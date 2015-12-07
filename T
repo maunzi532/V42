@@ -1,2 +1,0 @@
-cd ~/Rest/V42/
-java -jar V42_Test.jar
