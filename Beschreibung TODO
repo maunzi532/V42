@@ -1,0 +1,51 @@
+Bug-Stufe
+		Windows Mausfokus Bug
+		Vermutlich Fensterrahmen Bug
+
+Stufe 1
+	Ansicht 1
+		LadeF2 - Mehrere Teile definieren
+		Bildschirmelement - Ersatz für ScreenText
+		4D-Daten des aktuellen Felds anzeigen
+		F2 - Gradienten
+		D2 - Aussehen verbessern
+		4D-Splittern
+	Animation 1
+		Sequenzen - Teleport
+		NBD - Idle Bewegung
+	Movement 1
+		MDAktion - Drehung anpassen
+		LinkAchse - Freidrehwerte
+		Der Move - Power und Abbrechen
+		Bewegung - Power
+	Gameplay 1
+		Finde die Kopie - Geschafft-Sequenz
+		Finde die Kopie - Labyrinth generieren
+		Hauptmenü einbauen
+	Eingabe 1
+		TA2 - TA-Datei verbessern
+		Targeting-System - Markierung bewegen
+		Bildschirmelement - Eingabefeld
+	Code 1
+		ScreenText - Weg Damit
+		Ladebildschirm einbauen
+
+Stufe 2
+	Gameplay 2
+		Sinnvolles Attk
+		Welt generieren
+		Schadensleiste einbauen
+		Fallende Blöcke
+	Speicher 2
+		Mehrsprachig Text lagern
+
+Stufe 3
+	Ansicht 3
+		Reflexion
+	Movement 3
+		Einsetzbare Aktionen
+	Gameplay 3
+		Item-System
+		Debuff-Aura-System
+		Teil-System
+		Level-System

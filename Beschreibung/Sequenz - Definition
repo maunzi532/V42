@@ -1,0 +1,24 @@
+Sequenz
+
+Leere und mit / beginnende Zeilen werden ignoriert
+
+Trennzeichen ist Leerzeichen
+
+Sequenzen haben interne Teile
+Teile beginnen mit 0
+
+Endzeilen beginnen mit "Z "
+	Aufbau: "Z" Zeit
+	Zeit ist die Mindestdauer des aktuellen Teils
+	Nach einer Endzeile wird die aktuelle
+	Teilnummer um 1 erhöht
+
+Alle anderen Zeilen sind Aktionszeilen
+	Aufbau: Zeit Aktionstyp Werte
+	Zeit: Startzeit innerhalb des aktuellen Teils
+	Aktionstyp: Ein Kürzel für den Typ der Aktion
+	Werte: Weiter unten
+
+Aktionstypen
+
+

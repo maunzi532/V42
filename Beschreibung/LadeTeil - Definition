@@ -1,0 +1,40 @@
+LadeTeil
+
+Leere und mit / beginnende Zeilen werden ignoriert
+
+Trennzeichen ist Leerzeichen
+
+Punkte sollten vor Flächen definiert werden
+
+Achsennummersetzungszeilen beginnen mit "Achse "
+	Aufbau: "Achse" Nummer
+	Alle nachfolgenden definierten LadePunkte
+	gehören zu der letzten gesetzten Achse
+
+Jede übrige Zeile, die nicht mit "F" beginnt,
+definiert einen Punkt
+	Aufbau: Abstand_vom_Start spin Abstand_von_Achse
+	Für jede Achse werden die Punkte
+	intern nummeriert, beginnend mit 0
+
+Flächenzeilen beginnen mit "F"
+	Aufbau: Sichtbarkeit Farbe Punkte
+	Punkte werden mit Leerzeichen getrennt
+	Sichtbarkeit:
+		FM = Sichtbarkeit von beiden Seiten
+		FA = Sichtbar nur von der einen Seite
+		FV = Sichtbar nur von der anderen Seite
+	Farbe:
+		Besteht aus 1 bis 4 Teilen
+		Trennzeichen ist Minus
+		Bei 1- oder 2-teiligen ist es ein Grauton
+		Die erste Nummer ist der Grauwert
+		Bei 3- oder 4-teiligen ist es farbig
+		Die ersten drei Nummern sind der RGB Wert
+		Bei 2- oder 4-teiligen ist es transparent
+		Die letzte Nummer ist das Alpha
+	Punkte:
+		Die Punkte werden miteinander verbunden
+		Der letzte wird mit dem ersten verbunden
+		Trennzeichen ist Minus
+		Aufbau: Achse-Interne_Nummer_vom_Punkt
