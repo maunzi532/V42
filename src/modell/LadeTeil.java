@@ -66,7 +66,6 @@ public class LadeTeil
 								f2.get(f2.size() - 1).spken3.add(false);
 							}
 							f2.get(f2.size() - 1).spken2.add(Integer.parseInt(cx2[1]));
-							f2.get(f2.size() - 1).et1.add(cx2[2]);
 						}
 					}
 				}

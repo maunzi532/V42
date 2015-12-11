@@ -4,20 +4,20 @@ Bug-Stufe
 
 Stufe 1
 	Ansicht 1
-		LadeF2 - Mehrere Teile definieren
+	-	LadeF2 - Mehrere Teile definieren
 		Bildschirmelement - Ersatz für ScreenText
 		4D-Daten des aktuellen Felds anzeigen
 		F2 - Gradienten
 		D2 - Aussehen verbessern
-		4D-Splittern
+	-	4D-Splittern
 	Animation 1
 		Sequenzen - Teleport
 		NBD - Idle Bewegung
 	Movement 1
 		MDAktion - Drehung anpassen
 		LinkAchse - Freidrehwerte
-		Der Move - Power und Abbrechen
-		Bewegung - Power
+	-	Der Move - Power und Abbrechen
+	-	Bewegung - Power
 	Gameplay 1
 		Finde die Kopie - Geschafft-Sequenz
 		Finde die Kopie - Labyrinth generieren
@@ -28,7 +28,7 @@ Stufe 1
 		Bildschirmelement - Eingabefeld
 	Code 1
 		ScreenText - Weg Damit
-		Ladebildschirm einbauen
+	-	Ladebildschirm einbauen
 
 Stufe 2
 	Gameplay 2

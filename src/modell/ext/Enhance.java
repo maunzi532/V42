@@ -89,7 +89,7 @@ public class Enhance
 			K4[] spken = new K4[f2.spken1.size()];
 			for(int k = 0; k < f2.spken1.size(); k++)
 				spken[k] = into[f2.spken1.get(k) + (f2.ecken3.get(k) ? 0 : anfang)][f2.spken2.get(k)];
-			toR.add(new NF2(ecken, ecken1, spken, f2.et1, f2.farbe, f2.seite, 0, f2.seed, main2.tn));
+			toR.add(new NF2(ecken, ecken1, spken, f2.farbe, f2.seite, 0, f2.seed, main2.tn));
 		}
 		return toR;
 	}

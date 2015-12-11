@@ -3,18 +3,15 @@ package ansicht;
 import k.*;
 import modell.xF.*;
 
-import java.util.*;
-
 public class NF2 extends F2
 {
-	public NF2(K4[] ecken, K4[] eckenNK, K4[] spken, ArrayList<String> et1, XFarbe farbe,
+	public NF2(K4[] ecken, K4[] eckenNK, K4[] spken, XFarbe farbe,
 			Boolean seite, int spld, int seed, long tn)
 	{
 		block = false;
 		this.ecken = ecken;
 		this.eckenNK = eckenNK;
 		this.spken = spken;
-		this.et1 = et1;
 		this.farbe = farbe;
 		this.seite = seite;
 		this.spld = spld;
@@ -29,7 +26,6 @@ public class NF2 extends F2
 		this.eckenNK = eckenNK;
 		this.farbe = farbe;
 		spken = null;
-		et1 = null;
 		seite = null;
 		spld = 0;
 		this.seed = seed;
@@ -46,10 +42,6 @@ public class NF2 extends F2
 		}
 		else
 		{
-			if(et1 != null)
-				for(int i = 0; i < et1.size(); i++)
-					if(et1.get(i).equals("mid"))
-						mid = new K4(spken[i]);
 			if(mid == null)
 			{
 				for(int i = 0; i < ecken.length; i++)

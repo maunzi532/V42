@@ -5,12 +5,10 @@ import k.*;
 import modell.xF.*;
 
 import java.awt.*;
-import java.util.*;
 
 public abstract class N2
 {
 	public K4[] spken;
-	public ArrayList<String> et1;
 	public XFarbe farbe;
 	protected boolean block;
 	public K4 mid;

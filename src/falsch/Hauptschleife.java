@@ -14,6 +14,7 @@ import nonblockbox.aktion.seq.*;
 import nonblockbox.attk.*;
 
 import java.awt.*;
+import java.util.*;
 
 public class Hauptschleife
 {
@@ -56,7 +57,32 @@ public class Hauptschleife
 		n.dreh = new Drehung(1, 0);
 		n.init();
 
-		n2 = new TSSA(new Controller())
+		n2 = new TSSA(new Controller()
+		{
+			public ArrayList<String> giveCommands()
+			{
+				ArrayList<String> cmd = new ArrayList<>();
+				if(TA2.keyStat[9] == 2)
+					cmd.add("A");
+				if(TA2.keyStat[10] == 2)
+					cmd.add("B");
+				if(TA2.keyStat[11] == 2)
+					cmd.add("C");
+				if(TA2.keyStat[15] == 2)
+					cmd.add("KL");
+				if(TA2.keyStat[16] == 2)
+					cmd.add("KR");
+				if(TA2.keyStat[6] == 2)
+					cmd.add("unten");
+				if(TA2.keyStat[5] == 2)
+					cmd.add("oben");
+				if(TA2.keyStat[3] == 2)
+					cmd.add("vorne");
+				if(TA2.keyStat[4] == 2)
+					cmd.add("hinten");
+				return cmd;
+			}
+		})
 		{
 			public void collide(Attk attk)
 			{

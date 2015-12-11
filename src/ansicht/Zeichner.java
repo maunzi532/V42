@@ -66,7 +66,7 @@ public class Zeichner
 						K4[] spken = new K4[f2.spken1.size()];
 						for(int k = 0; k < f2.spken1.size(); k++)
 							spken[k] = nb.punkteK[f2.spken1.get(k)][f2.spken2.get(k)];
-						n2s.add(new NF2(ecken, eckenNK, spken, f2.et1, f2.farbe, f2.seite, 0, f2.seed, nb.tn));
+						n2s.add(new NF2(ecken, eckenNK, spken, f2.farbe, f2.seite, 0, f2.seed, nb.tn));
 					}
 				}
 				Staticf.sca("NEF " + nb.toString() + " 2 ");
@@ -145,8 +145,7 @@ public class Zeichner
 				{
 					NF2 tsp = (NF2)n2s.get(i);
 					//noinspection ConstantConditions,PointlessBooleanExpression
-					if(Staticf.splThr > 0 && (tsp.et1 != null && !tsp.et1.contains("mid")) &&
-							tsp.maxAbs() > Staticf.splThr)
+					if(Staticf.splThr > 0 && tsp.maxAbs() > Staticf.splThr)
 					{
 
 						n2s.remove(i);
@@ -170,7 +169,7 @@ public class Zeichner
 											sec[j > 0 ? j - 1 : sec.length - 1]},
 											new K4[]{tsp.eckenNK[j], sec1[j], tsp.mid1(),
 											sec1[j > 0 ? j - 1 : sec1.length - 1]},
-											tsp.spken, tsp.et1, tsp.farbe, tsp.seite, tsp.spld + 1, tsp.seed, tsp.tn);
+											tsp.spken, tsp.farbe, tsp.seite, tsp.spld + 1, tsp.seed, tsp.tn);
 							tspt.mid();
 							tspt.splseed = tsp.splseed * 4 + j + 1;
 							n2s.add(tspt);
