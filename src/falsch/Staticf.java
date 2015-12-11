@@ -121,7 +121,7 @@ public class Staticf
 	public static boolean xrmode = false;
 
 	//Sichtweite NonBlocks
-	public static final double sicht = 200;
+	public static final double sicht = 100;
 	//Eigene H ausblenden
 	public static final double sichtMin = 2;
 	//Sichtweite d NonBlocks

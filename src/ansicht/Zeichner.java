@@ -78,7 +78,7 @@ public class Zeichner
 			}
 		Staticf.sca("NE1 ");
 		if(Staticf.siehBlocks)
-			n2s.addAll(WeltB.flaechen(kp, kd, new K4(140, 140, 140, 100)));
+			n2s.addAll(WeltB.flaechen(kp, kd, new K4(100, 100, 100, 60)));
 		Staticf.sca("NE2 ");
 		for(int i = 0; i < n2s.size(); i++)
 		{
