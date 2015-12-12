@@ -21,6 +21,8 @@ public class KController extends Controller
 			cmd.add("unten");
 		if(TA2.keyStat[5] == 2)
 			cmd.add("oben");
+		if(TA2.keyStat[3] > 0)
+			cmd.add("vor");
 		if(TA2.keyStat[3] == 2)
 			cmd.add("vorne");
 		if(TA2.keyStat[4] == 2)

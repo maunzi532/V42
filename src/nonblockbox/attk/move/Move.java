@@ -9,11 +9,13 @@ public class Move
 	private int zeitA;
 	private final NBB akteur;
 	private AttkAktion ender;
+	public String name;
 
 	public Move(LadeMove lad, NBB akteur)
 	{
 		this.akteur = akteur;
 		this.lad = lad;
+		name = lad.name;
 	}
 
 	public boolean tick()

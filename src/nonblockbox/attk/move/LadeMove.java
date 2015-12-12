@@ -7,9 +7,11 @@ public class LadeMove
 	final ArrayList<LadeAktionB> aktionen;
 	int teilE;
 	final ArrayList<Integer> zeitE;
+	String name;
 
-	public LadeMove(String code)
+	public LadeMove(String name, String code)
 	{
+		this.name = name;
 		zeitE = new ArrayList<>();
 		aktionen = new ArrayList<>();
 		String cde1 = code.replace("\n	", "|");

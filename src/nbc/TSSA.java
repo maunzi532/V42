@@ -98,7 +98,7 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 					if(canAirgrab(richtung, dif, new WBP(p)))
 					{
 						K4 fp = Koord.wt2(p);
-						fp.b += Koord.weltBlock.b / 2 - 3.6;
+						fp.b += Koord.weltBlock.b / 2 + 0.6;
 						if(richtung % 2 == 0)
 						{
 							fp.c += (Koord.weltBlock.c / 2 - 3.6) * (1 - richtung);
@@ -191,8 +191,9 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 	{
 		if(grabRichtung >= 0)
 		{
-			WBP p = Koord.tw(position);
-			K4 dif = K4.diff(Koord.wt(p), position);
+			WBP p = Koord.tw(focus.targetPosition);
+			p.k[1]--;
+			K4 dif = K4.diff(Koord.wt(p), focus.targetPosition);
 			Boolean ck = canKlettern(grabRichtung, dif, p);
 			if(ck != null)
 			{

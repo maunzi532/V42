@@ -6,7 +6,7 @@ public class Focus
 {
 	protected final NonBlock the;
 	protected int focusTime;
-	protected K4 targetPosition;
+	public K4 targetPosition;
 	protected Drehung targetDreh;
 
 	public Focus(NonBlock the, int focusTime, K4 targetPosition, Drehung targetDreh)

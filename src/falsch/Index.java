@@ -113,12 +113,12 @@ public class Index
 		{
 			if(geladen.containsKey(name))
 				return (LadeMove) geladen.get(name);
-			LadeMove s = new LadeMove(Lader.gibText(teilNamen.get(name)));
+			LadeMove s = new LadeMove(name, Lader.gibText(teilNamen.get(name)));
 			geladen.put(name, s);
 			return s;
 		}
 		else
-			return new LadeMove(replace(Lader.gibText(teilNamen.get(name)), replace));
+			return new LadeMove(name, replace(Lader.gibText(teilNamen.get(name)), replace));
 	}
 
 	public static XFBT gibXFBT(String name, String... replace)

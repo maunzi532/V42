@@ -162,13 +162,13 @@ public class Tha extends TSSA
 			else if(grabRichtung < 0)
 				Index.gibAlternateStandard("TSSA").changeToThis(this);
 		}
-		if(command.equals("vorne"))
+		if(command.equals("vor"))
 		{
 			if(grabRichtung < 0 && !boden)
 			{
 				boolean can = true;
-				for(Aktion a : aktionen)
-					if(a instanceof MDAktion)
+				for(Move a : moves)
+					if(a.name.equals("WK"))
 					{
 						can = false;
 						break;
@@ -176,7 +176,10 @@ public class Tha extends TSSA
 				if(can)
 					attemptAirgrab(0);
 			}
-			else if(grabRichtung >= 0)
+		}
+		if(command.equals("vorne"))
+		{
+			if(grabRichtung >= 0)
 				kletterHoch();
 		}
 		if(command.equals("hinten"))
