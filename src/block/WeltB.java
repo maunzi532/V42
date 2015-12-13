@@ -177,8 +177,6 @@ public class WeltB
 				ke[3] = Koord.wt(p);
 				break;
 		}
-		//return new BF2(ke, new XFN(new Color(nof * 40, 100, block > 1 ? 255 : 100)),
-				//nof % 2 == 0, nof, 0, tn);
 		return new BF2(ke, new K4[ke.length], Index.gibXFBT("XFBT_" + block + "_" + nof), nof % 2 == 0, nof, 0, tn);
 	}
 

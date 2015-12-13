@@ -105,7 +105,6 @@ public class AlternateStandard
 			command = new AltTrans((NBB)n, 30, 10, blockbox);
 		else
 			command = new AltTrans(n, 30, 10);
-		System.out.println(n.resLink[67]);
 		for(int i = 0; i < n.resLink.length; i++)
 			if(n.resLink[i] == null)
 			{

@@ -72,7 +72,7 @@ public class ZeitVerwalter
 		System.exit(0);
 	}
 
-	private static void schlaf(long zeit)
+	public static void schlaf(long zeit)
 	{
 		try
 		{

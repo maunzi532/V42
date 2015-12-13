@@ -65,13 +65,13 @@ public abstract class XFarbe
 				if(ld > WeltND.licht.get(i).lichtRange())
 					continue;
 				double pow = WeltND.licht.get(i).lichtPower();
-				//pow -= ld * ld * WeltND.licht.get(i).lichtPowerDecay();
+				pow -= ld * WeltND.licht.get(i).lichtPowerDecay();
 				if(f.eckenNK != null)
 				{
 					double sh = shadeWinkel(f, WeltND.licht.get(i).lichtPosition());
-					if(sh > 1.5)
-						continue;
-					pow -= sh * 100;
+					//if(sh > 1.5)
+						//continue;
+					pow -= sh * 40;
 				}
 				if(pow > power)
 					power = pow;
@@ -93,7 +93,7 @@ public abstract class XFarbe
 		double kd = Math.sqrt(kp.a * kp.a + kp.b * kp.b + kp.c * kp.c);
 		double ld = Math.sqrt(lr.a * lr.a + lr.b * lr.b + lr.c * lr.c);
 		if(kd == 0 || ld == 0)
-			return 1000;
+			return 2;
 		K4 kn = new K4(kp.a / kd, kp.b / kd, kp.c / kd, 0);
 		K4 ln = new K4(lr.a / ld, lr.b / ld, lr.c / ld, 0);
 		double d1 = 2;

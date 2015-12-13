@@ -13,6 +13,7 @@ public class ThaCre2A
 		Hauptschleife.init();
 		LPaneel.init2();
 		Overlay.initOverlay();
+		LagZeit.start();
 		ZeitVerwalter.start();
 	}
 }

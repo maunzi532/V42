@@ -19,7 +19,7 @@ import java.util.*;
 public class Hauptschleife
 {
 	public static TSSA n;
-	private static TSSA n2;
+	static TSSA n2;
 	public static Point maus;
 	public static Kamera godModeKam;
 	public static Zeichner z;

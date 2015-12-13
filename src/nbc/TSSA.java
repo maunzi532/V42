@@ -194,18 +194,21 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 			WBP p = Koord.tw(focus.targetPosition);
 			p.k[1]--;
 			K4 dif = K4.diff(Koord.wt(p), focus.targetPosition);
-			Boolean ck = canKlettern(grabRichtung, dif, p);
-			if(ck != null)
+			if(dif.b > Koord.weltBlock.b)
 			{
-				Index.gibAlternateStandard("TSSA").changeToThis(this);
-				focus = null;
-				grabRichtung = -1;
-				if(ck)
-					moves.add(new Move(Index.gibLadeMove("WK", String.valueOf(-Math.sin(dreh.wl) * 5),
-							String.valueOf(Math.cos(dreh.wl) * 5)), this));
-				else
-					moves.add(new Move(Index.gibLadeMove("WK", "0", "0"), this));
-				return false;
+				Boolean ck = canKlettern(grabRichtung, dif, p);
+				if(ck != null)
+				{
+					Index.gibAlternateStandard("TSSA").changeToThis(this);
+					focus = null;
+					grabRichtung = -1;
+					if(ck)
+						moves.add(new Move(Index.gibLadeMove("WK", String.valueOf(-Math.sin(dreh.wl) * 5),
+								String.valueOf(Math.cos(dreh.wl) * 5)), this));
+					else
+						moves.add(new Move(Index.gibLadeMove("WK", "0", "0"), this));
+					return false;
+				}
 			}
 		}
 		return true;
@@ -264,11 +267,11 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 
 	public double lichtPower()
 	{
-		return 0;
+		return 30;
 	}
 
 	public double lichtPowerDecay()
 	{
-		return 0.03;
+		return 2;
 	}
 }
