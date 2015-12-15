@@ -1,25 +1,26 @@
 Bug-Stufe
 		Windows Mausfokus Bug
 		Vermutlich Fensterrahmen Bug
+		MDAktion - Drehung anpassen
+		Block 0 nicht abbaubar
 
 Stufe 1
-	Ansicht 1
+	N2 1
 	-	LadeF2 - Mehrere Teile definieren
-		Bildschirmelement - Ersatz für ScreenText
-		4D-Daten des aktuellen Felds anzeigen
 		F2 - Gradienten
 		D2 - Aussehen verbessern
 	-	4D-Splittern
+	Overlay 1
+	-	Bildschirmelement - Ersatz für ScreenText
+		4D-Daten des aktuellen Felds anzeigen
 	Animation 1
 		Sequenzen - Teleport
 		NBD - Idle Bewegung
+		Finde die Kopie - Geschafft-Sequenz
 	Movement 1
-		MDAktion - Drehung anpassen
-		LinkAchse - Freidrehwerte
 	-	Der Move - Power und Abbrechen
 	-	Bewegung - Power
 	Gameplay 1
-		Finde die Kopie - Geschafft-Sequenz
 		Finde die Kopie - Labyrinth generieren
 		Hauptmenü einbauen
 	Eingabe 1
@@ -28,7 +29,6 @@ Stufe 1
 		Bildschirmelement - Eingabefeld
 	Code 1
 		ScreenText - Weg Damit
-	-	Ladebildschirm einbauen
 
 Stufe 2
 	Gameplay 2

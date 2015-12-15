@@ -11,6 +11,15 @@ public class SchalterLayer
 	final Color front = Color.WHITE;
 
 	public final ArrayList<SLF> layer = new ArrayList<>();
+	public final ArrayList[] tex;
+	public final String[] texNamen = new String[0];
+
+	public SchalterLayer()
+	{
+		tex = new ArrayList[texNamen.length];
+		for(int i = 0; i < tex.length; i++)
+			tex[i] = new ArrayList<>();
+	}
 
 	public int mw(double multiplikator)
 	{
