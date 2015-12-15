@@ -149,10 +149,6 @@ public class Hauptschleife
 		n2.collidable.add(new ColBox(n2, 0, 4, 4, 1, 1));
 		n2.physik.add(new ColBox(n2, 69, 1.5, 1.6, 1.1));
 		n2.physik.add(new ColBox(n2, 78, 1.5, 1, 1));
-		/*n2.physik.add(new ColBox(n2, 74, 1, 1, 1.4));
-		n2.physik.add(new ColBox(n2, 75, 1, 1, 1.4));
-		n2.physik.add(new ColBox(n2, 76, 1, 1, 1.4));
-		n2.physik.add(new ColBox(n2, 77, 1, 1, 1.4));*/
 		n2.physik.add(new ColBox(n2, 11, 0.7, 0.7, 1));
 		n2.physik.add(new ColBox(n2, 12, 0.7, 0.7, 1));
 		n2.physik.add(new ColBox(n2, 0, 1.8, 1.8, 1));
@@ -173,9 +169,8 @@ public class Hauptschleife
 		godModeKam.aktionen.add(new Sicht(godModeKam, 10, 0, true));
 	}
 
-	public static boolean mainTick(boolean skpf)
+	public static boolean eingabe()
 	{
-		//Eingabe
 		if(Staticf.sc.width != LPaneel.fr.getSize().width ||
 				Staticf.sc.height != LPaneel.fr.getSize().height)
 		{
@@ -230,39 +225,39 @@ public class Hauptschleife
 			}
 		}
 		Staticf.sca("M und T (0) ");
+		return false;
+	}
 
-		//Logik
+	public static void logik()
+	{
 		WeltND.timetickN();
 		Staticf.sca("WeltND tN (7) ");
 		WeltNB.timetick();
 		Staticf.sca("WeltNB t (0) ");
 		WeltND.timetickD();
 		Staticf.sca("WeltND tD (5) ");
+	}
 
-		//Rendern
-		if(!skpf)
-		{
-			z.nehmen();
-			Staticf.sca("Z nehmen (14) ");
-			z.splittern();
-			Staticf.sca("Z splittern (1) ");
-			z.sortieren();
-			Staticf.sca("Z sortieren (2) ");
-			z.eckenEntf();
-			Staticf.sca("Z eckenEntf (1) ");
-			//Hier waere ein Thread gut
-			Overlay.pa.panelize(z.n2s, maus.x + Staticf.sc.width / 2,
-					maus.y + Staticf.sc.height / 2);
-			Staticf.sca("P panelize (18) ");
-			Overlay.gd.drawImage(Overlay.pa.light, 0, 0, null);
-			Staticf.sca("O draw P (4) ");
-			Overlay.overlay();
-			Staticf.sca("O overlay (0) ");
-			//Hier Hauptthread
-			LPaneel.rePanel(Overlay.hl);
-			Staticf.sca("LP rePanel (6) ");
-		}
-		Staticf.sca("Ende (0) ");
-		return false;
+	public static void rendern()
+	{
+		z.nehmen();
+		Staticf.sca("Z nehmen (14) ");
+		z.splittern();
+		Staticf.sca("Z splittern (1) ");
+		z.sortieren();
+		Staticf.sca("Z sortieren (2) ");
+		z.eckenEntf();
+		Staticf.sca("Z eckenEntf (1) ");
+		//Hier waere ein Thread gut
+		Overlay.pa.panelize(z.n2s, maus.x + Staticf.sc.width / 2,
+				maus.y + Staticf.sc.height / 2);
+		Staticf.sca("P panelize (18) ");
+		Overlay.gd.drawImage(Overlay.pa.light, 0, 0, null);
+		Staticf.sca("O draw P (4) ");
+		Overlay.overlay();
+		Staticf.sca("O overlay (0) ");
+		//Hier Hauptthread
+		LPaneel.rePanel(Overlay.hl);
+		Staticf.sca("LP rePanel (6) ");
 	}
 }

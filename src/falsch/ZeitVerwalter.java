@@ -64,8 +64,11 @@ public class ZeitVerwalter
 			if(okay)
 			{
 				Staticf.last = System.currentTimeMillis();
-				if(Hauptschleife.mainTick(skpf))
+				if(Hauptschleife.eingabe())
 					break;
+				Hauptschleife.logik();
+				if(!skpf)
+					Hauptschleife.rendern();
 				if(!skpf)
 					fskp = -1;
 			}
