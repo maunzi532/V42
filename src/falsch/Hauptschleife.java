@@ -175,6 +175,16 @@ public class Hauptschleife
 
 	public static boolean mainTick(boolean skpf)
 	{
+		//Eingabe
+		if(Staticf.sc.width != LPaneel.fr.getSize().width ||
+				Staticf.sc.height != LPaneel.fr.getSize().height)
+		{
+			Staticf.sc = LPaneel.fr.getSize();
+			Overlay.resize();
+		}
+		TA2.move();
+		if(TA2.keyStat[0] > 0)
+			return true;
 		maus = MouseInfo.getPointerInfo().getLocation();
 		Point mm = LPaneel.fr.getLocationOnScreen();
 		maus.translate(-mm.x, -mm.y);
@@ -188,9 +198,7 @@ public class Hauptschleife
 			if(Overlay.sl.click(maus.x, maus.y, true))
 				TA2.keyStat[16] = 1;
 		}
-		Staticf.sca("M und T 1 (0) ");
 		Overlay.sl.tick();
-		Staticf.sca("SchalterLayer t (0) ");
 		maus.translate(-Staticf.sc.width / 2, -Staticf.sc.height / 2);
 		if(TA2.keyStat[13] == 2 && Overlay.sichtAn)
 		{
@@ -221,13 +229,17 @@ public class Hauptschleife
 				Staticf.siehNonBlocks = true;
 			}
 		}
-		Staticf.sca("M und T 2 (0) ");
+		Staticf.sca("M und T (0) ");
+
+		//Logik
 		WeltND.timetickN();
 		Staticf.sca("WeltND tN (7) ");
 		WeltNB.timetick();
 		Staticf.sca("WeltNB t (0) ");
 		WeltND.timetickD();
 		Staticf.sca("WeltND tD (5) ");
+
+		//Rendern
 		if(!skpf)
 		{
 			z.nehmen();
@@ -238,6 +250,7 @@ public class Hauptschleife
 			Staticf.sca("Z sortieren (2) ");
 			z.eckenEntf();
 			Staticf.sca("Z eckenEntf (1) ");
+			//Hier waere ein Thread gut
 			Overlay.pa.panelize(z.n2s, maus.x + Staticf.sc.width / 2,
 					maus.y + Staticf.sc.height / 2);
 			Staticf.sca("P panelize (18) ");
@@ -245,18 +258,9 @@ public class Hauptschleife
 			Staticf.sca("O draw P (4) ");
 			Overlay.overlay();
 			Staticf.sca("O overlay (0) ");
+			//Hier Hauptthread
 			LPaneel.rePanel(Overlay.hl);
 			Staticf.sca("LP rePanel (6) ");
-		}
-		Staticf.sca("End skpf (0) ");
-		TA2.move();
-		if(TA2.keyStat[0] > 0)
-			return true;
-		if(Staticf.sc.width != LPaneel.fr.getSize().width ||
-				Staticf.sc.height != LPaneel.fr.getSize().height)
-		{
-			Staticf.sc = LPaneel.fr.getSize();
-			Overlay.resize();
 		}
 		Staticf.sca("Ende (0) ");
 		return false;

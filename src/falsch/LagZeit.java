@@ -1,6 +1,5 @@
 package falsch;
 
-import k.*;
 import modell.ext.*;
 
 public class LagZeit
@@ -11,12 +10,12 @@ public class LagZeit
 		for(int i = 0; i < 10; i++)
 		{
 			Staticf.last = System.currentTimeMillis();
+			External.nicht = !(i == 0 || i == 9);
 			if(Hauptschleife.mainTick(false))
 				System.exit(0);
-			External.nicht = true;
 		}
 		Staticf.siehNonBlocks = true;
-		for(int i = 0; i < 5; i++)
+		/*for(int i = 0; i < 5; i++)
 		{
 			H h = (H) Hauptschleife.n2.aussehen.ext.get(i);
 			K4[][] into = new K4[300][10];
@@ -26,6 +25,6 @@ public class LagZeit
 				h.punkte(into);
 				h.tick();
 			}
-		}
+		}*/
 	}
 }

@@ -31,7 +31,7 @@ public class ZeitVerwalter
 					}
 					else if(over + now - last > Staticf.stdfms)
 					{
-						if(fskp < Staticf.mfskp)
+						if(fskp < Staticf.maxfskp)
 						{
 							skpf = true;
 							fskp++;
@@ -56,6 +56,7 @@ public class ZeitVerwalter
 			}
 			else
 			{
+				//Erstes Frame
 				skpf = true;
 				External.nicht = false;
 				last = System.currentTimeMillis();
@@ -69,7 +70,6 @@ public class ZeitVerwalter
 					fskp = -1;
 			}
 		}
-		System.exit(0);
 	}
 
 	public static void schlaf(long zeit)

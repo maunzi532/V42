@@ -15,5 +15,6 @@ public class ThaCre2A
 		Overlay.initOverlay();
 		LagZeit.start();
 		ZeitVerwalter.start();
+		System.exit(0);
 	}
 }

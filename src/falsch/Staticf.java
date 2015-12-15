@@ -131,9 +131,11 @@ public class Staticf
 	//NonBlock F2 Teilung bis kleiner als das
 	public static final double splThr = 1.2;
 	//Maximale Anzahl Frameskips
-	static final int mfskp = 5;
+	static final int minfskp = 1;
+	//Maximale Anzahl Frameskips
+	static final int maxfskp = 5;
 	//Anzahl Millisekunden pro Frame
-	static final long stdfms = 33;
+	static final long stdfms = 16;
 	//Anzahl Millisekunden zwischen Checks ob wieder im Fokus
 	public static long blcfms = 200;
 	//Weite in Blocks wo NonBlocks in d nicht diffundieren
