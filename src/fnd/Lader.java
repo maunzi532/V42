@@ -28,6 +28,7 @@ public class Lader
 	private static String neuText(String key)
 	{
 		String val = umwandelnT(new File(key.replace('/', File.separatorChar)));
+		val = val.replace("\r", "");
 		texte.put(key, val);
 		return val;
 	}
