@@ -253,4 +253,10 @@ public class Zeichner
 	{
 		return (k0 * kc1 - k1 * kc0) / (kc1 - kc0);
 	}
+
+	public void farbe_flaeche()
+	{
+		for(int i = 0; i < n2s.size(); i++)
+			n2s.get(i).farbe_flaeche();
+	}
 }

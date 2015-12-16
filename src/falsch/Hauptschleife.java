@@ -241,23 +241,25 @@ public class Hauptschleife
 	public static void rendern()
 	{
 		z.nehmen();
-		Staticf.sca("Z nehmen (14) ");
+		Staticf.sca("Z nehmen (5) ");
 		z.splittern();
 		Staticf.sca("Z splittern (1) ");
 		z.sortieren();
-		Staticf.sca("Z sortieren (2) ");
+		Staticf.sca("Z sortieren (1) ");
 		z.eckenEntf();
 		Staticf.sca("Z eckenEntf (1) ");
+		z.farbe_flaeche();
+		Staticf.sca("Z farbeflaeche (3) ");
 		//Hier waere ein Thread gut
 		Overlay.pa.panelize(z.n2s, maus.x + Staticf.sc.width / 2,
 				maus.y + Staticf.sc.height / 2);
-		Staticf.sca("P panelize (18) ");
+		Staticf.sca("P panelize (14) ");
 		Overlay.gd.drawImage(Overlay.pa.light, 0, 0, null);
 		Staticf.sca("O draw P (4) ");
 		Overlay.overlay();
 		Staticf.sca("O overlay (0) ");
 		//Hier Hauptthread
 		LPaneel.rePanel(Overlay.hl);
-		Staticf.sca("LP rePanel (6) ");
+		Staticf.sca("LP rePanel (7) ");
 	}
 }

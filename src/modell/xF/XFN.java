@@ -15,8 +15,8 @@ public class XFN extends XFarbe
 
 	protected XFN(){}
 
-	public void setFarb(Graphics2D gd, double ddiff, N2 n)
+	public void setFarb(N2 n)
 	{
-		setFarb(gd, ddiff, n, farb);
+		setFarb(n, farb);
 	}
 }

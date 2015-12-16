@@ -19,37 +19,36 @@ public abstract class XFarbe
 			splN[i] = r.nextInt(Staticf.seedifier);
 	}
 
-	public abstract void setFarb(Graphics2D gd, double ddiff, N2 n);
+	public abstract void setFarb(N2 n);
 
-	public boolean shownext(double ddiff, N2 n)
+	public boolean shownext(N2 n)
 	{
 		F2 f = (F2) n;
 		if(f.seed <= 0)
 			return true;
-		if(ddiff >= 0)
-			return ddiff / Staticf.diffusewidth - Staticf.safezone <=
+		if(f.ddiff >= 0)
+			return f.ddiff / Staticf.diffusewidth - Staticf.safezone <=
 					((Math.abs(f.seed) + splN[(f.splseed % Staticf.seedifier)]) %
 					Staticf.seedifier) / (double)Staticf.seedifier;
-		return -ddiff / Staticf.diffusewidth - Staticf.safezone <=
+		return -f.ddiff / Staticf.diffusewidth - Staticf.safezone <=
 				(Staticf.seedifier - 1 - ((Math.abs(f.seed) +
 				splN[(f.splseed % Staticf.seedifier)]) % Staticf.seedifier)) / (double)Staticf.seedifier;
 	}
 
-	public static void setFarb(Graphics2D gd, double ddiff, N2 n, Color fc)
+	public static void setFarb(N2 n, Color fc)
 	{
-		if(ddiff > 0)
-			fc = limit(fc, (int)(ddiff * 10), (int)(ddiff * -5), (int)(ddiff * -5));
-		else if(ddiff < 0)
-			fc = limit(fc, (int)(ddiff * 5), (int)(ddiff * -10), (int)(ddiff * 5));
+		if(n.ddiff > 0)
+			fc = limit(fc, (int)(n.ddiff * 10), (int)(n.ddiff * -5), (int)(n.ddiff * -5));
+		else if(n.ddiff < 0)
+			fc = limit(fc, (int)(n.ddiff * 5), (int)(n.ddiff * -10), (int)(n.ddiff * 5));
 		fc = shade(fc, n);
 		double weg = Math.sqrt(n.mid.a * n.mid.a + n.mid.b * n.mid.b + n.mid.c * n.mid.c + n.mid.d * n.mid.d);
 		double weg2 = (Staticf.sicht - weg) / Staticf.sicht;
 		if(weg2 < 0)
 			weg2 = 0;
-		fc = new Color((int)(fc.getRed() * weg2 + 20 * (1 - weg2)),
+		n.dFarb = new Color((int)(fc.getRed() * weg2 + 20 * (1 - weg2)),
 				(int)(fc.getGreen() * weg2 + 0 * (1 - weg2)),
 				(int)(fc.getBlue() * weg2 + 0 * (1 - weg2)), fc.getAlpha());
-		gd.setColor(fc);
 	}
 
 	public static Color shade(Color fc, N2 n)
@@ -67,12 +66,7 @@ public abstract class XFarbe
 				double pow = WeltND.licht.get(i).lichtPower();
 				pow -= ld * WeltND.licht.get(i).lichtPowerDecay();
 				if(f.eckenNK != null)
-				{
-					double sh = shadeWinkel(f, WeltND.licht.get(i).lichtPosition());
-					//if(sh > 1.5)
-						//continue;
-					pow -= sh * 40;
-				}
+					pow -= shadeWinkel(f, WeltND.licht.get(i).lichtPosition()) * 40;
 				if(pow > power)
 					power = pow;
 			}

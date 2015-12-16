@@ -47,7 +47,7 @@ public class XFBT extends XFN
 			farben.put(cfarb, c1);
 	}
 
-	public void setFarb(Graphics2D gd, double ddiff, N2 n)
+	public void setFarb(N2 n)
 	{
 		F2 f = (F2) n;
 		Color fc;
@@ -55,6 +55,6 @@ public class XFBT extends XFN
 			fc = farb;
 		else
 			fc = farben.get(f.spld)[f.splseed];
-		setFarb(gd, ddiff, n, fc);
+		setFarb(n, fc);
 	}
 }

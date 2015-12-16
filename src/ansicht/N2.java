@@ -13,6 +13,8 @@ public abstract class N2
 	protected boolean block;
 	public K4 mid;
 	public long tn;
+	public Color dFarb;
+	public double ddiff;
 
 	public boolean anzeigen()
 	{
@@ -21,7 +23,18 @@ public abstract class N2
 				mid.d > -Staticf.sichtd && mid.d < Staticf.sichtd;
 	}
 
-	public abstract boolean panelDaten();
+	public void farbe_flaeche()
+	{
+		panelDaten();
+		farbe.setFarb(this);
+	}
+
+	public boolean draw()
+	{
+		return true;
+	}
+
+	public abstract void panelDaten();
 	public abstract void panelDark(Graphics2D darkCopy);
 	public abstract void panel(Panelizer pa);
 

@@ -12,7 +12,6 @@ public class D2 extends N2
 	private final boolean quadrat;
 	private int xe;
 	private int ye;
-	private double ddiff;
 	private int scale;
 
 	public D2(boolean quadrat, XFarbe farbe, String text, K4 mid, long tn)
@@ -25,7 +24,7 @@ public class D2 extends N2
 		this.tn = tn;
 	}
 
-	public boolean panelDaten()
+	public void panelDaten()
 	{
 		double ca = mid.c;
 		if(ca < Staticf.nnull)
@@ -34,7 +33,6 @@ public class D2 extends N2
 		ye = ethaY(mid.b, ca);
 		ddiff = mid.d;
 		scale = (int)(1000 / ca) + 1;
-		return true;
 	}
 
 	public void panelDark(Graphics2D darkCopy)
@@ -50,7 +48,7 @@ public class D2 extends N2
 
 	public void panel(Panelizer pa)
 	{
-		farbe.setFarb(pa.gd, ddiff, this);
+		pa.gd.setColor(dFarb);
 		pa.gd.setFont(new Font("Consolas", Font.PLAIN, scale > 20 ? 20 : scale));
 		if(Staticf.d2tangibility)
 		{
@@ -66,7 +64,6 @@ public class D2 extends N2
 			pa.gd.fillRect(xe - w, ye - h, w * 2, h * 2);
 			pa.gd.setColor(Color.WHITE);
 			pa.gd.drawString(text, xe - w + scale / 8, ye + h - scale / 8);
-			farbe.setFarb(pa.gd, ddiff, this);
 		}
 	}
 }

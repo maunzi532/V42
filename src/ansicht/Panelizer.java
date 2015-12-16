@@ -45,25 +45,22 @@ public class Panelizer
 		}
 		Staticf.sca("PL1 ");
 		for(int i = 0; i < n2s.size(); i++)
-		{
-			if(n2s.get(i) == null)
-				continue;
-			if(!n2s.get(i).panelDaten())
-				continue;
-			if(taType > 0)
+			if(n2s.get(i).draw())
 			{
-				Long ta = n2s.get(i).tn;
-				if(!darkC.containsKey(ta))
+				if(taType > 0)
 				{
-					darkUsed++;
-					darkC.put(ta, darkUsed);
-					darkC2.put(darkUsed, ta);
+					Long ta = n2s.get(i).tn;
+					if(!darkC.containsKey(ta))
+					{
+						darkUsed++;
+						darkC.put(ta, darkUsed);
+						darkC2.put(darkUsed, ta);
+					}
+					darkCopy.setColor(new Color(darkC.get(ta)));
+					n2s.get(i).panelDark(darkCopy);
 				}
-				darkCopy.setColor(new Color(darkC.get(ta)));
-				n2s.get(i).panelDark(darkCopy);
+				n2s.get(i).panel(this);
 			}
-			n2s.get(i).panel(this);
-		}
 		Staticf.sca("PL2 ");
 		DPA2(gd, mx, my);
 		Staticf.sca("PL3 ");

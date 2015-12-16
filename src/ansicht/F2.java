@@ -17,7 +17,6 @@ public abstract class F2 extends N2
 
 	private int[] xe;
 	private int[] ye;
-	private double ddiff;
 	private double avkh2;
 
 	public abstract void mid();
@@ -73,10 +72,25 @@ public abstract class F2 extends N2
 		return k;
 	}
 
-	public boolean panelDaten()
+	public void farbe_flaeche()
 	{
-		if(ec2 == null)
-			return false;
+		if(ec2 != null)
+		{
+			panelDaten();
+			if(!farbe.shownext(this))
+				ec2 = null;
+			else
+				farbe.setFarb(this);
+		}
+	}
+
+	public boolean draw()
+	{
+		return ec2 != null;
+	}
+
+	public void panelDaten()
+	{
 		xe = new int[ec2.length];
 		ye = new int[ec2.length];
 		ddiff = 0;
@@ -90,7 +104,6 @@ public abstract class F2 extends N2
 			ddiff += ec2[j].d;
 		}
 		ddiff /= ec2.length;
-		return true;
 	}
 
 	public void panelDark(Graphics2D darkCopy)
@@ -100,13 +113,10 @@ public abstract class F2 extends N2
 
 	public void panel(Panelizer pa)
 	{
-		farbe.setFarb(pa.gd, ddiff, this);
-		if(farbe.shownext(ddiff, this))
-		{
-			if(Staticf.xrmode && avkh2 < Staticf.xraywidth * Staticf.xraywidth)
-				pa.gd.draw(new Polygon(xe, ye, xe.length));
-			else
-				pa.gd.fill(new Polygon(xe, ye, xe.length));
-		}
+		pa.gd.setColor(dFarb);
+		if(Staticf.xrmode && avkh2 < Staticf.xraywidth * Staticf.xraywidth)
+			pa.gd.draw(new Polygon(xe, ye, xe.length));
+		else
+			pa.gd.fill(new Polygon(xe, ye, xe.length));
 	}
 }
