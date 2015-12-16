@@ -12,6 +12,13 @@ public class LagZeit
 				System.exit(0);
 			Hauptschleife.logik();
 			Hauptschleife.rendern();
+			new Thread()
+			{
+				public void run()
+				{
+					Hauptschleife.panelize();
+				}
+			}.start();
 		}
 		Staticf.siehNonBlocks = true;
 	}

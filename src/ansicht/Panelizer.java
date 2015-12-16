@@ -31,7 +31,7 @@ public class Panelizer
 		darkCopy = dark.createGraphics();
 	}
 
-	public void panelize(ArrayList<N2> n2s, int mx, int my)
+	public void panelize(N2[] n2s, int mx, int my)
 	{
 		gd.setColor(new Color(20, 0, 0));
 		gd.fillRect(0, 0, light.getWidth(), light.getHeight());
@@ -44,12 +44,12 @@ public class Panelizer
 			darkUsed = 0;
 		}
 		Staticf.sca("PL1 ");
-		for(int i = 0; i < n2s.size(); i++)
-			if(n2s.get(i).draw())
+		for(int i = 0; i < n2s.length; i++)
+			if(n2s[i].draw())
 			{
 				if(taType > 0)
 				{
-					Long ta = n2s.get(i).tn;
+					Long ta = n2s[i].tn;
 					if(!darkC.containsKey(ta))
 					{
 						darkUsed++;
@@ -57,9 +57,9 @@ public class Panelizer
 						darkC2.put(darkUsed, ta);
 					}
 					darkCopy.setColor(new Color(darkC.get(ta)));
-					n2s.get(i).panelDark(darkCopy);
+					n2s[i].panelDark(darkCopy);
 				}
-				n2s.get(i).panel(this);
+				n2s[i].panel(this);
 			}
 		Staticf.sca("PL2 ");
 		DPA2(gd, mx, my);

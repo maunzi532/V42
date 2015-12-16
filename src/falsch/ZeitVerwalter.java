@@ -8,13 +8,13 @@ public class ZeitVerwalter
 	private static long last;
 	private static int fskp;
 	private static long over;
+	private static boolean skpf;
 
 	public static void start()
 	{
 		while(true)
 		{
 			boolean okay = LPaneel.fr.hasFocus();
-			boolean skpf;
 			if(last > 0)
 			{
 				skpf = false;
@@ -68,9 +68,17 @@ public class ZeitVerwalter
 					break;
 				Hauptschleife.logik();
 				if(!skpf)
+				{
 					Hauptschleife.rendern();
-				if(!skpf)
+					new Thread()
+					{
+						public void run()
+						{
+							Hauptschleife.panelize();
+						}
+					}.start();
 					fskp = -1;
+				}
 			}
 		}
 	}

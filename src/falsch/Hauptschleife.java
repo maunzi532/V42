@@ -25,6 +25,7 @@ public class Hauptschleife
 	public static Zeichner z;
 	public static Controllable kamN;
 	public static ZP4C zp;
+	public static N2[] n2s2;
 
 	public static void init()
 	{
@@ -250,16 +251,23 @@ public class Hauptschleife
 		Staticf.sca("Z eckenEntf (1) ");
 		z.farbe_flaeche();
 		Staticf.sca("Z farbeflaeche (3) ");
-		//Hier waere ein Thread gut
-		Overlay.pa.panelize(z.n2s, maus.x + Staticf.sc.width / 2,
+		N2[] n2s3 = new N2[z.n2s.size()];
+		for(int i = 0; i < n2s3.length; i++)
+			n2s3[i] = z.n2s.get(i);
+		n2s2 = n2s3;
+	}
+
+	public static void panelize()
+	{
+		Overlay.pa.panelize(n2s2, maus.x + Staticf.sc.width / 2,
 				maus.y + Staticf.sc.height / 2);
-		Staticf.sca("P panelize (14) ");
+		Staticf.sca("		P panelize (14) ");
 		Overlay.gd.drawImage(Overlay.pa.light, 0, 0, null);
-		Staticf.sca("O draw P (4) ");
+		Staticf.sca("		O draw P (4) ");
 		Overlay.overlay();
-		Staticf.sca("O overlay (0) ");
+		Staticf.sca("		O overlay (0) ");
 		//Hier Hauptthread
 		LPaneel.rePanel(Overlay.hl);
-		Staticf.sca("LP rePanel (7) ");
+		Staticf.sca("		LP rePanel (7) ");
 	}
 }
