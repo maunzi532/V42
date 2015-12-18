@@ -11,12 +11,19 @@ public class Staticf
 	public static boolean sca = false;
 	//Zeit an der sca gemessen werden soll
 	public static long last;
+	public static long last2;
 
 	//Debug-Textausgabe
 	public static void sca(Object w)
 	{
 		if(sca)
 			System.out.println(w.toString() + (System.currentTimeMillis() - last));
+	}
+
+	public static void sca2(Object w)
+	{
+		if(sca)
+			System.out.println("		" + w.toString() + (System.currentTimeMillis() - last2));
 	}
 
 	//Fenster ohne Rahmen
@@ -133,7 +140,7 @@ public class Staticf
 	//Maximale Anzahl Frameskips
 	static final int maxfskp = 10;
 	//Anzahl Millisekunden pro Frame
-	static final long stdfms = 10;
+	static final long stdfms = 20;
 	//Anzahl Millisekunden zwischen Checks ob wieder im Fokus
 	public static long blcfms = 200;
 	//Weite in Blocks wo NonBlocks in d nicht diffundieren

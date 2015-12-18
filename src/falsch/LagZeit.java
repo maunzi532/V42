@@ -16,6 +16,7 @@ public class LagZeit
 			{
 				public void run()
 				{
+					Staticf.last2 = System.currentTimeMillis();
 					Hauptschleife.panelize();
 				}
 			}.start();

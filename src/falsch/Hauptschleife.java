@@ -261,13 +261,13 @@ public class Hauptschleife
 	{
 		Overlay.pa.panelize(n2s2, maus.x + Staticf.sc.width / 2,
 				maus.y + Staticf.sc.height / 2);
-		Staticf.sca("		P panelize (14) ");
+		Staticf.sca2("P panelize (14) ");
 		Overlay.gd.drawImage(Overlay.pa.light, 0, 0, null);
-		Staticf.sca("		O draw P (4) ");
+		Staticf.sca2("O draw P (4) ");
 		Overlay.overlay();
-		Staticf.sca("		O overlay (0) ");
+		Staticf.sca2("O overlay (0) ");
 		//Hier Hauptthread
 		LPaneel.rePanel(Overlay.hl);
-		Staticf.sca("		LP rePanel (7) ");
+		Staticf.sca2("LP rePanel (7) ");
 	}
 }

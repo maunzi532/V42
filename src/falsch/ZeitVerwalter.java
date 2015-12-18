@@ -74,6 +74,7 @@ public class ZeitVerwalter
 					{
 						public void run()
 						{
+							Staticf.last2 = System.currentTimeMillis();
 							Hauptschleife.panelize();
 						}
 					}.start();
