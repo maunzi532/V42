@@ -124,7 +124,7 @@ public class Hauptschleife
 			}
 		};
 		n2.aussehen = new LadeModell().reload(new External[]{
-						new H2(n2, 71, 0.5, 0.5, 10, 10, 6, 1, 0, 0, 0),
+						new H2(n2, 71, 0.5, 0.5, 10, 10, 5, 1, 0, 0, 0),
 						new H2(n2, 74, 0.2, 0.5, 4, 10, 7, 0.5, 0, 0, -0.2),
 						new H2(n2, 75, 0.2, 0.5, 4, 10, 7, 0.5, 0, 0, -0.2),
 						new H2(n2, 76, 0.2, 0.5, 4, 10, 4, 0.5, 0, 0, -0.2),

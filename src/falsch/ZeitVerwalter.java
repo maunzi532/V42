@@ -9,6 +9,7 @@ public class ZeitVerwalter
 	private static int fskp;
 	private static long over;
 	private static boolean skpf;
+	private static boolean thd;
 
 	public static void start()
 	{
@@ -74,8 +75,13 @@ public class ZeitVerwalter
 					{
 						public void run()
 						{
-							Staticf.last2 = System.currentTimeMillis();
-							Hauptschleife.panelize();
+							if(!thd)
+							{
+								thd = true;
+								Staticf.last2 = System.currentTimeMillis();
+								Hauptschleife.panelize();
+								thd = false;
+							}
 						}
 					}.start();
 					fskp = -1;

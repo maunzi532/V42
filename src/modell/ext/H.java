@@ -53,7 +53,7 @@ public class H extends External
 							break;
 						default:
 							h2[i][j].add(new LinkAchse(new Drehung(0, 0),
-									0.4 + 0.4 * k - r.nextDouble() * 0.2 * k, 0, 0));
+									1.2 - r.nextDouble() * 0.2 * k, 0, 0));
 							break;
 					}
 				}

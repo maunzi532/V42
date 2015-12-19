@@ -56,8 +56,11 @@ public class Panelizer
 						darkC.put(ta, darkUsed);
 						darkC2.put(darkUsed, ta);
 					}
-					darkCopy.setColor(new Color(darkC.get(ta)));
-					n2s[i].panelDark(darkCopy);
+					if(darkC.containsKey(ta) && darkC.get(ta) != null)
+					{
+						darkCopy.setColor(new Color(darkC.get(ta)));
+						n2s[i].panelDark(darkCopy);
+					}
 				}
 				n2s[i].panel(this);
 			}
