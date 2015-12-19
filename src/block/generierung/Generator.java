@@ -1,7 +1,7 @@
 package block.generierung;
 
 import block.*;
-import k.*;
+import wahr.zugriff.*;
 
 public abstract class Generator
 {

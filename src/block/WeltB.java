@@ -1,9 +1,8 @@
 package block;
 
-import ansicht.*;
-import falsch.*;
-import k.*;
-import modell.xF.*;
+import ansicht.n2.*;
+import ansicht.n2.xF.*;
+import wahr.zugriff.*;
 
 import java.awt.*;
 import java.io.*;

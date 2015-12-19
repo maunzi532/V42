@@ -2,7 +2,7 @@ package ansicht;
 
 import ansicht.text.*;
 import block.*;
-import falsch.*;
+import wahr.zugriff.*;
 
 import java.awt.*;
 import java.awt.image.*;

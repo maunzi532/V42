@@ -1,6 +1,7 @@
 package ansicht;
 
-import falsch.*;
+import ansicht.n2.*;
+import wahr.zugriff.*;
 
 import java.awt.*;
 import java.awt.image.*;

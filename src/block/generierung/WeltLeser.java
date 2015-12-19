@@ -1,6 +1,6 @@
 package block.generierung;
 
-import fnd.*;
+import wahr.physisch.*;
 
 class WeltLeser extends Generator
 {

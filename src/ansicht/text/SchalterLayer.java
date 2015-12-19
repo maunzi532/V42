@@ -1,6 +1,6 @@
 package ansicht.text;
 
-import falsch.*;
+import wahr.zugriff.*;
 
 import java.awt.*;
 import java.util.*;

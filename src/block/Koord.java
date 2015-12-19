@@ -1,6 +1,6 @@
 package block;
 
-import k.*;
+import wahr.zugriff.*;
 
 public class Koord
 {

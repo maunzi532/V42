@@ -1,6 +1,6 @@
 package nonBlock;
 
-import k.*;
+import wahr.zugriff.*;
 
 public class Focus
 {

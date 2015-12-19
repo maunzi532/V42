@@ -1,6 +1,6 @@
 package ansicht;
 
-import k.*;
+import wahr.zugriff.*;
 
 public interface Licht
 {

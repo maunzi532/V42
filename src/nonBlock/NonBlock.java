@@ -1,9 +1,10 @@
 package nonBlock;
 
-import k.*;
-import modell.*;
-import modell.ext.*;
-import nonblockbox.aktion.*;
+import ansicht.n2.*;
+import nonBlock.aussehen.*;
+import nonBlock.aussehen.ext.*;
+import nonBlock.aktion.*;
+import wahr.zugriff.*;
 
 public abstract class NonBlock
 {

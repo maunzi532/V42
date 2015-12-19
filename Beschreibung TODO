@@ -13,7 +13,7 @@ Stufe 1
 		D2 - Aussehen verbessern
 	-	4D-Splittern
 	Overlay 1
-	-	Bildschirmelement - Ersatz für ScreenText
+		Texte ordentlich platzieren
 		4D-Daten des aktuellen Felds anzeigen
 	Animation 1
 		Sequenzen - Teleport
@@ -31,10 +31,11 @@ Stufe 1
 		Targeting-System - Markierung bewegen
 		Bildschirmelement - Eingabefeld
 	Code 1
-		ScreenText - Weg Damit
 		ZeitVerwalter Code (der ist unlesbar)
 
 Stufe 2
+	Overlay 2
+		Texte aussehen
 	Gameplay 2
 		Sinnvolles Attk
 		Welt generieren
