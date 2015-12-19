@@ -69,6 +69,7 @@ public class AlternateStandard
 				}
 			}
 		}
+		assert main != null;
 		la = main.la;
 		drehs = new Drehung[la];
 		lens = new Double[la];

@@ -6,12 +6,12 @@ import nonBlock.*;
 
 public class Abbau extends Aktion
 {
-	long tn;
-	int start;
-	NBD reMount;
-	int linA;
-	Drehung reD;
-	int reT;
+	private final long tn;
+	private final int start;
+	private final NBD reMount;
+	private final int linA;
+	private final Drehung reD;
+	private final int reT;
 
 	public Abbau(NBD besitzer, int dauer, int power, long tn, int start, NBD reMount, int linA, Drehung reD, int reT)
 	{

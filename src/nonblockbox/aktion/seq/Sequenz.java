@@ -9,7 +9,7 @@ public class Sequenz
 	private int teilA;
 	private int zeitA;
 	private final NBD[] akteure;
-	private ScreenText ender;
+	private TBox ender;
 
 	public Sequenz(LadeSequenz lad, NBD... akteure)
 	{
@@ -25,7 +25,7 @@ public class Sequenz
 			LadeAktion lad1 = lad.aktionen.get(i);
 			if(lad1.teil == teilA && lad1.zeit == zeitA)
 			{
-				ScreenText a = lad1.erzeugeAktion(lad1.akteur >= 0 ? akteure[lad1.akteur] : null);
+				TBox a = lad1.erzeugeAktion(lad1.akteur >= 0 ? akteure[lad1.akteur] : null);
 				if(a != null)
 					ender = a;
 			}

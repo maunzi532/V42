@@ -4,7 +4,7 @@ public class LagZeit
 {
 	public static void start()
 	{
-		Staticf.siehNonBlocks = false;
+		UIVerbunden.siehNonBlocks = false;
 		for(int i = 0; i < 10; i++)
 		{
 			Staticf.last = System.currentTimeMillis();
@@ -21,6 +21,6 @@ public class LagZeit
 				/*}
 			}.start();*/
 		}
-		Staticf.siehNonBlocks = true;
+		UIVerbunden.siehNonBlocks = true;
 	}
 }

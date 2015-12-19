@@ -16,7 +16,7 @@ public abstract class NBB extends NBD
 	public final ArrayList<Integer> cTime;
 	public final NBB nht;
 	public final ArrayList<ColBox> physik;
-	public final ArrayList<Move> moves;
+	protected final ArrayList<Move> moves;
 
 	protected NBB()
 	{

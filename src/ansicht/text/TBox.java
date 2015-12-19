@@ -4,6 +4,8 @@ import java.awt.*;
 
 public class TBox extends SLF
 {
+	public boolean clicked;
+
 	public TBox(SchalterLayer main, boolean tangible, double x, double y, double w, double h, String text)
 	{
 		super(main, tangible, x, y, w, h, text);
@@ -23,8 +25,7 @@ public class TBox extends SLF
 
 	public void onClick(boolean r)
 	{
+		clicked = true;
 		main.layer.remove(this);
 	}
-
-	public void tick(){}
 }

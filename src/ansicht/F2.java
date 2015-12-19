@@ -43,7 +43,7 @@ public abstract class F2 extends N2
 		if(seite == null)
 			return true;
 		if(ecken[0].c <= 0 || ecken[1].c <= 0 || ecken[2].c <= 0)
-			return !Staticf.godMode;
+			return !UIVerbunden.godMode;
 		double a1 = ecken[0].a / ecken[0].c;
 		double a2 = ecken[1].a / ecken[1].c;
 		double a3 = ecken[2].a / ecken[2].c;
@@ -89,7 +89,7 @@ public abstract class F2 extends N2
 		return ec2 != null;
 	}
 
-	public void panelDaten()
+	protected void panelDaten()
 	{
 		xe = new int[ec2.length];
 		ye = new int[ec2.length];
@@ -114,7 +114,7 @@ public abstract class F2 extends N2
 	public void panel(Panelizer pa)
 	{
 		pa.gd.setColor(dFarb);
-		if(Staticf.xrmode && avkh2 < Staticf.xraywidth * Staticf.xraywidth)
+		if(UIVerbunden.xrmode && avkh2 < Staticf.xraywidth * Staticf.xraywidth)
 			pa.gd.draw(new Polygon(xe, ye, xe.length));
 		else
 			pa.gd.fill(new Polygon(xe, ye, xe.length));

@@ -13,10 +13,8 @@ import java.util.*;
 public abstract class TSSA extends NBB implements Controllable, Licht
 {
 	private final Controller control;
-	//Seitlich, Hoch, Runter, D
-	private double[] canInfl;
-	public boolean boden;
-	public int grabRichtung = -1;
+	boolean boden;
+	int grabRichtung = -1;
 
 	public TSSA(Controller control)
 	{
@@ -26,6 +24,7 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 
 	public void kontrolle()
 	{
+		double[] canInfl;
 		if(grabRichtung >= 0)
 		{
 			canInfl = null;
@@ -70,12 +69,12 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 	public abstract void doCommand(String command);
 
 	//Links 7 Rechts 0
-	public int approxRichtung()
+	int approxRichtung()
 	{
 		return 7 - (int)(Drehung.sichern(dreh.wl) * 4 / Math.PI);
 	}
 
-	public boolean attemptAirgrab(int type)
+	boolean attemptAirgrab(int type)
 	{
 		if(grabRichtung < 0 && !boden)
 		{
@@ -187,7 +186,7 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 		return false;
 	}
 
-	public boolean kletterHoch()
+	boolean kletterHoch()
 	{
 		if(grabRichtung >= 0)
 		{
@@ -214,7 +213,7 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 		return true;
 	}
 
-	public boolean lassLos()
+	boolean lassLos()
 	{
 		if(grabRichtung >= 0)
 		{

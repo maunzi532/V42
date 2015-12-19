@@ -4,10 +4,10 @@ import k.*;
 
 public class Focus
 {
-	protected final NonBlock the;
-	protected int focusTime;
+	private final NonBlock the;
+	int focusTime;
 	public K4 targetPosition;
-	protected Drehung targetDreh;
+	Drehung targetDreh;
 
 	public Focus(NonBlock the, int focusTime, K4 targetPosition, Drehung targetDreh)
 	{
@@ -24,7 +24,7 @@ public class Focus
 		this.targetPosition = targetPosition;
 	}
 
-	public Focus(NonBlock the)
+	Focus(NonBlock the)
 	{
 		this.the = the;
 	}

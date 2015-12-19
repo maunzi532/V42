@@ -45,7 +45,7 @@ public abstract class NBD extends NonBlock
 			}
 		}
 
-		if(WeltND.nfr || Staticf.godMode)
+		if(WeltND.nfr || UIVerbunden.godMode)
 			kontrolle();
 		mTick();
 	}

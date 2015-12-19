@@ -8,7 +8,6 @@ import java.awt.*;
 public class LPaneel
 {
 	public static JFrame fr;
-	public static Graphics2D gd;
 
 	public static void init1()
 	{
@@ -30,7 +29,7 @@ public class LPaneel
 		while(true)
 			if(fr.isActive())
 				break;
-		Staticf.sc = fr.getSize();
+		UIVerbunden.sc = fr.getSize();
 	}
 
 	public static void rePanel(Image img)

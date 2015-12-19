@@ -11,8 +11,8 @@ import nonblockbox.attk.move.*;
 
 public class Tha extends TSSA
 {
-	public NBB fL;
-	public NBB fR;
+	private NBB fL;
+	private NBB fR;
 
 	public Tha()
 	{
@@ -118,30 +118,30 @@ public class Tha extends TSSA
 			if(Overlay.pa.taType > 0 && Overlay.pa.tnTarget != null && Overlay.pa.tnTarget > 0)
 			{
 				moves.add(new Move(Index.gibLadeMove("KBL",
-						String.valueOf(-70 - Hauptschleife.maus.x / 10),
-						String.valueOf(60 - Hauptschleife.maus.y / 10)), this));
+						String.valueOf(-70 - UIVerbunden.maus.x / 10),
+						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
 				fL.aktionen.add(new Abbau(fL, 60, 5, Overlay.pa.tnTarget, 20, this, 15,
 						new Drehung(0, Math.PI * 3 / 2), 40));
 			}
 			else
 				moves.add(new Move(Index.gibLadeMove("KL",
-						String.valueOf(-70 - Hauptschleife.maus.x / 10),
-						String.valueOf(60 - Hauptschleife.maus.y / 10)), this));
+						String.valueOf(-70 - UIVerbunden.maus.x / 10),
+						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
 		}
 		if(command.equals("KR"))
 		{
 			if(Overlay.pa.taType > 0 && Overlay.pa.tnTarget != null && Overlay.pa.tnTarget > 0)
 			{
 				moves.add(new Move(Index.gibLadeMove("KBR",
-						String.valueOf(70 - Hauptschleife.maus.x / 10),
-						String.valueOf(60 - Hauptschleife.maus.y / 10)), this));
+						String.valueOf(70 - UIVerbunden.maus.x / 10),
+						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
 				fR.aktionen.add(new Abbau(fR, 60, 5, Overlay.pa.tnTarget, 20, this, 16,
 						new Drehung(0, Math.PI * 3 / 2), 40));
 			}
 			else
 				moves.add(new Move(Index.gibLadeMove("KR",
-						String.valueOf(70 - Hauptschleife.maus.x / 10),
-						String.valueOf(60 - Hauptschleife.maus.y / 10)), this));
+						String.valueOf(70 - UIVerbunden.maus.x / 10),
+						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
 		}
 		if(command.equals("unten"))
 		{

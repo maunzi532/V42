@@ -3,7 +3,6 @@ package ansicht;
 import ansicht.text.*;
 import block.*;
 import falsch.*;
-import fnd.*;
 
 import java.awt.*;
 import java.awt.image.*;
@@ -14,7 +13,6 @@ public class Overlay
 	public static BufferedImage hl;
 	public static Graphics2D gd;
 	public static SchalterLayer sl;
-	public static ArrayList<ScreenText> st;
 	public static ArrayList<SLF> normalSchalter;
 	public static ArrayList<SLF> godModeSchalter;
 	public static boolean sichtAn = true;
@@ -22,11 +20,10 @@ public class Overlay
 
 	public static void initOverlay()
 	{
-		hl = new BufferedImage(Staticf.sc.width, Staticf.sc.height, BufferedImage.TYPE_INT_ARGB_PRE);
+		hl = new BufferedImage(UIVerbunden.sc.width, UIVerbunden.sc.height, BufferedImage.TYPE_INT_ARGB_PRE);
 		gd = hl.createGraphics();
 		sl = new SchalterLayer();
-		st = new ArrayList<>();
-		pa = new Panelizer(Staticf.sc);
+		pa = new Panelizer(UIVerbunden.sc);
 		normalSchalter = new ArrayList<>();
 		normalSchalter.add(new SLF(sl, true, 0.1, 0.1, 0.1, 0.05)
 		{
@@ -59,14 +56,14 @@ public class Overlay
 			public void onClick(boolean r)
 			{
 				if(r)
-					Staticf.x4dization = Staticf.x4dization > 0 ? 0 : 1;
+					UIVerbunden.x4dization = UIVerbunden.x4dization > 0 ? 0 : 1;
 				else
-					Staticf.x4dization = Staticf.x4dization > 1 ? 0 : 2;
+					UIVerbunden.x4dization = UIVerbunden.x4dization > 1 ? 0 : 2;
 			}
 
 			public void tick()
 			{
-				switch(Staticf.x4dization)
+				switch(UIVerbunden.x4dization)
 				{
 					case 0:
 						text = "4D aus";
@@ -84,12 +81,12 @@ public class Overlay
 		{
 			public void onClick(boolean r)
 			{
-				Staticf.d2tangibility = !Staticf.d2tangibility;
+				UIVerbunden.d2tangibility = !UIVerbunden.d2tangibility;
 			}
 
 			public void tick()
 			{
-				if(Staticf.d2tangibility)
+				if(UIVerbunden.d2tangibility)
 					text = "Baumodus an";
 				else
 					text = "Baumodus aus";
@@ -108,23 +105,23 @@ public class Overlay
 			public void onClick(boolean r)
 			{
 				if(r)
-					Staticf.siehNonBlocks = !Staticf.siehNonBlocks;
+					UIVerbunden.siehNonBlocks = !UIVerbunden.siehNonBlocks;
 				else
-					Staticf.siehBlocks = !Staticf.siehBlocks;
+					UIVerbunden.siehBlocks = !UIVerbunden.siehBlocks;
 			}
 
 			public void tick()
 			{
-				if(Staticf.siehBlocks)
+				if(UIVerbunden.siehBlocks)
 				{
-					if(Staticf.siehNonBlocks)
+					if(UIVerbunden.siehNonBlocks)
 						text = "Alles";
 					else
 						text = "Blocks";
 				}
 				else
 				{
-					if(Staticf.siehNonBlocks)
+					if(UIVerbunden.siehNonBlocks)
 						text = "NonBlocks";
 					else
 						text = "Nichts";
@@ -135,12 +132,12 @@ public class Overlay
 		{
 			public void onClick(boolean r)
 			{
-				Staticf.xrmode = !Staticf.xrmode;
+				UIVerbunden.xrmode = !UIVerbunden.xrmode;
 			}
 
 			public void tick()
 			{
-				if(Staticf.xrmode)
+				if(UIVerbunden.xrmode)
 					text = "XR an " + Staticf.xraywidth;
 				else
 					text = "XR aus";
@@ -150,28 +147,16 @@ public class Overlay
 
 	public static void resize()
 	{
-		hl = new BufferedImage(Staticf.sc.width, Staticf.sc.height, BufferedImage.TYPE_INT_ARGB_PRE);
+		hl = new BufferedImage(UIVerbunden.sc.width, UIVerbunden.sc.height, BufferedImage.TYPE_INT_ARGB_PRE);
 		gd = hl.createGraphics();
-		pa.resize(Staticf.sc);
+		pa.resize(UIVerbunden.sc);
 	}
 
 	public static void overlay()
 	{
-		int h = 100;
-		for(int i = 0; i < st.size(); i++)
-		{
-			boolean w = st.get(i).act(TA2.keyStat[15] >= 1);
-			st.get(i).z(gd, 400, h);
-			h += st.get(i).reservedHeight();
-			if(w)
-			{
-				st.remove(i);
-				i--;
-			}
-		}
 		sl.draw(gd);
 		gd.setColor(new Color(0, 0, 180));
-		gd.setFont(new Font("Arial", Font.PLAIN, 20));
+		gd.setFont(new Font(null, Font.PLAIN, 20));
 		/*if(Staticf.x4dization > 0)
 			gd.drawString(String.valueOf(Hauptschleife.n.position.d), 50, 50);
 		WBP wbp = WeltB.tw(Hauptschleife.n.position);
@@ -181,11 +166,11 @@ public class Overlay
 		wbp.k[3] -= 2;
 		if(WeltB.gib(wbp) == 0)
 			gd.drawString("P Bereit", 300, 100);*/
-		if(Staticf.x4dization > 0)
-			gd.drawString(String.valueOf(Hauptschleife.zp.d), 50, 50);
-		if(Hauptschleife.zp.z)
+		if(UIVerbunden.x4dization > 0)
+			gd.drawString(String.valueOf(UIVerbunden.zp.d), 50, 50);
+		if(UIVerbunden.zp.z)
 			gd.drawString("Z Bereit", 300, 50);
-		if(Hauptschleife.zp.p)
+		if(UIVerbunden.zp.p)
 			gd.drawString("P Bereit", 300, 100);
 	}
 }

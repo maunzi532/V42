@@ -13,8 +13,6 @@ public class MK extends External
 {
 	private final double fwm;
 	private final double fwx;
-	private final double fhm;
-	private final double fhx;
 	private final int nw;
 	private final int nt;
 	private final int[] linkedP;
@@ -29,8 +27,6 @@ public class MK extends External
 		super(main2, axn);
 		this.fwm = fwm;
 		this.fwx = fwx;
-		this.fhm = fhm;
-		this.fhx = fhx;
 		this.nw = nw;
 		this.nt = nt;
 		this.linkedP = linkedP;

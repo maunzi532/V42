@@ -9,7 +9,7 @@ public class Move
 	private int zeitA;
 	private final NBB akteur;
 	private AttkAktion ender;
-	public String name;
+	public final String name;
 
 	public Move(LadeMove lad, NBB akteur)
 	{

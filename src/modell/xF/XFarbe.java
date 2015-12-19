@@ -35,7 +35,7 @@ public abstract class XFarbe
 				splN[(f.splseed % Staticf.seedifier)]) % Staticf.seedifier)) / (double)Staticf.seedifier;
 	}
 
-	public static void setFarb(N2 n, Color fc)
+	static void setFarb(N2 n, Color fc)
 	{
 		if(n.ddiff > 0)
 			fc = limit(fc, (int)(n.ddiff * 10), (int)(n.ddiff * -5), (int)(n.ddiff * -5));
@@ -51,7 +51,7 @@ public abstract class XFarbe
 				(int)(fc.getBlue() * weg2 + 0 * (1 - weg2)), fc.getAlpha());
 	}
 
-	public static Color shade(Color fc, N2 n)
+	private static Color shade(Color fc, N2 n)
 	{
 		double power = -255;
 		for(int i = 0; i < WeltND.licht.size(); i++)
@@ -74,7 +74,7 @@ public abstract class XFarbe
 		return limit(fc, (int)power, (int)power, (int)power);
 	}
 
-	public static double shadeWinkel(F2 n, K4 lichtp)
+	private static double shadeWinkel(F2 n, K4 lichtp)
 	{
 		for(int i = 0; i < n.eckenNK.length; i++)
 			if(n.eckenNK[i] == null)
@@ -144,7 +144,7 @@ public abstract class XFarbe
 		return new Color(r, g, b);
 	}
 
-	static Color limit(Color c, int r, int g, int b)
+	private static Color limit(Color c, int r, int g, int b)
 	{
 		r += c.getRed();
 		if(r > 255)

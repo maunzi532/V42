@@ -11,8 +11,8 @@ public class SchalterLayer
 	final Color front = Color.WHITE;
 
 	public final ArrayList<SLF> layer = new ArrayList<>();
-	public final ArrayList[] tex;
-	public final String[] texNamen = new String[0];
+	private final ArrayList[] tex;
+	private final String[] texNamen = new String[0];
 
 	public SchalterLayer()
 	{
@@ -23,12 +23,12 @@ public class SchalterLayer
 
 	public int mw(double multiplikator)
 	{
-		return (int)(Staticf.sc.width * multiplikator);
+		return (int)(UIVerbunden.sc.width * multiplikator);
 	}
 
 	public int mh(double multiplikator)
 	{
-		return (int)(Staticf.sc.height * multiplikator);
+		return (int)(UIVerbunden.sc.height * multiplikator);
 	}
 
 	public boolean click(int x, int y, boolean r)

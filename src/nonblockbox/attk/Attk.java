@@ -16,21 +16,6 @@ public class Attk
 	private ArrayList<Hitbox> col1;
 	private ArrayList<ColBox> col2;
 
-	public Attk(NBB besitzer, NBB nht, int cll)
-	{
-		this.besitzer = besitzer;
-		this.nht = nht;
-		this.cll = cll;
-		h = new ArrayList<>();
-		con = new ArrayList<>();
-		conP = new ArrayList<>();
-		changed = new ArrayList<>();
-		col1 = new ArrayList<>();
-		col2 = new ArrayList<>();
-		besitzer.attks.add(this);
-		WeltNB.attks.add(this);
-	}
-
 	public Attk(int cll)
 	{
 		this.cll = cll;

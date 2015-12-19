@@ -13,7 +13,7 @@ public class WeltNB
 
 	public static void timetick()
 	{
-		if(WeltND.nfr && !Staticf.godMode)
+		if(WeltND.nfr && !UIVerbunden.godMode)
 		{
 			for(int i = 0; i < vta.size(); i++)
 				for(int j = 0; j < vta.get(i).cTime.size(); j++)

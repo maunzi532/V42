@@ -2,13 +2,11 @@ package falsch;
 
 import fnd.*;
 
-import java.awt.*;
-
 public class Staticf
 {
 
 	//Debug-Zeiten ausgeben an/aus
-	public static boolean sca = false;
+	private static boolean sca = false;
 	//Zeit an der sca gemessen werden soll
 	public static long last;
 	public static long last2;
@@ -112,21 +110,6 @@ public class Staticf
 			}
 	}
 
-	//Fenster w/h
-	public static Dimension sc;
-	//Zeitgefrorener Spectator Modus
-	public static boolean godMode = false;
-	//4D-Blick an/aus
-	public static int x4dization = 0;
-	//D2 anklickbarkeit
-	public static boolean d2tangibility = false;
-	//Blocks sehen
-	public static boolean siehBlocks = true;
-	//NonBlocks sehen
-	public static boolean siehNonBlocks = true;
-	//X_Ray-Modus an/aus
-	public static boolean xrmode = false;
-
 	//Sichtweite NonBlocks
 	public static final double sicht = 100;
 	//Eigene H ausblenden
@@ -142,7 +125,7 @@ public class Staticf
 	//Anzahl Millisekunden pro Frame
 	static final long stdfms = 20;
 	//Anzahl Millisekunden zwischen Checks ob wieder im Fokus
-	public static long blcfms = 200;
+	public static final long blcfms = 200;
 	//Weite in Blocks wo NonBlocks in d nicht diffundieren
 	public static final double safezone = 1;
 	//Weite danach wo NonBlocks in d diffundieren
@@ -158,7 +141,7 @@ public class Staticf
 	//Zeit bis Texte ganz verschwinden
 	public static final int textFade = 10;
 	//Weite des X-Ray-Modus
-	public static int xraywidth = 50;
+	public static final int xraywidth = 50;
 
 	public static void charge2()
 	{

@@ -36,11 +36,11 @@ public class WeltND
 
 	public static void timetickD()
 	{
-		if(!nfr && !Staticf.godMode)
+		if(!nfr && !UIVerbunden.godMode)
 			if(seq.tick())
 				seq = null;
-		if(Staticf.godMode)
-			Hauptschleife.godModeKam.tick();
+		if(UIVerbunden.godMode)
+			UIVerbunden.godModeKam.tick();
 		else
 			for(int i = 0; i < nonBlocks.size(); i++)
 				nonBlocks.get(i).tick();

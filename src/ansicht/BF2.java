@@ -5,7 +5,7 @@ import modell.xF.*;
 
 public class BF2 extends F2
 {
-	public int seitenwand;
+	public final int seitenwand;
 
 	public BF2(K4[] ecken, K4[] eckenNK, XFarbe farbe, Boolean seite, int seitenwand, int spld, long tn)
 	{

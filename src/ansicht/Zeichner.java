@@ -13,13 +13,12 @@ import java.util.*;
 public class Zeichner
 {
 	public ArrayList<N2> n2s;
-	public Controllable kam;
-	private ArrayList<Double> abstands;
-	private ArrayList<Integer> splits;
+	private Controllable kam;
+	private final ArrayList<Double> abstands;
+	private final ArrayList<Integer> splits;
 
-	public Zeichner(Controllable kam, String ats)
+	public Zeichner(String ats)
 	{
-		this.kam = kam;
 		abstands = new ArrayList<>();
 		splits = new ArrayList<>();
 		String[] zeilen = ats.split("\n");
@@ -34,10 +33,11 @@ public class Zeichner
 
 	public void nehmen()
 	{
+		kam = UIVerbunden.kamA;
 		K4 kp = kam.kamP();
 		Drehung kd = kam.kamD();
 		n2s = new ArrayList<>();
-		if(Staticf.siehNonBlocks)
+		if(UIVerbunden.siehNonBlocks)
 			for(NonBlock nb : WeltND.nonBlocks)
 			{
 				if(nb.punkte == null)
@@ -77,7 +77,7 @@ public class Zeichner
 				Staticf.sca("NEF " + nb.toString() + " 3 ");
 			}
 		Staticf.sca("NE1 ");
-		if(Staticf.siehBlocks)
+		if(UIVerbunden.siehBlocks)
 			n2s.addAll(WeltB.flaechen(kp, kd, new K4(100, 100, 100, 60)));
 		Staticf.sca("NE2 ");
 		for(int i = 0; i < n2s.size(); i++)

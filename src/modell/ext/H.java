@@ -178,7 +178,7 @@ public class H extends External
 	public ArrayList<F2> gibFl(K4[][] p5)
 	{
 		ArrayList<F2> al = new ArrayList<>();
-		if(nicht || Hauptschleife.z.kam == main2)
+		if(nicht || UIVerbunden.kamA == main2)
 			return al;
 		int cy = anfang;
 		for(int i = 0; i < ht; i++)

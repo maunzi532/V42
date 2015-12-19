@@ -37,7 +37,7 @@ public class D2 extends N2
 
 	public void panelDark(Graphics2D darkCopy)
 	{
-		if(Staticf.d2tangibility)
+		if(UIVerbunden.d2tangibility)
 		{
 			int r = scale * 2;
 			int[] xp = new int[]{xe - r, xe, xe + r, xe};
@@ -50,7 +50,7 @@ public class D2 extends N2
 	{
 		pa.gd.setColor(dFarb);
 		pa.gd.setFont(new Font("Consolas", Font.PLAIN, scale > 20 ? 20 : scale));
-		if(Staticf.d2tangibility)
+		if(UIVerbunden.d2tangibility)
 		{
 			int r = scale * 2;
 			int[] xp = new int[]{xe - r, xe, xe + r, xe};

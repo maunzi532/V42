@@ -4,7 +4,6 @@ import k.*;
 
 public class MDAktion extends Aktion
 {
-	private final double[] mvd;
 	private final Boolean[] mvdA;
 	private final double[] mvd0;
 	private final double[] mvdT;
@@ -12,7 +11,6 @@ public class MDAktion extends Aktion
 	public MDAktion(NBD besitzer, int dauer, double[] mvd, Boolean[] mvdA)
 	{
 		super(besitzer, dauer, 0);
-		this.mvd = mvd;
 		this.mvdA = mvdA;
 		mvd0 = new double[]{besitzer.position.a, besitzer.position.b,
 				besitzer.position.c, besitzer.position.d, besitzer.dreh.wl, besitzer.dreh.wb};
@@ -25,8 +23,8 @@ public class MDAktion extends Aktion
 				else
 					mvdT[i] = mvd0[i] + mvd[i];
 			}
-		mvd[4] = Drehung.sichern(mvd[4]);
-		mvd[5] = Drehung.sichern(mvd[5]);
+		mvdT[4] = Drehung.sichern(mvdT[4]);
+		mvdT[5] = Drehung.sichern(mvdT[5]);
 	}
 
 	public void tick()

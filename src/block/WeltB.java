@@ -59,7 +59,7 @@ public class WeltB
 		Staticf.sca("WE1 ");
 		double dd = (kam.d - Koord.startWelt.d) / Koord.weltBlock.d;
 		int di = Koord.intiize((kam.d - Koord.startWelt.d) / Koord.weltBlock.d);
-		if(Staticf.x4dization == 0)
+		if(UIVerbunden.x4dization == 0)
 			for(int a = kaw0.k[0]; a < kawEnd.k[0]; a++)
 				for(int b = kaw0.k[1]; b < kawEnd.k[1]; b++)
 					for(int c = kaw0.k[2]; c < kawEnd.k[2]; c++)
@@ -72,7 +72,7 @@ public class WeltB
 										b + Koord.seiten[i][1], c + Koord.seiten[i][2], di))))
 									toR.add(flaeche(new WBP(a, b, c, di), block, i));
 						}
-						else if(Staticf.d2tangibility)
+						else if(UIVerbunden.d2tangibility)
 						{
 							WBP p = new WBP(a, b, c, di);
 							long tn = tn(p);
@@ -230,7 +230,7 @@ public class WeltB
 	{
 		if(!opaque(blockR) && !opaque(blockG))
 		{
-			if(Staticf.d2tangibility)
+			if(UIVerbunden.d2tangibility)
 				return new D2(true, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
 						null, Koord.wt2(p), tn);
 			return null;
@@ -238,8 +238,8 @@ public class WeltB
 		String text = (opaque(blockR) ? "Rot: " + blockR : "") +
 				(opaque(blockR) && opaque(blockG) ? " " : "") +
 				(opaque(blockG) ? "Gn: " + blockG : "");
-		if(Staticf.d2tangibility || Staticf.x4dization > 1)
-			return new D2(Staticf.d2tangibility, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
+		if(UIVerbunden.d2tangibility || UIVerbunden.x4dization > 1)
+			return new D2(UIVerbunden.d2tangibility, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
 					text, Koord.wt2(p), tn);
 		else
 			return null;
@@ -259,7 +259,7 @@ public class WeltB
 		return block > 0;
 	}
 
-	public static boolean vKanten(int block)
+	private static boolean vKanten(int block)
 	{
 		return block == 2;
 	}

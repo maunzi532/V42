@@ -130,7 +130,7 @@ class LadeAktion
 		}
 	}
 
-	public ScreenText erzeugeAktion(NBD besitzer)
+	public TBox erzeugeAktion(NBD besitzer)
 	{
 		switch(typ)
 		{
@@ -143,12 +143,12 @@ class LadeAktion
 				Freeze.checkLinA(besitzer, fm);
 				break;
 			case 2:
-				ScreenText st = new ScreenText(text, null, null, dauer, false);
-				Overlay.st.add(st);
+				TBox st = new TBox(Overlay.sl, false, 0.2, 0.8, 0.1, 0.1, text);
+				Overlay.sl.layer.add(st);
 				break;
 			case 3:
-				ScreenText st2 = new ScreenText(text, null, null, 0, false);
-				Overlay.st.add(st2);
+				TBox st2 = new TBox(Overlay.sl, true, 0.2, 0.8, 0.1, 0.1, text);
+				Overlay.sl.layer.add(st2);
 				return st2;
 			case 4:
 				MDAktion md = new MDAktion(besitzer, dauer, mvd, mvd2);
@@ -157,9 +157,9 @@ class LadeAktion
 			case 5:
 				if(besitzer instanceof Controllable)
 				{
-					Hauptschleife.kamN = (Controllable)besitzer;
-					if(!Staticf.godMode)
-						Hauptschleife.z.kam = Hauptschleife.kamN;
+					UIVerbunden.kamN = (Controllable)besitzer;
+					if(!UIVerbunden.godMode)
+						UIVerbunden.kamA = UIVerbunden.kamN;
 				}
 				break;
 			case 6:

@@ -4,12 +4,12 @@ import java.awt.*;
 
 public abstract class SLF
 {
-	protected final SchalterLayer main;
-	protected final boolean tangible;
-	protected final double x;
-	protected final double y;
-	protected final double w;
-	protected final double h;
+	final SchalterLayer main;
+	final boolean tangible;
+	final double x;
+	final double y;
+	final double w;
+	final double h;
 	protected String text;
 
 	public SLF(SchalterLayer main, boolean tangible, double x, double y, double w, double h)

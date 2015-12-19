@@ -23,13 +23,13 @@ public class Sicht extends Aktion
 
 	public void tick()
 	{
-		if(Overlay.sichtAn && (gm ? Staticf.godMode : WeltND.nfr))
+		if(Overlay.sichtAn && (gm ? UIVerbunden.godMode : WeltND.nfr))
 		{
-			besitzer.dreh.wl -= Hauptschleife.maus.x * Math.abs(Hauptschleife.maus.x)
-					/ 10000d / Staticf.sc.width;
+			besitzer.dreh.wl -= UIVerbunden.maus.x * Math.abs(UIVerbunden.maus.x)
+					/ 10000d / UIVerbunden.sc.width;
 			besitzer.dreh.sichern();
-			besitzer.linkAchsen[linA].dreh.wb -= Hauptschleife.maus.y * Math.abs(Hauptschleife.maus.y)
-					/ 10000d / Staticf.sc.height;
+			besitzer.linkAchsen[linA].dreh.wb -= UIVerbunden.maus.y * Math.abs(UIVerbunden.maus.y)
+					/ 10000d / UIVerbunden.sc.height;
 			if(!gm)
 			{
 				if(besitzer.linkAchsen[linA].dreh.wb < 0.2)

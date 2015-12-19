@@ -10,7 +10,7 @@ public abstract class N2
 {
 	public K4[] spken;
 	public XFarbe farbe;
-	protected boolean block;
+	boolean block;
 	public K4 mid;
 	public long tn;
 	public Color dFarb;
@@ -34,17 +34,17 @@ public abstract class N2
 		return true;
 	}
 
-	public abstract void panelDaten();
+	protected abstract void panelDaten();
 	public abstract void panelDark(Graphics2D darkCopy);
 	public abstract void panel(Panelizer pa);
 
 	static int ethaX(double a, double c)
 	{
-		return (int)(Staticf.sc.width / 2d + Staticf.scaleX * a / c);
+		return (int)(UIVerbunden.sc.width / 2d + Staticf.scaleX * a / c);
 	}
 
 	static int ethaY(double b, double c)
 	{
-		return (int)(Staticf.sc.height / 2d - Staticf.scaleY * b / c);
+		return (int)(UIVerbunden.sc.height / 2d - Staticf.scaleY * b / c);
 	}
 }

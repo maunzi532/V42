@@ -109,7 +109,7 @@ public class Panelizer
 				}
 				//C
 				gd.setColor(new Color(0, 180, 0));
-				gd.setFont(new Font("Arial", Font.PLAIN, 20));
+				gd.setFont(new Font(null, Font.PLAIN, 20));
 				if(tnTarget != null)
 					gd.drawString(tnTarget.toString(), 50, 150);
 			}

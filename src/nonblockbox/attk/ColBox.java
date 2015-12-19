@@ -67,12 +67,12 @@ public class ColBox
 		if(cu.b > k.b || co.b < k.b)
 			return null;
 		if(cu.b == k.b)
-			return checkAtB2(cu, rcu, k, 0);
+			return checkAtB2(cu, rcu, k);
 		if(co.b == k.b)
-			return checkAtB2(co, rco, k, 0);
+			return checkAtB2(co, rco, k);
 		K4 in = new K4();
 		double rm = neueScheibe(cu, rcu, co, rco, k.b, in);
-		return checkAtB2(in, rm, k, 0);
+		return checkAtB2(in, rm, k);
 	}
 
 	static boolean checkAtB(K4 t1, double r1, K4 t2, double r2)
@@ -85,14 +85,13 @@ public class ColBox
 		return r * r >= lq;
 	}
 
-	private static double checkAtB2(K4 t1, double r1, K4 t2, double r2)
+	private static double checkAtB2(K4 t1, double r1, K4 t2)
 	{
 		double a = t1.a - t2.a;
 		double c = t1.c - t2.c;
 		double d = t1.d - t2.d;
 		double lq = a * a + c * c + d * d;
-		double r = r1 + r2;
-		return Math.sqrt(lq) - r;
+		return Math.sqrt(lq) - r1;
 	}
 
 	static double neueScheibe(K4 u, double ru, K4 o, double ro, double b, K4 in)

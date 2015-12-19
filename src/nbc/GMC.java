@@ -10,7 +10,7 @@ public class GMC extends Controller
 	public ArrayList<String> giveCommands()
 	{
 		ArrayList<String> cmd = new ArrayList<>();
-		if(Staticf.godMode)
+		if(UIVerbunden.godMode)
 		{
 			if(TA2.keyStat[15] == 2)
 				cmd.add("Hoch");
@@ -22,7 +22,7 @@ public class GMC extends Controller
 
 	public boolean[] infl()
 	{
-		if(Staticf.godMode)
+		if(UIVerbunden.godMode)
 			return new boolean[]
 					{
 							TA2.keyStat[2] > 0,

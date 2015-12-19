@@ -8,7 +8,6 @@ public class ZeitVerwalter
 	private static long last;
 	private static int fskp;
 	private static long over;
-	private static boolean skpf;
 	private static boolean thd;
 
 	public static void start()
@@ -16,6 +15,7 @@ public class ZeitVerwalter
 		while(true)
 		{
 			boolean okay = LPaneel.fr.hasFocus();
+			boolean skpf;
 			if(last > 0)
 			{
 				skpf = false;
@@ -90,15 +90,12 @@ public class ZeitVerwalter
 		}
 	}
 
-	public static void schlaf(long zeit)
+	private static void schlaf(long zeit)
 	{
 		try
 		{
 			Thread.sleep(zeit);
 		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
+		catch(InterruptedException ignored){}
 	}
 }

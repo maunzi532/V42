@@ -160,8 +160,8 @@ class LadeAktionB
 				Freeze.checkLinA(b2, fm);
 				break;
 			case 2:
-				ScreenText st = new ScreenText(text, null, null, dauer, false);
-				Overlay.st.add(st);
+				TBox st = new TBox(Overlay.sl, false, 0.2, 0.8, 0.1, 0.1, text);
+				Overlay.sl.layer.add(st);
 				break;
 			case 3:
 				AttkAktion ak = new AttkAktion((NBB) b2, dauer, power, thatAttk,

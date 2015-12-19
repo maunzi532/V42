@@ -10,13 +10,8 @@ public abstract class External
 {
 	public static boolean nicht;
 	final NonBlock main2;
-	int axn;
+	final int axn;
 	int anfang;
-
-	public External(NonBlock main2)
-	{
-		this.main2 = main2;
-	}
 
 	External(NonBlock main2, int axn)
 	{

@@ -18,14 +18,10 @@ import java.util.*;
 
 public class Hauptschleife
 {
-	public static TSSA n;
-	static TSSA n2;
-	public static Point maus;
-	public static Kamera godModeKam;
-	public static Zeichner z;
-	public static Controllable kamN;
-	public static ZP4C zp;
-	public static N2[] n2s2;
+	private static TSSA n;
+	private static TSSA n2;
+	private static Zeichner z;
+	private static N2[] n2s2;
 
 	public static void init()
 	{
@@ -87,18 +83,13 @@ public class Hauptschleife
 		{
 			public void collide(Attk attk)
 			{
-				System.out.println("collide");
 				AktionM.checkLinA(this, new AktionM(this, 20, 1, ADI.deg(16, 2, 14, 3, 45, 0, 0, 0, false)));
 			}
 
-			public void actCollide(Attk attk)
-			{
-				System.out.println("actcollide");
-			}
+			public void actCollide(Attk attk){}
 
 			public void decollide(Attk attk)
 			{
-				System.out.println("decollide");
 				Index.gibAlternateStandard("TSSA2R").changeToThis(this);
 			}
 
@@ -145,8 +136,9 @@ public class Hauptschleife
 		n2.position.b += n2.block.get(0).airshift;
 		n2.dreh = new Drehung(Math.PI, 0);
 		n2.init();
-		kamN = n;
-		z = new Zeichner(kamN, Index.gibText("SPL"));
+		UIVerbunden.kamN = n;
+		UIVerbunden.kamA = UIVerbunden.kamN;
+		z = new Zeichner(Index.gibText("SPL"));
 		n2.collidable.add(new ColBox(n2, 0, 4, 4, 1, 1));
 		n2.physik.add(new ColBox(n2, 69, 1.5, 1.6, 1.1));
 		n2.physik.add(new ColBox(n2, 78, 1.5, 1, 1));
@@ -154,48 +146,48 @@ public class Hauptschleife
 		n2.physik.add(new ColBox(n2, 12, 0.7, 0.7, 1));
 		n2.physik.add(new ColBox(n2, 0, 1.8, 1.8, 1));
 		n.aktionen.add(new Sicht(n, 10, 67, false));
-		zp = new ZP4C(n, 0);
-		n.aktionen.add(zp);
+		UIVerbunden.zp = new ZP4C(n, 0);
+		n.aktionen.add(UIVerbunden.zp);
 		WeltND.licht.add(n);
 		WeltND.licht.add(n2);
-		godModeKam = new Kamera(new GMC());
-		godModeKam.position = new K4(n.position);
-		godModeKam.dreh = new Drehung();
-		godModeKam.canInfl = new double[]{1, 1, 1, 1};
-		godModeKam.aussehen = new LadeModell();
-		Index.gibStandardAussehen("Kam").assignStandard(godModeKam);
-		godModeKam.aussehen.reload();
-		godModeKam.elimit = 1;
-		godModeKam.init();
-		godModeKam.aktionen.add(new Sicht(godModeKam, 10, 0, true));
+		UIVerbunden.godModeKam = new Kamera(new GMC());
+		UIVerbunden.godModeKam.position = new K4(n.position);
+		UIVerbunden.godModeKam.dreh = new Drehung();
+		UIVerbunden.godModeKam.canInfl = new double[]{1, 1, 1, 1};
+		UIVerbunden.godModeKam.aussehen = new LadeModell();
+		Index.gibStandardAussehen("Kam").assignStandard(UIVerbunden.godModeKam);
+		UIVerbunden.godModeKam.aussehen.reload();
+		UIVerbunden.godModeKam.elimit = 1;
+		UIVerbunden.godModeKam.init();
+		UIVerbunden.godModeKam.aktionen.add(new Sicht(UIVerbunden.godModeKam, 10, 0, true));
 	}
 
 	public static boolean eingabe()
 	{
-		if(Staticf.sc.width != LPaneel.fr.getSize().width ||
-				Staticf.sc.height != LPaneel.fr.getSize().height)
+		if(UIVerbunden.sc.width != LPaneel.fr.getSize().width ||
+				UIVerbunden.sc.height != LPaneel.fr.getSize().height)
 		{
-			Staticf.sc = LPaneel.fr.getSize();
+			UIVerbunden.sc = LPaneel.fr.getSize();
 			Overlay.resize();
 		}
 		TA2.move();
 		if(TA2.keyStat[0] > 0)
 			return true;
-		maus = MouseInfo.getPointerInfo().getLocation();
+		UIVerbunden.maus = MouseInfo.getPointerInfo().getLocation();
 		Point mm = LPaneel.fr.getLocationOnScreen();
-		maus.translate(-mm.x, -mm.y);
+		UIVerbunden.maus.translate(-mm.x, -mm.y);
 		if(TA2.keyStat[15] == 2)
 		{
-			if(Overlay.sl.click(maus.x, maus.y, false))
+			if(Overlay.sl.click(UIVerbunden.maus.x, UIVerbunden.maus.y, false))
 				TA2.keyStat[15] = 1;
 		}
 		else if(TA2.keyStat[16] == 2)
 		{
-			if(Overlay.sl.click(maus.x, maus.y, true))
+			if(Overlay.sl.click(UIVerbunden.maus.x, UIVerbunden.maus.y, true))
 				TA2.keyStat[16] = 1;
 		}
 		Overlay.sl.tick();
-		maus.translate(-Staticf.sc.width / 2, -Staticf.sc.height / 2);
+		UIVerbunden.maus.translate(-UIVerbunden.sc.width / 2, -UIVerbunden.sc.height / 2);
 		if(TA2.keyStat[13] == 2 && Overlay.sichtAn)
 		{
 			Overlay.sichtAn = false;
@@ -206,23 +198,23 @@ public class Hauptschleife
 			Overlay.sichtAn = true;
 			Overlay.sl.layer.clear();
 		}
-		if(TA2.keyStat[17] == 2 && godModeKam != null)
+		if(TA2.keyStat[17] == 2 && UIVerbunden.godModeKam != null)
 		{
-			Staticf.godMode = !Staticf.godMode;
-			if(Staticf.godMode)
+			UIVerbunden.godMode = !UIVerbunden.godMode;
+			if(UIVerbunden.godMode)
 			{
-				z.kam = godModeKam;
+				UIVerbunden.kamA = UIVerbunden.godModeKam;
 				Overlay.normalSchalter.addAll(Overlay.godModeSchalter);
-				WeltND.licht.add(godModeKam);
+				WeltND.licht.add(UIVerbunden.godModeKam);
 			}
 			else
 			{
-				z.kam = kamN;
+				UIVerbunden.kamA = UIVerbunden.kamN;
 				Overlay.normalSchalter.removeAll(Overlay.godModeSchalter);
-				WeltND.licht.remove(godModeKam);
-				Staticf.xrmode = false;
-				Staticf.siehBlocks = true;
-				Staticf.siehNonBlocks = true;
+				WeltND.licht.remove(UIVerbunden.godModeKam);
+				UIVerbunden.xrmode = false;
+				UIVerbunden.siehBlocks = true;
+				UIVerbunden.siehNonBlocks = true;
 			}
 		}
 		Staticf.sca("M und T (0) ");
@@ -259,8 +251,8 @@ public class Hauptschleife
 
 	public static void panelize()
 	{
-		Overlay.pa.panelize(n2s2, maus.x + Staticf.sc.width / 2,
-				maus.y + Staticf.sc.height / 2);
+		Overlay.pa.panelize(n2s2, UIVerbunden.maus.x + UIVerbunden.sc.width / 2,
+				UIVerbunden.maus.y + UIVerbunden.sc.height / 2);
 		Staticf.sca2("P panelize (14) ");
 		Overlay.gd.drawImage(Overlay.pa.light, 0, 0, null);
 		Staticf.sca2("O draw P (4) ");

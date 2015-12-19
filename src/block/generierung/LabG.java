@@ -2,7 +2,7 @@ package block.generierung;
 
 import java.util.*;
 
-public class LabG extends Generator
+class LabG extends Generator
 {
 	private static final int[][] x = new int[][]
 			{

@@ -2,9 +2,9 @@ package block.generierung;
 
 import fnd.*;
 
-public class WeltLeser extends Generator
+class WeltLeser extends Generator
 {
-	public String ort;
+	private String ort;
 	private int[] size;
 
 	int[][][][] generiere()

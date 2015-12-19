@@ -7,7 +7,7 @@ public class LadeMove
 	final ArrayList<LadeAktionB> aktionen;
 	int teilE;
 	final ArrayList<Integer> zeitE;
-	String name;
+	final String name;
 
 	public LadeMove(String name, String code)
 	{
