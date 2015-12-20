@@ -19,14 +19,14 @@ public class NF2 extends F2
 		this.tn = tn;
 	}
 
-	public NF2(K4[] ecken, K4[] eckenNK, XFarbe farbe, int seed, int splseed, long tn)
+	public NF2(K4[] ecken, K4[] eckenNK, XFarbe farbe, Boolean seite, int seed, int splseed, long tn)
 	{
 		block = false;
 		this.ecken = ecken;
 		this.eckenNK = eckenNK;
 		this.farbe = farbe;
 		spken = null;
-		seite = null;
+		this.seite = seite;
 		spld = 0;
 		this.seed = seed;
 		this.splseed = splseed;

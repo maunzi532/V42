@@ -69,6 +69,63 @@ public class LadeTeil
 						}
 					}
 				}
+				else if(zeilen[i].startsWith("PRISMA"))
+				{
+					String[] x2 = zeilen[i].split(" ");
+					//noinspection ConstantConditions
+					Boolean seite = x2[0].endsWith("+") ? true : x2[0].endsWith("-") ? false : null;
+					int seitig = Integer.parseInt(x2[1]);
+					int[][] daten = new int[seitig][6];
+					int sh = 2;
+					int[] all = new int[]{-1, -1};
+					for(int j = 0; j < seitig; j++)
+						for(int k = 0; k < 2; k++)
+						{
+							if(all[k] < 0)
+							{
+								String[] cx2 = x2[sh].split("-");
+								if(cx2.length > 2 && cx2[2].equals("ALL"))
+									all[k] = j;
+								if(cx2[0].startsWith("+"))
+								{
+									daten[j][k * 3] = Integer.parseInt(cx2[0].substring(1));
+									daten[j][k * 3 + 2] = 1;
+								}
+								else
+									daten[j][k * 3] = Integer.parseInt(cx2[0]);
+								daten[j][k * 3 + 1] = Integer.parseInt(cx2[1]);
+								sh++;
+							}
+							else
+							{
+								daten[j][k * 3] = daten[all[k]][k * 3];
+								daten[j][k * 3 + 1] = daten[all[k]][k * 3 + 1] + j - all[k];
+								daten[j][k * 3 + 2] = daten[all[k]][k * 3 + 2];
+							}
+						}
+					XFarbe xfall = null;
+					for(int j = 0; j < seitig; j++)
+					{
+						LadeF2 l;
+						if(xfall != null)
+							l = new LadeF2(xfall, seite);
+						else if(x2[sh].endsWith("-ALL"))
+						{
+							xfall = XFarbe.t2xf(x2[sh].substring(0, x2[sh].length() - 4));
+							l = new LadeF2(xfall, seite);
+						}
+						else
+							l = new LadeF2(XFarbe.t2xf(x2[sh]), seite);
+						for(int m = 0; m < 4; m++)
+						{
+							l.ecken1.add(daten[(j + (m == 1 || m == 2 ? 1 : 0)) % seitig][m > 1 ? 3 : 0]);
+							l.ecken2.add(daten[(j + (m == 1 || m == 2 ? 1 : 0)) % seitig][m > 1 ? 4 : 1]);
+							l.ecken3.add(daten[(j + (m == 1 || m == 2 ? 1 : 0)) % seitig][m > 1 ? 5 : 2] == 1);
+						}
+						f2.add(l);
+						sh++;
+					}
+				}
 				else
 				{
 					String[] x3 = zeilen[i].split(" ");
@@ -79,5 +136,4 @@ public class LadeTeil
 		}
 		end = Collections.max(punkte.keySet());
 	}
-
 }

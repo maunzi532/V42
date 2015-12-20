@@ -198,13 +198,17 @@ public class H extends External
 						K4[] p7 = p5[cy + 1];
 						K4[] p71 = into1[cy + 1];
 						al.add(new NF2(new K4[]{p6[0], p6[1], p7[1], p7[0]},
-								new K4[]{p61[0], p61[1], p71[1], p71[0]}, fn, seeds[i][j], 0, main2.tn));
+								new K4[]{p61[0], p61[1], p71[1], p71[0]}, fn,
+								true, seeds[i][j], 0, main2.tn));
 						al.add(new NF2(new K4[]{p6[1], p6[2], p7[1]},
-								new K4[]{p61[1], p61[2], p71[1]}, fn, seeds[i][j], 1, main2.tn));
+								new K4[]{p61[1], p61[2], p71[1]}, fn,
+								true, seeds[i][j], 1, main2.tn));
 						al.add(new NF2(new K4[]{p6[2], p6[3], p7[2], p7[1]},
-								new K4[]{p61[2], p61[3], p71[2], p71[1]}, fn, seeds[i][j], 2, main2.tn));
+								new K4[]{p61[2], p61[3], p71[2], p71[1]}, fn,
+								true, seeds[i][j], 2, main2.tn));
 						al.add(new NF2(new K4[]{p6[3], p6[0], p7[0], p7[2]},
-								new K4[]{p61[3], p61[0], p71[0], p71[2]}, fn, seeds[i][j], 3, main2.tn));
+								new K4[]{p61[3], p61[0], p71[0], p71[2]}, fn,
+								true, seeds[i][j], 3, main2.tn));
 					}
 					else if(k + 1 < h2a[i][j].length)
 					{
@@ -213,22 +217,28 @@ public class H extends External
 							K4[] p7 = p5[cy + 1];
 							K4[] p71 = into1[cy + 1];
 							al.add(new NF2(new K4[]{p6[0], p6[1], p7[0]},
-									new K4[]{p61[0], p61[1], p71[0]}, fn, seeds[i][j], k * 3 + 1, main2.tn));
+									new K4[]{p61[0], p61[1], p71[0]}, fn,
+									true, seeds[i][j], k * 3 + 1, main2.tn));
 							al.add(new NF2(new K4[]{p6[1], p6[2], p7[0]},
-									new K4[]{p61[1], p61[2], p71[0]}, fn, seeds[i][j], k * 3 + 1, main2.tn));
+									new K4[]{p61[1], p61[2], p71[0]}, fn,
+									true, seeds[i][j], k * 3 + 1, main2.tn));
 							al.add(new NF2(new K4[]{p6[2], p6[0], p7[0]},
-									new K4[]{p61[2], p61[0], p71[0]},fn, seeds[i][j], k * 3 + 1, main2.tn));
+									new K4[]{p61[2], p61[0], p71[0]},fn,
+									true, seeds[i][j], k * 3 + 1, main2.tn));
 						}
 						else
 						{
 							K4[] p7 = p5[cy + 1];
 							K4[] p71 = into1[cy + 1];
 							al.add(new NF2(new K4[]{p6[0], p6[1], p7[1], p7[0]},
-									new K4[]{p61[0], p61[1], p71[1], p71[0]}, fn, seeds[i][j], k * 3 + 1, main2.tn));
+									new K4[]{p61[0], p61[1], p71[1], p71[0]}, fn,
+									true, seeds[i][j], k * 3 + 1, main2.tn));
 							al.add(new NF2(new K4[]{p6[1], p6[2], p7[2], p7[1]},
-									new K4[]{p61[1], p61[2], p71[2], p71[1]}, fn, seeds[i][j], k * 3 + 1, main2.tn));
+									new K4[]{p61[1], p61[2], p71[2], p71[1]}, fn,
+									true, seeds[i][j], k * 3 + 1, main2.tn));
 							al.add(new NF2(new K4[]{p6[2], p6[0], p7[0], p7[2]},
-									new K4[]{p61[2], p61[0], p71[0], p71[2]}, fn, seeds[i][j], k * 3 + 1, main2.tn));
+									new K4[]{p61[2], p61[0], p71[0], p71[2]}, fn,
+									true, seeds[i][j], k * 3 + 1, main2.tn));
 						}
 					}
 					cy++;
