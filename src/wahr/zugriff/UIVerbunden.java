@@ -18,7 +18,11 @@ public class UIVerbunden
 	//Zurzeit benutzte Kamera
 	public static Controllable kamA;
 	//Letzte Mausposition
-	public static Point maus;
+	public static Point maus = new Point();
+	//Maus Robot
+	public static Robot ro;
+	//Mausverschiebung
+	public static Point mausv;
 	//Fenster w/h
 	public static Dimension sc;
 	//4D-Blick an/aus

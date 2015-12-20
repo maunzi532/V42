@@ -77,7 +77,8 @@ public class Zeichner
 			}
 		Staticf.sca("NE1 ");
 		if(UIVerbunden.siehBlocks)
-			n2s.addAll(WeltB.flaechen(kp, kd, new K4(100, 100, 100, 60)));
+			n2s.addAll(WeltB.flaechen(kp, kd, new K4(Staticf.sicht, Staticf.sicht,
+					Staticf.sicht, Staticf.sichtd)));
 		Staticf.sca("NE2 ");
 		for(int i = 0; i < n2s.size(); i++)
 		{
@@ -128,11 +129,10 @@ public class Zeichner
 							for(int j = 0; j < splB; j++)
 								for(int k = 0; k < splB; k++)
 								{
-									F2 tspt = new BF2(new K4[]{sec[j][k], sec[j + 1][k],
+									F2 tspt = new BF2(tsp, new K4[]{sec[j][k], sec[j + 1][k],
 											sec[j + 1][k + 1], sec[j][k + 1]},
 											new K4[]{sec1[j][k], sec1[j + 1][k],
-													sec1[j + 1][k + 1], sec1[j][k + 1]},
-											tsp.farbe, tsp.seite, tsp.seitenwand, splB, tsp.tn);
+													sec1[j + 1][k + 1], sec1[j][k + 1]}, splB);
 									tspt.mid();
 									tspt.splseed = j * splB + k;
 									n2s.add(tspt);

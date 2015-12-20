@@ -119,7 +119,8 @@ public abstract class NonBlock
 			if(punkte[i] != null)
 			{
 				punkteK[i] = new K4[punkte[i].length];
-				System.arraycopy(punkte[i], 0, punkteK[i], 0, punkte[i].length);
+				for(int j = 0; j < punkte[i].length; j++)
+					punkteK[i][j] = new K4(punkte[i][j]);
 				for(int j = 0; j < punkteK[i].length; j++)
 					if(punkteK[i][j] != null)
 						punkteK[i][j] = TK4F.transformSet2(punkteK[i][j], kDreh, relativ);

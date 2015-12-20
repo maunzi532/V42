@@ -2,10 +2,16 @@ package block.generierung;
 
 import wahr.physisch.*;
 
-class WeltLeser extends Generator
+public class WeltLeser extends Generator
 {
 	private String ort;
 	private int[] size;
+
+	public void gibInWelt(Object... z)
+	{
+		ort = (String)z[0];
+		super.gibInWelt();
+	}
 
 	int[][][][] generiere()
 	{

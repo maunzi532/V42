@@ -4,6 +4,7 @@ import wahr.zugriff.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.*;
 
 public class LPaneel
 {
@@ -30,6 +31,17 @@ public class LPaneel
 			if(fr.isActive())
 				break;
 		UIVerbunden.sc = fr.getSize();
+	}
+
+	public static void setC1()
+	{
+		fr.setCursor(Cursor.getDefaultCursor());
+	}
+
+	public static void setC0()
+	{
+		fr.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+				new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_INDEXED), new Point(), null));
 	}
 
 	public static void rePanel(Image img)

@@ -130,6 +130,8 @@ public class WeltB
 					f2.eckenNK[j] = new K4(f2.ecken[j]);
 					f2.ecken[j] = TK4F.transformSet2(f2.ecken[j], kDreh, relativ);
 				}
+				for(int j = 0; j < f2.spken.length; j++)
+					f2.spken[j] = TK4F.transformSet2(f2.spken[j], kDreh, relativ);
 			}
 			else
 				toR.get(i).mid = TK4F.transformSet2(toR.get(i).mid, kDreh, relativ);

@@ -48,7 +48,7 @@ public class D2 extends N2
 
 	public void panel(Panelizer pa)
 	{
-		pa.gd.setColor(dFarb);
+		pa.gd.setPaint(dFarb);
 		pa.gd.setFont(new Font("Consolas", Font.PLAIN, scale > 20 ? 20 : scale));
 		if(UIVerbunden.d2tangibility)
 		{

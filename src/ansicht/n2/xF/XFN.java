@@ -15,8 +15,8 @@ public class XFN extends XFarbe
 
 	XFN(){}
 
-	public void setFarb(N2 n)
+	public Paint gibFarb(N2 n)
 	{
-		setFarb(n, farb);
+		return anpassen(n, farb);
 	}
 }

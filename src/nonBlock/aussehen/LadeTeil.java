@@ -34,7 +34,7 @@ public class LadeTeil
 						seite = true;
 					else if(x2[0].equals("FV"))
 						seite = false;
-					farbe = lade(x2[1]);
+					farbe = XFarbe.t2xf(x2[1]);
 					f2.add(new LadeF2(farbe, seite));
 					for(int j = 0; j + 2 < x2.length; j++)
 					{
@@ -80,11 +80,4 @@ public class LadeTeil
 		end = Collections.max(punkte.keySet());
 	}
 
-	private static XFarbe lade(String tex)
-	{
-		String[] cx0 = tex.split(",");
-		if(cx0.length == 1)
-			return new XFN(XFarbe.farbCode(cx0[0]));
-		return null;
-	}
 }

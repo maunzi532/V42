@@ -111,7 +111,7 @@ public class Staticf
 	}
 
 	//Sichtweite NonBlocks
-	public static final double sicht = 100;
+	public static final double sicht = 300;
 	//Eigene H ausblenden
 	public static final double sichtMin = 2;
 	//Sichtweite d NonBlocks
@@ -138,8 +138,6 @@ public class Staticf
 	public static final double ebhc = 0.1;
 	//Schrittweite bei Hitboxes
 	public static final double abhc = 1;
-	//Zeit bis Texte ganz verschwinden
-	public static final int textFade = 10;
 	//Weite des X-Ray-Modus
 	public static final int xraywidth = 50;
 

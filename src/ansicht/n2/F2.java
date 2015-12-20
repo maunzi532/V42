@@ -15,8 +15,8 @@ public abstract class F2 extends N2
 	public int seed;
 	public int splseed;
 
-	private int[] xe;
-	private int[] ye;
+	protected int[] xe;
+	protected int[] ye;
 	private double avkh2;
 
 	public abstract void mid();
@@ -80,7 +80,7 @@ public abstract class F2 extends N2
 			if(!farbe.shownext(this))
 				ec2 = null;
 			else
-				farbe.setFarb(this);
+				dFarb = farbe.gibFarb(this);
 		}
 	}
 
@@ -104,6 +104,19 @@ public abstract class F2 extends N2
 			ddiff += ec2[j].d;
 		}
 		ddiff /= ec2.length;
+		if(spken != null)
+		{
+			xse = new int[spken.length];
+			yse = new int[spken.length];
+			for(int j = 0; j < spken.length; j++)
+			{
+				double ca = spken[j].c;
+				if(ca < Staticf.nnull)
+					ca = Staticf.nnull;
+				xse[j] = ethaX(spken[j].a, ca);
+				yse[j] = ethaY(spken[j].b, ca);
+			}
+		}
 	}
 
 	public void panelDark(Graphics2D darkCopy)
@@ -113,7 +126,7 @@ public abstract class F2 extends N2
 
 	public void panel(Panelizer pa)
 	{
-		pa.gd.setColor(dFarb);
+		pa.gd.setPaint(dFarb);
 		if(UIVerbunden.xrmode && avkh2 < Staticf.xraywidth * Staticf.xraywidth)
 			pa.gd.draw(new Polygon(xe, ye, xe.length));
 		else

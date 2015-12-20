@@ -18,7 +18,7 @@ public abstract class XFarbe
 			splN[i] = r.nextInt(Staticf.seedifier);
 	}
 
-	public abstract void setFarb(N2 n);
+	public abstract Paint gibFarb(N2 n);
 
 	public boolean shownext(N2 n)
 	{
@@ -34,7 +34,7 @@ public abstract class XFarbe
 				splN[(f.splseed % Staticf.seedifier)]) % Staticf.seedifier)) / (double)Staticf.seedifier;
 	}
 
-	static void setFarb(N2 n, Color fc)
+	static Color anpassen(N2 n, Color fc)
 	{
 		if(n.ddiff > 0)
 			fc = limit(fc, (int)(n.ddiff * 10), (int)(n.ddiff * -5), (int)(n.ddiff * -5));
@@ -45,7 +45,7 @@ public abstract class XFarbe
 		double weg2 = (Staticf.sicht - weg) / Staticf.sicht;
 		if(weg2 < 0)
 			weg2 = 0;
-		n.dFarb = new Color((int)(fc.getRed() * weg2 + 20 * (1 - weg2)),
+		return new Color((int)(fc.getRed() * weg2 + 20 * (1 - weg2)),
 				(int)(fc.getGreen() * weg2 + 0 * (1 - weg2)),
 				(int)(fc.getBlue() * weg2 + 0 * (1 - weg2)), fc.getAlpha());
 	}
@@ -59,7 +59,12 @@ public abstract class XFarbe
 			{
 				F2 f = (F2) n;
 				K4 lr = K4.diff(WeltND.licht.get(i).lichtPosition(), f.mid1());
+				/*if(true)
+					return limit(fc, (int) (1 / Math.abs(lr.a) * -100),
+							(int) (1 / Math.abs(lr.b) * -100), (int) (1 / Math.abs(lr.c) * -100));*/
 				double ld = Math.sqrt(lr.a * lr.a + lr.b * lr.b + lr.c * lr.c);
+				/*if(true)
+					return limit(fc, (int) (ld * -1), (int) (ld * -1), 0);*/
 				if(ld > WeltND.licht.get(i).lichtRange())
 					continue;
 				double pow = WeltND.licht.get(i).lichtPower();
@@ -161,5 +166,15 @@ public abstract class XFarbe
 		if(b < 0)
 			b = 0;
 		return new Color(r, g, b, c.getAlpha());
+	}
+
+	public static XFarbe t2xf(String tex)
+	{
+		String[] cx0 = tex.split(",");
+		if(cx0.length == 1)
+			return new XFN(farbCode(cx0[0]));
+		if(cx0.length == 2)
+			return new XGradient(farbCode(cx0[0]), 0, farbCode(cx0[1]), 1);
+		return null;
 	}
 }

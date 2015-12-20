@@ -11,12 +11,26 @@ public class BF2 extends F2
 	{
 		block = true;
 		this.ecken = ecken;
+		spken = ecken.clone();
 		this.eckenNK = eckenNK;
 		this.farbe = farbe;
 		this.seite = seite;
 		this.seitenwand = seitenwand;
 		this.spld = spld;
 		this.tn = tn;
+	}
+
+	public BF2(BF2 main, K4[] ecken, K4[] eckenNK, int spld)
+	{
+		block = true;
+		this.ecken = ecken;
+		spken = main.spken;
+		this.eckenNK = eckenNK;
+		farbe = main.farbe;
+		seite = main.seite;
+		seitenwand = main.seitenwand;
+		this.spld = spld;
+		tn = main.tn;
 	}
 
 	public void mid()

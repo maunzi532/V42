@@ -13,8 +13,11 @@ public abstract class N2
 	boolean block;
 	public K4 mid;
 	public long tn;
-	public Color dFarb;
+	public Paint dFarb;
 	public double ddiff;
+
+	public int[] xse;
+	public int[] yse;
 
 	public boolean anzeigen()
 	{
@@ -26,7 +29,7 @@ public abstract class N2
 	public void farbe_flaeche()
 	{
 		panelDaten();
-		farbe.setFarb(this);
+		dFarb = farbe.gibFarb(this);
 	}
 
 	public boolean draw()

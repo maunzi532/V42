@@ -11,7 +11,7 @@ public abstract class Generator
 
 	abstract int[][][][] generiere();
 
-	public void gibInWelt()
+	public void gibInWelt(Object... z)
 	{
 		WeltB.blocks = generiere();
 		WeltB.enden = enden;

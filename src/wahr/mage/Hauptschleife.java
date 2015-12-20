@@ -4,12 +4,12 @@ import ansicht.*;
 import ansicht.n2.*;
 import block.*;
 import block.generierung.*;
-import nonBlock.aussehen.*;
-import nonBlock.aussehen.ext.*;
-import nonBlock.controllable.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.seq.*;
+import nonBlock.aussehen.*;
+import nonBlock.aussehen.ext.*;
 import nonBlock.collide.*;
+import nonBlock.controllable.*;
 import wahr.physisch.*;
 import wahr.zugriff.*;
 
@@ -25,9 +25,10 @@ public class Hauptschleife
 
 	public static void init()
 	{
-		Generator g = new TestGenerator();
-		//((WeltLeser) g).ort = "Levels/Generiert1";
-		g.gibInWelt();
+		Generator g = new LabG();
+		//g.gibInWelt("Levels/Generiert1");
+		//g.gibInWelt();
+		g.gibInWelt(2, 10);
 		Koord.setzeSE(new K4(0, 0, 0, 0), new K4(20, 20, 20, 20));
 		g.ermittleStart();
 		n = new Tha();
@@ -160,6 +161,14 @@ public class Hauptschleife
 		UIVerbunden.godModeKam.elimit = 1;
 		UIVerbunden.godModeKam.init();
 		UIVerbunden.godModeKam.aktionen.add(new Sicht(UIVerbunden.godModeKam, 10, 0, true));
+		try
+		{
+			UIVerbunden.ro = new Robot();
+		}catch(AWTException e)
+		{
+			throw new RuntimeException(e);
+		}
+		LPaneel.setC0();
 	}
 
 	public static boolean eingabe()
@@ -173,30 +182,37 @@ public class Hauptschleife
 		TA2.move();
 		if(TA2.keyStat[0] > 0)
 			return true;
-		UIVerbunden.maus = MouseInfo.getPointerInfo().getLocation();
+		Point maus = MouseInfo.getPointerInfo().getLocation();
 		Point mm = LPaneel.fr.getLocationOnScreen();
-		UIVerbunden.maus.translate(-mm.x, -mm.y);
+		maus.translate(-mm.x, -mm.y);
 		if(TA2.keyStat[15] == 2)
 		{
-			if(Overlay.sl.click(UIVerbunden.maus.x, UIVerbunden.maus.y, false))
+			if(Overlay.sl.click(maus.x, maus.y, false))
 				TA2.keyStat[15] = 1;
 		}
 		else if(TA2.keyStat[16] == 2)
 		{
-			if(Overlay.sl.click(UIVerbunden.maus.x, UIVerbunden.maus.y, true))
+			if(Overlay.sl.click(maus.x, maus.y, true))
 				TA2.keyStat[16] = 1;
 		}
 		Overlay.sl.tick();
-		UIVerbunden.maus.translate(-UIVerbunden.sc.width / 2, -UIVerbunden.sc.height / 2);
+		maus.translate(-UIVerbunden.sc.width / 2, -UIVerbunden.sc.height / 2);
+		UIVerbunden.mausv = new Point(maus);
+		//UIVerbunden.mausv.translate(-UIVerbunden.maus.x, -UIVerbunden.maus.y);
+		UIVerbunden.maus = maus;
+		if(TA2.keyStat[13] <= 0)
+			UIVerbunden.ro.mouseMove(UIVerbunden.sc.width / 2 + mm.x, UIVerbunden.sc.height / 2 + mm.y);
 		if(TA2.keyStat[13] == 2 && Overlay.sichtAn)
 		{
 			Overlay.sichtAn = false;
 			Overlay.sl.layer.addAll(Overlay.normalSchalter);
+			LPaneel.setC1();
 		}
 		if(TA2.keyStat[13] == -1 && !Overlay.sichtAn)
 		{
 			Overlay.sichtAn = true;
 			Overlay.sl.layer.clear();
+			LPaneel.setC0();
 		}
 		if(TA2.keyStat[17] == 2 && UIVerbunden.godModeKam != null)
 		{
