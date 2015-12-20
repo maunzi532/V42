@@ -104,8 +104,8 @@ public class Tha extends TSSA
 				protected void kontrolle(){}
 			};
 			f.aussehen = new LadeModell();
-			Index.gibStandardAussehen("B_Main").assignStandard(f);
-			f.aussehen.reload(Index.gibLadeTeil("B_X"));
+			Index.gibStandardAussehen("F_Main").assignStandard(f);
+			f.aussehen.reload(Index.gibLadeTeil("F_X"));
 			f.position = new K4(this.position);
 			f.position.b -= this.block.get(0).airshift;
 			f.dreh = new Drehung(this.dreh.wl, 0);

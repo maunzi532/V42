@@ -35,37 +35,44 @@ public class LadeTeil
 					else if(x2[0].equals("FV"))
 						seite = false;
 					farbe = XFarbe.t2xf(x2[1]);
-					f2.add(new LadeF2(farbe, seite));
+					LadeF2 f22 = new LadeF2(farbe, seite);
+					f2.add(f22);
 					for(int j = 0; j + 2 < x2.length; j++)
 					{
 						String[] cx2 = x2[j + 2].split("-");
-						if(cx2.length <= 2)
+						if(cx2.length == 1)
+						{
+							f22.ecken1.add(f22.ecken1.get(f22.ecken1.size() - 1));
+							f22.ecken3.add(f22.ecken3.get(f22.ecken3.size() - 1));
+							f22.ecken2.add(Integer.parseInt(cx2[0]));
+						}
+						else if(cx2.length == 2)
 						{
 							if(cx2[0].startsWith("+"))
 							{
-								f2.get(f2.size() - 1).ecken1.add(Integer.parseInt(cx2[0].substring(1)));
-								f2.get(f2.size() - 1).ecken3.add(true);
+								f22.ecken1.add(Integer.parseInt(cx2[0].substring(1)));
+								f22.ecken3.add(true);
 							}
 							else
 							{
-								f2.get(f2.size() - 1).ecken1.add(Integer.parseInt(cx2[0]));
-								f2.get(f2.size() - 1).ecken3.add(false);
+								f22.ecken1.add(Integer.parseInt(cx2[0]));
+								f22.ecken3.add(false);
 							}
-							f2.get(f2.size() - 1).ecken2.add(Integer.parseInt(cx2[1]));
+							f22.ecken2.add(Integer.parseInt(cx2[1]));
 						}
 						else
 						{
 							if(cx2[0].startsWith("+"))
 							{
-								f2.get(f2.size() - 1).spken1.add(Integer.parseInt(cx2[0].substring(1)));
-								f2.get(f2.size() - 1).spken3.add(true);
+								f22.spken1.add(Integer.parseInt(cx2[0].substring(1)));
+								f22.spken3.add(true);
 							}
 							else
 							{
-								f2.get(f2.size() - 1).spken1.add(Integer.parseInt(cx2[0]));
-								f2.get(f2.size() - 1).spken3.add(false);
+								f22.spken1.add(Integer.parseInt(cx2[0]));
+								f22.spken3.add(false);
 							}
-							f2.get(f2.size() - 1).spken2.add(Integer.parseInt(cx2[1]));
+							f22.spken2.add(Integer.parseInt(cx2[1]));
 						}
 					}
 				}
@@ -89,14 +96,23 @@ public class LadeTeil
 								String[] cx2 = x2[sh].split("-");
 								if(cx2.length > 2 && cx2[2].equals("ALL"))
 									all[k] = j;
-								if(cx2[0].startsWith("+"))
+								if(cx2.length == 1)
 								{
-									daten[j][k * 3] = Integer.parseInt(cx2[0].substring(1));
-									daten[j][k * 3 + 2] = 1;
+									daten[j][k * 3] = daten[j - 1][k * 3];
+									daten[j][k * 3 + 2] = daten[j - 1][k * 3 + 2];
+									daten[j][k * 3 + 1] = Integer.parseInt(cx2[0]);
 								}
 								else
-									daten[j][k * 3] = Integer.parseInt(cx2[0]);
-								daten[j][k * 3 + 1] = Integer.parseInt(cx2[1]);
+								{
+									if(cx2[0].startsWith("+"))
+									{
+										daten[j][k * 3] = Integer.parseInt(cx2[0].substring(1));
+										daten[j][k * 3 + 2] = 1;
+									}
+									else
+										daten[j][k * 3] = Integer.parseInt(cx2[0]);
+									daten[j][k * 3 + 1] = Integer.parseInt(cx2[1]);
+								}
 								sh++;
 							}
 							else
@@ -164,14 +180,23 @@ public class LadeTeil
 							String[] cx2 = x2[sh].split("-");
 							if(cx2.length > 2 && cx2[2].equals("ALL"))
 								all = j;
-							if(cx2[0].startsWith("+"))
+							if(cx2.length == 1)
 							{
-								daten[j][0] = Integer.parseInt(cx2[0].substring(1));
-								daten[j][2] = 1;
+								daten[j][0] = daten[j - 1][0];
+								daten[j][2] = daten[j - 1][2];
+								daten[j][1] = Integer.parseInt(cx2[0]);
 							}
 							else
-								daten[j][0] = Integer.parseInt(cx2[0]);
-							daten[j][1] = Integer.parseInt(cx2[1]);
+							{
+								if(cx2[0].startsWith("+"))
+								{
+									daten[j][0] = Integer.parseInt(cx2[0].substring(1));
+									daten[j][2] = 1;
+								}
+								else
+									daten[j][0] = Integer.parseInt(cx2[0]);
+								daten[j][1] = Integer.parseInt(cx2[1]);
+							}
 							sh++;
 						}
 						else
