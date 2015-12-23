@@ -58,6 +58,7 @@ public class WeltB
 		Staticf.sca("WE1 ");
 		double dd = (kam.d - Koord.startWelt.d) / Koord.weltBlock.d;
 		int di = Koord.intiize((kam.d - Koord.startWelt.d) / Koord.weltBlock.d);
+		double dddi = dd - di;
 		if(UIVerbunden.x4dization == 0)
 			for(int a = kaw0.k[0]; a < kawEnd.k[0]; a++)
 				for(int b = kaw0.k[1]; b < kawEnd.k[1]; b++)
@@ -69,7 +70,7 @@ public class WeltB
 							for(int i = 0; i < Koord.seiten.length; i++)
 								if(!opaque(gib(new WBP(a + Koord.seiten[i][0],
 										b + Koord.seiten[i][1], c + Koord.seiten[i][2], di))))
-									toR.add(flaeche(new WBP(a, b, c, di), block, i));
+									toR.add(flaeche(new WBP(a, b, c, di), block, i, -1, 1));
 						}
 						else if(UIVerbunden.d2tangibility)
 						{
@@ -94,14 +95,12 @@ public class WeltB
 										b + Koord.seiten[i][1], c + Koord.seiten[i][2], di))))
 								{
 									if(opaque(blockG))
-										toR.add(flaechex4d(new WBP(a, b, c, di + 1),
-												-1 + dd - di, 1, blockG, i));
+										toR.add(flaeche(new WBP(a, b, c, di + 1), blockG, i, dddi, 1));
 									if(opaque(blockR))
-										toR.add(flaechex4d(new WBP(a, b, c, di - 1),
-												1, di - dd, blockR, i));
-									toR.add(flaechex4d(new WBP(a, b, c, di),
-											(!opaque(blockR)) ? 1 : dd - di,
-											(!opaque(blockG)) ? 1 : 1 + di - dd, block, i));
+										toR.add(flaeche(new WBP(a, b, c, di - 1), blockR, i, -1, dddi - 1));
+									toR.add(flaeche(new WBP(a, b, c, di), block, i,
+											(!opaque(blockR)) ? -1 : dddi - 1,
+											(!opaque(blockG)) ? 1 : dddi));
 								}
 						}
 						else
@@ -125,20 +124,18 @@ public class WeltB
 			if(toR.get(i) instanceof F2)
 			{
 				F2 f2 = (F2) toR.get(i);
-				for(int j = 0; j < f2.ecken.length; j++)
-				{
-					f2.eckenNK[j] = new K4(f2.ecken[j]);
-					f2.ecken[j] = TK4F.transformSet2(f2.ecken[j], kDreh, relativ);
-				}
 				for(int j = 0; j < f2.spken.length; j++)
+				{
+					f2.eckenNK[j] = new K4(f2.spken[j]);
 					f2.spken[j] = TK4F.transformSet2(f2.spken[j], kDreh, relativ);
+				}
 			}
 			else
 				toR.get(i).mid = TK4F.transformSet2(toR.get(i).mid, kDreh, relativ);
 		return toR;
 	}
 
-	private static F2 flaeche(WBP p, int block, int nof)
+	private static F2 flaeche(WBP p, int block, int nof, double rend, double gend)
 	{
 		long tn = tn(p);
 		K4[] ke = new K4[4];
@@ -178,46 +175,8 @@ public class WeltB
 				ke[3] = Koord.wt(p);
 				break;
 		}
-		return new BF2(ke, new K4[ke.length], Index.gibXFBT("XFBT_" + block + "_" + nof), nof % 2 == 0, nof, 0, tn);
-	}
-
-	private static F2 flaechex4d(WBP p, double rstart, double gstart, int block, int nof)
-	{
-		F2 f2 = flaeche(p, block, nof);
-		if(rstart == 1 && gstart == 1)
-			return f2;
-		int nf = nof % 4;
-		f2.spken = f2.ecken;
-		f2.spld = -1;
-		K4[] ecken;
-		if(rstart == 1)
-		{
-			if(gstart > 0)
-				ecken = new K4[]{new K4(f2.spken[nf % 4]), new K4(f2.spken[(1 + nf) % 4]),
-						t1e(f2.spken, gstart, 1, nf),
-						t1e(f2.spken, gstart, 2, nf), new K4(f2.spken[(3 + nf) % 4])};
-			else
-				ecken = new K4[]{new K4(f2.spken[nf % 4]), t1e(f2.spken, -gstart, 0, nf),
-						t1e(f2.spken, -gstart, 3, nf)};
-		}
-		else if(gstart == 1)
-		{
-			if(rstart > 0)
-				ecken = new K4[]{new K4(f2.spken[(2 + nf) % 4]), new K4(f2.spken[(3 + nf) % 4]),
-						t1e(f2.spken, rstart, 3, nf),
-						t1e(f2.spken, rstart, 0, nf), new K4(f2.spken[(1 + nf) % 4])};
-			else
-				ecken = new K4[]{new K4(f2.spken[(2 + nf) % 4]), t1e(f2.spken, -rstart, 2, nf),
-						t1e(f2.spken, -rstart, 1, nf)};
-		}
-		else
-				ecken = new K4[]{new K4(f2.spken[(1 + nf) % 4]), t1e(f2.spken, gstart, 1, nf),
-						t1e(f2.spken, gstart, 2, nf),
-						new K4(f2.spken[(3 + nf) % 4]), t1e(f2.spken, rstart, 3, nf),
-						t1e(f2.spken, rstart, 0, nf)};
-		f2.ecken = ecken;
-		f2.eckenNK = new K4[f2.ecken.length];
-		return f2;
+		return new BF2(ke, new K4[ke.length], Index.gibXFBT("XFBT_" + block + "_" + nof),
+				nof % 2 == 0, nof, rend, gend, tn);
 	}
 
 	private static long tn(WBP p)
@@ -244,15 +203,6 @@ public class WeltB
 					text, Koord.wt2(p), tn);
 		else
 			return null;
-	}
-
-	private static K4 t1e(K4[] spken, double modifier, int kante, int nf)
-	{
-		K4 k1 = spken[kante > 1 ? (3 + nf) % 4 : (1 + nf) % 4];
-		K4 k2 = spken[kante % 3 == 0 ? nf % 4 : (2 + nf) % 4];
-		double mod2 = modifier > 1 ? 1 : (modifier < 0 ? 0 : modifier);
-		return new K4(k1.a * (1 - mod2) + k2.a * mod2, k1.b * (1 - mod2) + k2.b * mod2,
-				k1.c * (1 - mod2) + k2.c * mod2, k1.d * (1 - mod2) + k2.d * mod2);
 	}
 
 	public static boolean opaque(int block)

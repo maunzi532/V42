@@ -25,7 +25,7 @@ public class Hauptschleife
 
 	public static void init()
 	{
-		Generator g = new LabG();
+		Generator g = new TestGenerator();
 		//g.gibInWelt("Levels/Generiert1");
 		//g.gibInWelt();
 		g.gibInWelt(2, 10);

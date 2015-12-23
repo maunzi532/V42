@@ -76,20 +76,16 @@ public class Zeichner
 				Staticf.sca("NEF " + nb.toString() + " 3 ");
 			}
 		Staticf.sca("NE1 ");
-		if(UIVerbunden.siehBlocks)
-			n2s.addAll(WeltB.flaechen(kp, kd, new K4(Staticf.sicht, Staticf.sicht,
-					Staticf.sicht, Staticf.sichtd)));
-		Staticf.sca("NE2 ");
 		for(int i = 0; i < n2s.size(); i++)
-		{
-			if(n2s.get(i) instanceof F2)
-				((F2)n2s.get(i)).mid();
 			if(!n2s.get(i).anzeigen())
 			{
 				n2s.remove(i);
 				i--;
 			}
-		}
+		Staticf.sca("NE2 ");
+		if(UIVerbunden.siehBlocks)
+			n2s.addAll(WeltB.flaechen(kp, kd, new K4(Staticf.sicht, Staticf.sicht,
+					Staticf.sicht, Staticf.sichtd)));
 	}
 
 	private int sqToSplit(double sq)
@@ -112,8 +108,9 @@ public class Zeichner
 					//noinspection ConstantConditions,PointlessBooleanExpression
 					if(tsp.spld == 0)
 					{
-						int splB = sqToSplit(tsp.mid.a * tsp.mid.a + tsp.mid.b * tsp.mid.b +
-								tsp.mid.c * tsp.mid.c);
+						tsp.midsp();
+						int splB = sqToSplit(tsp.midsp.a * tsp.midsp.a + tsp.midsp.b * tsp.midsp.b +
+								tsp.midsp.c * tsp.midsp.c);
 						if(splB > 1)
 						{
 							n2s.remove(i);
@@ -129,14 +126,23 @@ public class Zeichner
 							for(int j = 0; j < splB; j++)
 								for(int k = 0; k < splB; k++)
 								{
-									F2 tspt = new BF2(tsp, new K4[]{sec[j][k], sec[j + 1][k],
-											sec[j + 1][k + 1], sec[j][k + 1]},
-											new K4[]{sec1[j][k], sec1[j + 1][k],
-													sec1[j + 1][k + 1], sec1[j][k + 1]}, splB);
+									BF2 tspt = new BF2(tsp, splB);
+									tspt.ecken(j, k, splB, splB);
 									tspt.mid();
 									tspt.splseed = j * splB + k;
-									n2s.add(tspt);
+									if(tspt.anzeigen())
+										n2s.add(tspt);
 								}
+						}
+						else
+						{
+							tsp.ecken(0, 0, 1, 1);
+							tsp.mid();
+							if(!tsp.anzeigen())
+							{
+								n2s.remove(i);
+								i--;
+							}
 						}
 					}
 				}
