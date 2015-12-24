@@ -1,9 +1,8 @@
 package nonBlock.aussehen.ext;
 
 import ansicht.n2.*;
-import nonBlock.aussehen.*;
 import ansicht.n2.xF.*;
-import nonBlock.*;
+import nonBlock.aussehen.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
@@ -17,21 +16,18 @@ public class MK extends External
 	private final int nt;
 	private final int[] linkedP;
 	private final LinkAchse[][] h2;
-	private final Achse[][] h2a;
 	private final int[][] seeds;
-	private K4[][] into1;
 
-	public MK(NonBlock main2, int axn, double fwm, double fwx, double fhm, double fhx,
+	public MK(double fwm, double fwx, double fhm, double fhx,
 			int nw, int nt, int[] linkedP)
 	{
-		super(main2, axn);
 		this.fwm = fwm;
 		this.fwx = fwx;
 		this.nw = nw;
 		this.nt = nt;
 		this.linkedP = linkedP;
 		h2 = new LinkAchse[nt][nw];
-		h2a = new Achse[nt][nw];
+		//h2a = new Achse[nt][nw];
 
 		for(int t = 0; t < nt; t++)
 			for(int w = 0; w < nw; w++)
@@ -45,48 +41,33 @@ public class MK extends External
 				seeds[i][j] = r.nextInt();
 	}
 
-	public void tick()
-	{
-
-	}
-
-	public int platz()
-	{
-		if(nicht)
-			return 0;
-		return nt * nw;
-	}
-
 	public void entLink(Drehung mDreh, K4 mPos)
 	{
-		if(nicht)
-			return;
 		for(int w = 0; w < nw; w++)
 		{
 			LadePunkt la = main2.aussehen.punkte[axn].get(linkedP[w]);
-			h2a[0][w] = h2[0][w].entlinken(TK4F.zuPunkt(main2.achsen[axn],
+			main2.achsen[anfang + w] = h2[0][w].entlinken(TK4F.zuPunkt(main2.achsen[axn],
 					la.abstand, 0, la.vor,
 					la.spin, mDreh, mPos), main2.achsen[axn]);
 		}
 		for(int t = 1; t < nt; t++)
 			for(int w = 0; w < nw; w++)
-				h2a[t][w] = h2[t][w].entlinken(TK4F.achseEnde(h2a[t - 1][w],
+				main2.achsen[anfang + t * nw + w] =
+						h2[t][w].entlinken(TK4F.achseEnde(main2.achsen[anfang + (t - 1) * nw + w],
 						TK4F.mkT1(new K4(Math.sin(h2[t][w].dreh.wl) * t / nt *
 								(fwm * (nt - t) + fwx * t) / nt, 0,
 								Math.cos(h2[t][w].dreh.wl) * t / nt *
 								(fwm * (nt - t) + fwx * t) / nt, 0),
-								mDreh, new K4())), h2a[t - 1][w]);
+								mDreh, new K4())), main2.achsen[anfang + (t - 1) * nw + w]);
 	}
 
 	public void punkte(K4[][] into)
 	{
-		if(nicht)
-			return;
 		int cy = this.anfang;
 		for(int i = 0; i < nt; i++)
 			for(int j = 0; j < nw; j++)
 			{
-				into[cy] = new K4[]{TK4F.zuPunktXH(h2a[i][j], 0, 0)};
+				into[cy] = new K4[]{TK4F.zuPunktXH(main2.achsen[anfang + i * nw + j], 0, 0)};
 				cy++;
 			}
 		into1 = into;
@@ -95,8 +76,6 @@ public class MK extends External
 	public ArrayList<F2> gibFl(K4[][] into)
 	{
 		ArrayList<F2> al = new ArrayList<>();
-		if(nicht)
-			return al;
 		int cy = anfang;
 		for(int t = 0; t < nt - 1; t++)
 			for(int w = 0; w < nw; w++)
@@ -114,4 +93,6 @@ public class MK extends External
 			}
 		return al;
 	}
+
+	public void tick(){}
 }

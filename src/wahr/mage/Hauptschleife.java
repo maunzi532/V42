@@ -32,15 +32,7 @@ public class Hauptschleife
 		Koord.setzeSE(new K4(0, 0, 0, 0), new K4(20, 20, 20, 20));
 		g.ermittleStart();
 		n = new Tha();
-		n.aussehen = new LadeModell().reload(new External[]{
-						new H(n, 71, 0.5, 0.5, 10, 10, 6, 1, 0, 0, 0),
-						//new H(n, 74, 0.2, 0.5, 4, 10, 6, 0.5, 0, 0, -0.2),
-						new H(n, 75, 0.2, 0.5, 4, 10, 6, 0.5, 0, 0, -0.2),
-						new H(n, 76, 0.2, 0.5, 4, 10, 6, 0.5, 0, 0, -0.2),
-						new H(n, 77, 0.2, 0.5, 4, 10, 6, 0.5, 0, 0, -0.2),
-						new MK(n, 0, 0, 0.1, 0.5, 1, 8, 4, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
-						//new MK(n, 0, 0.25, 1, 0.25, 1, 8, 14, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
-				},
+		n.aussehen = new LadeModell().reload(
 				Index.gibLadeTeil("T_H"),
 				Index.gibLadeTeil("T_B"),
 				Index.gibLadeTeil("T_A"),
@@ -48,8 +40,16 @@ public class Hauptschleife
 				Index.gibLadeTeil("T_K"),
 				Index.gibLadeTeil("T_S"));
 		Index.gibStandardAussehen("TSSA").assignStandard(n,
-				new LadeModell().reload(Index.gibLadeTeil("T_HL2")),
-				new LadeModell().reload(Index.gibLadeTeil("T_HR2")));
+				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HL2"))),
+				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HR2"))),
+				new MK(0, 0.1, 0.5, 1, 8, 4, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
+				//new MK(n, 0, 0.25, 1, 0.25, 1, 8, 14, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
+				new H(0.5, 0.5, 10, 10, 6, 1, 0, 0, 0),
+				new H(0.2, 0.5, 4, 10, 3, 0.5, 0, 0, -0.2),
+				new H(0.2, 0.5, 4, 10, 6, 0.5, 0, 0, -0.2),
+				new H(0.2, 0.5, 4, 10, 6, 0.5, 0, 0, -0.2),
+				new H(0.2, 0.5, 4, 10, 6, 0.5, 0, 0, -0.2)
+		);
 		n.position = WeltB.starts[0];
 		n.position.b += n.block.get(0).airshift;
 		n.dreh = new Drehung(1, 0);
@@ -115,15 +115,8 @@ public class Hauptschleife
 				}
 			}
 		};
-		n2.aussehen = new LadeModell().reload(new External[]{
-						new H2(n2, 71, 0.5, 0.5, 10, 10, 5, 1, 0, 0, 0),
-						new H2(n2, 74, 0.2, 0.5, 4, 10, 7, 0.5, 0, 0, -0.2),
-						new H2(n2, 75, 0.2, 0.5, 4, 10, 7, 0.5, 0, 0, -0.2),
-						new H2(n2, 76, 0.2, 0.5, 4, 10, 4, 0.5, 0, 0, -0.2),
-						new H2(n2, 77, 0.2, 0.5, 4, 10, 7, 0.5, 0, 0, -0.2),
-						new MK(n2, 0, 0, 0.1, 0.5, 1, 8, 4, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
-						//new MK(n2, 0, 0.25, 0.75, 0.25, 1, 8, 14, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
-				},
+		n2.aussehen = new LadeModell().reload(
+
 				Index.gibLadeTeil("T_H"),
 				Index.gibLadeTeil("T_B"),
 				Index.gibLadeTeil("T_A"),
@@ -131,8 +124,16 @@ public class Hauptschleife
 				Index.gibLadeTeil("T_K"),
 				Index.gibLadeTeil("T_S"));
 		Index.gibStandardAussehen("TSSA").assignStandard(n2,
-				new LadeModell().reload(Index.gibLadeTeil("T_HL2")),
-				new LadeModell().reload(Index.gibLadeTeil("T_HR2")));
+				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HL2"))),
+				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HR2"))),
+				new MK(0, 0.1, 0.5, 1, 8, 4, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
+				//new MK(0.25, 0.75, 0.25, 1, 8, 14, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
+				new H2(n2, 0.5, 0.5, 10, 10, 5, 1, 0, 0, 0),
+				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.5, 0, 0, -0.2),
+				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.5, 0, 0, -0.2),
+				new H2(n2, 0.2, 0.5, 4, 10, 4, 0.5, 0, 0, -0.2),
+				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.5, 0, 0, -0.2)
+				);
 		n2.position = WeltB.starts[1];
 		n2.position.b += n2.block.get(0).airshift;
 		n2.dreh = new Drehung(Math.PI, 0);

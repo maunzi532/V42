@@ -9,10 +9,10 @@ public class H2 extends H
 	private Drehung mDreh;
 	private K4 mPos;
 
-	public H2(NBB main3, int axn, double w, double h, int wt, int ht, int nlen, double wwl, double hwl,
+	public H2(NBB main3, double w, double h, int wt, int ht, int nlen, double wwl, double hwl,
 			double wwb, double hwb)
 	{
-		super(main3, axn, w, h, wt, ht, nlen, wwl, hwl, wwb, hwb);
+		super(w, h, wt, ht, nlen, wwl, hwl, wwb, hwb);
 		this.main3 = main3;
 		for(int i = 0; i < ht; i++)
 			for(int j = 0; j < wt; j++)
@@ -45,7 +45,8 @@ public class H2 extends H
 							in = Double.MAX_VALUE;
 							for(int p = 0; p < main3.physik.size(); p++)
 							{
-								Double v = main3.physik.get(p).innen(h2a[i][j][k + 1].start);
+								Double v = main3.physik.get(p).innen(
+										main2.achsen[anfang + i * wt * nlen + j * nlen + k + 1].start);
 								if(v != null)
 									if(v < in)
 										in = v;
@@ -71,6 +72,11 @@ public class H2 extends H
 							in2++;
 						}
 						while(in < 0);
+
+					}
+		}
+	}
+
 						/*double a1 = h2a[i][j][k].start.a - inmid.a;
 						double c1 = h2a[i][j][k].start.c - inmid.c;
 						double ab = Math.sqrt(a1 * a1 + c1 * c1);
@@ -80,7 +86,4 @@ public class H2 extends H
 							h2[i][j].get(k).dreh.wb -= 0.05;
 						else if(h2a[i][j][k].dreh.wb < depth - 0.05 && h2a[i][j][k].dreh.wb > depth - Math.PI + 0.05)
 							h2[i][j].get(k).dreh.wb += 0.05;*/
-					}
-		}
-	}
 }

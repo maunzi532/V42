@@ -6,13 +6,12 @@ import wahr.zugriff.*;
 
 import java.util.*;
 
-public class Enhance extends Enh
+public class Enhance extends External
 {
 	private final LadeModell enh;
 
-	public Enhance(int axn, LadeModell enh)
+	public Enhance(LadeModell enh)
 	{
-		this.axn = axn;
 		this.enh = enh;
 	}
 
@@ -85,4 +84,6 @@ public class Enhance extends Enh
 		}
 		return toR;
 	}
+
+	public void tick(){}
 }

@@ -69,10 +69,8 @@ public class Zeichner
 					}
 				}
 				Staticf.sca("NEF " + nb.toString() + " 2 ");
-				for(int i = 0; i < nb.enhs.length; i++)
-					n2s.addAll(nb.enhs[i].gibFl(nb.punkteK));
-				for(int i = 0; i < nb.aussehen.ext.size(); i++)
-					n2s.addAll(nb.aussehen.ext.get(i).gibFl(nb.punkteK));
+				for(int i = 0; i < nb.externals.length; i++)
+					n2s.addAll(nb.externals[i].gibFl(nb.punkteK));
 				Staticf.sca("NEF " + nb.toString() + " 3 ");
 			}
 		Staticf.sca("NE1 ");
