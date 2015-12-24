@@ -2,7 +2,6 @@ package nonBlock.aussehen.ext;
 
 import ansicht.n2.*;
 import ansicht.n2.xF.*;
-import nonBlock.*;
 import nonBlock.aussehen.*;
 import wahr.zugriff.*;
 
@@ -13,20 +12,16 @@ public class H extends External
 {
 	private final double w;
 	private final double h;
-	private final int wt;
+	protected final int wt;
 	private final int ht;
 	final ArrayList<LinkAchse>[][] h2;
-	final Achse[][][] h2a;
 	final int nlen;
 	private final int[][] seeds;
-	private K4 inmid;
-	private K4[][] into1;
 
 	//Verursacht Lag
-	public H(NonBlock main2, int axn, double w, double h, int wt, int ht, int nlen,
+	public H(double w, double h, int wt, int ht, int nlen,
 			double wwl, double hwl, double wwb, double hwb)
 	{
-		super(main2, axn);
 		this.w = w;
 		this.h = h;
 		this.wt = wt;
@@ -34,7 +29,6 @@ public class H extends External
 		this.nlen = nlen;
 		//noinspection unchecked
 		h2 = new ArrayList[ht][wt];
-		h2a = new Achse[ht][wt][];
 		Random r = new Random();
 		for(int i = 0; i < ht; i++)
 			for(int j = 0; j < wt; j++)
@@ -57,7 +51,6 @@ public class H extends External
 							break;
 					}
 				}
-				h2a[i][j] = new Achse[h2[i][j].size()];
 			}
 		seeds = new int[ht][wt];
 		for(int i = 0; i < ht; i++)
@@ -72,14 +65,15 @@ public class H extends External
 				for(int k = 0; k < h2[i][j].size(); k++)
 					if(k >= 1)
 					{
-						double a1 = h2a[i][j][k].start.a - inmid.a;
-						double c1 = h2a[i][j][k].start.c - inmid.c;
+						Achse ac = main2.achsen[anfang + i * wt * nlen + j * nlen + k];
+						double a1 = ac.start.a - inmid.a;
+						double c1 = ac.start.c - inmid.c;
 						double ab = Math.sqrt(a1 * a1 + c1 * c1);
 						double de1 = ab > 1 ? 1 / ab : 1;
 						double depth = Math.PI * (1.5 + de1 * 0.5);
-						if(h2a[i][j][k].dreh.wb > depth + 0.05 || h2a[i][j][k].dreh.wb < depth - Math.PI - 0.05)
+						if(ac.dreh.wb > depth + 0.05 || ac.dreh.wb < depth - Math.PI - 0.05)
 							h2[i][j].get(k).dreh.wb -= 0.05;
-						else if(h2a[i][j][k].dreh.wb < depth - 0.05 && h2a[i][j][k].dreh.wb > depth - Math.PI + 0.05)
+						else if(ac.dreh.wb < depth - 0.05 && ac.dreh.wb > depth - Math.PI + 0.05)
 							h2[i][j].get(k).dreh.wb += 0.05;
 					}
 	}
@@ -97,17 +91,8 @@ public class H extends External
 			h2[i][j].get(k).dreh.wb += 0.05;
 	}*/
 
-	public int platz()
-	{
-		if(nicht)
-			return 0;
-		return ht * wt * nlen;
-	}
-
 	public void entLink(Drehung mDreh, K4 mPos)
 	{
-		if(nicht)
-			return;
 		inmid = TK4F.zuPunkt(main2.achsen[axn], 0, 0, 1, 0, mDreh, mPos);
 		for(int i = 0; i < ht; i++)
 			for(int j = 0; j < wt; j++)
@@ -115,26 +100,26 @@ public class H extends External
 				{
 					if(k == 0)
 					{
-						h2a[i][j][k] = h2[i][j].get(k).entlinken(
+						main2.achsen[anfang + i * wt * nlen + j * nlen + k] = h2[i][j].get(k).entlinken(
 								TK4F.zuPunkt(main2.achsen[axn], j * w * 2 / wt - w + w / wt,
 										i * h * 2 / ht - h + h / ht, 1, 0, mDreh/*WTF*/, mPos), main2.achsen[axn]);
-						h2a[i][j][k].dreh = Drehung.plus(h2a[i][j][k].dreh, mDreh);
+						main2.achsen[anfang + i * wt * nlen + j * nlen + k].dreh =
+								Drehung.plus(main2.achsen[anfang + i * wt * nlen + j * nlen + k].dreh, mDreh);
 					}
 					else
-						h2a[i][j][k] = h2[i][j].get(k).entlinken(h2a[i][j][k - 1]);
+						main2.achsen[anfang + i * wt * nlen + j * nlen + k] =
+								h2[i][j].get(k).entlinken(main2.achsen[anfang + i * wt * nlen + j * nlen + k - 1]);
 				}
 	}
 
 	public void punkte(K4[][] into)
 	{
-		if(nicht)
-			return;
 		int cy = this.anfang;
 		for(int i = 0; i < ht; i++)
 			for(int j = 0; j < wt; j++)
-				for(int k = 0; k < h2a[i][j].length; k++)
+				for(int k = 0; k < nlen; k++)
 				{
-					into[cy] = punktA(h2a[i][j][k], k, h2a[i][j].length);
+					into[cy] = punktA(main2.achsen[anfang + i * wt * nlen + j * nlen + k], k, nlen);
 					cy++;
 				}
 		into1 = into;
@@ -178,12 +163,12 @@ public class H extends External
 	public ArrayList<F2> gibFl(K4[][] p5)
 	{
 		ArrayList<F2> al = new ArrayList<>();
-		if(nicht || UIVerbunden.kamA == main2)
+		if(main2 == UIVerbunden.kamA)
 			return al;
 		int cy = anfang;
 		for(int i = 0; i < ht; i++)
 			for(int j = 0; j < wt; j++)
-				for(int k = 0; k < h2a[i][j].length; k++)
+				for(int k = 0; k < nlen; k++)
 				{
 					int grau = 110 - k * 5;
 					if(grau < 0)
@@ -210,9 +195,9 @@ public class H extends External
 								new K4[]{p61[3], p61[0], p71[0], p71[2]}, fn,
 								true, seeds[i][j], 3, main2.tn));
 					}
-					else if(k + 1 < h2a[i][j].length)
+					else if(k + 1 < nlen)
 					{
-						if(k + 2 >= h2a[i][j].length)
+						if(k + 2 >= nlen)
 						{
 							K4[] p7 = p5[cy + 1];
 							K4[] p71 = into1[cy + 1];

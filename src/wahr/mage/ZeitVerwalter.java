@@ -1,6 +1,5 @@
 package wahr.mage;
 
-import nonBlock.aussehen.ext.*;
 import wahr.physisch.*;
 import wahr.zugriff.*;
 
@@ -54,13 +53,11 @@ public class ZeitVerwalter
 					last = 0;
 					over = 0;
 				}
-				External.nicht = skpf;
 			}
 			else
 			{
 				//Erstes Frame
 				skpf = true;
-				External.nicht = false;
 				last = System.currentTimeMillis();
 			}
 			if(okay)

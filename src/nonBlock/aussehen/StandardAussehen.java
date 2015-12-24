@@ -123,16 +123,17 @@ public class StandardAussehen extends AlternateStandard
 		n.standard = this;
 	}
 
-	public void assignStandard(NBD n, LadeModell... enh)
+	public void assignStandard(NBD n, External... ext)
 	{
 		n.elimit = enhStart.get(0);
-		n.enhances = new Enhance[enh.length];
-		for(int i = 0; i < enh.length; i++)
+		n.externals = new External[ext.length];
+		for(int i = 0; i < ext.length; i++)
 		{
-			n.enhances[i] = new Enhance(enhLink.get(i), enh[i]);
-			n.enhances[i].anfang = enhStart.get(i);
-			n.enhances[i].laenge = enhStart.get(i + 1) - enhStart.get(i);
-			n.enhances[i].main2 = n;
+			n.externals[i] = ext[i];
+			n.externals[i].axn = enhLink.get(i);
+			n.externals[i].anfang = enhStart.get(i);
+			n.externals[i].laenge = enhStart.get(i + 1) - enhStart.get(i);
+			n.externals[i].main2 = n;
 		}
 		n.linkAchsen = new LinkAchse[enhStart.get(enhStart.size() - 1)];
 		for(int i = 0; i < la; i++)

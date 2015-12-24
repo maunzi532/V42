@@ -17,7 +17,7 @@ public abstract class NonBlock
 
 	public LadeModell aussehen;
 	public int elimit;
-	public Enhance[] enhances = new Enhance[0];
+	public External[] externals = new External[0];
 	public LinkAchse[] linkAchsen;
 	public boolean entlinkt;
 	public Achse[] achsen;
@@ -38,9 +38,8 @@ public abstract class NonBlock
 
 	public void tick()
 	{
-		if(aussehen != null)
-			for(int i = 0; i < aussehen.ext.size(); i++)
-				aussehen.ext.get(i).tick();
+		for(int i = 0; i < externals.length; i++)
+			externals[i].tick();
 	}
 
 	public void entlinken()
@@ -74,15 +73,13 @@ public abstract class NonBlock
 				}
 			}
 		}
-		for(int i = 0; i < enhances.length; i++)
-			enhances[i].entLink(dreh, position);
-		for(int i = 0; i < aussehen.ext.size(); i++)
-			aussehen.ext.get(i).entLink(dreh, position);
+		for(int i = 0; i < externals.length; i++)
+			externals[i].entLink(dreh, position);
 	}
 
 	public void punkte()
 	{
-		punkte = new K4[achsen.length + aussehen.allext()][];
+		punkte = new K4[achsen.length][];
 		for(int i = 0; i < elimit && i < aussehen.punkte.length; i++)
 		{
 			punkte[i] = new K4[aussehen.punkte[i].size()];
@@ -94,15 +91,8 @@ public abstract class NonBlock
 					punkte[i][j] = TK4F.zuPunkt(a, la.abstand, 0, la.vor, la.spin, dreh, position);
 			}
 		}
-		for(int i = 0; i < enhances.length; i++)
-			enhances[i].punkte(punkte);
-		int ab = linkAchsen.length;
-		for(int i = 0; i < aussehen.ext.size(); i++)
-		{
-			aussehen.ext.get(i).anfang(ab);
-			aussehen.ext.get(i).punkte(punkte);
-			ab += aussehen.ext.get(i).platz();
-		}
+		for(int i = 0; i < externals.length; i++)
+			externals[i].punkte(punkte);
 		for(int i = 0; i < achsen.length; i++)
 			if(achsen[i] != null)
 			{

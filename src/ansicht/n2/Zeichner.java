@@ -69,19 +69,23 @@ public class Zeichner
 					}
 				}
 				Staticf.sca("NEF " + nb.toString() + " 2 ");
-				for(int i = 0; i < nb.enhances.length; i++)
-					n2s.addAll(nb.enhances[i].gibFl(nb.punkteK));
-				for(int i = 0; i < nb.aussehen.ext.size(); i++)
-					n2s.addAll(nb.aussehen.ext.get(i).gibFl(nb.punkteK));
+				for(int i = 0; i < nb.externals.length; i++)
+					n2s.addAll(nb.externals[i].gibFl(nb.punkteK));
 				Staticf.sca("NEF " + nb.toString() + " 3 ");
 			}
 		Staticf.sca("NE1 ");
+		System.out.println(n2s.size());
 		for(int i = 0; i < n2s.size(); i++)
+		{
+			if(n2s.get(i) instanceof F2)
+				((F2)n2s.get(i)).mid();
 			if(!n2s.get(i).anzeigen())
 			{
 				n2s.remove(i);
 				i--;
 			}
+		}
+		System.out.println(n2s.size());
 		Staticf.sca("NE2 ");
 		if(UIVerbunden.siehBlocks)
 			n2s.addAll(WeltB.flaechen(kp, kd, new K4(Staticf.sicht, Staticf.sicht,
