@@ -2,21 +2,13 @@ package nonBlock.aussehen.ext;
 
 import ansicht.n2.*;
 import nonBlock.aussehen.*;
-import nonBlock.*;
 import wahr.zugriff.*;
 
 import java.util.*;
 
-public class Enhance
+public class Enhance extends Enh
 {
-	public NonBlock main2;
-	private final int axn;
-	public int anfang;
-	public int laenge;
 	private final LadeModell enh;
-	private K4 inmid;
-	private Drehung dmid;
-	private K4[][] into1;
 
 	public Enhance(int axn, LadeModell enh)
 	{

@@ -17,7 +17,7 @@ public abstract class NonBlock
 
 	public LadeModell aussehen;
 	public int elimit;
-	public Enhance[] enhances = new Enhance[0];
+	public Enh[] enhs = new Enh[0];
 	public LinkAchse[] linkAchsen;
 	public boolean entlinkt;
 	public Achse[] achsen;
@@ -74,8 +74,8 @@ public abstract class NonBlock
 				}
 			}
 		}
-		for(int i = 0; i < enhances.length; i++)
-			enhances[i].entLink(dreh, position);
+		for(int i = 0; i < enhs.length; i++)
+			enhs[i].entLink(dreh, position);
 		for(int i = 0; i < aussehen.ext.size(); i++)
 			aussehen.ext.get(i).entLink(dreh, position);
 	}
@@ -94,8 +94,8 @@ public abstract class NonBlock
 					punkte[i][j] = TK4F.zuPunkt(a, la.abstand, 0, la.vor, la.spin, dreh, position);
 			}
 		}
-		for(int i = 0; i < enhances.length; i++)
-			enhances[i].punkte(punkte);
+		for(int i = 0; i < enhs.length; i++)
+			enhs[i].punkte(punkte);
 		int ab = linkAchsen.length;
 		for(int i = 0; i < aussehen.ext.size(); i++)
 		{
