@@ -111,7 +111,7 @@ public class Staticf
 	}
 
 	//Sichtweite NonBlocks
-	public static final double sicht = 100;
+	public static final double sicht = 150;
 	//Eigene H ausblenden
 	public static final double sichtMin = 2;
 	//Sichtweite d NonBlocks

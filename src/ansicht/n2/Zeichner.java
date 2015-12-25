@@ -65,7 +65,7 @@ public class Zeichner
 						K4[] spken = new K4[f2.spken1.size()];
 						for(int k = 0; k < f2.spken1.size(); k++)
 							spken[k] = nb.punkteK[f2.spken1.get(k)][f2.spken2.get(k)];
-						n2s.add(new NF2(ecken, eckenNK, spken, f2.farbe, f2.seite, 0, f2.seed, nb.tn));
+						NF2.atl(n2s, new NF2(ecken, eckenNK, spken, f2.farbe, f2.seite, 0, f2.seed, nb.tn));
 					}
 				}
 				Staticf.sca("NEF " + nb.toString() + " 2 ");
@@ -74,19 +74,6 @@ public class Zeichner
 				Staticf.sca("NEF " + nb.toString() + " 3 ");
 			}
 		Staticf.sca("NE1 ");
-		System.out.println(n2s.size());
-		for(int i = 0; i < n2s.size(); i++)
-		{
-			if(n2s.get(i) instanceof F2)
-				((F2)n2s.get(i)).mid();
-			if(!n2s.get(i).anzeigen())
-			{
-				n2s.remove(i);
-				i--;
-			}
-		}
-		System.out.println(n2s.size());
-		Staticf.sca("NE2 ");
 		if(UIVerbunden.siehBlocks)
 			n2s.addAll(WeltB.flaechen(kp, kd, new K4(Staticf.sicht, Staticf.sicht,
 					Staticf.sicht, Staticf.sichtd)));
@@ -134,8 +121,7 @@ public class Zeichner
 									tspt.ecken(j, k, splB, splB);
 									tspt.mid();
 									tspt.splseed = j * splB + k;
-									if(tspt.anzeigen())
-										n2s.add(tspt);
+									BF2.atls(n2s, tspt);
 								}
 						}
 						else
@@ -156,7 +142,6 @@ public class Zeichner
 					//noinspection ConstantConditions,PointlessBooleanExpression
 					if(Staticf.splThr > 0 && tsp.maxAbs() > Staticf.splThr)
 					{
-
 						n2s.remove(i);
 						i--;
 						K4[] sec = new K4[tsp.ecken.length];
@@ -173,8 +158,7 @@ public class Zeichner
 						}
 						for(int j = 0; j < sec.length; j++)
 						{
-							F2 tspt =
-									new NF2(new K4[]{tsp.ecken[j], sec[j], tsp.mid,
+							F2 tspt = new NF2(new K4[]{tsp.ecken[j], sec[j], tsp.mid,
 											sec[j > 0 ? j - 1 : sec.length - 1]},
 											new K4[]{tsp.eckenNK[j], sec1[j], tsp.mid1(),
 											sec1[j > 0 ? j - 1 : sec1.length - 1]},

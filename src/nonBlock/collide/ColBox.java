@@ -6,12 +6,12 @@ public class ColBox
 {
 	NBB besitzer;
 	int linkN;
-	double rad1;
-	double rad2;
+	End3 rad1;
+	End3 rad2;
 	double lnm;
 	double connectibility;
 
-	public ColBox(NBB besitzer, int linkN, double rad1, double rad2, double lnm, double connectibility)
+	public ColBox(NBB besitzer, int linkN, End3 rad1, End3 rad2, double lnm, double connectibility)
 	{
 		this.besitzer = besitzer;
 		this.linkN = linkN;
@@ -21,7 +21,7 @@ public class ColBox
 		this.connectibility = connectibility;
 	}
 
-	public ColBox(NBB besitzer, int linkN, double rad1, double rad2, double lnm)
+	public ColBox(NBB besitzer, int linkN, End3 rad1, End3 rad2, double lnm)
 	{
 		this.besitzer = besitzer;
 		this.linkN = linkN;
@@ -34,9 +34,10 @@ public class ColBox
 	ColBox(){}
 
 	K4 cu;
-	double rcu;
+	End3 rcu;
 	K4 co;
-	double rco;
+	End3 rco;
+	double wl;
 
 	public void bereit()
 	{
@@ -59,7 +60,7 @@ public class ColBox
 			rco = rad1;
 			rcu = rad2;
 		}
-
+		wl = Drehung.sichern(besitzer.achsen[linkN].dreh.wl + besitzer.dreh.wl);
 	}
 
 	public Double innen(K4 k)
@@ -67,34 +68,34 @@ public class ColBox
 		if(cu.b > k.b || co.b < k.b)
 			return null;
 		if(cu.b == k.b)
-			return checkAtB2(cu, rcu, k);
+			return checkAtB2(cu, rcu, k, wl);
 		if(co.b == k.b)
-			return checkAtB2(co, rco, k);
+			return checkAtB2(co, rco, k, wl);
 		K4 in = new K4();
-		double rm = neueScheibe(cu, rcu, co, rco, k.b, in);
-		return checkAtB2(in, rm, k);
+		EndScheibe rm = neueScheibe(cu, rcu, co, rco, k.b, in, k, wl);
+		return checkAtB2(in, rm, k, wl);
 	}
 
-	static boolean checkAtB(K4 t1, double r1, K4 t2, double r2)
+	static boolean checkAtB(K4 t1, End3 r1, double wl1, K4 t2, End3 r2, double wl2)
 	{
 		double a = t1.a - t2.a;
 		double c = t1.c - t2.c;
 		double d = t1.d - t2.d;
 		double lq = a * a + c * c + d * d;
-		double r = r1 + r2;
+		double r = r1.radiusHier(t1, t2, wl1) + r2.radiusHier(t2, t1, wl2);
 		return r * r >= lq;
 	}
 
-	private static double checkAtB2(K4 t1, double r1, K4 t2)
+	private static double checkAtB2(K4 t1, End3 r1, K4 t2, double wl)
 	{
 		double a = t1.a - t2.a;
 		double c = t1.c - t2.c;
 		double d = t1.d - t2.d;
 		double lq = a * a + c * c + d * d;
-		return Math.sqrt(lq) - r1;
+		return Math.sqrt(lq) - r1.radiusHier(t1, t2, wl);
 	}
 
-	static double neueScheibe(K4 u, double ru, K4 o, double ro, double b, K4 in)
+	static EndScheibe neueScheibe(K4 u, End3 ru, K4 o, End3 ro, double b, K4 in, K4 t2, double wl)
 	{
 		double mu = o.b - b;
 		double mo = b - u.b;
@@ -103,6 +104,6 @@ public class ColBox
 		in.b = b;
 		in.c = (u.c * mu + o.c * mo) / div;
 		in.d = (u.d * mu + o.d * mo) / div;
-		return (ru * mu + ro * mo) / div;
+		return new EndScheibe((ru.radiusHier(u, t2, wl) * mu + ro.radiusHier(o, t2, wl) * mo) / div);
 	}
 }

@@ -109,7 +109,7 @@ public class Tha extends TSSA
 			f.position = new K4(this.position);
 			f.position.b -= this.block.get(0).airshift;
 			f.dreh = new Drehung(this.dreh.wl, 0);
-			f.collidable.add(new ColBox(f, 1, 0.3, 0.3, 1, 1));
+			f.collidable.add(new ColBox(f, 1, new EndScheibe(0.3), new EndScheibe(0.3), 1, 1));
 			f.init();
 		}
 		if(command.equals("KL"))

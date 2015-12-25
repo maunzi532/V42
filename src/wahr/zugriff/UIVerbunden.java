@@ -35,4 +35,6 @@ public class UIVerbunden
 	public static boolean siehNonBlocks = true;
 	//X_Ray-Modus an/aus
 	public static boolean xrmode = false;
+	//Haare berechnen
+	public static boolean calculateH = true;
 }

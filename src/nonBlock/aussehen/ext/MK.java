@@ -86,7 +86,7 @@ public class MK extends External
 				int pm = w == nw - 1 ? 1 - nw : 1;
 				K4[] k1 = into[cy + pm];
 				K4[] k11 = into1[cy + pm];
-					al.add(new NF2(new K4[]{k0[0], k1[0], into[cy + nw + pm][0], into[cy + nw][0]},
+					NF2.atl(al, new NF2(new K4[]{k0[0], k1[0], into[cy + nw + pm][0], into[cy + nw][0]},
 							new K4[]{k01[0], k11[0], into1[cy + nw + pm][0], into1[cy + nw][0]},
 							fn, true, seeds[t][w], 0, main2.tn));
 				cy++;
