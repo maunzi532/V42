@@ -16,22 +16,24 @@ public class WeltND
 
 	public static void timetickN()
 	{
-		for(int i = 0; i < nonBlocks.size(); i++)
-			nonBlocks.get(i).entlinkt = false;
-		int toEntLink = nonBlocks.size();
-		while(toEntLink > 0)
-			for(int i = 0; i < nonBlocks.size(); i++)
-				if(!nonBlocks.get(i).entlinkt)
+		ArrayList<NonBlock> noch = nonBlocks;
+		while(noch.size() > 0)
+		{
+			ArrayList<NonBlock> noch2 = new ArrayList<>();
+			for(int i = 0; i < noch.size(); i++)
+			{
+				Focus fc = noch.get(i).focus;
+				if(fc == null || !(fc instanceof Mount) || !noch.contains(((Mount)fc).master))
 				{
-					Focus fc = nonBlocks.get(i).focus;
-					if(fc == null || !(fc instanceof Mount) || ((Mount)fc).master.entlinkt)
-					{
-						nonBlocks.get(i).entlinken();
-						nonBlocks.get(i).punkte();
-						nonBlocks.get(i).entlinkt = true;
-						toEntLink--;
-					}
+					System.out.println(noch.get(i));
+					noch.get(i).entlinken();
+					noch.get(i).punkte();
 				}
+				else
+					noch2.add(noch.get(i));
+			}
+			noch = noch2;
+		}
 	}
 
 	public static void timetickD()

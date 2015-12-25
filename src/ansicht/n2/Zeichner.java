@@ -12,7 +12,7 @@ import java.util.*;
 public class Zeichner
 {
 	public ArrayList<N2> n2s;
-	private Controllable kam;
+	public Controllable kam;
 	private final ArrayList<Double> abstands;
 	private final ArrayList<Integer> splits;
 

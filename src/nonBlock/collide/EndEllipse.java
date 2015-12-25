@@ -21,6 +21,8 @@ public class EndEllipse implements End3
 		double w = Math.PI;
 		if(diff.a != 0)
 			w = Math.atan(diff.c / diff.a) + wl;
-		return ra * Math.abs(Math.cos(w)) + rc * Math.abs(Math.sin(w));
+		double ca = Math.abs(Math.cos(w));
+		double sa = Math.abs(Math.sin(w));
+		return (ra * ca + rc * sa) / (ca + sa);
 	}
 }

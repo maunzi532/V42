@@ -63,6 +63,7 @@ public class ZeitVerwalter
 			if(okay)
 			{
 				Staticf.last = System.currentTimeMillis();
+				Staticf.last2 = System.currentTimeMillis();
 				if(Hauptschleife.eingabe())
 					break;
 				UIVerbunden.calculateH = !skpf;
@@ -77,7 +78,7 @@ public class ZeitVerwalter
 							if(!thd)
 							{
 								thd = true;
-								Staticf.last2 = System.currentTimeMillis();
+								//Staticf.last2 = System.currentTimeMillis();
 								Hauptschleife.panelize();
 								thd = false;
 							}

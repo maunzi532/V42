@@ -19,7 +19,6 @@ public abstract class NonBlock
 	public int elimit;
 	public External[] externals = new External[0];
 	public LinkAchse[] linkAchsen;
-	public boolean entlinkt;
 	public Achse[] achsen;
 	public K4[][] punkte;
 	public K4[][] punkteK;
@@ -115,5 +114,8 @@ public abstract class NonBlock
 					if(punkteK[i][j] != null)
 						punkteK[i][j] = TK4F.transformSet2(punkteK[i][j], kDreh, relativ);
 			}
+		for(int i = 0; i < externals.length; i++)
+			if(externals[i] instanceof H)
+				((H)externals[i]).transformK(kam, kDreh);
 	}
 }

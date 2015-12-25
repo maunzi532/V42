@@ -20,7 +20,7 @@ public class Hauptschleife
 {
 	private static TSSA n;
 	private static TSSA n2;
-	private static Zeichner z;
+	public static Zeichner z;
 	private static N2[] n2s2;
 
 	public static void init()
@@ -44,11 +44,11 @@ public class Hauptschleife
 				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HR2"))),
 				new MK(0, 0.1, 0.5, 1, 8, 4, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
 				//new MK(n, 0, 0.25, 1, 0.25, 1, 8, 14, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
-				new H(0.5, 0.5, 10, 10, 6, 1, 0, 0, 0),
-				new H(0.2, 0.5, 4, 10, 3, 0.5, 0, 0, -0.2),
-				new H(0.2, 0.5, 4, 10, 6, 0.5, 0, 0, -0.2),
-				new H(0.2, 0.5, 4, 10, 6, 0.5, 0, 0, -0.2),
-				new H(0.2, 0.5, 4, 10, 6, 0.5, 0, 0, -0.2)
+				new H2(n, 0.5, 0.5, 10, 10, 4, 1, 0, 0.6),
+				new H2(n, 0.2, 0.5, 8, 20, 7, 0.35, 0, 0.6),
+				new H2(n, 0.2, 0.5, 8, 20, 7, 0.35, 0, 0.6),
+				new H2(n, 0.2, 0.5, 8, 20, 3, 0.35, 0, 0.6),
+				new H2(n, 0.2, 0.5, 8, 20, 7, 0.35, 0, 0.6)
 		);
 		n.position = WeltB.starts[0];
 		n.position.b += n.block.get(0).airshift;
@@ -128,11 +128,11 @@ public class Hauptschleife
 				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HR2"))),
 				new MK(0, 0.1, 0.5, 1, 8, 4, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
 				//new MK(0.25, 0.75, 0.25, 1, 8, 14, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
-				new H2(n2, 0.5, 0.5, 10, 10, 5, 1, 0, 0, 0),
-				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.5, 0, 0, -0.2),
-				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.5, 0, 0, -0.2),
-				new H2(n2, 0.2, 0.5, 4, 10, 4, 0.5, 0, 0, -0.2),
-				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.5, 0, 0, -0.2)
+				new H2(n2, 0.5, 0.5, 10, 10, 4, 1, 0, 0.6),
+				new H2(n2, 0.2, 0.5, 8, 20, 7, 0.35, 0, 0.6),
+				new H2(n2, 0.2, 0.5, 8, 20, 7, 0.35, 0, 0.6),
+				new H2(n2, 0.2, 0.5, 8, 20, 3, 0.35, 0, 0.6),
+				new H2(n2, 0.2, 0.5, 8, 20, 7, 0.35, 0, 0.6)
 				);
 		n2.position = WeltB.starts[1];
 		n2.position.b += n2.block.get(0).airshift;
@@ -142,11 +142,16 @@ public class Hauptschleife
 		UIVerbunden.kamA = UIVerbunden.kamN;
 		z = new Zeichner(Index.gibText("SPL"));
 		n2.collidable.add(new ColBox(n2, 0, new EndScheibe(4), new EndScheibe(4), 1, 1));
-		n2.physik.add(new ColBox(n2, 69, new EndScheibe(1.6), new EndScheibe(1.4), 1.1));
-		n2.physik.add(new ColBox(n2, 78, new EndScheibe(1.4), new EndScheibe(1), 1));
+		n.physik.add(new ColBox(n, 69, new EndScheibe(1.4), new EndScheibe(1.2), 1.1));
+		n.physik.add(new ColBox(n, 78, new EndScheibe(1.2), new EndScheibe(1), 1));
+		n.physik.add(new ColBox(n, 11, new EndScheibe(0.7), new EndScheibe(0.7), 1));
+		n.physik.add(new ColBox(n, 12, new EndScheibe(0.7), new EndScheibe(0.7), 1));
+		n.physik.add(new ColBox(n, 0, new EndEllipse(2.1, 1.4, 0), new EndEllipse(2.1, 1.4, 0), 1));
+		n2.physik.add(new ColBox(n2, 69, new EndScheibe(1.4), new EndScheibe(1.2), 1.1));
+		n2.physik.add(new ColBox(n2, 78, new EndScheibe(1.2), new EndScheibe(1), 1));
 		n2.physik.add(new ColBox(n2, 11, new EndScheibe(0.7), new EndScheibe(0.7), 1));
 		n2.physik.add(new ColBox(n2, 12, new EndScheibe(0.7), new EndScheibe(0.7), 1));
-		n2.physik.add(new ColBox(n2, 0, new EndEllipse(1.8, 0.9, 0), new EndEllipse(1.8, 0.9, 0), 1));
+		n2.physik.add(new ColBox(n2, 0, new EndEllipse(2.1, 1.4, 0), new EndEllipse(2.1, 1.4, 0), 1));
 		n.aktionen.add(new Sicht(n, 10, 67, false));
 		UIVerbunden.zp = new ZP4C(n, 0);
 		n.aktionen.add(UIVerbunden.zp);
@@ -183,8 +188,11 @@ public class Hauptschleife
 		TA2.move();
 		if(TA2.keyStat[0] > 0)
 			return true;
+		Staticf.sca("TA2 ");
 		Point maus = MouseInfo.getPointerInfo().getLocation();
+		Staticf.sca("Mx ");
 		Point mm = LPaneel.fr.getLocationOnScreen();
+		Staticf.sca("Mx1 ");
 		maus.translate(-mm.x, -mm.y);
 		if(TA2.keyStat[15] == 2)
 		{
@@ -197,12 +205,14 @@ public class Hauptschleife
 				TA2.keyStat[16] = 1;
 		}
 		Overlay.sl.tick();
+		Staticf.sca("SL ");
 		maus.translate(-UIVerbunden.sc.width / 2, -UIVerbunden.sc.height / 2);
 		UIVerbunden.mausv = new Point(maus);
 		//UIVerbunden.mausv.translate(-UIVerbunden.maus.x, -UIVerbunden.maus.y);
 		UIVerbunden.maus = maus;
 		if(TA2.keyStat[13] <= 0)
 			UIVerbunden.ro.mouseMove(UIVerbunden.sc.width / 2 + mm.x, UIVerbunden.sc.height / 2 + mm.y);
+		Staticf.sca("RO ");
 		if(TA2.keyStat[13] == 2 && Overlay.sichtAn)
 		{
 			Overlay.sichtAn = false;
@@ -245,7 +255,7 @@ public class Hauptschleife
 		WeltNB.timetick();
 		Staticf.sca("WeltNB t (0) ");
 		WeltND.timetickD();
-		Staticf.sca("WeltND tD (5) ");
+		Staticf.sca("WeltND tD (0) ");
 	}
 
 	public static void rendern()

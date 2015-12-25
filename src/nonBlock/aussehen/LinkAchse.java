@@ -49,6 +49,12 @@ public class LinkAchse
 		return gelinktA;
 	}
 
+	public Achse entlinken(K4 ende, Achse inlinkt, Drehung mDreh)
+	{
+		gelinktA = new Achse(ende, Drehung.nplus(Drehung.nplus(dreh, inlinkt.dreh), mDreh), len, spin, dShift);
+		return gelinktA;
+	}
+
 	public Achse entlinken(K4 ende, Achse inlinkt)
 	{
 		gelinktA = new Achse(ende, Drehung.nplus(dreh, inlinkt.dreh), len, spin, dShift);

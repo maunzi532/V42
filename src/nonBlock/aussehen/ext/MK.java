@@ -63,7 +63,7 @@ public class MK extends External
 
 	public void punkte(K4[][] into)
 	{
-		int cy = this.anfang;
+		int cy = anfang;
 		for(int i = 0; i < nt; i++)
 			for(int j = 0; j < nw; j++)
 			{
