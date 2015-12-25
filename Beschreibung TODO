@@ -5,11 +5,11 @@ Bug-Stufe
 		Block 0 nicht abbaubar
 		Boden-glitch
 		Block 3 hat kein aussehen
+		R - NullPointerException
 
 Stufe 1
 	N2 1
 		D2 - Aussehen verbessern
-	-	4D-Splittern
 	Overlay 1
 		Texte ordentlich platzieren
 		4D-Daten des aktuellen Felds anzeigen
@@ -23,7 +23,6 @@ Stufe 1
 	Gameplay 1
 		Finde die Kopie - Labyrinth generieren
 		Hauptmenü einbauen
-		Attk - Collision später Detection verbessern
 	Eingabe 1
 		TA2 - TA-Datei verbessern
 		Targeting-System - Markierung bewegen
@@ -33,7 +32,7 @@ Stufe 1
 
 Stufe 2
 	Overlay 2
-		Texte aussehen
+		Texte Aussehen
 	Gameplay 2
 		Sinnvolles Attk
 		Welt generieren

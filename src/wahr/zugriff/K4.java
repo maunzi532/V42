@@ -135,4 +135,9 @@ public class K4
 		c = c1 * cwb - b * swb;
 		b = b * cwb + c1 * swb;
 	}
+
+	public String toString()
+	{
+		return a + " " + b + " " + c + " " + d;
+	}
 }

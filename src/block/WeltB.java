@@ -55,10 +55,11 @@ public class WeltB
 				kam.c - radius.c, kam.d - radius.d)));
 		WBP kawEnd = new WBP(Koord.tw(new K4(kam.a + radius.a + 1, kam.b + radius.b + 1,
 				kam.c + radius.c + 1, kam.d + radius.d + 1)));
-		Staticf.sca("WE1 ");
 		double dd = (kam.d - Koord.startWelt.d) / Koord.weltBlock.d;
 		int di = Koord.intiize((kam.d - Koord.startWelt.d) / Koord.weltBlock.d);
 		double dddi = dd - di;
+		K4 relativ = TK4F.transformSet2(new K4(kam), kDreh, null);
+		Staticf.sca("WE1 ");
 		if(UIVerbunden.x4dization == 0)
 			for(int a = kaw0.k[0]; a < kawEnd.k[0]; a++)
 				for(int b = kaw0.k[1]; b < kawEnd.k[1]; b++)
@@ -70,14 +71,14 @@ public class WeltB
 							for(int i = 0; i < Koord.seiten.length; i++)
 								if(!opaque(gib(new WBP(a + Koord.seiten[i][0],
 										b + Koord.seiten[i][1], c + Koord.seiten[i][2], di))))
-									toR.add(flaeche(new WBP(a, b, c, di), block, i, -1, 1));
+									BF2.atl(toR, flaeche(new WBP(a, b, c, di), block, i, -1, 1), kDreh, relativ);
 						}
 						else if(UIVerbunden.d2tangibility)
 						{
 							WBP p = new WBP(a, b, c, di);
 							long tn = tn(p);
-							toR.add(new D2(true, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
-									null, Koord.wt2(p), tn));
+							D2.atl(toR, new D2(true, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
+									null, Koord.wt2(p), tn), kDreh, relativ);
 						}
 					}
 		else
@@ -95,12 +96,12 @@ public class WeltB
 										b + Koord.seiten[i][1], c + Koord.seiten[i][2], di))))
 								{
 									if(opaque(blockG))
-										toR.add(flaeche(new WBP(a, b, c, di + 1), blockG, i, dddi, 1));
+										BF2.atl(toR, flaeche(new WBP(a, b, c, di + 1), blockG, i, dddi, 1), kDreh, relativ);
 									if(opaque(blockR))
-										toR.add(flaeche(new WBP(a, b, c, di - 1), blockR, i, -1, dddi - 1));
-									toR.add(flaeche(new WBP(a, b, c, di), block, i,
+										BF2.atl(toR, flaeche(new WBP(a, b, c, di - 1), blockR, i, -1, dddi - 1), kDreh, relativ);
+									BF2.atl(toR, flaeche(new WBP(a, b, c, di), block, i,
 											(!opaque(blockR)) ? -1 : dddi - 1,
-											(!opaque(blockG)) ? 1 : dddi));
+											(!opaque(blockG)) ? 1 : dddi), kDreh, relativ);
 								}
 						}
 						else
@@ -114,28 +115,14 @@ public class WeltB
 								long tn = tn(ba);
 								D2 de = descr(new WBP(a, b, c, di), blockA, blockR, blockG, tn);
 								if(de != null)
-									toR.add(de);
+									D2.atl(toR, de, kDreh, relativ);
 							}
 						}
 					}
-		Staticf.sca("WE2 ");
-		K4 relativ = TK4F.transformSet2(new K4(kam), kDreh, null);
-		for(int i = 0; i < toR.size(); i++)
-			if(toR.get(i) instanceof F2)
-			{
-				F2 f2 = (F2) toR.get(i);
-				for(int j = 0; j < f2.spken.length; j++)
-				{
-					f2.eckenNK[j] = new K4(f2.spken[j]);
-					f2.spken[j] = TK4F.transformSet2(f2.spken[j], kDreh, relativ);
-				}
-			}
-			else
-				toR.get(i).mid = TK4F.transformSet2(toR.get(i).mid, kDreh, relativ);
 		return toR;
 	}
 
-	private static F2 flaeche(WBP p, int block, int nof, double rend, double gend)
+	private static BF2 flaeche(WBP p, int block, int nof, double rend, double gend)
 	{
 		long tn = tn(p);
 		K4[] ke = new K4[4];

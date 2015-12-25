@@ -17,7 +17,7 @@ public abstract class F2 extends N2
 
 	protected int[] xe;
 	protected int[] ye;
-	private double avkh2;
+	protected double avkh2;
 
 	public abstract void mid();
 

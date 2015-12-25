@@ -3,8 +3,20 @@ package ansicht.n2;
 import ansicht.n2.xF.*;
 import wahr.zugriff.*;
 
+import java.util.*;
+
 public class NF2 extends F2
 {
+	public static void atl(ArrayList al, NF2 f2)
+	{
+		if(f2.anz())
+		{
+			f2.mid();
+			if(f2.mid != null)
+				al.add(f2);
+		}
+	}
+
 	public NF2(K4[] ecken, K4[] eckenNK, K4[] spken, XFarbe farbe,
 			Boolean seite, int spld, int seed, long tn)
 	{
@@ -57,6 +69,7 @@ public class NF2 extends F2
 				mid = new K4(nmid.a / durch, nmid.b / durch, nmid.c / durch, nmid.d / durch);
 			}
 		}
+		avkh2 = mid.a * mid.a + mid.b * mid.b + mid.c * mid.c;
 	}
 
 	public K4 mid1()
@@ -77,5 +90,37 @@ public class NF2 extends F2
 			durch++;
 		}
 		return new K4(nmid.a / durch, nmid.b / durch, nmid.c / durch, nmid.d / durch);
+	}
+
+	public boolean anz()
+	{
+		boolean a = false;
+		for(int i = 0; i < ecken.length; i++)
+		{
+			if(ecken[i] == null)
+				return false;
+			if(ecken[i].c >= 0 && ecken[i].a * ecken[i].a + ecken[i].b * ecken[i].b +
+					ecken[i].c * ecken[i].c < Staticf.sicht * Staticf.sicht &&
+					ecken[i].d > -Staticf.sichtd && ecken[i].d < Staticf.sichtd)
+				a = true;
+		}
+		if(!a)
+			return false;
+		if(seite == null)
+			return true;
+		if(ecken[0].c <= 0 || ecken[1].c <= 0 || ecken[2].c <= 0)
+			return !UIVerbunden.godMode;
+		double a1 = ecken[0].a / ecken[0].c;
+		double a2 = ecken[1].a / ecken[1].c;
+		double a3 = ecken[2].a / ecken[2].c;
+		double b1 = ecken[0].b / ecken[0].c;
+		double b2 = ecken[1].b / ecken[1].c;
+		double b3 = ecken[2].b / ecken[2].c;
+		if(a2 - a1 == 0)
+			return a3 != a1 && (a3 > a1) == seite;
+		double bv = (b2 - b1) / (a2 - a1);
+		double bs = b1 - bv * a1;
+		double bx = b3 - bv * a3;
+		return bs != bx && (bx > bs) == (seite == (a1 < a2));
 	}
 }

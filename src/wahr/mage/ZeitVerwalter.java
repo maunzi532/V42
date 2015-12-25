@@ -65,6 +65,7 @@ public class ZeitVerwalter
 				Staticf.last = System.currentTimeMillis();
 				if(Hauptschleife.eingabe())
 					break;
+				UIVerbunden.calculateH = !skpf;
 				Hauptschleife.logik();
 				if(!skpf)
 				{

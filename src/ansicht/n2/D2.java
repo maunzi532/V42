@@ -5,6 +5,7 @@ import ansicht.n2.xF.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
+import java.util.*;
 
 public class D2 extends N2
 {
@@ -13,6 +14,12 @@ public class D2 extends N2
 	private int xe;
 	private int ye;
 	private int scale;
+
+	public static void atl(ArrayList al, D2 d2, Drehung kDreh, K4 relativ)
+	{
+		d2.mid = TK4F.transformSet2(d2.mid, kDreh, relativ);
+		al.add(d2);
+	}
 
 	public D2(boolean quadrat, XFarbe farbe, String text, K4 mid, long tn)
 	{

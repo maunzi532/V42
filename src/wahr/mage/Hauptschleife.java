@@ -141,12 +141,12 @@ public class Hauptschleife
 		UIVerbunden.kamN = n;
 		UIVerbunden.kamA = UIVerbunden.kamN;
 		z = new Zeichner(Index.gibText("SPL"));
-		n2.collidable.add(new ColBox(n2, 0, 4, 4, 1, 1));
-		n2.physik.add(new ColBox(n2, 69, 1.5, 1.6, 1.1));
-		n2.physik.add(new ColBox(n2, 78, 1.5, 1, 1));
-		n2.physik.add(new ColBox(n2, 11, 0.7, 0.7, 1));
-		n2.physik.add(new ColBox(n2, 12, 0.7, 0.7, 1));
-		n2.physik.add(new ColBox(n2, 0, 1.8, 1.8, 1));
+		n2.collidable.add(new ColBox(n2, 0, new EndScheibe(4), new EndScheibe(4), 1, 1));
+		n2.physik.add(new ColBox(n2, 69, new EndScheibe(1.6), new EndScheibe(1.4), 1.1));
+		n2.physik.add(new ColBox(n2, 78, new EndScheibe(1.4), new EndScheibe(1), 1));
+		n2.physik.add(new ColBox(n2, 11, new EndScheibe(0.7), new EndScheibe(0.7), 1));
+		n2.physik.add(new ColBox(n2, 12, new EndScheibe(0.7), new EndScheibe(0.7), 1));
+		n2.physik.add(new ColBox(n2, 0, new EndEllipse(1.8, 0.9, 0), new EndEllipse(1.8, 0.9, 0), 1));
 		n.aktionen.add(new Sicht(n, 10, 67, false));
 		UIVerbunden.zp = new ZP4C(n, 0);
 		n.aktionen.add(UIVerbunden.zp);

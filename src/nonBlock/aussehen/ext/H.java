@@ -18,7 +18,6 @@ public class H extends External
 	final int nlen;
 	private final int[][] seeds;
 
-	//Verursacht Lag
 	public H(double w, double h, int wt, int ht, int nlen,
 			double wwl, double hwl, double wwb, double hwb)
 	{
@@ -98,22 +97,23 @@ public class H extends External
 			for(int j = 0; j < wt; j++)
 				for(int k = 0; k < h2[i][j].size(); k++)
 				{
+					int a = anfang + i * wt * nlen + j * nlen + k;
 					if(k == 0)
 					{
-						main2.achsen[anfang + i * wt * nlen + j * nlen + k] = h2[i][j].get(k).entlinken(
+						main2.achsen[a] = h2[i][j].get(k).entlinken(
 								TK4F.zuPunkt(main2.achsen[axn], j * w * 2 / wt - w + w / wt,
-										i * h * 2 / ht - h + h / ht, 1, 0, mDreh/*WTF*/, mPos), main2.achsen[axn]);
-						main2.achsen[anfang + i * wt * nlen + j * nlen + k].dreh =
-								Drehung.plus(main2.achsen[anfang + i * wt * nlen + j * nlen + k].dreh, mDreh);
+										i * h * 2 / ht - h + h / ht, 1, 0, mDreh, mPos), main2.achsen[axn]);
+						main2.achsen[a].dreh = Drehung.plus(main2.achsen[a].dreh, mDreh);
 					}
 					else
-						main2.achsen[anfang + i * wt * nlen + j * nlen + k] =
-								h2[i][j].get(k).entlinken(main2.achsen[anfang + i * wt * nlen + j * nlen + k - 1]);
+						main2.achsen[a] = h2[i][j].get(k).entlinken(main2.achsen[a - 1]);
 				}
 	}
 
 	public void punkte(K4[][] into)
 	{
+		if(!UIVerbunden.calculateH)
+			return;
 		int cy = this.anfang;
 		for(int i = 0; i < ht; i++)
 			for(int j = 0; j < wt; j++)
@@ -163,35 +163,31 @@ public class H extends External
 	public ArrayList<F2> gibFl(K4[][] p5)
 	{
 		ArrayList<F2> al = new ArrayList<>();
-		if(main2 == UIVerbunden.kamA)
+		if(!UIVerbunden.calculateH || main2 == UIVerbunden.kamA)
 			return al;
 		int cy = anfang;
+		int grau = 100;
+		XFarbe fn = new XFN(new Color(grau, grau, grau));
 		for(int i = 0; i < ht; i++)
 			for(int j = 0; j < wt; j++)
 				for(int k = 0; k < nlen; k++)
 				{
-					int grau = 110 - k * 5;
-					if(grau < 0)
-						grau = 0;
-					if(grau > 255)
-						grau = 255;
-					XFarbe fn = new XFN(new Color(grau, grau, grau));
 					K4[] p6 = p5[cy];
 					K4[] p61 = into1[cy];
 					if(k == 0)
 					{
 						K4[] p7 = p5[cy + 1];
 						K4[] p71 = into1[cy + 1];
-						al.add(new NF2(new K4[]{p6[0], p6[1], p7[1], p7[0]},
+						NF2.atl(al, new NF2(new K4[]{p6[0], p6[1], p7[1], p7[0]},
 								new K4[]{p61[0], p61[1], p71[1], p71[0]}, fn,
 								true, seeds[i][j], 0, main2.tn));
-						al.add(new NF2(new K4[]{p6[1], p6[2], p7[1]},
+						NF2.atl(al, new NF2(new K4[]{p6[1], p6[2], p7[1]},
 								new K4[]{p61[1], p61[2], p71[1]}, fn,
 								true, seeds[i][j], 1, main2.tn));
-						al.add(new NF2(new K4[]{p6[2], p6[3], p7[2], p7[1]},
+						NF2.atl(al, new NF2(new K4[]{p6[2], p6[3], p7[2], p7[1]},
 								new K4[]{p61[2], p61[3], p71[2], p71[1]}, fn,
 								true, seeds[i][j], 2, main2.tn));
-						al.add(new NF2(new K4[]{p6[3], p6[0], p7[0], p7[2]},
+						NF2.atl(al, new NF2(new K4[]{p6[3], p6[0], p7[0], p7[2]},
 								new K4[]{p61[3], p61[0], p71[0], p71[2]}, fn,
 								true, seeds[i][j], 3, main2.tn));
 					}
@@ -201,13 +197,13 @@ public class H extends External
 						{
 							K4[] p7 = p5[cy + 1];
 							K4[] p71 = into1[cy + 1];
-							al.add(new NF2(new K4[]{p6[0], p6[1], p7[0]},
+							NF2.atl(al, new NF2(new K4[]{p6[0], p6[1], p7[0]},
 									new K4[]{p61[0], p61[1], p71[0]}, fn,
 									true, seeds[i][j], k * 3 + 1, main2.tn));
-							al.add(new NF2(new K4[]{p6[1], p6[2], p7[0]},
+							NF2.atl(al, new NF2(new K4[]{p6[1], p6[2], p7[0]},
 									new K4[]{p61[1], p61[2], p71[0]}, fn,
 									true, seeds[i][j], k * 3 + 1, main2.tn));
-							al.add(new NF2(new K4[]{p6[2], p6[0], p7[0]},
+							NF2.atl(al, new NF2(new K4[]{p6[2], p6[0], p7[0]},
 									new K4[]{p61[2], p61[0], p71[0]},fn,
 									true, seeds[i][j], k * 3 + 1, main2.tn));
 						}
@@ -215,13 +211,13 @@ public class H extends External
 						{
 							K4[] p7 = p5[cy + 1];
 							K4[] p71 = into1[cy + 1];
-							al.add(new NF2(new K4[]{p6[0], p6[1], p7[1], p7[0]},
+							NF2.atl(al, new NF2(new K4[]{p6[0], p6[1], p7[1], p7[0]},
 									new K4[]{p61[0], p61[1], p71[1], p71[0]}, fn,
 									true, seeds[i][j], k * 3 + 1, main2.tn));
-							al.add(new NF2(new K4[]{p6[1], p6[2], p7[2], p7[1]},
+							NF2.atl(al, new NF2(new K4[]{p6[1], p6[2], p7[2], p7[1]},
 									new K4[]{p61[1], p61[2], p71[2], p71[1]}, fn,
 									true, seeds[i][j], k * 3 + 1, main2.tn));
-							al.add(new NF2(new K4[]{p6[2], p6[0], p7[0], p7[2]},
+							NF2.atl(al, new NF2(new K4[]{p6[2], p6[0], p7[0], p7[2]},
 									new K4[]{p61[2], p61[0], p71[0], p71[2]}, fn,
 									true, seeds[i][j], k * 3 + 1, main2.tn));
 						}

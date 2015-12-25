@@ -33,7 +33,7 @@ public class H2 extends H
 	{
 		for(int k = 0; k < nlen - 1; k++)
 		{
-			entLink(mDreh, mPos);
+			//entLink(mDreh, mPos);
 			for(int i = 0; i < h2.length; i++)
 				for(int j = 0; j < h2[i].length; j++)
 					if(k >= 1)
@@ -72,18 +72,7 @@ public class H2 extends H
 							in2++;
 						}
 						while(in < 0);
-
 					}
 		}
 	}
-
-						/*double a1 = h2a[i][j][k].start.a - inmid.a;
-						double c1 = h2a[i][j][k].start.c - inmid.c;
-						double ab = Math.sqrt(a1 * a1 + c1 * c1);
-						double de1 = ab > 1 ? 1 / ab : 1;
-						double depth = Math.PI * (1.5 + de1 * 0.5);
-						if(h2a[i][j][k].dreh.wb > depth + 0.05 || h2a[i][j][k].dreh.wb < depth - Math.PI - 0.05)
-							h2[i][j].get(k).dreh.wb -= 0.05;
-						else if(h2a[i][j][k].dreh.wb < depth - 0.05 && h2a[i][j][k].dreh.wb > depth - Math.PI + 0.05)
-							h2[i][j].get(k).dreh.wb += 0.05;*/
 }
