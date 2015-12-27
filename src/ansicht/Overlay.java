@@ -27,12 +27,13 @@ public class Overlay
 		normalSchalter = new ArrayList<>();
 		normalSchalter.add(new SLF(sl, true, 0.1, 0.1, 0.1, 0.05)
 		{
-			public void onClick(boolean r)
+			public void onClick(boolean r, double cx, double cy)
 			{
 				if(r)
 					pa.taType = pa.taType == 2 ? 0 : 2;
 				else
 					pa.taType = pa.taType == 1 ? 0 : 1;
+				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
@@ -53,12 +54,13 @@ public class Overlay
 		});
 		normalSchalter.add(new SLF(sl, true, 0.1, 0.2, 0.1, 0.05)
 		{
-			public void onClick(boolean r)
+			public void onClick(boolean r, double cx, double cy)
 			{
 				if(r)
 					UIVerbunden.x4dization = UIVerbunden.x4dization > 0 ? 0 : 1;
 				else
 					UIVerbunden.x4dization = UIVerbunden.x4dization > 1 ? 0 : 2;
+				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
@@ -79,9 +81,10 @@ public class Overlay
 		});
 		normalSchalter.add(new SLF(sl, true, 0.1, 0.3, 0.1, 0.05)
 		{
-			public void onClick(boolean r)
+			public void onClick(boolean r, double cx, double cy)
 			{
 				UIVerbunden.d2tangibility = !UIVerbunden.d2tangibility;
+				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
@@ -95,19 +98,21 @@ public class Overlay
 		godModeSchalter = new ArrayList<>();
 		godModeSchalter.add(new SLF(sl, true, 0.25, 0.1, 0.1, 0.05, "Speichern")
 		{
-			public void onClick(boolean r)
+			public void onClick(boolean r, double cx, double cy)
 			{
 				WeltB.speichern("Levels/Generiert1", new int[]{30, 50, 30, 4});
+				super.onClick(r, cx, cy);
 			}
 		});
 		godModeSchalter.add(new SLF(sl, true, 0.25, 0.2, 0.1, 0.05)
 		{
-			public void onClick(boolean r)
+			public void onClick(boolean r, double cx, double cy)
 			{
 				if(r)
 					UIVerbunden.siehNonBlocks = !UIVerbunden.siehNonBlocks;
 				else
 					UIVerbunden.siehBlocks = !UIVerbunden.siehBlocks;
+				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
@@ -130,17 +135,26 @@ public class Overlay
 		});
 		godModeSchalter.add(new SLF(sl, true, 0.25, 0.3, 0.1, 0.05)
 		{
-			public void onClick(boolean r)
+			public void onClick(boolean r, double cx, double cy)
 			{
 				UIVerbunden.xrmode = !UIVerbunden.xrmode;
+				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
 			{
 				if(UIVerbunden.xrmode)
-					text = "XR an " + Staticf.xraywidth;
+					text = "XR an";
 				else
 					text = "XR aus";
+			}
+		});
+		godModeSchalter.add(new Schieber(sl, true, 0.25, 0.4, 0.1, 0.05, 0, 100, 50)
+		{
+			public void tick()
+			{
+				Staticf.xraywidth = shift * shiftm + startw;
+				text = String.valueOf(Staticf.xraywidth);
 			}
 		});
 	}

@@ -45,7 +45,7 @@ public class H extends External
 						case 0:
 							h2[i][j][k] = new LinkAchse(new Drehung(
 									(i - (ht - 1d) / 2) * hwl + (j - (wt - 1d) / 2) * wwl +
-											(r.nextDouble() - 0.5), (r.nextDouble() - 0.5) / 2),
+											(r.nextDouble() - 0.5), (r.nextDouble() - 0.5) / 5),
 									len * (r.nextDouble() / 2 + 0.75), 0, 0);
 							break;
 						default:

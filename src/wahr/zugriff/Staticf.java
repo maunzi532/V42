@@ -139,7 +139,7 @@ public class Staticf
 	//Schrittweite bei Hitboxes
 	public static final double abhc = 1;
 	//Weite des X-Ray-Modus
-	public static final int xraywidth = 50;
+	public static double xraywidth = 50;
 
 	public static void charge2()
 	{

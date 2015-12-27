@@ -35,9 +35,9 @@ public abstract class SLF
 		this.text = text;
 	}
 
-	public boolean click(int xc, int yc)
+	public boolean click(double xc, double yc)
 	{
-		return xc >= main.mw(x) && yc >= main.mh(y) && xc < main.mw(x + w) && yc < main.mh(y + h);
+		return xc >= x && yc >= y && xc < x + w && yc < y + h;
 	}
 
 	public void draw(Graphics2D gd)
@@ -52,7 +52,10 @@ public abstract class SLF
 		}
 	}
 
-	public void onClick(boolean r){}
+	public void onClick(boolean r, double cx, double cy)
+	{
+		tick();
+	}
 
 	public void tick(){}
 }

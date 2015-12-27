@@ -9,6 +9,8 @@ public class SchalterLayer
 {
 	final Color back = Color.BLACK;
 	final Color front = Color.WHITE;
+	final Color schieber = new Color(46, 46, 46);
+	final Color schieberKante = Color.GRAY;
 
 	public final ArrayList<SLF> layer = new ArrayList<>();
 	private final ArrayList[] tex;
@@ -31,23 +33,27 @@ public class SchalterLayer
 		return (int)(UIVerbunden.sc.height * multiplikator);
 	}
 
+	public double nmw(double multiplikator)
+	{
+		return multiplikator / UIVerbunden.sc.width;
+	}
+
+	public double nmh(double multiplikator)
+	{
+		return multiplikator / UIVerbunden.sc.height;
+	}
+
 	public boolean click(int x, int y, boolean r)
 	{
 		if(x >= mw(1) || y >= mh(1) || x < 0 || y < 0)
 			return false;
-		for(int i = 0; i < layer.size(); i++)
-			if(layer.get(i).tangible && layer.get(i).click(x, y))
+		for(SLF slf : layer)
+			if(slf.tangible && slf.click(nmw(x), nmh(y)))
 			{
-				layer.get(i).onClick(r);
+				slf.onClick(r, (nmw(x) - slf.x) / slf.w, (nmh(y) - slf.y) / slf.h);
 				return true;
 			}
 		return false;
-	}
-
-	public void tick()
-	{
-		for(int i = 0; i < layer.size(); i++)
-			layer.get(i).tick();
 	}
 
 	public void draw(Graphics2D gd)

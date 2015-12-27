@@ -25,7 +25,6 @@ public class WeltND
 				Focus fc = noch.get(i).focus;
 				if(fc == null || !(fc instanceof Mount) || !noch.contains(((Mount)fc).master))
 				{
-					System.out.println(noch.get(i));
 					noch.get(i).entlinken();
 					noch.get(i).punkte();
 				}
