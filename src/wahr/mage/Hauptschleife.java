@@ -25,10 +25,11 @@ public class Hauptschleife
 
 	public static void init()
 	{
-		Generator g = new TestGenerator();
+		Generator g = new WeltLeser();
+		g.gibInWelt("Levels/Test1");
 		//g.gibInWelt("Levels/Generiert1");
 		//g.gibInWelt();
-		g.gibInWelt(2, 10);
+		//g.gibInWelt(4, 4);
 		Koord.setzeSE(new K4(0, 0, 0, 0), new K4(20, 20, 20, 20));
 		g.ermittleStart();
 		n = new Tha();
@@ -44,11 +45,11 @@ public class Hauptschleife
 				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HR2"))),
 				new MK(0, 0.1, 0.5, 1, 8, 4, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
 				//new MK(n, 0, 0.25, 1, 0.25, 1, 8, 14, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
-				new H2(n, 0.5, 0.5, 10, 10, 4, 1, 0, 0.6),
-				new H2(n, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.6),
-				new H2(n, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.6),
-				new H2(n, 0.2, 0.5, 4, 10, 3, 0.7, 0, 0.6),
-				new H2(n, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.6)
+				new H(0.5, 0.5, 10, 10, 4, 1, 0, 0.9),
+				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9),
+				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9),
+				new H(0.2, 0.5, 4, 10, 3, 0.7, 0, 0.9),
+				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9)
 		);
 		n.position = WeltB.starts[0];
 		n.position.b += n.block.get(0).airshift;

@@ -1,5 +1,6 @@
 package wahr.zugriff;
 
+import block.*;
 import wahr.physisch.*;
 
 public class Staticf
@@ -111,7 +112,7 @@ public class Staticf
 	}
 
 	//Sichtweite NonBlocks
-	public static final double sicht = 150;
+	public static final double sicht = 300;
 	//Eigene H ausblenden
 	public static final double sichtMin = 2;
 	//Sichtweite d NonBlocks
@@ -138,8 +139,12 @@ public class Staticf
 	public static final double ebhc = 0.1;
 	//Schrittweite bei Hitboxes
 	public static final double abhc = 1;
+	//D2 Mindestabstand um gesehen zu werden
+	public static final double d2min = 1;
 	//Weite des X-Ray-Modus
 	public static double xraywidth = 50;
+	//Speichergroesse
+	public static WBP wspg = new WBP(1, 1, 1, 1);
 
 	public static void charge2()
 	{

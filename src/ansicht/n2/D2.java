@@ -31,6 +31,11 @@ public class D2 extends N2
 		this.tn = tn;
 	}
 
+	public boolean draw()
+	{
+		return mid.c > Staticf.d2min;
+	}
+
 	public void panelDaten()
 	{
 		double ca = mid.c;
@@ -44,7 +49,7 @@ public class D2 extends N2
 
 	public void panelDark(Graphics2D darkCopy)
 	{
-		if(UIVerbunden.d2tangibility)
+		if(quadrat)
 		{
 			int r = scale * 2;
 			int[] xp = new int[]{xe - r, xe, xe + r, xe};
@@ -57,7 +62,7 @@ public class D2 extends N2
 	{
 		pa.gd.setPaint(dFarb);
 		pa.gd.setFont(new Font("Consolas", Font.PLAIN, scale > 20 ? 20 : scale));
-		if(UIVerbunden.d2tangibility)
+		if(quadrat)
 		{
 			int r = scale * 2;
 			int[] xp = new int[]{xe - r, xe, xe + r, xe};
@@ -69,7 +74,7 @@ public class D2 extends N2
 			int w = text.length() * scale / 3;
 			int h = scale / 2;
 			pa.gd.fillRect(xe - w, ye - h, w * 2, h * 2);
-			pa.gd.setColor(Color.WHITE);
+			pa.gd.setPaint(Color.WHITE);
 			pa.gd.drawString(text, xe - w + scale / 8, ye + h - scale / 8);
 		}
 	}

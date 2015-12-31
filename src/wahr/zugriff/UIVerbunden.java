@@ -28,7 +28,7 @@ public class UIVerbunden
 	//4D-Blick an/aus
 	public static int x4dization = 0;
 	//D2 anklickbarkeit
-	public static boolean d2tangibility = false;
+	public static int d2tangibility = 0;
 	//Blocks sehen
 	public static boolean siehBlocks = true;
 	//NonBlocks sehen

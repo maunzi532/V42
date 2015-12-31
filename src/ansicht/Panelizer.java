@@ -51,13 +51,13 @@ public class Panelizer
 				if(taType > 0)
 				{
 					Long ta = n2s[i].tn;
-					if(!darkC.containsKey(ta))
+					if(darkC != null && !darkC.containsKey(ta))
 					{
 						darkUsed++;
 						darkC.put(ta, darkUsed);
 						darkC2.put(darkUsed, ta);
 					}
-					if(darkC.containsKey(ta) && darkC.get(ta) != null)
+					if(darkC != null && darkC.containsKey(ta) && darkC.get(ta) != null)
 					{
 						darkCopy.setColor(new Color(darkC.get(ta)));
 						n2s[i].panelDark(darkCopy);

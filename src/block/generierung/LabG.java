@@ -41,7 +41,7 @@ public class LabG extends Generator
 		ArrayList<Integer> pathr = new ArrayList<>();
 		boolean canHoch = true;
 		set(2);
-		for(int ab = 0; ab < 10; ab++)
+		//for(int ab = 0; ab < 10; ab++)
 		{
 			for(int t = 0; t < 40; t++)
 			{
@@ -63,7 +63,7 @@ public class LabG extends Generator
 				}
 				if(pathc == 0)
 				{
-					if(ab == 0)
+					//if(ab == 0)
 						starts[1] = position;
 					break;
 				}
@@ -81,9 +81,9 @@ public class LabG extends Generator
 				for(int ic = 0; ic < size[2]; ic++)
 					for(int id = 0; id < size[3]; id++)
 						blocks[ia][ib][ic][id] = rev(b1[ia][ib][ic][id]);
-		//enden = new int[]{1, 1, 1, 1, 1, 1, 1, 1};
+		enden = new int[]{1, 1, 1, 1, 1, 1, 1, 1};
 		//enden = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		enden = new int[]{1, 1, 1, 0, 1, 1, 1, 1};
+		//enden = new int[]{1, 1, 1, 0, 1, 1, 1, 1};
 		endOrder = new int[]{0, 2, 1, 3};
 		return blocks;
 	}

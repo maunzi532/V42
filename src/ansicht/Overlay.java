@@ -83,27 +83,30 @@ public class Overlay
 		{
 			public void onClick(boolean r, double cx, double cy)
 			{
-				UIVerbunden.d2tangibility = !UIVerbunden.d2tangibility;
+				if(r)
+					UIVerbunden.d2tangibility = 0;
+				else
+					UIVerbunden.d2tangibility = (UIVerbunden.d2tangibility + 1) % 3;
 				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
 			{
-				if(UIVerbunden.d2tangibility)
-					text = "Baumodus an";
-				else
-					text = "Baumodus aus";
+				switch(UIVerbunden.d2tangibility)
+				{
+					case 0:
+						text = "Baumodus aus";
+						break;
+					case 1:
+						text = "Baumodus Kanten";
+						break;
+					case 2:
+						text = "Baumodus an";
+						break;
+				}
 			}
 		});
 		godModeSchalter = new ArrayList<>();
-		godModeSchalter.add(new SLF(sl, true, 0.25, 0.1, 0.1, 0.05, "Speichern")
-		{
-			public void onClick(boolean r, double cx, double cy)
-			{
-				WeltB.speichern("Levels/Generiert1", new int[]{30, 50, 30, 4});
-				super.onClick(r, cx, cy);
-			}
-		});
 		godModeSchalter.add(new SLF(sl, true, 0.25, 0.2, 0.1, 0.05)
 		{
 			public void onClick(boolean r, double cx, double cy)
@@ -157,6 +160,46 @@ public class Overlay
 				text = String.valueOf(Staticf.xraywidth);
 			}
 		});
+		godModeSchalter.add(new SLF(sl, true, 0.4, 0.1, 0.1, 0.05, "Speichern")
+		{
+			public void onClick(boolean r, double cx, double cy)
+			{
+				WeltB.speichern("Levels/Test1", Staticf.wspg.k);
+				super.onClick(r, cx, cy);
+			}
+		});
+		godModeSchalter.add(new Schieber(sl, true, 0.4, 0.2, 0.2, 0.025, 0, 100, Koord.end[0])
+		{
+			public void tick()
+			{
+				Staticf.wspg.k[0] = (int)(shift * shiftm + startw);
+				text = String.valueOf(Staticf.wspg.k[0]);
+			}
+		});
+		godModeSchalter.add(new Schieber(sl, true, 0.4, 0.225, 0.2, 0.025, 0, 100, Koord.end[1])
+		{
+			public void tick()
+			{
+				Staticf.wspg.k[1] = (int)(shift * shiftm + startw);
+				text = String.valueOf(Staticf.wspg.k[1]);
+			}
+		});
+		godModeSchalter.add(new Schieber(sl, true, 0.4, 0.25, 0.2, 0.025, 0, 100, Koord.end[2])
+		{
+			public void tick()
+			{
+				Staticf.wspg.k[2] = (int)(shift * shiftm + startw);
+				text = String.valueOf(Staticf.wspg.k[2]);
+			}
+		});
+		godModeSchalter.add(new Schieber(sl, true, 0.4, 0.275, 0.2, 0.025, 0, 100, Koord.end[3])
+		{
+			public void tick()
+			{
+				Staticf.wspg.k[3] = (int)(shift * shiftm + startw);
+				text = String.valueOf(Staticf.wspg.k[3]);
+			}
+		});
 	}
 
 	public static void resize()
@@ -171,15 +214,6 @@ public class Overlay
 		sl.draw(gd);
 		gd.setColor(new Color(0, 0, 180));
 		gd.setFont(new Font(null, Font.PLAIN, 20));
-		/*if(Staticf.x4dization > 0)
-			gd.drawString(String.valueOf(Hauptschleife.n.position.d), 50, 50);
-		WBP wbp = WeltB.tw(Hauptschleife.n.position);
-		wbp.k[3]++;
-		if(WeltB.gib(wbp) == 0)
-			gd.drawString("Z Bereit", 300, 50);
-		wbp.k[3] -= 2;
-		if(WeltB.gib(wbp) == 0)
-			gd.drawString("P Bereit", 300, 100);*/
 		if(UIVerbunden.x4dization > 0)
 			gd.drawString(String.valueOf(UIVerbunden.zp.d), 50, 50);
 		if(UIVerbunden.zp.z)

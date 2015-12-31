@@ -10,6 +10,18 @@ import java.util.*;
 
 public class WeltB
 {
+	private static final int[][] allD = new int[][]
+			{
+					{-1, 0, 0, 0},
+					{1, 0, 0, 0},
+					{0, -1, 0, 0},
+					{0, 1, 0, 0},
+					{0, 0, -1, 0},
+					{0, 0, 1, 0},
+					{0, 0, 0, -1},
+					{0, 0, 0, 1},
+			};
+
 	public static int[][][][] blocks;
 	public static int[] enden;
 	public static int[] endOrder;
@@ -65,7 +77,8 @@ public class WeltB
 				for(int b = kaw0.k[1]; b < kawEnd.k[1]; b++)
 					for(int c = kaw0.k[2]; c < kawEnd.k[2]; c++)
 					{
-						int block = gib(new WBP(a, b, c, di));
+						WBP p = new WBP(a, b, c, di);
+						int block = gib(p);
 						if(opaque(block))
 						{
 							for(int i = 0; i < Koord.seiten.length; i++)
@@ -73,9 +86,8 @@ public class WeltB
 										b + Koord.seiten[i][1], c + Koord.seiten[i][2], di))))
 									BF2.atl(toR, flaeche(new WBP(a, b, c, di), block, i, -1, 1), kDreh, relativ);
 						}
-						else if(UIVerbunden.d2tangibility)
+						else if(d2Vis(p))
 						{
-							WBP p = new WBP(a, b, c, di);
 							long tn = tn(p);
 							D2.atl(toR, new D2(true, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
 									null, Koord.wt2(p), tn), kDreh, relativ);
@@ -86,7 +98,8 @@ public class WeltB
 				for(int b = kaw0.k[1]; b < kawEnd.k[1]; b++)
 					for(int c = kaw0.k[2]; c < kawEnd.k[2]; c++)
 					{
-						int block = gib(new WBP(a, b, c, di));
+						WBP p = new WBP(a, b, c, di);
+						int block = gib(p);
 						if(opaque(block))
 						{
 							int blockG = gib(new WBP(a, b, c, di + 1));
@@ -106,14 +119,13 @@ public class WeltB
 						}
 						else
 						{
-							WBP ba = new WBP(a, b, c, di);
-							int blockA = gib(ba);
+							int blockA = gib(p);
 							int blockR = gib(new WBP(a, b, c, di - 1));
 							int blockG = gib(new WBP(a, b, c, di + 1));
 							if(!opaque(blockA))
 							{
-								long tn = tn(ba);
-								D2 de = descr(new WBP(a, b, c, di), blockA, blockR, blockG, tn);
+								long tn = tn(p);
+								D2 de = descr(p, blockA, blockR, blockG, tn);
 								if(de != null)
 									D2.atl(toR, de, kDreh, relativ);
 							}
@@ -175,9 +187,10 @@ public class WeltB
 
 	private static D2 descr(WBP p, int block, int blockR, int blockG, long tn)
 	{
+		boolean quad = d2Vis(p);
 		if(!opaque(blockR) && !opaque(blockG))
 		{
-			if(UIVerbunden.d2tangibility)
+			if(quad)
 				return new D2(true, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
 						null, Koord.wt2(p), tn);
 			return null;
@@ -185,11 +198,26 @@ public class WeltB
 		String text = (opaque(blockR) ? "Rot: " + blockR : "") +
 				(opaque(blockR) && opaque(blockG) ? " " : "") +
 				(opaque(blockG) ? "Gn: " + blockG : "");
-		if(UIVerbunden.d2tangibility || UIVerbunden.x4dization > 1)
-			return new D2(UIVerbunden.d2tangibility, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
+		if(quad || UIVerbunden.x4dization > 1)
+			return new D2(quad, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
 					text, Koord.wt2(p), tn);
 		else
 			return null;
+	}
+
+	public static boolean d2Vis(WBP p)
+	{
+		if(UIVerbunden.d2tangibility == 1)
+		{
+			for(int i = 0; i < 8; i++)
+			{
+				if(opaque(gib(new WBP(p.k[0] + allD[i][0], p.k[1] + allD[i][1],
+						p.k[2] + allD[i][2], p.k[3] + allD[i][3]))))
+					return true;
+			}
+			return false;
+		}
+		return UIVerbunden.d2tangibility > 0;
 	}
 
 	public static boolean opaque(int block)

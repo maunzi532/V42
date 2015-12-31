@@ -260,7 +260,7 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 
 	public double lichtRange()
 	{
-		return 120;
+		return 300;
 	}
 
 	public double lichtPower()
@@ -270,6 +270,6 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 
 	public double lichtPowerDecay()
 	{
-		return 2;
+		return 0.1;
 	}
 }

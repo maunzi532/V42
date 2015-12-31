@@ -15,7 +15,7 @@ public class Koord
 			};
 	public static K4 weltBlock;
 	public static K4 startWelt;
-	static int[] end;
+	public static int[] end;
 
 	public static WBP tw(K4 k)
 	{
