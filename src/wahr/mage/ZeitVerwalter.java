@@ -24,16 +24,23 @@ public class ZeitVerwalter
 					long now = System.currentTimeMillis();
 					if(Staticf.writeFrameTime)
 						System.out.println("T " + (now - last) + " " + over);
+					//Dauer checken
 					if(over + now - last < Staticf.stdfms)
 					{
+						//Zu kurz
 						over = over + now - last - Staticf.stdfms;
 						if(over < -Staticf.stdfms)
+						{
+							schlaf(-over - Staticf.stdfms);
 							over = -Staticf.stdfms;
+						}
 					}
 					else if(over + now - last > Staticf.stdfms)
 					{
+						//Zu lang
 						if(fskp < Staticf.maxfskp)
 						{
+							//Frame skippen
 							skpf = true;
 							fskp++;
 							if(Staticf.writeFrameskips)
@@ -41,6 +48,7 @@ public class ZeitVerwalter
 							over = over + now - last - Staticf.stdfms;
 						}
 						else
+							//Lagt zu stark
 							over = 0;
 					}
 					else
@@ -49,6 +57,7 @@ public class ZeitVerwalter
 				}
 				else
 				{
+					//Hat keinen Fokus, warten
 					schlaf(Staticf.blcfms);
 					last = 0;
 					over = 0;
@@ -59,20 +68,25 @@ public class ZeitVerwalter
 				//Erstes Frame
 				skpf = true;
 				last = System.currentTimeMillis();
+				Staticf.last3 = System.currentTimeMillis();
 			}
 			if(okay)
 			{
+				//Hat Fokus
 				Staticf.last = System.currentTimeMillis();
 				Staticf.last2 = System.currentTimeMillis();
 				if(Hauptschleife.eingabe())
 					break;
+				//Haare laggen furchtbar
 				UIVerbunden.calculateH = !skpf;
 				Hauptschleife.logik();
 				if(!skpf)
 				{
+					//Noch nicht aufmalen
 					Hauptschleife.rendern();
 					new Thread()
 					{
+						//Hier wird aufgemalt
 						public void run()
 						{
 							if(!thd)
@@ -80,6 +94,9 @@ public class ZeitVerwalter
 								thd = true;
 								//Staticf.last2 = System.currentTimeMillis();
 								Hauptschleife.panelize();
+								if(Staticf.writeVisibleTime)
+									System.out.println("VIS: " + (System.currentTimeMillis() - Staticf.last3));
+								Staticf.last3 = System.currentTimeMillis();
 								thd = false;
 							}
 						}

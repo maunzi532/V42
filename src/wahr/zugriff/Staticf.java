@@ -8,9 +8,12 @@ public class Staticf
 
 	//Debug-Zeiten ausgeben an/aus
 	private static boolean sca = false;
+	//Debug-Zeiten in Threads ausgeben an/aus
+	private static boolean sca2 = false;
 	//Zeit an der sca gemessen werden soll
 	public static long last;
 	public static long last2;
+	public static long last3;
 
 	//Debug-Textausgabe
 	public static void sca(Object w)
@@ -21,7 +24,7 @@ public class Staticf
 
 	public static void sca2(Object w)
 	{
-		if(sca)
+		if(sca2)
 			System.out.println("		" + w.toString() + (System.currentTimeMillis() - last2));
 	}
 
@@ -43,6 +46,8 @@ public class Staticf
 	public static boolean writeFrameskips = false;
 	//Frameskips ausgeben
 	public static boolean writeFrameTime = false;
+	//Zeit zwischen sichtbaren Frames ausgeben
+	public static boolean writeVisibleTime = false;
 
 	public static void initialCharge()
 	{
@@ -95,6 +100,10 @@ public class Staticf
 						if(z != null)
 							sca = z;
 						break;
+					case "sca2":
+						if(z != null)
+							sca2 = z;
+						break;
 					case "writeKeyIndex":
 						if(z != null)
 							writeKeyIndex = z;
@@ -106,6 +115,10 @@ public class Staticf
 					case "writeFrameTime":
 						if(z != null)
 							writeFrameTime = z;
+						break;
+					case "writeVisibleTime":
+						if(z != null)
+							writeVisibleTime = z;
 						break;
 				}
 			}
@@ -145,6 +158,8 @@ public class Staticf
 	public static double xraywidth = 50;
 	//Speichergroesse
 	public static WBP wspg = new WBP(1, 1, 1, 1);
+	//ZP4C Relokalisierungsgeschwindigkeit
+	public static double zpSpeed = 1;
 
 	public static void charge2()
 	{

@@ -5,6 +5,9 @@ automaximize
 scaleX=560
 scaleY=560
 nnull=0.0001
-sca
+sca!
+sca2!
+writeKeyIndex!
 writeFrameskips!
 writeFrameTime!
+writeVisibleTime!

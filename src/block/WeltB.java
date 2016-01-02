@@ -102,30 +102,30 @@ public class WeltB
 						int block = gib(p);
 						if(opaque(block))
 						{
-							int blockG = gib(new WBP(a, b, c, di + 1));
-							int blockR = gib(new WBP(a, b, c, di - 1));
+							int blockR = gib(new WBP(a, b, c, di + 1));
+							int blockG = gib(new WBP(a, b, c, di - 1));
 							for(int i = 0; i < Koord.seiten.length; i++)
 								if(!opaque(gib(new WBP(a + Koord.seiten[i][0],
 										b + Koord.seiten[i][1], c + Koord.seiten[i][2], di))))
 								{
-									if(opaque(blockG))
-										BF2.atl(toR, flaeche(new WBP(a, b, c, di + 1), blockG, i, dddi, 1), kDreh, relativ);
 									if(opaque(blockR))
-										BF2.atl(toR, flaeche(new WBP(a, b, c, di - 1), blockR, i, -1, dddi - 1), kDreh, relativ);
+										BF2.atl(toR, flaeche(new WBP(a, b, c, di + 1), blockR, i, dddi, 1), kDreh, relativ);
+									if(opaque(blockG))
+										BF2.atl(toR, flaeche(new WBP(a, b, c, di - 1), blockG, i, -1, dddi - 1), kDreh, relativ);
 									BF2.atl(toR, flaeche(new WBP(a, b, c, di), block, i,
-											(!opaque(blockR)) ? -1 : dddi - 1,
-											(!opaque(blockG)) ? 1 : dddi), kDreh, relativ);
+											(!opaque(blockG)) ? -1 : dddi - 1,
+											(!opaque(blockR)) ? 1 : dddi), kDreh, relativ);
 								}
 						}
 						else
 						{
 							int blockA = gib(p);
-							int blockR = gib(new WBP(a, b, c, di - 1));
-							int blockG = gib(new WBP(a, b, c, di + 1));
+							int blockR = gib(new WBP(a, b, c, di + 1));
+							int blockG = gib(new WBP(a, b, c, di - 1));
 							if(!opaque(blockA))
 							{
 								long tn = tn(p);
-								D2 de = descr(p, blockA, blockR, blockG, tn);
+								D2 de = descr(p, blockA, blockG, blockR, tn);
 								if(de != null)
 									D2.atl(toR, de, kDreh, relativ);
 							}
@@ -185,19 +185,19 @@ public class WeltB
 		return -1;
 	}
 
-	private static D2 descr(WBP p, int block, int blockR, int blockG, long tn)
+	private static D2 descr(WBP p, int block, int bG, int bR, long tn)
 	{
 		boolean quad = d2Vis(p);
-		if(!opaque(blockR) && !opaque(blockG))
+		if(!opaque(bG) && !opaque(bR))
 		{
 			if(quad)
 				return new D2(true, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
 						null, Koord.wt2(p), tn);
 			return null;
 		}
-		String text = (opaque(blockR) ? "Rot: " + blockR : "") +
-				(opaque(blockR) && opaque(blockG) ? " " : "") +
-				(opaque(blockG) ? "Gn: " + blockG : "");
+		String text = (opaque(bG) ? "Gn: " + bG : "") +
+				(opaque(bG) && opaque(bR) ? " " : "") +
+				(opaque(bR) ? "Rot: " + bR : "");
 		if(quad || UIVerbunden.x4dization > 1)
 			return new D2(quad, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
 					text, Koord.wt2(p), tn);

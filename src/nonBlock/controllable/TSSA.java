@@ -109,8 +109,6 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 						}
 						fp.d = position.d;
 						grabRichtung = richtung;
-						if(richtung == 0 && approxRichtung() == 7)
-							richtung = 4;
 						focus = new Focus(this, 20, fp, Drehung.nDrehung((4 - richtung) * Math.PI / 2, 0));
 						Index.gibAlternateStandard("TSSA3LR").changeToThis(this);
 						return false;

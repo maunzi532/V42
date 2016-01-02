@@ -79,7 +79,8 @@ public class StandardAussehen extends AlternateStandard
 				}
 			}
 		}
-		la = Collections.max(numm) + 1;
+		//la = Collections.max(numm) + 1;
+		la = enhStart.get(enhStart.size() - 1);
 		linkeds = new Integer[la];
 		drehs = new Drehung[la];
 		lens = new Double[la];

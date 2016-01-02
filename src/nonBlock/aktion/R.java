@@ -6,7 +6,7 @@ public class R extends Aktion
 {
 	public static void summonR(NBD besitzer, int linA)
 	{
-		if(linA >= besitzer.elimit)
+		if(linA >= besitzer.linkAchsen.length)
 			return;
 		R r = new R(besitzer);
 		AlternateStandard std = besitzer.standard;

@@ -1,23 +1,23 @@
 Bug-Stufe
 		Windows Mausfokus Bug
 		Vermutlich Fensterrahmen Bug
-		MDAktion - Drehung anpassen
 		Block 0 nicht abbaubar
 		Boden-glitch
-		Block 3 hat kein aussehen
-		R - NullPointerException
+		Block 3 hat kein aussehen (Absturz)
 
 Stufe 1
-	N2 1
+	4D 1
+		H4D Ansicht
+		4D-Daten des aktuellen Felds anzeigen
 		D2 - Aussehen verbessern
 	Overlay 1
 		Texte ordentlich platzieren
-		4D-Daten des aktuellen Felds anzeigen
 	Animation 1
 		Sequenzen - Teleport
 		NBD - Idle Bewegung
 		Finde die Kopie - Geschafft-Sequenz
 	Movement 1
+		H4D beachten beim Kanten klettern
 	-	Der Move - Power und Abbrechen
 	-	Bewegung - Power
 	Gameplay 1
@@ -27,8 +27,6 @@ Stufe 1
 		TA2 - TA-Datei verbessern
 		Targeting-System - Markierung bewegen
 		Bildschirmelement - Eingabefeld
-	Code 1
-		ZeitVerwalter Code (der ist unlesbar)
 
 Stufe 2
 	Overlay 2
