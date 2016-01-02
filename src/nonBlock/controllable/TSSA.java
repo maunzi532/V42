@@ -253,6 +253,28 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 			return WeltB.tk2(p, richtung);
 	}
 
+	boolean kletterSeitlich(boolean richtung)
+	{
+		if(grabRichtung >= 0)
+		{
+			K4 p2 = new K4(focus.targetPosition);
+			int kR = (grabRichtung + (richtung ? 1 : 3)) % 4;
+			if(kR % 2 == 0)
+				p2.c += 3.2 * (1 - kR);
+			else
+				p2.a += 3.2 * (2 - kR);
+			p2.b -= 2;
+			if(WeltB.tk1(Koord.tw(p2), grabRichtung))
+			{
+				if(kR % 2 == 0)
+					focus.targetPosition.c += 0.2 * (1 - kR);
+				else
+					focus.targetPosition.a += 0.2 * (2 - kR);
+			}
+		}
+		return false;
+	}
+
 	public K4 lichtPosition()
 	{
 		return position;

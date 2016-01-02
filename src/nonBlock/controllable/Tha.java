@@ -204,6 +204,14 @@ public class Tha extends TSSA
 				}
 			}
 		}
+		if(command.equals("links"))
+		{
+			kletterSeitlich(false);
+		}
+		if(command.equals("rechts"))
+		{
+			kletterSeitlich(true);
+		}
 		if(command.equals("hinten"))
 		{
 			if(grabRichtung >= 0)

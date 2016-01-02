@@ -27,6 +27,10 @@ public class KController extends Controller
 			cmd.add("vorne");
 		if(TA2.keyStat[4] == 2)
 			cmd.add("hinten");
+		if(TA2.keyStat[1] > 0)
+			cmd.add("links");
+		if(TA2.keyStat[2] > 0)
+			cmd.add("rechts");
 		return cmd;
 	}
 
