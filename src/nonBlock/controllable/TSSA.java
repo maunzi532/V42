@@ -37,6 +37,37 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 			else
 				canInfl = new double[]{0.1, 0, 0.2, 0.1};
 		}
+		if(grabRichtung < 0)
+		{
+			if(achsen[67].dreh.wl < Staticf.nachDreh || achsen[67].dreh.wl > Math.PI * 2 - Staticf.nachDreh)
+			{
+				dreh.wl += achsen[67].dreh.wl;
+				achsen[67].dreh.wl = 0;
+			}
+			else if(achsen[67].dreh.wl > Math.PI)
+			{
+				dreh.wl -= Staticf.nachDreh;
+				achsen[67].dreh.wl += Staticf.nachDreh;
+				achsen[67].dreh.sichern();
+			}
+			else
+			{
+				dreh.wl += Staticf.nachDreh;
+				achsen[67].dreh.wl -= Staticf.nachDreh;
+				achsen[67].dreh.sichern();
+			}
+			dreh.sichern();
+		}
+		else
+		{
+			if(achsen[67].dreh.wl < Math.PI * 1.5 && achsen[67].dreh.wl > Math.PI * 0.5)
+			{
+				if(achsen[67].dreh.wl > Math.PI)
+					achsen[67].dreh.wl = Math.PI * 1.5;
+				else
+					achsen[67].dreh.wl = Math.PI * 0.5;
+			}
+		}
 		ArrayList<String> commands = control.giveCommands();
 		for(int i = 0; i < commands.size(); i++)
 			doCommand(commands.get(i));

@@ -30,6 +30,9 @@ public class Kamera extends NBD implements Controllable, Licht
 
 	public void kontrolle()
 	{
+		dreh.wl += achsen[0].dreh.wl;
+		dreh.sichern();
+		achsen[0].dreh.wl = 0;
 		ArrayList<String> commands = control.giveCommands();
 		for(int i = 0; i < commands.size(); i++)
 			doCommand(commands.get(i));

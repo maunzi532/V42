@@ -153,7 +153,7 @@ public class Hauptschleife
 		n2.physik.add(new ColBox(n2, 11, new EndScheibe(0.7), new EndScheibe(0.7), 1));
 		n2.physik.add(new ColBox(n2, 12, new EndScheibe(0.7), new EndScheibe(0.7), 1));
 		n2.physik.add(new ColBox(n2, 0, new EndEllipse(2.1, 1.4, 0), new EndEllipse(2.1, 1.4, 0), 1));
-		n.aktionen.add(new Sicht(n, 10, 67, false));
+		n.aktionen.add(new Sicht(n, 10, 67, 67, false));
 		UIVerbunden.zp = new ZP4C(n, 0);
 		n.aktionen.add(UIVerbunden.zp);
 		WeltND.licht.add(n);
@@ -167,7 +167,7 @@ public class Hauptschleife
 		UIVerbunden.godModeKam.aussehen.reload();
 		UIVerbunden.godModeKam.elimit = 1;
 		UIVerbunden.godModeKam.init();
-		UIVerbunden.godModeKam.aktionen.add(new Sicht(UIVerbunden.godModeKam, 10, 0, true));
+		UIVerbunden.godModeKam.aktionen.add(new Sicht(UIVerbunden.godModeKam, 10, 0, 0, true));
 		try
 		{
 			UIVerbunden.ro = new Robot();

@@ -160,6 +160,8 @@ public class Staticf
 	public static WBP wspg = new WBP(1, 1, 1, 1);
 	//ZP4C Relokalisierungsgeschwindigkeit
 	public static double zpSpeed = 1;
+	//Drehgeschwindigkeit
+	public static double nachDreh = 0.1;
 
 	public static void charge2()
 	{
