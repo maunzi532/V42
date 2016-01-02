@@ -11,6 +11,7 @@ public class D2 extends N2
 {
 	private final String text;
 	private final boolean quadrat;
+	private final Boolean dSide;
 	private int xe;
 	private int ye;
 	private int scale;
@@ -21,10 +22,11 @@ public class D2 extends N2
 		al.add(d2);
 	}
 
-	public D2(boolean quadrat, XFarbe farbe, String text, K4 mid, long tn)
+	public D2(boolean quadrat, Boolean dSide, XFarbe farbe, String text, K4 mid, long tn)
 	{
 		block = true;
 		this.quadrat = quadrat;
+		this.dSide = dSide;
 		this.farbe = farbe;
 		this.text = text;
 		this.mid = mid;
@@ -52,9 +54,24 @@ public class D2 extends N2
 		if(quadrat)
 		{
 			int r = scale * 2;
-			int[] xp = new int[]{xe - r, xe, xe + r, xe};
-			int[] yp = new int[]{ye, ye - r, ye, ye + r};
-			darkCopy.fillPolygon(xp, yp, 4);
+			int[] xp;
+			int[] yp;
+			if(dSide == null)
+			{
+				xp = new int[]{xe - r, xe, xe + r, xe};
+				yp = new int[]{ye, ye - r, ye, ye + r};
+			}
+			else if(dSide)
+			{
+				xp = new int[]{xe - r, xe, xe};
+				yp = new int[]{ye, ye - r, ye + r};
+			}
+			else
+			{
+				xp = new int[]{xe, xe + r, xe};
+				yp = new int[]{ye - r, ye, ye + r};
+			}
+			darkCopy.fillPolygon(xp, yp, dSide != null ? 3 : 4);
 		}
 	}
 
@@ -65,17 +82,38 @@ public class D2 extends N2
 		if(quadrat)
 		{
 			int r = scale * 2;
-			int[] xp = new int[]{xe - r, xe, xe + r, xe};
-			int[] yp = new int[]{ye, ye - r, ye, ye + r};
-			pa.gd.fillPolygon(xp, yp, 4);
+			int[] xp;
+			int[] yp;
+			if(dSide == null)
+			{
+				xp = new int[]{xe - r, xe, xe + r, xe};
+				yp = new int[]{ye, ye - r, ye, ye + r};
+			}
+			else if(dSide)
+			{
+				xp = new int[]{xe, xe + r, xe};
+				yp = new int[]{ye - r, ye, ye + r};
+			}
+			else
+			{
+				xp = new int[]{xe - r, xe, xe};
+				yp = new int[]{ye, ye - r, ye + r};
+			}
+			pa.gd.fillPolygon(xp, yp, dSide != null ? 3 : 4);
 		}
 		if(text != null)
 		{
 			int w = text.length() * scale / 3;
 			int h = scale / 2;
-			pa.gd.fillRect(xe - w, ye - h, w * 2, h * 2);
+			int h2 = 0;
+			if(dSide != null)
+				h2 = h * (dSide ? 1 : -1);
+			int w2 = 0;
+			if(dSide != null)
+				w2 = w * (dSide ? 1 : -1);
+			pa.gd.fillRect(xe - w + w2, ye - h + h2, w * 2, h * 2);
 			pa.gd.setPaint(Color.WHITE);
-			pa.gd.drawString(text, xe - w + scale / 8, ye + h - scale / 8);
+			pa.gd.drawString(text, xe - w + w2 + scale / 8, ye + h + h2 - scale / 8);
 		}
 	}
 }

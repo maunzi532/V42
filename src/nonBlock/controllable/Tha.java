@@ -1,6 +1,7 @@
 package nonBlock.controllable;
 
 import ansicht.*;
+import block.*;
 import nonBlock.aussehen.*;
 import nonBlock.*;
 import nonBlock.aktion.*;
@@ -188,7 +189,19 @@ public class Tha extends TSSA
 						break;
 					}
 				if(can)
-					attemptAirgrab(0);
+				{
+					if(attemptAirgrab(0, position))
+					{
+						if(position.d - Koord.intiize(position.d / Koord.weltBlock.d) *
+								Koord.weltBlock.d < Staticf.zpSpeed)
+							attemptAirgrab(0, new K4(position.a, position.b, position.c,
+									position.d - Staticf.zpSpeed));
+						if(position.d - Koord.intiize(position.d / Koord.weltBlock.d) *
+								Koord.weltBlock.d > Koord.weltBlock.d - Staticf.zpSpeed)
+							attemptAirgrab(0, new K4(position.a, position.b, position.c,
+									position.d + Staticf.zpSpeed));
+					}
+				}
 			}
 		}
 		if(command.equals("hinten"))

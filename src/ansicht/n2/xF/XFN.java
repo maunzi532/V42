@@ -17,6 +17,8 @@ public class XFN extends XFarbe
 
 	public Paint gibFarb(N2 n)
 	{
-		return anpassen(n, farb);
+		if(n instanceof F2)
+			return anpassen((F2)n, farb);
+		return farb;
 	}
 }

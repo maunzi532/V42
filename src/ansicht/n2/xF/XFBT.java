@@ -52,7 +52,7 @@ public class XFBT extends XFN
 	{
 		F2 f = (F2) n;
 		if(f.spld <= 0 || !farben.containsKey(f.spld))
-			return anpassen(n, farb);
+			return super.gibFarb(n);
 		else
 			return farben.get(f.spld)[f.splseed].gibFarb(n);
 	}

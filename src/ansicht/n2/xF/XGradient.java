@@ -19,7 +19,9 @@ public class XGradient extends XFarbe
 
 	public Paint gibFarb(N2 n)
 	{
-		return new GradientPaint(n.xse[s1], n.yse[s1], anpassen(n, f1),
-				n.xse[s2], n.yse[s2], anpassen(n, f2));
+		if(n instanceof F2)
+			return new GradientPaint(n.xse[s1], n.yse[s1], anpassen((F2)n, f1),
+					n.xse[s2], n.yse[s2], anpassen((F2)n, f2));
+		throw new RuntimeException("Nur F2 haben Gradienten");
 	}
 }

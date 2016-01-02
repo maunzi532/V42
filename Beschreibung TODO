@@ -7,7 +7,6 @@ Bug-Stufe
 
 Stufe 1
 	4D 1
-		H4D Ansicht
 		4D-Daten des aktuellen Felds anzeigen
 		D2 - Aussehen verbessern
 	Overlay 1
@@ -17,7 +16,6 @@ Stufe 1
 		NBD - Idle Bewegung
 		Finde die Kopie - Geschafft-Sequenz
 	Movement 1
-		H4D beachten beim Kanten klettern
 	-	Der Move - Power und Abbrechen
 	-	Bewegung - Power
 	Gameplay 1

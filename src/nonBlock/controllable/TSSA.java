@@ -73,12 +73,12 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 		return 7 - (int)(Drehung.sichern(dreh.wl) * 4 / Math.PI);
 	}
 
-	boolean attemptAirgrab(int type)
+	boolean attemptAirgrab(int type, K4 dlPosition)
 	{
 		if(grabRichtung < 0 && !boden)
 		{
-			WBP p = Koord.tw(position);
-			K4 dif = K4.diff(Koord.wt(p), position);
+			WBP p = Koord.tw(dlPosition);
+			K4 dif = K4.diff(Koord.wt(p), dlPosition);
 			if(dif.b < Koord.weltBlock.b - 4 || dif.b > Koord.weltBlock.b)
 			{
 				if(dif.b < 4)
@@ -100,15 +100,17 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 						if(richtung % 2 == 0)
 						{
 							fp.c += (Koord.weltBlock.c / 2 - 3.6) * (1 - richtung);
-							fp.a = position.a;
+							fp.a = dlPosition.a;
 						}
 						else
 						{
 							fp.a += (Koord.weltBlock.a / 2 - 3.6) * (2 - richtung);
-							fp.c = position.c;
+							fp.c = dlPosition.c;
 						}
-						fp.d = position.d;
+						fp.d = dlPosition.d;
 						grabRichtung = richtung;
+						if(approxRichtung() == 7)
+							richtung = 4;
 						focus = new Focus(this, 20, fp, Drehung.nDrehung((4 - richtung) * Math.PI / 2, 0));
 						Index.gibAlternateStandard("TSSA3LR").changeToThis(this);
 						return false;

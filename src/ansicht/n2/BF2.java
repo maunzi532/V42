@@ -144,7 +144,7 @@ public class BF2 extends F2
 			ecken = sple;
 			return;
 		}
-		if(rdcd > 0)
+		if(rdcd >= 0)
 		{
 			if(gdcd >= 1)
 			{
@@ -161,7 +161,7 @@ public class BF2 extends F2
 			ecken[3] = scseite(sple[3], sple[2], gdcd);
 			return;
 		}
-		if(gdcd < 0)
+		if(gdcd <= 0)
 		{
 			if(rdcd <= -1)
 			{

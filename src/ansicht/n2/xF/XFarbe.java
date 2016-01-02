@@ -34,7 +34,7 @@ public abstract class XFarbe
 				splN[(f.splseed % Staticf.seedifier)]) % Staticf.seedifier)) / (double)Staticf.seedifier;
 	}
 
-	static Color anpassen(N2 n, Color fc)
+	static Color anpassen(F2 n, Color fc)
 	{
 		if(n.ddiff > 0)
 			fc = limit(fc, (int)(n.ddiff * 10), (int)(n.ddiff * -5), (int)(n.ddiff * -5));
@@ -50,30 +50,26 @@ public abstract class XFarbe
 				(int)(fc.getBlue() * weg2 + 0 * (1 - weg2)), fc.getAlpha());
 	}
 
-	private static Color shade(Color fc, N2 n)
+	private static Color shade(Color fc, F2 f)
 	{
 		double power = -255;
 		for(int i = 0; i < WeltND.licht.size(); i++)
 		{
-			if(n instanceof F2)
-			{
-				F2 f = (F2) n;
-				K4 lr = K4.diff(WeltND.licht.get(i).lichtPosition(), f.mid1());
-				/*if(true)
-					return limit(fc, (int) (1 / Math.abs(lr.a) * -100),
-							(int) (1 / Math.abs(lr.b) * -100), (int) (1 / Math.abs(lr.c) * -100));*/
-				double ld = Math.sqrt(lr.a * lr.a + lr.b * lr.b + lr.c * lr.c);
-				/*if(true)
-					return limit(fc, (int) (ld * -1), (int) (ld * -1), 0);*/
-				if(ld > WeltND.licht.get(i).lichtRange())
-					continue;
-				double pow = WeltND.licht.get(i).lichtPower();
-				pow -= ld * WeltND.licht.get(i).lichtPowerDecay();
-				if(f.eckenNK != null)
-					pow -= shadeWinkel(f, WeltND.licht.get(i).lichtPosition()) * 40;
-				if(pow > power)
-					power = pow;
-			}
+			K4 lr = K4.diff(WeltND.licht.get(i).lichtPosition(), f.mid1());
+			/*if(true)
+				return limit(fc, (int) (1 / Math.abs(lr.a) * -100),
+						(int) (1 / Math.abs(lr.b) * -100), (int) (1 / Math.abs(lr.c) * -100));*/
+			double ld = Math.sqrt(lr.a * lr.a + lr.b * lr.b + lr.c * lr.c);
+			/*if(true)
+				return limit(fc, (int) (ld * -1), (int) (ld * -1), 0);*/
+			if(ld > WeltND.licht.get(i).lichtRange())
+				continue;
+			double pow = WeltND.licht.get(i).lichtPower();
+			pow -= ld * WeltND.licht.get(i).lichtPowerDecay();
+			if(f.eckenNK != null)
+				pow -= shadeWinkel(f, WeltND.licht.get(i).lichtPosition()) * 40;
+			if(pow > power)
+				power = pow;
 		}
 		return limit(fc, (int)power, (int)power, (int)power);
 	}

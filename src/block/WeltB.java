@@ -89,11 +89,12 @@ public class WeltB
 						else if(d2Vis(p))
 						{
 							long tn = tn(p);
-							D2.atl(toR, new D2(true, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
+							D2.atl(toR, new D2(true, null, new XFN(new Color(0, 0, 100)),
 									null, Koord.wt2(p), tn), kDreh, relativ);
 						}
 					}
-		else
+		else if(dddi > 0.25 && dddi < 0.75)
+		{
 			for(int a = kaw0.k[0]; a < kawEnd.k[0]; a++)
 				for(int b = kaw0.k[1]; b < kawEnd.k[1]; b++)
 					for(int c = kaw0.k[2]; c < kawEnd.k[2]; c++)
@@ -109,9 +110,11 @@ public class WeltB
 										b + Koord.seiten[i][1], c + Koord.seiten[i][2], di))))
 								{
 									if(opaque(blockR))
-										BF2.atl(toR, flaeche(new WBP(a, b, c, di + 1), blockR, i, dddi, 1), kDreh, relativ);
+										BF2.atl(toR, flaeche(new WBP(a, b, c, di + 1), blockR, i, dddi, 1),
+												kDreh, relativ);
 									if(opaque(blockG))
-										BF2.atl(toR, flaeche(new WBP(a, b, c, di - 1), blockG, i, -1, dddi - 1), kDreh, relativ);
+										BF2.atl(toR, flaeche(new WBP(a, b, c, di - 1), blockG, i, -1, dddi - 1),
+												kDreh, relativ);
 									BF2.atl(toR, flaeche(new WBP(a, b, c, di), block, i,
 											(!opaque(blockG)) ? -1 : dddi - 1,
 											(!opaque(blockR)) ? 1 : dddi), kDreh, relativ);
@@ -119,18 +122,74 @@ public class WeltB
 						}
 						else
 						{
-							int blockA = gib(p);
 							int blockR = gib(new WBP(a, b, c, di + 1));
 							int blockG = gib(new WBP(a, b, c, di - 1));
-							if(!opaque(blockA))
+							if(!opaque(gib(p)))
 							{
 								long tn = tn(p);
-								D2 de = descr(p, blockA, blockG, blockR, tn);
-								if(de != null)
-									D2.atl(toR, de, kDreh, relativ);
+								D2 der = descr(p, blockR, false, true, tn);
+								if(der != null)
+									D2.atl(toR, der, kDreh, relativ);
+								D2 deg = descr(p, blockG, true, true, tn);
+								if(deg != null)
+									D2.atl(toR, deg, kDreh, relativ);
 							}
 						}
 					}
+		}
+		else
+		{
+			if(dddi < 0.5)
+				di--;
+			else
+				dddi--;
+			for(int a = kaw0.k[0]; a < kawEnd.k[0]; a++)
+				for(int b = kaw0.k[1]; b < kawEnd.k[1]; b++)
+					for(int c = kaw0.k[2]; c < kawEnd.k[2]; c++)
+					{
+						WBP pG = new WBP(a, b, c, di);
+						WBP pR = new WBP(a, b, c, di + 1);
+						int blockG = gib(pG);
+						int blockR = gib(pR);
+						if(opaque(blockR) || opaque(blockG))
+						{
+							for(int i = 0; i < Koord.seiten.length; i++)
+							{
+								if(!opaque(gib(new WBP(a + Koord.seiten[i][0],
+										b + Koord.seiten[i][1], c + Koord.seiten[i][2], di))) && opaque(blockG))
+									BF2.atl(toR, flaeche(new WBP(pG), blockG, i, -1, dddi), kDreh, relativ);
+								if(!opaque(gib(new WBP(a + Koord.seiten[i][0],
+										b + Koord.seiten[i][1], c + Koord.seiten[i][2], di + 1))) && opaque(blockR))
+									BF2.atl(toR, flaeche(new WBP(pR), blockR, i, dddi, 1), kDreh, relativ);
+							}
+						}
+						if(!opaque(blockR) && !opaque(blockG))
+						{
+							int blockR2 = gib(new WBP(a, b, c, di + 2));
+							int blockG2 = gib(new WBP(a, b, c, di - 1));
+							D2 der = descr(pG, blockR2, false, true, tn(pG));
+							if(der != null)
+								D2.atl(toR, der, kDreh, relativ);
+							D2 deg = descr(pG, blockG2, true, true, tn(pR));
+							if(deg != null)
+								D2.atl(toR, deg, kDreh, relativ);
+						}
+						else if(!opaque(blockR))
+						{
+							int blockG2 = gib(new WBP(a, b, c, di - 1));
+							D2 deg = descr(pG, blockG2, true, true, tn(pG));
+							if(deg != null)
+								D2.atl(toR, deg, kDreh, relativ);
+						}
+						else if(!opaque(blockG))
+						{
+							int blockR2 = gib(new WBP(a, b, c, di + 2));
+							D2 der = descr(pG, blockR2, false, true, tn(pR));
+							if(der != null)
+								D2.atl(toR, der, kDreh, relativ);
+						}
+					}
+		}
 		return toR;
 	}
 
@@ -185,24 +244,21 @@ public class WeltB
 		return -1;
 	}
 
-	private static D2 descr(WBP p, int block, int bG, int bR, long tn)
+	private static D2 descr(WBP p, int b, boolean g, boolean other, long tn)
 	{
 		boolean quad = d2Vis(p);
-		if(!opaque(bG) && !opaque(bR))
+		if(!opaque(b))
 		{
 			if(quad)
-				return new D2(true, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
+				return new D2(true, other ? g : null, new XFN(new Color(0, 0, 100)),
 						null, Koord.wt2(p), tn);
 			return null;
 		}
-		String text = (opaque(bG) ? "Gn: " + bG : "") +
-				(opaque(bG) && opaque(bR) ? " " : "") +
-				(opaque(bR) ? "Rot: " + bR : "");
-		if(quad || UIVerbunden.x4dization > 1)
-			return new D2(quad, new XFN(new Color(100, 100, block > 1 ? 255 : 100)),
-					text, Koord.wt2(p), tn);
-		else
-			return null;
+		String text = null;
+		if(opaque(b))
+			text = (g ? "Gn: " : "Rot: ") + b;
+		return new D2(quad, g, new XFN(new Color(!g ? 255 : 0, g ? 255 : 0, 0)),
+				text, Koord.wt2(p), tn);
 	}
 
 	public static boolean d2Vis(WBP p)
