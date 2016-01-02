@@ -23,7 +23,7 @@ public class TBox extends SLF
 		}
 	}
 
-	public void onClick(boolean r)
+	public void onClick(boolean r, double cx, double cy)
 	{
 		clicked = true;
 		main.layer.remove(this);

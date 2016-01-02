@@ -12,9 +12,9 @@ public abstract class External
 	public int axn;
 	public int anfang;
 	public int laenge;
-	protected K4 inmid;
-	protected Drehung dmid;
-	protected K4[][] into1;
+	K4 inmid;
+	Drehung dmid;
+	K4[][] into1;
 
 	public abstract void entLink(Drehung mDreh, K4 mPos);
 

@@ -4,7 +4,7 @@ import wahr.zugriff.*;
 
 import java.util.*;
 
-public class MPSF
+class MPSF
 {
 	MPS sup;
 	K4 ort;

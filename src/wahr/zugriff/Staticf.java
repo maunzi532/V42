@@ -157,11 +157,11 @@ public class Staticf
 	//Weite des X-Ray-Modus
 	public static double xraywidth = 50;
 	//Speichergroesse
-	public static WBP wspg = new WBP(1, 1, 1, 1);
+	public static final WBP wspg = new WBP(1, 1, 1, 1);
 	//ZP4C Relokalisierungsgeschwindigkeit
-	public static double zpSpeed = 1;
+	public static final double zpSpeed = 1;
 	//Drehgeschwindigkeit
-	public static double nachDreh = 0.1;
+	public static final double nachDreh = 0.1;
 
 	public static void charge2()
 	{

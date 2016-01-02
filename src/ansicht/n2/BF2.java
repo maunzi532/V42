@@ -7,9 +7,9 @@ import java.util.*;
 
 public class BF2 extends F2
 {
-	public final int seitenwand;
-	public double rend;
-	public double gend;
+	private final int seitenwand;
+	private final double rend;
+	private final double gend;
 	public K4 midsp;
 
 	public static void atl(ArrayList al, BF2 f2, Drehung kDreh, K4 relativ)
@@ -207,7 +207,7 @@ public class BF2 extends F2
 		ecken[5] = scseite(sple[3], sple[2], gdcd);
 	}
 
-	public static K4 scseite(K4 sm, K4 se, double faktor)
+	private static K4 scseite(K4 sm, K4 se, double faktor)
 	{
 		if(faktor < 0)
 			faktor = -faktor;
@@ -215,7 +215,7 @@ public class BF2 extends F2
 				sm.c * (1 - faktor) + se.c * faktor, sm.d * (1 - faktor) + se.d * faktor);
 	}
 
-	public boolean anz()
+	private boolean anz()
 	{
 		boolean a = false;
 		for(int i = 0; i < spken.length; i++)

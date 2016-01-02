@@ -33,12 +33,12 @@ public class SchalterLayer
 		return (int)(UIVerbunden.sc.height * multiplikator);
 	}
 
-	public double nmw(double multiplikator)
+	private double nmw(double multiplikator)
 	{
 		return multiplikator / UIVerbunden.sc.width;
 	}
 
-	public double nmh(double multiplikator)
+	private double nmh(double multiplikator)
 	{
 		return multiplikator / UIVerbunden.sc.height;
 	}

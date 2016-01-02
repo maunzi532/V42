@@ -7,7 +7,7 @@ public class Focus
 	private final NonBlock the;
 	int focusTime;
 	public K4 targetPosition;
-	public Drehung targetDreh;
+	Drehung targetDreh;
 
 	public Focus(NonBlock the, int focusTime, K4 targetPosition, Drehung targetDreh)
 	{

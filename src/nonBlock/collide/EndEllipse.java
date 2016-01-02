@@ -4,9 +4,9 @@ import wahr.zugriff.*;
 
 public class EndEllipse implements End3
 {
-	double ra;
-	double rc;
-	double rd;
+	private final double ra;
+	private final double rc;
+	private final double rd;
 
 	public EndEllipse(double ra, double rc, double rd)
 	{

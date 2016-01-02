@@ -2,7 +2,7 @@ package block.generierung;
 
 import java.util.*;
 
-public class TestGenerator extends Generator
+class TestGenerator extends Generator
 {
 	int[][][][] generiere()
 	{

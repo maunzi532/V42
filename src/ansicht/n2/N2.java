@@ -13,18 +13,11 @@ public abstract class N2
 	boolean block;
 	public K4 mid;
 	public long tn;
-	public Paint dFarb;
+	Paint dFarb;
 	public double ddiff;
 
 	public int[] xse;
 	public int[] yse;
-
-	public boolean anzeigen()
-	{
-		return mid != null && mid.c >= 0 &&
-				mid.a * mid.a + mid.b * mid.b + mid.c * mid.c < Staticf.sicht * Staticf.sicht &&
-				mid.d > -Staticf.sichtd && mid.d < Staticf.sichtd;
-	}
 
 	public void farbe_flaeche()
 	{

@@ -127,10 +127,10 @@ public class WeltB
 							if(!opaque(gib(p)))
 							{
 								long tn = tn(p);
-								D2 der = descr(p, blockR, false, true, tn);
+								D2 der = descr(p, blockR, false, tn);
 								if(der != null)
 									D2.atl(toR, der, kDreh, relativ);
-								D2 deg = descr(p, blockG, true, true, tn);
+								D2 deg = descr(p, blockG, true, tn);
 								if(deg != null)
 									D2.atl(toR, deg, kDreh, relativ);
 							}
@@ -167,24 +167,24 @@ public class WeltB
 						{
 							int blockR2 = gib(new WBP(a, b, c, di + 2));
 							int blockG2 = gib(new WBP(a, b, c, di - 1));
-							D2 der = descr(pG, blockR2, false, true, tn(pG));
+							D2 der = descr(pG, blockR2, false, tn(pG));
 							if(der != null)
 								D2.atl(toR, der, kDreh, relativ);
-							D2 deg = descr(pG, blockG2, true, true, tn(pR));
+							D2 deg = descr(pG, blockG2, true, tn(pR));
 							if(deg != null)
 								D2.atl(toR, deg, kDreh, relativ);
 						}
 						else if(!opaque(blockR))
 						{
 							int blockG2 = gib(new WBP(a, b, c, di - 1));
-							D2 deg = descr(pG, blockG2, true, true, tn(pG));
+							D2 deg = descr(pG, blockG2, true, tn(pG));
 							if(deg != null)
 								D2.atl(toR, deg, kDreh, relativ);
 						}
 						else if(!opaque(blockG))
 						{
 							int blockR2 = gib(new WBP(a, b, c, di + 2));
-							D2 der = descr(pG, blockR2, false, true, tn(pR));
+							D2 der = descr(pG, blockR2, false, tn(pR));
 							if(der != null)
 								D2.atl(toR, der, kDreh, relativ);
 						}
@@ -244,13 +244,13 @@ public class WeltB
 		return -1;
 	}
 
-	private static D2 descr(WBP p, int b, boolean g, boolean other, long tn)
+	private static D2 descr(WBP p, int b, boolean g, long tn)
 	{
 		boolean quad = d2Vis(p);
 		if(!opaque(b))
 		{
 			if(quad)
-				return new D2(true, other ? g : null, new XFN(new Color(0, 0, 100)),
+				return new D2(true, g, new XFN(new Color(0, 0, 100)),
 						null, Koord.wt2(p), tn);
 			return null;
 		}
@@ -261,7 +261,7 @@ public class WeltB
 				text, Koord.wt2(p), tn);
 	}
 
-	public static boolean d2Vis(WBP p)
+	private static boolean d2Vis(WBP p)
 	{
 		if(UIVerbunden.d2tangibility == 1)
 		{

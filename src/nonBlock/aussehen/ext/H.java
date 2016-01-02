@@ -12,15 +12,15 @@ public class H extends External
 {
 	private final double w;
 	private final double h;
-	protected final int wt;
+	private final int wt;
 	private final int ht;
 	final LinkAchse[][][] h2;
 	final Achse[][][] h2a;
-	final K4[][] punkte;
-	final K4[][] punkteK;
+	private final K4[][] punkte;
+	private final K4[][] punkteK;
 	final int nlen;
 	private final int[][] seeds;
-	Random r;
+	private final Random r;
 
 	public H(double w, double h, int wt, int ht, int nlen,
 			double wwl, double hwl, double len)

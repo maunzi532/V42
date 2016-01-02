@@ -20,7 +20,7 @@ public class Hauptschleife
 {
 	private static TSSA n;
 	private static TSSA n2;
-	public static Zeichner z;
+	private static Zeichner z;
 	private static N2[] n2s2;
 
 	public static void init()

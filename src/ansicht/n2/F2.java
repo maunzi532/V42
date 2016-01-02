@@ -15,9 +15,9 @@ public abstract class F2 extends N2
 	public int seed;
 	public int splseed;
 
-	protected int[] xe;
-	protected int[] ye;
-	protected double avkh2;
+	private int[] xe;
+	private int[] ye;
+	double avkh2;
 
 	public abstract void mid();
 

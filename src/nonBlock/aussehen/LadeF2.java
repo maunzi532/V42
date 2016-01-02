@@ -6,9 +6,9 @@ import java.util.*;
 
 public class LadeF2
 {
-	public ArrayList<Integer> ecken1;
+	public final ArrayList<Integer> ecken1;
 	public final ArrayList<Integer> ecken2;
-	public ArrayList<Boolean> ecken3;
+	public final ArrayList<Boolean> ecken3;
 	public final ArrayList<Integer> spken1;
 	public final ArrayList<Integer> spken2;
 	public final ArrayList<Boolean> spken3;

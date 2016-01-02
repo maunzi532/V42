@@ -6,8 +6,10 @@ import java.awt.*;
 
 public class XGradient extends XFarbe
 {
-	Color f1, f2;
-	int s1, s2;
+	private final Color f1;
+	private final Color f2;
+	private final int s1;
+	private final int s2;
 
 	public XGradient(Color f1, int s1, Color f2, int s2)
 	{

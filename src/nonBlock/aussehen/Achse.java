@@ -5,7 +5,7 @@ import wahr.zugriff.*;
 public class Achse
 {
 	public final K4 start;
-	public Drehung dreh;
+	public final Drehung dreh;
 	public final double len;
 	public final double spin;
 	public final double dShift;

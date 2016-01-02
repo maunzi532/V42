@@ -105,7 +105,7 @@ public abstract class XFarbe
 		return d1 < d2 ? d1 : d2;
 	}
 
-	public static Color farbCode(String code)
+	static Color farbCode(String code)
 	{
 		String[] cx1 = code.split("-");
 		switch(cx1.length)

@@ -4,7 +4,7 @@ import wahr.zugriff.*;
 
 public class EndScheibe implements End3
 {
-	double radius;
+	private final double radius;
 
 	public EndScheibe(double radius)
 	{

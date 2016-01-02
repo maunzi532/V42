@@ -92,7 +92,7 @@ public class NF2 extends F2
 		return new K4(nmid.a / durch, nmid.b / durch, nmid.c / durch, nmid.d / durch);
 	}
 
-	public boolean anz()
+	private boolean anz()
 	{
 		boolean a = false;
 		for(int i = 0; i < ecken.length; i++)

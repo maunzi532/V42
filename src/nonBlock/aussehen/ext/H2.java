@@ -1,7 +1,6 @@
 package nonBlock.aussehen.ext;
 
 import nonBlock.collide.*;
-import wahr.zugriff.*;
 
 public class H2 extends H
 {
@@ -11,11 +10,6 @@ public class H2 extends H
 	{
 		super(w, h, wt, ht, nlen, wwl, hwl, len);
 		this.main3 = main3;
-	}
-
-	public void entLink(Drehung mDreh, K4 mPos)
-	{
-		super.entLink(mDreh, mPos);
 	}
 
 	public void tick()

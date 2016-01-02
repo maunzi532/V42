@@ -5,13 +5,13 @@ import java.awt.*;
 public class Schieber extends SLF
 {
 	public double shift;
-	public double shiftm;
-	public double startw;
+	public final double shiftm;
+	public final double startw;
 
-	public Schieber(SchalterLayer main, boolean tangible, double x, double y, double w, double h,
+	public Schieber(SchalterLayer main, double x, double y, double w, double h,
 			double startw, double endw, double init)
 	{
-		super(main, tangible, x, y, w, h);
+		super(main, true, x, y, w, h);
 		this.startw = startw;
 		shiftm = endw - startw;
 		shift = (init - startw) / shiftm;
@@ -42,6 +42,4 @@ public class Schieber extends SLF
 		shift = cx;
 		super.onClick(r, cx, cy);
 	}
-
-	public void tick(){}
 }
