@@ -91,13 +91,13 @@ public class D2 extends N2
 			}
 			else if(dSide)
 			{
-				xp = new int[]{xe, xe + r, xe};
-				yp = new int[]{ye - r, ye, ye + r};
+				xp = new int[]{xe - r, xe, xe};
+				yp = new int[]{ye, ye - r, ye + r};
 			}
 			else
 			{
-				xp = new int[]{xe - r, xe, xe};
-				yp = new int[]{ye, ye - r, ye + r};
+				xp = new int[]{xe, xe + r, xe};
+				yp = new int[]{ye - r, ye, ye + r};
 			}
 			pa.gd.fillPolygon(xp, yp, dSide != null ? 3 : 4);
 		}
