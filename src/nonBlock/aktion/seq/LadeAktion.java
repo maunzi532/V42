@@ -49,6 +49,9 @@ class LadeAktion
 			case "Alt":
 				typ = 6;
 				break;
+			case "TP":
+				typ = 7;
+				break;
 			default:
 				typ = -1;
 		}
@@ -143,11 +146,8 @@ class LadeAktion
 				Freeze.checkLinA(besitzer, fm);
 				break;
 			case 2:
-				TBox st = new TBox(Overlay.sl, false, 0.2, 0.8, 0.1, 0.1, text);
-				Overlay.sl.layer.add(st);
-				break;
 			case 3:
-				TBox st2 = new TBox(Overlay.sl, true, 0.2, 0.8, 0.1, 0.1, text);
+				TBox st2 = new TBox(Overlay.sl, typ == 3, 0.2, 0.8, 0.1, 0.1, text);
 				Overlay.sl.layer.add(st2);
 				return st2;
 			case 4:
@@ -165,7 +165,33 @@ class LadeAktion
 			case 6:
 				Index.gibAlternateStandard(text).changeToThis(besitzer);
 				break;
+			case 7:
+				tp(besitzer, mvd, mvd2);
 		}
 		return null;
+	}
+
+	public void tp(NBD target, double[] mvd, Boolean[] mvdA)
+	{
+		double[] mvd0 = new double[]{target.position.a, target.position.b,
+				target.position.c, target.position.d, target.dreh.wl, target.dreh.wb};
+		double[] mvdT = new double[6];
+		for(int i = 0; i < 6; i++)
+			if(mvdA[i] != null)
+			{
+				if(mvdA[i])
+					mvdT[i] = mvd[i];
+				else
+					mvdT[i] = mvd0[i] + mvd[i];
+			}
+		mvdT[4] = Drehung.sichern(mvdT[4]);
+		mvdT[5] = Drehung.sichern(mvdT[5]);
+		target.position.a = mvdT[0];
+		target.position.b = mvdT[1];
+		target.position.c = mvdT[2];
+		target.position.d = mvdT[3];
+		target.dreh.wl = mvdT[4];
+		target.dreh.wb = mvdT[5];
+		target.forced.add(new Forced(new K4(), 10));
 	}
 }

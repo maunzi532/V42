@@ -3,7 +3,7 @@ package nonBlock.aktion;
 import ansicht.*;
 import wahr.zugriff.*;
 
-public class Sicht extends Aktion
+public class Sicht extends LinAAktion
 {
 	private final int linAl;
 	private final int linAb;

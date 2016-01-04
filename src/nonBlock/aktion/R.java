@@ -2,7 +2,7 @@ package nonBlock.aktion;
 
 import nonBlock.aussehen.*;
 
-public class R extends Aktion
+public class R extends LinAAktion
 {
 	public static void summonR(NBD besitzer, int linA)
 	{

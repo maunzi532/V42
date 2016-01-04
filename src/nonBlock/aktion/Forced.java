@@ -5,8 +5,8 @@ import wahr.zugriff.*;
 public class Forced
 {
 	boolean[] affected;
-	int power;
 	K4 movement;
+	int power;
 
 	public Forced(boolean[] affected, K4 movement, int power)
 	{
@@ -15,7 +15,7 @@ public class Forced
 		this.power = power;
 	}
 
-	public Forced(int power, K4 movement)
+	public Forced(K4 movement, int power)
 	{
 		affected = new boolean[]{true, true, true, true};
 		this.power = power;

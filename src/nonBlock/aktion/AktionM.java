@@ -2,30 +2,8 @@ package nonBlock.aktion;
 
 import nonBlock.aussehen.*;
 
-public class AktionM extends Aktion
+public class AktionM extends Freeze
 {
-	public static void checkLinA(NBD target, AktionM ak)
-	{
-		for(int i = 0; i < ak.a.length; i++)
-			if(target.resLink[ak.a[i].linA] != null)
-			{
-				if(target.resLink[ak.a[i].linA].power > ak.power)
-				{
-					ak.needCancel = true;
-					ak.needCancelAt[ak.a[i].linA] = true;
-				}
-				else
-				{
-					target.resLink[ak.a[i].linA].needCancel = true;
-					target.resLink[ak.a[i].linA].needCancelAt[ak.a[i].linA] = true;
-				}
-			}
-		for(int i = 0; i < ak.a.length; i++)
-			if(!ak.needCancelAt[ak.a[i].linA])
-				ak.besitzer.resLink[ak.a[i].linA] = ak;
-		target.aktionen.add(ak);
-	}
-
 	private final ADI[] a;
 	private final double[] lenY;
 	private final double[] dwbY;
@@ -37,6 +15,9 @@ public class AktionM extends Aktion
 	{
 		super(besitzer, dauer, power);
 		this.a = a;
+		linA = new Integer[a.length];
+		for(int i = 0; i < a.length; i++)
+			linA[i] = a[i].linA;
 		lenY = new double[a.length];
 		dwbY = new double[a.length];
 		dwlY = new double[a.length];
@@ -44,23 +25,13 @@ public class AktionM extends Aktion
 		dd4Y = new double[a.length];
 	}
 
-	public void delink()
-	{
-		for(int i = 0; i < a.length; i++)
-			if(!needCancelAt[a[i].linA])
-			{
-				besitzer.resLink[a[i].linA] = null;
-				R.summonR(besitzer, a[i].linA);
-			}
-	}
-
 	public void tick()
 	{
 		for(int i = 0; i < a.length; i++)
-			if(!needCancelAt[a[i].linA])
+			if(!needCancelAt[linA[i]])
 				if(aktuell >= a[i].anfD && aktuell <= a[i].anfD + a[i].lenD)
 				{
-					LinkAchse li = besitzer.linkAchsen[a[i].linA];
+					LinkAchse li = besitzer.linkAchsen[linA[i]];
 					if(a[i].zv)
 					{
 						if(aktuell == a[i].anfD)

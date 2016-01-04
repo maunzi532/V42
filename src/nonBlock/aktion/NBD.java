@@ -8,7 +8,7 @@ import java.util.*;
 
 public abstract class NBD extends NonBlock
 {
-	public Aktion[] resLink;
+	public LinAAktion[] resLink;
 	public final ArrayList<Aktion> aktionen;
 	public K4 bewegung;
 	public ArrayList<K4> beweg;
@@ -27,7 +27,7 @@ public abstract class NBD extends NonBlock
 
 	public void init()
 	{
-		resLink = new Aktion[linkAchsen.length];
+		resLink = new LinAAktion[linkAchsen.length];
 	}
 
 	public void tick()
