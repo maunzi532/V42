@@ -263,6 +263,8 @@ public class WeltB
 
 	private static boolean d2Vis(WBP p)
 	{
+		if(!innen(p))
+			return false;
 		if(UIVerbunden.d2tangibility == 1)
 		{
 			for(int i = 0; i < 8; i++)

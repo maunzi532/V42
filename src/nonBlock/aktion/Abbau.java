@@ -13,7 +13,8 @@ public class Abbau extends Aktion
 	private final Drehung reD;
 	private final int reT;
 
-	public Abbau(NBD besitzer, int dauer, int power, long tn, int start, NBD reMount, int linA, Drehung reD, int reT)
+	public Abbau(NBD besitzer, int dauer, int power, long tn,
+			int start, NBD reMount, int linA, Drehung reD, int reT)
 	{
 		super(besitzer, dauer, power);
 		this.tn = tn;

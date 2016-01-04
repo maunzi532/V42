@@ -115,7 +115,7 @@ public class Tha extends TSSA
 		}
 		if(command.equals("KL"))
 		{
-			if(Overlay.pa.taType > 0 && Overlay.pa.tnTarget != null && Overlay.pa.tnTarget > 0)
+			if(Overlay.pa.taType > 0 && Overlay.pa.tnTarget != null && Overlay.pa.tnTarget >= 0)
 			{
 				moves.add(new Move(Index.gibLadeMove("KBL",
 						String.valueOf(-70 - UIVerbunden.maus.x / 10),
@@ -130,7 +130,7 @@ public class Tha extends TSSA
 		}
 		if(command.equals("KR"))
 		{
-			if(Overlay.pa.taType > 0 && Overlay.pa.tnTarget != null && Overlay.pa.tnTarget > 0)
+			if(Overlay.pa.taType > 0 && Overlay.pa.tnTarget != null && Overlay.pa.tnTarget >= 0)
 			{
 				moves.add(new Move(Index.gibLadeMove("KBR",
 						String.valueOf(70 - UIVerbunden.maus.x / 10),

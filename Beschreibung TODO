@@ -1,9 +1,10 @@
 Bug-Stufe
 		Windows Mausfokus Bug
 		Vermutlich Fensterrahmen Bug
-		Block 0 nicht abbaubar
-		Boden-glitch
+		TSSA 2 Boden Glitch
 		Stürzt bei Block 3 beinhart ab
+		Teleport gehört getestet
+		ZP4C + Wand = Murks
 
 Stufe 1
 	4D 1
@@ -12,7 +13,6 @@ Stufe 1
 	Overlay 1
 		Texte ordentlich platzieren
 	Animation 1
-		Sequenzen - Teleport
 		NBD - Idle Bewegung
 		Finde die Kopie - Geschafft-Sequenz
 	Movement 1
