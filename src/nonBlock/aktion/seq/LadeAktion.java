@@ -151,7 +151,7 @@ class LadeAktion
 				Overlay.sl.layer.add(st2);
 				return st2;
 			case 4:
-				MDAktion md = new MDAktion(besitzer, dauer, mvd, mvd2);
+				MDAktion md = new MDAktion(besitzer, dauer, power, mvd, mvd2);
 				besitzer.aktionen.add(md);
 				break;
 			case 5:

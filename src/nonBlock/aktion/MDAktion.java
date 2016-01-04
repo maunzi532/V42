@@ -7,10 +7,11 @@ public class MDAktion extends Aktion
 	private final Boolean[] mvdA;
 	private final double[] mvd0;
 	private final double[] mvdT;
+	Forced forced;
 
-	public MDAktion(NBD besitzer, int dauer, double[] mvd, Boolean[] mvdA)
+	public MDAktion(NBD besitzer, int dauer, int power, double[] mvd, Boolean[] mvdA)
 	{
-		super(besitzer, dauer, 0);
+		super(besitzer, dauer, power);
 		this.mvdA = mvdA;
 		mvd0 = new double[]{besitzer.position.a, besitzer.position.b,
 				besitzer.position.c, besitzer.position.d, besitzer.dreh.wl, besitzer.dreh.wb};
@@ -25,19 +26,25 @@ public class MDAktion extends Aktion
 			}
 		mvdT[4] = Drehung.sichern(mvdT[4]);
 		mvdT[5] = Drehung.sichern(mvdT[5]);
+		boolean[] fa = new boolean[4];
+		for(int i = 0; i < 4; i++)
+			if(mvdA[i] != null)
+				fa[i] = true;
+		forced = new Forced(fa, new K4(), power);
 	}
 
 	public void tick()
 	{
 		int m1 = dauer - aktuell;
 		if(mvdA[0] != null)
-			besitzer.bewegung.a = (mvd0[0] * m1 + mvdT[0] * aktuell) / dauer - besitzer.position.a;
+			forced.movement.a = (mvd0[0] * m1 + mvdT[0] * aktuell) / dauer - besitzer.position.a;
 		if(mvdA[1] != null)
-			besitzer.bewegung.b = (mvd0[1] * m1 + mvdT[1] * aktuell) / dauer - besitzer.position.b;
+			forced.movement.b = (mvd0[1] * m1 + mvdT[1] * aktuell) / dauer - besitzer.position.b;
 		if(mvdA[2] != null)
-			besitzer.bewegung.c = (mvd0[2] * m1 + mvdT[2] * aktuell) / dauer - besitzer.position.c;
+			forced.movement.c = (mvd0[2] * m1 + mvdT[2] * aktuell) / dauer - besitzer.position.c;
 		if(mvdA[3] != null)
-			besitzer.bewegung.d = (mvd0[3] * m1 + mvdT[3] * aktuell) / dauer - besitzer.position.d;
+			forced.movement.d = (mvd0[3] * m1 + mvdT[3] * aktuell) / dauer - besitzer.position.d;
+		besitzer.forced.add(forced);
 		if(mvdA[4] != null)
 			besitzer.dreh.wl = mvd0[4] + (mvdT[4] - mvd0[4]) * aktuell / dauer;
 		if(mvdA[5] != null)

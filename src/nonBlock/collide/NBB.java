@@ -70,6 +70,7 @@ public abstract class NBB extends NBD
 
 	protected void mTick()
 	{
+		super.mTick();
 		K4 eb = new K4(bewegung); //Bewegunsfreiheit testen
 		for(int i = 0; i < block.size(); i++)
 		{
@@ -91,9 +92,7 @@ public abstract class NBB extends NBD
 			wand(bewegung.c > 0 ? 5 : 4);
 		if(eb.a != bewegung.a)
 			wand(bewegung.a > 0 ? 1 : 0);
-
 		bewegung = eb;
-		position = K4.plus(position, bewegung); //Bewegen
 	}
 
 	public abstract void collide(Attk attk);

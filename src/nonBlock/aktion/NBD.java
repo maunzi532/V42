@@ -11,6 +11,8 @@ public abstract class NBD extends NonBlock
 	public Aktion[] resLink;
 	public final ArrayList<Aktion> aktionen;
 	public K4 bewegung;
+	public ArrayList<K4> beweg;
+	public ArrayList<Forced> forced;
 	public AlternateStandard standard = null;
 	public Aktion currentTrans = null;
 
@@ -18,6 +20,8 @@ public abstract class NBD extends NonBlock
 	{
 		super();
 		bewegung = new K4();
+		beweg = new ArrayList<>();
+		forced = new ArrayList<>();
 		aktionen = new ArrayList<>();
 	}
 
@@ -47,11 +51,19 @@ public abstract class NBD extends NonBlock
 		if(WeltND.nfr || UIVerbunden.godMode)
 			kontrolle();
 		mTick();
+		position = K4.plus(position, bewegung);
 	}
 
 	protected void mTick()
 	{
-		position = K4.plus(position, bewegung);
+		bewegung = new K4();
+		int[] powers = new int[4];
+		for(int i = 0; i < beweg.size(); i++)
+			bewegung = K4.plus(bewegung, beweg.get(i));
+		for(int i = 0; i < forced.size(); i++)
+			forced.get(i).affect(bewegung, powers);
+		beweg.clear();
+		forced.clear();
 	}
 
 	protected abstract void kontrolle();

@@ -174,7 +174,7 @@ class LadeAktionB
 				}
 				break;
 			case 4:
-				MDAktion md = new MDAktion(b2, dauer, mvd, mvd2);
+				MDAktion md = new MDAktion(b2, dauer, power, mvd, mvd2);
 				b2.aktionen.add(md);
 				break;
 			case 6:

@@ -14,10 +14,12 @@ public class ZP4C extends Aktion
 	public boolean z;
 	public boolean p;
 	public double d;
+	Forced forced;
 
 	public ZP4C(NBB besitzer, int power)
 	{
 		super(besitzer, -1, power);
+		forced = new Forced(new boolean[]{false, false, false, true}, new K4(), 1);
 	}
 
 	public void tick()
@@ -82,17 +84,18 @@ public class ZP4C extends Aktion
 		{
 			if(Math.abs(zd - b.position.d) < Staticf.zpSpeed)
 			{
-				b.bewegung.d = zd - b.position.d;
+				forced.movement.d = zd - b.position.d;
 				activated = false;
 			}
 			else if(zd > b.position.d)
-				b.bewegung.d = Staticf.zpSpeed;
+				forced.movement.d = Staticf.zpSpeed;
 			else
-				b.bewegung.d = -Staticf.zpSpeed;
+				forced.movement.d = -Staticf.zpSpeed;
 		}
 		else
-			b.bewegung.d = 0;
-		if(!geht(b.block, b.bewegung.d, false))
+			forced.movement.d = 0;
+		b.forced.add(forced);
+		if(!geht(b.block, forced.movement.d, false))
 			activated = false;
 	}
 

@@ -73,23 +73,26 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 			doCommand(commands.get(i));
 		if(canInfl != null)
 		{
+			K4 cb = new K4();
 			boolean[] infl = control.infl();
 			if(infl[0] != infl[1])
 			{
-				bewegung.a += Math.cos(dreh.wl) * (infl[0] ? canInfl[0] : -canInfl[0]);
-				bewegung.c += Math.sin(dreh.wl) * (infl[0] ? canInfl[0] : -canInfl[0]);
+				cb.a += Math.cos(dreh.wl) * (infl[0] ? canInfl[0] : -canInfl[0]);
+				cb.c += Math.sin(dreh.wl) * (infl[0] ? canInfl[0] : -canInfl[0]);
 			}
 			if(infl[2] != infl[3])
-				bewegung.b += infl[2] ? canInfl[1] : -canInfl[2];
+				cb.b += infl[2] ? canInfl[1] : -canInfl[2];
 			if(infl[4] != infl[5])
 			{
-				bewegung.a -= Math.sin(dreh.wl) * (infl[4] ? canInfl[0] : -canInfl[0]);
-				bewegung.c += Math.cos(dreh.wl) * (infl[4] ? canInfl[0] : -canInfl[0]);
+				cb.a -= Math.sin(dreh.wl) * (infl[4] ? canInfl[0] : -canInfl[0]);
+				cb.c += Math.cos(dreh.wl) * (infl[4] ? canInfl[0] : -canInfl[0]);
 			}
 			if(infl[6] != infl[7])
-				bewegung.d += infl[6] ? canInfl[3] : -canInfl[3];
+				cb.d += infl[6] ? canInfl[3] : -canInfl[3];
+			beweg.add(cb);
 		}
-		bewegung = new K4(bewegung.a * 0.85, bewegung.b * 0.85 - 0.05, bewegung.c * 0.85, bewegung.d * 0.85);
+		beweg.add(new K4(bewegung.a * 0.85, bewegung.b * 0.85, bewegung.c * 0.85, bewegung.d * 0.85));
+		beweg.add(new K4(0, -0.05, 0, 0));
 	}
 
 	public abstract K4 kamP();
