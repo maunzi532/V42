@@ -4,6 +4,7 @@ import wahr.zugriff.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.*;
 
 public class LPaneel
 {
@@ -39,9 +40,9 @@ public class LPaneel
 
 	public static void setC0()
 	{
-		//fr.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				//new BufferedImage(10, 10, BufferedImage.TYPE_BYTE_INDEXED), new Point(), null));
-		fr.setCursor(Cursor.getDefaultCursor());
+		fr.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+				new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_INDEXED), new Point(), null));
+		//fr.setCursor(Cursor.getDefaultCursor());
 	}
 
 	public static void rePanel(Image img)

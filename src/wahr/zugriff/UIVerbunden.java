@@ -23,6 +23,8 @@ public class UIVerbunden
 	public static Robot ro;
 	//Mausverschiebung
 	public static Point mausv;
+	//Maus Letzter Fokus
+	public static Point mausLast;
 	//Fenster w/h
 	public static Dimension sc;
 	//4D-Blick an/aus

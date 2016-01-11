@@ -180,21 +180,25 @@ public class Hauptschleife
 
 	public static boolean eingabe()
 	{
+		TA2.move();
+		if(TA2.keyStat[0] > 0)
+			return true;
 		if(UIVerbunden.sc.width != LPaneel.fr.getSize().width ||
 				UIVerbunden.sc.height != LPaneel.fr.getSize().height)
 		{
 			UIVerbunden.sc = LPaneel.fr.getSize();
 			Overlay.resize();
 		}
-		TA2.move();
-		if(TA2.keyStat[0] > 0)
-			return true;
 		Staticf.sca("TA2 ");
 		Point maus = MouseInfo.getPointerInfo().getLocation();
 		Staticf.sca("Mx ");
 		Point mm = LPaneel.fr.getLocationOnScreen();
 		Staticf.sca("Mx1 ");
 		maus.translate(-mm.x, -mm.y);
+		if(TA2.keyStat[13] <= 0)
+			UIVerbunden.ro.mouseMove(UIVerbunden.mausLast.x + mm.x, UIVerbunden.mausLast.y + mm.y);
+		else
+			UIVerbunden.mausLast = new Point(maus);
 		if(TA2.keyStat[15] == 2)
 		{
 			if(Overlay.sl.click(maus.x, maus.y, false))
@@ -206,12 +210,9 @@ public class Hauptschleife
 				TA2.keyStat[16] = 1;
 		}
 		Staticf.sca("SL ");
-		maus.translate(-UIVerbunden.sc.width / 2, -UIVerbunden.sc.height / 2);
+		maus.translate(-UIVerbunden.mausLast.x, -UIVerbunden.mausLast.y);
 		UIVerbunden.mausv = new Point(maus);
-		//UIVerbunden.mausv.translate(-UIVerbunden.maus.x, -UIVerbunden.maus.y);
 		UIVerbunden.maus = maus;
-		if(TA2.keyStat[13] <= 0)
-			UIVerbunden.ro.mouseMove(UIVerbunden.sc.width / 2 + mm.x, UIVerbunden.sc.height / 2 + mm.y);
 		Staticf.sca("RO ");
 		if(TA2.keyStat[13] == 2 && Overlay.sichtAn)
 		{

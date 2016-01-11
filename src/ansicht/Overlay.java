@@ -2,6 +2,7 @@ package ansicht;
 
 import ansicht.text.*;
 import block.*;
+import wahr.physisch.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
@@ -20,6 +21,9 @@ public class Overlay
 
 	public static void initOverlay()
 	{
+		UIVerbunden.mausLast = new Point(UIVerbunden.sc.width / 2, UIVerbunden.sc.height / 2);
+		Point mm = LPaneel.fr.getLocationOnScreen();
+		UIVerbunden.ro.mouseMove(UIVerbunden.sc.width / 2 + mm.x, UIVerbunden.sc.height / 2 + mm.y);
 		hl = new BufferedImage(UIVerbunden.sc.width, UIVerbunden.sc.height, BufferedImage.TYPE_INT_ARGB_PRE);
 		gd = hl.createGraphics();
 		sl = new SchalterLayer();

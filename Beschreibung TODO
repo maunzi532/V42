@@ -12,6 +12,11 @@ Stufe 1
 		D2 - Aussehen verbessern
 	Overlay 1
 		Texte ordentlich platzieren
+		Targeting-System - Markierung bewegen
+		Bildschirmelement - Eingabefeld
+		Hauptmenü einbauen
+	Welt 1
+		Block - Datei - Zuordnung ändern
 	Animation 1
 		NBD - Idle Bewegung
 		Finde die Kopie - Geschafft-Sequenz
@@ -19,25 +24,23 @@ Stufe 1
 	-	Der Move - Power und Abbrechen
 	Gameplay 1
 		Finde die Kopie - Labyrinth generieren
-		Hauptmenü einbauen
-	Eingabe 1
+	Speicher 1
 		TA2 - TA-Datei verbessern
-		Targeting-System - Markierung bewegen
-		Bildschirmelement - Eingabefeld
 
 Stufe 2
 	Overlay 2
 		Texte Aussehen
+	Welt 2
+		Welt generieren
 	Gameplay 2
 		Sinnvolles Attk
-		Welt generieren
 		Schadensleiste einbauen
 		Fallende Blöcke
 	Speicher 2
 		Mehrsprachig Text lagern
 
 Stufe 3
-	N2 3
+	Grafik 3
 		Reflexion
 	Movement 3
 		Einsetzbare Aktionen
