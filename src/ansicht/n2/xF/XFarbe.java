@@ -34,13 +34,13 @@ public abstract class XFarbe
 				splN[(f.splseed % Staticf.seedifier)]) % Staticf.seedifier)) / (double)Staticf.seedifier;
 	}
 
-	static Color anpassen(F2 n, Color fc)
+	static Color anpassen(F2 n, Color fc, Material mat)
 	{
 		if(n.ddiff > 0)
 			fc = limit(fc, (int)(n.ddiff * 10), (int)(n.ddiff * -5), (int)(n.ddiff * -5));
 		else if(n.ddiff < 0)
 			fc = limit(fc, (int)(n.ddiff * 5), (int)(n.ddiff * -10), (int)(n.ddiff * 5));
-		fc = shade(fc, n);
+		fc = shade(fc, n, mat);
 		double weg = Math.sqrt(n.mid.a * n.mid.a + n.mid.b * n.mid.b + n.mid.c * n.mid.c + n.mid.d * n.mid.d);
 		double weg2 = (Staticf.sicht - weg) / Staticf.sicht;
 		if(weg2 < 0)
@@ -50,9 +50,9 @@ public abstract class XFarbe
 				(int)(fc.getBlue() * weg2 + 0 * (1 - weg2)), fc.getAlpha());
 	}
 
-	private static Color shade(Color fc, F2 f)
+	private static Color shade(Color fc, F2 f, Material mat)
 	{
-		double power = -255;
+		double power = mat.startPower;
 		for(int i = 0; i < WeltND.licht.size(); i++)
 		{
 			K4 lr = K4.diff(WeltND.licht.get(i).lichtPosition(), f.mid1());
@@ -67,7 +67,7 @@ public abstract class XFarbe
 			double pow = WeltND.licht.get(i).lichtPower();
 			pow -= ld * WeltND.licht.get(i).lichtPowerDecay();
 			if(f.eckenNK != null)
-				pow -= shadeWinkel(f, WeltND.licht.get(i).lichtPosition()) * 40;
+				pow -= shadeWinkel(f, WeltND.licht.get(i).lichtPosition()) * mat.shadeMultiplier;
 			if(pow > power)
 				power = pow;
 		}
@@ -168,9 +168,9 @@ public abstract class XFarbe
 	{
 		String[] cx0 = tex.split(",");
 		if(cx0.length == 1)
-			return new XFN(farbCode(cx0[0]));
+			return new XFN(farbCode(cx0[0]), Material.N);
 		if(cx0.length == 2)
-			return new XGradient(farbCode(cx0[0]), 0, farbCode(cx0[1]), 1);
+			return new XGradient(farbCode(cx0[0]), 0, farbCode(cx0[1]), 1, Material.N);
 		return null;
 	}
 }

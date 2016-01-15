@@ -46,14 +46,16 @@ public class XFBT extends XFN
 			}
 		if(cfarb != 0)
 			farben.put(cfarb, c1);
+		mat = Material.B;
 	}
 
 	public Paint gibFarb(N2 n)
 	{
+		assert n instanceof F2;
 		F2 f = (F2) n;
 		if(f.spld <= 0 || !farben.containsKey(f.spld))
-			return super.gibFarb(n);
+			return super.gibFarb(f);
 		else
-			return farben.get(f.spld)[f.splseed].gibFarb(n);
+			return farben.get(f.spld)[f.splseed].gibFarb(f);
 	}
 }

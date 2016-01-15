@@ -80,7 +80,7 @@ public class MK extends External
 		for(int t = 0; t < nt - 1; t++)
 			for(int w = 0; w < nw; w++)
 			{
-				XFarbe fn = new XFN(Color.WHITE);
+				XFarbe fn = new XFN(Color.WHITE, Material.N);
 				K4[] k0 = into[cy];
 				K4[] k01 = into1[cy];
 				int pm = w == nw - 1 ? 1 - nw : 1;

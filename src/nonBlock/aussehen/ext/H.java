@@ -169,8 +169,7 @@ public class H extends External
 		if(!UIVerbunden.calculateH || main2 == UIVerbunden.kamA)
 			return al;
 		int cy = 0;
-		int grau = 100;
-		XFarbe fn = new XFN(new Color(grau, grau, grau));
+		XFarbe fn = new XFN(Color.WHITE, Material.H);
 		for(int i = 0; i < ht; i++)
 			for(int j = 0; j < wt; j++)
 				for(int k = 0; k < nlen; k++)
@@ -202,13 +201,13 @@ public class H extends External
 							K4[] p71 = punkte[cy + 1];
 							NF2.atl(al, new NF2(new K4[]{p6[0], p6[1], p7[0]},
 									new K4[]{p61[0], p61[1], p71[0]}, fn,
-									true, seeds[i][j], k * 3 + 1, main2.tn));
+									null, seeds[i][j], k * 3 + 1, main2.tn));
 							NF2.atl(al, new NF2(new K4[]{p6[1], p6[2], p7[0]},
 									new K4[]{p61[1], p61[2], p71[0]}, fn,
-									true, seeds[i][j], k * 3 + 1, main2.tn));
+									null, seeds[i][j], k * 3 + 1, main2.tn));
 							NF2.atl(al, new NF2(new K4[]{p6[2], p6[0], p7[0]},
 									new K4[]{p61[2], p61[0], p71[0]},fn,
-									true, seeds[i][j], k * 3 + 1, main2.tn));
+									null, seeds[i][j], k * 3 + 1, main2.tn));
 						}
 						else
 						{

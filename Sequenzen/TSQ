@@ -2,8 +2,8 @@
 6 T Dauer=20 T=hesou_du_wa_finden_ji
 7 MD Akt=0 Dauer=30 Power=10 bM=5 wlM=20
 13 T Dauer=20 T=Waah
-16 AM Akt=0 Dauer=15 Power=4 ADI=16,2,14,3,120,0,0,0 ADI=15,2,14,3,120,0,0,0 ADI=3,2,14,3,60,0,60,0 ADI=4,2,14,3,60,0,-60,0 ADI=62,2,14,2,90,360,0,0 ADI=64,2,14,2,90,0,0,0
-32 AF Akt=0 Power=12 Dauer=40 LinA=3 LinA=4 LinA=15 LinA=16
+16 AM Akt=0 Dauer=15 Power=4 ADI=16,2,14,3,120,0,0,0 ADI=15,2,14,3,120,0,0,0 ADI=23,2,14,3,60,0,60,0 ADI=24,2,14,3,60,0,-60,0 ADI=62,2,14,2,90,360,0,0 ADI=64,2,14,2,90,0,0,0
+32 AF Akt=0 Power=12 Dauer=40 LinA=23 LinA=24 LinA=15 LinA=16
 36 Fokus Akt=0
 40 TE T=Internal_Error_4
 /36 Alt Akt=1 T=TSSA2L

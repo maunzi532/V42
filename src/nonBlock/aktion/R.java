@@ -10,6 +10,8 @@ public class R extends LinAAktion
 			return;
 		R r = new R(besitzer);
 		AlternateStandard std = besitzer.standard;
+		if(std.lens[linA] == null)
+			throw new RuntimeException("R Fehler: " + linA);
 		r.a = ADI.rad(linA, 1, 9, std.lens[linA], std.drehs[linA].wb, std.drehs[linA].wl,
 				std.spins[linA], std.dShifts[linA], false);
 		if(!r.needCancel)

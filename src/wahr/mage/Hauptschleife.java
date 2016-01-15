@@ -43,8 +43,6 @@ public class Hauptschleife
 		Index.gibStandardAussehen("TSSA").assignStandard(n,
 				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HL2"))),
 				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HR2"))),
-				new MK(0, 0.1, 0.5, 1, 8, 4, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
-				//new MK(n, 0, 0.25, 1, 0.25, 1, 8, 14, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
 				new H(0.5, 0.5, 10, 10, 4, 1, 0, 0.9),
 				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9),
 				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9),
@@ -117,7 +115,6 @@ public class Hauptschleife
 			}
 		};
 		n2.aussehen = new LadeModell().reload(
-
 				Index.gibLadeTeil("T_H"),
 				Index.gibLadeTeil("T_B"),
 				Index.gibLadeTeil("T_A"),
@@ -127,8 +124,6 @@ public class Hauptschleife
 		Index.gibStandardAussehen("TSSA").assignStandard(n2,
 				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HL2"))),
 				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HR2"))),
-				new MK(0, 0.1, 0.5, 1, 8, 4, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
-				//new MK(0.25, 0.75, 0.25, 1, 8, 14, new int[]{32, 33, 34, 35, 36, 37, 38, 39}),
 				new H2(n2, 0.5, 0.5, 10, 10, 4, 1, 0, 0.6),
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.6),
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.6),

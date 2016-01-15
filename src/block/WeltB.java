@@ -89,7 +89,7 @@ public class WeltB
 						else if(d2Vis(p))
 						{
 							long tn = tn(p);
-							D2.atl(toR, new D2(true, null, new XFN(new Color(0, 0, 100)),
+							D2.atl(toR, new D2(true, null, new XFD(new Color(0, 0, 100)),
 									null, Koord.wt2(p), tn), kDreh, relativ);
 						}
 					}
@@ -250,14 +250,14 @@ public class WeltB
 		if(!opaque(b))
 		{
 			if(quad)
-				return new D2(true, g, new XFN(new Color(0, 0, 100)),
+				return new D2(true, g, new XFD(new Color(0, 0, 100)),
 						null, Koord.wt2(p), tn);
 			return null;
 		}
 		String text = null;
 		if(opaque(b))
 			text = (g ? "Gn: " : "Rot: ") + b;
-		return new D2(quad, g, new XFN(new Color(!g ? 255 : 0, g ? 255 : 0, 0)),
+		return new D2(quad, g, new XFD(new Color(!g ? 255 : 0, g ? 255 : 0, 0)),
 				text, Koord.wt2(p), tn);
 	}
 

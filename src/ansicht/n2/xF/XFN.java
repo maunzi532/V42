@@ -6,11 +6,13 @@ import java.awt.*;
 
 public class XFN extends XFarbe
 {
+	Material mat;
 	Color farb;
 
-	public XFN(Color farb)
+	public XFN(Color farb, Material mat)
 	{
 		this.farb = farb;
+		this.mat = mat;
 	}
 
 	XFN(){}
@@ -18,7 +20,7 @@ public class XFN extends XFarbe
 	public Paint gibFarb(N2 n)
 	{
 		if(n instanceof F2)
-			return anpassen((F2)n, farb);
+			return anpassen((F2)n, farb, mat);
 		return farb;
 	}
 }

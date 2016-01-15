@@ -326,6 +326,6 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 
 	public double lichtPowerDecay()
 	{
-		return 0.1;
+		return 0.8;
 	}
 }
