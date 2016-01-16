@@ -66,7 +66,8 @@ public abstract class XFarbe
 				continue;
 			double pow = WeltND.licht.get(i).lichtPower();
 			pow -= ld * WeltND.licht.get(i).lichtPowerDecay();
-			if(f.eckenNK != null)
+			pow *= mat.lichtAffection;
+			if(f.eckenNK != null && mat.shadeMultiplier != 0)
 				pow -= shadeWinkel(f, WeltND.licht.get(i).lichtPosition()) * mat.shadeMultiplier;
 			if(pow > power)
 				power = pow;
@@ -170,7 +171,9 @@ public abstract class XFarbe
 		if(cx0.length == 1)
 			return new XFN(farbCode(cx0[0]), Material.N);
 		if(cx0.length == 2)
-			return new XGradient(farbCode(cx0[0]), 0, farbCode(cx0[1]), 1, Material.N);
+			return new XFN(farbCode(cx0[0]), Material.valueOf(cx0[1]));
+		if(cx0.length == 3)
+			return new XGradient(farbCode(cx0[0]), 0, farbCode(cx0[1]), 1, Material.valueOf(cx0[2]));
 		return null;
 	}
 }

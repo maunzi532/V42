@@ -125,10 +125,10 @@ public class Hauptschleife
 				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HL2"))),
 				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HR2"))),
 				new H2(n2, 0.5, 0.5, 10, 10, 4, 1, 0, 0.6),
-				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.6),
-				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.6),
-				new H2(n2, 0.2, 0.5, 4, 10, 3, 0.7, 0, 0.6),
-				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.6)
+				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
+				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
+				new H2(n2, 0.2, 0.5, 4, 10, 3, 0.7, 0, 0.55),
+				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55)
 				);
 		n2.position = WeltB.starts[1];
 		n2.position.b += n2.block.get(0).airshift;
@@ -138,16 +138,11 @@ public class Hauptschleife
 		UIVerbunden.kamA = UIVerbunden.kamN;
 		z = new Zeichner(Index.gibText("SPL"));
 		n2.collidable.add(new ColBox(n2, 0, new EndScheibe(4), new EndScheibe(4), 1, 1));
-		n.physik.add(new ColBox(n, 69, new EndScheibe(1.6), new EndScheibe(1.3), 1.1));
-		n.physik.add(new ColBox(n, 78, new EndScheibe(1.3), new EndScheibe(1), 1));
-		n.physik.add(new ColBox(n, 11, new EndScheibe(0.7), new EndScheibe(0.7), 1));
-		n.physik.add(new ColBox(n, 12, new EndScheibe(0.7), new EndScheibe(0.7), 1));
-		n.physik.add(new ColBox(n, 0, new EndEllipse(2.1, 1.4, 0), new EndEllipse(2.1, 1.4, 0), 1));
-		n2.physik.add(new ColBox(n2, 69, new EndScheibe(1.6), new EndScheibe(1.3), 1.1));
-		n2.physik.add(new ColBox(n2, 78, new EndScheibe(1.3), new EndScheibe(1), 1));
+		n2.physik.add(new ColBox(n2, 69, new EndScheibe(1.5), new EndScheibe(1.0), 1.1));
+		n2.physik.add(new ColBox(n2, 78, new EndScheibe(1.0), new EndScheibe(0.7), 0.7));
 		n2.physik.add(new ColBox(n2, 11, new EndScheibe(0.7), new EndScheibe(0.7), 1));
 		n2.physik.add(new ColBox(n2, 12, new EndScheibe(0.7), new EndScheibe(0.7), 1));
-		n2.physik.add(new ColBox(n2, 0, new EndEllipse(2.1, 1.4, 0), new EndEllipse(2.1, 1.4, 0), 1));
+		n2.physik.add(new ColBox(n2, 0, new EndEllipse(2.1, 1.2, 0), new EndEllipse(2.2, 1.4, 0), 1));
 		n.aktionen.add(new Sicht(n, 10, 67, 67, false));
 		UIVerbunden.zp = new ZP4C(n, 0);
 		n.aktionen.add(UIVerbunden.zp);

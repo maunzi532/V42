@@ -21,6 +21,7 @@ public class H extends External
 	final int nlen;
 	private final int[][] seeds;
 	private final Random r;
+	XFarbe fn;
 
 	public H(double w, double h, int wt, int ht, int nlen,
 			double wwl, double hwl, double len)
@@ -46,12 +47,12 @@ public class H extends External
 							h2[i][j][k] = new LinkAchse(new Drehung(
 									(i - (ht - 1d) / 2) * hwl + (j - (wt - 1d) / 2) * wwl +
 											(r.nextDouble() - 0.5), (r.nextDouble() - 0.5) / 5),
-									len * (r.nextDouble() / 2 + 0.75), 0, 0);
+									len * (r.nextDouble() / 5 + 0.25), 0, 0);
 							break;
 						default:
 							h2[i][j][k] = new LinkAchse(new Drehung(
 									(r.nextDouble() - 0.5) / 10, (r.nextDouble() - 0.5) / 10),
-									len * (r.nextDouble() / 5 + 0.9), 0, 0);
+									len * (r.nextDouble() + 0.5), 0, 0);
 							break;
 					}
 				}
@@ -60,6 +61,7 @@ public class H extends External
 		for(int i = 0; i < ht; i++)
 			for(int j = 0; j < wt; j++)
 				seeds[i][j] = r.nextInt();
+		fn = new XFN(new Color(150, 150, 150), Material.H);
 	}
 
 	public void tick()
@@ -169,7 +171,6 @@ public class H extends External
 		if(!UIVerbunden.calculateH || main2 == UIVerbunden.kamA)
 			return al;
 		int cy = 0;
-		XFarbe fn = new XFN(Color.WHITE, Material.H);
 		for(int i = 0; i < ht; i++)
 			for(int j = 0; j < wt; j++)
 				for(int k = 0; k < nlen; k++)
@@ -201,13 +202,13 @@ public class H extends External
 							K4[] p71 = punkte[cy + 1];
 							NF2.atl(al, new NF2(new K4[]{p6[0], p6[1], p7[0]},
 									new K4[]{p61[0], p61[1], p71[0]}, fn,
-									null, seeds[i][j], k * 3 + 1, main2.tn));
+									true, seeds[i][j], k * 3 + 1, main2.tn));
 							NF2.atl(al, new NF2(new K4[]{p6[1], p6[2], p7[0]},
 									new K4[]{p61[1], p61[2], p71[0]}, fn,
-									null, seeds[i][j], k * 3 + 1, main2.tn));
+									true, seeds[i][j], k * 3 + 1, main2.tn));
 							NF2.atl(al, new NF2(new K4[]{p6[2], p6[0], p7[0]},
 									new K4[]{p61[2], p61[0], p71[0]},fn,
-									null, seeds[i][j], k * 3 + 1, main2.tn));
+									true, seeds[i][j], k * 3 + 1, main2.tn));
 						}
 						else
 						{
