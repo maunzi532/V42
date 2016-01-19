@@ -167,26 +167,26 @@ public class WeltB
 						{
 							int blockR2 = gib(new WBP(a, b, c, di + 2));
 							int blockG2 = gib(new WBP(a, b, c, di - 1));
-							D2 der = descr(pR, blockR2, true, tn(pR));
+							D2 der = descr(pR, blockR2, false, tn(pR));
 							if(der != null)
 								D2.atl(toR, der, kDreh, relativ);
-							D2 deg = descr(pG, blockG2, false, tn(pG));
+							D2 deg = descr(pG, blockG2, true, tn(pG));
 							if(deg != null)
 								D2.atl(toR, deg, kDreh, relativ);
 						}
 						else if(!opaque(blockR))
 						{
 							int blockR2 = gib(new WBP(a, b, c, di + 2));
-							D2 deg = descr(pR, blockR2, true, tn(pR));
-							if(deg != null)
-								D2.atl(toR, deg, kDreh, relativ);
+							D2 der = descr(pR, blockR2, false, tn(pR));
+							if(der != null)
+								D2.atl(toR, der, kDreh, relativ);
 						}
 						else if(!opaque(blockG))
 						{
 							int blockG2 = gib(new WBP(a, b, c, di - 1));
-							D2 der = descr(pG, blockG2, false, tn(pG));
-							if(der != null)
-								D2.atl(toR, der, kDreh, relativ);
+							D2 deg = descr(pG, blockG2, true, tn(pG));
+							if(deg != null)
+								D2.atl(toR, deg, kDreh, relativ);
 						}
 					}
 		}

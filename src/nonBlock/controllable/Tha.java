@@ -190,16 +190,16 @@ public class Tha extends TSSA
 					}
 				if(can)
 				{
-					if(attemptAirgrab(0, position))
+					if(attemptAirgrab(0, position, position.d))
 					{
 						if(position.d - Koord.intiize(position.d / Koord.weltBlock.d) *
 								Koord.weltBlock.d < Staticf.zpSpeed)
 							attemptAirgrab(0, new K4(position.a, position.b, position.c,
-									position.d - Staticf.zpSpeed));
+									position.d - Staticf.zpSpeed), position.d - Staticf.zpSpeed / 2);
 						if(position.d - Koord.intiize(position.d / Koord.weltBlock.d) *
 								Koord.weltBlock.d > Koord.weltBlock.d - Staticf.zpSpeed)
 							attemptAirgrab(0, new K4(position.a, position.b, position.c,
-									position.d + Staticf.zpSpeed));
+									position.d + Staticf.zpSpeed), position.d + Staticf.zpSpeed / 2);
 					}
 				}
 			}

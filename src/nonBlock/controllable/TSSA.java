@@ -107,7 +107,7 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 		return 7 - (int)(Drehung.sichern(dreh.wl) * 4 / Math.PI);
 	}
 
-	boolean attemptAirgrab(int type, K4 dlPosition)
+	boolean attemptAirgrab(int type, K4 dlPosition, double dUnedited)
 	{
 		if(grabRichtung < 0 && !boden)
 		{
@@ -141,7 +141,7 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 							fp.a += (Koord.weltBlock.a / 2 - 3.6) * (2 - richtung);
 							fp.c = dlPosition.c;
 						}
-						fp.d = dlPosition.d;
+						fp.d = dUnedited;
 						grabRichtung = richtung;
 						if(approxRichtung() == 7)
 							richtung = 4;
