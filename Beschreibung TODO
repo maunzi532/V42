@@ -10,12 +10,11 @@ Stufe 1
 		4D-Daten des aktuellen Felds anzeigen
 		D2 - Aussehen verbessern
 	Overlay 1
-		Texte ordentlich platzieren
 		Targeting-System - Markierung bewegen
 		Bildschirmelement - Eingabefeld
 		Hauptmenü einbauen
 	Welt 1
-		Block - Datei - Zuordnung ändern
+		Index - Zuordnung ändern (Blöcke)
 	Animation 1
 		NBD - Idle Bewegung
 		Finde die Kopie - Geschafft-Sequenz
@@ -25,6 +24,7 @@ Stufe 1
 		Finde die Kopie - Labyrinth generieren
 	Speicher 1
 		TA2 - TA-Datei verbessern
+		Sca - Laden 2
 
 Stufe 2
 	Overlay 2

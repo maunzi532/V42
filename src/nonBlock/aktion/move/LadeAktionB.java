@@ -22,6 +22,9 @@ class LadeAktionB
 	private Attk thatAttk;
 	private int delay;
 	private String text;
+	private String dispName;
+	private String codebez;
+	private String emotion;
 	private String dislocate;
 	private String nhtDislocate;
 
@@ -77,6 +80,15 @@ class LadeAktionB
 					break;
 				case "T":
 					text = cd3[1];
+					break;
+				case "dispName":
+					dispName = cd3[1];
+					break;
+				case "codebez":
+					codebez = cd3[1];
+					break;
+				case "emotion":
+					emotion = cd3[1];
 					break;
 				case "Attk":
 					thatAttk = new Attk(Integer.parseInt(cd3[1]));
@@ -160,8 +172,8 @@ class LadeAktionB
 				Freeze.checkLinA(b2, fm);
 				break;
 			case 2:
-				TBox st = new TBox(Overlay.sl, false, 0.2, 0.8, 0.1, 0.1, text);
-				Overlay.sl.layer.add(st);
+				TBox st = new TBox(Overlay.sl, false, 0.1, 0.1, text);
+				Overlay.sl.placeTBox(st, dispName, codebez, emotion);
 				break;
 			case 3:
 				AttkAktion ak = new AttkAktion((NBB) b2, dauer, power, thatAttk,

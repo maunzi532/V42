@@ -235,6 +235,7 @@ public class Hauptschleife
 				UIVerbunden.siehNonBlocks = true;
 			}
 		}
+		Overlay.sl.actTex();
 		Staticf.sca("M und T (0) ");
 		return false;
 	}

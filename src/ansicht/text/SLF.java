@@ -6,8 +6,8 @@ public abstract class SLF
 {
 	final SchalterLayer main;
 	final boolean tangible;
-	final double x;
-	final double y;
+	double x;
+	double y;
 	final double w;
 	final double h;
 	protected String text;

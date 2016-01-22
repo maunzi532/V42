@@ -21,6 +21,9 @@ class LadeAktion
 	private final ArrayList<Integer> linA = new ArrayList<>();
 	private final ArrayList<ADI> adiA = new ArrayList<>();
 	private String text;
+	private String dispName;
+	private String codebez;
+	private String emotion;
 
 	public LadeAktion(int teil, String[] cd2)
 	{
@@ -80,6 +83,15 @@ class LadeAktion
 					break;
 				case "T":
 					text = cd3[1];
+					break;
+				case "dispName":
+					dispName = cd3[1];
+					break;
+				case "codebez":
+					codebez = cd3[1];
+					break;
+				case "emotion":
+					emotion = cd3[1];
 					break;
 				case "aM":
 					mvd2[0] = false;
@@ -147,8 +159,8 @@ class LadeAktion
 				break;
 			case 2:
 			case 3:
-				TBox st2 = new TBox(Overlay.sl, typ == 3, 0.2, 0.8, 0.1, 0.1, text);
-				Overlay.sl.layer.add(st2);
+				TBox st2 = new TBox(Overlay.sl, typ == 3, 0.1, 0.1, text);
+				Overlay.sl.placeTBox(st2, dispName, codebez, emotion);
 				return st2;
 			case 4:
 				MDAktion md = new MDAktion(besitzer, dauer, power, mvd, mvd2);
