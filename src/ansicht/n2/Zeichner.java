@@ -12,7 +12,6 @@ import java.util.*;
 public class Zeichner
 {
 	public ArrayList<N2> n2s;
-	private Controllable kam;
 	private final ArrayList<Double> abstands;
 	private final ArrayList<Integer> splits;
 
@@ -32,7 +31,7 @@ public class Zeichner
 
 	public void nehmen()
 	{
-		kam = UIVerbunden.kamA;
+		Controllable kam = UIVerbunden.kamA;
 		K4 kp = kam.kamP();
 		Drehung kd = kam.kamD();
 		n2s = new ArrayList<>();

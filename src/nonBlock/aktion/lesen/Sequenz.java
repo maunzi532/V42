@@ -1,6 +1,5 @@
-package nonBlock.aktion.seq;
+package nonBlock.aktion.lesen;
 
-import ansicht.text.*;
 import nonBlock.aktion.*;
 
 public class Sequenz
@@ -9,7 +8,7 @@ public class Sequenz
 	private int teilA;
 	private int zeitA;
 	private final NBD[] akteure;
-	private TBox ender;
+	private ZDelay ender;
 
 	public Sequenz(LadeSequenz lad, NBD... akteure)
 	{
@@ -25,12 +24,17 @@ public class Sequenz
 			LadeAktion lad1 = lad.aktionen.get(i);
 			if(lad1.teil == teilA && lad1.zeit == zeitA)
 			{
-				TBox a = lad1.erzeugeAktion(lad1.akteur >= 0 ? akteure[lad1.akteur] : null);
+				ZDelay a = lad1.erzeugeAktion(lad1.akteur >= 0 ? akteure[lad1.akteur] : null);
 				if(a != null)
 					ender = a;
 			}
 		}
-		if(zeitA >= lad.zeitE.get(teilA) && (ender == null || ender.clicked))
+		boolean fertig;
+		if(ender == null)
+			fertig = zeitA >= lad.zeitE.get(teilA);
+		else
+			fertig = ender.fertig(zeitA - lad.zeitE.get(teilA));
+		if(fertig)
 		{
 			teilA++;
 			zeitA = -1;

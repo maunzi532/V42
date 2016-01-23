@@ -1,7 +1,7 @@
 package nonBlock.collide;
 
 import nonBlock.aktion.*;
-import nonBlock.aktion.move.*;
+import nonBlock.aktion.lesen.*;
 import wahr.zugriff.*;
 
 import java.util.*;

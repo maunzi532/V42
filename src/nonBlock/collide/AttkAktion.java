@@ -1,10 +1,11 @@
 package nonBlock.collide;
 
 import nonBlock.aktion.*;
+import nonBlock.aktion.lesen.*;
 
-public class AttkAktion extends Aktion
+public class AttkAktion extends Aktion implements ZDelay
 {
-	public final Attk attk;
+	private final Attk attk;
 	public int delay;
 
 	public AttkAktion(NBB besitzer, int dauer, int power, Attk attk, NBB nht)
@@ -19,5 +20,13 @@ public class AttkAktion extends Aktion
 	public void delink()
 	{
 		attk.ende();
+	}
+
+	public boolean fertig(int timeLeft)
+	{
+		if(attk.con.size() == 0)
+			return timeLeft >= 0;
+		else
+			return timeLeft >= delay;
 	}
 }

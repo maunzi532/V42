@@ -5,9 +5,14 @@ Bug-Stufe
 		Stürzt bei Block 3 beinhart ab
 		Teleport gehört getestet
 
+Nicht sicher
+		4D-Daten des aktuellen Felds anzeigen
+		NBD - Idle Bewegung
+		Finde die Kopie - Geschafft-Sequenz
+		Finde die Kopie - Labyrinth generieren
+
 Stufe 1
 	4D 1
-		4D-Daten des aktuellen Felds anzeigen
 		D2 - Aussehen verbessern
 	Overlay 1
 		Targeting-System - Markierung bewegen
@@ -15,36 +20,34 @@ Stufe 1
 		Hauptmenü einbauen
 	Welt 1
 		Index - Zuordnung ändern (Blöcke)
-	Animation 1
-		NBD - Idle Bewegung
-		Finde die Kopie - Geschafft-Sequenz
 	Movement 1
 		Der Move - Power und Abbrechen
-	Gameplay 1
-		Finde die Kopie - Labyrinth generieren
 	Speicher 1
 		TA2 - TA-Datei verbessern
 		Sca - Laden 2
+	Code 1
+		Merge LadeAktion mit LadeAktionB
 
 Stufe 2
 	Overlay 2
-		Texte Aussehen
+		Schrift Aussehen
 	Welt 2
 		Welt generieren
+	Movement 2
+		Abstract extends NBB mit Abstract Movement
 	Gameplay 2
 		Sinnvolles Attk
 		Schadensleiste einbauen
 		Fallende Blöcke
 	Speicher 2
 		Mehrsprachig Text lagern
+		Einstellungs-Editor
 
 Stufe 3
 	Grafik 3
-		Reflexion
-	Movement 3
-		Einsetzbare Aktionen
+		Metall-Reflexion
 	Gameplay 3
 		Item-System
-		Debuff-Aura-System
-		Teil-System
-		Level-System
+		Essenz-System
+		Level-Depower-System
+		Level-Auswahl

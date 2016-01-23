@@ -20,8 +20,7 @@ public class H extends External
 	private final K4[][] punkteK;
 	final int nlen;
 	private final int[][] seeds;
-	private final Random r;
-	XFarbe fn;
+	private XFarbe fn;
 
 	public H(double w, double h, int wt, int ht, int nlen,
 			double wwl, double hwl, double len)
@@ -35,7 +34,7 @@ public class H extends External
 		h2a = new Achse[ht][wt][nlen];
 		punkte = new K4[ht * wt * nlen][];
 		punkteK = new K4[ht * wt * nlen][];
-		r = new Random();
+		Random r = new Random();
 		for(int i = 0; i < ht; i++)
 			for(int j = 0; j < wt; j++)
 			{

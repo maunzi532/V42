@@ -1,9 +1,8 @@
 package wahr.zugriff;
 
+import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
 import ansicht.n2.xF.*;
-import nonBlock.aktion.seq.*;
-import nonBlock.aktion.move.*;
 import wahr.physisch.*;
 
 import java.util.*;

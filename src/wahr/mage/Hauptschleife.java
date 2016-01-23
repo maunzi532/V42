@@ -5,7 +5,7 @@ import ansicht.n2.*;
 import block.*;
 import block.generierung.*;
 import nonBlock.aktion.*;
-import nonBlock.aktion.seq.*;
+import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
 import nonBlock.aussehen.ext.*;
 import nonBlock.collide.*;
@@ -19,7 +19,6 @@ import java.util.*;
 public class Hauptschleife
 {
 	private static TSSA n;
-	private static TSSA n2;
 	private static Zeichner z;
 	private static N2[] n2s2;
 
@@ -54,7 +53,7 @@ public class Hauptschleife
 		n.dreh = new Drehung(1, 0);
 		n.init();
 
-		n2 = new TSSA(new Controller()
+		TSSA n2 = new TSSA(new Controller()
 		{
 			public ArrayList<String> giveCommands()
 			{
@@ -107,6 +106,11 @@ public class Hauptschleife
 
 			public void doCommand(String command)
 			{
+				if(command.equals("B"))
+				{
+					WeltND.nfr = false;
+					WeltND.seq = new Sequenz(Index.gibLadeSequenz("TPSQ"), this, n);
+				}
 				if(command.equals("C"))
 				{
 					WeltND.nfr = false;

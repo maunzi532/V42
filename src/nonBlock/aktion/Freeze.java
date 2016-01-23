@@ -24,7 +24,7 @@ public class Freeze extends LinAAktion
 		target.aktionen.add(ak);
 	}
 
-	protected Integer[] linA;
+	Integer[] linA;
 
 	public Freeze(NBD besitzer, int dauer, int power, Integer... linA)
 	{

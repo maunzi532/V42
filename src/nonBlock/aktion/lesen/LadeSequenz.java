@@ -1,17 +1,15 @@
-package nonBlock.aktion.move;
+package nonBlock.aktion.lesen;
 
 import java.util.*;
 
-public class LadeMove
+public class LadeSequenz
 {
-	final ArrayList<LadeAktionB> aktionen;
+	final ArrayList<LadeAktion> aktionen;
 	int teilE;
 	final ArrayList<Integer> zeitE;
-	final String name;
 
-	public LadeMove(String name, String code)
+	public LadeSequenz(String code)
 	{
-		this.name = name;
 		zeitE = new ArrayList<>();
 		aktionen = new ArrayList<>();
 		String cde1 = code.replace("\n	", "|");
@@ -28,7 +26,7 @@ public class LadeMove
 				else
 				{
 					String[] cd2 = cde[i].split(" ");
-					aktionen.add(new LadeAktionB(teilE, cd2));
+					aktionen.add(new LadeAktion(teilE, cd2));
 				}
 			}
 		}

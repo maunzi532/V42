@@ -7,7 +7,7 @@ public class MDAktion extends Aktion
 	private final Boolean[] mvdA;
 	private final double[] mvd0;
 	private final double[] mvdT;
-	Forced forced;
+	private Forced forced;
 
 	public MDAktion(NBD besitzer, int dauer, int power, double[] mvd, Boolean[] mvdA)
 	{

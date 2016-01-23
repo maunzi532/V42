@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class XFD extends XFarbe
 {
-	Color farb;
+	private Color farb;
 
 	public XFD(Color farb)
 	{

@@ -1,4 +1,4 @@
-package nonBlock.aktion.move;
+package nonBlock.aktion.lesen;
 
 import nonBlock.collide.*;
 
@@ -8,7 +8,7 @@ public class Move
 	private int teilA;
 	private int zeitA;
 	private final NBB akteur;
-	private AttkAktion ender;
+	private ZDelay ender;
 	public final String name;
 
 	public Move(LadeMove lad, NBB akteur)
@@ -22,16 +22,20 @@ public class Move
 	{
 		for(int i = 0; i < lad.aktionen.size(); i++)
 		{
-			LadeAktionB lad1 = lad.aktionen.get(i);
+			LadeAktion lad1 = lad.aktionen.get(i);
 			if(lad1.teil == teilA && lad1.zeit == zeitA)
 			{
-				AttkAktion a = lad1.erzeugeAktion(akteur);
+				ZDelay a = lad1.erzeugeAktion(akteur);
 				if(a != null)
 					ender = a;
 			}
 		}
-		if(zeitA >= lad.zeitE.get(teilA) +
-				(ender == null || ender.attk.con.size() == 0 ? 0 : ender.delay))
+		boolean fertig;
+		if(ender == null)
+			fertig = zeitA >= lad.zeitE.get(teilA);
+		else
+			fertig = ender.fertig(zeitA - lad.zeitE.get(teilA));
+		if(fertig)
 		{
 			teilA++;
 			zeitA = -1;

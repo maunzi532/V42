@@ -2,11 +2,11 @@ package nonBlock.controllable;
 
 import ansicht.*;
 import block.*;
+import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
 import nonBlock.*;
 import nonBlock.aktion.*;
 import nonBlock.collide.*;
-import nonBlock.aktion.move.*;
 import wahr.zugriff.*;
 
 public class Tha extends TSSA

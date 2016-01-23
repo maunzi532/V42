@@ -4,9 +4,9 @@ import wahr.zugriff.*;
 
 public class Forced
 {
-	boolean[] affected;
+	private boolean[] affected;
 	K4 movement;
-	int power;
+	private int power;
 
 	public Forced(boolean[] affected, K4 movement, int power)
 	{

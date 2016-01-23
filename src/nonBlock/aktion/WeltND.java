@@ -2,7 +2,7 @@ package nonBlock.aktion;
 
 import ansicht.*;
 import nonBlock.*;
-import nonBlock.aktion.seq.*;
+import nonBlock.aktion.lesen.*;
 import wahr.zugriff.*;
 
 import java.util.*;

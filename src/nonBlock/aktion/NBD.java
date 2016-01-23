@@ -10,8 +10,8 @@ public abstract class NBD extends NonBlock
 {
 	public LinAAktion[] resLink;
 	public final ArrayList<Aktion> aktionen;
-	public K4 bewegung;
-	public ArrayList<K4> beweg;
+	protected K4 bewegung;
+	protected ArrayList<K4> beweg;
 	public ArrayList<Forced> forced;
 	public AlternateStandard standard = null;
 	public Aktion currentTrans = null;
