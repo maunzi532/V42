@@ -92,20 +92,6 @@ public class Index
 			return new AlternateStandard(replace(Lader.gibText(teilNamen.get(name)), replace));
 	}
 
-	public static LadeSequenz gibLadeSequenz(String name, String... replace)
-	{
-		if(replace.length <= 0)
-		{
-			if(geladen.containsKey(name))
-				return (LadeSequenz) geladen.get(name);
-			LadeSequenz s = new LadeSequenz(Lader.gibText(teilNamen.get(name)));
-			geladen.put(name, s);
-			return s;
-		}
-		else
-			return new LadeSequenz(replace(Lader.gibText(teilNamen.get(name)), replace));
-	}
-
 	public static LadeMove gibLadeMove(String name, String... replace)
 	{
 		if(replace.length <= 0)

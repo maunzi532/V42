@@ -11,7 +11,7 @@ public class WeltND
 {
 	public static final ArrayList<NonBlock> nonBlocks = new ArrayList<>();
 	public static final ArrayList<Licht> licht = new ArrayList<>();
-	public static Sequenz seq = null;
+	public static Move seq = null;
 	public static boolean nfr = true;
 
 	public static void timetickN()

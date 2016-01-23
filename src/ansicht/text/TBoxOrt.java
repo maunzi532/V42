@@ -1,6 +1,6 @@
 package ansicht.text;
 
-public class TBoxOrt
+class TBoxOrt
 {
 	double x;
 	double y;

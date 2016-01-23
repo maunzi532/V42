@@ -109,12 +109,12 @@ public class Hauptschleife
 				if(command.equals("B"))
 				{
 					WeltND.nfr = false;
-					WeltND.seq = new Sequenz(Index.gibLadeSequenz("TPSQ"), this, n);
+					WeltND.seq = new Move(Index.gibLadeMove("TPSQ"), this, n);
 				}
 				if(command.equals("C"))
 				{
 					WeltND.nfr = false;
-					WeltND.seq = new Sequenz(Index.gibLadeSequenz("TSQ"), this, n);
+					WeltND.seq = new Move(Index.gibLadeMove("TSQ"), this, n);
 				}
 			}
 		};

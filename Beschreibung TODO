@@ -3,7 +3,6 @@ Bug-Stufe
 		Vermutlich Fensterrahmen Bug
 		TSSA 2 Boden Glitch
 		Stürzt bei Block 3 beinhart ab
-		Teleport gehört getestet
 
 Nicht sicher
 		4D-Daten des aktuellen Felds anzeigen
@@ -25,8 +24,6 @@ Stufe 1
 	Speicher 1
 		TA2 - TA-Datei verbessern
 		Sca - Laden 2
-	Code 1
-		Merge LadeAktion mit LadeAktionB
 
 Stufe 2
 	Overlay 2
