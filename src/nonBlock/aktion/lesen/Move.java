@@ -27,7 +27,6 @@ public class Move
 		this.akteure = akteure;
 		akteur = null;
 		this.lad = lad;
-		WeltND.nfr = false;
 		name = lad.name;
 		seq = true;
 	}
@@ -54,11 +53,7 @@ public class Move
 			zeitA = -1;
 			ender = null;
 			if(teilA >= lad.teilE)
-			{
-				if(seq)
-					WeltND.nfr = true;
 				return true;
-			}
 		}
 		zeitA++;
 		return false;

@@ -32,17 +32,17 @@ public class BlockBox
 		this.airshift = airshift;
 	}
 
-	public K4 check(K4 mov)
+	public K4 check(K4 mov, WeltB welt)
 	{
 		double[] mov1 = new double[4];
 		mov1[0] = mov.a;
 		mov1[1] = mov.b;
 		mov1[2] = mov.c;
 		mov1[3] = mov.d;
-		return check(mov1);
+		return check(mov1, welt);
 	}
 
-	private K4 check(double[] mov1)
+	private K4 check(double[] mov1, WeltB welt)
 	{
 		double len = Math.sqrt(mov1[0] * mov1[0] + mov1[1] * mov1[1] + mov1[2] * mov1[2] + mov1[3] * mov1[3]);
 		if(len <= 0)
@@ -79,8 +79,8 @@ public class BlockBox
 							besitzer.position.d + reMov[3] + ee[3]
 					};
 					chee[k1] += cha + movStep[k1] - ee[k1];
-					WBP p0 = Koord.tw(chse);
-					WBP p1 = Koord.tw(chee);
+					WBP p0 = welt.tw(chse);
+					WBP p1 = welt.tw(chee);
 					if(p0.k[k1] != p1.k[k1])
 					{
 						p0.k[k1] = p1.k[k1];
@@ -88,7 +88,7 @@ public class BlockBox
 							for(int jb = p0.k[1]; jb <= p1.k[1]; jb++)
 								for(int jc = p0.k[2]; jc <= p1.k[2]; jc++)
 									for(int jd = p0.k[3]; jd <= p1.k[3]; jd++)
-										if(WeltB.opaque(WeltB.gib(new WBP(ja, jb, jc, jd))))
+										if(welt.opaque(welt.gib(new WBP(ja, jb, jc, jd))))
 										{
 											end[k1] = i;
 											fin[k1] = movStep[k1] * i;
@@ -105,17 +105,17 @@ public class BlockBox
 		return new K4(fin[0], fin[1], fin[2], fin[3]);
 	}
 
-	public boolean checkOnly(K4 mov)
+	public boolean checkOnly(K4 mov, WeltB welt)
 	{
 		double[] mov1 = new double[4];
 		mov1[0] = mov.a;
 		mov1[1] = mov.b;
 		mov1[2] = mov.c;
 		mov1[3] = mov.d;
-		return checkOnly(mov1);
+		return checkOnly(mov1, welt);
 	}
 
-	public boolean checkOnly(double[] mov1)
+	public boolean checkOnly(double[] mov1, WeltB welt)
 	{
 		double len = Math.sqrt(mov1[0] * mov1[0] + mov1[1] * mov1[1] + mov1[2] * mov1[2] + mov1[3] * mov1[3]);
 		if(len <= 0)
@@ -151,8 +151,8 @@ public class BlockBox
 							besitzer.position.d + reMov[3] + ee[3]
 					};
 					chee[k1] += cha + movStep[k1] - ee[k1];
-					WBP p0 = Koord.tw(chse);
-					WBP p1 = Koord.tw(chee);
+					WBP p0 = welt.tw(chse);
+					WBP p1 = welt.tw(chee);
 					if(p0.k[k1] != p1.k[k1])
 					{
 						p0.k[k1] = p1.k[k1];
@@ -160,7 +160,7 @@ public class BlockBox
 							for(int jb = p0.k[1]; jb <= p1.k[1]; jb++)
 								for(int jc = p0.k[2]; jc <= p1.k[2]; jc++)
 									for(int jd = p0.k[3]; jd <= p1.k[3]; jd++)
-										if(WeltB.opaque(WeltB.gib(new WBP(ja, jb, jc, jd))))
+										if(welt.opaque(welt.gib(new WBP(ja, jb, jc, jd))))
 											return false;
 					}
 					if(end[k1] == -1)
@@ -171,11 +171,11 @@ public class BlockBox
 		return true;
 	}
 
-	public boolean checkWand(int welche, double abstand)
+	public boolean checkWand(int welche, double abstand, WeltB welt)
 	{
 		double[] c1 = new double[4];
 		for(int i = 0; i < 4; i++)
 			c1[i] = wandRichtung[welche][i] * abstand;
-		return !checkOnly(c1);
+		return !checkOnly(c1, welt);
 	}
 }

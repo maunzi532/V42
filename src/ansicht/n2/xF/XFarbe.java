@@ -1,7 +1,6 @@
 package ansicht.n2.xF;
 
 import ansicht.n2.*;
-import nonBlock.aktion.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
@@ -52,23 +51,25 @@ public abstract class XFarbe
 
 	private static Color shade(Color fc, F2 f, Material mat)
 	{
+		if(f.lw == null)
+			return fc;
 		double power = mat.startPower;
-		for(int i = 0; i < WeltND.licht.size(); i++)
+		for(int i = 0; i < f.lw.licht.size(); i++)
 		{
-			K4 lr = K4.diff(WeltND.licht.get(i).lichtPosition(), f.mid1());
+			K4 lr = K4.diff(f.lw.licht.get(i).lichtPosition(), f.mid1());
 			/*if(true)
 				return limit(fc, (int) (1 / Math.abs(lr.a) * -100),
 						(int) (1 / Math.abs(lr.b) * -100), (int) (1 / Math.abs(lr.c) * -100));*/
 			double ld = Math.sqrt(lr.a * lr.a + lr.b * lr.b + lr.c * lr.c);
 			/*if(true)
 				return limit(fc, (int) (ld * -1), (int) (ld * -1), 0);*/
-			if(ld > WeltND.licht.get(i).lichtRange())
+			if(ld > f.lw.licht.get(i).lichtRange())
 				continue;
-			double pow = WeltND.licht.get(i).lichtPower();
-			pow -= ld * WeltND.licht.get(i).lichtPowerDecay();
+			double pow = f.lw.licht.get(i).lichtPower();
+			pow -= ld * f.lw.licht.get(i).lichtPowerDecay();
 			pow *= mat.lichtAffection;
 			if(f.eckenNK != null && mat.shadeMultiplier != 0)
-				pow -= shadeWinkel(f, WeltND.licht.get(i).lichtPosition()) * mat.shadeMultiplier;
+				pow -= shadeWinkel(f, f.lw.licht.get(i).lichtPosition()) * mat.shadeMultiplier;
 			if(pow > power)
 				power = pow;
 		}

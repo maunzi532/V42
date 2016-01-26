@@ -14,6 +14,7 @@ public abstract class F2 extends N2
 	public int spld;
 	public int seed;
 	public int splseed;
+	public LichtW lw;
 
 	private int[] xe;
 	private int[] ye;

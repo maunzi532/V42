@@ -1,5 +1,6 @@
 package ansicht.n2;
 
+import ansicht.*;
 import ansicht.n2.xF.*;
 import wahr.zugriff.*;
 
@@ -18,7 +19,7 @@ public class NF2 extends F2
 	}
 
 	public NF2(K4[] ecken, K4[] eckenNK, K4[] spken, XFarbe farbe,
-			Boolean seite, int spld, int seed, long tn)
+			Boolean seite, LichtW lw, int spld, int seed, long tn)
 	{
 		block = false;
 		this.ecken = ecken;
@@ -26,12 +27,13 @@ public class NF2 extends F2
 		this.spken = spken;
 		this.farbe = farbe;
 		this.seite = seite;
+		this.lw = lw;
 		this.spld = spld;
 		this.seed = seed;
 		this.tn = tn;
 	}
 
-	public NF2(K4[] ecken, K4[] eckenNK, XFarbe farbe, Boolean seite, int seed, int splseed, long tn)
+	public NF2(K4[] ecken, K4[] eckenNK, XFarbe farbe, Boolean seite, LichtW lw, int seed, int splseed, long tn)
 	{
 		block = false;
 		this.ecken = ecken;
@@ -39,6 +41,7 @@ public class NF2 extends F2
 		this.farbe = farbe;
 		spken = null;
 		this.seite = seite;
+		this.lw = lw;
 		spld = 0;
 		this.seed = seed;
 		this.splseed = splseed;

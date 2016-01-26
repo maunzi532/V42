@@ -7,15 +7,22 @@ import wahr.zugriff.*;
 
 import java.util.*;
 
-public class Kamera extends NBD implements Controllable, Licht
+public class GMKamera extends NBD implements Controllable, Licht
 {
 	private final Controller control;
 	public double[] canInfl;
+	private WeltB welt;
 
-	public Kamera(Controller control)
+	public GMKamera(Controller control, WeltB welt, WeltND dw)
 	{
-		super();
+		super(null, dw);
+		this.welt = welt;
 		this.control = control;
+	}
+
+	public GMKamera(Controller control, AllWelt aw)
+	{
+		this(control, aw.wbl, aw.dw);
 	}
 
 	public K4 kamP()
@@ -71,13 +78,13 @@ public class Kamera extends NBD implements Controllable, Licht
 			case "Hoch":
 				if(Overlay.pa.tnTarget != null && Overlay.pa.tnTarget >= 0)
 				{
-					WBP p = Koord.decodeTn(Overlay.pa.tnTarget);
-					WeltB.set(p, WeltB.gib(p) + 1);
+					WBP p = welt.decodeTn(Overlay.pa.tnTarget);
+					welt.set(p, welt.gib(p) + 1);
 				}
 				break;
 			case "Weg":
 				if(Overlay.pa.tnTarget != null && Overlay.pa.tnTarget >= 0)
-					WeltB.set(Koord.decodeTn(Overlay.pa.tnTarget), 0);
+					welt.set(welt.decodeTn(Overlay.pa.tnTarget), 0);
 				break;
 		}
 	}

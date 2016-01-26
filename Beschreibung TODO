@@ -26,6 +26,8 @@ Stufe 1
 		Sca - Laden 2
 
 Stufe 2
+	Grafik 2
+		Metall-Reflexion
 	Overlay 2
 		Schrift Aussehen
 	Welt 2
@@ -41,8 +43,6 @@ Stufe 2
 		Einstellungs-Editor
 
 Stufe 3
-	Grafik 3
-		Metall-Reflexion
 	Gameplay 3
 		Item-System
 		Essenz-System

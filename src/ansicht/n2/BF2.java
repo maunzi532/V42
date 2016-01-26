@@ -1,5 +1,6 @@
 package ansicht.n2;
 
+import ansicht.*;
 import ansicht.n2.xF.*;
 import wahr.zugriff.*;
 
@@ -33,7 +34,7 @@ public class BF2 extends F2
 		}
 	}
 
-	public BF2(K4[] spken, K4[] eckenNK, XFarbe farbe, Boolean seite,
+	public BF2(K4[] spken, K4[] eckenNK, XFarbe farbe, Boolean seite, LichtW lw,
 			int seitenwand, double rend, double gend, long tn)
 	{
 		block = true;
@@ -41,6 +42,7 @@ public class BF2 extends F2
 		this.eckenNK = eckenNK;
 		this.farbe = farbe;
 		this.seite = seite;
+		this.lw = lw;
 		this.seitenwand = seitenwand;
 		this.rend = rend;
 		this.gend = gend;
@@ -55,6 +57,7 @@ public class BF2 extends F2
 		eckenNK = main.eckenNK;
 		farbe = main.farbe;
 		seite = main.seite;
+		lw = main.lw;
 		seitenwand = main.seitenwand;
 		rend = main.rend;
 		gend = main.gend;

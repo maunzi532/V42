@@ -1,5 +1,7 @@
 package block.generierung;
 
+import block.*;
+
 import java.util.*;
 
 public class LabG extends Generator
@@ -20,12 +22,12 @@ public class LabG extends Generator
 	private int[] size;
 	private int[] position;
 
-	public void gibInWelt(Object... z)
+	public void gibInWelt(WeltB welt, Object... z)
 	{
 		int dim = (Integer)z[0];
 		int sa = (Integer)z[1];
 		size = new int[]{sa, dim > 2 ? sa : 1, sa, dim > 3 ? sa : 1};
-		super.gibInWelt();
+		super.gibInWelt(welt);
 	}
 
 	public int[][][][] generiere()

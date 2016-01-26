@@ -4,7 +4,6 @@ import ansicht.*;
 import block.*;
 import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
-import nonBlock.*;
 import nonBlock.aktion.*;
 import nonBlock.collide.*;
 import wahr.zugriff.*;
@@ -14,15 +13,20 @@ public class Tha extends TSSA
 	private NBB fL;
 	private NBB fR;
 
-	public Tha()
+	public Tha(WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
-		super(new KController());
+		super(new KController(), welt, lw, dw, bw);
+	}
+
+	public Tha(AllWelt aw)
+	{
+		this(aw.wbl, aw.lw, aw.dw, aw.bw);
 	}
 
 	public void init()
 	{
 		super.init();
-		fL = new NBB()
+		fL = new NBB(welt, lw, dw, bw)
 		{
 			public void collide(Attk attk){}
 			public void actCollide(Attk attk){}
@@ -34,7 +38,7 @@ public class Tha extends TSSA
 		fL.aussehen = new LadeModell().reload(Index.gibLadeTeil("H4_X"));
 		fL.focus = new Mount(fL, this, 15, 0, new Drehung(0, Math.PI * 3 / 2), 0);
 		fL.init();
-		fR = new NBB()
+		fR = new NBB(welt, lw, dw, bw)
 		{
 			public void collide(Attk attk){}
 			public void actCollide(Attk attk){}
@@ -92,7 +96,7 @@ public class Tha extends TSSA
 	{
 		if(command.equals("A"))
 		{
-			NBB f = new NBB()
+			NBB f = new NBB(welt, lw, dw, bw)
 			{
 				public void collide(Attk attk)
 				{
@@ -192,12 +196,12 @@ public class Tha extends TSSA
 				{
 					if(attemptAirgrab(0, position, position.d))
 					{
-						if(position.d - Koord.intiize(position.d / Koord.weltBlock.d) *
-								Koord.weltBlock.d < Staticf.zpSpeed)
+						if(position.d - welt.intiize(position.d / welt.weltBlock.d) *
+								welt.weltBlock.d < Staticf.zpSpeed)
 							attemptAirgrab(0, new K4(position.a, position.b, position.c,
 									position.d - Staticf.zpSpeed), position.d - Staticf.zpSpeed / 2);
-						if(position.d - Koord.intiize(position.d / Koord.weltBlock.d) *
-								Koord.weltBlock.d > Koord.weltBlock.d - Staticf.zpSpeed)
+						if(position.d - welt.intiize(position.d / welt.weltBlock.d) *
+								welt.weltBlock.d > welt.weltBlock.d - Staticf.zpSpeed)
 							attemptAirgrab(0, new K4(position.a, position.b, position.c,
 									position.d + Staticf.zpSpeed), position.d + Staticf.zpSpeed / 2);
 					}

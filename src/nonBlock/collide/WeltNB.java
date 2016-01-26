@@ -1,18 +1,23 @@
 package nonBlock.collide;
 
-import nonBlock.aktion.*;
 import wahr.zugriff.*;
 
 import java.util.*;
 
 public class WeltNB
 {
-	public static final ArrayList<NBB> vta = new ArrayList<>();
-	public static final ArrayList<Attk> attks = new ArrayList<>();
+	public final ArrayList<NBB> vta = new ArrayList<>();
+	public final ArrayList<Attk> attks = new ArrayList<>();
+	private final AllWelt aw;
 
-	public static void timetick()
+	public WeltNB(AllWelt aw)
 	{
-		if(WeltND.nfr && !UIVerbunden.godMode)
+		this.aw = aw;
+	}
+
+	public void timetick()
+	{
+		if(aw.dw.nofreeze())
 		{
 			for(int i = 0; i < vta.size(); i++)
 				for(int j = 0; j < vta.get(i).cTime.size(); j++)

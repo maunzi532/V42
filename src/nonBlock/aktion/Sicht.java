@@ -27,7 +27,7 @@ public class Sicht extends LinAAktion
 
 	public void tick()
 	{
-		if(Overlay.sichtAn && (gm ? UIVerbunden.godMode : WeltND.nfr))
+		if(Overlay.sichtAn && (gm ? UIVerbunden.godMode : (besitzer.dw.nofreeze() && !UIVerbunden.godMode)))
 		{
 			besitzer.linkAchsen[linAl].dreh.wl -= UIVerbunden.mausv.x * 1.1d / UIVerbunden.sc.width;
 			besitzer.linkAchsen[linAl].dreh.sichern();

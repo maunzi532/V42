@@ -2,7 +2,6 @@ package wahr.mage;
 
 import ansicht.*;
 import ansicht.n2.*;
-import block.*;
 import block.generierung.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
@@ -21,17 +20,20 @@ public class Hauptschleife
 	private static TSSA n;
 	private static Zeichner z;
 	private static N2[] n2s2;
+	private static AllWelt aw;
 
 	public static void init()
 	{
+		aw = new AllWelt();
 		Generator g = new WeltLeser();
-		g.gibInWelt("Levels/Test1");
+		g.gibInWelt(aw.wbl, "Levels/Test1");
 		//g.gibInWelt("Levels/Generiert1");
 		//g.gibInWelt();
 		//g.gibInWelt(4, 4);
-		Koord.setzeSE(new K4(0, 0, 0, 0), new K4(20, 20, 20, 20));
+		aw.wbl.setzeSE(new K4(0, 0, 0, 0), new K4(20, 20, 20, 20));
 		g.ermittleStart();
-		n = new Tha();
+
+		n = new Tha(aw);
 		n.aussehen = new LadeModell().reload(
 				Index.gibLadeTeil("T_H"),
 				Index.gibLadeTeil("T_B"),
@@ -48,7 +50,7 @@ public class Hauptschleife
 				new H(0.2, 0.5, 4, 10, 3, 0.7, 0, 0.9),
 				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9)
 		);
-		n.position = WeltB.starts[0];
+		n.position = aw.wbl.starts[0];
 		n.position.b += n.block.get(0).airshift;
 		n.dreh = new Drehung(1, 0);
 		n.init();
@@ -78,7 +80,7 @@ public class Hauptschleife
 					cmd.add("hinten");
 				return cmd;
 			}
-		})
+		}, aw)
 		{
 			public void collide(Attk attk)
 			{
@@ -108,13 +110,11 @@ public class Hauptschleife
 			{
 				if(command.equals("B"))
 				{
-					WeltND.nfr = false;
-					WeltND.seq = new Move(Index.gibLadeMove("TPSQ"), this, n);
+					dw.seq = new Move(Index.gibLadeMove("TPSQ"), this, n);
 				}
 				if(command.equals("C"))
 				{
-					WeltND.nfr = false;
-					WeltND.seq = new Move(Index.gibLadeMove("TSQ"), this, n);
+					dw.seq = new Move(Index.gibLadeMove("TSQ"), this, n);
 				}
 			}
 		};
@@ -134,13 +134,13 @@ public class Hauptschleife
 				new H2(n2, 0.2, 0.5, 4, 10, 3, 0.7, 0, 0.55),
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55)
 				);
-		n2.position = WeltB.starts[1];
+		n2.position = aw.wbl.starts[1];
 		n2.position.b += n2.block.get(0).airshift;
 		n2.dreh = new Drehung(Math.PI, 0);
 		n2.init();
 		UIVerbunden.kamN = n;
 		UIVerbunden.kamA = UIVerbunden.kamN;
-		z = new Zeichner(Index.gibText("SPL"));
+		z = new Zeichner(Index.gibText("SPL"), aw);
 		n2.collidable.add(new ColBox(n2, 0, new EndScheibe(4), new EndScheibe(4), 1, 1));
 		n2.physik.add(new ColBox(n2, 69, new EndScheibe(1.5), new EndScheibe(1.0), 1.1));
 		n2.physik.add(new ColBox(n2, 78, new EndScheibe(1.0), new EndScheibe(0.7), 0.7));
@@ -150,9 +150,9 @@ public class Hauptschleife
 		n.aktionen.add(new Sicht(n, 10, 67, 67, false));
 		UIVerbunden.zp = new ZP4C(n, 0);
 		n.aktionen.add(UIVerbunden.zp);
-		WeltND.licht.add(n);
-		WeltND.licht.add(n2);
-		UIVerbunden.godModeKam = new Kamera(new GMC());
+		aw.lw.licht.add(n);
+		aw.lw.licht.add(n2);
+		UIVerbunden.godModeKam = new GMKamera(new GMC(), aw);
 		UIVerbunden.godModeKam.position = new K4(n.position);
 		UIVerbunden.godModeKam.dreh = new Drehung();
 		UIVerbunden.godModeKam.canInfl = new double[]{1, 1, 1, 1};
@@ -170,6 +170,11 @@ public class Hauptschleife
 			throw new RuntimeException(e);
 		}
 		LPaneel.setC0();
+	}
+
+	public static void initOverlay()
+	{
+		Overlay.initOverlay(aw);
 	}
 
 	public static boolean eingabe()
@@ -227,13 +232,13 @@ public class Hauptschleife
 			{
 				UIVerbunden.kamA = UIVerbunden.godModeKam;
 				Overlay.normalSchalter.addAll(Overlay.godModeSchalter);
-				WeltND.licht.add(UIVerbunden.godModeKam);
+				aw.lw.licht.add(UIVerbunden.godModeKam);
 			}
 			else
 			{
 				UIVerbunden.kamA = UIVerbunden.kamN;
 				Overlay.normalSchalter.removeAll(Overlay.godModeSchalter);
-				WeltND.licht.remove(UIVerbunden.godModeKam);
+				aw.lw.licht.remove(UIVerbunden.godModeKam);
 				UIVerbunden.xrmode = false;
 				UIVerbunden.siehBlocks = true;
 				UIVerbunden.siehNonBlocks = true;
@@ -246,11 +251,11 @@ public class Hauptschleife
 
 	public static void logik()
 	{
-		WeltND.timetickN();
+		aw.dw.timetickN();
 		Staticf.sca("WeltND tN (7) ");
-		WeltNB.timetick();
+		aw.bw.timetick();
 		Staticf.sca("WeltNB t (0) ");
-		WeltND.timetickD();
+		aw.dw.timetickD();
 		Staticf.sca("WeltND tD (0) ");
 	}
 

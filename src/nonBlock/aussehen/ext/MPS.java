@@ -1,5 +1,6 @@
 package nonBlock.aussehen.ext;
 
+import ansicht.*;
 import ansicht.n2.*;
 import wahr.zugriff.*;
 
@@ -20,7 +21,7 @@ public class MPS extends External
 
 	}
 
-	public ArrayList<F2> gibFl(K4[][] into)
+	public ArrayList<F2> gibFl(K4[][] into, LichtW lw)
 	{
 		return null;
 	}

@@ -1,6 +1,5 @@
 package wahr.physisch;
 
-import ansicht.*;
 import wahr.mage.*;
 import wahr.zugriff.*;
 
@@ -13,7 +12,7 @@ public class ThaCre2A
 		LPaneel.init1();
 		Hauptschleife.init();
 		LPaneel.init2();
-		Overlay.initOverlay();
+		Hauptschleife.initOverlay();
 		LagZeit.start();
 		ZeitVerwalter.start();
 		System.exit(0);

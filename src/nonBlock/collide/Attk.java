@@ -35,7 +35,7 @@ public class Attk
 			h.get(i).dauerNoch = h.get(i).dauer;
 		}
 		besitzer.attks.add(this);
-		WeltNB.attks.add(this);
+		besitzer.bw.attks.add(this);
 	}
 
 	public void reset()
@@ -49,7 +49,7 @@ public class Attk
 	public void ende()
 	{
 		besitzer.attks.remove(this);
-		WeltNB.attks.remove(this);
+		besitzer.bw.attks.remove(this);
 	}
 
 	public void resolve()

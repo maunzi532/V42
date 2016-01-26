@@ -1,7 +1,6 @@
 package ansicht;
 
 import ansicht.text.*;
-import block.*;
 import wahr.physisch.*;
 import wahr.zugriff.*;
 
@@ -18,9 +17,11 @@ public class Overlay
 	public static ArrayList<SLF> godModeSchalter;
 	public static boolean sichtAn = true;
 	public static Panelizer pa;
+	private static AllWelt aw;
 
-	public static void initOverlay()
+	public static void initOverlay(AllWelt awA)
 	{
+		aw = awA;
 		UIVerbunden.mausLast = new Point(UIVerbunden.sc.width / 2, UIVerbunden.sc.height / 2);
 		Point mm = LPaneel.fr.getLocationOnScreen();
 		UIVerbunden.ro.mouseMove(UIVerbunden.sc.width / 2 + mm.x, UIVerbunden.sc.height / 2 + mm.y);
@@ -164,15 +165,31 @@ public class Overlay
 				text = String.valueOf(Staticf.xraywidth);
 			}
 		});
+		godModeSchalter.add(new SLF(sl, true, 0.25, 0.5, 0.1, 0.05)
+		{
+			public void onClick(boolean r, double cx, double cy)
+			{
+				aw.dw.gmFreeze = !aw.dw.gmFreeze;
+				super.onClick(r, cx, cy);
+			}
+
+			public void tick()
+			{
+				if(aw.dw.gmFreeze)
+					text = "Gestoppt";
+				else
+					text = "Stop";
+			}
+		});
 		godModeSchalter.add(new SLF(sl, true, 0.4, 0.1, 0.1, 0.05, "Speichern")
 		{
 			public void onClick(boolean r, double cx, double cy)
 			{
-				WeltB.speichern("Levels/Test1", Staticf.wspg.k);
+				aw.wbl.speichern("Levels/Test1", Staticf.wspg.k);
 				super.onClick(r, cx, cy);
 			}
 		});
-		godModeSchalter.add(new Schieber(sl, 0.4, 0.2, 0.2, 0.025, 0, 100, Koord.end[0])
+		godModeSchalter.add(new Schieber(sl, 0.4, 0.2, 0.2, 0.025, 0, 100, aw.wbl.end[0])
 		{
 			public void tick()
 			{
@@ -180,7 +197,7 @@ public class Overlay
 				text = String.valueOf(Staticf.wspg.k[0]);
 			}
 		});
-		godModeSchalter.add(new Schieber(sl, 0.4, 0.225, 0.2, 0.025, 0, 100, Koord.end[1])
+		godModeSchalter.add(new Schieber(sl, 0.4, 0.225, 0.2, 0.025, 0, 100, aw.wbl.end[1])
 		{
 			public void tick()
 			{
@@ -188,7 +205,7 @@ public class Overlay
 				text = String.valueOf(Staticf.wspg.k[1]);
 			}
 		});
-		godModeSchalter.add(new Schieber(sl, 0.4, 0.25, 0.2, 0.025, 0, 100, Koord.end[2])
+		godModeSchalter.add(new Schieber(sl, 0.4, 0.25, 0.2, 0.025, 0, 100, aw.wbl.end[2])
 		{
 			public void tick()
 			{
@@ -196,7 +213,7 @@ public class Overlay
 				text = String.valueOf(Staticf.wspg.k[2]);
 			}
 		});
-		godModeSchalter.add(new Schieber(sl, 0.4, 0.275, 0.2, 0.025, 0, 100, Koord.end[3])
+		godModeSchalter.add(new Schieber(sl, 0.4, 0.275, 0.2, 0.025, 0, 100, aw.wbl.end[3])
 		{
 			public void tick()
 			{

@@ -2,8 +2,9 @@ package nonBlock.controllable;
 
 import ansicht.*;
 import block.*;
-import nonBlock.*;
+import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
+import nonBlock.aussehen.*;
 import nonBlock.collide.*;
 import wahr.zugriff.*;
 
@@ -15,10 +16,15 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 	boolean boden;
 	int grabRichtung = -1;
 
-	public TSSA(Controller control)
+	public TSSA(Controller control, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
-		super();
+		super(welt, lw, dw, bw);
 		this.control = control;
+	}
+
+	protected TSSA(Controller control, AllWelt aw)
+	{
+		this(control, aw.wbl, aw.lw, aw.dw, aw.bw);
 	}
 
 	public void kontrolle()
@@ -111,14 +117,14 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 	{
 		if(grabRichtung < 0 && !boden)
 		{
-			WBP p = Koord.tw(dlPosition);
-			K4 dif = K4.diff(Koord.wt(p), dlPosition);
-			if(dif.b < Koord.weltBlock.b - 4 || dif.b > Koord.weltBlock.b)
+			WBP p = welt.tw(dlPosition);
+			K4 dif = K4.diff(welt.wt(p), dlPosition);
+			if(dif.b < welt.weltBlock.b - 4 || dif.b > welt.weltBlock.b)
 			{
 				if(dif.b < 4)
 				{
 					p.k[1]--;
-					dif.b += Koord.weltBlock.b;
+					dif.b += welt.weltBlock.b;
 				}
 				else
 					return true;
@@ -129,16 +135,16 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 				case 0:
 					if(canAirgrab(richtung, dif, new WBP(p)))
 					{
-						K4 fp = Koord.wt2(p);
-						fp.b += Koord.weltBlock.b / 2 + 0.6;
+						K4 fp = welt.wt2(p);
+						fp.b += welt.weltBlock.b / 2 + 0.6;
 						if(richtung % 2 == 0)
 						{
-							fp.c += (Koord.weltBlock.c / 2 - 3.6) * (1 - richtung);
+							fp.c += (welt.weltBlock.c / 2 - 3.6) * (1 - richtung);
 							fp.a = dlPosition.a;
 						}
 						else
 						{
-							fp.a += (Koord.weltBlock.a / 2 - 3.6) * (2 - richtung);
+							fp.a += (welt.weltBlock.a / 2 - 3.6) * (2 - richtung);
 							fp.c = dlPosition.c;
 						}
 						fp.d = dUnedited;
@@ -155,64 +161,64 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 		return true;
 	}
 
-	private static boolean canAirgrab(int richtung, K4 dif, WBP p)
+	private boolean canAirgrab(int richtung, K4 dif, WBP p)
 	{
 		switch(richtung)
 		{
 			case 0:
-				if(dif.c > Koord.weltBlock.c - 8 && dif.c < Koord.weltBlock.c - 2)
+				if(dif.c > welt.weltBlock.c - 8 && dif.c < welt.weltBlock.c - 2)
 				{
-					if(dif.a < 3 || dif.a > Koord.weltBlock.a - 3)
+					if(dif.a < 3 || dif.a > welt.weltBlock.a - 3)
 					{
-						if(!WeltB.tk1(p, richtung))
+						if(!welt.tk1(p, richtung))
 							return false;
-						p.k[0] += dif.a > Koord.weltBlock.a / 2 ? 1 : -1;
-						return WeltB.tk1(p, richtung);
+						p.k[0] += dif.a > welt.weltBlock.a / 2 ? 1 : -1;
+						return welt.tk1(p, richtung);
 					}
 					else
-						return WeltB.tk1(p, richtung);
+						return welt.tk1(p, richtung);
 				}
 				break;
 			case 1:
-				if(dif.a > Koord.weltBlock.a - 8 && dif.a < Koord.weltBlock.a - 2)
+				if(dif.a > welt.weltBlock.a - 8 && dif.a < welt.weltBlock.a - 2)
 				{
-					if(dif.c < 3 || dif.c > Koord.weltBlock.c - 3)
+					if(dif.c < 3 || dif.c > welt.weltBlock.c - 3)
 					{
-						if(!WeltB.tk1(p, richtung))
+						if(!welt.tk1(p, richtung))
 							return false;
-						p.k[2] += dif.c > Koord.weltBlock.c / 2 ? 1 : -1;
-						return WeltB.tk1(p, richtung);
+						p.k[2] += dif.c > welt.weltBlock.c / 2 ? 1 : -1;
+						return welt.tk1(p, richtung);
 					}
 					else
-						return WeltB.tk1(p, richtung);
+						return welt.tk1(p, richtung);
 				}
 				break;
 			case 2:
 				if(dif.c < 8 && dif.c > 2)
 				{
-					if(dif.a < 3 || dif.a > Koord.weltBlock.a - 3)
+					if(dif.a < 3 || dif.a > welt.weltBlock.a - 3)
 					{
-						if(!WeltB.tk1(p, richtung))
+						if(!welt.tk1(p, richtung))
 							return false;
-						p.k[0] += dif.a > Koord.weltBlock.a / 2 ? 1 : -1;
-						return WeltB.tk1(p, richtung);
+						p.k[0] += dif.a > welt.weltBlock.a / 2 ? 1 : -1;
+						return welt.tk1(p, richtung);
 					}
 					else
-						return WeltB.tk1(p, richtung);
+						return welt.tk1(p, richtung);
 				}
 				break;
 			case 3:
 				if(dif.a < 8 && dif.a > 2)
 				{
-					if(dif.c < 3 || dif.c > Koord.weltBlock.c - 3)
+					if(dif.c < 3 || dif.c > welt.weltBlock.c - 3)
 					{
-						if(!WeltB.tk1(p, richtung))
+						if(!welt.tk1(p, richtung))
 							return false;
-						p.k[2] += dif.c > Koord.weltBlock.c / 2 ? 1 : -1;
-						return WeltB.tk1(p, richtung);
+						p.k[2] += dif.c > welt.weltBlock.c / 2 ? 1 : -1;
+						return welt.tk1(p, richtung);
 					}
 					else
-						return WeltB.tk1(p, richtung);
+						return welt.tk1(p, richtung);
 				}
 				break;
 		}
@@ -223,10 +229,10 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 	{
 		if(grabRichtung >= 0)
 		{
-			WBP p = Koord.tw(focus.targetPosition);
+			WBP p = welt.tw(focus.targetPosition);
 			p.k[1]--;
-			K4 dif = K4.diff(Koord.wt(p), focus.targetPosition);
-			if(dif.b > Koord.weltBlock.b)
+			K4 dif = K4.diff(welt.wt(p), focus.targetPosition);
+			if(dif.b > welt.weltBlock.b)
 			{
 				Boolean ck = canKlettern(grabRichtung, dif, p);
 				if(ck != null)
@@ -259,32 +265,32 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 		return true;
 	}
 
-	private static Boolean canKlettern(int richtung, K4 dif, WBP p)
+	private Boolean canKlettern(int richtung, K4 dif, WBP p)
 	{
-		if(richtung % 2 == 0 && (dif.a < 3 || dif.a > Koord.weltBlock.a - 3))
+		if(richtung % 2 == 0 && (dif.a < 3 || dif.a > welt.weltBlock.a - 3))
 		{
-			Boolean k1 = WeltB.tk2(p, richtung);
+			Boolean k1 = welt.tk2(p, richtung);
 			if(k1 == null)
 				return null;
-			p.k[0] += dif.a > Koord.weltBlock.a / 2 ? 1 : -1;
-			Boolean k2 = WeltB.tk2(p, richtung);
+			p.k[0] += dif.a > welt.weltBlock.a / 2 ? 1 : -1;
+			Boolean k2 = welt.tk2(p, richtung);
 			if(k2 == null)
 				return null;
 			return k1 && k2;
 		}
-		else if(richtung % 2 != 0 && (dif.c < 3 || dif.c > Koord.weltBlock.c - 3))
+		else if(richtung % 2 != 0 && (dif.c < 3 || dif.c > welt.weltBlock.c - 3))
 		{
-			Boolean k1 = WeltB.tk2(p, richtung);
+			Boolean k1 = welt.tk2(p, richtung);
 			if(k1 == null)
 				return null;
-			p.k[2] += dif.c > Koord.weltBlock.c / 2 ? 1 : -1;
-			Boolean k2 = WeltB.tk2(p, richtung);
+			p.k[2] += dif.c > welt.weltBlock.c / 2 ? 1 : -1;
+			Boolean k2 = welt.tk2(p, richtung);
 			if(k2 == null)
 				return null;
 			return k1 && k2;
 		}
 		else
-			return WeltB.tk2(p, richtung);
+			return welt.tk2(p, richtung);
 	}
 
 	boolean kletterSeitlich(boolean richtung)
@@ -298,7 +304,7 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 			else
 				p2.a += 3.2 * (2 - kR);
 			p2.b -= 2;
-			if(WeltB.tk1(Koord.tw(p2), grabRichtung))
+			if(welt.tk1(welt.tw(p2), grabRichtung))
 			{
 				if(kR % 2 == 0)
 					focus.targetPosition.c += 0.2 * (1 - kR);

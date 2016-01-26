@@ -50,7 +50,8 @@ public class AltTrans extends Aktion
 	{
 		if(besitzer instanceof NBB)
 		{
-			ArrayList<BlockBox> ba = ((NBB)besitzer).block;
+			NBB be = ((NBB)besitzer);
+			ArrayList<BlockBox> ba = be.block;
 			for(int i = 0; i < ba.size(); i++)
 			{
 				double[] lmo = new double[9];
@@ -63,8 +64,8 @@ public class AltTrans extends Aktion
 						lmo[j] = 0;
 				K4 a1 = new K4(-lmo[0], -lmo[1], -lmo[2], -lmo[3]);
 				K4 a2 = new K4(lmo[4], lmo[5], lmo[6], -lmo[7]);
-				K4 b1 = ba.get(i).check(a1);
-				K4 b2 = ba.get(i).check(a2);
+				K4 b1 = ba.get(i).check(a1, be.welt);
+				K4 b2 = ba.get(i).check(a2, be.welt);
 				if(a1.a != b1.a || a1.b != b1.b || a1.c != b1.c || a1.d != b1.d ||
 						a2.a != b2.a || a2.b != b2.b || a2.c != b2.c || a2.d != b2.d)
 				{
@@ -96,7 +97,8 @@ public class AltTrans extends Aktion
 		needCancel = true;
 		if(besitzer instanceof NBB)
 		{
-			ArrayList<BlockBox> ba = ((NBB)besitzer).block;
+			NBB be = ((NBB)besitzer);
+			ArrayList<BlockBox> ba = be.block;
 			for(int i = 0; i < ba.size(); i++)
 			{
 				double[] lmo = new double[9];
@@ -109,8 +111,8 @@ public class AltTrans extends Aktion
 						lmo[j] = 0;
 				K4 a1 = new K4(-lmo[0], -lmo[1], -lmo[2], -lmo[3]);
 				K4 a2 = new K4(lmo[4], lmo[5], lmo[6], -lmo[7]);
-				K4 b1 = ba.get(i).check(a1);
-				K4 b2 = ba.get(i).check(a2);
+				K4 b1 = ba.get(i).check(a1, be.welt);
+				K4 b2 = ba.get(i).check(a2, be.welt);
 				if(a1.a != b1.a || a1.b != b1.b || a1.c != b1.c || a1.d != b1.d ||
 						a2.a != b2.a || a2.b != b2.b || a2.c != b2.c || a2.d != b2.d)
 				{

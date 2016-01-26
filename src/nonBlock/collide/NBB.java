@@ -1,5 +1,7 @@
 package nonBlock.collide;
 
+import ansicht.*;
+import block.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
 import wahr.zugriff.*;
@@ -16,10 +18,14 @@ public abstract class NBB extends NBD
 	public final NBB nht;
 	public final ArrayList<ColBox> physik;
 	protected final ArrayList<Move> moves;
+	public WeltB welt;
+	public WeltNB bw;
 
-	protected NBB()
+	protected NBB(WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
-		super();
+		super(lw, dw);
+		this.welt = welt;
+		this.bw = bw;
 		block = new ArrayList<>();
 		collidable = new ArrayList<>();
 		connected = new ArrayList<>();
@@ -28,18 +34,23 @@ public abstract class NBB extends NBD
 		attks = new ArrayList<>();
 		physik = new ArrayList<>();
 		moves = new ArrayList<>();
-		WeltNB.vta.add(this);
+		bw.vta.add(this);
+	}
+
+	protected NBB(AllWelt aw)
+	{
+		this(aw.wbl, aw.lw, aw.dw, aw.bw);
 	}
 
 	public void ende()
 	{
-		WeltND.nonBlocks.remove(this);
-		WeltNB.vta.remove(this);
+		dw.nonBlocks.remove(this);
+		bw.vta.remove(this);
 	}
 
 	public void tick()
 	{
-		if(WeltND.nfr)
+		if(dw.nofreeze())
 		{
 			for(int i = 0; i < connected.size(); i++) //Auf Kollisionen testen
 			{
@@ -74,7 +85,7 @@ public abstract class NBB extends NBD
 		K4 eb = new K4(bewegung); //Bewegunsfreiheit testen
 		for(int i = 0; i < block.size(); i++)
 		{
-			K4 eb1 = block.get(i).check(bewegung);
+			K4 eb1 = block.get(i).check(bewegung, welt);
 			if(Math.abs(eb1.a) < Math.abs(eb.a))
 				eb.a = eb1.a;
 			if(Math.abs(eb1.b) < Math.abs(eb.b))
@@ -106,7 +117,7 @@ public abstract class NBB extends NBD
 	protected boolean naheWand(int welche, double abstand)
 	{
 		for(int i = 0; i < block.size(); i++)
-			if(block.get(i).checkWand(welche, abstand))
+			if(block.get(i).checkWand(welche, abstand, welt))
 				return true;
 		return false;
 	}

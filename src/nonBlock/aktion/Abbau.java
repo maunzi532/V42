@@ -1,20 +1,21 @@
 package nonBlock.aktion;
 
 import block.*;
-import nonBlock.*;
+import nonBlock.aussehen.*;
+import nonBlock.collide.*;
 import wahr.zugriff.*;
 
 public class Abbau extends Aktion
 {
 	private final long tn;
 	private final int start;
-	private final NBD reMount;
+	private final NBB reMount;
 	private final int linA;
 	private final Drehung reD;
 	private final int reT;
 
-	public Abbau(NBD besitzer, int dauer, int power, long tn,
-			int start, NBD reMount, int linA, Drehung reD, int reT)
+	public Abbau(NBB besitzer, int dauer, int power, long tn,
+			int start, NBB reMount, int linA, Drehung reD, int reT)
 	{
 		super(besitzer, dauer, power);
 		this.tn = tn;
@@ -27,12 +28,13 @@ public class Abbau extends Aktion
 
 	public void tick()
 	{
+		WeltB welt = ((NBB)besitzer).welt;
 		if(aktuell == start)
-			besitzer.focus = new Focus(besitzer, dauer - start, Koord.wt2(Koord.decodeTn(tn)));
+			besitzer.focus = new Focus(besitzer, dauer - start, welt.wt2(welt.decodeTn(tn)));
 		if(aktuell == dauer - 1)
 		{
 			besitzer.focus = new Mount(besitzer, reMount, linA, 0, reD, reT);
-			WeltB.set(Koord.decodeTn(tn), 0);
+			welt.set(welt.decodeTn(tn), 0);
 		}
 	}
 }

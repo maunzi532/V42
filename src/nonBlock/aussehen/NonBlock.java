@@ -1,7 +1,7 @@
-package nonBlock;
+package nonBlock.aussehen;
 
+import ansicht.*;
 import ansicht.n2.*;
-import nonBlock.aussehen.*;
 import nonBlock.aussehen.ext.*;
 import nonBlock.aktion.*;
 import wahr.zugriff.*;
@@ -14,6 +14,8 @@ public abstract class NonBlock
 	public Drehung dreh;
 	public final long tn;
 	public Focus focus;
+	public LichtW lw;
+	public WeltND dw;
 
 	public LadeModell aussehen;
 	public int elimit;
@@ -23,16 +25,23 @@ public abstract class NonBlock
 	public K4[][] punkte;
 	public K4[][] punkteK;
 
-	protected NonBlock()
+	protected NonBlock(LichtW lw, WeltND dw)
 	{
+		this.lw = lw;
+		this.dw = dw;
 		tnm--;
 		tn = tnm;
-		WeltND.nonBlocks.add(this);
+		dw.nonBlocks.add(this);
+	}
+
+	protected NonBlock(AllWelt aw)
+	{
+		this(aw.lw, aw.dw);
 	}
 
 	public void ende()
 	{
-		WeltND.nonBlocks.remove(this);
+		dw.nonBlocks.remove(this);
 	}
 
 	public void tick()

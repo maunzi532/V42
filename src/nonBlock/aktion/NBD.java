@@ -1,7 +1,7 @@
 package nonBlock.aktion;
 
+import ansicht.*;
 import nonBlock.aussehen.*;
-import nonBlock.*;
 import wahr.zugriff.*;
 
 import java.util.*;
@@ -16,13 +16,18 @@ public abstract class NBD extends NonBlock
 	public AlternateStandard standard = null;
 	public Aktion currentTrans = null;
 
-	protected NBD()
+	protected NBD(LichtW lw, WeltND dw)
 	{
-		super();
+		super(lw, dw);
 		bewegung = new K4();
 		beweg = new ArrayList<>();
 		forced = new ArrayList<>();
 		aktionen = new ArrayList<>();
+	}
+
+	protected NBD(AllWelt aw)
+	{
+		this(aw.lw, aw.dw);
 	}
 
 	public void init()
@@ -48,7 +53,7 @@ public abstract class NBD extends NonBlock
 			}
 		}
 
-		if(WeltND.nfr || UIVerbunden.godMode)
+		if(dw.nofreeze())
 			kontrolle();
 		mTick();
 		position = K4.plus(position, bewegung);

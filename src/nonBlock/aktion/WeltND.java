@@ -1,20 +1,28 @@
 package nonBlock.aktion;
 
-import ansicht.*;
-import nonBlock.*;
 import nonBlock.aktion.lesen.*;
+import nonBlock.aussehen.*;
 import wahr.zugriff.*;
 
 import java.util.*;
 
 public class WeltND
 {
-	public static final ArrayList<NonBlock> nonBlocks = new ArrayList<>();
-	public static final ArrayList<Licht> licht = new ArrayList<>();
-	public static Move seq = null;
-	public static boolean nfr = true;
+	public final ArrayList<NonBlock> nonBlocks = new ArrayList<>();
+	public Move seq = null;
+	public boolean gmFreeze;
 
-	public static void timetickN()
+	public boolean nofreeze()
+	{
+		return seq == null && (!UIVerbunden.godMode || !gmFreeze);
+	}
+
+	public boolean noGMFreeze()
+	{
+		return !UIVerbunden.godMode || !gmFreeze;
+	}
+
+	public void timetickN()
 	{
 		ArrayList<NonBlock> noch = nonBlocks;
 		while(noch.size() > 0)
@@ -35,14 +43,14 @@ public class WeltND
 		}
 	}
 
-	public static void timetickD()
+	public void timetickD()
 	{
-		if(!nfr && !UIVerbunden.godMode)
+		if(!nofreeze() && seq != null)
 			if(seq.tick())
 				seq = null;
 		if(UIVerbunden.godMode)
 			UIVerbunden.godModeKam.tick();
-		else
+		if(noGMFreeze())
 			for(int i = 0; i < nonBlocks.size(); i++)
 				nonBlocks.get(i).tick();
 	}

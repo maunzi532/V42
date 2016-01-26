@@ -5,23 +5,25 @@ import wahr.zugriff.*;
 
 public abstract class Generator
 {
+	WeltB welt;
 	int[][] starts;
 	int[] enden;
 	int[] endOrder;
 
 	abstract int[][][][] generiere();
 
-	public void gibInWelt(Object... z)
+	public void gibInWelt(WeltB welt, Object... z)
 	{
-		WeltB.blocks = generiere();
-		WeltB.enden = enden;
-		WeltB.endOrder = endOrder;
+		this.welt = welt;
+		welt.blocks = generiere();
+		welt.enden = enden;
+		welt.endOrder = endOrder;
 	}
 
 	public void ermittleStart()
 	{
-		WeltB.starts = new K4[starts.length];
+		welt.starts = new K4[starts.length];
 		for(int i = 0; i < starts.length; i++)
-			WeltB.starts[i] = Koord.N2Start(starts[i]);
+			welt.starts[i] = welt.N2Start(starts[i]);
 	}
 }
