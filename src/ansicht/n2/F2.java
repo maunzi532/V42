@@ -128,7 +128,7 @@ public abstract class F2 extends N2
 	public void panel(Panelizer pa)
 	{
 		pa.gd.setPaint(dFarb);
-		if(UIVerbunden.xrmode && avkh2 < Staticf.xraywidth * Staticf.xraywidth)
+		if(pa.xrmode && avkh2 < Staticf.xraywidth * Staticf.xraywidth)
 			pa.gd.draw(new Polygon(xe, ye, xe.length));
 		else
 			pa.gd.fill(new Polygon(xe, ye, xe.length));

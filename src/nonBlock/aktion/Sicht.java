@@ -8,8 +8,9 @@ public class Sicht extends LinAAktion
 	private final int linAl;
 	private final int linAb;
 	private final boolean gm;
+	private final Overlay overlay;
 
-	public Sicht(NBD target, int power, int linAl, int linAb, boolean gm)
+	public Sicht(NBD target, int power, int linAl, int linAb, boolean gm, Overlay overlay)
 	{
 		super(target, -1, power);
 		this.linAl = linAl;
@@ -17,6 +18,7 @@ public class Sicht extends LinAAktion
 		besitzer.resLink[linAl] = this;
 		besitzer.resLink[linAb] = this;
 		this.gm = gm;
+		this.overlay = overlay;
 	}
 
 	public void delink()
@@ -27,7 +29,7 @@ public class Sicht extends LinAAktion
 
 	public void tick()
 	{
-		if(Overlay.sichtAn && (gm ? UIVerbunden.godMode : (besitzer.dw.nofreeze() && !UIVerbunden.godMode)))
+		if(overlay.sichtAn && (gm ? UIVerbunden.godMode : (besitzer.dw.nofreeze() && !UIVerbunden.godMode)))
 		{
 			besitzer.linkAchsen[linAl].dreh.wl -= UIVerbunden.mausv.x * 1.1d / UIVerbunden.sc.width;
 			besitzer.linkAchsen[linAl].dreh.sichern();

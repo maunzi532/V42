@@ -1,6 +1,7 @@
 package ansicht.n2;
 
 import block.*;
+import nonBlock.aktion.*;
 import nonBlock.aussehen.*;
 import nonBlock.controllable.*;
 import wahr.zugriff.*;
@@ -13,6 +14,15 @@ public class Zeichner
 	private final ArrayList<Double> abstands;
 	private final ArrayList<Integer> splits;
 	private BlockN2 blockN2;
+	private WeltND dw;
+	//4D-Blick an/aus
+	public int x4dization = 0;
+	//D2 anklickbarkeit
+	public int d2tangibility = 0;
+	//Blocks sehen
+	public boolean siehBlocks = true;
+	//NonBlocks sehen
+	public boolean siehNonBlocks = true;
 
 	public Zeichner(String ats, AllWelt aw)
 	{
@@ -26,7 +36,8 @@ public class Zeichner
 				abstands.add(Double.parseDouble(z1[0]));
 				splits.add(Integer.parseInt(z1[1]));
 			}
-		blockN2 = new BlockN2(aw.wbl, aw.lw, aw.dw);
+		dw = aw.dw;
+		blockN2 = new BlockN2(this, aw.wbl, aw.lw);
 	}
 
 	public void nehmen()
@@ -35,8 +46,8 @@ public class Zeichner
 		K4 kp = kam.kamP();
 		Drehung kd = kam.kamD();
 		n2s = new ArrayList<>();
-		if(UIVerbunden.siehNonBlocks)
-			for(NonBlock nb : blockN2.dw.nonBlocks)
+		if(siehNonBlocks)
+			for(NonBlock nb : dw.nonBlocks)
 			{
 				if(nb.punkte == null)
 					continue;
@@ -73,7 +84,7 @@ public class Zeichner
 				Staticf.sca("NEF " + nb.toString() + " 3 ");
 			}
 		Staticf.sca("NE1 ");
-		if(UIVerbunden.siehBlocks)
+		if(siehBlocks)
 			n2s.addAll(blockN2.flaechen(kp, kd, new K4(Staticf.sicht, Staticf.sicht,
 					Staticf.sicht, Staticf.sichtd)));
 	}

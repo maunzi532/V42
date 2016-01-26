@@ -19,4 +19,14 @@ public class AllWelt
 		lw = new LichtW();
 		bw = new WeltNB(this);
 	}
+
+	public void logik()
+	{
+		dw.timetickN();
+		Staticf.sca("WeltND tN (7) ");
+		bw.timetick();
+		Staticf.sca("WeltNB t (0) ");
+		dw.timetickD();
+		Staticf.sca("WeltND tD (0) ");
+	}
 }

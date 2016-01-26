@@ -1,7 +1,6 @@
 package wahr.mage;
 
 import ansicht.*;
-import ansicht.n2.*;
 import block.generierung.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
@@ -18,12 +17,12 @@ import java.util.*;
 public class Hauptschleife
 {
 	private static TSSA n;
-	private static Zeichner z;
-	private static N2[] n2s2;
-	private static AllWelt aw;
+	static AllWelt aw;
+	public static Overlay theOverlay;
 
 	public static void init()
 	{
+		theOverlay = new Overlay();
 		aw = new AllWelt();
 		Generator g = new WeltLeser();
 		g.gibInWelt(aw.wbl, "Levels/Test1");
@@ -33,7 +32,7 @@ public class Hauptschleife
 		aw.wbl.setzeSE(new K4(0, 0, 0, 0), new K4(20, 20, 20, 20));
 		g.ermittleStart();
 
-		n = new Tha(aw);
+		n = new Tha(theOverlay, aw);
 		n.aussehen = new LadeModell().reload(
 				Index.gibLadeTeil("T_H"),
 				Index.gibLadeTeil("T_B"),
@@ -80,7 +79,7 @@ public class Hauptschleife
 					cmd.add("hinten");
 				return cmd;
 			}
-		}, aw)
+		}, null, aw)
 		{
 			public void collide(Attk attk)
 			{
@@ -110,11 +109,11 @@ public class Hauptschleife
 			{
 				if(command.equals("B"))
 				{
-					dw.seq = new Move(Index.gibLadeMove("TPSQ"), this, n);
+					dw.seq = new Move(Index.gibLadeMove("TPSQ"), theOverlay, this, n);
 				}
 				if(command.equals("C"))
 				{
-					dw.seq = new Move(Index.gibLadeMove("TSQ"), this, n);
+					dw.seq = new Move(Index.gibLadeMove("TSQ"), theOverlay, this, n);
 				}
 			}
 		};
@@ -140,19 +139,18 @@ public class Hauptschleife
 		n2.init();
 		UIVerbunden.kamN = n;
 		UIVerbunden.kamA = UIVerbunden.kamN;
-		z = new Zeichner(Index.gibText("SPL"), aw);
 		n2.collidable.add(new ColBox(n2, 0, new EndScheibe(4), new EndScheibe(4), 1, 1));
 		n2.physik.add(new ColBox(n2, 69, new EndScheibe(1.5), new EndScheibe(1.0), 1.1));
 		n2.physik.add(new ColBox(n2, 78, new EndScheibe(1.0), new EndScheibe(0.7), 0.7));
 		n2.physik.add(new ColBox(n2, 11, new EndScheibe(0.7), new EndScheibe(0.7), 1));
 		n2.physik.add(new ColBox(n2, 12, new EndScheibe(0.7), new EndScheibe(0.7), 1));
 		n2.physik.add(new ColBox(n2, 0, new EndEllipse(2.1, 1.2, 0), new EndEllipse(2.2, 1.4, 0), 1));
-		n.aktionen.add(new Sicht(n, 10, 67, 67, false));
+		n.aktionen.add(new Sicht(n, 10, 67, 67, false, theOverlay));
 		UIVerbunden.zp = new ZP4C(n, 0);
 		n.aktionen.add(UIVerbunden.zp);
 		aw.lw.licht.add(n);
 		aw.lw.licht.add(n2);
-		UIVerbunden.godModeKam = new GMKamera(new GMC(), aw);
+		UIVerbunden.godModeKam = new GMKamera(new GMC(), theOverlay, aw);
 		UIVerbunden.godModeKam.position = new K4(n.position);
 		UIVerbunden.godModeKam.dreh = new Drehung();
 		UIVerbunden.godModeKam.canInfl = new double[]{1, 1, 1, 1};
@@ -161,7 +159,7 @@ public class Hauptschleife
 		UIVerbunden.godModeKam.aussehen.reload();
 		UIVerbunden.godModeKam.elimit = 1;
 		UIVerbunden.godModeKam.init();
-		UIVerbunden.godModeKam.aktionen.add(new Sicht(UIVerbunden.godModeKam, 10, 0, 0, true));
+		UIVerbunden.godModeKam.aktionen.add(new Sicht(UIVerbunden.godModeKam, 10, 0, 0, true, theOverlay));
 		try
 		{
 			UIVerbunden.ro = new Robot();
@@ -174,7 +172,7 @@ public class Hauptschleife
 
 	public static void initOverlay()
 	{
-		Overlay.initOverlay(aw);
+		theOverlay.initOverlay(aw, "SPL");
 	}
 
 	public static boolean eingabe()
@@ -186,7 +184,7 @@ public class Hauptschleife
 				UIVerbunden.sc.height != LPaneel.fr.getSize().height)
 		{
 			UIVerbunden.sc = LPaneel.fr.getSize();
-			Overlay.resize();
+			theOverlay.resize();
 		}
 		Staticf.sca("TA2 ");
 		Point maus = MouseInfo.getPointerInfo().getLocation();
@@ -200,12 +198,12 @@ public class Hauptschleife
 			UIVerbunden.mausLast = new Point(maus);
 		if(TA2.keyStat[15] == 2)
 		{
-			if(Overlay.sl.click(maus.x, maus.y, false))
+			if(theOverlay.sl.click(maus.x, maus.y, false))
 				TA2.keyStat[15] = 1;
 		}
 		else if(TA2.keyStat[16] == 2)
 		{
-			if(Overlay.sl.click(maus.x, maus.y, true))
+			if(theOverlay.sl.click(maus.x, maus.y, true))
 				TA2.keyStat[16] = 1;
 		}
 		Staticf.sca("SL ");
@@ -213,16 +211,16 @@ public class Hauptschleife
 		UIVerbunden.mausv = new Point(maus);
 		UIVerbunden.maus = maus;
 		Staticf.sca("RO ");
-		if(TA2.keyStat[13] == 2 && Overlay.sichtAn)
+		if(TA2.keyStat[13] == 2 && theOverlay.sichtAn)
 		{
-			Overlay.sichtAn = false;
-			Overlay.sl.layer.addAll(Overlay.normalSchalter);
+			theOverlay.sichtAn = false;
+			theOverlay.sl.layer.addAll(theOverlay.normalSchalter);
 			LPaneel.setC1();
 		}
-		if(TA2.keyStat[13] == -1 && !Overlay.sichtAn)
+		if(TA2.keyStat[13] == -1 && !theOverlay.sichtAn)
 		{
-			Overlay.sichtAn = true;
-			Overlay.sl.layer.clear();
+			theOverlay.sichtAn = true;
+			theOverlay.sl.layer.clear();
 			LPaneel.setC0();
 		}
 		if(TA2.keyStat[17] == 2 && UIVerbunden.godModeKam != null)
@@ -231,63 +229,21 @@ public class Hauptschleife
 			if(UIVerbunden.godMode)
 			{
 				UIVerbunden.kamA = UIVerbunden.godModeKam;
-				Overlay.normalSchalter.addAll(Overlay.godModeSchalter);
+				theOverlay.normalSchalter.addAll(theOverlay.godModeSchalter);
 				aw.lw.licht.add(UIVerbunden.godModeKam);
 			}
 			else
 			{
 				UIVerbunden.kamA = UIVerbunden.kamN;
-				Overlay.normalSchalter.removeAll(Overlay.godModeSchalter);
+				theOverlay.normalSchalter.removeAll(theOverlay.godModeSchalter);
 				aw.lw.licht.remove(UIVerbunden.godModeKam);
-				UIVerbunden.xrmode = false;
-				UIVerbunden.siehBlocks = true;
-				UIVerbunden.siehNonBlocks = true;
+				theOverlay.pa.xrmode = false;
+				theOverlay.z.siehBlocks = true;
+				theOverlay.z.siehNonBlocks = true;
 			}
 		}
-		Overlay.sl.actTex();
+		theOverlay.sl.actTex();
 		Staticf.sca("M und T (0) ");
 		return false;
-	}
-
-	public static void logik()
-	{
-		aw.dw.timetickN();
-		Staticf.sca("WeltND tN (7) ");
-		aw.bw.timetick();
-		Staticf.sca("WeltNB t (0) ");
-		aw.dw.timetickD();
-		Staticf.sca("WeltND tD (0) ");
-	}
-
-	public static void rendern()
-	{
-		z.nehmen();
-		Staticf.sca("Z nehmen (5) ");
-		z.splittern();
-		Staticf.sca("Z splittern (1) ");
-		z.sortieren();
-		Staticf.sca("Z sortieren (1) ");
-		z.eckenEntf();
-		Staticf.sca("Z eckenEntf (1) ");
-		z.farbe_flaeche();
-		Staticf.sca("Z farbeflaeche (3) ");
-		N2[] n2s3 = new N2[z.n2s.size()];
-		for(int i = 0; i < n2s3.length; i++)
-			n2s3[i] = z.n2s.get(i);
-		n2s2 = n2s3;
-	}
-
-	public static void panelize()
-	{
-		Overlay.pa.panelize(n2s2, UIVerbunden.maus.x + UIVerbunden.sc.width / 2,
-				UIVerbunden.maus.y + UIVerbunden.sc.height / 2);
-		Staticf.sca2("P panelize (14) ");
-		Overlay.gd.drawImage(Overlay.pa.light, 0, 0, null);
-		Staticf.sca2("O draw P (4) ");
-		Overlay.overlay();
-		Staticf.sca2("O overlay (0) ");
-		//Hier Hauptthread
-		LPaneel.rePanel(Overlay.hl);
-		Staticf.sca2("LP rePanel (7) ");
 	}
 }

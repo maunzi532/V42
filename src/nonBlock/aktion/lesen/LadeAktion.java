@@ -174,17 +174,17 @@ class LadeAktion
 		}
 	}
 
-	public ZDelay erzeugeAktion(NBD besitzer)
+	public ZDelay erzeugeAktion(NBD besitzer, Overlay overlay)
 	{
 		NBD b2;
 		if(dislocate != null)
 			b2 = besitzer.plzDislocate(dislocate);
 		else
 			b2 = besitzer;
-		return erzeugeAktion(b2, besitzer);
+		return erzeugeAktion(b2, besitzer, overlay);
 	}
 
-	private ZDelay erzeugeAktion(NBD dislocated, NBD besitzer2)
+	private ZDelay erzeugeAktion(NBD dislocated, NBD besitzer2, Overlay overlay)
 	{
 		switch(typ)
 		{
@@ -198,8 +198,8 @@ class LadeAktion
 				break;
 			case 2:
 			case 3:
-				TBox st2 = new TBox(Overlay.sl, typ == 3, 0.1, 0.1, text);
-				Overlay.sl.placeTBox(st2, dispName, codebez, emotion);
+				TBox st2 = new TBox(overlay.sl, typ == 3, 0.1, 0.1, text);
+				overlay.sl.placeTBox(st2, dispName, codebez, emotion);
 				if(typ == 3)
 					return st2;
 				break;
@@ -231,7 +231,6 @@ class LadeAktion
 					return ak;
 				}
 				break;
-
 		}
 		return null;
 	}

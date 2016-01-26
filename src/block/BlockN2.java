@@ -3,7 +3,6 @@ package block;
 import ansicht.*;
 import ansicht.n2.*;
 import ansicht.n2.xF.*;
-import nonBlock.aktion.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
@@ -23,18 +22,18 @@ public class BlockN2
 					{0, 0, 0, 1},
 			};
 
+	private Zeichner z;
 	private WeltB von;
 	private LichtW licht;
-	public WeltND dw;
 
-	public BlockN2(WeltB von, LichtW licht, WeltND dw)
+	public BlockN2(Zeichner z, WeltB von, LichtW licht)
 	{
+		this.z = z;
 		this.von = von;
 		this.licht = licht;
-		this.dw = dw;
 	}
 
-	public boolean sichtOpaque(int block)
+	private boolean sichtOpaque(int block)
 	{
 		return block > 0;
 	}
@@ -51,7 +50,7 @@ public class BlockN2
 		double dddi = dd - di;
 		K4 relativ = TK4F.transformSet2(new K4(kam), kDreh, null);
 		Staticf.sca("WE1 ");
-		if(UIVerbunden.x4dization == 0)
+		if(z.x4dization == 0)
 			for(int a = kaw0.k[0]; a < kawEnd.k[0]; a++)
 				for(int b = kaw0.k[1]; b < kawEnd.k[1]; b++)
 					for(int c = kaw0.k[2]; c < kawEnd.k[2]; c++)
@@ -237,7 +236,7 @@ public class BlockN2
 	{
 		if(!von.innen(p))
 			return false;
-		if(UIVerbunden.d2tangibility == 1)
+		if(z.d2tangibility == 1)
 		{
 			for(int i = 0; i < 8; i++)
 			{
@@ -247,7 +246,7 @@ public class BlockN2
 			}
 			return false;
 		}
-		return UIVerbunden.d2tangibility > 0;
+		return z.d2tangibility > 0;
 	}
 
 	private long tn(WBP p)

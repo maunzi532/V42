@@ -13,18 +13,20 @@ import java.util.*;
 public abstract class TSSA extends NBB implements Controllable, Licht
 {
 	private final Controller control;
+	final Overlay overlay;
 	boolean boden;
 	int grabRichtung = -1;
 
-	public TSSA(Controller control, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
+	TSSA(Controller control, Overlay overlay, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
 		super(welt, lw, dw, bw);
 		this.control = control;
+		this.overlay = overlay;
 	}
 
-	protected TSSA(Controller control, AllWelt aw)
+	protected TSSA(Controller control, Overlay overlay, AllWelt aw)
 	{
-		this(control, aw.wbl, aw.lw, aw.dw, aw.bw);
+		this(control, overlay, aw.wbl, aw.lw, aw.dw, aw.bw);
 	}
 
 	public void kontrolle()

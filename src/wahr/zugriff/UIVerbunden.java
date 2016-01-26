@@ -32,21 +32,6 @@ public class UIVerbunden
 	public static Point mausLast;
 	//Fenster w/h
 	public static Dimension sc;
-	//4D-Blick an/aus
-	//pro Zeichner
-	public static int x4dization = 0;
-	//D2 anklickbarkeit
-	//pro Zeichner
-	public static int d2tangibility = 0;
-	//Blocks sehen
-	//pro Zeichner
-	public static boolean siehBlocks = true;
-	//NonBlocks sehen
-	//pro Zeichner
-	public static boolean siehNonBlocks = true;
-	//X_Ray-Modus an/aus
-	//pro Zeichner
-	public static boolean xrmode = false;
 	//Haare berechnen
 	public static boolean calculateH = true;
 }

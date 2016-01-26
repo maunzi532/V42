@@ -18,6 +18,8 @@ public class Panelizer
 	private BufferedImage dark;
 	public Long tnTarget;
 	public int taType = 0;
+	//X_Ray-Modus an/aus
+	public boolean xrmode = false;
 
 	public Panelizer(Dimension wh)
 	{

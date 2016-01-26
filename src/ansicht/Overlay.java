@@ -1,32 +1,31 @@
 package ansicht;
 
+import ansicht.n2.*;
 import ansicht.text.*;
 import wahr.physisch.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
-import java.awt.image.*;
 import java.util.*;
 
 public class Overlay
 {
-	public static BufferedImage hl;
-	public static Graphics2D gd;
-	public static SchalterLayer sl;
-	public static ArrayList<SLF> normalSchalter;
-	public static ArrayList<SLF> godModeSchalter;
-	public static boolean sichtAn = true;
-	public static Panelizer pa;
-	private static AllWelt aw;
+	public SchalterLayer sl;
+	public ArrayList<SLF> normalSchalter;
+	public ArrayList<SLF> godModeSchalter;
+	public boolean sichtAn = true;
+	public Panelizer pa;
+	private AllWelt aw;
+	public Zeichner z;
+	private N2[] n2s2;
 
-	public static void initOverlay(AllWelt awA)
+	public void initOverlay(AllWelt awA, String zDatLad)
 	{
 		aw = awA;
+		z = new Zeichner(Index.gibText(zDatLad), aw);
 		UIVerbunden.mausLast = new Point(UIVerbunden.sc.width / 2, UIVerbunden.sc.height / 2);
 		Point mm = LPaneel.fr.getLocationOnScreen();
 		UIVerbunden.ro.mouseMove(UIVerbunden.sc.width / 2 + mm.x, UIVerbunden.sc.height / 2 + mm.y);
-		hl = new BufferedImage(UIVerbunden.sc.width, UIVerbunden.sc.height, BufferedImage.TYPE_INT_ARGB_PRE);
-		gd = hl.createGraphics();
 		sl = new SchalterLayer();
 		pa = new Panelizer(UIVerbunden.sc);
 		normalSchalter = new ArrayList<>();
@@ -62,15 +61,15 @@ public class Overlay
 			public void onClick(boolean r, double cx, double cy)
 			{
 				if(r)
-					UIVerbunden.x4dization = UIVerbunden.x4dization > 0 ? 0 : 1;
+					z.x4dization = z.x4dization > 0 ? 0 : 1;
 				else
-					UIVerbunden.x4dization = UIVerbunden.x4dization > 1 ? 0 : 2;
+					z.x4dization = z.x4dization > 1 ? 0 : 2;
 				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
 			{
-				switch(UIVerbunden.x4dization)
+				switch(z.x4dization)
 				{
 					case 0:
 						text = "4D aus";
@@ -89,15 +88,15 @@ public class Overlay
 			public void onClick(boolean r, double cx, double cy)
 			{
 				if(r)
-					UIVerbunden.d2tangibility = 0;
+					z.d2tangibility = 0;
 				else
-					UIVerbunden.d2tangibility = (UIVerbunden.d2tangibility + 1) % 3;
+					z.d2tangibility = (z.d2tangibility + 1) % 3;
 				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
 			{
-				switch(UIVerbunden.d2tangibility)
+				switch(z.d2tangibility)
 				{
 					case 0:
 						text = "Baumodus aus";
@@ -117,24 +116,24 @@ public class Overlay
 			public void onClick(boolean r, double cx, double cy)
 			{
 				if(r)
-					UIVerbunden.siehNonBlocks = !UIVerbunden.siehNonBlocks;
+					z.siehNonBlocks = !z.siehNonBlocks;
 				else
-					UIVerbunden.siehBlocks = !UIVerbunden.siehBlocks;
+					z.siehBlocks = !z.siehBlocks;
 				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
 			{
-				if(UIVerbunden.siehBlocks)
+				if(z.siehBlocks)
 				{
-					if(UIVerbunden.siehNonBlocks)
+					if(z.siehNonBlocks)
 						text = "Alles";
 					else
 						text = "Blocks";
 				}
 				else
 				{
-					if(UIVerbunden.siehNonBlocks)
+					if(z.siehNonBlocks)
 						text = "NonBlocks";
 					else
 						text = "Nichts";
@@ -145,13 +144,13 @@ public class Overlay
 		{
 			public void onClick(boolean r, double cx, double cy)
 			{
-				UIVerbunden.xrmode = !UIVerbunden.xrmode;
+				pa.xrmode = !pa.xrmode;
 				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
 			{
-				if(UIVerbunden.xrmode)
+				if(pa.xrmode)
 					text = "XR an";
 				else
 					text = "XR aus";
@@ -223,23 +222,53 @@ public class Overlay
 		});
 	}
 
-	public static void resize()
+	public void resize()
 	{
-		hl = new BufferedImage(UIVerbunden.sc.width, UIVerbunden.sc.height, BufferedImage.TYPE_INT_ARGB_PRE);
-		gd = hl.createGraphics();
 		pa.resize(UIVerbunden.sc);
 	}
 
-	public static void overlay()
+	private void overlay()
 	{
-		sl.draw(gd);
-		gd.setColor(new Color(0, 0, 180));
+		sl.draw(pa.gd);
+		/*gd.setColor(new Color(0, 0, 180));
 		gd.setFont(new Font(null, Font.PLAIN, 20));
 		if(UIVerbunden.x4dization > 0)
 			gd.drawString(String.valueOf(UIVerbunden.zp.d), 50, 50);
 		if(UIVerbunden.zp.z)
 			gd.drawString("Z Bereit", 300, 50);
 		if(UIVerbunden.zp.p)
-			gd.drawString("P Bereit", 300, 100);
+			gd.drawString("P Bereit", 300, 100);*/
+	}
+
+	public void rendern()
+	{
+		z.nehmen();
+		Staticf.sca("Z nehmen (5) ");
+		z.splittern();
+		Staticf.sca("Z splittern (1) ");
+		z.sortieren();
+		Staticf.sca("Z sortieren (1) ");
+		z.eckenEntf();
+		Staticf.sca("Z eckenEntf (1) ");
+		z.farbe_flaeche();
+		Staticf.sca("Z farbeflaeche (3) ");
+		N2[] n2s3 = new N2[z.n2s.size()];
+		for(int i = 0; i < n2s3.length; i++)
+			n2s3[i] = z.n2s.get(i);
+		n2s2 = n2s3;
+	}
+
+	public void panelize()
+	{
+		pa.panelize(n2s2, UIVerbunden.maus.x + UIVerbunden.sc.width / 2,
+				UIVerbunden.maus.y + UIVerbunden.sc.height / 2);
+		Staticf.sca2("P panelize (14) ");
+		//Overlay.gd.drawImage(Overlay.pa.light, 0, 0, null);
+		Staticf.sca2("O draw P (4) ");
+		overlay();
+		Staticf.sca2("O overlay (0) ");
+		//Hier Hauptthread
+		LPaneel.rePanel(pa.light);
+		Staticf.sca2("LP rePanel (7) ");
 	}
 }

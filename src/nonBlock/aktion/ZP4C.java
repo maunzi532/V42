@@ -11,9 +11,9 @@ public class ZP4C extends Aktion
 {
 	private double zd;
 	private boolean activated;
-	public boolean z;
-	public boolean p;
-	public double d;
+	private boolean z;
+	private boolean p;
+	private double d;
 	private Forced forced;
 
 	public ZP4C(NBB besitzer, int power)

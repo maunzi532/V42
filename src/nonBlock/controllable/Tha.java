@@ -13,14 +13,14 @@ public class Tha extends TSSA
 	private NBB fL;
 	private NBB fR;
 
-	public Tha(WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
+	private Tha(Overlay overlay, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
-		super(new KController(), welt, lw, dw, bw);
+		super(new KController(), overlay, welt, lw, dw, bw);
 	}
 
-	public Tha(AllWelt aw)
+	public Tha(Overlay overlay, AllWelt aw)
 	{
-		this(aw.wbl, aw.lw, aw.dw, aw.bw);
+		this(overlay, aw.wbl, aw.lw, aw.dw, aw.bw);
 	}
 
 	public void init()
@@ -119,12 +119,12 @@ public class Tha extends TSSA
 		}
 		if(command.equals("KL"))
 		{
-			if(Overlay.pa.taType > 0 && Overlay.pa.tnTarget != null && Overlay.pa.tnTarget >= 0)
+			if(overlay.pa.taType > 0 && overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
 			{
 				moves.add(new Move(Index.gibLadeMove("KBL",
 						String.valueOf(-70 - UIVerbunden.maus.x / 10),
 						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
-				fL.aktionen.add(new Abbau(fL, 60, 5, Overlay.pa.tnTarget, 20, this, 15,
+				fL.aktionen.add(new Abbau(fL, 60, 5, overlay.pa.tnTarget, 20, this, 15,
 						new Drehung(0, Math.PI * 3 / 2), 40));
 			}
 			else
@@ -134,12 +134,12 @@ public class Tha extends TSSA
 		}
 		if(command.equals("KR"))
 		{
-			if(Overlay.pa.taType > 0 && Overlay.pa.tnTarget != null && Overlay.pa.tnTarget >= 0)
+			if(overlay.pa.taType > 0 && overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
 			{
 				moves.add(new Move(Index.gibLadeMove("KBR",
 						String.valueOf(70 - UIVerbunden.maus.x / 10),
 						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
-				fR.aktionen.add(new Abbau(fR, 60, 5, Overlay.pa.tnTarget, 20, this, 16,
+				fR.aktionen.add(new Abbau(fR, 60, 5, overlay.pa.tnTarget, 20, this, 16,
 						new Drehung(0, Math.PI * 3 / 2), 40));
 			}
 			else

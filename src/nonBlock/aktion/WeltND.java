@@ -17,7 +17,7 @@ public class WeltND
 		return seq == null && (!UIVerbunden.godMode || !gmFreeze);
 	}
 
-	public boolean noGMFreeze()
+	private boolean noGMFreeze()
 	{
 		return !UIVerbunden.godMode || !gmFreeze;
 	}

@@ -162,9 +162,4 @@ public class Staticf
 	public static final double zpSpeed = 1;
 	//Drehgeschwindigkeit
 	public static final double nachDreh = 0.1;
-
-	public static void charge2()
-	{
-
-	}
 }

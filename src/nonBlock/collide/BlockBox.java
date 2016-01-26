@@ -105,16 +105,6 @@ public class BlockBox
 		return new K4(fin[0], fin[1], fin[2], fin[3]);
 	}
 
-	public boolean checkOnly(K4 mov, WeltB welt)
-	{
-		double[] mov1 = new double[4];
-		mov1[0] = mov.a;
-		mov1[1] = mov.b;
-		mov1[2] = mov.c;
-		mov1[3] = mov.d;
-		return checkOnly(mov1, welt);
-	}
-
 	public boolean checkOnly(double[] mov1, WeltB welt)
 	{
 		double len = Math.sqrt(mov1[0] * mov1[0] + mov1[1] * mov1[1] + mov1[2] * mov1[2] + mov1[3] * mov1[3]);

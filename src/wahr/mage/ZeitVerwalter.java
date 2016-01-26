@@ -79,11 +79,11 @@ public class ZeitVerwalter
 					break;
 				//Haare laggen furchtbar
 				UIVerbunden.calculateH = !skpf;
-				Hauptschleife.logik();
+				Hauptschleife.aw.logik();
 				if(!skpf)
 				{
 					//Noch nicht aufmalen
-					Hauptschleife.rendern();
+					Hauptschleife.theOverlay.rendern();
 					new Thread()
 					{
 						//Hier wird aufgemalt
@@ -93,7 +93,7 @@ public class ZeitVerwalter
 							{
 								thd = true;
 								//Staticf.last2 = System.currentTimeMillis();
-								Hauptschleife.panelize();
+								Hauptschleife.theOverlay.panelize();
 								if(Staticf.writeVisibleTime)
 									System.out.println("VIS: " + (System.currentTimeMillis() - Staticf.last3));
 								Staticf.last3 = System.currentTimeMillis();
