@@ -31,6 +31,8 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 
 	public void kontrolle()
 	{
+		if(!dw.nofreeze())
+			return;
 		double[] canInfl;
 		if(grabRichtung >= 0)
 		{

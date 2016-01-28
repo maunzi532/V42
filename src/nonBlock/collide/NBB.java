@@ -3,7 +3,6 @@ package nonBlock.collide;
 import ansicht.*;
 import block.*;
 import nonBlock.aktion.*;
-import nonBlock.aktion.lesen.*;
 import wahr.zugriff.*;
 
 import java.util.*;
@@ -17,7 +16,6 @@ public abstract class NBB extends NBD
 	public final ArrayList<Integer> cTime;
 	public final NBB nht;
 	public final ArrayList<ColBox> physik;
-	protected final ArrayList<Move> moves;
 	public WeltB welt;
 	public WeltNB bw;
 
@@ -33,7 +31,6 @@ public abstract class NBB extends NBD
 		nht = null;
 		attks = new ArrayList<>();
 		physik = new ArrayList<>();
-		moves = new ArrayList<>();
 		bw.vta.add(this);
 	}
 
@@ -69,12 +66,6 @@ public abstract class NBB extends NBD
 				else
 					cTime.set(i, cTime.get(i) + 1);
 			}
-			for(int i = 0; i < moves.size(); i++)
-				if(moves.get(i).tick())
-				{
-					moves.remove(i);
-					i--;
-				}
 		}
 		super.tick();
 	}

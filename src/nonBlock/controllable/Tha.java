@@ -54,6 +54,8 @@ public class Tha extends TSSA
 
 	public void kontrolle()
 	{
+		if(!dw.nofreeze())
+			return;
 		super.kontrolle();
 		fL.linkAchsen[0].dreh.wl += 0.03;
 		fL.linkAchsen[0].dreh.sichern();

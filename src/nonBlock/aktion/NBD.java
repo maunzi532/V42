@@ -1,6 +1,7 @@
 package nonBlock.aktion;
 
 import ansicht.*;
+import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
 import wahr.zugriff.*;
 
@@ -15,6 +16,7 @@ public abstract class NBD extends NonBlock
 	public ArrayList<Forced> forced;
 	public AlternateStandard standard = null;
 	public Aktion currentTrans = null;
+	protected final ArrayList<Move> moves;
 
 	protected NBD(LichtW lw, WeltND dw)
 	{
@@ -23,6 +25,7 @@ public abstract class NBD extends NonBlock
 		beweg = new ArrayList<>();
 		forced = new ArrayList<>();
 		aktionen = new ArrayList<>();
+		moves = new ArrayList<>();
 	}
 
 	protected NBD(AllWelt aw)
@@ -38,6 +41,12 @@ public abstract class NBD extends NonBlock
 	public void tick()
 	{
 		super.tick();
+		for(int i = 0; i < moves.size(); i++)
+			if(moves.get(i).tick())
+			{
+				moves.remove(i);
+				i--;
+			}
 		for(int i = 0; i < aktionen.size(); i++)
 		{
 			aktionen.get(i).tick();
@@ -52,9 +61,7 @@ public abstract class NBD extends NonBlock
 				}
 			}
 		}
-
-		if(dw.nofreeze())
-			kontrolle();
+		kontrolle();
 		mTick();
 		position = K4.plus(position, bewegung);
 	}
