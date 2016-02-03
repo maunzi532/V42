@@ -98,18 +98,7 @@ public class Tha extends TSSA
 	{
 		if(command.equals("A"))
 		{
-			NBB f = new NBB(welt, lw, dw, bw)
-			{
-				public void collide(Attk attk)
-				{
-					ende();
-				}
-
-				public void actCollide(Attk attk){}
-				public void decollide(Attk attk){}
-				public void wand(int welche){}
-				protected void kontrolle(){}
-			};
+			Flag f = new Flag(welt, lw, dw, bw);
 			f.aussehen = new LadeModell();
 			Index.gibStandardAussehen("F_Main").assignStandard(f);
 			f.aussehen.reload(Index.gibLadeTeil("F_X"));

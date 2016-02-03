@@ -8,13 +8,14 @@ public class LadeControlledMove
 	ArrayList<Integer> brauchtLevel;
 	boolean isChainOnly;
 	String theMove;
+	int sharedcooldown;
 	int cooldown;
 	int power;
 
 	public LadeControlledMove(String code)
 	{
 		braucht = new ArrayList<>();
-		String cde1 = code.replace("\n	", "|");
+		String cde1 = code.replace("\n	", "");
 		String[] cde = cde1.split("\n");
 		for(int i = 0; i < cde.length; i++)
 		{
@@ -30,6 +31,8 @@ public class LadeControlledMove
 					isChainOnly = true;
 				else if(cde[i].startsWith("cld "))
 					cooldown = Integer.parseInt(cde[i].substring(4));
+				else if(cde[i].startsWith("shcld "))
+					sharedcooldown = Integer.parseInt(cde[i].substring(4));
 				else if(cde[i].startsWith("power "))
 					power = Integer.parseInt(cde[i].substring(6));
 				else if(cde[i].startsWith("move "))

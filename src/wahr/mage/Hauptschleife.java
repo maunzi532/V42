@@ -148,8 +148,8 @@ public class Hauptschleife
 		n.aktionen.add(new Sicht(n, 10, 67, 67, false, theOverlay));
 		UIVerbunden.zp = new ZP4C(n, 0);
 		n.aktionen.add(UIVerbunden.zp);
-		aw.lw.licht.add(n);
-		aw.lw.licht.add(n2);
+		//aw.lw.licht.add(n);
+		//aw.lw.licht.add(n2);
 		UIVerbunden.godModeKam = new GMKamera(new GMC(), theOverlay, aw);
 		UIVerbunden.godModeKam.position = new K4(n.position);
 		UIVerbunden.godModeKam.dreh = new Drehung();
