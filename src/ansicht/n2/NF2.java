@@ -77,6 +77,8 @@ public class NF2 extends F2
 
 	public K4 mid1()
 	{
+		if(eckenNK == null)
+			return null;
 		if(spld > 0)
 		{
 			K4 nmid = K4.plus(K4.plus(eckenNK[0], eckenNK[1]), K4.plus(eckenNK[2], eckenNK[3]));

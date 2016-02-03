@@ -150,7 +150,7 @@ public class Zeichner
 				{
 					NF2 tsp = (NF2)n2s.get(i);
 					//noinspection ConstantConditions,PointlessBooleanExpression
-					if(Staticf.splThr > 0 && tsp.maxAbs() > Staticf.splThr)
+					if(Staticf.splThr > 0 && tsp.spld >= 0 && tsp.maxAbs() > Staticf.splThr)
 					{
 						n2s.remove(i);
 						i--;

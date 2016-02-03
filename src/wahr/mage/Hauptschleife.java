@@ -117,6 +117,7 @@ public class Hauptschleife
 				}
 			}
 		};
+		MPS mp2 = new MPS();
 		n2.aussehen = new LadeModell().reload(
 				Index.gibLadeTeil("T_H"),
 				Index.gibLadeTeil("T_B"),
@@ -131,10 +132,12 @@ public class Hauptschleife
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
 				new H2(n2, 0.2, 0.5, 4, 10, 3, 0.7, 0, 0.55),
-				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55)
+				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
+				mp2
 				);
 		n2.position = aw.wbl.starts[1];
 		n2.position.b += n2.block.get(0).airshift;
+		mp2.init();
 		n2.dreh = new Drehung(Math.PI, 0);
 		n2.init();
 		UIVerbunden.kamN = n;

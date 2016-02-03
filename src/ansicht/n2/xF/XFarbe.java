@@ -56,11 +56,16 @@ public abstract class XFarbe
 		double power = mat.startPower;
 		for(int i = 0; i < f.lw.licht.size(); i++)
 		{
-			K4 lr = K4.diff(f.lw.licht.get(i).lichtPosition(), f.mid1());
-			/*if(true)
-				return limit(fc, (int) (1 / Math.abs(lr.a) * -100),
-						(int) (1 / Math.abs(lr.b) * -100), (int) (1 / Math.abs(lr.c) * -100));*/
-			double ld = Math.sqrt(lr.a * lr.a + lr.b * lr.b + lr.c * lr.c);
+			K4 lr = f.mid1();
+			double ld = 0;
+			if(lr != null)
+			{
+				lr = K4.diff(f.lw.licht.get(i).lichtPosition(), lr);
+				/*if(true)
+					return limit(fc, (int) (1 / Math.abs(lr.a) * -100),
+							(int) (1 / Math.abs(lr.b) * -100), (int) (1 / Math.abs(lr.c) * -100));*/
+				ld = Math.sqrt(lr.a * lr.a + lr.b * lr.b + lr.c * lr.c);
+			}
 			/*if(true)
 				return limit(fc, (int) (ld * -1), (int) (ld * -1), 0);*/
 			if(ld > f.lw.licht.get(i).lichtRange())
