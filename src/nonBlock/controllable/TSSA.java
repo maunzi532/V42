@@ -245,10 +245,10 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 					focus = null;
 					grabRichtung = -1;
 					if(ck)
-						moves.add(new Move(Index.gibLadeMove("WK", String.valueOf(-Math.sin(dreh.wl) * 5),
+						moves.add(new Move(Index.gibLadeMove(false, "WK", String.valueOf(-Math.sin(dreh.wl) * 5),
 								String.valueOf(Math.cos(dreh.wl) * 5)), this));
 					else
-						moves.add(new Move(Index.gibLadeMove("WK", "0", "0"), this));
+						moves.add(new Move(Index.gibLadeMove(false, "WK", "0", "0"), this));
 					return false;
 				}
 			}

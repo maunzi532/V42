@@ -18,7 +18,7 @@ public abstract class FWA extends NBB implements Controllable
 	int transformTime;
 	ArrayList<FWVerwendet> verwendbar;
 	int[] verwendet;
-	int[] cooldowns;
+	double[] cooldowns;
 	Move chain;
 	LadeFWA abilities;
 
@@ -32,6 +32,13 @@ public abstract class FWA extends NBB implements Controllable
 	{
 		super(aw);
 		this.control = control;
+	}
+
+	public void tick()
+	{
+		for(int i = 0; i < cooldowns.length; i++)
+			cooldowns[i]--;
+		super.tick();
 	}
 
 	public void kontrolle()
@@ -84,7 +91,7 @@ public abstract class FWA extends NBB implements Controllable
 			return;
 		if(td.isChainOnly && moves.contains(chain))
 			return;
-		Move m = new Move(Index.gibLadeMove(td.theMove), this);
+		Move m = new Move(Index.gibLadeMove(false, td.theMove), this);
 		if(td.isChainOnly)
 			chain = m;
 		moves.add(m);

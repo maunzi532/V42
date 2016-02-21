@@ -9,7 +9,7 @@ public class LadeControlledMove
 	boolean isChainOnly;
 	String theMove;
 	int sharedcooldown;
-	int cooldown;
+	double cooldown;
 	int power;
 
 	public LadeControlledMove(String code)
@@ -24,15 +24,15 @@ public class LadeControlledMove
 				if(cde[i].startsWith("V "))
 				{
 					String[] cde2 = cde[i].split(" ");
-					braucht.add(FWVerwendet.valueOf(cde2[0]));
-					brauchtLevel.add(Integer.parseInt(cde2[1]));
+					braucht.add(FWVerwendet.valueOf(cde2[1]));
+					brauchtLevel.add(Integer.parseInt(cde2[2]));
 				}
 				else if(cde[i].equalsIgnoreCase("ChainOnly"))
 					isChainOnly = true;
 				else if(cde[i].startsWith("cld "))
 					cooldown = Integer.parseInt(cde[i].substring(4));
 				else if(cde[i].startsWith("shcld "))
-					sharedcooldown = Integer.parseInt(cde[i].substring(4));
+					sharedcooldown = Integer.parseInt(cde[i].substring(6));
 				else if(cde[i].startsWith("power "))
 					power = Integer.parseInt(cde[i].substring(6));
 				else if(cde[i].startsWith("move "))

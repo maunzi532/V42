@@ -211,7 +211,7 @@ public class BlockN2
 				ke[3] = von.wt(p);
 				break;
 		}
-		return new BF2(ke, new K4[ke.length], Index.gibXFBT("XFBT_" + block + "_" + nof),
+		return new BF2(ke, new K4[ke.length], Index.gibXFBT(block + " " + (nof == 2 || nof == 3 ? "O" : "S")),
 				nof % 2 == 0, licht, nof, rend, gend, tn);
 	}
 

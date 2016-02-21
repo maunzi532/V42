@@ -34,15 +34,15 @@ public class Hauptschleife
 
 		n = new Tha(theOverlay, aw);
 		n.aussehen = new LadeModell().reload(
-				Index.gibLadeTeil("T_H"),
-				Index.gibLadeTeil("T_B"),
-				Index.gibLadeTeil("T_A"),
-				Index.gibLadeTeil("T_F"),
-				Index.gibLadeTeil("T_K"),
-				Index.gibLadeTeil("T_S"));
+				Index.gibLadeTeil("Hauptteil"),
+				Index.gibLadeTeil("Beine"),
+				Index.gibLadeTeil("Arme"),
+				Index.gibLadeTeil("Schuhe"),
+				Index.gibLadeTeil("Kopf"),
+				Index.gibLadeTeil("Sicht"));
 		Index.gibStandardAussehen("TSSA").assignStandard(n,
-				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HL2"))),
-				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HR2"))),
+				new Enhance(new LadeModell().reload(Index.gibLadeTeil("Hand L2"))),
+				new Enhance(new LadeModell().reload(Index.gibLadeTeil("Hand R2"))),
 				new H(0.5, 0.5, 10, 10, 4, 1, 0, 0.9),
 				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9),
 				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9),
@@ -109,25 +109,25 @@ public class Hauptschleife
 			{
 				if(command.equals("B"))
 				{
-					dw.seq = new Move(Index.gibLadeMove("TPSQ"), theOverlay, this, n);
+					dw.seq = new Move(Index.gibLadeMove(true, "TPSQ"), theOverlay, this, n);
 				}
 				if(command.equals("C"))
 				{
-					dw.seq = new Move(Index.gibLadeMove("TSQ"), theOverlay, this, n);
+					dw.seq = new Move(Index.gibLadeMove(true, "TSQ"), theOverlay, this, n);
 				}
 			}
 		};
 		MPS mp2 = new MPS();
 		n2.aussehen = new LadeModell().reload(
-				Index.gibLadeTeil("T_H"),
-				Index.gibLadeTeil("T_B"),
-				Index.gibLadeTeil("T_A"),
-				Index.gibLadeTeil("T_F"),
-				Index.gibLadeTeil("T_K"),
-				Index.gibLadeTeil("T_S"));
+				Index.gibLadeTeil("Hauptteil"),
+				Index.gibLadeTeil("Beine"),
+				Index.gibLadeTeil("Arme"),
+				Index.gibLadeTeil("Schuhe"),
+				Index.gibLadeTeil("Kopf"),
+				Index.gibLadeTeil("Sicht"));
 		Index.gibStandardAussehen("TSSA").assignStandard(n2,
-				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HL2"))),
-				new Enhance(new LadeModell().reload(Index.gibLadeTeil("T_HR2"))),
+				new Enhance(new LadeModell().reload(Index.gibLadeTeil("Hand L2"))),
+				new Enhance(new LadeModell().reload(Index.gibLadeTeil("Hand R2"))),
 				new H2(n2, 0.5, 0.5, 10, 10, 4, 1, 0, 0.6),
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),

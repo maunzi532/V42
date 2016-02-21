@@ -5,6 +5,7 @@ import nonBlock.aussehen.*;
 import ansicht.n2.xF.*;
 import wahr.physisch.*;
 
+import java.io.*;
 import java.util.*;
 
 public class Index
@@ -36,18 +37,23 @@ public class Index
 		return s2.toString();
 	}
 
-	public static String gibText(String name, String... replace)
+	private static String bauName(String ordner, String name)
+	{
+		return Lader.gibText(teilNamen.get(ordner) + File.separator + name.replace("/", File.separator));
+	}
+
+	public static String gibText(String ordner, String name, String... replace)
 	{
 		if(replace.length <= 0)
 		{
 			if(geladen.containsKey(name))
 				return (String) geladen.get(name);
-			String s = Lader.gibText(teilNamen.get(name));
+			String s = bauName(ordner, name);
 			geladen.put(name, s);
 			return s;
 		}
 		else
-			return replace(Lader.gibText(teilNamen.get(name)), replace);
+			return replace(bauName(ordner, name), replace);
 	}
 
 	public static LadeTeil gibLadeTeil(String name, String... replace)
@@ -56,12 +62,12 @@ public class Index
 		{
 			if(geladen.containsKey(name))
 				return (LadeTeil) geladen.get(name);
-			LadeTeil s = new LadeTeil(Lader.gibText(teilNamen.get(name)));
+			LadeTeil s = new LadeTeil(bauName("Ladeteile", name));
 			geladen.put(name, s);
 			return s;
 		}
 		else
-			return new LadeTeil(replace(Lader.gibText(teilNamen.get(name)), replace));
+			return new LadeTeil(replace(bauName("Ladeteile", name), replace));
 	}
 
 	public static StandardAussehen gibStandardAussehen(String name, String... replace)
@@ -70,12 +76,12 @@ public class Index
 		{
 			if(geladen.containsKey(name))
 				return (StandardAussehen) geladen.get(name);
-			StandardAussehen s = new StandardAussehen(Lader.gibText(teilNamen.get(name)));
+			StandardAussehen s = new StandardAussehen(bauName("Ladeteile", name));
 			geladen.put(name, s);
 			return s;
 		}
 		else
-			return new StandardAussehen(replace(Lader.gibText(teilNamen.get(name)), replace));
+			return new StandardAussehen(replace(bauName("Ladeteile", name), replace));
 	}
 
 	public static AlternateStandard gibAlternateStandard(String name, String... replace)
@@ -84,26 +90,26 @@ public class Index
 		{
 			if(geladen.containsKey(name))
 				return (AlternateStandard) geladen.get(name);
-			AlternateStandard s = new AlternateStandard(Lader.gibText(teilNamen.get(name)));
+			AlternateStandard s = new AlternateStandard(bauName("Ladeteile", name));
 			geladen.put(name, s);
 			return s;
 		}
 		else
-			return new AlternateStandard(replace(Lader.gibText(teilNamen.get(name)), replace));
+			return new AlternateStandard(replace(bauName("Ladeteile", name), replace));
 	}
 
-	public static LadeMove gibLadeMove(String name, String... replace)
+	public static LadeMove gibLadeMove(boolean seq, String name, String... replace)
 	{
 		if(replace.length <= 0)
 		{
 			if(geladen.containsKey(name))
 				return (LadeMove) geladen.get(name);
-			LadeMove s = new LadeMove(name, Lader.gibText(teilNamen.get(name)));
+			LadeMove s = new LadeMove(name, bauName(seq ? "Sequenzen" : "Moves", name));
 			geladen.put(name, s);
 			return s;
 		}
 		else
-			return new LadeMove(name, replace(Lader.gibText(teilNamen.get(name)), replace));
+			return new LadeMove(name, replace(bauName(seq ? "Sequenzen" : "Moves", name), replace));
 	}
 
 	public static XFBT gibXFBT(String name, String... replace)
@@ -112,11 +118,11 @@ public class Index
 		{
 			if(geladen.containsKey(name))
 				return (XFBT) geladen.get(name);
-			XFBT s = new XFBT(Lader.gibText(teilNamen.get(name)));
+			XFBT s = new XFBT(bauName("Blocks", name));
 			geladen.put(name, s);
 			return s;
 		}
 		else
-			return new XFBT(replace(Lader.gibText(teilNamen.get(name)), replace));
+			return new XFBT(replace(bauName("Blocks", name), replace));
 	}
 }

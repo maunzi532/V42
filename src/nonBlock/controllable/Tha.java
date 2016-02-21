@@ -34,8 +34,8 @@ public class Tha extends TSSA
 			public void wand(int welche){}
 			protected void kontrolle(){}
 		};
-		Index.gibStandardAussehen("H4_Main").assignStandard(fL);
-		fL.aussehen = new LadeModell().reload(Index.gibLadeTeil("H4_X"));
+		Index.gibStandardAussehen("H4/Sta").assignStandard(fL);
+		fL.aussehen = new LadeModell().reload(Index.gibLadeTeil("H4/Achsen"));
 		fL.focus = new Mount(fL, this, 15, 0, new Drehung(0, Math.PI * 3 / 2), 0);
 		fL.init();
 		fR = new NBB(welt, lw, dw, bw)
@@ -46,8 +46,8 @@ public class Tha extends TSSA
 			public void wand(int welche){}
 			protected void kontrolle(){}
 		};
-		Index.gibStandardAussehen("H4_Main").assignStandard(fR);
-		fR.aussehen = new LadeModell().reload(Index.gibLadeTeil("H4_X"));
+		Index.gibStandardAussehen("H4/Sta").assignStandard(fR);
+		fR.aussehen = new LadeModell().reload(Index.gibLadeTeil("H4/Achsen"));
 		fR.focus = new Mount(fR, this, 16, 0, new Drehung(0, Math.PI * 3 / 2), 0);
 		fR.init();
 	}
@@ -100,8 +100,8 @@ public class Tha extends TSSA
 		{
 			Flag f = new Flag(welt, lw, dw, bw);
 			f.aussehen = new LadeModell();
-			Index.gibStandardAussehen("F_Main").assignStandard(f);
-			f.aussehen.reload(Index.gibLadeTeil("F_X"));
+			Index.gibStandardAussehen("Flagge/Sta").assignStandard(f);
+			f.aussehen.reload(Index.gibLadeTeil("Flagge/Achsen"));
 			f.position = new K4(this.position);
 			f.position.b -= this.block.get(0).airshift;
 			f.dreh = new Drehung(this.dreh.wl, 0);
@@ -112,14 +112,14 @@ public class Tha extends TSSA
 		{
 			if(overlay.pa.taType > 0 && overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
 			{
-				moves.add(new Move(Index.gibLadeMove("KBL",
+				moves.add(new Move(Index.gibLadeMove(false, "KBL",
 						String.valueOf(-70 - UIVerbunden.maus.x / 10),
 						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
 				fL.aktionen.add(new Abbau(fL, 60, 5, overlay.pa.tnTarget, 20, this, 15,
 						new Drehung(0, Math.PI * 3 / 2), 40));
 			}
 			else
-				moves.add(new Move(Index.gibLadeMove("KL",
+				moves.add(new Move(Index.gibLadeMove(false, "KL",
 						String.valueOf(-70 - UIVerbunden.maus.x / 10),
 						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
 		}
@@ -127,14 +127,14 @@ public class Tha extends TSSA
 		{
 			if(overlay.pa.taType > 0 && overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
 			{
-				moves.add(new Move(Index.gibLadeMove("KBR",
+				moves.add(new Move(Index.gibLadeMove(false, "KBR",
 						String.valueOf(70 - UIVerbunden.maus.x / 10),
 						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
 				fR.aktionen.add(new Abbau(fR, 60, 5, overlay.pa.tnTarget, 20, this, 16,
 						new Drehung(0, Math.PI * 3 / 2), 40));
 			}
 			else
-				moves.add(new Move(Index.gibLadeMove("KR",
+				moves.add(new Move(Index.gibLadeMove(false, "KR",
 						String.valueOf(70 - UIVerbunden.maus.x / 10),
 						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
 		}
@@ -150,7 +150,7 @@ public class Tha extends TSSA
 		{
 			if(boden)
 			{
-				moves.add(new Move(Index.gibLadeMove("MV1"), this));
+				moves.add(new Move(Index.gibLadeMove(false, "MV1"), this));
 				Index.gibAlternateStandard("TSSA").changeToThis(this);
 				boden = false;
 			}

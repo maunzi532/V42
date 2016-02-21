@@ -20,7 +20,7 @@ public class LPaneel
 		if(Staticf.automaximize)
 			fr.setExtendedState(Frame.MAXIMIZED_BOTH);
 		fr.setSize(Staticf.frameXW, Staticf.frameYH);
-		TA2.feedMoves(Index.gibText("TA"));
+		TA2.feedMoves(Index.gibText("Einstellungen", "TA"));
 		TA2.addToFrame(fr, Staticf.writeKeyIndex);
 	}
 

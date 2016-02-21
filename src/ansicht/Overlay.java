@@ -22,7 +22,7 @@ public class Overlay
 	public void initOverlay(AllWelt awA, String zDatLad)
 	{
 		aw = awA;
-		z = new Zeichner(Index.gibText(zDatLad), aw);
+		z = new Zeichner(Index.gibText("Einstellungen", zDatLad), aw);
 		UIVerbunden.mausLast = new Point(UIVerbunden.sc.width / 2, UIVerbunden.sc.height / 2);
 		Point mm = LPaneel.fr.getLocationOnScreen();
 		UIVerbunden.ro.mouseMove(UIVerbunden.sc.width / 2 + mm.x, UIVerbunden.sc.height / 2 + mm.y);
