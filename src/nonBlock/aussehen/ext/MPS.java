@@ -29,7 +29,24 @@ public class MPS extends External
 			{
 				t[i][j] = new MPSF(this, new K4(main2.position.a + Math.sin(j / 5d) * 5, main2.position.b - i * 2,
 						main2.position.c + Math.cos(j / 5d) * 5, main2.position.d));
+				if(i == 0 && j % 4 == 0)
+				{
+					t[i][j].fixedto1 = 0;
+					t[i][j].fixedto2 = j / 4;
+				}
 				teile.add(t[i][j]);
+			}
+		for(int i = 0; i < t.length; i++)
+			for(int j = 0; j < t[i].length; j++)
+			{
+				if(i > 0)
+					t[i][j].verb[0] = t[i - 1][j];
+				if(i < t.length - 1)
+					t[i][j].verb[1] = t[i + 1][j];
+				if(j > 0)
+					t[i][j].verb[2] = t[i][j - 1];
+				if(j < t[i].length - 1)
+					t[i][j].verb[3] = t[i][j + 1];
 			}
 		flaechen = new ArrayList<>();
 		for(int i = 0; i < t.length - 1; i++)
@@ -70,7 +87,9 @@ public class MPS extends External
 
 	public void tick()
 	{
-		for(int i = 0; i < teile.size(); i++)
+		/*for(int i = 0; i < teile.size(); i++)
 			teile.get(i).tick();
+		for(int i = 0; i < teile.size(); i++)
+			teile.get(i).ort = teile.get(i).ortNeu;*/
 	}
 }

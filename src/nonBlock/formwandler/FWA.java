@@ -13,8 +13,8 @@ import java.util.*;
 public abstract class FWA extends NBB implements Controllable
 {
 	private final Controller control;
-	FWZustand current;
-	FWZustand last;
+	String currentZ;
+	String lastZ;
 	int transformTime;
 	ArrayList<FWVerwendet> verwendbar;
 	int[] verwendet;
@@ -22,16 +22,24 @@ public abstract class FWA extends NBB implements Controllable
 	Move chain;
 	LadeFWA abilities;
 
-	protected FWA(Controller control, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
+	protected FWA(Controller control, LadeFWA abilities, String currentZ, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
 		super(welt, lw, dw, bw);
 		this.control = control;
+		this.abilities = abilities;
+		cooldowns = new double[abilities.cldSize];
+		this.currentZ = currentZ;
+		lastZ = currentZ;
 	}
 
-	protected FWA(Controller control, AllWelt aw)
+	protected FWA(Controller control, LadeFWA abilities, String currentZ, AllWelt aw)
 	{
 		super(aw);
 		this.control = control;
+		this.abilities = abilities;
+		cooldowns = new double[abilities.cldSize];
+		this.currentZ = currentZ;
+		lastZ = currentZ;
 	}
 
 	public void tick()
@@ -81,7 +89,7 @@ public abstract class FWA extends NBB implements Controllable
 
 	public void doCommand(String command)
 	{
-		int i = abilities.zustands.indexOf(current);
+		int i = abilities.zustands.indexOf(currentZ);
 		int j = abilities.usedInputs.get(i).indexOf(command);
 		LadeControlledMove td = abilities.availMoves.get(i).get(j);
 		for(int k = 0; k < td.braucht.size(); k++)

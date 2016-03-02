@@ -8,6 +8,7 @@ import nonBlock.aussehen.*;
 import nonBlock.aussehen.ext.*;
 import nonBlock.collide.*;
 import nonBlock.controllable.*;
+import nonBlock.formwandler.*;
 import wahr.physisch.*;
 import wahr.zugriff.*;
 
@@ -16,7 +17,7 @@ import java.util.*;
 
 public class Hauptschleife
 {
-	private static TSSA n;
+	private static Tha n;
 	static AllWelt aw;
 	public static Overlay theOverlay;
 
@@ -32,7 +33,29 @@ public class Hauptschleife
 		aw.wbl.setzeSE(new K4(0, 0, 0, 0), new K4(20, 20, 20, 20));
 		g.ermittleStart();
 
+		LadeFWA lfwa = new LadeFWA(20);
+		lfwa.charge(Index.gibLadeFWATeil("Set1"));
 		n = new Tha(theOverlay, aw);
+		/*n = new FWA(new SPController(), lfwa, "Normal", aw)
+		{
+			public void collide(Attk attk){}
+
+			public void actCollide(Attk attk){}
+
+			public void decollide(Attk attk){}
+
+			public void wand(int welche){}
+
+			public K4 kamP()
+			{
+				return new K4(punkte[73][14]);
+			}
+
+			public Drehung kamD()
+			{
+				return Drehung.plus(dreh, achsen[73].dreh);
+			}
+		};*/
 		n.aussehen = new LadeModell().reload(
 				Index.gibLadeTeil("Hauptteil"),
 				Index.gibLadeTeil("Beine"),
@@ -151,8 +174,8 @@ public class Hauptschleife
 		n.aktionen.add(new Sicht(n, 10, 67, 67, false, theOverlay));
 		UIVerbunden.zp = new ZP4C(n, 0);
 		n.aktionen.add(UIVerbunden.zp);
-		//aw.lw.licht.add(n);
-		//aw.lw.licht.add(n2);
+		aw.lw.licht.add(n);
+		aw.lw.licht.add(n2);
 		UIVerbunden.godModeKam = new GMKamera(new GMC(), theOverlay, aw);
 		UIVerbunden.godModeKam.position = new K4(n.position);
 		UIVerbunden.godModeKam.dreh = new Drehung();

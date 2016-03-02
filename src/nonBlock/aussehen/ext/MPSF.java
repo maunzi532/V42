@@ -6,6 +6,7 @@ class MPSF
 {
 	MPS sup;
 	K4 ort;
+	K4 ortNeu;
 	MPSF[] verb;
 	int[] vAbstand;
 	int fixedto1 = -1;
@@ -32,10 +33,20 @@ class MPSF
 	public void tick()
 	{
 		if(fixedto1 >= 0)
-			ort = sup.main2.punkte[fixedto1][fixedto2];
+			ortNeu = new K4(sup.main2.punkte[fixedto1][fixedto2]);
 		else
 		{
 			//X
+			K4 diffNeu = new K4();
+			for(int i = 0; i < 4; i++)
+				if(verb[i] != null)
+					diffNeu = K4.plus(verb[i].ort, diffNeu);
+				else
+					diffNeu = K4.plus(ort, diffNeu);
+			diffNeu = new K4(diffNeu.a / 4, diffNeu.b / 4, diffNeu.c / 4, diffNeu.d / 4);
+			diffNeu = K4.diff(ort, diffNeu);
+			K4 fall = new K4(0, -0.05, 0, 0);
+			ortNeu = K4.plus(K4.plus(ort, diffNeu), fall);
 		}
 	}
 }

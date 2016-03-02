@@ -1,6 +1,7 @@
 package ansicht.text;
 
 import wahr.physisch.*;
+import wahr.zugriff.*;
 
 import java.awt.*;
 import java.io.*;
@@ -42,8 +43,12 @@ public class T2Box extends SLF
 			gd.setFont(new Font(null, Font.PLAIN, main.mh((h - h2) / 2)));
 			gd.drawString(text, main.mw(x) + main.mh((h - h2) / 4),
 					main.mh(y) + main.mh(h2) + main.mh((h - h2) * 2 / 3));
-			gd.drawImage(Lader.gibBild("NAME" + File.separator + codebez + "_" + emotion + ".png"),
-					main.mw(x), main.mh(y), main.mw(w), main.mh(h2), null);
+			String pfad = Index.gibPfad("TextIcons") + File.separator + codebez + "_" + emotion + ".png";
+			Image im = null;
+			if(new File(pfad).exists())
+				im = Lader.gibBild(pfad);
+			if(im != null)
+				gd.drawImage(im, main.mw(x), main.mh(y), main.mw(w), main.mh(h2), null);
 		}
 	}
 

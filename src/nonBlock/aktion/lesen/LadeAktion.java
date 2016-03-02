@@ -11,6 +11,19 @@ import java.util.*;
 
 class LadeAktion
 {
+	private static String[] typen = new String[]
+			{
+					"Multiachsendrehung", //M
+					"Freeze", //F
+					"KText", //K
+					"EndText", //E
+					"Bewegung", //B
+					"Fokus", //Fo
+					"Transformieren", //T
+					"Teleport", //Te
+					"Attk" //A
+			};
+
 	public final int teil;
 	public final int zeit;
 	private int typ = -1;
@@ -40,38 +53,12 @@ class LadeAktion
 	{
 		this.teil = teil;
 		zeit = Integer.parseInt(cd2[0]);
-		switch(cd2[1])
-		{
-			case "AM":
-				typ = 0;
+		for(int i = 0; i < typen.length; i++)
+			if(typen[i].startsWith(cd2[1]))
+			{
+				typ = i;
 				break;
-			case "AF":
-				typ = 1;
-				break;
-			case "T":
-				typ = 2;
-				break;
-			case "TE":
-				typ = 3;
-				break;
-			case "MD":
-				typ = 4;
-				break;
-			case "Fokus":
-				typ = 5;
-				break;
-			case "Alt":
-				typ = 6;
-				break;
-			case "TP":
-				typ = 7;
-				break;
-			case "Attk":
-				typ = 8;
-				break;
-			default:
-				typ = -1;
-		}
+			}
 		for(int t = 2; t < cd2.length; t++)
 		{
 			String[] cd3 = cd2[t].split("=", 2);
@@ -122,54 +109,32 @@ class LadeAktion
 				case "emotion":
 					emotion = cd3[1];
 					break;
-				case "aM":
-					mvd2[0] = false;
-					mvd[0] = Double.parseDouble(cd3[1]);
-					break;
-				case "aT":
-					mvd2[0] = true;
-					mvd[0] = Double.parseDouble(cd3[1]);
-					break;
-				case "bM":
-					mvd2[1] = false;
-					mvd[1] = Double.parseDouble(cd3[1]);
-					break;
-				case "bT":
-					mvd2[1] = true;
-					mvd[1] = Double.parseDouble(cd3[1]);
-					break;
-				case "cM":
-					mvd2[2] = false;
-					mvd[2] = Double.parseDouble(cd3[1]);
-					break;
-				case "cT":
-					mvd2[2] = true;
-					mvd[2] = Double.parseDouble(cd3[1]);
-					break;
-				case "dM":
-					mvd2[3] = false;
-					mvd[3] = Double.parseDouble(cd3[1]);
-					break;
-				case "dT":
-					mvd2[3] = true;
-					mvd[3] = Double.parseDouble(cd3[1]);
-					break;
-				case "wlM":
-					mvd2[4] = false;
-					mvd[4] = Double.parseDouble(cd3[1]) * Math.PI / 180;
-					break;
-				case "wlT":
-					mvd2[4] = true;
-					mvd[4] = Double.parseDouble(cd3[1]) * Math.PI / 180;
-					break;
-				case "wbM":
-					mvd2[5] = false;
-					mvd[5] = Double.parseDouble(cd3[1]) * Math.PI / 180;
-					break;
-				case "wbT":
-					mvd2[5] = true;
-					mvd[5] = Double.parseDouble(cd3[1]) * Math.PI / 180;
-					break;
+				default:
+					if(cd3[0].endsWith("M") || cd3[0].endsWith("T"))
+					{
+						if(cd3[0].length() == 2)
+						{
+							int nd = cd3[0].charAt(0) - 97;
+							if(nd >= 0 && nd < 4)
+							{
+								mvd2[nd] = cd3[0].endsWith("T");
+								mvd[nd] = Double.parseDouble(cd3[1]);
+							}
+						}
+						else if(cd3[0].length() == 3 && cd3[0].charAt(0) == 'w')
+						{
+							int nd = 0;
+							if(cd3[0].charAt(1) == 'l')
+								nd = 4;
+							else if(cd3[0].charAt(1) == 'b')
+								nd = 5;
+							if(nd > 0)
+							{
+								mvd2[nd] = cd3[0].endsWith("T");
+								mvd[nd] = Double.parseDouble(cd3[1]) * Math.PI / 180;
+							}
+						}
+					}
 			}
 		}
 	}

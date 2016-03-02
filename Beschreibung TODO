@@ -1,39 +1,35 @@
 Bug-Stufe
 		Windows Mausfokus Bug
 		Vermutlich Fensterrahmen Bug
-		TSSA 2 Boden Glitch
-		Stürzt bei Block 3 beinhart ab
+		Spawn Boden Glitch
 
 Nicht sicher
 		4D-Daten des aktuellen Felds anzeigen
 		NBD - Idle Bewegung
 		Finde die Kopie - Geschafft-Sequenz
 		Finde die Kopie - Labyrinth generieren
+		Metall-Reflexion
 
 Stufe 1
 	4D 1
 		D2 - Aussehen verbessern
 	Overlay 1
 		Targeting-System - Markierung bewegen
-		Block auswahl
+		Block auswahl (welcher Typ von Block)
 		Bildschirmelement - Eingabefeld
 		Hauptmenü einbauen
 	Welt 1
-		Index - Zuordnung ändern (Blöcke)
+		Eigener Index für Blöcke
 	Movement 1
 		Der Move - Abbrechen
 	FWA 1
 		LadeAktion - FWVerwendet ändern
-		LadeFWA
-		FWAController
-		FWA
+		TSSA zu FWA machen
 	Speicher 1
 		TA2 - TA-Datei verbessern
 		Sca - Laden 2
 
 Stufe 2
-	Grafik 2
-		Metall-Reflexion
 	Overlay 2
 		Schrift Aussehen
 	Welt 2

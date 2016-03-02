@@ -1,7 +1,7 @@
-2 AM Dauer=20 Power=2 ADI=16,2,14,3,%1%,%0%,0,0
-20 AF Dauer=70 Power=3 LinA=16
-2 AM Dauer=50 Power=2 dis=HR ADI=5,2,48,-5,90,0,0,0 ADI=6,2,48,-5,90,0,0,0 ADI=7,2,48,-5,90,0,0,0 ADI=8,2,48,-5,90,0,0,0
-51 AM Dauer=99 Power=2 dis=HR ADI=5,2,48,0,90,0,0,0 ADI=6,2,48,0,90,0,0,0 ADI=7,2,48,0,90,0,0,0 ADI=8,2,48,0,90,0,0,0
-40 AM Dauer=20 Power=3 dis=HR ADIZV=0,2,8,0,0,-180,0,0
-60 AF Dauer=40 Power=4 dis=HR LinA=0
+2 M Dauer=20 Power=2 ADI=16,2,14,3,%1%,%0%,0,0
+20 F Dauer=70 Power=3 LinA=16
+2 M Dauer=50 Power=2 dis=HR ADI=5,2,48,-5,90,0,0,0 ADI=6,2,48,-5,90,0,0,0 ADI=7,2,48,-5,90,0,0,0 ADI=8,2,48,-5,90,0,0,0
+51 M Dauer=99 Power=2 dis=HR ADI=5,2,48,0,90,0,0,0 ADI=6,2,48,0,90,0,0,0 ADI=7,2,48,0,90,0,0,0 ADI=8,2,48,0,90,0,0,0
+40 M Dauer=20 Power=3 dis=HR ADIZV=0,2,8,0,0,-180,0,0
+60 F Dauer=40 Power=4 dis=HR LinA=0
 Z 100

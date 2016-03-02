@@ -3,6 +3,7 @@ package wahr.zugriff;
 import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
 import ansicht.n2.xF.*;
+import nonBlock.formwandler.*;
 import wahr.physisch.*;
 
 import java.io.*;
@@ -40,6 +41,11 @@ public class Index
 	private static String bauName(String ordner, String name)
 	{
 		return Lader.gibText(teilNamen.get(ordner) + File.separator + name.replace("/", File.separator));
+	}
+
+	public static String gibPfad(String ordner)
+	{
+		return teilNamen.get(ordner);
 	}
 
 	public static String gibText(String ordner, String name, String... replace)
@@ -124,5 +130,33 @@ public class Index
 		}
 		else
 			return new XFBT(replace(bauName("Blocks", name), replace));
+	}
+
+	public static LadeFWATeil gibLadeFWATeil(String name, String... replace)
+	{
+		if(replace.length <= 0)
+		{
+			if(geladen.containsKey(name))
+				return (LadeFWATeil) geladen.get(name);
+			LadeFWATeil s = new LadeFWATeil(bauName("FWA", name));
+			geladen.put(name, s);
+			return s;
+		}
+		else
+			return new LadeFWATeil(replace(bauName("FWA", name), replace));
+	}
+
+	public static LadeControlledMove gibLadeControlledMove(String name, String... replace)
+	{
+		if(replace.length <= 0)
+		{
+			if(geladen.containsKey(name))
+				return (LadeControlledMove) geladen.get(name);
+			LadeControlledMove s = new LadeControlledMove(bauName("FWA", name));
+			geladen.put(name, s);
+			return s;
+		}
+		else
+			return new LadeControlledMove(replace(bauName("FWA", name), replace));
 	}
 }

@@ -4,15 +4,17 @@ import java.util.*;
 
 public class LadeFWA
 {
-	ArrayList<FWZustand> zustands;
+	ArrayList<String> zustands;
 	ArrayList<ArrayList<String>> usedInputs;
 	ArrayList<ArrayList<LadeControlledMove>> availMoves;
+	int cldSize;
 
-	public LadeFWA()
+	public LadeFWA(int cldSize)
 	{
 		zustands = new ArrayList<>();
 		usedInputs = new ArrayList<>();
 		availMoves = new ArrayList<>();
+		this.cldSize = cldSize;
 	}
 
 	public void charge(LadeFWATeil teil)

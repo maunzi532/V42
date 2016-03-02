@@ -1,4 +1,4 @@
-2 Alt T=TSSA
-2 MD Akt=0 Dauer=20 Power=5 bM=16
-20 MD Akt=0 Dauer=10 Power=5 aM=%0% cM=%1%
+2 Tra T=TSSA
+2 Bew Akt=0 Dauer=20 Power=5 bM=16
+20 Bew Akt=0 Dauer=10 Power=5 aM=%0% cM=%1%
 Z 31

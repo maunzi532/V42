@@ -1,0 +1,5 @@
+move KL2
+cld 500
+shcld 0
+power 2
+ChainOnly
