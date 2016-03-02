@@ -4,7 +4,8 @@ Some commits on master do not run
 No compiled version here
 
 # Controls
-I - forward, grab edge, climb up<b>
+I - forward, grab edge, climb up
+#
 J - left
 L - right
 K - backward
