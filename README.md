@@ -1,10 +1,9 @@
-# Only M5s push to master
-# Some commits on master do not run
-# No compiled version here
+# This is V42
+Only M5s push to master
+Some commits on master do not run
+No compiled version here
 
-This is V42.
-
-Controls:
+# Controls
 I - forward, grab edge, climb up
 J - left
 L - right
