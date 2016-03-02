@@ -4,8 +4,7 @@ Some commits on master do not run
 No compiled version here
 
 # Controls
-I - forward, grab edge, climb up
-#
+`I - forward, grab edge, climb up
 J - left
 L - right
 K - backward
@@ -20,4 +19,4 @@ G - switch to the flying camera
 Left Mouse - shoot the left thing forward
 in G - increase the number of the faced block (at 3 it crashes)
 Right Mouse - shoot the right thing forward
-in G - set the number of the faced block to 0
+in G - set the number of the faced block to 0`
