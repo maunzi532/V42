@@ -125,14 +125,30 @@ public class TA2
 		keys = new boolean[1024];
 		k2 = new boolean[1024];
 		String[] na = feed.split("\n");
-		moves = new int[na.length][];
-		for(int i = 0; i < na.length; i++)
-		{
-			String[] nb = na[i].split(" ");
-			moves[i] = new int[nb.length];
-			for(int j = 0; j < nb.length; j++)
-				moves[i][j] = Integer.parseInt(nb[j]);
-		}
+		moves = new int[Integer.parseInt(na[0])][];
+		for(int i = 1; i < na.length; i++)
+			if(!na[i].equals("") && !na[i].startsWith("/"))
+			{
+				String[] nb = na[i].split("=");
+				String[] nc = nb[1].split(",");
+				String[] nd = nb[0].split("-");
+				int ne = Integer.parseInt(nd[0]);
+				moves[ne] = new int[nc.length];
+				for(int j = 0; j < nc.length; j++)
+				{
+					if(nc[j].charAt(0) == 'n')
+						moves[ne][j] = Integer.parseInt(nc[j].substring(1));
+					else if(nc[j].charAt(0) == 'm')
+						moves[ne][j] = Integer.parseInt(nc[j].substring(1)) + magicNumber;
+					else if(nc[j].length() == 1)
+						moves[ne][j] = nc[j].charAt(0);
+					else
+						throw new RuntimeException("Falscher Text in TA2");
+				}
+			}
+		for(int i = 0; i < moves.length; i++)
+			if(moves[i] == null)
+				moves[i] = new int[0];
 		keyStat = new int[moves.length];
 	}
 }
