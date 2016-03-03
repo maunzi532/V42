@@ -35,27 +35,7 @@ public class Hauptschleife
 
 		LadeFWA lfwa = new LadeFWA(20);
 		lfwa.charge(Index.gibLadeFWATeil("Set1"));
-		n = new Tha(theOverlay, aw);
-		/*n = new FWA(new SPController(), lfwa, "Normal", aw)
-		{
-			public void collide(Attk attk){}
-
-			public void actCollide(Attk attk){}
-
-			public void decollide(Attk attk){}
-
-			public void wand(int welche){}
-
-			public K4 kamP()
-			{
-				return new K4(punkte[73][14]);
-			}
-
-			public Drehung kamD()
-			{
-				return Drehung.plus(dreh, achsen[73].dreh);
-			}
-		};*/
+		n = new Tha(lfwa, theOverlay, aw);
 		n.aussehen = new LadeModell().reload(
 				Index.gibLadeTeil("Hauptteil"),
 				Index.gibLadeTeil("Beine"),
@@ -102,7 +82,7 @@ public class Hauptschleife
 					cmd.add("hinten");
 				return cmd;
 			}
-		}, null, aw)
+		}, null, null, null, aw)
 		{
 			public void collide(Attk attk)
 			{
@@ -113,7 +93,7 @@ public class Hauptschleife
 
 			public void decollide(Attk attk)
 			{
-				Index.gibAlternateStandard("TSSA2R").changeToThis(this);
+				Index.gibAlternateStandard("TSSA2R").changeToThis(this, 40, 5);
 			}
 
 			public void wand(int welche){}

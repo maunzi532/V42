@@ -181,7 +181,7 @@ class LadeAktion
 				}
 				break;
 			case 6:
-				Index.gibAlternateStandard(text).changeToThis(dislocated);
+				Index.gibAlternateStandard(text).changeToThis(dislocated, dauer, power);
 				break;
 			case 7:
 				tp(dislocated, mvd, mvd2);

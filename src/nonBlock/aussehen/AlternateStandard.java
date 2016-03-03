@@ -97,14 +97,14 @@ public class AlternateStandard
 		}
 	}
 
-	public void changeToThis(NBD n)
+	public void changeToThis(NBD n, int dauer, int power)
 	{
 		n.standard = this;
 		AltTrans command;
 		if(n instanceof NBB)
-			command = new AltTrans((NBB)n, 30, 10, blockbox);
+			command = new AltTrans((NBB)n, dauer, power, blockbox);
 		else
-			command = new AltTrans(n, 30, 10);
+			command = new AltTrans(n, dauer, power);
 		for(int i = 0; i < n.resLink.length; i++)
 			if(n.resLink[i] == null)
 			{

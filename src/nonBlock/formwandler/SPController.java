@@ -51,6 +51,25 @@ public class SPController extends Controller
 				if(TA2.keyStat[kh[i]] == 2)
 					k = i;
 		}
+		if(!lockL && !lockR)
+		{
+			if(TA2.keyStat[2] == 2)
+				cmd.add("Rechts");
+			if(TA2.keyStat[1] == 2)
+				cmd.add("Links");
+			if(TA2.keyStat[5] == 2)
+				cmd.add("Oben");
+			if(TA2.keyStat[6] == 2)
+				cmd.add("Untem");
+			if(TA2.keyStat[3] == 2)
+				cmd.add("Vorne");
+			if(TA2.keyStat[4] == 2)
+				cmd.add("Hinten");
+			if(TA2.keyStat[7] == 2)
+				cmd.add("Rot");
+			if(TA2.keyStat[8] == 2)
+				cmd.add("Gn");
+		}
 		return cmd;
 	}
 

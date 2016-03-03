@@ -6,27 +6,28 @@ import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
 import nonBlock.collide.*;
+import nonBlock.formwandler.*;
 import wahr.zugriff.*;
 
 import java.util.*;
 
-public abstract class TSSA extends NBB implements Controllable, Licht
+public abstract class TSSA extends FWA implements Licht
 {
 	private final Controller control;
 	final Overlay overlay;
 	boolean boden;
 	int grabRichtung = -1;
 
-	TSSA(Controller control, Overlay overlay, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
+	TSSA(Controller control, LadeFWA abilities, String currentZ, Overlay overlay, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
-		super(welt, lw, dw, bw);
+		super(control, abilities, currentZ, welt, lw, dw, bw);
 		this.control = control;
 		this.overlay = overlay;
 	}
 
-	protected TSSA(Controller control, Overlay overlay, AllWelt aw)
+	protected TSSA(Controller control, LadeFWA abilities, String currentZ, Overlay overlay, AllWelt aw)
 	{
-		this(control, overlay, aw.wbl, aw.lw, aw.dw, aw.bw);
+		this(control, abilities, currentZ, overlay, aw.wbl, aw.lw, aw.dw, aw.bw);
 	}
 
 	public void kontrolle()
@@ -78,13 +79,10 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 					achsen[67].dreh.wl = Math.PI * 0.5;
 			}
 		}
-		ArrayList<String> commands = control.giveCommands();
-		for(int i = 0; i < commands.size(); i++)
-			doCommand(commands.get(i));
+		boolean[] infl = control.infl();
 		if(canInfl != null)
 		{
 			K4 cb = new K4();
-			boolean[] infl = control.infl();
 			if(infl[0] != infl[1])
 			{
 				cb.a += Math.cos(dreh.wl) * (infl[0] ? canInfl[0] : -canInfl[0]);
@@ -101,15 +99,16 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 				cb.d += infl[6] ? canInfl[3] : -canInfl[3];
 			beweg.add(cb);
 		}
+
+		inflChecks(infl);
+		ArrayList<String> commands = control.giveCommands();
+		for(int i = 0; i < commands.size(); i++)
+			doCommand(commands.get(i));
 		beweg.add(new K4(bewegung.a * 0.85, bewegung.b * 0.85, bewegung.c * 0.85, bewegung.d * 0.85));
 		beweg.add(new K4(0, -0.05, 0, 0));
 	}
 
-	public abstract K4 kamP();
-
-	public abstract Drehung kamD();
-
-	public abstract void doCommand(String command);
+	public void inflChecks(boolean[] infl){}
 
 	//Links 7 Rechts 0
 	int approxRichtung()
@@ -156,7 +155,7 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 						if(approxRichtung() == 7)
 							richtung = 4;
 						focus = new Focus(this, 20, fp, Drehung.nDrehung((4 - richtung) * Math.PI / 2, 0));
-						Index.gibAlternateStandard("TSSA3LR").changeToThis(this);
+						Index.gibAlternateStandard("TSSA3LR").changeToThis(this, 20, 8);
 						return false;
 					}
 					break;
@@ -241,7 +240,7 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 				Boolean ck = canKlettern(grabRichtung, dif, p);
 				if(ck != null)
 				{
-					Index.gibAlternateStandard("TSSA").changeToThis(this);
+					Index.gibAlternateStandard("TSSA").changeToThis(this, 30, 10);
 					focus = null;
 					grabRichtung = -1;
 					if(ck)
@@ -260,7 +259,7 @@ public abstract class TSSA extends NBB implements Controllable, Licht
 	{
 		if(grabRichtung >= 0)
 		{
-			Index.gibAlternateStandard("TSSA").changeToThis(this);
+			Index.gibAlternateStandard("TSSA").changeToThis(this, 20, 10);
 			focus = null;
 			grabRichtung = -1;
 			//bewegung.b = 2;
