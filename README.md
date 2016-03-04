@@ -4,17 +4,17 @@ Some commits on master do not run
 No compiled version here  
 
 # Controls
-I - forward, grab edge, climb up  
-J - left  
-L - right  
-K - backward  
-U - jump, get up  
-O - crouch, fall faster  
-Z - red direction  
-P - green direction  
-A - place flag  
-B, C - copy does something  
-; - (hold) show some settings  
+I,W - forward, grab edge, climb up  
+J,A - left  
+L,D - right  
+K,S - backward  
+U,Q - jump, get up  
+O,E - crouch, fall faster  
+Z,Y - red direction  
+P,X - green direction  
+F - place flag  
+1,2 - copy does something  
+;,> - (hold) show some settings  
 G - switch to the flying camera  
 Left Mouse - shoot the left thing forward  
 - in G - increase the number of the faced block (at 3 it crashes)  
