@@ -325,7 +325,7 @@ public abstract class TSSA extends FWA implements Licht
 
 	public double lichtRange()
 	{
-		return 300;
+		return 800;
 	}
 
 	public double lichtPower()
@@ -335,6 +335,6 @@ public abstract class TSSA extends FWA implements Licht
 
 	public double lichtPowerDecay()
 	{
-		return 0.8;
+		return 0.4;
 	}
 }

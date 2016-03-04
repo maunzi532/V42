@@ -38,8 +38,6 @@ public class Staticf
 	//Scaling am Bildschirm
 	public static int scaleX = 560;
 	public static int scaleY = 560;
-	//Panelizer fast Null
-	public static double nnull = 0.0001;
 	//Tasten-Indexes ausgeben
 	public static boolean writeKeyIndex = false;
 	//Frameskips ausgeben
@@ -92,10 +90,6 @@ public class Staticf
 						if(t2.length > 1)
 							scaleY = Integer.parseInt(t2[1]);
 						break;
-					case "nnull":
-						if(t2.length > 1)
-							nnull = Double.parseDouble(t2[1]);
-						break;
 					case "sca":
 						if(z != null)
 							sca = z;
@@ -124,6 +118,8 @@ public class Staticf
 			}
 	}
 
+	//Panelizer fast Null
+	public static double nnull = 0.0001;
 	//Sichtweite NonBlocks
 	public static final double sicht = 300;
 	//Eigene H ausblenden

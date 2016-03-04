@@ -191,11 +191,27 @@ public class Zeichner
 	public void eckenEntf()
 	{
 		for(int q = 0; q < n2s.size(); q++)
-		{
+			if(n2s.get(q) instanceof F2)
+				for(int v = 0; v < 4; v++)
+				{
+					K4[] eck = ((F2)n2s.get(q)).ecken;
+					if(eck.length == 0)
+						continue;
+					int falsch = 0;
+					for(int i = 0; i < eck.length; i++)
+						if(eck[i].c < (v % 2 == 0 ? eck[i].a * Staticf.frameXW / UIVerbunden.sc.width :
+								eck[i].b * Staticf.frameXW / UIVerbunden.sc.height) * (v / 2 * 2 - 1))
+							falsch++;
+					if(falsch >= eck.length)
+						((F2)n2s.get(q)).ecken = new K4[0];
+				}
+		for(int q = 0; q < n2s.size(); q++)
 			if(n2s.get(q) instanceof F2)
 			{
 				F2 f2 = (F2)n2s.get(q);
 				K4[] eck = ((F2)n2s.get(q)).ecken;
+				if(eck.length == 0)
+					continue;
 				int vornIdx = -1;
 				int hintIdx = -1;
 				int falsch = 0;
@@ -249,7 +265,6 @@ public class Zeichner
 					f2.ec2[len - 1].c = 0;
 				}
 			}
-		}
 	}
 
 	private static double rkc(double k0, double k1, double kc0, double kc1)
