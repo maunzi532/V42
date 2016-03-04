@@ -13,7 +13,6 @@ import java.util.*;
 
 public abstract class TSSA extends FWA implements Licht
 {
-	private final Controller control;
 	final Overlay overlay;
 	boolean boden;
 	int grabRichtung = -1;
@@ -21,7 +20,6 @@ public abstract class TSSA extends FWA implements Licht
 	TSSA(Controller control, LadeFWA abilities, String currentZ, Overlay overlay, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
 		super(control, abilities, currentZ, welt, lw, dw, bw);
-		this.control = control;
 		this.overlay = overlay;
 	}
 
@@ -107,8 +105,6 @@ public abstract class TSSA extends FWA implements Licht
 		beweg.add(new K4(bewegung.a * 0.85, bewegung.b * 0.85, bewegung.c * 0.85, bewegung.d * 0.85));
 		beweg.add(new K4(0, -0.05, 0, 0));
 	}
-
-	public void inflChecks(boolean[] infl){}
 
 	//Links 7 Rechts 0
 	int approxRichtung()

@@ -12,7 +12,7 @@ import java.util.*;
 
 public abstract class FWA extends NBB implements Controllable
 {
-	private final Controller control;
+	protected final Controller control;
 	String currentZ;
 	String lastZ;
 	int transformTime;
@@ -66,11 +66,25 @@ public abstract class FWA extends NBB implements Controllable
 			return;
 		if(td.isChainOnly && moves.contains(chain))
 			return;
-		Move m = new Move(Index.gibLadeMove(false, td.theMove), this);
-		if(td.isChainOnly)
-			chain = m;
-		moves.add(m);
+		if(td.theFall != null)
+			doFall(td.theFall, td.isChainOnly);
+		if(td.theMove != null)
+		{
+			Move m = new Move(Index.gibLadeMove(false, td.theMove), this);
+			if(td.isChainOnly)
+				chain = m;
+			moves.add(m);
+		}
 		if(td.sharedcooldown >= 0)
 			cooldowns[td.sharedcooldown] = td.cooldown;
 	}
+
+	public void inflChecks(boolean[] infl)
+	{
+		for(int i = 0; i < 8; i++)
+			if(infl[i])
+			doCommand("I" + i);
+	}
+
+	protected abstract void doFall(String fall, boolean attachChainOnly);
 }

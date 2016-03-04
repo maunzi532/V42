@@ -128,6 +128,7 @@ public class Tha extends TSSA
 			kletterSeitlich(false);
 		if(infl[0])
 			kletterSeitlich(true);
+		super.inflChecks(infl);
 	}
 
 	public void doCommand(String command)
@@ -210,5 +211,13 @@ public class Tha extends TSSA
 			return;
 		}
 		super.doCommand(command);
+	}
+
+	protected void doFall(String fall, boolean attachChainOnly)
+	{
+		switch(fall)
+		{
+
+		}
 	}
 }

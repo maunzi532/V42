@@ -1,0 +1,18 @@
+F Lx
+move KL2
+cld 500
+shcld 0
+power 2
+ChainOnly
+
+F Rx
+move KR2
+cld 500
+shcld 1
+power 2
+ChainOnly
+
+F Sp
+move MV1
+shcld -1
+power 3

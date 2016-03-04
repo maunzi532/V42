@@ -8,19 +8,23 @@ public class LadeControlledMove
 	ArrayList<Integer> brauchtLevel;
 	boolean isChainOnly;
 	String theMove;
+	String theFall;
 	int sharedcooldown;
 	double cooldown;
 	int power;
 
-	public LadeControlledMove(String code)
+	public LadeControlledMove(String code, String find)
 	{
 		braucht = new ArrayList<>();
 		String cde1 = code.replace("\n	", "");
 		String[] cde = cde1.split("\n");
-		for(int i = 0; i < cde.length; i++)
+		int i = Arrays.asList(cde).indexOf("F " + find);
+		for(i++; i < cde.length; i++)
 		{
 			if(!cde[i].isEmpty() && !cde[i].startsWith("/"))
 			{
+				if(cde[i].startsWith("F "))
+					return;
 				if(cde[i].startsWith("V "))
 				{
 					String[] cde2 = cde[i].split(" ");
@@ -37,6 +41,8 @@ public class LadeControlledMove
 					power = Integer.parseInt(cde[i].substring(6));
 				else if(cde[i].startsWith("move "))
 					theMove = cde[i].substring(5);
+				else if(cde[i].startsWith("fall "))
+					theFall = cde[i].substring(5);
 			}
 		}
 	}

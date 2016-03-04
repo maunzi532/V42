@@ -148,15 +148,20 @@ public class Index
 
 	public static LadeControlledMove gibLadeControlledMove(String name, String... replace)
 	{
+		int xe = name.indexOf('-');
+		if(xe == -1)
+			throw new RuntimeException("LadeControlledMove name muss - enthalten");
 		if(replace.length <= 0)
 		{
 			if(geladen.containsKey(name))
 				return (LadeControlledMove) geladen.get(name);
-			LadeControlledMove s = new LadeControlledMove(bauName("FWA", name));
+			LadeControlledMove s = new LadeControlledMove(bauName("FWA", name.substring(0, xe)),
+					name.substring(xe + 1));
 			geladen.put(name, s);
 			return s;
 		}
 		else
-			return new LadeControlledMove(replace(bauName("FWA", name), replace));
+			return new LadeControlledMove(replace(bauName("FWA", name.substring(0, xe)), replace),
+					name.substring(xe + 1));
 	}
 }

@@ -119,6 +119,8 @@ public class Hauptschleife
 					dw.seq = new Move(Index.gibLadeMove(true, "TSQ"), theOverlay, this, n);
 				}
 			}
+
+			protected void doFall(String fall, boolean attachChainOnly){}
 		};
 		MPS mp2 = new MPS();
 		n2.aussehen = new LadeModell().reload(

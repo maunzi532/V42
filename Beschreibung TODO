@@ -1,35 +1,24 @@
-Bug-Stufe
-		Windows Mausfokus Bug
-		Vermutlich Fensterrahmen Bug
-		Spawn Boden Glitch
-
 Nicht sicher
 		4D-Daten des aktuellen Felds anzeigen
 		NBD - Idle Bewegung
-		Finde die Kopie - Geschafft-Sequenz
-		Finde die Kopie - Labyrinth generieren
 		Metall-Reflexion
-
-Stufe 1
-	4D 1
 		D2 - Aussehen verbessern
-	Overlay 1
-		Targeting-System - Markierung bewegen
+
+Diese Stufe
+	Blöcke
 		Block auswahl (welcher Typ von Block)
-		Bildschirmelement - Eingabefeld
-		Hauptmenü einbauen
-	Welt 1
 		Eigener Index für Blöcke
-	Movement 1
+		Blöcke mit Bildern definieren
+		Targeting-System - Markierung bewegen
+	Andere
+		Bildschirmelement - Eingabefeld
 		Der Move - Abbrechen
-	FWA 1
-		LadeAktion - FWVerwendet ändern
-	Speicher 1
-		Sca - Laden 2
+		Tha als FWA
 
 Stufe 2
 	Overlay 2
 		Schrift Aussehen
+		Hauptmenü einbauen
 	Welt 2
 		Welt generieren
 	Gameplay 2
