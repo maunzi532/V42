@@ -2,11 +2,11 @@ undecoratedFrame
 frameXW=1000
 frameYH=600
 automaximize
-scaleX=560
-scaleY=560
+scaleX=0.8
 sca!
 sca2!
 writeKeyIndex!
 writeFrameskips!
 writeFrameTime!
 writeVisibleTime!
+writeThreadTime!

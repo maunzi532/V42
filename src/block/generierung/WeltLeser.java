@@ -7,6 +7,11 @@ public class WeltLeser extends Generator
 {
 	private String ort;
 	private int[] size;
+	int c0 = 0;
+	int c1 = 0;
+	int c2 = 0;
+	int c3 = 0;
+	int[][][][] blocks = null;
 
 	public void gibInWelt(WeltB welt, Object... z)
 	{
@@ -16,7 +21,6 @@ public class WeltLeser extends Generator
 
 	int[][][][] generiere()
 	{
-		int[][][][] blocks = null;
 		String[] w1 = Lader.gibText(ort).replace("\n	", "").split("\n");
 		for(String w2 : w1)
 		{
@@ -43,31 +47,19 @@ public class WeltLeser extends Generator
 						endOrder[i] = Integer.parseInt(w43[i]);
 					break;
 				case "B":
+					assert blocks != null;
 					String[] w44 = w3[1].split(",");
-					int c0 = 0;
-					int c1 = 0;
-					int c2 = 0;
-					int c3 = 0;
 					for(int i = 0; i < w44.length; i++)
 					{
-						assert blocks != null;
-						blocks[c0][c1][c2][c3] = ladeBlock(w44[i]);
-						c3++;
-						if(c3 >= size[3])
+						if(w44[i].contains("x"))
 						{
-							c3 = 0;
-							c2++;
-							if(c2 >= size[2])
-							{
-								c2 = 0;
-								c1++;
-								if(c1 >= size[1])
-								{
-									c1 = 0;
-									c0++;
-								}
-							}
+							String[] w441 = w44[i].split("x");
+							int m = Integer.parseInt(w441[0]);
+							for(int j = 0; j < m; j++)
+								nex(w441[1]);
 						}
+						else
+							nex(w44[i]);
 					}
 					break;
 			}
@@ -75,6 +67,27 @@ public class WeltLeser extends Generator
 		starts = new int[][]{{size[0] / 2 - 1, size[1] / 2 + 1, size[2] / 2, size[3] / 2},
 				{size[0] / 2 - 1, size[1] / 2 + 1, size[2] / 2 + 1, size[3] / 2}};
 		return blocks;
+	}
+
+	private void nex(String t)
+	{
+		blocks[c0][c1][c2][c3] = ladeBlock(t);
+		c3++;
+		if(c3 >= size[3])
+		{
+			c3 = 0;
+			c2++;
+			if(c2 >= size[2])
+			{
+				c2 = 0;
+				c1++;
+				if(c1 >= size[1])
+				{
+					c1 = 0;
+					c0++;
+				}
+			}
+		}
 	}
 
 	private int ladeBlock(String s)

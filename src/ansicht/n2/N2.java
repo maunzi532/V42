@@ -36,11 +36,11 @@ public abstract class N2
 
 	static int ethaX(double a, double c)
 	{
-		return (int)(UIVerbunden.sc.width / 2d + Staticf.scaleX * a / c);
+		return (int)(UIVerbunden.sc.width / 2d * (1 + Staticf.scaleX * a / c));
 	}
 
 	static int ethaY(double b, double c)
 	{
-		return (int)(UIVerbunden.sc.height / 2d - Staticf.scaleY * b / c);
+		return (int)(UIVerbunden.sc.height / 2d - UIVerbunden.sc.width / 2d * Staticf.scaleX * b / c);
 	}
 }

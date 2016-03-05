@@ -36,8 +36,7 @@ public class Staticf
 	//Fenster am Anfang maximiert
 	public static boolean automaximize = true;
 	//Scaling am Bildschirm
-	public static int scaleX = 560;
-	public static int scaleY = 560;
+	public static double scaleX = 0.8;
 	//Tasten-Indexes ausgeben
 	public static boolean writeKeyIndex = false;
 	//Frameskips ausgeben
@@ -46,6 +45,8 @@ public class Staticf
 	public static boolean writeFrameTime = false;
 	//Zeit zwischen sichtbaren Frames ausgeben
 	public static boolean writeVisibleTime = false;
+	//Zeit die der Thread braucht ausgeben
+	public static boolean writeThreadTime = false;
 
 	public static void initialCharge()
 	{
@@ -84,11 +85,7 @@ public class Staticf
 						break;
 					case "scaleX":
 						if(t2.length > 1)
-							scaleX = Integer.parseInt(t2[1]);
-						break;
-					case "scaleY":
-						if(t2.length > 1)
-							scaleY = Integer.parseInt(t2[1]);
+							scaleX = Double.parseDouble(t2[1]);
 						break;
 					case "sca":
 						if(z != null)
@@ -113,6 +110,10 @@ public class Staticf
 					case "writeVisibleTime":
 						if(z != null)
 							writeVisibleTime = z;
+						break;
+					case "writeThreadTime":
+						if(z != null)
+							writeThreadTime = z;
 						break;
 				}
 			}
@@ -158,4 +159,6 @@ public class Staticf
 	public static final double zpSpeed = 1;
 	//Drehgeschwindigkeit
 	public static final double nachDreh = 0.1;
+	//Umbruch beim WeltB speichern
+	public static final int maxCta = 60;
 }

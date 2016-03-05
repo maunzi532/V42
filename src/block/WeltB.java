@@ -188,22 +188,40 @@ public class WeltB
 				.append(endOrder[3]).append(",").append("\n");
 		sb.append("B = ");
 		int cta = 0;
+		String last = "";
+		int lastc = 0;
 		for(int i0 = 0; i0 < size[0]; i0++)
 			for(int i1 = 0; i1 < size[1]; i1++)
 				for(int i2 = 0; i2 < size[2]; i2++)
 					for(int i3 = 0; i3 < size[3]; i3++)
 					{
 						String b = BlockToText(new WBP(i0, i1, i2, i3));
-						sb.append(b);
-						cta += b.length() + 1;
-						if(cta > 120)
-						{
-							cta = 0;
-							sb.append(",\n	");
-						}
+						if(b.equals(last))
+							lastc++;
 						else
-							sb.append(",");
+						{
+							if(lastc > 0)
+							{
+								if(lastc > 1)
+									last = lastc + "x" + last;
+								sb.append(last);
+								cta += last.length() + 1;
+								if(cta > Staticf.maxCta)
+								{
+									cta = 0;
+									sb.append(",\n	");
+								}
+								else
+									sb.append(",");
+							}
+							last = b;
+							lastc = 1;
+						}
+
 					}
+		if(lastc > 1)
+			last = lastc + "x" + last;
+		sb.append(last).append(",");
 		try
 		{
 			FileWriter fw = new FileWriter(new File(name.replace('/', File.separatorChar)));

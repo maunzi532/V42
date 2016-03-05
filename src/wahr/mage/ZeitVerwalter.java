@@ -92,11 +92,13 @@ public class ZeitVerwalter
 							if(!thd)
 							{
 								thd = true;
-								//Staticf.last2 = System.currentTimeMillis();
+								long last4 = System.currentTimeMillis();
 								Hauptschleife.theOverlay.panelize();
 								if(Staticf.writeVisibleTime)
 									System.out.println("VIS: " + (System.currentTimeMillis() - Staticf.last3));
 								Staticf.last3 = System.currentTimeMillis();
+								if(Staticf.writeThreadTime)
+									System.out.println("THR: " + (System.currentTimeMillis() - last4));
 								thd = false;
 							}
 						}

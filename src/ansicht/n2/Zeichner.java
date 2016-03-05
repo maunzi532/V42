@@ -199,8 +199,9 @@ public class Zeichner
 						continue;
 					int falsch = 0;
 					for(int i = 0; i < eck.length; i++)
-						if(eck[i].c < (v % 2 == 0 ? eck[i].a * Staticf.frameXW / UIVerbunden.sc.width :
-								eck[i].b * Staticf.frameXW / UIVerbunden.sc.height) * (v / 2 * 2 - 1))
+						if(eck[i].c < (v % 2 == 0 ? eck[i].a * Staticf.scaleX :
+								eck[i].b * Staticf.scaleX * UIVerbunden.sc.height /
+										UIVerbunden.sc.width) * (v / 2 * 2 - 1))
 							falsch++;
 					if(falsch >= eck.length)
 						((F2)n2s.get(q)).ecken = new K4[0];
