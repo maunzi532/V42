@@ -60,7 +60,7 @@ public class SPController extends Controller
 			if(TA2.keyStat[5] == 2)
 				cmd.add("Oben");
 			if(TA2.keyStat[6] == 2)
-				cmd.add("Untem");
+				cmd.add("Unten");
 			if(TA2.keyStat[3] == 2)
 				cmd.add("Vorne");
 			if(TA2.keyStat[4] == 2)

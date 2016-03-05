@@ -1,0 +1,15 @@
+Z Normal
+Oben LCM-N_Oben
+Unten LCM-N_Unten
+
+Z Kante
+I1 LCM-K_Links
+I0 LCM-K_Rechts
+Vorne LCM-K_Vorne
+Hinten LCM-K_Hinten
+
+Z Luft
+I4 LCM-L_Vor
+
+Z Ducken
+Oben LCM-D_Oben

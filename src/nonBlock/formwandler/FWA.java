@@ -13,8 +13,8 @@ import java.util.*;
 public abstract class FWA extends NBB implements Controllable
 {
 	protected final Controller control;
-	String currentZ;
-	String lastZ;
+	public String currentZ;
+	public String lastZ;
 	int transformTime;
 	ArrayList<FWVerwendet> verwendbar;
 	int[] verwendet;
@@ -55,6 +55,8 @@ public abstract class FWA extends NBB implements Controllable
 	public void doCommand(String command)
 	{
 		int i = abilities.zustands.indexOf(currentZ);
+		if(i < 0)
+			return;
 		int j = abilities.usedInputs.get(i).indexOf(command);
 		if(j < 0)
 			return;

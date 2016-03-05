@@ -34,6 +34,7 @@ public class Hauptschleife
 		g.ermittleStart();
 
 		LadeFWA lfwa = new LadeFWA(20);
+		lfwa.charge(Index.gibLadeFWATeil("SetN"));
 		lfwa.charge(Index.gibLadeFWATeil("Set1"));
 		n = new Tha(lfwa, theOverlay, aw);
 		n.aussehen = new LadeModell().reload(
@@ -82,7 +83,7 @@ public class Hauptschleife
 					cmd.add("hinten");
 				return cmd;
 			}
-		}, null, null, null, aw)
+		}, null, "Luft", null, aw)
 		{
 			public void collide(Attk attk)
 			{

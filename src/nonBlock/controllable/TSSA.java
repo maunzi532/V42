@@ -13,8 +13,13 @@ import java.util.*;
 
 public abstract class TSSA extends FWA implements Licht
 {
+	protected static List<String> zustands = Arrays.asList("Normal", "Kante", "Luft", "Ducken");
+	protected static double[][] zinfl = new double[][]{{0.2, 0, 0, 0.2}, null,
+			{0.1, 0, 0.2, 0.1}, {0.05, 0, 0, 0.05}};
+	protected static Boolean[] zboden = new Boolean[]{true, null, false, true};
+	protected static boolean[] canDreh = new boolean[]{true, false, true, false};
+
 	final Overlay overlay;
-	boolean boden;
 	int grabRichtung = -1;
 
 	TSSA(Controller control, LadeFWA abilities, String currentZ, Overlay overlay, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
@@ -32,21 +37,23 @@ public abstract class TSSA extends FWA implements Licht
 	{
 		if(!dw.nofreeze())
 			return;
+		int zIndex = zustands.indexOf(currentZ);
 		double[] canInfl;
-		if(grabRichtung >= 0)
+		if(zboden[zIndex] != null)
 		{
-			canInfl = null;
-			boden = false;
+			boolean boden = naheWand(2, 0.1);
+			if(zboden[zIndex] != boden)
+			{
+				lastZ = currentZ;
+				if(boden)
+					currentZ = "Normal";
+				else
+					currentZ = "Luft";
+				Index.gibAlternateStandard("TSSA").changeToThis(this, 20, 3);
+			}
 		}
-		else
-		{
-			boden = naheWand(2, 0.1);
-			if(boden)
-				canInfl = new double[]{0.2, 0, 0, 0.2};
-			else
-				canInfl = new double[]{0.1, 0, 0.2, 0.1};
-		}
-		if(grabRichtung < 0)
+		canInfl = zinfl[zIndex];
+		if(canDreh[zIndex])
 		{
 			if(achsen[67].dreh.wl < Staticf.nachDreh || achsen[67].dreh.wl > Math.PI * 2 - Staticf.nachDreh)
 			{
@@ -114,48 +121,47 @@ public abstract class TSSA extends FWA implements Licht
 
 	boolean attemptAirgrab(int type, K4 dlPosition, double dUnedited)
 	{
-		if(grabRichtung < 0 && !boden)
+		WBP p = welt.tw(dlPosition);
+		K4 dif = K4.diff(welt.wt(p), dlPosition);
+		if(dif.b < welt.weltBlock.b - 4 || dif.b > welt.weltBlock.b)
 		{
-			WBP p = welt.tw(dlPosition);
-			K4 dif = K4.diff(welt.wt(p), dlPosition);
-			if(dif.b < welt.weltBlock.b - 4 || dif.b > welt.weltBlock.b)
+			if(dif.b < 4)
 			{
-				if(dif.b < 4)
+				p.k[1]--;
+				dif.b += welt.weltBlock.b;
+			}
+			else
+				return true;
+		}
+		int richtung = (approxRichtung() + 1) % 8 / 2;
+		switch(type)
+		{
+			case 0:
+				if(canAirgrab(richtung, dif, new WBP(p)))
 				{
-					p.k[1]--;
-					dif.b += welt.weltBlock.b;
-				}
-				else
-					return true;
-			}
-			int richtung = (approxRichtung() + 1) % 8 / 2;
-			switch(type)
-			{
-				case 0:
-					if(canAirgrab(richtung, dif, new WBP(p)))
+					K4 fp = welt.wt2(p);
+					fp.b += welt.weltBlock.b / 2 + 0.6;
+					if(richtung % 2 == 0)
 					{
-						K4 fp = welt.wt2(p);
-						fp.b += welt.weltBlock.b / 2 + 0.6;
-						if(richtung % 2 == 0)
-						{
-							fp.c += (welt.weltBlock.c / 2 - 3.6) * (1 - richtung);
-							fp.a = dlPosition.a;
-						}
-						else
-						{
-							fp.a += (welt.weltBlock.a / 2 - 3.6) * (2 - richtung);
-							fp.c = dlPosition.c;
-						}
-						fp.d = dUnedited;
-						grabRichtung = richtung;
-						if(approxRichtung() == 7)
-							richtung = 4;
-						focus = new Focus(this, 20, fp, Drehung.nDrehung((4 - richtung) * Math.PI / 2, 0));
-						Index.gibAlternateStandard("TSSA3LR").changeToThis(this, 20, 8);
-						return false;
+						fp.c += (welt.weltBlock.c / 2 - 3.6) * (1 - richtung);
+						fp.a = dlPosition.a;
 					}
-					break;
-			}
+					else
+					{
+						fp.a += (welt.weltBlock.a / 2 - 3.6) * (2 - richtung);
+						fp.c = dlPosition.c;
+					}
+					fp.d = dUnedited;
+					grabRichtung = richtung;
+					if(approxRichtung() == 7)
+						richtung = 4;
+					focus = new Focus(this, 20, fp, Drehung.nDrehung((4 - richtung) * Math.PI / 2, 0));
+					Index.gibAlternateStandard("TSSA3LR").changeToThis(this, 20, 8);
+					lastZ = currentZ;
+					currentZ = "Kante";
+					return false;
+				}
+				break;
 		}
 		return true;
 	}
@@ -237,6 +243,8 @@ public abstract class TSSA extends FWA implements Licht
 				if(ck != null)
 				{
 					Index.gibAlternateStandard("TSSA").changeToThis(this, 30, 10);
+					lastZ = currentZ;
+					currentZ = "Luft";
 					focus = null;
 					grabRichtung = -1;
 					if(ck)
@@ -256,9 +264,10 @@ public abstract class TSSA extends FWA implements Licht
 		if(grabRichtung >= 0)
 		{
 			Index.gibAlternateStandard("TSSA").changeToThis(this, 20, 10);
+			lastZ = currentZ;
+			currentZ = "Luft";
 			focus = null;
 			grabRichtung = -1;
-			//bewegung.b = 2;
 			return false;
 		}
 		return true;

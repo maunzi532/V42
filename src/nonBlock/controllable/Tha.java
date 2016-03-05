@@ -16,7 +16,7 @@ public class Tha extends TSSA
 
 	private Tha(LadeFWA abilities, Overlay overlay, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
-		super(new SPController(), abilities, "Normal", overlay, welt, lw, dw, bw);
+		super(new SPController(), abilities, "Luft", overlay, welt, lw, dw, bw);
 	}
 
 	public Tha(LadeFWA abilities, Overlay overlay, AllWelt aw)
@@ -95,43 +95,7 @@ public class Tha extends TSSA
 		return Drehung.plus(dreh, achsen[73].dreh);
 	}
 
-	public void inflChecks(boolean[] infl)
-	{
-		if(infl[4])
-		{
-			if(grabRichtung < 0 && !boden)
-			{
-				boolean can = true;
-				for(Move a : moves)
-					if(a.name.equals("WK"))
-					{
-						can = false;
-						break;
-					}
-				if(can)
-				{
-					if(attemptAirgrab(0, position, position.d))
-					{
-						if(position.d - welt.intiize(position.d / welt.weltBlock.d) *
-								welt.weltBlock.d < Staticf.zpSpeed)
-							attemptAirgrab(0, new K4(position.a, position.b, position.c,
-									position.d - Staticf.zpSpeed), position.d - Staticf.zpSpeed / 2);
-						if(position.d - welt.intiize(position.d / welt.weltBlock.d) *
-								welt.weltBlock.d > welt.weltBlock.d - Staticf.zpSpeed)
-							attemptAirgrab(0, new K4(position.a, position.b, position.c,
-									position.d + Staticf.zpSpeed), position.d + Staticf.zpSpeed / 2);
-					}
-				}
-			}
-		}
-		if(infl[1])
-			kletterSeitlich(false);
-		if(infl[0])
-			kletterSeitlich(true);
-		super.inflChecks(infl);
-	}
-
-	public void doCommand(String command)
+	/*public void doCommand(String command)
 	{
 		if(command.equals("A"))
 		{
@@ -178,46 +142,61 @@ public class Tha extends TSSA
 						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
 			return;
 		}
-		/*if(command.equals("unten"))
-		{
-			if(boden)
-				if(approxRichtung() % 2 == 0)
-					Index.gibAlternateStandard("TSSA2L").changeToThis(this);
-				else
-					Index.gibAlternateStandard("TSSA2R").changeToThis(this);
-			return;
-		}*/
-		/*if(command.equals("oben"))
-		{
-			if(boden)
-			{
-				moves.add(new Move(Index.gibLadeMove(false, "MV1"), this));
-				Index.gibAlternateStandard("TSSA").changeToThis(this);
-				boden = false;
-			}
-			else if(grabRichtung < 0)
-				Index.gibAlternateStandard("TSSA").changeToThis(this);
-			return;
-		}*/
-		if(command.equals("Vorne"))
-		{
-			kletterHoch();
-			return;
-		}
-		if(command.equals("Hinten"))
-		{
-			if(grabRichtung >= 0)
-				lassLos();
-			return;
-		}
 		super.doCommand(command);
-	}
+	}*/
 
 	protected void doFall(String fall, boolean attachChainOnly)
 	{
 		switch(fall)
 		{
-
+			case "Luftvor":
+				boolean can = true;
+				for(Move a : moves)
+					if(a.name.equals("WK"))
+					{
+						can = false;
+						break;
+					}
+				if(can)
+				{
+					if(attemptAirgrab(0, position, position.d))
+					{
+						if(position.d - welt.intiize(position.d / welt.weltBlock.d) *
+								welt.weltBlock.d < Staticf.zpSpeed)
+							attemptAirgrab(0, new K4(position.a, position.b, position.c,
+									position.d - Staticf.zpSpeed), position.d - Staticf.zpSpeed / 2);
+						if(position.d - welt.intiize(position.d / welt.weltBlock.d) *
+								welt.weltBlock.d > welt.weltBlock.d - Staticf.zpSpeed)
+							attemptAirgrab(0, new K4(position.a, position.b, position.c,
+									position.d + Staticf.zpSpeed), position.d + Staticf.zpSpeed / 2);
+					}
+				}
+				break;
+			case "WandL":
+				kletterSeitlich(false);
+				break;
+			case "WandR":
+				kletterSeitlich(true);
+				break;
+			case "KletterHoch":
+				kletterHoch();
+				break;
+			case "LassLos":
+				lassLos();
+				break;
+			case "Ducken":
+				if(approxRichtung() % 2 == 0)
+					Index.gibAlternateStandard("TSSA2L").changeToThis(this, 30, 3);
+				else
+					Index.gibAlternateStandard("TSSA2R").changeToThis(this, 30, 3);
+				lastZ = currentZ;
+				currentZ = "Ducken";
+				break;
+			case "Aufstehen":
+				Index.gibAlternateStandard("TSSA").changeToThis(this, 40, 3);
+				lastZ = currentZ;
+				currentZ = "Normal";
+				break;
 		}
 	}
 }
