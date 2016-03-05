@@ -3,6 +3,7 @@ package ansicht.n2.xF;
 import ansicht.n2.*;
 
 import java.awt.*;
+import java.awt.image.*;
 import java.util.*;
 
 public class XFBT extends XFN
@@ -46,6 +47,24 @@ public class XFBT extends XFN
 			}
 		if(cfarb != 0)
 			farben.put(cfarb, c1);
+		mat = Material.B;
+	}
+
+	public XFBT(ArrayList<BufferedImage> bilder, int seite)
+	{
+		farben = new HashMap<>();
+		farb = Color.WHITE;
+		for(int i = 0; i < bilder.size(); i++)
+		{
+			int n = bilder.get(i).getHeight();
+			XFarbe[] lies = new XFarbe[n * n];
+			for(int j = 0; j < n; j++)
+				for(int k = 0; k < n; k++)
+					lies[j * n + k] = new XFN(new Color(bilder.get(i).getRGB(n * seite + k, j)), mat = Material.B);
+			farben.put(n, lies);
+			if(n == 1)
+				farb = ((XFN)lies[0]).farb;
+		}
 		mat = Material.B;
 	}
 

@@ -6,19 +6,19 @@ Nicht sicher
 
 Diese Stufe
 	Blöcke
-		Block auswahl (welcher Typ von Block)
-		Blöcke mit Bildern definieren
 		Targeting-System - Markierung bewegen
+		Beim Welt speichern Mehrfache zusammenfassen
 	Andere
 		Bildschirmelement - Eingabefeld
 		Der Move - Abbrechen
-		Tha als FWA
+		ZP-Bewegung neu machen
 
 Stufe 2
 	Overlay 2
 		Schrift Aussehen
 		Hauptmenü einbauen
 	Welt 2
+		Block Auswahl (Welcher Typ von Block)
 		Welt generieren
 	Gameplay 2
 		Sinnvolles Attk

@@ -1,7 +1,6 @@
 package wahr.physisch;
 
-import javax.imageio.stream.*;
-import javax.swing.*;
+import javax.imageio.*;
 import java.awt.*;
 import java.io.*;
 import java.util.*;
@@ -67,12 +66,13 @@ public class Lader
 	{
 		try
 		{
-			FileImageInputStream fl = new FileImageInputStream(file);
+			return ImageIO.read(file);
+			/*FileImageInputStream fl = new FileImageInputStream(file);
 			byte[] by = new byte[(int) file.length()];
 			fl.read(by);
 			ImageIcon ico = new ImageIcon(by);
 			fl.close();
-			return ico.getImage();
+			return ico.getImage();*/
 		}
 		catch(Exception e)
 		{

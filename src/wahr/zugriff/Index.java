@@ -1,11 +1,12 @@
 package wahr.zugriff;
 
+import ansicht.n2.xF.*;
 import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
-import ansicht.n2.xF.*;
 import nonBlock.formwandler.*;
 import wahr.physisch.*;
 
+import java.awt.image.*;
 import java.io.*;
 import java.util.*;
 
@@ -130,6 +131,23 @@ public class Index
 		}
 		else
 			return new XFBT(replace(bauName("Blocks", name), replace));
+	}
+
+	public static XFBT gibXFBT(String name, int seite, int max)
+	{
+		if(geladen.containsKey(name + seite))
+			return (XFBT) geladen.get(name + seite);
+		ArrayList<BufferedImage> imgs = new ArrayList<>();
+		for(int i = 1; i <= max; i++)
+		{
+			String text = teilNamen.get("Blocks") + File.separator +
+					name.replace("/", File.separator) + " " + i + ".png";
+			if(new File(text).exists())
+				imgs.add((BufferedImage)Lader.gibBild(text));
+		}
+		XFBT s = new XFBT(imgs, seite);
+		geladen.put(name + seite, s);
+		return s;
 	}
 
 	public static LadeFWATeil gibLadeFWATeil(String name, String... replace)

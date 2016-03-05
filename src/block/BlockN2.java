@@ -19,7 +19,29 @@ public class BlockN2
 					{0, 0, -1, 0},
 					{0, 0, 1, 0},
 					{0, 0, 0, -1},
-					{0, 0, 0, 1},
+					{0, 0, 0, 1}
+			};
+
+	private static final int[][] seiten = new int[][]
+			{
+					{0, 2, 6, 4},
+					{5, 7, 3, 1},
+					{0, 4, 5, 1},
+					{7, 6, 2, 3},
+					{1, 3, 2, 0},
+					{4, 6, 7, 5}
+			};
+
+	private static final int[][] punkte = new int[][]
+			{
+					{0, 0, 0},
+					{1, 0, 0},
+					{0, 1, 0},
+					{1, 1, 0},
+					{0, 0, 1},
+					{1, 0, 1},
+					{0, 1, 1},
+					{1, 1, 1}
 			};
 
 	private Zeichner z;
@@ -175,44 +197,13 @@ public class BlockN2
 	{
 		long tn = tn(p);
 		K4[] ke = new K4[4];
-		switch(nof)
+		for(int i = 0; i < 4; i++)
 		{
-			case 1:
-				p.k[0]++;
-			case 0:
-				ke[0] = von.wt(p);
-				p.k[1]++;
-				ke[1] = von.wt(p);
-				p.k[2]++;
-				ke[2] = von.wt(p);
-				p.k[1]--;
-				ke[3] = von.wt(p);
-				break;
-			case 3:
-				p.k[1]++;
-			case 2:
-				ke[0] = von.wt(p);
-				p.k[2]++;
-				ke[1] = von.wt(p);
-				p.k[0]++;
-				ke[2] = von.wt(p);
-				p.k[2]--;
-				ke[3] = von.wt(p);
-				break;
-			case 5:
-				p.k[2]++;
-			case 4:
-				ke[0] = von.wt(p);
-				p.k[0]++;
-				ke[1] = von.wt(p);
-				p.k[1]++;
-				ke[2] = von.wt(p);
-				p.k[0]--;
-				ke[3] = von.wt(p);
-				break;
+			int[] pl = punkte[seiten[nof][i]];
+			ke[i] = von.wt(new WBP(p.k[0] + pl[0], p.k[1] + pl[1], p.k[2] + pl[2], p.k[3]));
 		}
-		return new BF2(ke, new K4[ke.length], Index.gibXFBT(block + " " + (nof == 2 || nof == 3 ? "O" : "S")),
-				nof % 2 == 0, licht, nof, rend, gend, tn);
+		return new BF2(ke, new K4[ke.length], Index.gibXFBT(String.valueOf(block), nof, 10),
+				true, licht, nof, rend, gend, tn);
 	}
 
 	private D2 descr(WBP p, int b, boolean g, long tn)
