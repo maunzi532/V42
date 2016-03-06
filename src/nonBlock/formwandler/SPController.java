@@ -2,6 +2,7 @@ package nonBlock.formwandler;
 
 import nonBlock.controllable.*;
 import wahr.physisch.*;
+import wahr.zugriff.*;
 
 import java.util.*;
 
@@ -18,6 +19,8 @@ public class SPController extends Controller
 
 	public ArrayList<String> giveCommands()
 	{
+		if(UIVerbunden.godMode)
+			return new ArrayList<>();
 		ArrayList<String> cmd = new ArrayList<>();
 		if(lockL || lockR)
 		{
@@ -75,7 +78,7 @@ public class SPController extends Controller
 
 	public boolean[] infl()
 	{
-		if(lockL || lockR)
+		if(UIVerbunden.godMode || lockL || lockR)
 			return new boolean[8];
 		boolean[] b = new boolean[]
 				{

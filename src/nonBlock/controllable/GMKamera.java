@@ -34,14 +34,16 @@ public class GMKamera extends NBD implements Controllable, Licht
 
 	public Drehung kamD()
 	{
-		return new Drehung(dreh.wl, achsen[0].dreh.wb);
+		return new Drehung(dreh.wl, dreh.wb);
 	}
 
 	public void kontrolle()
 	{
 		dreh.wl += achsen[0].dreh.wl;
+		dreh.wb += achsen[0].dreh.wb;
 		dreh.sichern();
 		achsen[0].dreh.wl = 0;
+		achsen[0].dreh.wb = 0;
 		ArrayList<String> commands = control.giveCommands();
 		for(int i = 0; i < commands.size(); i++)
 			doCommand(commands.get(i));
@@ -58,8 +60,9 @@ public class GMKamera extends NBD implements Controllable, Licht
 				cb.b += infl[2] ? canInfl[1] : -canInfl[2];
 			if(infl[4] != infl[5])
 			{
-				cb.a -= Math.sin(dreh.wl) * (infl[4] ? canInfl[0] : -canInfl[0]);
-				cb.c += Math.cos(dreh.wl) * (infl[4] ? canInfl[0] : -canInfl[0]);
+				cb.a -= Math.sin(dreh.wl) * Math.cos(dreh.wb) * (infl[4] ? canInfl[0] : -canInfl[0]);
+				cb.c += Math.cos(dreh.wl) * Math.cos(dreh.wb) * (infl[4] ? canInfl[0] : -canInfl[0]);
+				cb.b += Math.sin(dreh.wb) * (infl[4] ? canInfl[1] : -canInfl[1]);
 			}
 			if(infl[6] != infl[7])
 				cb.d += infl[6] ? canInfl[3] : -canInfl[3];
