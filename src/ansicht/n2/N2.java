@@ -19,10 +19,10 @@ public abstract class N2
 	public int[] xse;
 	public int[] yse;
 
-	public void farbe_flaeche()
+	public void farbe_flaeche(Long tn)
 	{
 		panelDaten();
-		dFarb = farbe.gibFarb(this);
+		dFarb = farbe.gibFarb(this, tn);
 	}
 
 	public boolean draw()

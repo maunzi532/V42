@@ -18,6 +18,7 @@ public class Panelizer
 	private BufferedImage dark;
 	public Long tnTarget;
 	public int taType = 0;
+	public boolean taGet;
 	//X_Ray-Modus an/aus
 	public boolean xrmode = false;
 
@@ -40,7 +41,7 @@ public class Panelizer
 		gd.fillRect(0, 0, light.getWidth(), light.getHeight());
 		if(taType > 0)
 		{
-			darkCopy.setColor(new Color(0, 0, 0));
+			darkCopy.setColor(Color.BLACK);
 			darkCopy.fillRect(0, 0, dark.getWidth(), dark.getHeight());
 			darkC = new HashMap<>();
 			darkC2 = new HashMap<>();
@@ -75,49 +76,56 @@ public class Panelizer
 
 	private void DPA2(Graphics2D gd, int mx, int my)
 	{
-		if(taType > 0 && mx >= 0 && my >= 0 && mx < dark.getWidth() && my < dark.getHeight())
+		if(!taGet && taType > 0 && mx >= 0 && my >= 0 && mx < dark.getWidth() && my < dark.getHeight())
 		{
 			int cl = dark.getRGB(mx, my);
 			if(cl + 16777216 > 0)
 			{
 				tnTarget = darkC2.get(cl + 16777216);
-				if(taType > 1 && tnTarget != -1)
-				{
-					int[][] cls = new int[dark.getWidth()][dark.getHeight()];
-					for(int ix = 0; ix < cls.length; ix++)
-						for(int iy = 0; iy < cls[ix].length; iy++)
-							if(dark.getRGB(ix, iy) == cl)
-								cls[ix][iy] = Staticf.targetW + 1;
-					for(int i = Staticf.targetW; i > 0; i--)
-						for(int ix = 0; ix < cls.length; ix++)
-							for(int iy = 0; iy < cls[ix].length; iy++)
-								if(cls[ix][iy] < i && ((ix > 0 && cls[ix - 1][iy] > i) ||
-										(iy > 0 && cls[ix][iy - 1] > i) ||
-										(ix < cls.length - 1 && cls[ix + 1][iy] > i) ||
-										(iy < cls[ix].length - 1 && cls[ix][iy + 1] > i)))
-									cls[ix][iy] = i;
-
-					if(taType == 2)
-					{
-						//A
-						for(int ix = 0; ix < cls.length; ix++)
-							for(int iy = 0; iy < cls[ix].length; iy++)
-								if(cls[ix][iy] > 0 && cls[ix][iy] <= Staticf.targetW)
-								{
-									gd.setColor(new Color(0, 0, 127 - 255 * cls[ix][iy] / Staticf.targetW / 2));
-									gd.fillRect(ix, iy, 1, 1);
-								}
-					}
-					Staticf.sca("TN Linie (45) ");
-				}
-				//C
-				gd.setColor(new Color(0, 180, 0));
-				gd.setFont(new Font(null, Font.PLAIN, 20));
-				if(tnTarget != null)
-					gd.drawString(tnTarget.toString(), 50, 150);
+				DPA3(cl);
 			}
 			else
 				tnTarget = null;
+		}
+		if(taType > 0)
+		{
+			gd.setColor(new Color(0, 180, 0));
+			gd.setFont(new Font(null, Font.PLAIN, 20));
+			if(tnTarget != null)
+				gd.drawString(tnTarget.toString(), 50, 150);
+		}
+	}
+
+	public void DPA3(int cl)
+	{
+		if(taType > 1 && tnTarget != -1)
+		{
+			int[][] cls = new int[dark.getWidth()][dark.getHeight()];
+			for(int ix = 0; ix < cls.length; ix++)
+				for(int iy = 0; iy < cls[ix].length; iy++)
+					if(dark.getRGB(ix, iy) == cl)
+						cls[ix][iy] = Staticf.targetW + 1;
+			for(int i = Staticf.targetW; i > 0; i--)
+				for(int ix = 0; ix < cls.length; ix++)
+					for(int iy = 0; iy < cls[ix].length; iy++)
+						if(cls[ix][iy] < i && ((ix > 0 && cls[ix - 1][iy] > i) ||
+								(iy > 0 && cls[ix][iy - 1] > i) ||
+								(ix < cls.length - 1 && cls[ix + 1][iy] > i) ||
+								(iy < cls[ix].length - 1 && cls[ix][iy + 1] > i)))
+							cls[ix][iy] = i;
+
+			if(taType == 2)
+			{
+				//A
+				for(int ix = 0; ix < cls.length; ix++)
+					for(int iy = 0; iy < cls[ix].length; iy++)
+						if(cls[ix][iy] > 0 && cls[ix][iy] <= Staticf.targetW)
+						{
+							gd.setColor(new Color(0, 0, 127 - 255 * cls[ix][iy] / Staticf.targetW / 2));
+							gd.fillRect(ix, iy, 1, 1);
+						}
+			}
+			Staticf.sca("TN Linie (45) ");
 		}
 	}
 }

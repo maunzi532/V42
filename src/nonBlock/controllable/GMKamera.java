@@ -13,6 +13,7 @@ public class GMKamera extends NBD implements Controllable, Licht
 	private final Overlay overlay;
 	public double[] canInfl;
 	private WeltB welt;
+	private int lockedDreh;
 
 	private GMKamera(Controller control, Overlay overlay, WeltB welt, WeltND dw)
 	{
@@ -90,6 +91,58 @@ public class GMKamera extends NBD implements Controllable, Licht
 			case "Weg":
 				if(overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
 					welt.set(welt.decodeTn(overlay.pa.tnTarget), 0);
+				break;
+			case "taGet":
+				overlay.pa.taGet = !overlay.pa.taGet;
+				if(overlay.pa.taGet)
+				{
+					lockedDreh = ((int)(dreh.wl / Math.PI * 4) + 1) % 8 / 2;
+				}
+				break;
+			case "R0":
+			case "R1":
+			case "R2":
+			case "R3":
+				if(overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
+				{
+					WBP p = welt.decodeTn(overlay.pa.tnTarget);
+					if(p != null)
+					{
+						int d = (lockedDreh + command.charAt(1)) % 4;
+						p.k[d % 2 == 0 ? 0 : 2] += d > 1 ? 1 : -1;
+						long tn = welt.tn(p);
+						if(tn >= 0)
+							overlay.pa.tnTarget = tn;
+					}
+				}
+				break;
+			case "H0":
+			case "H1":
+				if(overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
+				{
+					WBP p = welt.decodeTn(overlay.pa.tnTarget);
+					if(p != null)
+					{
+						p.k[1] -= (command.charAt(1) - 48) * 2 - 1;
+						long tn = welt.tn(p);
+						if(tn >= 0)
+							overlay.pa.tnTarget = tn;
+					}
+				}
+				break;
+			case "D0":
+			case "D1":
+				if(overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
+				{
+					WBP p = welt.decodeTn(overlay.pa.tnTarget);
+					if(p != null)
+					{
+						p.k[3] -= (command.charAt(1) - 48) * 2 - 1;
+						long tn = welt.tn(p);
+						if(tn >= 0)
+							overlay.pa.tnTarget = tn;
+					}
+				}
 				break;
 		}
 	}

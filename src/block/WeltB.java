@@ -73,6 +73,8 @@ public class WeltB
 
 	public WBP decodeTn(long tn)
 	{
+		if(tn < 0)
+			return null;
 		int a = (int)(tn / end[1] / end[2] / end[3]);
 		tn -= a * end[1] * end[2] * end[3];
 		int b = (int)(tn / end[2] / end[3]);
@@ -131,6 +133,13 @@ public class WeltB
 				return false;
 		}
 		return true;
+	}
+
+	public long tn(WBP p)
+	{
+		if(innen(p))
+			return p.k[3] + end[3] * (p.k[2] + end[2] * (p.k[1] + end[1] * p.k[0]));
+		return -1;
 	}
 
 	public boolean tk1(WBP p, int richtung)

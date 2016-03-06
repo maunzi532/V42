@@ -88,7 +88,7 @@ public class BlockN2
 						}
 						else if(d2Vis(p))
 						{
-							long tn = tn(p);
+							long tn = von.tn(p);
 							D2.atl(toR, new D2(true, null, new XFD(new Color(0, 0, 100)),
 									null, von.wt2(p), tn), kDreh, relativ);
 						}
@@ -126,7 +126,7 @@ public class BlockN2
 							int blockG = von.gib(new WBP(a, b, c, di - 1));
 							if(!sichtOpaque(von.gib(p)))
 							{
-								long tn = tn(p);
+								long tn = von.tn(p);
 								D2 der = descr(p, blockR, false, tn);
 								if(der != null)
 									D2.atl(toR, der, kDreh, relativ);
@@ -167,24 +167,24 @@ public class BlockN2
 						{
 							int blockR2 = von.gib(new WBP(a, b, c, di + 2));
 							int blockG2 = von.gib(new WBP(a, b, c, di - 1));
-							D2 der = descr(pR, blockR2, false, tn(pR));
+							D2 der = descr(pR, blockR2, false, von.tn(pR));
 							if(der != null)
 								D2.atl(toR, der, kDreh, relativ);
-							D2 deg = descr(pG, blockG2, true, tn(pG));
+							D2 deg = descr(pG, blockG2, true, von.tn(pG));
 							if(deg != null)
 								D2.atl(toR, deg, kDreh, relativ);
 						}
 						else if(!sichtOpaque(blockR))
 						{
 							int blockR2 = von.gib(new WBP(a, b, c, di + 2));
-							D2 der = descr(pR, blockR2, false, tn(pR));
+							D2 der = descr(pR, blockR2, false, von.tn(pR));
 							if(der != null)
 								D2.atl(toR, der, kDreh, relativ);
 						}
 						else if(!sichtOpaque(blockG))
 						{
 							int blockG2 = von.gib(new WBP(a, b, c, di - 1));
-							D2 deg = descr(pG, blockG2, true, tn(pG));
+							D2 deg = descr(pG, blockG2, true, von.tn(pG));
 							if(deg != null)
 								D2.atl(toR, deg, kDreh, relativ);
 						}
@@ -195,7 +195,7 @@ public class BlockN2
 
 	private BF2 flaeche(WBP p, int block, int nof, double rend, double gend)
 	{
-		long tn = tn(p);
+		long tn = von.tn(p);
 		K4[] ke = new K4[4];
 		for(int i = 0; i < 4; i++)
 		{
@@ -238,12 +238,5 @@ public class BlockN2
 			return false;
 		}
 		return z.d2tangibility > 0;
-	}
-
-	private long tn(WBP p)
-	{
-		if(von.innen(p))
-			return p.k[3] + von.end[3] * (p.k[2] + von.end[2] * (p.k[1] + von.end[1] * p.k[0]));
-		return -1;
 	}
 }

@@ -21,11 +21,11 @@ public class XGradient extends XFarbe
 		this.mat = mat;
 	}
 
-	public Paint gibFarb(N2 n)
+	public Paint gibFarb(N2 n, Long tn)
 	{
 		if(n instanceof F2)
-			return new GradientPaint(n.xse[s1], n.yse[s1], anpassen((F2)n, f1, mat),
-					n.xse[s2], n.yse[s2], anpassen((F2)n, f2, mat));
+			return new GradientPaint(n.xse[s1], n.yse[s1], anpassen((F2)n, f1, mat, tn),
+					n.xse[s2], n.yse[s2], anpassen((F2)n, f2, mat, tn));
 		throw new RuntimeException("Nur F2 haben Gradienten");
 	}
 }

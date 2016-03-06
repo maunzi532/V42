@@ -166,7 +166,6 @@ public class Hauptschleife
 		UIVerbunden.godModeKam.aussehen = new LadeModell();
 		Index.gibStandardAussehen("Kam").assignStandard(UIVerbunden.godModeKam);
 		UIVerbunden.godModeKam.aussehen.reload();
-		UIVerbunden.godModeKam.elimit = 1;
 		UIVerbunden.godModeKam.init();
 		UIVerbunden.godModeKam.aktionen.add(new Sicht(UIVerbunden.godModeKam, 10, 0, 0, true, theOverlay));
 		try

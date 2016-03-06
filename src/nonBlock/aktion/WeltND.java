@@ -48,7 +48,7 @@ public class WeltND
 		if(!nofreeze() && seq != null)
 			if(seq.tick())
 				seq = null;
-		if(UIVerbunden.godMode)
+		if(UIVerbunden.godMode && !noGMFreeze())
 			UIVerbunden.godModeKam.tick();
 		if(noGMFreeze())
 			for(int i = 0; i < nonBlocks.size(); i++)

@@ -17,7 +17,7 @@ public abstract class XFarbe
 			splN[i] = r.nextInt(Staticf.seedifier);
 	}
 
-	public abstract Paint gibFarb(N2 n);
+	public abstract Paint gibFarb(N2 n, Long tn);
 
 	public boolean shownext(N2 n)
 	{
@@ -33,7 +33,7 @@ public abstract class XFarbe
 				splN[(f.splseed % Staticf.seedifier)]) % Staticf.seedifier)) / (double)Staticf.seedifier;
 	}
 
-	static Color anpassen(F2 n, Color fc, Material mat)
+	static Color anpassen(F2 n, Color fc, Material mat, Long tn)
 	{
 		if(n.ddiff > 0)
 			fc = limit(fc, (int)(n.ddiff * 10), (int)(n.ddiff * -5), (int)(n.ddiff * -5));
@@ -44,6 +44,8 @@ public abstract class XFarbe
 		double weg2 = (Staticf.sicht - weg) / Staticf.sicht;
 		if(weg2 < 0)
 			weg2 = 0;
+		if(n.tn != -1 && tn != null && n.tn == tn)
+			fc = limit(fc, 60, 60, 60);
 		return new Color((int)(fc.getRed() * weg2 + 20 * (1 - weg2)),
 				(int)(fc.getGreen() * weg2 + 0 * (1 - weg2)),
 				(int)(fc.getBlue() * weg2 + 0 * (1 - weg2)), fc.getAlpha());
@@ -134,7 +136,7 @@ public abstract class XFarbe
 		}
 	}
 
-	private static Color limit(Color c, int r, int g, int b)
+	protected static Color limit(Color c, int r, int g, int b)
 	{
 		r += c.getRed();
 		if(r > 255)

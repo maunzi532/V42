@@ -227,19 +227,6 @@ public class Overlay
 		pa.resize(UIVerbunden.sc);
 	}
 
-	private void overlay()
-	{
-		sl.draw(pa.gd);
-		/*gd.setColor(new Color(0, 0, 180));
-		gd.setFont(new Font(null, Font.PLAIN, 20));
-		if(UIVerbunden.x4dization > 0)
-			gd.drawString(String.valueOf(UIVerbunden.zp.d), 50, 50);
-		if(UIVerbunden.zp.z)
-			gd.drawString("Z Bereit", 300, 50);
-		if(UIVerbunden.zp.p)
-			gd.drawString("P Bereit", 300, 100);*/
-	}
-
 	public void rendern()
 	{
 		z.nehmen();
@@ -250,7 +237,7 @@ public class Overlay
 		Staticf.sca("Z sortieren (1) ");
 		z.eckenEntf();
 		Staticf.sca("Z eckenEntf (1) ");
-		z.farbe_flaeche();
+		z.farbe_flaeche(pa.tnTarget);
 		Staticf.sca("Z farbeflaeche (3) ");
 		N2[] n2s3 = new N2[z.n2s.size()];
 		for(int i = 0; i < n2s3.length; i++)
@@ -262,13 +249,10 @@ public class Overlay
 	{
 		pa.panelize(n2s2, UIVerbunden.maus.x + UIVerbunden.sc.width / 2,
 				UIVerbunden.maus.y + UIVerbunden.sc.height / 2);
-		Staticf.sca2("P panelize (14) ");
-		//Overlay.gd.drawImage(Overlay.pa.light, 0, 0, null);
-		Staticf.sca2("O draw P (4) ");
-		overlay();
-		Staticf.sca2("O overlay (0) ");
-		//Hier Hauptthread
+		Staticf.sca2("Panelize (14) ");
+		sl.draw(pa.gd);
+		Staticf.sca2("Overlay (0) ");
 		LPaneel.rePanel(pa.light);
-		Staticf.sca2("LP rePanel (7) ");
+		Staticf.sca2("RePanel (7) ");
 	}
 }

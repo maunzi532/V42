@@ -73,7 +73,7 @@ public abstract class F2 extends N2
 		return k;
 	}
 
-	public void farbe_flaeche()
+	public void farbe_flaeche(Long tn)
 	{
 		if(ec2 != null)
 		{
@@ -81,7 +81,7 @@ public abstract class F2 extends N2
 			if(!farbe.shownext(this))
 				ec2 = null;
 			else
-				dFarb = farbe.gibFarb(this);
+				dFarb = farbe.gibFarb(this, tn);
 		}
 	}
 

@@ -17,10 +17,10 @@ public class XFN extends XFarbe
 
 	XFN(){}
 
-	public Paint gibFarb(N2 n)
+	public Paint gibFarb(N2 n, Long tn)
 	{
 		if(n instanceof F2)
-			return anpassen((F2)n, farb, mat);
+			return anpassen((F2)n, farb, mat, tn);
 		return farb;
 	}
 }
