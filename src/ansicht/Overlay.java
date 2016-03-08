@@ -184,7 +184,7 @@ public class Overlay
 		{
 			public void onClick(boolean r, double cx, double cy)
 			{
-				aw.wbl.speichern("Levels/Test1", Staticf.wspg.k);
+				aw.wbl.speichern("Levels/Test2", Staticf.wspg.k);
 				super.onClick(r, cx, cy);
 			}
 		});

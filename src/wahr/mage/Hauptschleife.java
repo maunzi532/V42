@@ -26,7 +26,7 @@ public class Hauptschleife
 		theOverlay = new Overlay();
 		aw = new AllWelt();
 		Generator g = new WeltLeser();
-		g.gibInWelt(aw.wbl, "Levels/Test1");
+		g.gibInWelt(aw.wbl, "Levels/Test2");
 		//g.gibInWelt("Levels/Generiert1");
 		//g.gibInWelt();
 		//g.gibInWelt(4, 4);
@@ -138,12 +138,12 @@ public class Hauptschleife
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
 				new H2(n2, 0.2, 0.5, 4, 10, 3, 0.7, 0, 0.55),
-				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
-				mp2
+				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55)/*,
+				mp2*/
 				);
 		n2.position = aw.wbl.starts[1];
 		n2.position.b += n2.block.get(0).airshift;
-		mp2.init();
+		//mp2.init();
 		n2.dreh = new Drehung(Math.PI, 0);
 		n2.init();
 		UIVerbunden.kamN = n;
