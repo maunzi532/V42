@@ -1,7 +1,20 @@
 # This is V42
-Only M5s push to master  
-Some commits on master do not run  
-No compiled version here  
+Rules for using:  
+1. Only M5s may push to master  
+2. Other branches can be used by admins  
+3. Admins only, no access restrictions (currently)  
+4. master is sometimes uncompilable  
+5. Has to be compiled, no compiled version here  
+6. Some commits will crash, this is sometimes intended  
+7. If uncompilable or crashing, use an older version  
+8. Try keeping the size of the compiled version rather small  
+9. (evtl.) All take smite and go botlane  
+A. Read the Controls before using  
+B. The contents of "Beschreibung" are outdated, do not use  
+C. Small changes in the text files can (and will) produce a crash  
+D. When something is needed public, make public  
+E. Try avoiding getters and setters  
+F. The copy of the player character is for testing visual things
 
 # Controls
 I,W - forward, grab edge, climb up  
