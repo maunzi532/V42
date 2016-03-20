@@ -21,7 +21,7 @@ public abstract class External
 
 	public abstract void punkte(K4[][] into);
 
-	public abstract ArrayList<F2> gibFl(K4[][] into, LichtW lw);
+	public abstract ArrayList<F2> gibFl(K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision);
 
 	public abstract void tick();
 }

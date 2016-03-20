@@ -7,6 +7,7 @@ import wahr.zugriff.*;
 
 import java.util.*;
 
+//Deprecated
 public class ZP4C extends Aktion
 {
 	private double zd;
@@ -22,7 +23,7 @@ public class ZP4C extends Aktion
 	public void tick()
 	{
 		NBB b = (NBB) besitzer;
-		if(TA2.keyStat[0][7] == 2) //TODO
+		if(TA2.keyStat[0][7] == 2)
 		{
 			WBP wbp = b.welt.tw(b.position);
 			double wd = b.welt.wt(wbp).d - b.welt.weltBlock.d / 2;
@@ -48,7 +49,7 @@ public class ZP4C extends Aktion
 			}
 			activated = true;
 		}
-		if(TA2.keyStat[0][8] == 2) //TODO
+		if(TA2.keyStat[0][8] == 2)
 		{
 			WBP wbp = b.welt.tw(b.position);
 			double wd = b.welt.wt(wbp).d - b.welt.weltBlock.d / 2;

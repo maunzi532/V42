@@ -13,25 +13,21 @@ public class BF2 extends F2
 	private final double gend;
 	public K4 midsp;
 
-	public static void atl(ArrayList al, BF2 f2, Drehung kDreh, K4 relativ)
+	public static void atl(ArrayList al, BF2 f2, Drehung kDreh, K4 relativ, boolean gmVision)
 	{
 		for(int j = 0; j < f2.spken.length; j++)
 		{
 			f2.eckenNK[j] = new K4(f2.spken[j]);
 			f2.spken[j] = TK4F.transformSet2(f2.spken[j], kDreh, relativ);
 		}
-		if(f2.anz())
-		{
+		if(f2.vAnzeigen(false, f2.spken, gmVision))
 			al.add(f2);
-		}
 	}
 
-	public static void atls(ArrayList al, BF2 f2)
+	public static void atls(ArrayList al, BF2 f2, boolean gmVision)
 	{
-		if(f2.anzeigen())
-		{
+		if(f2.vAnzeigen(false, f2.spken, gmVision))
 			al.add(f2);
-		}
 	}
 
 	public BF2(K4[] spken, K4[] eckenNK, XFarbe farbe, Boolean seite, LichtW lw,
@@ -218,35 +214,4 @@ public class BF2 extends F2
 				sm.c * (1 - faktor) + se.c * faktor, sm.d * (1 - faktor) + se.d * faktor);
 	}
 
-	private boolean anz()
-	{
-		boolean a = false;
-		for(int i = 0; i < spken.length; i++)
-		{
-			if(spken[i] == null)
-				return false;
-			if(spken[i].c >= 0 && spken[i].a * spken[i].a + spken[i].b * spken[i].b +
-					spken[i].c * spken[i].c < Staticf.sicht * Staticf.sicht &&
-					spken[i].d > -Staticf.sichtd && spken[i].d < Staticf.sichtd)
-				a = true;
-		}
-		if(!a)
-			return false;
-		if(seite == null)
-			return true;
-		if(spken[0].c <= 0 || spken[1].c <= 0 || spken[2].c <= 0)
-			return true;//TODO !UIVerbunden.godMode;
-		double a1 = spken[0].a / spken[0].c;
-		double a2 = spken[1].a / spken[1].c;
-		double a3 = spken[2].a / spken[2].c;
-		double b1 = spken[0].b / spken[0].c;
-		double b2 = spken[1].b / spken[1].c;
-		double b3 = spken[2].b / spken[2].c;
-		if(a2 - a1 == 0)
-			return a3 != a1 && (a3 > a1) == seite;
-		double bv = (b2 - b1) / (a2 - a1);
-		double bs = b1 - bv * a1;
-		double bx = b3 - bv * a3;
-		return bs != bx && (bx > bs) == (seite == (a1 < a2));
-	}
 }

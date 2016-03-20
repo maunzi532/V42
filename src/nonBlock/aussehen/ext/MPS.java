@@ -84,7 +84,7 @@ public class MPS extends External
 			into[anfang][i] = new K4(teile.get(i).ort);
 	}
 
-	public ArrayList<F2> gibFl(K4[][] into, LichtW lw)
+	public ArrayList<F2> gibFl(K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision)
 	{
 		ArrayList<F2> toR = new ArrayList<>();
 		for(int i = 0; i < flaechen.size(); i++)
@@ -92,7 +92,7 @@ public class MPS extends External
 			K4[] ecken = new K4[flaechen.get(i).length];
 			for(int j = 0; j < flaechen.get(i).length; j++)
 				ecken[j] = into[anfang][flaechen.get(i)[j]];
-			NF2.atl(toR, new NF2(ecken, null, null, xf, null, lw, -1, seeds.get(i), main2.tn));
+			NF2.atl(toR, new NF2(ecken, null, null, xf, null, lw, -1, seeds.get(i), main2.tn), gmVision);
 		}
 		return toR;
 	}

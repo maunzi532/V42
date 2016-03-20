@@ -234,7 +234,7 @@ public class Overlay
 	{
 		z.nehmen(master);
 		Staticf.sca("Z nehmen (5) ");
-		z.splittern();
+		z.splittern(master.godMode);
 		Staticf.sca("Z splittern (1) ");
 		z.sortieren();
 		Staticf.sca("Z sortieren (1) ");

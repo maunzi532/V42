@@ -24,33 +24,35 @@ public abstract class F2 extends N2
 
 	public abstract K4 mid1();
 
-	public boolean anzeigen()
+	public boolean vAnzeigen(boolean midTime, K4[] eckHier, boolean gmVision)
 	{
-		if(mid == null)
+		if(midTime && mid == null)
 			return false;
 		boolean a = false;
-		for(int i = 0; i < ecken.length; i++)
+		for(int i = 0; i < eckHier.length; i++)
 		{
-			if(ecken[i] == null)
+			if(eckHier[i] == null)
 				return false;
-			if(ecken[i].c >= 0 && ecken[i].a * ecken[i].a + ecken[i].b * ecken[i].b +
-					ecken[i].c * ecken[i].c < Staticf.sicht * Staticf.sicht &&
-					ecken[i].d > -Staticf.sichtd && ecken[i].d < Staticf.sichtd)
+			if(eckHier[i].c >= 0 && eckHier[i].a * eckHier[i].a + eckHier[i].b * eckHier[i].b +
+					eckHier[i].c * eckHier[i].c < Staticf.sicht * Staticf.sicht &&
+					eckHier[i].d > -Staticf.sichtd && eckHier[i].d < Staticf.sichtd)
 				a = true;
 		}
 		if(!a)
 			return false;
-		avkh2 = mid.a * mid.a + mid.b * mid.b + mid.c * mid.c;
+		if(midTime)
+			avkh2 = mid.a * mid.a + mid.b * mid.b + mid.c * mid.c;
 		if(seite == null)
 			return true;
-		if(ecken[0].c <= 0 || ecken[1].c <= 0 || ecken[2].c <= 0)
-			return true;//TODO!UIVerbunden.godMode;
-		double a1 = ecken[0].a / ecken[0].c;
-		double a2 = ecken[1].a / ecken[1].c;
-		double a3 = ecken[2].a / ecken[2].c;
-		double b1 = ecken[0].b / ecken[0].c;
-		double b2 = ecken[1].b / ecken[1].c;
-		double b3 = ecken[2].b / ecken[2].c;
+		for(int i = 0; i < eckHier.length; i++)
+			if(eckHier[i].c <= 0)
+				return !gmVision;
+		double a1 = eckHier[0].a / eckHier[0].c;
+		double a2 = eckHier[1].a / eckHier[1].c;
+		double a3 = eckHier[2].a / eckHier[2].c;
+		double b1 = eckHier[0].b / eckHier[0].c;
+		double b2 = eckHier[1].b / eckHier[1].c;
+		double b3 = eckHier[2].b / eckHier[2].c;
 		if(a2 - a1 == 0)
 			return a3 != a1 && (a3 > a1) == seite;
 		double bv = (b2 - b1) / (a2 - a1);

@@ -165,10 +165,10 @@ public class H extends External
 		}
 	}
 
-	public ArrayList<F2> gibFl(K4[][] into, LichtW lw)
+	public ArrayList<F2> gibFl(K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision)
 	{
 		ArrayList<F2> al = new ArrayList<>();
-		if(!UIVerbunden.calculateH/* || main2 == UIVerbunden.kamA*/)//TODO
+		if(!UIVerbunden.calculateH || isMasterVision)
 			return al;
 		int cy = 0;
 		for(int i = 0; i < ht; i++)
@@ -183,16 +183,16 @@ public class H extends External
 						K4[] p71 = punkte[cy + 1];
 						NF2.atl(al, new NF2(new K4[]{p6[0], p6[1], p7[1], p7[0]},
 								new K4[]{p61[0], p61[1], p71[1], p71[0]}, fn,
-								true, lw, seeds[i][j], 0, main2.tn));
+								true, lw, seeds[i][j], 0, main2.tn), gmVision);
 						NF2.atl(al, new NF2(new K4[]{p6[1], p6[2], p7[1]},
 								new K4[]{p61[1], p61[2], p71[1]}, fn,
-								true, lw, seeds[i][j], 1, main2.tn));
+								true, lw, seeds[i][j], 1, main2.tn), gmVision);
 						NF2.atl(al, new NF2(new K4[]{p6[2], p6[3], p7[2], p7[1]},
 								new K4[]{p61[2], p61[3], p71[2], p71[1]}, fn,
-								true, lw, seeds[i][j], 2, main2.tn));
+								true, lw, seeds[i][j], 2, main2.tn), gmVision);
 						NF2.atl(al, new NF2(new K4[]{p6[3], p6[0], p7[0], p7[2]},
 								new K4[]{p61[3], p61[0], p71[0], p71[2]}, fn,
-								true, lw, seeds[i][j], 3, main2.tn));
+								true, lw, seeds[i][j], 3, main2.tn), gmVision);
 					}
 					else if(k + 1 < nlen)
 					{
@@ -202,13 +202,13 @@ public class H extends External
 							K4[] p71 = punkte[cy + 1];
 							NF2.atl(al, new NF2(new K4[]{p6[0], p6[1], p7[0]},
 									new K4[]{p61[0], p61[1], p71[0]}, fn,
-									true, lw, seeds[i][j], k * 3 + 1, main2.tn));
+									true, lw, seeds[i][j], k * 3 + 1, main2.tn), gmVision);
 							NF2.atl(al, new NF2(new K4[]{p6[1], p6[2], p7[0]},
 									new K4[]{p61[1], p61[2], p71[0]}, fn,
-									true, lw, seeds[i][j], k * 3 + 1, main2.tn));
+									true, lw, seeds[i][j], k * 3 + 1, main2.tn), gmVision);
 							NF2.atl(al, new NF2(new K4[]{p6[2], p6[0], p7[0]},
 									new K4[]{p61[2], p61[0], p71[0]},fn,
-									true, lw, seeds[i][j], k * 3 + 1, main2.tn));
+									true, lw, seeds[i][j], k * 3 + 1, main2.tn), gmVision);
 						}
 						else
 						{
@@ -216,13 +216,13 @@ public class H extends External
 							K4[] p71 = punkte[cy + 1];
 							NF2.atl(al, new NF2(new K4[]{p6[0], p6[1], p7[1], p7[0]},
 									new K4[]{p61[0], p61[1], p71[1], p71[0]}, fn,
-									true, lw, seeds[i][j], k * 3 + 1, main2.tn));
+									true, lw, seeds[i][j], k * 3 + 1, main2.tn), gmVision);
 							NF2.atl(al, new NF2(new K4[]{p6[1], p6[2], p7[2], p7[1]},
 									new K4[]{p61[1], p61[2], p71[2], p71[1]}, fn,
-									true, lw, seeds[i][j], k * 3 + 1, main2.tn));
+									true, lw, seeds[i][j], k * 3 + 1, main2.tn), gmVision);
 							NF2.atl(al, new NF2(new K4[]{p6[2], p6[0], p7[0], p7[2]},
 									new K4[]{p61[2], p61[0], p71[0], p71[2]}, fn,
-									true, lw, seeds[i][j], k * 3 + 1, main2.tn));
+									true, lw, seeds[i][j], k * 3 + 1, main2.tn), gmVision);
 						}
 					}
 					cy++;

@@ -155,8 +155,6 @@ public class Hauptschleife
 		n2.physik.add(new ColBox(n2, 12, new EndScheibe(0.7), new EndScheibe(0.7), 1));
 		n2.physik.add(new ColBox(n2, 0, new EndEllipse(2.1, 1.2, 0), new EndEllipse(2.2, 1.4, 0), 1));
 		n.aktionen.add(new Sicht(n, 10, 67, 67, false, theSpieler));
-		theSpieler.zp = new ZP4C(n, 0);
-		n.aktionen.add(theSpieler.zp);
 		aw.lw.licht.add(n);
 		aw.lw.licht.add(n2);
 		try

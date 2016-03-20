@@ -76,18 +76,20 @@ public class Zeichner
 						K4[] spken = new K4[f2.spken1.size()];
 						for(int k = 0; k < f2.spken1.size(); k++)
 							spken[k] = nb.punkteK[f2.spken1.get(k)][f2.spken2.get(k)];
-						NF2.atl(n2s, new NF2(ecken, eckenNK, spken, f2.farbe, f2.seite, nb.lw, 0, f2.seed, nb.tn));
+						NF2.atl(n2s, new NF2(ecken, eckenNK, spken, f2.farbe, f2.seite, nb.lw, 0, f2.seed, nb.tn),
+								theSpieler.godMode);
 					}
 				}
 				Staticf.sca("NEF " + nb.toString() + " 2 ");
 				for(int i = 0; i < nb.externals.length; i++)
-					n2s.addAll(nb.externals[i].gibFl(nb.punkteK, nb.lw));
+					n2s.addAll(nb.externals[i].gibFl(nb.punkteK, nb.lw, theSpieler.godMode,
+							nb == theSpieler.kamZurZeit()));
 				Staticf.sca("NEF " + nb.toString() + " 3 ");
 			}
 		Staticf.sca("NE1 ");
 		if(siehBlocks)
 			n2s.addAll(blockN2.flaechen(kp, kd, new K4(Staticf.sicht, Staticf.sicht,
-					Staticf.sicht, Staticf.sichtd)));
+					Staticf.sicht, Staticf.sichtd), theSpieler.godMode));
 	}
 
 	private int sqToSplit(double sq)
@@ -98,7 +100,7 @@ public class Zeichner
 		return 1;
 	}
 
-	public void splittern()
+	public void splittern(boolean gmVision)
 	{
 		for(int i = 0; i < n2s.size(); i++)
 		{
@@ -132,14 +134,14 @@ public class Zeichner
 									tspt.ecken(j, k, splB, splB);
 									tspt.mid();
 									tspt.splseed = j * splB + k;
-									BF2.atls(n2s, tspt);
+									BF2.atls(n2s, tspt, gmVision);
 								}
 						}
 						else
 						{
 							tsp.ecken(0, 0, 1, 1);
 							tsp.mid();
-							if(!tsp.anzeigen())
+							if(!tsp.vAnzeigen(true, tsp.ecken, gmVision))
 							{
 								n2s.remove(i);
 								i--;

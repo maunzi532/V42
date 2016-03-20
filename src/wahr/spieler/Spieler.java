@@ -12,18 +12,14 @@ import java.awt.*;
 public class Spieler
 {
 	public Overlay overlay;
-	//4D-Bewegungs-Checker TODO weg damit
-	public ZP4C zp;
 	//Spectator Modus
 	public boolean godMode = false;
 	//Spectator-Modus-Kamera
 	public GMKamera godModeKam;
 	//Zurzeit benutzte Kamera, falls nicht im godMode
 	public Controllable kamN;
-
+	//Index in TA2
 	public int taIndex;
-
-
 
 	//Letzte Mausposition
 	public Point maus = new Point();

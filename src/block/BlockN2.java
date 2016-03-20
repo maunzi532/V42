@@ -60,7 +60,7 @@ public class BlockN2
 		return block > 0;
 	}
 
-	public ArrayList<N2> flaechen(K4 kam, Drehung kDreh, K4 radius)
+	public ArrayList<N2> flaechen(K4 kam, Drehung kDreh, K4 radius, boolean gmVision)
 	{
 		ArrayList<N2> toR = new ArrayList<>();
 		WBP kaw0 = new WBP(von.tw(new K4(kam.a - radius.a, kam.b - radius.b,
@@ -84,7 +84,8 @@ public class BlockN2
 							for(int i = 0; i < WeltB.seiten.length; i++)
 								if(!sichtOpaque(von.gib(new WBP(a + WeltB.seiten[i][0],
 										b + WeltB.seiten[i][1], c + WeltB.seiten[i][2], di))))
-									BF2.atl(toR, flaeche(new WBP(a, b, c, di), block, i, -1, 1), kDreh, relativ);
+									BF2.atl(toR, flaeche(new WBP(a, b, c, di), block, i, -1, 1),
+											kDreh, relativ, gmVision);
 						}
 						else if(d2Vis(p))
 						{
@@ -111,13 +112,13 @@ public class BlockN2
 								{
 									if(sichtOpaque(blockR))
 										BF2.atl(toR, flaeche(new WBP(a, b, c, di + 1), blockR, i, dddi, 1),
-												kDreh, relativ);
+												kDreh, relativ, gmVision);
 									if(sichtOpaque(blockG))
 										BF2.atl(toR, flaeche(new WBP(a, b, c, di - 1), blockG, i, -1, dddi - 1),
-												kDreh, relativ);
+												kDreh, relativ, gmVision);
 									BF2.atl(toR, flaeche(new WBP(a, b, c, di), block, i,
 											(!sichtOpaque(blockG)) ? -1 : dddi - 1,
-											(!sichtOpaque(blockR)) ? 1 : dddi), kDreh, relativ);
+											(!sichtOpaque(blockR)) ? 1 : dddi), kDreh, relativ, gmVision);
 								}
 						}
 						else
@@ -157,10 +158,10 @@ public class BlockN2
 							{
 								if(!sichtOpaque(von.gib(new WBP(a + WeltB.seiten[i][0],
 										b + WeltB.seiten[i][1], c + WeltB.seiten[i][2], di))) && sichtOpaque(blockG))
-									BF2.atl(toR, flaeche(new WBP(pG), blockG, i, -1, dddi), kDreh, relativ);
+									BF2.atl(toR, flaeche(new WBP(pG), blockG, i, -1, dddi), kDreh, relativ, gmVision);
 								if(!sichtOpaque(von.gib(new WBP(a + WeltB.seiten[i][0],
 										b + WeltB.seiten[i][1], c + WeltB.seiten[i][2], di + 1))) && von.opaque(blockR))
-									BF2.atl(toR, flaeche(new WBP(pR), blockR, i, dddi, 1), kDreh, relativ);
+									BF2.atl(toR, flaeche(new WBP(pR), blockR, i, dddi, 1), kDreh, relativ, gmVision);
 							}
 						}
 						if(!sichtOpaque(blockR) && !sichtOpaque(blockG))
