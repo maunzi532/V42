@@ -174,11 +174,7 @@ class LadeAktion
 				break;
 			case 5:
 				if(dislocated instanceof Controllable)
-				{
-					UIVerbunden.kamN = (Controllable)dislocated;
-					if(!UIVerbunden.godMode)
-						UIVerbunden.kamA = UIVerbunden.kamN;
-				}
+					overlay.master.kamN = (Controllable)dislocated;
 				break;
 			case 6:
 				Index.gibAlternateStandard(text).changeToThis(dislocated, dauer, power);

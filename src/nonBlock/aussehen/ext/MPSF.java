@@ -2,6 +2,8 @@ package nonBlock.aussehen.ext;
 
 import wahr.zugriff.*;
 
+import java.util.*;
+
 class MPSF
 {
 	MPS sup;
@@ -36,8 +38,39 @@ class MPSF
 			ortNeu = new K4(sup.main2.punkte[fixedto1][fixedto2]);
 		else
 		{
-			//X
+			ArrayList<K4> forces = new ArrayList<>();
+			for(int i = 0; i < 4; i++)
+				if(verb[i] != null)
+				{
+					K4 diff = K4.diff(ort, verb[i].ort);
+					double abst = Math.sqrt(diff.a * diff.a + diff.b * diff.b +
+							diff.c * diff.c + diff.d * diff.d);
+					double multi = (abst - vAbstand[i]) / abst;
+					K4 dif2 = new K4(diff.a * multi, diff.b * multi, diff.c * multi, diff.d * multi);
+					forces.add(dif2);
+				}
+			for(int i = 0; i < 4; i+=2)
+				if(verb[i] != null && verb [i + 1] != null)
+				{
+					K4 diffA = K4.diff(verb[i].ort, verb[i + 1].ort);
+					double abstA = Math.sqrt(diffA.a * diffA.a + diffA.b * diffA.b +
+							diffA.c * diffA.c + diffA.d * diffA.d);
+					K4 mid2 = K4.plus(verb[i].ort, verb[i + 1].ort);
+					K4 mid = new K4(mid2.a / 2, mid2.b / 2, mid2.c / 2, mid2.d / 2);
+					double multi = (abstA - (vAbstand[i] + vAbstand[i + 1])) / abstA / 100;
+					K4 dif3 = K4.diff(ort, mid);
+					K4 dif2 = new K4(dif3.a * multi, dif3.b * multi, dif3.c * multi, dif3.d * multi);
+					System.out.println(dif2);
+					forces.add(dif2);
+				}
 			K4 diffNeu = new K4();
+			for(int i = 0; i < forces.size(); i++)
+				diffNeu = K4.plus(diffNeu, forces.get(i));
+			int div = 8;
+			diffNeu = new K4(diffNeu.a / div, diffNeu.b / div, diffNeu.c / div, diffNeu.d / div);
+			ortNeu = K4.plus(ort, diffNeu);
+			//X
+			/*K4 diffNeu = new K4();
 			for(int i = 0; i < 4; i++)
 				if(verb[i] != null)
 					diffNeu = K4.plus(verb[i].ort, diffNeu);
@@ -46,7 +79,7 @@ class MPSF
 			diffNeu = new K4(diffNeu.a / 4, diffNeu.b / 4, diffNeu.c / 4, diffNeu.d / 4);
 			diffNeu = K4.diff(ort, diffNeu);
 			K4 fall = new K4(0, -0.05, 0, 0);
-			ortNeu = K4.plus(K4.plus(ort, diffNeu), fall);
+			ortNeu = K4.plus(K4.plus(ort, diffNeu), fall);*/
 		}
 	}
 }

@@ -1,6 +1,6 @@
 package nonBlock.aktion;
 
-import ansicht.*;
+import wahr.spieler.*;
 import wahr.zugriff.*;
 
 public class Sicht extends LinAAktion
@@ -8,9 +8,9 @@ public class Sicht extends LinAAktion
 	private final int linAl;
 	private final int linAb;
 	private final boolean gm;
-	private final Overlay overlay;
+	private final Spieler master;
 
-	public Sicht(NBD target, int power, int linAl, int linAb, boolean gm, Overlay overlay)
+	public Sicht(NBD target, int power, int linAl, int linAb, boolean gm, Spieler master)
 	{
 		super(target, -1, power);
 		this.linAl = linAl;
@@ -18,7 +18,7 @@ public class Sicht extends LinAAktion
 		besitzer.resLink[linAl] = this;
 		besitzer.resLink[linAb] = this;
 		this.gm = gm;
-		this.overlay = overlay;
+		this.master = master;
 	}
 
 	public void delink()
@@ -29,11 +29,11 @@ public class Sicht extends LinAAktion
 
 	public void tick()
 	{
-		if(overlay.sichtAn && (gm ? UIVerbunden.godMode : (besitzer.dw.nofreeze() && !UIVerbunden.godMode)))
+		if(master.overlay.sichtAn && (gm ? master.godMode : (besitzer.dw.nofreeze() && !master.godMode)))
 		{
-			besitzer.linkAchsen[linAl].dreh.wl -= UIVerbunden.mausv.x * 1.1d / UIVerbunden.sc.width;
+			besitzer.linkAchsen[linAl].dreh.wl -= master.mausv.x * 1.1d / UIVerbunden.sc.width;
 			besitzer.linkAchsen[linAl].dreh.sichern();
-			besitzer.linkAchsen[linAb].dreh.wb -= UIVerbunden.mausv.y * 1.1d / UIVerbunden.sc.height;
+			besitzer.linkAchsen[linAb].dreh.wb -= master.mausv.y * 1.1d / UIVerbunden.sc.height;
 			if(!gm)
 			{
 				if(besitzer.linkAchsen[linAb].dreh.wb < 0.2)

@@ -44,7 +44,7 @@ public abstract class F2 extends N2
 		if(seite == null)
 			return true;
 		if(ecken[0].c <= 0 || ecken[1].c <= 0 || ecken[2].c <= 0)
-			return !UIVerbunden.godMode;
+			return true;//TODO!UIVerbunden.godMode;
 		double a1 = ecken[0].a / ecken[0].c;
 		double a2 = ecken[1].a / ecken[1].c;
 		double a3 = ecken[2].a / ecken[2].c;

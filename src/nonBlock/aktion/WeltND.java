@@ -2,7 +2,7 @@ package nonBlock.aktion;
 
 import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
-import wahr.zugriff.*;
+import nonBlock.controllable.*;
 
 import java.util.*;
 
@@ -14,12 +14,7 @@ public class WeltND
 
 	public boolean nofreeze()
 	{
-		return seq == null && (!UIVerbunden.godMode || !gmFreeze);
-	}
-
-	private boolean noGMFreeze()
-	{
-		return !UIVerbunden.godMode || !gmFreeze;
+		return seq == null && !gmFreeze;
 	}
 
 	public void timetickN()
@@ -48,10 +43,8 @@ public class WeltND
 		if(!nofreeze() && seq != null)
 			if(seq.tick())
 				seq = null;
-		if(UIVerbunden.godMode && !noGMFreeze())
-			UIVerbunden.godModeKam.tick();
-		if(noGMFreeze())
-			for(int i = 0; i < nonBlocks.size(); i++)
+		for(int i = 0; i < nonBlocks.size(); i++)
+			if(!gmFreeze || nonBlocks.get(i) instanceof GMKamera)
 				nonBlocks.get(i).tick();
 	}
 }

@@ -168,7 +168,7 @@ public class H extends External
 	public ArrayList<F2> gibFl(K4[][] into, LichtW lw)
 	{
 		ArrayList<F2> al = new ArrayList<>();
-		if(!UIVerbunden.calculateH || main2 == UIVerbunden.kamA)
+		if(!UIVerbunden.calculateH/* || main2 == UIVerbunden.kamA*/)//TODO
 			return al;
 		int cy = 0;
 		for(int i = 0; i < ht; i++)

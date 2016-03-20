@@ -133,7 +133,7 @@ public class BF2 extends F2
 		sple[1] = splInn(splx + 1, sply, splmx, splmy);
 		sple[2] = splInn(splx + 1, sply + 1, splmx, splmy);
 		sple[3] = splInn(splx, sply + 1, splmx, splmy);
-		double decth = (splx + sply + 1) * 2d / (splmx + splmy) - 1;
+		double decth = (splx + sply + 1) * (double) 2 / (splmx + splmy) - 1;
 		double rdcd = (rend - decth) * (splmx + splmy) / 2;
 		double gdcd = (gend - decth) * (splmx + splmy) / 2;
 		assert gdcd >= rdcd;
@@ -235,7 +235,7 @@ public class BF2 extends F2
 		if(seite == null)
 			return true;
 		if(spken[0].c <= 0 || spken[1].c <= 0 || spken[2].c <= 0)
-			return !UIVerbunden.godMode;
+			return true;//TODO !UIVerbunden.godMode;
 		double a1 = spken[0].a / spken[0].c;
 		double a2 = spken[1].a / spken[1].c;
 		double a3 = spken[2].a / spken[2].c;

@@ -14,14 +14,14 @@ public class Tha extends TSSA
 	private NBB fL;
 	private NBB fR;
 
-	private Tha(LadeFWA abilities, Overlay overlay, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
+	private Tha(SPController control, LadeFWA abilities, Overlay overlay, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
-		super(new SPController(), abilities, "Luft", overlay, welt, lw, dw, bw);
+		super(control, abilities, "Luft", overlay, welt, lw, dw, bw);
 	}
 
-	public Tha(LadeFWA abilities, Overlay overlay, AllWelt aw)
+	public Tha(SPController control, LadeFWA abilities, Overlay overlay, AllWelt aw)
 	{
-		this(abilities, overlay, aw.wbl, aw.lw, aw.dw, aw.bw);
+		this(control, abilities, overlay, aw.wbl, aw.lw, aw.dw, aw.bw);
 	}
 
 	public void init()

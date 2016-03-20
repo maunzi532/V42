@@ -3,6 +3,7 @@ package ansicht;
 import ansicht.n2.*;
 import ansicht.text.*;
 import wahr.physisch.*;
+import wahr.spieler.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
@@ -10,6 +11,7 @@ import java.util.*;
 
 public class Overlay
 {
+	public Spieler master;
 	public SchalterLayer sl;
 	public ArrayList<SLF> normalSchalter;
 	public ArrayList<SLF> godModeSchalter;
@@ -19,13 +21,14 @@ public class Overlay
 	public Zeichner z;
 	private N2[] n2s2;
 
-	public void initOverlay(AllWelt awA, String zDatLad)
+	public void initOverlay(Spieler master, AllWelt awA, String zDatLad)
 	{
+		this.master = master;
 		aw = awA;
 		z = new Zeichner(Index.gibText("Einstellungen", zDatLad), aw);
-		UIVerbunden.mausLast = new Point(UIVerbunden.sc.width / 2, UIVerbunden.sc.height / 2);
+		master.mausLast = new Point(UIVerbunden.sc.width / 2, UIVerbunden.sc.height / 2);
 		Point mm = LPaneel.fr.getLocationOnScreen();
-		UIVerbunden.ro.mouseMove(UIVerbunden.sc.width / 2 + mm.x, UIVerbunden.sc.height / 2 + mm.y);
+		master.ro.mouseMove(UIVerbunden.sc.width / 2 + mm.x, UIVerbunden.sc.height / 2 + mm.y);
 		sl = new SchalterLayer();
 		pa = new Panelizer(UIVerbunden.sc);
 		normalSchalter = new ArrayList<>();
@@ -229,7 +232,7 @@ public class Overlay
 
 	public void rendern()
 	{
-		z.nehmen();
+		z.nehmen(master);
 		Staticf.sca("Z nehmen (5) ");
 		z.splittern();
 		Staticf.sca("Z splittern (1) ");
@@ -247,8 +250,8 @@ public class Overlay
 
 	public void panelize()
 	{
-		pa.panelize(n2s2, UIVerbunden.maus.x + UIVerbunden.sc.width / 2,
-				UIVerbunden.maus.y + UIVerbunden.sc.height / 2);
+		pa.panelize(n2s2, master.maus.x + UIVerbunden.sc.width / 2,
+				master.maus.y + UIVerbunden.sc.height / 2);
 		Staticf.sca2("Panelize (14) ");
 		sl.draw(pa.gd);
 		Staticf.sca2("Overlay (0) ");

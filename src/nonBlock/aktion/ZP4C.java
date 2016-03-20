@@ -11,9 +11,6 @@ public class ZP4C extends Aktion
 {
 	private double zd;
 	private boolean activated;
-	private boolean z;
-	private boolean p;
-	private double d;
 	private Forced forced;
 
 	public ZP4C(NBB besitzer, int power)
@@ -25,10 +22,7 @@ public class ZP4C extends Aktion
 	public void tick()
 	{
 		NBB b = (NBB) besitzer;
-		d = b.position.d;
-		z = geht(b.block, b.welt.weltBlock.d, false);
-		p = geht(b.block, b.welt.weltBlock.d, true);
-		if(TA2.keyStat[7] == 2) //Z
+		if(TA2.keyStat[0][7] == 2) //TODO
 		{
 			WBP wbp = b.welt.tw(b.position);
 			double wd = b.welt.wt(wbp).d - b.welt.weltBlock.d / 2;
@@ -54,7 +48,7 @@ public class ZP4C extends Aktion
 			}
 			activated = true;
 		}
-		if(TA2.keyStat[8] == 2) //P
+		if(TA2.keyStat[0][8] == 2) //TODO
 		{
 			WBP wbp = b.welt.tw(b.position);
 			double wd = b.welt.wt(wbp).d - b.welt.weltBlock.d / 2;

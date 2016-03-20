@@ -1,16 +1,16 @@
-package nonBlock.aktion;
+package nonBlock.aktion.lesen;
 
 public class ADI
 {
-	int linA;
-	int anfD;
-	int lenD;
-	double lenZ;
-	double dwbZ;
-	double dwlZ;
-	double spnZ;
-	double dd4Z;
-	boolean zv;
+	public int linA;
+	public int anfD;
+	public int lenD;
+	public double lenZ;
+	public double dwbZ;
+	public double dwlZ;
+	public double spnZ;
+	public double dd4Z;
+	public boolean zv;
 
 	private ADI(){}
 

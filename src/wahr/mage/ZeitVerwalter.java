@@ -75,15 +75,22 @@ public class ZeitVerwalter
 				//Hat Fokus
 				Staticf.last = System.currentTimeMillis();
 				Staticf.last2 = System.currentTimeMillis();
-				if(Hauptschleife.eingabe())
-					break;
+				boolean resize = false;
+				if(UIVerbunden.sc.width != LPaneel.fr.getSize().width ||
+						UIVerbunden.sc.height != LPaneel.fr.getSize().height)
+				{
+					UIVerbunden.sc = LPaneel.fr.getSize();
+					resize = true;
+				}
+				if(Hauptschleife.theSpieler.eingabe(resize))
+					return;
 				//Haare laggen furchtbar
 				UIVerbunden.calculateH = !skpf;
 				Hauptschleife.aw.logik();
 				if(!skpf)
 				{
 					//Noch nicht aufmalen
-					Hauptschleife.theOverlay.rendern();
+					Hauptschleife.theSpieler.overlay.rendern();
 					new Thread()
 					{
 						//Hier wird aufgemalt
@@ -93,7 +100,7 @@ public class ZeitVerwalter
 							{
 								thd = true;
 								long last4 = System.currentTimeMillis();
-								Hauptschleife.theOverlay.panelize();
+								Hauptschleife.theSpieler.overlay.panelize();
 								if(Staticf.writeVisibleTime)
 									System.out.println("VIS: " + (System.currentTimeMillis() - Staticf.last3));
 								Staticf.last3 = System.currentTimeMillis();

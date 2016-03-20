@@ -4,6 +4,7 @@ import block.*;
 import nonBlock.aktion.*;
 import nonBlock.aussehen.*;
 import nonBlock.controllable.*;
+import wahr.spieler.*;
 import wahr.zugriff.*;
 
 import java.util.*;
@@ -40,9 +41,9 @@ public class Zeichner
 		blockN2 = new BlockN2(this, aw.wbl, aw.lw);
 	}
 
-	public void nehmen()
+	public void nehmen(Spieler theSpieler)
 	{
-		Controllable kam = UIVerbunden.kamA;
+		Controllable kam = theSpieler.kamZurZeit();
 		K4 kp = kam.kamP();
 		Drehung kd = kam.kamD();
 		n2s = new ArrayList<>();

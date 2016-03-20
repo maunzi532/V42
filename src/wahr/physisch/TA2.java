@@ -7,8 +7,8 @@ public class TA2
 {
 	private static boolean[] keys;
 	private static boolean[] k2;
-	private static int[][] moves;
-	public static int[] keyStat;
+	private static int[][][] moves;
+	public static int[][] keyStat;
 	private static final int magicNumber = 700;
 
 	public static void addToFrame(JFrame frame, boolean ermittlung)
@@ -93,39 +93,45 @@ public class TA2
 		}
 	}
 
-	public static void move()
+	public static void move(int spieler)
 	{
 		boolean n;
-		for(int i = 0; i < moves.length; i++)
+		for(int i = 0; i < moves[spieler].length; i++)
 		{
 			n = false;
-			for(int j : moves[i])
+			for(int j : moves[spieler][i])
 				if(keys[j] || k2[j])
 					n = true;
 			if(n)
 			{
-				if(keyStat[i] > 0)
-					keyStat[i] = 1;
+				if(keyStat[spieler][i] > 0)
+					keyStat[spieler][i] = 1;
 				else
-					keyStat[i] = 2;
+					keyStat[spieler][i] = 2;
 			}
 			else
 			{
-				if(keyStat[i] <= 0)
-					keyStat[i] = 0;
+				if(keyStat[spieler][i] <= 0)
+					keyStat[spieler][i] = 0;
 				else
-					keyStat[i] = -1;
+					keyStat[spieler][i] = -1;
 			}
 		}
 		k2 = new boolean[1024];
 	}
 
-	public static void feedMoves(String feed)
+	public static void setzeAnz(int spielerAnz)
+	{
+		moves = new int[spielerAnz][][];
+		keyStat = new int[spielerAnz][];
+	}
+
+	public static void feedMoves(String feed, int spieler)
 	{
 		keys = new boolean[1024];
 		k2 = new boolean[1024];
 		String[] na = feed.split("\n");
-		moves = new int[Integer.parseInt(na[0])][];
+		moves[spieler] = new int[Integer.parseInt(na[0])][];
 		for(int i = 1; i < na.length; i++)
 			if(!na[i].equals("") && !na[i].startsWith("/"))
 			{
@@ -133,22 +139,22 @@ public class TA2
 				String[] nc = nb[1].split(",");
 				String[] nd = nb[0].split("-");
 				int ne = Integer.parseInt(nd[0]);
-				moves[ne] = new int[nc.length];
+				moves[spieler][ne] = new int[nc.length];
 				for(int j = 0; j < nc.length; j++)
 				{
 					if(nc[j].charAt(0) == 'n')
-						moves[ne][j] = Integer.parseInt(nc[j].substring(1));
+						moves[spieler][ne][j] = Integer.parseInt(nc[j].substring(1));
 					else if(nc[j].charAt(0) == 'm')
-						moves[ne][j] = Integer.parseInt(nc[j].substring(1)) + magicNumber;
+						moves[spieler][ne][j] = Integer.parseInt(nc[j].substring(1)) + magicNumber;
 					else if(nc[j].length() == 1)
-						moves[ne][j] = nc[j].charAt(0);
+						moves[spieler][ne][j] = nc[j].charAt(0);
 					else
 						throw new RuntimeException("Falscher Text in TA2");
 				}
 			}
-		for(int i = 0; i < moves.length; i++)
-			if(moves[i] == null)
-				moves[i] = new int[0];
-		keyStat = new int[moves.length];
+		for(int i = 0; i < moves[spieler].length; i++)
+			if(moves[spieler][i] == null)
+				moves[spieler][i] = new int[0];
+		keyStat[spieler] = new int[moves[spieler].length];
 	}
 }

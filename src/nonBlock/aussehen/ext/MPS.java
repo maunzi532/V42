@@ -40,13 +40,25 @@ public class MPS extends External
 			for(int j = 0; j < t[i].length; j++)
 			{
 				if(i > 0)
+				{
 					t[i][j].verb[0] = t[i - 1][j];
+					t[i][j].vAbstand[0] = 1;
+				}
 				if(i < t.length - 1)
+				{
 					t[i][j].verb[1] = t[i + 1][j];
+					t[i][j].vAbstand[1] = 1;
+				}
 				if(j > 0)
+				{
 					t[i][j].verb[2] = t[i][j - 1];
+					t[i][j].vAbstand[2] = 1;
+				}
 				if(j < t[i].length - 1)
+				{
 					t[i][j].verb[3] = t[i][j + 1];
+					t[i][j].vAbstand[3] = 1;
+				}
 			}
 		flaechen = new ArrayList<>();
 		for(int i = 0; i < t.length - 1; i++)

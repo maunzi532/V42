@@ -122,7 +122,7 @@ public class Staticf
 	//Panelizer fast Null
 	public static double nnull = 0.0001;
 	//Sichtweite NonBlocks
-	public static final double sicht = 300;
+	public static final double sicht = 150;
 	//Eigene H ausblenden
 	public static final double sichtMin = 2;
 	//Sichtweite d NonBlocks
