@@ -1,4 +1,4 @@
-18
+25
 0-Aus=n8
 1-Links=J,A
 2-Rechts=L,D
@@ -9,10 +9,15 @@
 7-Rot=Z,Y
 8-Gn=P,X
 
-9-Flagge=F
+9-Flagge=5
 10-B=1
 11-C=2
 13-Menu=n44,n153
 15-Linksklick=m1
 16-Rechtsklick=m3
-17-GodMode=G
+17-GodMode=6
+
+21-Maus nach Links=n37,F
+22-Maus nach Rechts=n39,H
+23-Maus nach Oben=n38,T
+24-Maus nach Unten=n40,G

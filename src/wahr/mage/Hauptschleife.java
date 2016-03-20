@@ -160,6 +160,7 @@ public class Hauptschleife
 	public static void initOverlay()
 	{
 		theSpieler.drehInput = new MausDrehInput(theSpieler);
+		//theSpieler.drehInput = new TastenDrehInput(theSpieler);
 		theSpieler.overlay.initOverlay(theSpieler, aw, "SPL");
 	}
 }
