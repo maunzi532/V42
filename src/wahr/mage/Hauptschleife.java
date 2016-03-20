@@ -9,11 +9,9 @@ import nonBlock.aussehen.ext.*;
 import nonBlock.collide.*;
 import nonBlock.controllable.*;
 import nonBlock.formwandler.*;
-import wahr.physisch.*;
 import wahr.spieler.*;
 import wahr.zugriff.*;
 
-import java.awt.*;
 import java.util.*;
 
 public class Hauptschleife
@@ -157,18 +155,11 @@ public class Hauptschleife
 		n.aktionen.add(new Sicht(n, 10, 67, 67, false, theSpieler));
 		aw.lw.licht.add(n);
 		aw.lw.licht.add(n2);
-		try
-		{
-			theSpieler.ro = new Robot();
-		}catch(AWTException e)
-		{
-			throw new RuntimeException(e);
-		}
-		LPaneel.setC0();
 	}
 
 	public static void initOverlay()
 	{
+		theSpieler.drehInput = new MausDrehInput(theSpieler);
 		theSpieler.overlay.initOverlay(theSpieler, aw, "SPL");
 	}
 }

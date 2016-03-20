@@ -27,23 +27,13 @@ public class LPaneel
 
 	public static void init2()
 	{
+		fr.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
+				new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE), new Point(), null));
 		fr.setVisible(true);
 		while(true)
 			if(fr.isActive())
 				break;
 		UIVerbunden.sc = fr.getSize();
-	}
-
-	public static void setC1()
-	{
-		fr.setCursor(Cursor.getDefaultCursor());
-	}
-
-	public static void setC0()
-	{
-		fr.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
-				new BufferedImage(1, 1, BufferedImage.TYPE_BYTE_INDEXED), new Point(), null));
-		//fr.setCursor(Cursor.getDefaultCursor());
 	}
 
 	public static void rePanel(Image img)

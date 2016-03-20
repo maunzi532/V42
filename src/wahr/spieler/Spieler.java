@@ -7,8 +7,6 @@ import nonBlock.controllable.*;
 import wahr.physisch.*;
 import wahr.zugriff.*;
 
-import java.awt.*;
-
 public class Spieler
 {
 	public Overlay overlay;
@@ -20,15 +18,10 @@ public class Spieler
 	public Controllable kamN;
 	//Index in TA2
 	public int taIndex;
+	//
+	public boolean schalterSichtbar;
 
-	//Letzte Mausposition
-	public Point maus = new Point();
-	//Maus Robot
-	public Robot ro;
-	//Mausverschiebung
-	public Point mausv;
-	//Maus Letzter Fokus
-	public Point mausLast;
+	public DrehInput drehInput;
 
 	public Spieler(Overlay overlay, int taIndex)
 	{
@@ -64,46 +57,32 @@ public class Spieler
 		if(resize)
 			overlay.resize();
 		Staticf.sca("TA2 ");
-		//Drehinput
-		Point mausNeu = MouseInfo.getPointerInfo().getLocation();
-		Staticf.sca("Mx ");
-		Point mm = LPaneel.fr.getLocationOnScreen();
-		Staticf.sca("Mx1 ");
-		mausNeu.translate(-mm.x, -mm.y);
-		//mausNeu ist jetzt location in Frame
-		if(TA2.keyStat[taIndex][13] <= 0)
-			ro.mouseMove(mausLast.x + mm.x, mausLast.y + mm.y); //zurueck wo du warst
-		else
-			mausLast = new Point(mausNeu); //wo du warst wird gesetzt
-		//Drehinput ende
-		if(TA2.keyStat[taIndex][15] == 2)
+		schalterSichtbar = TA2.keyStat[taIndex][13] > 0;
+		drehInput.ablesen(schalterSichtbar);
+		Staticf.sca("DL ");
+		if(schalterSichtbar)
 		{
-			if(overlay.sl.click(mausNeu.x, mausNeu.y, false)) //so geht das nicht
-				TA2.keyStat[taIndex][15] = 1;
-		}
-		else if(TA2.keyStat[taIndex][16] == 2)
-		{
-			if(overlay.sl.click(mausNeu.x, mausNeu.y, true))
-				TA2.keyStat[taIndex][16] = 1;
+			if(TA2.keyStat[taIndex][15] == 2)
+			{
+				if(overlay.sl.click(drehInput.xP(), drehInput.yP(), false))
+					TA2.keyStat[taIndex][15] = 1;
+			}
+			else if(TA2.keyStat[taIndex][16] == 2)
+			{
+				if(overlay.sl.click(drehInput.xP(), drehInput.yP(), true))
+					TA2.keyStat[taIndex][16] = 1;
+			}
 		}
 		Staticf.sca("SL ");
-		//Drehinput
-		mausNeu.translate(-mausLast.x, -mausLast.y); //Unterschied
-		mausv = new Point(mausNeu);
-		maus = mausNeu; //warum beides?
-		Staticf.sca("RO ");
-		//Drehinput ende
 		if(TA2.keyStat[taIndex][13] == 2 && overlay.sichtAn)
 		{
 			overlay.sichtAn = false;
 			overlay.sl.layer.addAll(overlay.normalSchalter);
-			LPaneel.setC1();
 		}
 		if(TA2.keyStat[taIndex][13] == -1 && !overlay.sichtAn)
 		{
 			overlay.sichtAn = true;
 			overlay.sl.layer.clear();
-			LPaneel.setC0();
 		}
 		if(TA2.keyStat[taIndex][17] == 2 && godModeKam != null)
 		{

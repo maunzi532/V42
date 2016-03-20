@@ -6,7 +6,7 @@ import wahr.physisch.*;
 import wahr.spieler.*;
 import wahr.zugriff.*;
 
-import java.awt.*;
+import java.io.*;
 import java.util.*;
 
 public class Overlay
@@ -26,9 +26,6 @@ public class Overlay
 		this.master = master;
 		aw = awA;
 		z = new Zeichner(Index.gibText("Einstellungen", zDatLad), aw);
-		master.mausLast = new Point(UIVerbunden.sc.width / 2, UIVerbunden.sc.height / 2);
-		Point mm = LPaneel.fr.getLocationOnScreen();
-		master.ro.mouseMove(UIVerbunden.sc.width / 2 + mm.x, UIVerbunden.sc.height / 2 + mm.y);
 		sl = new SchalterLayer();
 		pa = new Panelizer(UIVerbunden.sc);
 		normalSchalter = new ArrayList<>();
@@ -250,10 +247,14 @@ public class Overlay
 
 	public void panelize()
 	{
-		pa.panelize(n2s2, master.maus.x + UIVerbunden.sc.width / 2,
-				master.maus.y + UIVerbunden.sc.height / 2);
+		if(master.schalterSichtbar)
+			pa.panelize(n2s2, master.drehInput.xP(), master.drehInput.yP());
+		else
+			pa.panelize(n2s2, UIVerbunden.sc.width / 2, UIVerbunden.sc.height / 2);
 		Staticf.sca2("Panelize (14) ");
 		sl.draw(pa.gd);
+		pa.gd.drawImage(Lader.gibBild(Index.gibPfad("Einstellungen") + File.separator + "ThaCursor.png"),
+				master.drehInput.xP() - 10, master.drehInput.yP() - 10, 20, 20, null);
 		Staticf.sca2("Overlay (0) ");
 		LPaneel.rePanel(pa.light);
 		Staticf.sca2("RePanel (7) ");
