@@ -1,7 +1,10 @@
 package wahr.mage;
 
+import nonBlock.aussehen.ext.*;
 import wahr.physisch.*;
 import wahr.zugriff.*;
+
+import java.awt.*;
 
 public class ZeitVerwalter
 {
@@ -14,7 +17,10 @@ public class ZeitVerwalter
 	{
 		while(true)
 		{
-			boolean okay = LPaneel.fr.hasFocus();
+			boolean okay = false;
+			for(int i = 0; i < LPaneel.paneele.size(); i++)
+				if(LPaneel.paneele.get(i).fr.hasFocus())
+					okay = true;
 			boolean skpf;
 			if(last > 0)
 			{
@@ -76,16 +82,20 @@ public class ZeitVerwalter
 				Staticf.last = System.currentTimeMillis();
 				Staticf.last2 = System.currentTimeMillis();
 				boolean resize = false;
-				if(UIVerbunden.sc.width != LPaneel.fr.getSize().width ||
-						UIVerbunden.sc.height != LPaneel.fr.getSize().height)
+				for(int i = 0; i < LPaneel.paneele.size(); i++)
 				{
-					UIVerbunden.sc = LPaneel.fr.getSize();
-					resize = true;
+					Dimension sc1 = LPaneel.paneele.get(i).fr.getSize();
+					if(LPaneel.paneele.get(i).scF.width != sc1.width ||
+							LPaneel.paneele.get(i).scF.height != sc1.height)
+					{
+						LPaneel.paneele.get(i).scF = sc1;
+						resize = true;
+					}
 				}
 				if(Hauptschleife.theSpieler.eingabe(resize))
 					return;
 				//Haare laggen furchtbar
-				UIVerbunden.calculateH = !skpf;
+				H.calculateH = !skpf;
 				Hauptschleife.aw.logik();
 				if(!skpf)
 				{

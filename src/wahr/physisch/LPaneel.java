@@ -5,12 +5,16 @@ import wahr.zugriff.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.*;
+import java.util.*;
 
 public class LPaneel
 {
-	public static JFrame fr;
+	public static ArrayList<LPaneel> paneele = new ArrayList<>();
 
-	public static void init1()
+	public JFrame fr;
+	public Dimension scF;
+
+	public void init1()
 	{
 		fr = new JFrame();
 		fr.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -25,7 +29,7 @@ public class LPaneel
 		TA2.addToFrame(fr, Staticf.writeKeyIndex);
 	}
 
-	public static void init2()
+	public void init2()
 	{
 		fr.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE), new Point(), null));
@@ -33,11 +37,12 @@ public class LPaneel
 		while(true)
 			if(fr.isActive())
 				break;
-		UIVerbunden.sc = fr.getSize();
+		//UIVerbunden.sc = fr.getSize();
+		scF = fr.getSize();
 	}
 
-	public static void rePanel(Image img)
+	public void rePanel(Image img, double xp, double yp)
 	{
-		fr.getGraphics().drawImage(img, 0, 0, null);
+		fr.getGraphics().drawImage(img, (int) (xp * scF.width), (int) (yp * scF.height), null);
 	}
 }

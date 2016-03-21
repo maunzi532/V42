@@ -9,6 +9,7 @@ import nonBlock.aussehen.ext.*;
 import nonBlock.collide.*;
 import nonBlock.controllable.*;
 import nonBlock.formwandler.*;
+import wahr.physisch.*;
 import wahr.spieler.*;
 import wahr.zugriff.*;
 
@@ -19,6 +20,13 @@ public class Hauptschleife
 	private static Tha n;
 	static AllWelt aw;
 	public static Spieler theSpieler;
+	public static LPaneel theLPaneel;
+
+	public static void init0()
+	{
+		theLPaneel = new LPaneel();
+		LPaneel.paneele.add(theLPaneel);
+	}
 
 	public static void init()
 	{
@@ -159,8 +167,8 @@ public class Hauptschleife
 
 	public static void initOverlay()
 	{
+		theSpieler.overlay.initOverlay(theSpieler, aw, "SPL", theLPaneel);
 		theSpieler.drehInput = new MausDrehInput(theSpieler);
 		//theSpieler.drehInput = new TastenDrehInput(theSpieler);
-		theSpieler.overlay.initOverlay(theSpieler, aw, "SPL");
 	}
 }

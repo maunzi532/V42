@@ -9,9 +9,12 @@ public class ThaCre2A
 	{
 		Staticf.initialCharge();
 		Index.laden();
-		LPaneel.init1();
+		Hauptschleife.init0();
+		for(int i = 0; i < LPaneel.paneele.size(); i++)
+			LPaneel.paneele.get(i).init1();
 		Hauptschleife.init();
-		LPaneel.init2();
+		for(int i = 0; i < LPaneel.paneele.size(); i++)
+			LPaneel.paneele.get(i).init2();
 		Hauptschleife.initOverlay();
 		LagZeit.start();
 		ZeitVerwalter.start();

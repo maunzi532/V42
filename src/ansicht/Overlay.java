@@ -12,6 +12,7 @@ import java.util.*;
 public class Overlay
 {
 	public Spieler master;
+	public LPaneel auf;
 	public SchalterLayer sl;
 	public ArrayList<SLF> normalSchalter;
 	public ArrayList<SLF> godModeSchalter;
@@ -21,13 +22,14 @@ public class Overlay
 	public Zeichner z;
 	private N2[] n2s2;
 
-	public void initOverlay(Spieler master, AllWelt awA, String zDatLad)
+	public void initOverlay(Spieler master, AllWelt awA, String zDatLad, LPaneel auf)
 	{
 		this.master = master;
+		this.auf = auf;
 		aw = awA;
 		z = new Zeichner(Index.gibText("Einstellungen", zDatLad), aw);
-		sl = new SchalterLayer();
-		pa = new Panelizer(UIVerbunden.sc);
+		sl = new SchalterLayer(this);
+		pa = new Panelizer(auf.scF);
 		normalSchalter = new ArrayList<>();
 		normalSchalter.add(new SLF(sl, true, 0.1, 0.1, 0.1, 0.05)
 		{
@@ -224,7 +226,7 @@ public class Overlay
 
 	public void resize()
 	{
-		pa.resize(UIVerbunden.sc);
+		pa.resize(auf.scF);
 	}
 
 	public void rendern()
@@ -235,9 +237,9 @@ public class Overlay
 		Staticf.sca("Z splittern (1) ");
 		z.sortieren();
 		Staticf.sca("Z sortieren (1) ");
-		z.eckenEntf();
+		z.eckenEntf(auf.scF);
 		Staticf.sca("Z eckenEntf (1) ");
-		z.farbe_flaeche(pa.tnTarget);
+		z.farbe_flaeche(pa.tnTarget, auf.scF);
 		Staticf.sca("Z farbeflaeche (3) ");
 		N2[] n2s3 = new N2[z.n2s.size()];
 		for(int i = 0; i < n2s3.length; i++)
@@ -250,13 +252,13 @@ public class Overlay
 		if(master.schalterSichtbar)
 			pa.panelize(n2s2, master.drehInput.xP(), master.drehInput.yP());
 		else
-			pa.panelize(n2s2, UIVerbunden.sc.width / 2, UIVerbunden.sc.height / 2);
+			pa.panelize(n2s2, auf.scF.width / 2, auf.scF.height / 2);
 		Staticf.sca2("Panelize (14) ");
 		sl.draw(pa.gd);
 		pa.gd.drawImage(Lader.gibBild(Index.gibPfad("Einstellungen") + File.separator + "ThaCursor.png"),
 				master.drehInput.xP() - 10, master.drehInput.yP() - 10, 20, 20, null);
 		Staticf.sca2("Overlay (0) ");
-		LPaneel.rePanel(pa.light);
+		auf.rePanel(pa.light, 0, 0); //TODO
 		Staticf.sca2("RePanel (7) ");
 	}
 }

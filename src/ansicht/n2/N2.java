@@ -19,9 +19,9 @@ public abstract class N2
 	public int[] xse;
 	public int[] yse;
 
-	public void farbe_flaeche(Long tn)
+	public void farbe_flaeche(Long tn, Dimension sc1)
 	{
-		panelDaten();
+		panelDaten(sc1);
 		dFarb = farbe.gibFarb(this, tn);
 	}
 
@@ -30,17 +30,17 @@ public abstract class N2
 		return true;
 	}
 
-	protected abstract void panelDaten();
+	protected abstract void panelDaten(Dimension sc1);
 	public abstract void panelDark(Graphics2D darkCopy);
 	public abstract void panel(Panelizer pa);
 
-	static int ethaX(double a, double c)
+	static int ethaX(double a, double c, Dimension sc1)
 	{
-		return (int)(UIVerbunden.sc.width / 2d * (1 + Staticf.scaleX * a / c));
+		return (int)(sc1.width / 2d * (1 + Staticf.scaleX * a / c));
 	}
 
-	static int ethaY(double b, double c)
+	static int ethaY(double b, double c, Dimension sc1)
 	{
-		return (int)(UIVerbunden.sc.height / 2d - UIVerbunden.sc.width / 2d * Staticf.scaleX * b / c);
+		return (int)(sc1.height / 2d - sc1.width / 2d * Staticf.scaleX * b / c);
 	}
 }

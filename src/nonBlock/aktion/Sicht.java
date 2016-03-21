@@ -1,7 +1,6 @@
 package nonBlock.aktion;
 
 import wahr.spieler.*;
-import wahr.zugriff.*;
 
 public class Sicht extends LinAAktion
 {
@@ -31,9 +30,9 @@ public class Sicht extends LinAAktion
 	{
 		if(master.overlay.sichtAn && (gm ? master.godMode : (besitzer.dw.nofreeze() && !master.godMode)))
 		{
-			besitzer.linkAchsen[linAl].dreh.wl -= master.drehInput.wlmove() * 1.1d / UIVerbunden.sc.width;
+			besitzer.linkAchsen[linAl].dreh.wl -= master.drehInput.wlmove() * 1.1d / master.overlay.auf.scF.width;
 			besitzer.linkAchsen[linAl].dreh.sichern();
-			besitzer.linkAchsen[linAb].dreh.wb -= master.drehInput.wbmove() * 1.1d / UIVerbunden.sc.height;
+			besitzer.linkAchsen[linAb].dreh.wb -= master.drehInput.wbmove() * 1.1d / master.overlay.auf.scF.height;
 			if(!gm)
 			{
 				if(besitzer.linkAchsen[linAb].dreh.wb < 0.2)

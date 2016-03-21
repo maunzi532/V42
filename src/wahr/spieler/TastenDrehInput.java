@@ -1,7 +1,6 @@
 package wahr.spieler;
 
 import wahr.physisch.*;
-import wahr.zugriff.*;
 
 public class TastenDrehInput implements DrehInput
 {
@@ -12,8 +11,8 @@ public class TastenDrehInput implements DrehInput
 	public TastenDrehInput(Spieler master)
 	{
 		this.master = master;
-		positionX = UIVerbunden.sc.width / 2;
-		positionY = UIVerbunden.sc.height / 2;
+		positionX = master.overlay.auf.scF.width / 2;
+		positionY = master.overlay.auf.scF.height / 2;
 	}
 
 	public void ablesen(boolean mode)

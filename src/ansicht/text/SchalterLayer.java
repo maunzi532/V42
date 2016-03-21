@@ -1,5 +1,6 @@
 package ansicht.text;
 
+import ansicht.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
@@ -28,8 +29,11 @@ public class SchalterLayer
 	public final int fadePerTick = 10;
 	public final double movePerTick = 0.01;
 
-	public SchalterLayer()
+	public Overlay master;
+
+	public SchalterLayer(Overlay master)
 	{
+		this.master = master;
 		tex = new ArrayList[orte.length];
 		for(int i = 0; i < orte.length; i++)
 			tex[i] = new ArrayList<>();
@@ -41,22 +45,22 @@ public class SchalterLayer
 
 	public int mw(double multiplikator)
 	{
-		return (int)(UIVerbunden.sc.width * multiplikator);
+		return (int)(master.auf.scF.width * multiplikator);
 	}
 
 	public int mh(double multiplikator)
 	{
-		return (int)(UIVerbunden.sc.height * multiplikator);
+		return (int)(master.auf.scF.height * multiplikator);
 	}
 
 	private double nmw(double multiplikator)
 	{
-		return multiplikator / UIVerbunden.sc.width;
+		return multiplikator / master.auf.scF.width;
 	}
 
 	private double nmh(double multiplikator)
 	{
-		return multiplikator / UIVerbunden.sc.height;
+		return multiplikator / master.auf.scF.height;
 	}
 
 	public boolean click(int x, int y, boolean r)

@@ -11,6 +11,7 @@ import java.util.*;
 
 public class H extends External
 {
+	public static boolean calculateH = true;
 	private final double w;
 	private final double h;
 	private final int wt;
@@ -103,7 +104,7 @@ public class H extends External
 
 	public void punkte(K4[][] into)
 	{
-		if(!UIVerbunden.calculateH)
+		if(!calculateH)
 			return;
 		int cy = 0;
 		for(int i = 0; i < ht; i++)
@@ -168,7 +169,7 @@ public class H extends External
 	public ArrayList<F2> gibFl(K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision)
 	{
 		ArrayList<F2> al = new ArrayList<>();
-		if(!UIVerbunden.calculateH || isMasterVision)
+		if(!calculateH || isMasterVision)
 			return al;
 		int cy = 0;
 		for(int i = 0; i < ht; i++)
