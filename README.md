@@ -28,8 +28,8 @@ P,X - __green__ direction
 5 - place flag  
 1,2 - copy does something (does not work currently)  
 ;,> - (hold) show some __settings__  
-G - switch to the __flying camera__  
+6 - switch to the __flying camera__  
 Left Mouse - shoot the left thing forward  
-- in G - increase the number of the faced block  
+- flying - increase the number of the faced block  
 Right Mouse - shoot the right thing forward  
-- in G - set the number of the faced block to 0
+- flying - set the number of the faced block to 0

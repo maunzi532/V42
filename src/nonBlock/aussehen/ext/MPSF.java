@@ -60,9 +60,24 @@ class MPSF
 					double multi = (abstA - (vAbstand[i] + vAbstand[i + 1])) / abstA / 100;
 					K4 dif3 = K4.diff(ort, mid);
 					K4 dif2 = new K4(dif3.a * multi, dif3.b * multi, dif3.c * multi, dif3.d * multi);
-					System.out.println(dif2);
+					//System.out.println(dif2);
 					forces.add(dif2);
 				}
+			/*NBB main3 = ((NBB)(sup.main2));
+			for(int p = 0; p < main3.physik.size(); p++)
+			{
+				Double v = main3.physik.get(p).innen(ort);
+				if(v != null)
+				{
+					double a1 = ort.a - sup.main2.position.a;
+					double c1 = ort.c - sup.main2.position.c;
+					double div = Math.sqrt(a1 * a1 + c1 * c1);
+					a1 /= div;
+					c1 /= div;
+					if(v < 1)
+						forces.add(new K4(a1 * v * -50, 0, c1 * v * -50, 0));
+				}
+			}*/
 			K4 diffNeu = new K4();
 			for(int i = 0; i < forces.size(); i++)
 				diffNeu = K4.plus(diffNeu, forces.get(i));

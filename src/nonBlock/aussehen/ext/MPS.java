@@ -99,9 +99,9 @@ public class MPS extends External
 
 	public void tick()
 	{
-		/*for(int i = 0; i < teile.size(); i++)
+		for(int i = 0; i < teile.size(); i++)
 			teile.get(i).tick();
 		for(int i = 0; i < teile.size(); i++)
-			teile.get(i).ort = teile.get(i).ortNeu;*/
+			teile.get(i).ort = teile.get(i).ortNeu;
 	}
 }

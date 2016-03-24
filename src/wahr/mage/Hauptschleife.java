@@ -59,10 +59,22 @@ public class Hauptschleife
 				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9),
 				new H(0.2, 0.5, 4, 10, 3, 0.7, 0, 0.9),
 				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9)
+				/*new H2(n, 0.5, 0.5, 10, 10, 4, 1, 0, 0.6),
+				new H2(n, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
+				new H2(n, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
+				new H2(n, 0.2, 0.5, 4, 10, 3, 0.7, 0, 0.55),
+				new H2(n, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55)*/
 		);
 		n.position = aw.wbl.starts[0];
 		n.position.b += n.block.get(0).airshift;
 		n.dreh = new Drehung(1, 0);
+		n.physik.add(new ColBox(n, 69, new EndScheibe(1.5), new EndScheibe(1.0), 1.1));
+		n.physik.add(new ColBox(n, 78, new EndScheibe(1.0), new EndScheibe(0.7), 0.7));
+		n.physik.add(new ColBox(n, 11, new EndScheibe(0.7), new EndScheibe(0.7), 1));
+		n.physik.add(new ColBox(n, 12, new EndScheibe(0.7), new EndScheibe(0.7), 1));
+		n.physik.add(new ColBox(n, 0, new EndEllipse(2.1, 1.2, 0), new EndEllipse(2.2, 1.4, 0), 1));
+		n.physik.add(new ColBox(n, 1, new EndEllipse(2.2, 1.4, 0), new EndEllipse(2.2, 1.4, 0), 1));
+		n.physik.add(new ColBox(n, 2, new EndEllipse(2.2, 1.4, 0), new EndEllipse(2.2, 1.4, 0), 1));
 		n.init();
 		theSpieler.erzeugeGMK(aw, n.position);
 
@@ -130,7 +142,7 @@ public class Hauptschleife
 
 			protected void doFall(String fall, boolean attachChainOnly){}
 		};
-		MPS mp2 = new MPS();
+		//MPS mp2 = new MPS();
 		n2.aussehen = new LadeModell().reload(
 				Index.gibLadeTeil("Hauptteil"),
 				Index.gibLadeTeil("Beine"),
@@ -145,12 +157,12 @@ public class Hauptschleife
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
 				new H2(n2, 0.2, 0.5, 4, 10, 3, 0.7, 0, 0.55),
-				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
-				mp2
+				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55)/*,
+				mp2*/
 				);
 		n2.position = aw.wbl.starts[1];
 		n2.position.b += n2.block.get(0).airshift;
-		mp2.init();
+		//mp2.init();
 		n2.dreh = new Drehung(Math.PI, 0);
 		n2.init();
 		theSpieler.kamN = n;
