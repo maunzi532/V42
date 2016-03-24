@@ -32,7 +32,7 @@ public class Hauptschleife
 	{
 		aw = new AllWelt();
 		theSpieler = new Spieler(new Overlay(), 0);
-		Generator g = new WeltLeser();
+		Generator g = new TestGenerator();
 		g.gibInWelt(aw.wbl, "Levels/Test2");
 		//g.gibInWelt("Levels/Generiert1");
 		//g.gibInWelt();

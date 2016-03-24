@@ -213,5 +213,4 @@ public class BF2 extends F2
 		return new K4(sm.a * (1 - faktor) + se.a * faktor, sm.b * (1 - faktor) + se.b * faktor,
 				sm.c * (1 - faktor) + se.c * faktor, sm.d * (1 - faktor) + se.d * faktor);
 	}
-
 }

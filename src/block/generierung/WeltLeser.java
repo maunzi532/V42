@@ -11,7 +11,7 @@ public class WeltLeser extends Generator
 	int c1 = 0;
 	int c2 = 0;
 	int c3 = 0;
-	int[][][][] blocks = null;
+	DerBlock[][][][] blocks = null;
 
 	public void gibInWelt(WeltB welt, Object... z)
 	{
@@ -19,7 +19,7 @@ public class WeltLeser extends Generator
 		super.gibInWelt(welt);
 	}
 
-	int[][][][] generiere()
+	DerBlock[][][][] generiere()
 	{
 		String[] w1 = Lader.gibText(ort).replace("\n	", "").split("\n");
 		for(String w2 : w1)
@@ -32,11 +32,11 @@ public class WeltLeser extends Generator
 					size = new int[w41.length];
 					for(int i = 0; i < w41.length; i++)
 						size[i] = Integer.parseInt(w41[i]);
-					blocks = new int[size[0]][size[1]][size[2]][size[3]];
+					blocks = new DerBlock[size[0]][size[1]][size[2]][size[3]];
 					break;
 				case "E":
 					String[] w42 = w3[1].split(",");
-					enden = new int[w42.length];
+					enden = new DerBlock[w42.length];
 					for(int i = 0; i < w42.length; i++)
 						enden[i] = ladeBlock(w42[i]);
 					break;
@@ -90,8 +90,8 @@ public class WeltLeser extends Generator
 		}
 	}
 
-	private int ladeBlock(String s)
+	private DerBlock ladeBlock(String s)
 	{
-		return Integer.parseInt(s);
+		return new DerBlock(s);
 	}
 }

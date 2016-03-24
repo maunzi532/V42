@@ -7,6 +7,7 @@ import wahr.zugriff.*;
 
 import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 public class BlockN2
 {
@@ -44,6 +45,8 @@ public class BlockN2
 					{1, 1, 1}
 			};
 
+	public static final List<Integer> drehseiten = Arrays.asList(4, 1, 5, 0);
+
 	private Zeichner z;
 	private WeltB von;
 	private LichtW licht;
@@ -55,9 +58,9 @@ public class BlockN2
 		this.licht = licht;
 	}
 
-	private boolean sichtOpaque(int block)
+	private boolean sichtOpaque(DerBlock block)
 	{
-		return block > 0;
+		return block.typ > 0;
 	}
 
 	public ArrayList<N2> flaechen(K4 kam, Drehung kDreh, K4 radius, boolean gmVision)
@@ -78,7 +81,7 @@ public class BlockN2
 					for(int c = kaw0.k[2]; c < kawEnd.k[2]; c++)
 					{
 						WBP p = new WBP(a, b, c, di);
-						int block = von.gib(p);
+						DerBlock block = von.gib(p);
 						if(sichtOpaque(block))
 						{
 							for(int i = 0; i < WeltB.seiten.length; i++)
@@ -101,11 +104,11 @@ public class BlockN2
 					for(int c = kaw0.k[2]; c < kawEnd.k[2]; c++)
 					{
 						WBP p = new WBP(a, b, c, di);
-						int block = von.gib(p);
+						DerBlock block = von.gib(p);
 						if(sichtOpaque(block))
 						{
-							int blockR = von.gib(new WBP(a, b, c, di + 1));
-							int blockG = von.gib(new WBP(a, b, c, di - 1));
+							DerBlock blockR = von.gib(new WBP(a, b, c, di + 1));
+							DerBlock blockG = von.gib(new WBP(a, b, c, di - 1));
 							for(int i = 0; i < WeltB.seiten.length; i++)
 								if(!sichtOpaque(von.gib(new WBP(a + WeltB.seiten[i][0],
 										b + WeltB.seiten[i][1], c + WeltB.seiten[i][2], di))))
@@ -123,8 +126,8 @@ public class BlockN2
 						}
 						else
 						{
-							int blockR = von.gib(new WBP(a, b, c, di + 1));
-							int blockG = von.gib(new WBP(a, b, c, di - 1));
+							DerBlock blockR = von.gib(new WBP(a, b, c, di + 1));
+							DerBlock blockG = von.gib(new WBP(a, b, c, di - 1));
 							if(!sichtOpaque(von.gib(p)))
 							{
 								long tn = von.tn(p);
@@ -150,8 +153,8 @@ public class BlockN2
 					{
 						WBP pG = new WBP(a, b, c, di);
 						WBP pR = new WBP(a, b, c, di + 1);
-						int blockG = von.gib(pG);
-						int blockR = von.gib(pR);
+						DerBlock blockG = von.gib(pG);
+						DerBlock blockR = von.gib(pR);
 						if(sichtOpaque(blockR) || sichtOpaque(blockG))
 						{
 							for(int i = 0; i < WeltB.seiten.length; i++)
@@ -166,8 +169,8 @@ public class BlockN2
 						}
 						if(!sichtOpaque(blockR) && !sichtOpaque(blockG))
 						{
-							int blockR2 = von.gib(new WBP(a, b, c, di + 2));
-							int blockG2 = von.gib(new WBP(a, b, c, di - 1));
+							DerBlock blockR2 = von.gib(new WBP(a, b, c, di + 2));
+							DerBlock blockG2 = von.gib(new WBP(a, b, c, di - 1));
 							D2 der = descr(pR, blockR2, false, von.tn(pR));
 							if(der != null)
 								D2.atl(toR, der, kDreh, relativ);
@@ -177,14 +180,14 @@ public class BlockN2
 						}
 						else if(!sichtOpaque(blockR))
 						{
-							int blockR2 = von.gib(new WBP(a, b, c, di + 2));
+							DerBlock blockR2 = von.gib(new WBP(a, b, c, di + 2));
 							D2 der = descr(pR, blockR2, false, von.tn(pR));
 							if(der != null)
 								D2.atl(toR, der, kDreh, relativ);
 						}
 						else if(!sichtOpaque(blockG))
 						{
-							int blockG2 = von.gib(new WBP(a, b, c, di - 1));
+							DerBlock blockG2 = von.gib(new WBP(a, b, c, di - 1));
 							D2 deg = descr(pG, blockG2, true, von.tn(pG));
 							if(deg != null)
 								D2.atl(toR, deg, kDreh, relativ);
@@ -194,7 +197,7 @@ public class BlockN2
 		return toR;
 	}
 
-	private BF2 flaeche(WBP p, int block, int nof, double rend, double gend)
+	private BF2 flaeche(WBP p, DerBlock block, int nof, double rend, double gend)
 	{
 		long tn = von.tn(p);
 		K4[] ke = new K4[4];
@@ -203,11 +206,24 @@ public class BlockN2
 			int[] pl = punkte[seiten[nof][i]];
 			ke[i] = von.wt(new WBP(p.k[0] + pl[0], p.k[1] + pl[1], p.k[2] + pl[2], p.k[3]));
 		}
-		return new BF2(ke, new K4[ke.length], Index.gibXFBT(String.valueOf(block), nof, 10),
+		if(drehseiten.contains(nof))
+		{
+			int ind = drehseiten.indexOf(nof);
+			ind = (ind + block.dreh4) % 4;
+			nof = drehseiten.get(ind);
+		}
+		else
+		{
+			K4[] ke2 = new K4[4];
+			for(int i  = 0; i < 4; i++)
+				ke2[(i + block.dreh4) % 4] = ke[i];
+			ke = ke2;
+		}
+		return new BF2(ke, new K4[ke.length], Index.gibXFBT(block.name(), nof, 10),
 				true, licht, nof, rend, gend, tn);
 	}
 
-	private D2 descr(WBP p, int b, boolean g, long tn)
+	private D2 descr(WBP p, DerBlock b, boolean g, long tn)
 	{
 		boolean quad = d2Vis(p);
 		if(!sichtOpaque(b))

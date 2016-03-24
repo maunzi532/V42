@@ -19,8 +19,8 @@ public class WeltB
 	public K4 weltBlock;
 	public K4 startWelt;
 	public int[] end;
-	public int[][][][] blocks;
-	public int[] enden;
+	public DerBlock[][][][] blocks;
+	public DerBlock[] enden;
 	public int[] endOrder;
 	public K4[] starts;
 
@@ -92,7 +92,7 @@ public class WeltB
 				startWelt.d + weltBlock.d / 2 + weltBlock.d * ort[3]);
 	}
 
-	public int gib(WBP p)
+	public DerBlock gib(WBP p)
 	{
 		for(int i = 0; i < 4; i++)
 		{
@@ -104,7 +104,7 @@ public class WeltB
 		return blocks[p.k[0]][p.k[1]][p.k[2]][p.k[3]];
 	}
 
-	public boolean set(WBP p, int block)
+	public boolean set(WBP p, DerBlock block)
 	{
 		if(p.k[0] < 0 || p.k[0] >= end[0] || p.k[1] < 0 || p.k[1] >= end[1] ||
 				p.k[2] < 0 || p.k[2] >= end[2] || p.k[3] < 0 || p.k[3] >= end[3])
@@ -113,14 +113,14 @@ public class WeltB
 		return true;
 	}
 
-	public boolean opaque(int block)
+	public boolean opaque(DerBlock block)
 	{
-		return block > 0;
+		return block.typ > 0;
 	}
 
-	private boolean vKanten(int block)
+	private boolean vKanten(DerBlock block)
 	{
-		return block == 2;
+		return block.typ == 2;
 	}
 
 	boolean innen(WBP p)

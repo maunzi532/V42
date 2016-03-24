@@ -34,7 +34,8 @@ public class Abbau extends Aktion
 		if(aktuell == dauer - 1)
 		{
 			besitzer.focus = new Mount(besitzer, reMount, linA, 0, reD, reT);
-			welt.set(welt.decodeTn(tn), 0);
+			WBP p = welt.decodeTn(tn);
+			welt.set(p, new DerBlock(0, welt.gib(p).dreh4));
 		}
 	}
 }

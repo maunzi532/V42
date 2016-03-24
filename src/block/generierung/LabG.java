@@ -30,7 +30,7 @@ public class LabG extends Generator
 		super.gibInWelt(welt);
 	}
 
-	public int[][][][] generiere()
+	public DerBlock[][][][] generiere()
 	{
 		Random r = new Random();
 		b1 = new int[size[0]][size[1]][size[2]][size[3]];
@@ -77,13 +77,14 @@ public class LabG extends Generator
 			}
 			position = alt.get(r.nextInt(alt.size())).clone();
 		}
-		int[][][][] blocks = new int[size[0]][size[1]][size[2]][size[3]];
+		DerBlock[][][][] blocks = new DerBlock[size[0]][size[1]][size[2]][size[3]];
 		for(int ia = 0; ia < size[0]; ia++)
 			for(int ib = 0; ib < size[1]; ib++)
 				for(int ic = 0; ic < size[2]; ic++)
 					for(int id = 0; id < size[3]; id++)
-						blocks[ia][ib][ic][id] = rev(b1[ia][ib][ic][id]);
-		enden = new int[]{1, 1, 1, 1, 1, 1, 1, 1};
+						blocks[ia][ib][ic][id] = new DerBlock(rev(b1[ia][ib][ic][id]), 0);
+		DerBlock ender = new DerBlock(1, 0);
+		enden = new DerBlock[]{ender, ender, ender, ender, ender, ender, ender, ender};
 		//enden = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
 		//enden = new int[]{1, 1, 1, 0, 1, 1, 1, 1};
 		endOrder = new int[]{0, 2, 1, 3};

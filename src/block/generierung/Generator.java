@@ -7,10 +7,10 @@ public abstract class Generator
 {
 	private WeltB welt;
 	int[][] starts;
-	int[] enden;
+	DerBlock[] enden;
 	int[] endOrder;
 
-	abstract int[][][][] generiere();
+	abstract DerBlock[][][][] generiere();
 
 	public void gibInWelt(WeltB welt, Object... z)
 	{
