@@ -1,5 +1,7 @@
 25
+
 0-Aus=n8
+
 1-Links=J,A
 2-Rechts=L,D
 3-Vorne=I,W
@@ -13,6 +15,7 @@
 10-B=1
 11-C=2
 13-Menu=n44,n153
+14-GMDrehen=V
 15-Linksklick=m1
 16-Rechtsklick=m3
 17-GodMode=6

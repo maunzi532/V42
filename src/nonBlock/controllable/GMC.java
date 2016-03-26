@@ -23,6 +23,8 @@ public class GMC extends Controller
 				cmd.add("Hoch");
 			if(TA2.keyStat[master.taIndex][16] == 2)
 				cmd.add("Weg");
+			if(TA2.keyStat[master.taIndex][14] == 2)
+				cmd.add("Dreh");
 			if(TA2.keyStat[master.taIndex][9] == 2)
 				cmd.add("taGet");
 			if(TA2.keyStat[master.taIndex][2] == 2)

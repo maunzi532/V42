@@ -96,6 +96,14 @@ public class GMKamera extends NBD implements Controllable, Licht
 					welt.set(p, new DerBlock(0, welt.gib(p).dreh4));
 				}
 				break;
+			case "Dreh":
+				if(overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
+				{
+					WBP p = welt.decodeTn(overlay.pa.tnTarget);
+					DerBlock block = welt.gib(p);
+					block.dreh4 = (block.dreh4 + 1) % 4;
+				}
+				break;
 			case "taGet":
 				overlay.pa.taGet = !overlay.pa.taGet;
 				if(overlay.pa.taGet)
