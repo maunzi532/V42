@@ -1,5 +1,7 @@
 package nonBlock.aktion.lesen;
 
+import nonBlock.aktion.*;
+
 import java.util.*;
 
 public class RZahl
@@ -9,13 +11,12 @@ public class RZahl
 	public ArrayList<RWert> zahlies = new ArrayList<>();
 	public ArrayList<Integer> zeichens = new ArrayList<>();
 	public boolean deg2rad;
-	public LadeAktion e;
+	public NBD v1;
 
-	public RZahl(String text, boolean deg2rad, LadeAktion e)
+	public RZahl(String text, boolean deg2rad)
 	{
 		this.deg2rad = deg2rad;
-		this.e = e;
-		String[] tex2 = text.split(" ");
+		String[] tex2 = text.split("_");
 		assert tex2.length % 2 == 1;
 		for(int i = 0; i < tex2.length; i++)
 		{
@@ -36,25 +37,25 @@ public class RZahl
 
 	public double rechne()
 	{
-		double wert = zahlies.get(0).gib(e);
+		double wert = zahlies.get(0).gib(v1);
 		for(int i = 0; i < zeichens.size(); i++)
 		{
 			switch(zeichens.get(i))
 			{
 				case 0:
-					wert = wert + zahlies.get(i + 1).gib(e);
+					wert = wert + zahlies.get(i + 1).gib(v1);
 					break;
 				case 1:
-					wert = wert - zahlies.get(i + 1).gib(e);
+					wert = wert - zahlies.get(i + 1).gib(v1);
 					break;
 				case 2:
-					wert = wert * zahlies.get(i + 1).gib(e);
+					wert = wert * zahlies.get(i + 1).gib(v1);
 					break;
 				case 3:
-					wert = wert / zahlies.get(i + 1).gib(e);
+					wert = wert / zahlies.get(i + 1).gib(v1);
 					break;
 				case 4:
-					wert = wert % zahlies.get(i + 1).gib(e);
+					wert = wert % zahlies.get(i + 1).gib(v1);
 					break;
 			}
 		}

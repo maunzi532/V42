@@ -49,17 +49,17 @@ public class ADI
 		return a;
 	}
 
-	public ADI(String code, boolean zv, LadeAktion e)
+	public ADI(String code, boolean zv)
 	{
 		String[] cde1 = code.split(",");
 		linA = Integer.parseInt(cde1[0]);
 		anfD = Integer.parseInt(cde1[1]);
 		lenD = Integer.parseInt(cde1[2]);
-		lenZ = new RZahl(cde1[3], false, e);
-		dwbZ = new RZahl(cde1[4], true, e);
-		dwlZ = new RZahl(cde1[5], true, e);
-		spnZ = new RZahl(cde1[6], true, e);
-		dd4Z = new RZahl(cde1[7], false, e);
+		lenZ = new RZahl(cde1[3], false);
+		dwbZ = new RZahl(cde1[4], true);
+		dwlZ = new RZahl(cde1[5], true);
+		spnZ = new RZahl(cde1[6], true);
+		dd4Z = new RZahl(cde1[7], false);
 		this.zv = zv;
 	}
 }

@@ -1,4 +1,4 @@
 2 Tra T=TSSA
 2 Bew Akt=0 Dauer=20 Power=5 bM=16
-20 Bew Akt=0 Dauer=10 Power=5 aM=%0% cM=%1%
+20 Bew Akt=0 Dauer=10 Power=5 aM=sinwl_*_-5 cM=coswl_*_5
 Z 31

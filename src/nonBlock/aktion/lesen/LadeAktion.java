@@ -77,10 +77,10 @@ class LadeAktion
 					linA.add(Integer.parseInt(cd3[1]));
 					break;
 				case "ADI":
-					adiA.add(new ADI(cd3[1], false, this));
+					adiA.add(new ADI(cd3[1], false));
 					break;
 				case "ADIZV":
-					adiA.add(new ADI(cd3[1], true, this));
+					adiA.add(new ADI(cd3[1], true));
 					break;
 				case "dis":
 					dislocate = cd3[1];
@@ -118,7 +118,7 @@ class LadeAktion
 							if(nd >= 0 && nd < 4)
 							{
 								mvd2[nd] = cd3[0].endsWith("T");
-								mvd[nd] = new RZahl(cd3[1], false, this);
+								mvd[nd] = new RZahl(cd3[1], false);
 							}
 						}
 						else if(cd3[0].length() == 3 && cd3[0].charAt(0) == 'w')
@@ -131,7 +131,7 @@ class LadeAktion
 							if(nd > 0)
 							{
 								mvd2[nd] = cd3[0].endsWith("T");
-								mvd[nd] = new RZahl(cd3[1], true, this);
+								mvd[nd] = new RZahl(cd3[1], true);
 							}
 						}
 					}
@@ -172,7 +172,10 @@ class LadeAktion
 				double[] mvdR = new double[mvd.length];
 				for(int i1 = 0; i1 < mvd.length; i1++)
 					if(mvd[i1] != null)
+					{
+						mvd[i1].v1 = dislocated;
 						mvdR[i1] = mvd[i1].rechne();
+					}
 				MDAktion md = new MDAktion(dislocated, dauer, power, mvdR, mvd2);
 				dislocated.aktionen.add(md);
 				break;

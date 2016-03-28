@@ -2,22 +2,27 @@ Nicht sicher
 	4D-Daten des aktuellen Felds anzeigen
 	NBD - Idle Bewegung
 	Metall-Reflexion
-	D2 - Aussehen verbessern
+	D2 (BD3) - Aussehen verbessern
+	Moves mit Bedingungen ausstatten
 
 Stufe Mehr - gestartet - mittel
 	ZP4C neu machen und umwandeln in LCM
 	sc-Zoning
 	sc aufteilen
 
+Stufe Moves - gestartet - mittel
+	Moves abbrechen
+-	Moves mit Rechnungen testen
+
 Stufe Mine - gestartet - lang
-	Drehung speichern
+-	Drehung speichern
 	System F - GMKamera mitbewegen
 	Beim aktivieren von System F Targeting kurz aktivieren
 	Block Auswahl (Welcher Typ von Block)
 	Welt generieren
 
 Stufe Stoff - schwer
-	N2 bearbeiten
+-	N2 bearbeiten (N3)
 	Zeichner Reihenfolge ändern
 	Haare richtig anmontieren
 	ColBox Position Vergleich
@@ -25,12 +30,7 @@ Stufe Stoff - schwer
 	Modell ändern und besser anmontieren
 	Haare Mehrfach-Physik einfacher machen
 
-Stufe Leiste
-
-Stufe Moves (gestartet)
-	Moves abbrechen
-	Moves mit Rechnungen ausstatten
-	Moves mit Bedingungen ausstatten
+Stufe Leiste (Warten auf Stufe Moves)
 
 Stufe Eingabe
 

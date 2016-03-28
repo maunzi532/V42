@@ -1,5 +1,7 @@
 package nonBlock.aktion.lesen;
 
+import nonBlock.aktion.*;
+
 public class RWert
 {
 	String name;
@@ -18,10 +20,18 @@ public class RWert
 		this.zahl = zahl;
 	}
 
-	public double gib(LadeAktion e)
+	public double gib(NBD v1)
 	{
 		if(name != null)
-			return 0;
+			switch(name)
+			{
+				case "sinwl":
+					return Math.sin(v1.dreh.wl);
+				case "coswl":
+					return Math.cos(v1.dreh.wl);
+				default:
+					assert false;
+			}
 		return zahl;
 	}
 }

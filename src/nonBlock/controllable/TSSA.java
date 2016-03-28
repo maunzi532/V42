@@ -248,10 +248,9 @@ public abstract class TSSA extends FWA implements Licht
 					focus = null;
 					grabRichtung = -1;
 					if(ck)
-						moves.add(new Move(Index.gibLadeMove(false, "WK", String.valueOf(-Math.sin(dreh.wl) * 5),
-								String.valueOf(Math.cos(dreh.wl) * 5)), this));
+						moves.add(new Move(Index.gibLadeMove(false, "WK"), this));
 					else
-						moves.add(new Move(Index.gibLadeMove(false, "WK", "0", "0"), this));
+						moves.add(new Move(Index.gibLadeMove(false, "WK2"), this));
 					return false;
 				}
 			}
