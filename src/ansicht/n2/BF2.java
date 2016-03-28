@@ -8,10 +8,10 @@ import java.util.*;
 
 public class BF2 extends F2
 {
-	private final int seitenwand;
+	private final int seitenwand; //unnoetig
 	private final double rend;
 	private final double gend;
-	public K4 midsp;
+	public K4 midsp; //???
 
 	public static void atl(ArrayList al, BF2 f2, Drehung kDreh, K4 relativ, boolean gmVision)
 	{
@@ -116,7 +116,7 @@ public class BF2 extends F2
 						eckenNK[2].d * (m1 - a1) * (m2 - a2) + eckenNK[3].d * a1 * (m2 - a2)) / m1 / m2);
 	}
 
-	public void ecken(int splx, int sply, int splmx, int splmy)
+	public void ecken(int splx, int sply, int splmx, int splmy) //Na super
 	{
 		K4[] nk2 = new K4[4];
 		nk2[0] = splInn1(splx, sply, splmx, splmy);

@@ -12,7 +12,7 @@ public class NF2 extends F2
 	{
 		if(f2.vAnzeigen(false, f2.ecken, gmVision))
 		{
-			f2.mid();
+			f2.mid(); //ARGH
 			if(f2.mid != null)
 				al.add(f2);
 		}
@@ -33,6 +33,7 @@ public class NF2 extends F2
 		this.tn = tn;
 	}
 
+	//sind wirklich beide noetig?
 	public NF2(K4[] ecken, K4[] eckenNK, XFarbe farbe, Boolean seite, LichtW lw, int seed, int splseed, long tn)
 	{
 		block = false;

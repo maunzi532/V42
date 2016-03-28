@@ -13,8 +13,8 @@ public class R extends LinAAktion
 		AlternateStandard std = besitzer.standard;
 		if(std.lens[linA] == null)
 			throw new RuntimeException("R Fehler: " + linA);
-		r.a = ADI.rad(linA, 1, 9, std.lens[linA], std.drehs[linA].wb, std.drehs[linA].wl,
-				std.spins[linA], std.dShifts[linA], false);
+		r.a = ADI.rad(linA, 1, 9, new RZahl(std.lens[linA]), new RZahl(std.drehs[linA].wb),
+				new RZahl(std.drehs[linA].wl), new RZahl(std.spins[linA]), new RZahl(std.dShifts[linA]), false);
 		if(!r.needCancel)
 			besitzer.resLink[r.a.linA] = r;
 		besitzer.aktionen.add(r);
@@ -61,11 +61,11 @@ public class R extends LinAAktion
 			int m1 = a.anfD + a.lenD - aktuell;
 			int m2 = aktuell - a.anfD;
 			int m3 = a.lenD;
-			li.len = (lenY * m1 + a.lenZ * m2) / m3;
-			li.dreh.wb = (dwbY * m1 + a.dwbZ * m2) / m3;
-			li.dreh.wl = (dwlY * m1 + a.dwlZ * m2) / m3;
-			li.spin = (spnY * m1 + a.spnZ * m2) / m3;
-			li.dShift = (dd4Y * m1 + a.dd4Z * m2) / m3;
+			li.len = (lenY * m1 + a.lenZ.rechne() * m2) / m3;
+			li.dreh.wb = (dwbY * m1 + a.dwbZ.rechne() * m2) / m3;
+			li.dreh.wl = (dwlY * m1 + a.dwlZ.rechne() * m2) / m3;
+			li.spin = (spnY * m1 + a.spnZ.rechne() * m2) / m3;
+			li.dShift = (dd4Y * m1 + a.dd4Z.rechne() * m2) / m3;
 		}
 	}
 }

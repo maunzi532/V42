@@ -45,11 +45,11 @@ public class AktionM extends Freeze
 						}
 						int m2 = aktuell - a[i].anfD;
 						int m3 = a[i].lenD;
-						li.len = lenY[i] + a[i].lenZ * m2 / m3;
-						li.dreh.wb = dwbY[i] + a[i].dwbZ * m2 / m3;
-						li.dreh.wl = dwlY[i] + a[i].dwlZ * m2 / m3;
-						li.spin = spnY[i] + a[i].spnZ * m2 / m3;
-						li.dShift = dd4Y[i] + a[i].dd4Z * m2 / m3;
+						li.len = lenY[i] + a[i].lenZ.rechne() * m2 / m3;
+						li.dreh.wb = dwbY[i] + a[i].dwbZ.rechne() * m2 / m3;
+						li.dreh.wl = dwlY[i] + a[i].dwlZ.rechne() * m2 / m3;
+						li.spin = spnY[i] + a[i].spnZ.rechne() * m2 / m3;
+						li.dShift = dd4Y[i] + a[i].dd4Z.rechne() * m2 / m3;
 					}
 					else
 					{
@@ -64,11 +64,11 @@ public class AktionM extends Freeze
 						int m1 = a[i].anfD + a[i].lenD - aktuell;
 						int m2 = aktuell - a[i].anfD;
 						int m3 = a[i].lenD;
-						li.len = (lenY[i] * m1 + a[i].lenZ * m2) / m3;
-						li.dreh.wb = (dwbY[i] * m1 + a[i].dwbZ * m2) / m3;
-						li.dreh.wl = (dwlY[i] * m1 + a[i].dwlZ * m2) / m3;
-						li.spin = (spnY[i] * m1 + a[i].spnZ * m2) / m3;
-						li.dShift = (dd4Y[i] * m1 + a[i].dd4Z * m2) / m3;
+						li.len = (lenY[i] * m1 + a[i].lenZ.rechne() * m2) / m3;
+						li.dreh.wb = (dwbY[i] * m1 + a[i].dwbZ.rechne() * m2) / m3;
+						li.dreh.wl = (dwlY[i] * m1 + a[i].dwlZ.rechne() * m2) / m3;
+						li.spin = (spnY[i] * m1 + a[i].spnZ.rechne() * m2) / m3;
+						li.dShift = (dd4Y[i] * m1 + a[i].dd4Z.rechne() * m2) / m3;
 					}
 				}
 	}

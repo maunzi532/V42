@@ -106,7 +106,8 @@ public class Hauptschleife
 		{
 			public void collide(Attk attk)
 			{
-				AktionM.checkLinA(this, new AktionM(this, 20, 1, ADI.deg(16, 2, 14, 3, 45, 0, 0, 0, false)));
+				AktionM.checkLinA(this, new AktionM(this, 20, 1, ADI.deg(16, 2, 14, new RZahl(3), new RZahl(45),
+						new RZahl(0), new RZahl(0), new RZahl(0), false)));
 			}
 
 			public void actCollide(Attk attk){}

@@ -33,12 +33,6 @@ public class Move
 		seq = true;
 	}
 
-	public Move(LadeMove lad, Overlay overlay, NBD akteur)
-	{
-		this(lad, akteur);
-		this.overlay = overlay;
-	}
-
 	public Move(LadeMove lad, Overlay overlay, NBD... akteure)
 	{
 		this(lad, akteure);

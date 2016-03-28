@@ -13,8 +13,8 @@ public class ATR extends R
 			return;
 		ATR r = new ATR(target, command);
 		AlternateStandard std = target.standard;
-		r.a = ADI.rad(linA, 1, command.dauer - 1, std.lens[linA], std.drehs[linA].wb,
-				std.drehs[linA].wl, std.spins[linA], std.dShifts[linA], false);
+		r.a = ADI.rad(linA, 1, command.dauer - 1, new RZahl(std.lens[linA]), new RZahl(std.drehs[linA].wb),
+				new RZahl(std.drehs[linA].wl), new RZahl(std.spins[linA]), new RZahl(std.dShifts[linA]), false);
 		target.aktionen.add(r);
 	}
 

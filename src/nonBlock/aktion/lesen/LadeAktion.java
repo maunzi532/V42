@@ -33,7 +33,7 @@ class LadeAktion
 	private int dauer;
 	private int power;
 
-	private final double[] mvd = new double[6];
+	private final RZahl[] mvd = new RZahl[6];
 	private final Boolean[] mvd2 = new Boolean[6];
 	private final ArrayList<Integer> linA = new ArrayList<>();
 	private final ArrayList<ADI> adiA = new ArrayList<>();
@@ -77,10 +77,10 @@ class LadeAktion
 					linA.add(Integer.parseInt(cd3[1]));
 					break;
 				case "ADI":
-					adiA.add(new ADI(cd3[1], false));
+					adiA.add(new ADI(cd3[1], false, this));
 					break;
 				case "ADIZV":
-					adiA.add(new ADI(cd3[1], true));
+					adiA.add(new ADI(cd3[1], true, this));
 					break;
 				case "dis":
 					dislocate = cd3[1];
@@ -118,7 +118,7 @@ class LadeAktion
 							if(nd >= 0 && nd < 4)
 							{
 								mvd2[nd] = cd3[0].endsWith("T");
-								mvd[nd] = Double.parseDouble(cd3[1]);
+								mvd[nd] = new RZahl(cd3[1], false, this);
 							}
 						}
 						else if(cd3[0].length() == 3 && cd3[0].charAt(0) == 'w')
@@ -131,7 +131,7 @@ class LadeAktion
 							if(nd > 0)
 							{
 								mvd2[nd] = cd3[0].endsWith("T");
-								mvd[nd] = Double.parseDouble(cd3[1]) * Math.PI / 180;
+								mvd[nd] = new RZahl(cd3[1], true, this);
 							}
 						}
 					}
@@ -169,7 +169,11 @@ class LadeAktion
 					return st2;
 				break;
 			case 4:
-				MDAktion md = new MDAktion(dislocated, dauer, power, mvd, mvd2);
+				double[] mvdR = new double[mvd.length];
+				for(int i1 = 0; i1 < mvd.length; i1++)
+					if(mvd[i1] != null)
+						mvdR[i1] = mvd[i1].rechne();
+				MDAktion md = new MDAktion(dislocated, dauer, power, mvdR, mvd2);
 				dislocated.aktionen.add(md);
 				break;
 			case 5:
@@ -196,7 +200,7 @@ class LadeAktion
 		return null;
 	}
 
-	private void tp(NBD target, double[] mvd, Boolean[] mvdA)
+	private void tp(NBD target, RZahl[] mvd, Boolean[] mvdA)
 	{
 		double[] mvd0 = new double[]{target.position.a, target.position.b,
 				target.position.c, target.position.d, target.dreh.wl, target.dreh.wb};
@@ -205,9 +209,9 @@ class LadeAktion
 			if(mvdA[i] != null)
 			{
 				if(mvdA[i])
-					mvdT[i] = mvd[i];
+					mvdT[i] = mvd[i].rechne();
 				else
-					mvdT[i] = mvd0[i] + mvd[i];
+					mvdT[i] = mvd0[i] + mvd[i].rechne();
 			}
 		mvdT[4] = Drehung.sichern(mvdT[4]);
 		mvdT[5] = Drehung.sichern(mvdT[5]);

@@ -7,24 +7,25 @@ import java.awt.*;
 
 public abstract class F2 extends N2
 {
-	public K4[] ecken;
-	public K4[] eckenNK;
-	public K4[] ec2;
-	public Boolean seite;
-	public int spld;
-	public int seed;
-	public int splseed;
-	public LichtW lw;
+	public K4[] ecken; //Umbenennen in eckenK
+	public K4[] eckenNK; //Umbenennen in eckenR
+	public K4[] ec2; //Umbenennen in eckenNEntf
+	public Boolean seite; //Passt
+	public int spld; //Weg damit oder als boolean
+	public int seed; //Nicht sicher
+	public int splseed; //Nicht sicher
+	public LichtW lw; //Hmm
 
+	//Werden ausgelesen
 	private int[] xe;
 	private int[] ye;
 	double avkh2;
 
-	public abstract void mid();
+	public abstract void mid(); //Weg
 
-	public abstract K4 mid1();
+	public abstract K4 mid1(); //Weg
 
-	public boolean vAnzeigen(boolean midTime, K4[] eckHier, boolean gmVision)
+	public boolean vAnzeigen(boolean midTime, K4[] eckHier, boolean gmVision) //Nicht sicher
 	{
 		if(midTime && mid == null)
 			return false;
@@ -61,7 +62,7 @@ public abstract class F2 extends N2
 		return bs != bx && (bx > bs) == (seite == (a1 < a2));
 	}
 
-	public double maxAbs()
+	public double maxAbs() //Nach NF2
 	{
 		double k = 0;
 		for(int i = 0; i < ecken.length; i++)
@@ -92,7 +93,7 @@ public abstract class F2 extends N2
 		return ec2 != null;
 	}
 
-	protected void panelDaten(Dimension sc1)
+	protected void panelDaten(Dimension sc1) //spken checken
 	{
 		xe = new int[ec2.length];
 		ye = new int[ec2.length];
