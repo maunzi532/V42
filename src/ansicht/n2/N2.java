@@ -22,9 +22,9 @@ public abstract class N2
 	public int[] xse;
 	public int[] yse;
 
-	public void farbe_flaeche(Long tn, Dimension sc1)
+	public void farbe_flaeche(Long tn, int wI, int hI)
 	{
-		panelDaten(sc1);
+		panelDaten(wI, hI);
 		dFarb = farbe.gibFarb(this, tn);
 	}
 
@@ -33,17 +33,17 @@ public abstract class N2
 		return true;
 	}
 
-	protected abstract void panelDaten(Dimension sc1); //Panel size
+	protected abstract void panelDaten(int wI, int hI); //Panel size
 	public abstract void panelDark(Graphics2D darkCopy);
 	public abstract void panel(Panelizer pa);
 
-	static int ethaX(double a, double c, Dimension sc1) //Panel size
+	static int ethaX(double a, double c, int wI) //Panel size
 	{
-		return (int)(sc1.width / 2d * (1 + Staticf.scaleX * a / c));
+		return (int)(wI / 2d * (1 + Staticf.scaleX * a / c));
 	}
 
-	static int ethaY(double b, double c, Dimension sc1) //Panel size
+	static int ethaY(double b, double c, int wI, int hI) //Panel size
 	{
-		return (int)(sc1.height / 2d - sc1.width / 2d * Staticf.scaleX * b / c);
+		return (int)(hI / 2d - wI / 2d * Staticf.scaleX * b / c);
 	}
 }

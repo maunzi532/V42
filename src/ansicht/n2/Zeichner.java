@@ -7,7 +7,6 @@ import nonBlock.aussehen.*;
 import nonBlock.controllable.*;
 import wahr.zugriff.*;
 
-import java.awt.*;
 import java.util.*;
 
 public class Zeichner
@@ -192,7 +191,7 @@ public class Zeichner
 		Collections.sort(n2s, (n21, n22) -> -Double.compare(n21.mid.c, n22.mid.c));
 	}
 
-	public void eckenEntf(Dimension sc1)
+	public void eckenEntf(int wI, int hI, int cI)
 	{
 		for(int q = 0; q < n2s.size(); q++)
 			if(n2s.get(q) instanceof F2)
@@ -203,8 +202,8 @@ public class Zeichner
 						continue;
 					int falsch = 0;
 					for(int i = 0; i < eck.length; i++)
-						if(eck[i].c < (v % 2 == 0 ? eck[i].a * Staticf.scaleX :
-								eck[i].b * Staticf.scaleX * sc1.height / sc1.width) * (v / 2 * 2 - 1))
+						if(eck[i].c < (v % 2 == 0 ? eck[i].a * Staticf.scaleX * wI / cI :
+								eck[i].b * Staticf.scaleX * hI / cI) * (v / 2 * 2 - 1))
 							falsch++;
 					if(falsch >= eck.length)
 						((F2)n2s.get(q)).ecken = new K4[0];
@@ -276,9 +275,9 @@ public class Zeichner
 		return (k0 * kc1 - k1 * kc0) / (kc1 - kc0);
 	}
 
-	public void farbe_flaeche(Long tn, Dimension sc1)
+	public void farbe_flaeche(Long tn, int wI, int hI)
 	{
 		for(int i = 0; i < n2s.size(); i++)
-			n2s.get(i).farbe_flaeche(tn, sc1);
+			n2s.get(i).farbe_flaeche(tn, wI, hI);
 	}
 }

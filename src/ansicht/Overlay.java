@@ -9,12 +9,13 @@ import wahr.physisch.*;
 import wahr.spieler.*;
 import wahr.zugriff.*;
 
-import java.awt.*;
 import java.io.*;
 
 public class Overlay
 {
 	public LPaneel auf;
+	public double[] ort;
+	public int xI, yI, wI, hI;
 	public SchalterLayer sl;
 	public InitSL isl;
 	public boolean sichtAn = true;
@@ -33,15 +34,26 @@ public class Overlay
 	public boolean schalterSichtbar;
 	public DrehInput drehInput;
 
-	public void initOverlay(int taIndex, AllWelt awA, String zDatLad, LPaneel auf)
+	public void initOverlay(int taIndex, AllWelt awA, String zDatLad, LPaneel auf, double[] ort)
 	{
 		this.taIndex = taIndex;
 		this.auf = auf;
+		this.ort = ort;
 		aw = awA;
 		z = new Zeichner(Index.gibText("Einstellungen", zDatLad), aw);
 		sl = new SchalterLayer(this);
-		pa = new Panelizer(auf.scF);
+		pa = new Panelizer();
+		resize();
 		isl = new InitSL(sl, this);
+	}
+
+	public void resize()
+	{
+		xI = (int) (ort[0] * auf.scF.width);
+		yI = (int) (ort[1] * auf.scF.height);
+		wI = (int) (ort[2] * auf.scF.width);
+		hI = (int) (ort[3] * auf.scF.height);
+		pa.resize(wI, hI);
 	}
 
 	public void vorbereiten()
@@ -52,9 +64,9 @@ public class Overlay
 		Staticf.sca("Z splittern (1) ");
 		z.sortieren();
 		Staticf.sca("Z sortieren (1) ");
-		z.eckenEntf(auf.scF);
+		z.eckenEntf(wI, hI, auf.scF.width);
 		Staticf.sca("Z eckenEntf (1) ");
-		z.farbe_flaeche(pa.tnTarget, auf.scF);
+		z.farbe_flaeche(pa.tnTarget, wI, hI);
 		Staticf.sca("Z farbeflaeche (3) ");
 		N2[] n2s3 = new N2[z.n2s.size()];
 		for(int i = 0; i < n2s3.length; i++)
@@ -67,13 +79,13 @@ public class Overlay
 		if(schalterSichtbar)
 			pa.panelize(n2s2, drehInput.xP(), drehInput.yP());
 		else
-			pa.panelize(n2s2, auf.scF.width / 2, auf.scF.height / 2);
+			pa.panelize(n2s2, xI + wI / 2, yI + hI / 2);
 		Staticf.sca2("Panelize (14) ");
 		sl.draw(pa.gd);
 		pa.gd.drawImage(Lader.gibBild(Index.gibPfad("Einstellungen") + File.separator + "ThaCursor.png"),
 				drehInput.xP() - 10, drehInput.yP() - 10, 20, 20, null);
 		Staticf.sca2("Overlay (0) ");
-		auf.rePanel(pa.light, 0, 0); //TODO
+		auf.rePanel(pa.light, xI, yI);
 		Staticf.sca2("RePanel (7) ");
 	}
 
@@ -97,24 +109,13 @@ public class Overlay
 		return kamN;
 	}
 
-	public boolean eingabe()
+	public boolean eingabe(boolean resize)
 	{
 		TA2.move(taIndex);
 		if(TA2.keyStat[taIndex][0] > 0)
 			return true;
-		boolean resize = false;
-		for(int i = 0; i < LPaneel.paneele.size(); i++)
-		{
-			Dimension sc1 = LPaneel.paneele.get(i).fr.getSize();
-			if(LPaneel.paneele.get(i).scF.width != sc1.width ||
-					LPaneel.paneele.get(i).scF.height != sc1.height)
-			{
-				LPaneel.paneele.get(i).scF = sc1;
-				resize = true;
-			}
-		}
 		if(resize)
-			pa.resize(auf.scF);
+			resize();
 		Staticf.sca("TA2 ");
 		schalterSichtbar = TA2.keyStat[taIndex][13] > 0;
 		drehInput.ablesen(schalterSichtbar);

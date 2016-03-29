@@ -40,13 +40,13 @@ public class D2 extends N2
 		return mid.c > Staticf.d2min;
 	}
 
-	public void panelDaten(Dimension sc1)
+	public void panelDaten(int wI, int hI)
 	{
 		double ca = mid.c;
 		if(ca < Staticf.nnull)
 			ca = Staticf.nnull;
-		xe = ethaX(mid.a, ca, sc1);
-		ye = ethaY(mid.b, ca, sc1);
+		xe = ethaX(mid.a, ca, wI);
+		ye = ethaY(mid.b, ca, wI, hI);
 		ddiff = mid.d;
 		scale = (int)(1000 / ca) + 1;
 	}

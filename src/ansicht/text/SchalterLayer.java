@@ -1,7 +1,6 @@
 package ansicht.text;
 
 import ansicht.*;
-import wahr.zugriff.*;
 
 import java.awt.*;
 import java.util.*;
@@ -45,22 +44,22 @@ public class SchalterLayer
 
 	public int mw(double multiplikator)
 	{
-		return (int)(master.auf.scF.width * multiplikator);
+		return (int)(master.wI * multiplikator);
 	}
 
 	public int mh(double multiplikator)
 	{
-		return (int)(master.auf.scF.height * multiplikator);
+		return (int)(master.hI * multiplikator);
 	}
 
 	private double nmw(double multiplikator)
 	{
-		return multiplikator / master.auf.scF.width;
+		return multiplikator / master.wI;
 	}
 
 	private double nmh(double multiplikator)
 	{
-		return multiplikator / master.auf.scF.height;
+		return multiplikator / master.hI;
 	}
 
 	public boolean click(int x, int y, boolean r)

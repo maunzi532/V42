@@ -76,11 +76,11 @@ public abstract class F2 extends N2
 		return k;
 	}
 
-	public void farbe_flaeche(Long tn, Dimension sc1)
+	public void farbe_flaeche(Long tn, int wI, int hI)
 	{
 		if(ec2 != null)
 		{
-			panelDaten(sc1);
+			panelDaten(wI, hI);
 			if(!farbe.shownext(this))
 				ec2 = null;
 			else
@@ -93,7 +93,7 @@ public abstract class F2 extends N2
 		return ec2 != null;
 	}
 
-	protected void panelDaten(Dimension sc1) //spken checken
+	protected void panelDaten(int wI, int hI) //spken checken
 	{
 		xe = new int[ec2.length];
 		ye = new int[ec2.length];
@@ -103,8 +103,8 @@ public abstract class F2 extends N2
 			double ca = ec2[j].c;
 			if(ca < Staticf.nnull)
 				ca = Staticf.nnull;
-			xe[j] = ethaX(ec2[j].a, ca, sc1);
-			ye[j] = ethaY(ec2[j].b, ca, sc1);
+			xe[j] = ethaX(ec2[j].a, ca, wI);
+			ye[j] = ethaY(ec2[j].b, ca, wI, hI);
 			ddiff += ec2[j].d;
 		}
 		ddiff /= ec2.length;
@@ -117,8 +117,8 @@ public abstract class F2 extends N2
 				double ca = spken[j].c;
 				if(ca < Staticf.nnull)
 					ca = Staticf.nnull;
-				xse[j] = ethaX(spken[j].a, ca, sc1);
-				yse[j] = ethaY(spken[j].b, ca, sc1);
+				xse[j] = ethaX(spken[j].a, ca, wI);
+				yse[j] = ethaY(spken[j].b, ca, wI, hI);
 			}
 		}
 	}

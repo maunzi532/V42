@@ -4,6 +4,8 @@ import nonBlock.aussehen.ext.*;
 import wahr.physisch.*;
 import wahr.zugriff.*;
 
+import java.awt.*;
+
 public class ZeitVerwalter
 {
 	private static long last;
@@ -80,15 +82,27 @@ public class ZeitVerwalter
 				Staticf.last = System.currentTimeMillis();
 				Staticf.last2 = System.currentTimeMillis();
 				boolean resize = false;
-				if(Hauptschleife.theOverlay.eingabe())
-					return;
+				for(int i = 0; i < LPaneel.paneele.size(); i++)
+				{
+					Dimension sc1 = LPaneel.paneele.get(i).fr.getSize();
+					if(LPaneel.paneele.get(i).scF.width != sc1.width ||
+							LPaneel.paneele.get(i).scF.height != sc1.height)
+					{
+						LPaneel.paneele.get(i).scF = sc1;
+						resize = true;
+					}
+				}
+				for(int i = 0; i < Hauptschleife.theOverlays.length; i++)
+					if(Hauptschleife.theOverlays[i].eingabe(resize))
+						return;
 				//Haare laggen furchtbar
 				H.calculateH = !skpf;
 				Hauptschleife.aw.logik();
 				if(!skpf)
 				{
 					//Noch nicht aufmalen
-					Hauptschleife.theOverlay.vorbereiten();
+					for(int i = 0; i < Hauptschleife.theOverlays.length; i++)
+						Hauptschleife.theOverlays[i].vorbereiten();
 					new Thread()
 					{
 						//Hier wird aufgemalt
@@ -98,7 +112,8 @@ public class ZeitVerwalter
 							{
 								thd = true;
 								long last4 = System.currentTimeMillis();
-								Hauptschleife.theOverlay.panelize();
+								for(int i = 0; i < Hauptschleife.theOverlays.length; i++)
+									Hauptschleife.theOverlays[i].panelize();
 								if(Staticf.writeVisibleTime)
 									System.out.println("VIS: " + (System.currentTimeMillis() - Staticf.last3));
 								Staticf.last3 = System.currentTimeMillis();

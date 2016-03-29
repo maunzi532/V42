@@ -24,8 +24,9 @@ public class LPaneel
 		if(Staticf.automaximize)
 			fr.setExtendedState(Frame.MAXIMIZED_BOTH);
 		fr.setSize(Staticf.frameXW, Staticf.frameYH);
-		TA2.setzeAnz(1);
-		TA2.feedMoves(Index.gibText("Einstellungen", "TA"), 0);
+		TA2.setzeAnz(2);
+		TA2.feedMoves(Index.gibText("Einstellungen", "TA1"), 0);
+		TA2.feedMoves(Index.gibText("Einstellungen", "TA2"), 1);
 		TA2.addToFrame(fr, Staticf.writeKeyIndex);
 	}
 
@@ -37,12 +38,11 @@ public class LPaneel
 		while(true)
 			if(fr.isActive())
 				break;
-		//UIVerbunden.sc = fr.getSize();
 		scF = fr.getSize();
 	}
 
-	public void rePanel(Image img, double xp, double yp)
+	public void rePanel(Image img, int xp, int yp)
 	{
-		fr.getGraphics().drawImage(img, (int) (xp * scF.width), (int) (yp * scF.height), null);
+		fr.getGraphics().drawImage(img, xp, yp, null);
 	}
 }

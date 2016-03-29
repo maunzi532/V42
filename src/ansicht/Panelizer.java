@@ -22,16 +22,11 @@ public class Panelizer
 	//X_Ray-Modus an/aus
 	public boolean xrmode = false;
 
-	public Panelizer(Dimension wh)
+	public void resize(int w, int h)
 	{
-		resize(wh);
-	}
-
-	public void resize(Dimension wh)
-	{
-		light = new BufferedImage(wh.width, wh.height, BufferedImage.TYPE_INT_ARGB_PRE);
+		light = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB_PRE);
 		gd = light.createGraphics();
-		dark = new BufferedImage(wh.width, wh.height, BufferedImage.TYPE_INT_BGR);
+		dark = new BufferedImage(w, h, BufferedImage.TYPE_INT_BGR);
 		darkCopy = dark.createGraphics();
 	}
 
