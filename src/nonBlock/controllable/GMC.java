@@ -1,15 +1,15 @@
 package nonBlock.controllable;
 
+import ansicht.*;
 import wahr.physisch.*;
-import wahr.spieler.*;
 
 import java.util.*;
 
 public class GMC extends Controller
 {
-	Spieler master;
+	Overlay master;
 
-	public GMC(Spieler master)
+	public GMC(Overlay master)
 	{
 		this.master = master;
 	}

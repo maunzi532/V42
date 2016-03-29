@@ -1,8 +1,8 @@
 package nonBlock.formwandler;
 
+import ansicht.*;
 import nonBlock.controllable.*;
 import wahr.physisch.*;
-import wahr.spieler.*;
 
 import java.util.*;
 
@@ -16,9 +16,9 @@ public class SPController extends Controller
 	boolean lockL;
 	boolean lockR;
 	int k = -1;
-	Spieler master;
+	Overlay master;
 
-	public SPController(Spieler master)
+	public SPController(Overlay master)
 	{
 		this.master = master;
 	}

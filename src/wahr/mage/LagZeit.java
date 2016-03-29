@@ -6,17 +6,17 @@ public class LagZeit
 {
 	public static void start()
 	{
-		Hauptschleife.theSpieler.overlay.z.siehNonBlocks = false;
+		Hauptschleife.theOverlay.z.siehNonBlocks = false;
 		for(int i = 0; i < 10; i++)
 		{
 			Staticf.last = System.currentTimeMillis();
-			if(Hauptschleife.theSpieler.eingabe(false))
+			if(Hauptschleife.theOverlay.eingabe())
 				System.exit(0);
 			Hauptschleife.aw.logik();
-			Hauptschleife.theSpieler.overlay.rendern();
+			Hauptschleife.theOverlay.rendern();
 			Staticf.last2 = System.currentTimeMillis();
-			Hauptschleife.theSpieler.overlay.panelize();
+			Hauptschleife.theOverlay.panelize();
 		}
-		Hauptschleife.theSpieler.overlay.z.siehNonBlocks = true;
+		Hauptschleife.theOverlay.z.siehNonBlocks = true;
 	}
 }

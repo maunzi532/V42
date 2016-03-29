@@ -1,10 +1,10 @@
 package ansicht.n2;
 
+import ansicht.*;
 import block.*;
 import nonBlock.aktion.*;
 import nonBlock.aussehen.*;
 import nonBlock.controllable.*;
-import wahr.spieler.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
@@ -42,9 +42,9 @@ public class Zeichner
 		blockN2 = new BlockN2(this, aw.wbl, aw.lw);
 	}
 
-	public void nehmen(Spieler theSpieler)
+	public void nehmen(Overlay theOverlay)
 	{
-		Controllable kam = theSpieler.kamZurZeit();
+		Controllable kam = theOverlay.kamZurZeit();
 		K4 kp = kam.kamP();
 		Drehung kd = kam.kamD();
 		n2s = new ArrayList<>();
@@ -78,19 +78,19 @@ public class Zeichner
 						for(int k = 0; k < f2.spken1.size(); k++)
 							spken[k] = nb.punkteK[f2.spken1.get(k)][f2.spken2.get(k)];
 						NF2.atl(n2s, new NF2(ecken, eckenNK, spken, f2.farbe, f2.seite, nb.lw, 0, f2.seed, nb.tn),
-								theSpieler.godMode);
+								theOverlay.godMode);
 					}
 				}
 				Staticf.sca("NEF " + nb.toString() + " 2 ");
 				for(int i = 0; i < nb.externals.length; i++)
-					n2s.addAll(nb.externals[i].gibFl(nb.punkteK, nb.lw, theSpieler.godMode,
-							nb == theSpieler.kamZurZeit()));
+					n2s.addAll(nb.externals[i].gibFl(nb.punkteK, nb.lw, theOverlay.godMode,
+							nb == theOverlay.kamZurZeit()));
 				Staticf.sca("NEF " + nb.toString() + " 3 ");
 			}
 		Staticf.sca("NE1 ");
 		if(siehBlocks)
 			n2s.addAll(blockN2.flaechen(kp, kd, new K4(Staticf.sicht, Staticf.sicht,
-					Staticf.sicht, Staticf.sichtd), theSpieler.godMode));
+					Staticf.sicht, Staticf.sichtd), theOverlay.godMode));
 	}
 
 	private int sqToSplit(double sq)

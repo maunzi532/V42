@@ -181,7 +181,7 @@ class LadeAktion
 				break;
 			case 5:
 				if(dislocated instanceof Controllable)
-					overlay.master.kamN = (Controllable)dislocated;
+					overlay.kamN = (Controllable)dislocated;
 				break;
 			case 6:
 				Index.gibAlternateStandard(text).changeToThis(dislocated, dauer, power);

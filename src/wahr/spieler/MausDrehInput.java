@@ -1,12 +1,13 @@
 package wahr.spieler;
 
+import ansicht.*;
 import wahr.physisch.*;
 
 import java.awt.*;
 
 public class MausDrehInput implements DrehInput
 {
-	Spieler master;
+	Overlay master;
 	//Maus Robot
 	public Robot ro;
 	//Mausverschiebung
@@ -14,11 +15,11 @@ public class MausDrehInput implements DrehInput
 	//Maus Letzter Fokus
 	public Point mausLast;
 
-	public MausDrehInput(Spieler master)
+	public MausDrehInput(Overlay master)
 	{
 		this.master = master;
-		mausLast = new Point(master.overlay.auf.scF.width / 2, master.overlay.auf.scF.height / 2);
-		Point mm = master.overlay.auf.fr.getLocationOnScreen();
+		mausLast = new Point(master.auf.scF.width / 2, master.auf.scF.height / 2);
+		Point mm = master.auf.fr.getLocationOnScreen();
 		try
 		{
 			ro = new Robot();
@@ -26,14 +27,14 @@ public class MausDrehInput implements DrehInput
 		{
 			throw new RuntimeException(e);
 		}
-		ro.mouseMove(master.overlay.auf.scF.width / 2 + mm.x, master.overlay.auf.scF.height / 2 + mm.y);
+		ro.mouseMove(master.auf.scF.width / 2 + mm.x, master.auf.scF.height / 2 + mm.y);
 		mausv = new Point();
 	}
 
 	public void ablesen(boolean mode)
 	{
 		Point mausNeu = MouseInfo.getPointerInfo().getLocation();
-		Point mm = master.overlay.auf.fr.getLocationOnScreen();
+		Point mm = master.auf.fr.getLocationOnScreen();
 		mausNeu.translate(-mm.x, -mm.y);
 		//mausNeu ist jetzt location in Frame
 		if(TA2.keyStat[master.taIndex][13] <= 0)

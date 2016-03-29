@@ -1,15 +1,15 @@
 package nonBlock.aktion;
 
-import wahr.spieler.*;
+import ansicht.*;
 
 public class Sicht extends LinAAktion
 {
 	private final int linAl;
 	private final int linAb;
 	private final boolean gm;
-	private final Spieler master;
+	private final Overlay master;
 
-	public Sicht(NBD target, int power, int linAl, int linAb, boolean gm, Spieler master)
+	public Sicht(NBD target, int power, int linAl, int linAb, boolean gm, Overlay master)
 	{
 		super(target, -1, power);
 		this.linAl = linAl;
@@ -28,11 +28,11 @@ public class Sicht extends LinAAktion
 
 	public void tick()
 	{
-		if(master.overlay.sichtAn && (gm ? master.godMode : (besitzer.dw.nofreeze() && !master.godMode)))
+		if(master.sichtAn && (gm ? master.godMode : (besitzer.dw.nofreeze() && !master.godMode)))
 		{
-			besitzer.linkAchsen[linAl].dreh.wl -= master.drehInput.wlmove() * 1.1d / master.overlay.auf.scF.width;
+			besitzer.linkAchsen[linAl].dreh.wl -= master.drehInput.wlmove() * 1.1d / master.auf.scF.width;
 			besitzer.linkAchsen[linAl].dreh.sichern();
-			besitzer.linkAchsen[linAb].dreh.wb -= master.drehInput.wbmove() * 1.1d / master.overlay.auf.scF.height;
+			besitzer.linkAchsen[linAb].dreh.wb -= master.drehInput.wbmove() * 1.1d / master.auf.scF.height;
 			if(!gm)
 			{
 				if(besitzer.linkAchsen[linAb].dreh.wb < 0.2)

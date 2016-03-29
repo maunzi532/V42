@@ -19,7 +19,7 @@ public class Hauptschleife
 {
 	private static Tha n;
 	static AllWelt aw;
-	public static Spieler theSpieler;
+	public static Overlay theOverlay;
 	public static LPaneel theLPaneel;
 
 	public static void init0()
@@ -31,7 +31,7 @@ public class Hauptschleife
 	public static void init()
 	{
 		aw = new AllWelt();
-		theSpieler = new Spieler(new Overlay(), 0);
+		theOverlay = new Overlay();
 		Generator g = new TestGenerator();
 		g.gibInWelt(aw.wbl, "Levels/Test2");
 		//g.gibInWelt("Levels/Generiert1");
@@ -43,7 +43,7 @@ public class Hauptschleife
 		LadeFWA lfwa = new LadeFWA(20);
 		lfwa.charge(Index.gibLadeFWATeil("SetN"));
 		lfwa.charge(Index.gibLadeFWATeil("Set1"));
-		n = new Tha(new SPController(theSpieler), lfwa, theSpieler.overlay, aw);
+		n = new Tha(new SPController(theOverlay), lfwa, theOverlay, aw);
 		n.aussehen = new LadeModell().reload(
 				Index.gibLadeTeil("Hauptteil"),
 				Index.gibLadeTeil("Beine"),
@@ -76,7 +76,7 @@ public class Hauptschleife
 		n.physik.add(new ColBox(n, 1, new EndEllipse(2.2, 1.4, 0), new EndEllipse(2.2, 1.4, 0), 1));
 		n.physik.add(new ColBox(n, 2, new EndEllipse(2.2, 1.4, 0), new EndEllipse(2.2, 1.4, 0), 1));
 		n.init();
-		theSpieler.erzeugeGMK(aw, n.position);
+		theOverlay.erzeugeGMK(aw, n.position);
 
 		TSSA n2 = new TSSA(new Controller()
 		{
@@ -133,11 +133,11 @@ public class Hauptschleife
 			{
 				if(command.equals("B"))
 				{
-					dw.seq = new Move(Index.gibLadeMove(true, "TPSQ"), theSpieler.overlay, this, n);
+					dw.seq = new Move(Index.gibLadeMove(true, "TPSQ"), theOverlay, this, n);
 				}
 				if(command.equals("C"))
 				{
-					dw.seq = new Move(Index.gibLadeMove(true, "TSQ"), theSpieler.overlay, this, n);
+					dw.seq = new Move(Index.gibLadeMove(true, "TSQ"), theOverlay, this, n);
 				}
 			}
 
@@ -166,22 +166,22 @@ public class Hauptschleife
 		//mp2.init();
 		n2.dreh = new Drehung(Math.PI, 0);
 		n2.init();
-		theSpieler.kamN = n;
+		theOverlay.kamN = n;
 		n2.collidable.add(new ColBox(n2, 0, new EndScheibe(4), new EndScheibe(4), 1, 1));
 		n2.physik.add(new ColBox(n2, 69, new EndScheibe(1.5), new EndScheibe(1.0), 1.1));
 		n2.physik.add(new ColBox(n2, 78, new EndScheibe(1.0), new EndScheibe(0.7), 0.7));
 		n2.physik.add(new ColBox(n2, 11, new EndScheibe(0.7), new EndScheibe(0.7), 1));
 		n2.physik.add(new ColBox(n2, 12, new EndScheibe(0.7), new EndScheibe(0.7), 1));
 		n2.physik.add(new ColBox(n2, 0, new EndEllipse(2.1, 1.2, 0), new EndEllipse(2.2, 1.4, 0), 1));
-		n.aktionen.add(new Sicht(n, 10, 67, 67, false, theSpieler));
+		n.aktionen.add(new Sicht(n, 10, 67, 67, false, theOverlay));
 		aw.lw.licht.add(n);
 		aw.lw.licht.add(n2);
 	}
 
 	public static void initOverlay()
 	{
-		theSpieler.overlay.initOverlay(theSpieler, aw, "SPL", theLPaneel);
-		theSpieler.drehInput = new MausDrehInput(theSpieler);
-		//theSpieler.drehInput = new TastenDrehInput(theSpieler);
+		theOverlay.initOverlay(0, aw, "SPL", theLPaneel);
+		theOverlay.drehInput = new MausDrehInput(theOverlay);
+		//theOverlay.drehInput = new TastenDrehInput(theOverlay);
 	}
 }

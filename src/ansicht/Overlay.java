@@ -2,238 +2,53 @@ package ansicht;
 
 import ansicht.n2.*;
 import ansicht.text.*;
+import nonBlock.aktion.*;
+import nonBlock.aussehen.*;
+import nonBlock.controllable.*;
 import wahr.physisch.*;
 import wahr.spieler.*;
 import wahr.zugriff.*;
 
+import java.awt.*;
 import java.io.*;
-import java.util.*;
 
 public class Overlay
 {
-	public Spieler master;
 	public LPaneel auf;
 	public SchalterLayer sl;
-	public ArrayList<SLF> normalSchalter;
-	public ArrayList<SLF> godModeSchalter;
+	public InitSL isl;
 	public boolean sichtAn = true;
 	public Panelizer pa;
-	private AllWelt aw;
+	public AllWelt aw;
 	public Zeichner z;
 	private N2[] n2s2;
+	//Spectator Modus
+	public boolean godMode = false;
+	//Spectator-Modus-Kamera
+	public GMKamera godModeKam;
+	//Zurzeit benutzte Kamera, falls nicht im godMode
+	public Controllable kamN;
+	//Index in TA2
+	public int taIndex;
+	public boolean schalterSichtbar;
+	public DrehInput drehInput;
 
-	public void initOverlay(Spieler master, AllWelt awA, String zDatLad, LPaneel auf)
+	public void initOverlay(int taIndex, AllWelt awA, String zDatLad, LPaneel auf)
 	{
-		this.master = master;
+		this.taIndex = taIndex;
 		this.auf = auf;
 		aw = awA;
 		z = new Zeichner(Index.gibText("Einstellungen", zDatLad), aw);
 		sl = new SchalterLayer(this);
 		pa = new Panelizer(auf.scF);
-		normalSchalter = new ArrayList<>();
-		normalSchalter.add(new SLF(sl, true, 0.1, 0.1, 0.1, 0.05)
-		{
-			public void onClick(boolean r, double cx, double cy)
-			{
-				if(r)
-					pa.taType = pa.taType == 2 ? 0 : 2;
-				else
-					pa.taType = pa.taType == 1 ? 0 : 1;
-				super.onClick(r, cx, cy);
-			}
-
-			public void tick()
-			{
-				switch(pa.taType)
-				{
-					case 0:
-						text = "Target aus";
-						break;
-					case 1:
-						text = "Target an";
-						break;
-					case 2:
-						text = "Linien an";
-						break;
-				}
-			}
-		});
-		normalSchalter.add(new SLF(sl, true, 0.1, 0.2, 0.1, 0.05)
-		{
-			public void onClick(boolean r, double cx, double cy)
-			{
-				if(r)
-					z.x4dization = z.x4dization > 0 ? 0 : 1;
-				else
-					z.x4dization = z.x4dization > 1 ? 0 : 2;
-				super.onClick(r, cx, cy);
-			}
-
-			public void tick()
-			{
-				switch(z.x4dization)
-				{
-					case 0:
-						text = "4D aus";
-						break;
-					case 1:
-						text = "4D an";
-						break;
-					case 2:
-						text = "4D an + Hinweise";
-						break;
-				}
-			}
-		});
-		normalSchalter.add(new SLF(sl, true, 0.1, 0.3, 0.1, 0.05)
-		{
-			public void onClick(boolean r, double cx, double cy)
-			{
-				if(r)
-					z.d2tangibility = 0;
-				else
-					z.d2tangibility = (z.d2tangibility + 1) % 3;
-				super.onClick(r, cx, cy);
-			}
-
-			public void tick()
-			{
-				switch(z.d2tangibility)
-				{
-					case 0:
-						text = "Baumodus aus";
-						break;
-					case 1:
-						text = "Baumodus Kanten";
-						break;
-					case 2:
-						text = "Baumodus an";
-						break;
-				}
-			}
-		});
-		godModeSchalter = new ArrayList<>();
-		godModeSchalter.add(new SLF(sl, true, 0.25, 0.2, 0.1, 0.05)
-		{
-			public void onClick(boolean r, double cx, double cy)
-			{
-				if(r)
-					z.siehNonBlocks = !z.siehNonBlocks;
-				else
-					z.siehBlocks = !z.siehBlocks;
-				super.onClick(r, cx, cy);
-			}
-
-			public void tick()
-			{
-				if(z.siehBlocks)
-				{
-					if(z.siehNonBlocks)
-						text = "Alles";
-					else
-						text = "Blocks";
-				}
-				else
-				{
-					if(z.siehNonBlocks)
-						text = "NonBlocks";
-					else
-						text = "Nichts";
-				}
-			}
-		});
-		godModeSchalter.add(new SLF(sl, true, 0.25, 0.3, 0.1, 0.05)
-		{
-			public void onClick(boolean r, double cx, double cy)
-			{
-				pa.xrmode = !pa.xrmode;
-				super.onClick(r, cx, cy);
-			}
-
-			public void tick()
-			{
-				if(pa.xrmode)
-					text = "XR an";
-				else
-					text = "XR aus";
-			}
-		});
-		godModeSchalter.add(new Schieber(sl, 0.25, 0.4, 0.1, 0.05, 0, 100, 50)
-		{
-			public void tick()
-			{
-				Staticf.xraywidth = shift * shiftm + startw;
-				text = String.valueOf(Staticf.xraywidth);
-			}
-		});
-		godModeSchalter.add(new SLF(sl, true, 0.25, 0.5, 0.1, 0.05)
-		{
-			public void onClick(boolean r, double cx, double cy)
-			{
-				aw.dw.gmFreeze = !aw.dw.gmFreeze;
-				super.onClick(r, cx, cy);
-			}
-
-			public void tick()
-			{
-				if(aw.dw.gmFreeze)
-					text = "Gestoppt";
-				else
-					text = "Stop";
-			}
-		});
-		godModeSchalter.add(new SLF(sl, true, 0.4, 0.1, 0.1, 0.05, "Speichern")
-		{
-			public void onClick(boolean r, double cx, double cy)
-			{
-				aw.wbl.speichern("Levels/Test2", Staticf.wspg.k);
-				super.onClick(r, cx, cy);
-			}
-		});
-		godModeSchalter.add(new Schieber(sl, 0.4, 0.2, 0.2, 0.025, 0, 100, aw.wbl.end[0])
-		{
-			public void tick()
-			{
-				Staticf.wspg.k[0] = (int)(shift * shiftm + startw);
-				text = String.valueOf(Staticf.wspg.k[0]);
-			}
-		});
-		godModeSchalter.add(new Schieber(sl, 0.4, 0.225, 0.2, 0.025, 0, 100, aw.wbl.end[1])
-		{
-			public void tick()
-			{
-				Staticf.wspg.k[1] = (int)(shift * shiftm + startw);
-				text = String.valueOf(Staticf.wspg.k[1]);
-			}
-		});
-		godModeSchalter.add(new Schieber(sl, 0.4, 0.25, 0.2, 0.025, 0, 100, aw.wbl.end[2])
-		{
-			public void tick()
-			{
-				Staticf.wspg.k[2] = (int)(shift * shiftm + startw);
-				text = String.valueOf(Staticf.wspg.k[2]);
-			}
-		});
-		godModeSchalter.add(new Schieber(sl, 0.4, 0.275, 0.2, 0.025, 0, 100, aw.wbl.end[3])
-		{
-			public void tick()
-			{
-				Staticf.wspg.k[3] = (int)(shift * shiftm + startw);
-				text = String.valueOf(Staticf.wspg.k[3]);
-			}
-		});
-	}
-
-	public void resize()
-	{
-		pa.resize(auf.scF);
+		isl = new InitSL(sl, this);
 	}
 
 	public void rendern()
 	{
-		z.nehmen(master);
+		z.nehmen(this);
 		Staticf.sca("Z nehmen (5) ");
-		z.splittern(master.godMode);
+		z.splittern(godMode);
 		Staticf.sca("Z splittern (1) ");
 		z.sortieren();
 		Staticf.sca("Z sortieren (1) ");
@@ -249,16 +64,104 @@ public class Overlay
 
 	public void panelize()
 	{
-		if(master.schalterSichtbar)
-			pa.panelize(n2s2, master.drehInput.xP(), master.drehInput.yP());
+		if(schalterSichtbar)
+			pa.panelize(n2s2, drehInput.xP(), drehInput.yP());
 		else
 			pa.panelize(n2s2, auf.scF.width / 2, auf.scF.height / 2);
 		Staticf.sca2("Panelize (14) ");
 		sl.draw(pa.gd);
 		pa.gd.drawImage(Lader.gibBild(Index.gibPfad("Einstellungen") + File.separator + "ThaCursor.png"),
-				master.drehInput.xP() - 10, master.drehInput.yP() - 10, 20, 20, null);
+				drehInput.xP() - 10, drehInput.yP() - 10, 20, 20, null);
 		Staticf.sca2("Overlay (0) ");
 		auf.rePanel(pa.light, 0, 0); //TODO
 		Staticf.sca2("RePanel (7) ");
+	}
+
+	public void erzeugeGMK(AllWelt aw, K4 gmkpos)
+	{
+		godModeKam = new GMKamera(new GMC(this), this, aw);
+		godModeKam.position = new K4(gmkpos);
+		godModeKam.dreh = new Drehung();
+		godModeKam.canInfl = new double[]{1, 1, 1, 1};
+		godModeKam.aussehen = new LadeModell();
+		Index.gibStandardAussehen("Kam").assignStandard(godModeKam);
+		godModeKam.aussehen.reload();
+		godModeKam.init();
+		godModeKam.aktionen.add(new Sicht(godModeKam, 10, 0, 0, true, this));
+	}
+
+	public Controllable kamZurZeit()
+	{
+		if(godMode)
+			return godModeKam;
+		return kamN;
+	}
+
+	public boolean eingabe()
+	{
+		TA2.move(taIndex);
+		if(TA2.keyStat[taIndex][0] > 0)
+			return true;
+		boolean resize = false;
+		for(int i = 0; i < LPaneel.paneele.size(); i++)
+		{
+			Dimension sc1 = LPaneel.paneele.get(i).fr.getSize();
+			if(LPaneel.paneele.get(i).scF.width != sc1.width ||
+					LPaneel.paneele.get(i).scF.height != sc1.height)
+			{
+				LPaneel.paneele.get(i).scF = sc1;
+				resize = true;
+			}
+		}
+		if(resize)
+			pa.resize(auf.scF);
+		Staticf.sca("TA2 ");
+		schalterSichtbar = TA2.keyStat[taIndex][13] > 0;
+		drehInput.ablesen(schalterSichtbar);
+		Staticf.sca("DL ");
+		if(schalterSichtbar)
+		{
+			if(TA2.keyStat[taIndex][15] == 2)
+			{
+				if(sl.click(drehInput.xP(), drehInput.yP(), false))
+					TA2.keyStat[taIndex][15] = 1;
+			}
+			else if(TA2.keyStat[taIndex][16] == 2)
+			{
+				if(sl.click(drehInput.xP(), drehInput.yP(), true))
+					TA2.keyStat[taIndex][16] = 1;
+			}
+		}
+		Staticf.sca("SL ");
+		if(TA2.keyStat[taIndex][13] == 2 && sichtAn)
+		{
+			sichtAn = false;
+			sl.layer.addAll(isl.normalSchalter);
+		}
+		if(TA2.keyStat[taIndex][13] == -1 && !sichtAn)
+		{
+			sichtAn = true;
+			sl.layer.clear();
+		}
+		if(TA2.keyStat[taIndex][17] == 2 && godModeKam != null)
+		{
+			godMode = !godMode;
+			if(godMode)
+			{
+				isl.normalSchalter.addAll(isl.godModeSchalter);
+				godModeKam.lw.licht.add(godModeKam);
+			}
+			else
+			{
+				isl.normalSchalter.removeAll(isl.godModeSchalter);
+				godModeKam.lw.licht.remove(godModeKam);
+				pa.xrmode = false;
+				z.siehBlocks = true;
+				z.siehNonBlocks = true;
+			}
+		}
+		sl.actTex();
+		Staticf.sca("M und T (0) ");
+		return false;
 	}
 }
