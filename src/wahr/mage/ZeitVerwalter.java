@@ -88,7 +88,7 @@ public class ZeitVerwalter
 				if(!skpf)
 				{
 					//Noch nicht aufmalen
-					Hauptschleife.theOverlay.rendern();
+					Hauptschleife.theOverlay.vorbereiten();
 					new Thread()
 					{
 						//Hier wird aufgemalt

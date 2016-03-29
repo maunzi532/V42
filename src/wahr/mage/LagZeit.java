@@ -13,7 +13,7 @@ public class LagZeit
 			if(Hauptschleife.theOverlay.eingabe())
 				System.exit(0);
 			Hauptschleife.aw.logik();
-			Hauptschleife.theOverlay.rendern();
+			Hauptschleife.theOverlay.vorbereiten();
 			Staticf.last2 = System.currentTimeMillis();
 			Hauptschleife.theOverlay.panelize();
 		}

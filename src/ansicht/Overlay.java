@@ -44,7 +44,7 @@ public class Overlay
 		isl = new InitSL(sl, this);
 	}
 
-	public void rendern()
+	public void vorbereiten()
 	{
 		z.nehmen(this);
 		Staticf.sca("Z nehmen (5) ");

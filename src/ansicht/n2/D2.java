@@ -9,9 +9,6 @@ import java.util.*;
 
 public class D2 extends N2
 {
-	//Soll Extended werden von BD2
-	//Dementsprechenden Konstruktor machen
-
 	private final String text;
 	private final boolean quadrat; //Umbenennen in targetable
 	private final Boolean dSide;
