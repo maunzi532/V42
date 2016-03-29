@@ -33,7 +33,7 @@ Left Mouse - shoot the left thing forward
 Right Mouse - shoot the right thing forward  
 - flying - set the number of the faced block to 0  
   
-These only work if you use the TastenDrehInput
+These only work if you use the TastenDrehInput  
 T,↑ - Turn upwards  
 F,← - Turn left  
 H,→ - Turn right  
