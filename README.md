@@ -16,7 +16,7 @@ D. When something is needed public, __make public!__
 E. Try __avoiding__ getters and setters  
 F. The copy of the player character is for testing visual things
 
-# Controls
+# Controls (May be outdated)
 I,W - forward, grab edge, climb up  
 J,A - left  
 L,D - right  
@@ -25,11 +25,16 @@ U,Q - jump, get up
 O,E - crouch, fall faster  
 Z,Y - __red__ direction  
 P,X - __green__ direction  
-5 - place flag  
-1,2 - copy does something (does not work currently)  
+0,3 - place flag  
 ;,> - (hold) show some __settings__  
-6 - switch to the __flying camera__  
+6,5 - switch to the __flying camera__  
 Left Mouse - shoot the left thing forward  
 - flying - increase the number of the faced block  
 Right Mouse - shoot the right thing forward  
-- flying - set the number of the faced block to 0
+- flying - set the number of the faced block to 0  
+  
+These only work if you use the TastenDrehInput
+T,↑ - Turn upwards  
+F,← - Turn left  
+H,→ - Turn right  
+G,↓ - Turn downwards
