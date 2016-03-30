@@ -12,8 +12,8 @@ public class TastenDrehInput implements DrehInput
 	public TastenDrehInput(Overlay master)
 	{
 		this.master = master;
-		positionX = master.auf.scF.width / 2;
-		positionY = master.auf.scF.height / 2;
+		positionX = master.wI / 2;
+		positionY = master.hI / 2;
 	}
 
 	public void ablesen(boolean mode)

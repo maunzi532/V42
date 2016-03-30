@@ -18,7 +18,7 @@ public class MausDrehInput implements DrehInput
 	public MausDrehInput(Overlay master)
 	{
 		this.master = master;
-		mausLast = new Point(master.auf.scF.width / 2, master.auf.scF.height / 2);
+		mausLast = new Point(master.wI / 2, master.hI / 2);
 		Point mm = master.auf.fr.getLocationOnScreen();
 		try
 		{
@@ -27,7 +27,7 @@ public class MausDrehInput implements DrehInput
 		{
 			throw new RuntimeException(e);
 		}
-		ro.mouseMove(master.auf.scF.width / 2 + mm.x, master.auf.scF.height / 2 + mm.y);
+		ro.mouseMove(master.xI + master.wI / 2 + mm.x, master.yI + master.hI / 2 + mm.y);
 		mausv = new Point();
 	}
 
@@ -35,10 +35,10 @@ public class MausDrehInput implements DrehInput
 	{
 		Point mausNeu = MouseInfo.getPointerInfo().getLocation();
 		Point mm = master.auf.fr.getLocationOnScreen();
-		mausNeu.translate(-mm.x, -mm.y);
+		mausNeu.translate(-mm.x - master.xI, -mm.y - master.yI);
 		//mausNeu ist jetzt location in Frame
 		if(TA2.keyStat[master.taIndex][13] <= 0)
-			ro.mouseMove(mausLast.x + mm.x, mausLast.y + mm.y); //zurueck wo du warst
+			ro.mouseMove(mausLast.x + mm.x + master.xI, mausLast.y + mm.y + master.yI); //zurueck wo du warst
 		else
 			mausLast = new Point(mausNeu); //wo du warst wird gesetzt
 		mausNeu.translate(-mausLast.x, -mausLast.y); //Unterschied

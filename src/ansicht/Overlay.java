@@ -83,7 +83,7 @@ public class Overlay
 		Staticf.sca2("Panelize (14) ");
 		sl.draw(pa.gd);
 		pa.gd.drawImage(Lader.gibBild(Index.gibPfad("Einstellungen") + File.separator + "ThaCursor.png"),
-				drehInput.xP() - 10, drehInput.yP() - 10, 20, 20, null);
+				drehInput.xP() - 16, drehInput.yP() - 16, 32, 32, null);
 		Staticf.sca2("Overlay (0) ");
 		auf.rePanel(pa.light, xI, yI);
 		Staticf.sca2("RePanel (7) ");
