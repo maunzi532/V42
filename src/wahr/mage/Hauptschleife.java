@@ -33,7 +33,7 @@ public class Hauptschleife
 		theOverlays = new Overlay[2];
 		for(int i = 0; i < theOverlays.length; i++)
 			theOverlays[i] = new Overlay();
-		Generator g = new TestGenerator();
+		Generator g = new WeltLeser();
 		g.gibInWelt(aw.wbl, "Levels/Test2");
 		//g.gibInWelt("Levels/Generiert1");
 		//g.gibInWelt();

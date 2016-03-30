@@ -183,14 +183,14 @@ public class WeltB
 				.append(size[1]).append(",")
 				.append(size[2]).append(",")
 				.append(size[3]).append(",").append("\n");
-		sb.append("E = ").append(BlockToText(new WBP(-1, 0, 0, 0))).append(",")
-				.append(BlockToText(new WBP(end[0], 0, 0, 0))).append(",")
-				.append(BlockToText(new WBP(0, -1, 0, 0))).append(",")
-				.append(BlockToText(new WBP(0, end[1], 0, 0))).append(",")
-				.append(BlockToText(new WBP(0, 0, -1, 0))).append(",")
-				.append(BlockToText(new WBP(0, 0, end[2], 0))).append(",")
-				.append(BlockToText(new WBP(0, 0, 0, -1))).append(",")
-				.append(BlockToText(new WBP(0, 0, 0, end[3]))).append(",").append("\n");
+		sb.append("E = ").append(gib(new WBP(-1, 0, 0, 0))).append(",")
+				.append(gib(new WBP(end[0], 0, 0, 0))).append(",")
+				.append(gib(new WBP(0, -1, 0, 0))).append(",")
+				.append(gib(new WBP(0, end[1], 0, 0))).append(",")
+				.append(gib(new WBP(0, 0, -1, 0))).append(",")
+				.append(gib(new WBP(0, 0, end[2], 0))).append(",")
+				.append(gib(new WBP(0, 0, 0, -1))).append(",")
+				.append(gib(new WBP(0, 0, 0, end[3]))).append(",").append("\n");
 		sb.append("O = ").append(endOrder[0]).append(",")
 				.append(endOrder[1]).append(",")
 				.append(endOrder[2]).append(",")
@@ -204,7 +204,7 @@ public class WeltB
 				for(int i2 = 0; i2 < size[2]; i2++)
 					for(int i3 = 0; i3 < size[3]; i3++)
 					{
-						String b = BlockToText(new WBP(i0, i1, i2, i3));
+						String b = gib(new WBP(i0, i1, i2, i3)).toString();
 						if(b.equals(last))
 							lastc++;
 						else
@@ -241,10 +241,5 @@ public class WeltB
 		{
 			throw new RuntimeException(e);
 		}
-	}
-
-	private String BlockToText(WBP p)
-	{
-		return String.valueOf(gib(p));
 	}
 }

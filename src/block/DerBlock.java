@@ -22,4 +22,9 @@ public class DerBlock
 	{
 		return String.valueOf(typ);
 	}
+
+	public String toString()
+	{
+		return typ + "-" + dreh4;
+	}
 }
