@@ -25,8 +25,8 @@ public class LPaneel
 			fr.setExtendedState(Frame.MAXIMIZED_BOTH);
 		fr.setSize(Staticf.frameXW, Staticf.frameYH);
 		TA2.setzeAnz(2);
-		TA2.feedMoves(Index.gibText("Einstellungen", "TA1"), 0);
-		TA2.feedMoves(Index.gibText("Einstellungen", "TA2"), 1);
+		TA2.feedMoves(Index.gibText("Einstellungen", "TA_LT1"), 0);
+		TA2.feedMoves(Index.gibText("Einstellungen", "TA_RM2"), 1);
 		TA2.addToFrame(fr, Staticf.writeKeyIndex);
 	}
 

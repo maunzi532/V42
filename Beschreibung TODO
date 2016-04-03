@@ -4,23 +4,20 @@ Nicht sicher
 	Metall-Reflexion
 	D2 (BD3) - Aussehen verbessern
 
-Stufe Mehr - gestartet - mittel
-	ZP4C neu machen und umwandeln in LCM
-	sc-Zoning
-	sc aufteilen
-
 Stufe Moves - gestartet - mittel
 	Moves abbrechen
+	LCM anderes wenn targeted
 
 Stufe Mine - gestartet - lang
 -	Drehung speichern
+	ZP4C neu machen und umwandeln in LCM
 	System F - GMKamera mitbewegen
 	Beim aktivieren von System F Targeting kurz aktivieren
 	Block Auswahl (Welcher Typ von Block)
 	Welt generieren
 
 Stufe Stoff - schwer
--	N2 bearbeiten (N3)
+-	N2 neu machen (N3)
 	Zeichner Reihenfolge ändern
 	Haare richtig anmontieren
 	ColBox Position Vergleich
