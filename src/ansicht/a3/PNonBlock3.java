@@ -1,4 +1,4 @@
-package ansicht.n2;
+package ansicht.a3;
 
 import ansicht.*;
 import wahr.zugriff.*;
