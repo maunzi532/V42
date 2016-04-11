@@ -3,6 +3,7 @@ package ansicht.a3;
 import wahr.zugriff.*;
 
 import java.awt.*;
+import java.util.*;
 
 public abstract class Anzeige3
 {
@@ -20,7 +21,7 @@ public abstract class Anzeige3
 
 	public abstract boolean errechneKam(K4 kamP, Drehung kamD);
 
-	public void splittern(boolean gmVision){}
+	public void splittern(ArrayList<Anzeige3> rein, boolean gmVision){}
 
 	public void eckenEntf(int wI, int hI, int cI){}
 

@@ -12,7 +12,7 @@ public abstract class Polygon3 extends Anzeige3
 	public K4[] eckenCut;
 	public Boolean seite;
 	public LichtW lw;
-	//TODO Farbe
+	public PolyFarbe farbe;
 
 	private int[] eckenPanelX;
 	private int[] eckenPanelY;
@@ -145,11 +145,11 @@ public abstract class Polygon3 extends Anzeige3
 					yse[j] = ethaY(spken[j].b, ca, wI, hI);
 				}
 			}*/
-			/*if(!farbe.shownext(this))
-				anzeigen = false;
-			else
-				dFarb = farbe.gibFarb(this, tn);*///TODO
 			//TODO errechne xrDraw
+			if(farbe.showFade(this))
+				dFarb = farbe.errechneFarbe(this, tn);
+			else
+				anzeigen = false;
 		}
 	}
 

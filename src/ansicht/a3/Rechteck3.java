@@ -9,6 +9,8 @@ public class Rechteck3 extends Anzeige3
 	protected String text;
 	protected boolean targetable;
 	protected K4 rMid;
+	protected Color background;
+	protected Color foreground;
 
 	protected int xe;
 	protected int ye;
