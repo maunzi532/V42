@@ -11,10 +11,11 @@ public class PBlock3 extends Polygon3
 	private double gEnd;
 
 	public PBlock3(long tn, Boolean seite, LichtW lw,
-			double rEnd, double gEnd, PolyFarbe farbe, K4[] ecken)
+			double rEnd, double gEnd, PolyFarbe farbe, K4[] unSpldEckenR, K4[] unSpldEckenK)
 	{
 		super(tn, seite, lw);
-		unSpldEckenR = ecken;
+		this.unSpldEckenR = unSpldEckenR;
+		this.unSpldEckenK = unSpldEckenK;
 		this.rEnd = rEnd;
 		this.gEnd = gEnd;
 		this.farbe = farbe;
@@ -38,6 +39,8 @@ public class PBlock3 extends Polygon3
 
 	public void splittern(boolean gmVision)
 	{
+		if(!anzeigen)
+			return;
 		//midsp();
 		int spl = 5;//sqToSplit(midsp.a * midsp.a + midsp.b * midsp.b + midsp.c * midsp.c);
 		anzeigen = false;

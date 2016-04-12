@@ -10,11 +10,12 @@ public class PNonBlock3 extends Polygon3
 	K4 rMid;
 	//TODO spken
 
-	public PNonBlock3(long tn, Boolean seite, LichtW lw, PolyFarbe farbe, K4[] ecken)
+	public PNonBlock3(long tn, Boolean seite, LichtW lw, PolyFarbe farbe, K4[] eckenR, K4[] eckenK)
 	{
 		super(tn, seite, lw);
 		this.farbe = farbe;
-		eckenR = ecken;
+		this.eckenR = eckenR;
+		this.eckenK = eckenK;
 	}
 
 	public PNonBlock3(PNonBlock3 main, K4[] eckenR, K4[] eckenK)
@@ -31,9 +32,23 @@ public class PNonBlock3 extends Polygon3
 		return false; //TODO
 	}
 
+	public double sizeForKam()
+	{
+		double k = 0;
+		for(int i = 0; i < eckenK.length; i++)
+		{
+			double qa = eckenK[i].a - kamMid.a;
+			double qb = eckenK[i].b - kamMid.b;
+			double k2t = Math.sqrt(qa * qa + qb * qb);
+			if(k2t > k)
+				k = k2t;
+		}
+		return k;
+	}
+
 	public void splittern(boolean gmVision)
 	{
-		if(Staticf.splThr > 0 && canSplit/* && maxAbs() > Staticf.splThr*/)
+		if(anzeigen && Staticf.splThr > 0 && canSplit && sizeForKam() > Staticf.splThr)
 		{
 			anzeigen = false;
 			K4[] neueEckenK = new K4[eckenK.length];
