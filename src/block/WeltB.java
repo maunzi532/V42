@@ -6,7 +6,7 @@ import java.io.*;
 
 public class WeltB
 {
-	static final int[][] seiten = new int[][]
+	public static final int[][] seiten = new int[][]
 			{
 					{-1, 0, 0},
 					{1, 0, 0},

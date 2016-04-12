@@ -8,7 +8,7 @@ public class BlockDInfo3 extends Rechteck3
 {
 	private Boolean align;
 
-	public BlockDInfo3(long tn, K4 mid, boolean targetable, String text, boolean align)
+	public BlockDInfo3(long tn, K4 mid, boolean targetable, String text, Boolean align)
 	{
 		super(tn, mid, targetable, text);
 		this.align = align;

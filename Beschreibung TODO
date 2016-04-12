@@ -16,8 +16,15 @@ Stufe Mine - gestartet - lang
 	Block Auswahl (Welcher Typ von Block)
 	Welt generieren
 
+Stufe Anzeige3
+	N2 neu machen (Anzeige3)
+	BlockN2 neu machen (BlockZuAnz)
+	Zeichner neu machen (Vor)
+	XFarbe neu machen (PolyFarbe)
+	Einbauen
+	Reparieren
+
 Stufe Stoff - schwer
--	N2 neu machen (N3)
 	Zeichner Reihenfolge ändern
 	Haare richtig anmontieren
 	ColBox Position Vergleich

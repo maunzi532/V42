@@ -10,6 +10,11 @@ public class WBP
 		System.arraycopy(w.k, 0, k, 0, 4);
 	}
 
+	public WBP(int[] k)
+	{
+		this.k = k;
+	}
+
 	public WBP(int a, int b, int c, int d)
 	{
 		k = new int[4];

@@ -1,5 +1,6 @@
 package wahr.zugriff;
 
+import ansicht.a3.*;
 import ansicht.n2.xF.*;
 import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
@@ -104,6 +105,23 @@ public class Index
 				imgs.add((BufferedImage)Lader.gibBild(text));
 		}
 		XFBT s = new XFBT(imgs, seite);
+		geladen.put(name + seite, s);
+		return s;
+	}
+
+	public static XFBT2 gibXFBT2(String name, int seite, int max)
+	{
+		if(geladen.containsKey(name + seite))
+			return (XFBT2) geladen.get(name + seite);
+		ArrayList<BufferedImage> imgs = new ArrayList<>();
+		for(int i = 1; i <= max; i++)
+		{
+			String text = teilNamen.get("Blocks") + File.separator +
+					name.replace("/", File.separator) + " " + i + ".png";
+			if(new File(text).exists())
+				imgs.add((BufferedImage)Lader.gibBild(text));
+		}
+		XFBT2 s = new XFBT2(imgs, seite);
 		geladen.put(name + seite, s);
 		return s;
 	}
