@@ -13,7 +13,10 @@ public abstract class Polygon3 extends Anzeige3
 	public Boolean seite;
 	public LichtW lw;
 	public PolyFarbe farbe;
+	public int nachSplitID;
+	public int rSeed; //TODO
 
+	protected Paint dFarb;
 	private int[] eckenPanelX;
 	private int[] eckenPanelY;
 	private double avkh2; //TODO errechnen irgendwo

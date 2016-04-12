@@ -38,16 +38,22 @@ public class Rechteck3 extends Anzeige3
 		ye = ethaY(kamMid.b, ca, wI, hI);
 		ddiff = kamMid.d;
 		scale = (int)(1000 / ca) + 1;
-		//TODO dFarb = farbe.errechneFarbe(this);
+		//TODO background und foreground
 	}
 
 	public void Panel(Graphics2D gd)
 	{
-		//TODO
+		gd.setPaint(background);
+		gd.setFont(new Font("Consolas", Font.PLAIN, (int)(scale > 20 ? 20 : scale)));
+		if(text != null)
+		{
+			double w = text.length() * scale / 3;
+			double h = scale / 2;
+			gd.fillRect((int)(xe - w), (int)(ye - h), (int)(w * 2), (int)(h * 2));
+			gd.setPaint(foreground);
+			gd.drawString(text, (int)(xe - w + scale / 8), (int)(ye + h - scale / 8));
+		}
 	}
 
-	public void PanelDark(Graphics2D gd)
-	{
-		//TODO
-	}
+	public void PanelDark(Graphics2D gd){}
 }

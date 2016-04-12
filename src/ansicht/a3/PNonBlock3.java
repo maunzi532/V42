@@ -6,11 +6,24 @@ import wahr.zugriff.*;
 public class PNonBlock3 extends Polygon3
 {
 	boolean canSplit;
+	int splitDepth;
+	K4 rMid;
 	//TODO spken
 
-	public PNonBlock3(long tn, Boolean seite, LichtW lw)
+	public PNonBlock3(long tn, Boolean seite, LichtW lw, PolyFarbe farbe, K4[] ecken)
 	{
 		super(tn, seite, lw);
+		this.farbe = farbe;
+		eckenR = ecken;
+	}
+
+	public PNonBlock3(PNonBlock3 main, K4[] eckenR, K4[] eckenK)
+	{
+		super(main.tn, main.seite, main.lw);
+		farbe = main.farbe;
+		this.eckenR = eckenR;
+		this.eckenK = eckenK;
+		//TODO erneut mid berechnen
 	}
 
 	public boolean errechneKam(K4 kamP, Drehung kamD)
@@ -37,14 +50,26 @@ public class PNonBlock3 extends Polygon3
 			}
 			for(int j = 0; j < neueEckenK.length; j++)
 			{
-				/*F2 tspt = new PNonBlock3(new K4[]{eckenK[j], neueEckenK[j], mid,
-						neueEckenK[j > 0 ? j - 1 : neueEckenK.length - 1]},
-						new K4[]{eckenR[j], neueEckenR[j], mid1(),
-								neueEckenR[j > 0 ? j - 1 : neueEckenR.length - 1]},
-						spken, farbe, seite, lw, spld + 1, seed, tn);
-				tspt.mid();
-				tspt.splseed = splseed * 4 + j + 1;
-				n2s.add(tspt);*/
+				K4[] eR = new K4[]
+						{
+								eckenR[j],
+								neueEckenR[j],
+								rMid,
+								neueEckenR[j > 0 ? j - 1 : neueEckenR.length - 1]
+						};
+				K4[] eK = new K4[]
+						{
+								eckenK[j],
+								neueEckenK[j],
+								kamMid,
+								neueEckenK[j > 0 ? j - 1 : neueEckenK.length - 1]
+						};
+				PNonBlock3 tspt = new PNonBlock3(this, eR, eK);
+				//farbe, seite, lw, spld + 1, seed, tn);
+				//tspt.mid();
+				//tspt.splseed = splseed * 4 + j + 1;
+				//n2s.add(tspt);
+				//TODO splitDepth
 			}
 		}
 	}

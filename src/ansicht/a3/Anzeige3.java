@@ -11,7 +11,6 @@ public abstract class Anzeige3
 	public long tn;
 	public boolean anzeigen;
 
-	Paint dFarb;
 	public double ddiff;
 
 	protected Anzeige3(long tn)
