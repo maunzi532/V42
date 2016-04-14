@@ -3,33 +3,32 @@ package ansicht.a3;
 import ansicht.*;
 import wahr.zugriff.*;
 
+import java.util.*;
+
 public class PNonBlock3 extends Polygon3
 {
 	boolean canSplit;
 	int splitDepth;
-	K4 rMid;
-	//TODO spken
 
-	public PNonBlock3(long tn, Boolean seite, LichtW lw, PolyFarbe farbe, K4[] eckenR, K4[] eckenK)
+	public PNonBlock3(long tn, LichtW lw, Boolean seite, PolyFarbe farbe, int rSeed, K4[] eckenR, K4[] eckenK)
 	{
-		super(tn, seite, lw);
+		super(tn, lw, seite);
 		this.farbe = farbe;
 		this.eckenR = eckenR;
 		this.eckenK = eckenK;
+		this.rSeed = rSeed;
+		berechneMids();
 	}
 
-	public PNonBlock3(PNonBlock3 main, K4[] eckenR, K4[] eckenK)
+	public PNonBlock3(PNonBlock3 main, int splitID, K4[] eckenR, K4[] eckenK)
 	{
-		super(main.tn, main.seite, main.lw);
+		super(main.tn, main.lw, main.seite);
 		farbe = main.farbe;
+		rSeed = main.rSeed;
+		nachSplitID = main.nachSplitID * 4 + splitID + 1;
 		this.eckenR = eckenR;
 		this.eckenK = eckenK;
-		//TODO erneut mid berechnen
-	}
-
-	public boolean errechneKam(K4 kamP, Drehung kamD)
-	{
-		return false; //TODO
+		berechneMids();
 	}
 
 	public double sizeForKam()
@@ -46,7 +45,7 @@ public class PNonBlock3 extends Polygon3
 		return k;
 	}
 
-	public void splittern(boolean gmVision)
+	public void splittern(ArrayList<Anzeige3> dieListe, boolean gmVision, Vor daten)
 	{
 		if(anzeigen && Staticf.splThr > 0 && canSplit && sizeForKam() > Staticf.splThr)
 		{
@@ -79,12 +78,7 @@ public class PNonBlock3 extends Polygon3
 								kamMid,
 								neueEckenK[j > 0 ? j - 1 : neueEckenK.length - 1]
 						};
-				PNonBlock3 tspt = new PNonBlock3(this, eR, eK);
-				//farbe, seite, lw, spld + 1, seed, tn);
-				//tspt.mid();
-				//tspt.splseed = splseed * 4 + j + 1;
-				//n2s.add(tspt);
-				//TODO splitDepth
+				dieListe.add(new PNonBlock3(this, j, eR, eK));
 			}
 		}
 	}

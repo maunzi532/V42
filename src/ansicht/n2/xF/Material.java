@@ -11,9 +11,9 @@ public enum Material
 	NOSHADE(0, 0, 0),
 	DARKNESS(0, -1000, 0);
 
-	double shadeMultiplier;
+	public double shadeMultiplier;
 	int startPower;
-	double lichtAffection;
+	public double lichtAffection;
 
 	Material(double shadeMultiplier, int startPower, double lichtAffection)
 	{

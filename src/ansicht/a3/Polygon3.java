@@ -1,9 +1,11 @@
 package ansicht.a3;
 
 import ansicht.*;
+import ansicht.n2.xF.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
+import java.util.*;
 
 public abstract class Polygon3 extends Anzeige3
 {
@@ -11,27 +13,35 @@ public abstract class Polygon3 extends Anzeige3
 	public K4[] eckenK;
 	public K4[] eckenCut;
 	public Boolean seite;
-	public LichtW lw;
 	public PolyFarbe farbe;
+	public Material mat;
+	public int rSeed; //ungenutzt in PBlock3
 	public int nachSplitID;
-	public int rSeed; //TODO
 
 	protected Paint dFarb;
 	private int[] eckenPanelX;
 	private int[] eckenPanelY;
-	private double avkh2; //TODO errechnen irgendwo
 	private boolean xrDraw;
 
-	public Polygon3(long tn, Boolean seite, LichtW lw)
+	public Polygon3(long tn, LichtW lw, Boolean seite)
 	{
-		super(tn);
+		super(tn, lw);
 		this.seite =  seite;
-		this.lw = lw;
 	}
 
-	public abstract boolean errechneKam(K4 kamP, Drehung kamD);
+	public void berechneMids()
+	{
+		kamMid = new K4((eckenK[0].a + eckenK[2].a) / 2,
+				(eckenK[0].b + eckenK[2].b) / 2,
+				(eckenK[0].c + eckenK[2].c) / 2,
+				(eckenK[0].d + eckenK[2].d) / 2);
+		rMid = new K4((eckenR[0].a + eckenR[2].a) / 2,
+				(eckenR[0].b + eckenR[2].b) / 2,
+				(eckenR[0].c + eckenR[2].c) / 2,
+				(eckenR[0].d + eckenR[2].d) / 2);
+	}
 
-	public abstract void splittern(boolean gmVision);
+	public abstract void splittern(ArrayList<Anzeige3> dieListe, boolean gmVision, Vor daten);
 
 	public void eckenEntf(int wI, int hI, int cI)
 	{
@@ -118,7 +128,7 @@ public abstract class Polygon3 extends Anzeige3
 		return (k0 * kc1 - k1 * kc0) / (kc1 - kc0);
 	}
 
-	public void farbeFlaeche(Long tnTarget, int wI, int hI)
+	public void farbeFlaeche(Long tnTarget, int wI, int hI, K4 kam, double xrZone)
 	{
 		if(anzeigen)
 		{
@@ -148,9 +158,14 @@ public abstract class Polygon3 extends Anzeige3
 					yse[j] = ethaY(spken[j].b, ca, wI, hI);
 				}
 			}*/
-			//TODO errechne xrDraw
+			if(xrZone > 0)
+			{
+				K4 lr = K4.diff(kam, rMid);
+				if(Math.sqrt(lr.a * lr.a + lr.b * lr.b + lr.c * lr.c) < xrZone)
+					xrDraw = true;
+			}
 			if(farbe.showFade(this))
-				dFarb = farbe.errechneFarbe(this, tn);
+				dFarb = farbe.errechneFarbe(this, tn, mat);
 			else
 				anzeigen = false;
 		}

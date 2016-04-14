@@ -3,6 +3,8 @@ package ansicht.a3;
 import ansicht.*;
 import wahr.zugriff.*;
 
+import java.util.*;
+
 public class PBlock3 extends Polygon3
 {
 	public K4[] unSpldEckenK;
@@ -10,10 +12,10 @@ public class PBlock3 extends Polygon3
 	private double rEnd;
 	private double gEnd;
 
-	public PBlock3(long tn, Boolean seite, LichtW lw,
+	public PBlock3(long tn, LichtW lw, Boolean seite,
 			double rEnd, double gEnd, PolyFarbe farbe, K4[] unSpldEckenR, K4[] unSpldEckenK)
 	{
-		super(tn, seite, lw);
+		super(tn, lw, seite);
 		this.unSpldEckenR = unSpldEckenR;
 		this.unSpldEckenK = unSpldEckenK;
 		this.rEnd = rEnd;
@@ -23,27 +25,33 @@ public class PBlock3 extends Polygon3
 
 	public PBlock3(PBlock3 main, int xs, int ys, int max)
 	{
-		super(main.tn, main.seite, main.lw);
+		super(main.tn, main.lw, main.seite);
 		rEnd = main.rEnd;
 		gEnd = main.gEnd;
 		farbe = main.farbe;
 		nachSplitID = xs * max + ys;
 		ecken(xs, ys, max);
-		//TODO mid berechnen
+		berechneMids();
 	}
 
-	public boolean errechneKam(K4 kamP, Drehung kamD)
+	private int sqToSplit(double sq, Vor daten)
 	{
-		return false; //TODO
+		for(int i = 0; i < daten.abstands.size(); i++)
+			if(sq < daten.abstands.get(i) * daten.abstands.get(i))
+				return daten.splits.get(i);
+		return 1;
 	}
 
-	public void splittern(boolean gmVision)
+	public void splittern(ArrayList<Anzeige3> dieListe, boolean gmVision, Vor daten)
 	{
 		if(!anzeigen)
 			return;
-		//midsp();
-		int spl = 5;//sqToSplit(midsp.a * midsp.a + midsp.b * midsp.b + midsp.c * midsp.c);
 		anzeigen = false;
+		K4 midsp = new K4((unSpldEckenK[0].a + unSpldEckenK[2].a) / 2,
+				(unSpldEckenK[0].b + unSpldEckenK[2].b) / 2,
+				(unSpldEckenK[0].c + unSpldEckenK[2].c) / 2,
+				(unSpldEckenK[0].d + unSpldEckenK[2].d) / 2);
+		int spl = sqToSplit(midsp.a * midsp.a + midsp.b * midsp.b + midsp.c * midsp.c, daten);
 		K4[][] neueEckenK = new K4[spl + 1][spl + 1];
 		for(int j = 0; j <= spl; j++)
 			for(int k = 0; k <= spl; k++)
@@ -54,10 +62,7 @@ public class PBlock3 extends Polygon3
 				neueEckenR[j][k] = splInn(unSpldEckenR, j, k, spl);
 		for(int j = 0; j < spl; j++)
 			for(int k = 0; k < spl; k++)
-			{
-				PBlock3 tspt = new PBlock3(this, j, k, spl);
-				//TODO hinzu
-			}
+				dieListe.add(new PBlock3(this, j, k, spl));
 	}
 
 	public K4 splInn(K4[] ecken, int ax, int ay, int size)

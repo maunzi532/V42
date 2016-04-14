@@ -2,29 +2,26 @@ Nicht sicher
 	4D-Daten des aktuellen Felds anzeigen
 	NBD - Idle Bewegung
 	Metall-Reflexion
-	D2 (BD3) - Aussehen verbessern
 
-Stufe Moves - gestartet - mittel
+Stufe Moves
 	Moves abbrechen
-	LCM anderes wenn targeted
+	LadeCM anderes wenn targeted
 
-Stufe Mine - gestartet - lang
--	Drehung speichern
-	ZP4C neu machen und umwandeln in LCM
+Stufe Mine
+	ZP4C neu machen und umwandeln in LadeCM
 	System F - GMKamera mitbewegen
 	Beim aktivieren von System F Targeting kurz aktivieren
 	Block Auswahl (Welcher Typ von Block)
 	Welt generieren
 
 Stufe Anzeige3
-	N2 neu machen (Anzeige3)
-	BlockN2 neu machen (BlockZuAnz)
+	BlockDInfo3 - Aussehen verbessern
 	Zeichner neu machen (Vor)
 	XFarbe neu machen (PolyFarbe)
 	Einbauen
 	Reparieren
 
-Stufe Stoff - schwer
+Stufe Stoff
 	Zeichner Reihenfolge ändern
 	Haare richtig anmontieren
 	ColBox Position Vergleich

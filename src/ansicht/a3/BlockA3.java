@@ -89,7 +89,7 @@ public class BlockA3
 						else if(d2Vis(p))
 						{
 							long tn = von.tn(p);
-							dieListe.add(new BlockDInfo3(tn, von.wt2(p), true, null, null));
+							dieListe.add(new BlockDInfo3(tn, lw,  von.wt2(p), true, null, 0, 1));
 						}
 					}
 		else if(dddi > 0.25 && dddi < 0.75)
@@ -212,25 +212,25 @@ public class BlockA3
 				ke2[(i + block.dreh4) % 4] = ke[i];
 			ke = ke2;
 		}
-		return new PBlock3(tn, true, lw, rend, gend,
+		return new PBlock3(tn, lw, true, rend, gend,
 				null/*XFBT2 mit nof*/, ke, /*transformed ke*/ke);
 	}
 
 	private BlockDInfo3 descr(WBP p, DerBlock b, boolean g, long tn)
 	{
-		boolean quad = true;//TODO d2Vis(p);
+		boolean quad = true;
 		if(!sichtOpaque(b))
 		{
 			if(quad)
 				return new BlockDInfo3(/*true, g, new Color(0, 0, 100),
-						null, von.wt2(p), tn*/tn, von.wt2(p), true, null, g);
+						null, von.wt2(p), tn*/tn, lw, von.wt2(p), true, null, g ? 1 : -1, 1);
 			return null;
 		}
 		String text = null;
 		if(sichtOpaque(b))
-			text = (g ? "Gn: " : "Rot: ") + b; //TODO argh
+			text = (g ? "Gn: " : "Rot: ") + b;
 		return new BlockDInfo3(/*quad, g, new Color(!g ? 255 : 0, g ? 255 : 0, 0),
-				text, von.wt2(p), tn*/tn, von.wt2(p), true, text, g);
+				text, von.wt2(p), tn*/tn, lw, von.wt2(p), true, null, g ? 1 : -1, 1);
 	}
 
 	private boolean d2Vis(WBP p)
@@ -248,6 +248,6 @@ public class BlockA3
 			return false;
 		}
 		return vor.d2tangibility > 0;*/
-		return true; //TODO
+		return true;
 	}
 }

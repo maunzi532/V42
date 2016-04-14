@@ -123,7 +123,7 @@ public class WeltB
 		return block.typ == 2;
 	}
 
-	boolean innen(WBP p)
+	public boolean innen(WBP p)
 	{
 		for(int i = 0; i < 4; i++)
 		{
