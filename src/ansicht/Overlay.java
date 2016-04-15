@@ -1,5 +1,6 @@
 package ansicht;
 
+import ansicht.a3.*;
 import ansicht.n2.*;
 import ansicht.text.*;
 import nonBlock.aktion.*;
@@ -10,6 +11,7 @@ import wahr.spieler.*;
 import wahr.zugriff.*;
 
 import java.io.*;
+import java.util.*;
 
 public class Overlay
 {
@@ -23,6 +25,8 @@ public class Overlay
 	public AllWelt aw;
 	public Zeichner z;
 	private N2[] n2s2;
+	public Vor vor;
+	private ArrayList<Anzeige3> a3s2;
 	//Spectator Modus
 	public boolean godMode = false;
 	//Spectator-Modus-Kamera
@@ -41,6 +45,7 @@ public class Overlay
 		this.ort = ort;
 		aw = awA;
 		z = new Zeichner(Index.gibText("Einstellungen", zDatLad), aw);
+		vor = new Vor(Index.gibText("Einstellungen", zDatLad), aw);
 		sl = new SchalterLayer(this);
 		pa = new Panelizer();
 		resize();
@@ -58,7 +63,7 @@ public class Overlay
 
 	public void vorbereiten()
 	{
-		z.nehmen(this);
+		/*z.nehmen(this);
 		Staticf.sca("Z nehmen (5) ");
 		z.splittern(godMode);
 		Staticf.sca("Z splittern (1) ");
@@ -71,15 +76,26 @@ public class Overlay
 		N2[] n2s3 = new N2[z.n2s.size()];
 		for(int i = 0; i < n2s3.length; i++)
 			n2s3[i] = z.n2s.get(i);
-		n2s2 = n2s3;
+		n2s2 = n2s3;*/
+
+		vor.vorbereiten(this);
+		ArrayList<Anzeige3> a3s3 = new ArrayList<>();
+		for(int i = 0; i < vor.anzeige.size(); i++)
+			if(vor.anzeige.get(i).anzeigen)
+				a3s3.add(vor.anzeige.get(i));
+		a3s2 = a3s3;
 	}
 
 	public void panelize()
 	{
-		if(schalterSichtbar)
+		/*if(schalterSichtbar)
 			pa.panelize(n2s2, drehInput.xP(), drehInput.yP());
 		else
-			pa.panelize(n2s2, xI + wI / 2, yI + hI / 2);
+			pa.panelize(n2s2, xI + wI / 2, yI + hI / 2);*/
+		if(schalterSichtbar)
+			pa.panelize(a3s2, drehInput.xP(), drehInput.yP());
+		else
+			pa.panelize(a3s2, xI + wI / 2, yI + hI / 2);
 		Staticf.sca2("Panelize (14) ");
 		sl.draw(pa.gd);
 		pa.gd.drawImage(Lader.gibBild(Index.gibPfad("Einstellungen") + File.separator + "ThaCursor.png"),

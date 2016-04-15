@@ -16,7 +16,7 @@ public class Vor
 	private WeltND dw;
 	private LichtW lw;
 	private BlockZuAnz za;
-	public int visionRange4D;
+	public int visionRange4D = 1;
 	public int baumodus;
 	public boolean siehBlocks = true;
 	public boolean siehNonBlocks = true;
@@ -85,11 +85,29 @@ public class Vor
 					Staticf.sicht, 0), visionRange4D, baumodus);
 		for(int i = 0; i < anzeige.size(); i++)
 			anzeige.get(i).splittern(anzeige, theOverlay.godMode, this);
-		Collections.sort(anzeige, (t1, t2) -> Double.compare(t1.kamMid.c, t2.kamMid.c));
+		Collections.sort(anzeige, (t1, t2) ->
+		{
+			if(!t1.anzeigen && !t2.anzeigen)
+				return 0;
+			if(!t1.anzeigen)
+				return -1;
+			if(!t2.anzeigen)
+				return 1;
+			return -Double.compare(t1.kamMid.c, t2.kamMid.c);
+		});
 		for(int i = 0; i < anzeige.size(); i++)
 			anzeige.get(i).eckenEntf(theOverlay.wI, theOverlay.hI, theOverlay.auf.scF.width);
 		for(int i = 0; i < anzeige.size(); i++)
 			anzeige.get(i).farbeFlaeche(theOverlay.pa.tnTarget, theOverlay.wI, theOverlay.hI,
-					theOverlay.kamZurZeit().kamP(), Staticf.xraywidth);
+					theOverlay.kamZurZeit().kamP(), /*Staticf.xraywidth*/ 0);
+	}
+
+	private void soutA()
+	{
+		int z = 0;
+		for(int i = 0; i < anzeige.size(); i++)
+			if(anzeige.get(i).anzeigen)
+				z++;
+		System.out.println(z);
 	}
 }

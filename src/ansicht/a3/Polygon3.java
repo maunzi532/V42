@@ -29,6 +29,8 @@ public abstract class Polygon3 extends Anzeige3
 
 	public void berechneMids()
 	{
+		if(!anzeigen)
+			return;
 		kamMid = new K4((eckenK[0].a + eckenK[2].a) / 2,
 				(eckenK[0].b + eckenK[2].b) / 2,
 				(eckenK[0].c + eckenK[2].c) / 2,
@@ -169,7 +171,7 @@ public abstract class Polygon3 extends Anzeige3
 		}
 	}
 
-	public void Panel(Graphics2D gd)
+	public void panel(Graphics2D gd)
 	{
 		gd.setPaint(dFarb);
 		if(xrDraw)
@@ -178,7 +180,7 @@ public abstract class Polygon3 extends Anzeige3
 			gd.fill(new Polygon(eckenPanelX, eckenPanelY, eckenPanelX.length));
 	}
 
-	public void PanelDark(Graphics2D gd)
+	public void panelDark(Graphics2D gd)
 	{
 		gd.fill(new Polygon(eckenPanelX, eckenPanelY, eckenPanelX.length));
 	}

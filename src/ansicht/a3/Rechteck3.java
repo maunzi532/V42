@@ -18,10 +18,11 @@ public class Rechteck3 extends Anzeige3
 	protected Paint backgroundNew;
 	protected Paint foregroundNew;
 
-	public Rechteck3(long tn, LichtW lw, K4 mid, boolean targetable, String text)
+	public Rechteck3(long tn, LichtW lw, K4 mid, K4 kMid, boolean targetable, String text)
 	{
 		super(tn, lw);
 		rMid = mid;
+		kamMid = kMid;
 		this.targetable = targetable;
 		this.text = text;
 	}
@@ -56,7 +57,7 @@ public class Rechteck3 extends Anzeige3
 				(int)(fc.getBlue() * nah + 0 * (1 - nah)), fc.getAlpha()); //Fading nach Dunkelrot
 	}
 
-	public void Panel(Graphics2D gd)
+	public void panel(Graphics2D gd)
 	{
 		gd.setPaint(backgroundNew);
 		gd.setFont(new Font("Consolas", Font.PLAIN, (int)(scale > 20 ? 20 : scale)));
@@ -70,7 +71,7 @@ public class Rechteck3 extends Anzeige3
 		}
 	}
 
-	public void PanelDark(Graphics2D gd){}
+	public void panelDark(Graphics2D gd){}
 
 	public Color limit(Color c, int r, int g, int b)
 	{

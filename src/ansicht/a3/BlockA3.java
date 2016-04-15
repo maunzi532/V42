@@ -89,7 +89,7 @@ public class BlockA3
 						else if(d2Vis(p))
 						{
 							long tn = von.tn(p);
-							dieListe.add(new BlockDInfo3(tn, lw,  von.wt2(p), true, null, 0, 1));
+							dieListe.add(new BlockDInfo3(tn, lw, von.wt2(p), null, true, null, 0, 1));
 						}
 					}
 		else if(dddi > 0.25 && dddi < 0.75)
@@ -223,14 +223,14 @@ public class BlockA3
 		{
 			if(quad)
 				return new BlockDInfo3(/*true, g, new Color(0, 0, 100),
-						null, von.wt2(p), tn*/tn, lw, von.wt2(p), true, null, g ? 1 : -1, 1);
+						null, von.wt2(p), tn*/tn, lw, von.wt2(p), null, true, null, g ? 1 : -1, 1);
 			return null;
 		}
 		String text = null;
 		if(sichtOpaque(b))
 			text = (g ? "Gn: " : "Rot: ") + b;
 		return new BlockDInfo3(/*quad, g, new Color(!g ? 255 : 0, g ? 255 : 0, 0),
-				text, von.wt2(p), tn*/tn, lw, von.wt2(p), true, null, g ? 1 : -1, 1);
+				text, von.wt2(p), tn*/tn, lw, von.wt2(p), null, true, null, g ? 1 : -1, 1);
 	}
 
 	private boolean d2Vis(WBP p)

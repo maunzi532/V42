@@ -18,6 +18,7 @@ public abstract class Anzeige3
 
 	protected Anzeige3(long tn, LichtW lw)
 	{
+		anzeigen = true;
 		this.tn = tn;
 		this.lw = lw;
 	}
@@ -64,7 +65,7 @@ public abstract class Anzeige3
 		return (int)(hI / 2d - wI / 2d * Staticf.scaleX * b1 / c1);
 	}
 
-	public abstract void Panel(Graphics2D gd);
+	public abstract void panel(Graphics2D gd);
 
-	public abstract void PanelDark(Graphics2D gd);
+	public abstract void panelDark(Graphics2D gd);
 }

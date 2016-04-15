@@ -1,5 +1,7 @@
 package ansicht.a3;
 
+import ansicht.n2.xF.*;
+
 import java.awt.*;
 import java.awt.image.*;
 import java.util.*;
@@ -23,6 +25,7 @@ public class XFBT2 extends PolyFarbe
 			if(n == 1)
 				baseColor = lies[0];
 		}
+		mat = Material.B;
 	}
 
 	public Paint errechneFarbe(Polygon3 target, long tn)

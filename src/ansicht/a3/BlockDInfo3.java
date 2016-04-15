@@ -11,15 +11,18 @@ public class BlockDInfo3 extends Rechteck3
 	private double ddiff1;
 	private double ddiff2;
 
-	public BlockDInfo3(long tn, LichtW lw,  K4 mid, boolean targetable, DerBlock block, double ddiff1, double ddiff2)
+	public BlockDInfo3(long tn, LichtW lw, K4 mid, K4 rMid, boolean targetable,
+			DerBlock block, double ddiff1, double ddiff2)
 	{
-		super(tn, lw, mid, targetable, null);
+		super(tn, lw, mid, rMid, targetable, null);
 		this.ddiff1 = ddiff1;
 		this.ddiff2 = ddiff2;
+		foreground = Color.WHITE;
+		background = Color.DARK_GRAY;
 		text = block.toString();
 	}
 
-	public void Panel(Graphics2D gd)
+	public void panel(Graphics2D gd)
 	{
 		int[] xp = new int[3];
 		int[] yp = new int[3];
@@ -57,7 +60,7 @@ public class BlockDInfo3 extends Rechteck3
 		}*/
 	}
 
-	public void PanelDark(Graphics2D gd)
+	public void panelDark(Graphics2D gd)
 	{
 		int[] xp = new int[3];
 		int[] yp = new int[3];

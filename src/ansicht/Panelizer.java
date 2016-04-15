@@ -1,5 +1,6 @@
 package ansicht;
 
+import ansicht.a3.*;
 import ansicht.n2.*;
 import wahr.zugriff.*;
 
@@ -122,5 +123,41 @@ public class Panelizer
 			}
 			Staticf.sca("TN Linie (45) ");
 		}
+	}
+
+	public void panelize(ArrayList<Anzeige3> anzeige, int mx, int my)
+	{
+		gd.setColor(new Color(20, 0, 0));
+		gd.fillRect(0, 0, light.getWidth(), light.getHeight());
+		if(taType > 0)
+		{
+			darkCopy.setColor(Color.BLACK);
+			darkCopy.fillRect(0, 0, dark.getWidth(), dark.getHeight());
+			darkC = new HashMap<>();
+			darkC2 = new HashMap<>();
+			darkUsed = 0;
+		}
+		for(int i = 0; i < anzeige.size(); i++)
+			if(anzeige.get(i).anzeigen)
+			{
+				if(taType > 0)
+				{
+					Long ta = anzeige.get(i).tn;
+					if(darkC != null && !darkC.containsKey(ta))
+					{
+						darkUsed++;
+						darkC.put(ta, darkUsed);
+						darkC2.put(darkUsed, ta);
+					}
+					if(darkC != null && darkC.containsKey(ta) && darkC.get(ta) != null)
+					{
+						darkCopy.setColor(new Color(darkC.get(ta)));
+						anzeige.get(i).panelDark(darkCopy);
+					}
+				}
+				anzeige.get(i).panel(gd);
+			}
+		DPA2(gd, mx, my);
+		//gd.drawImage(dark, 700, 0, 300, 200, null);
 	}
 }

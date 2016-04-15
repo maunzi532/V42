@@ -26,6 +26,8 @@ public class PBlock3 extends Polygon3
 	public PBlock3(PBlock3 main, int xs, int ys, int max)
 	{
 		super(main.tn, main.lw, main.seite);
+		unSpldEckenR = main.unSpldEckenR;
+		unSpldEckenK = main.unSpldEckenK;
 		rEnd = main.rEnd;
 		gEnd = main.gEnd;
 		farbe = main.farbe;
@@ -44,7 +46,7 @@ public class PBlock3 extends Polygon3
 
 	public void splittern(ArrayList<Anzeige3> dieListe, boolean gmVision, Vor daten)
 	{
-		if(!anzeigen)
+		if(!anzeigen || eckenR != null)
 			return;
 		anzeigen = false;
 		K4 midsp = new K4((unSpldEckenK[0].a + unSpldEckenK[2].a) / 2,
