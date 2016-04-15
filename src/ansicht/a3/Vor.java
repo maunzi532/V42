@@ -73,12 +73,12 @@ public class Vor
 						/*K4[] spken = new K4[f2.spken1.size()];
 						for(int k = 0; k < f2.spken1.size(); k++)
 							spken[k] = nb.punkteK[f2.spken1.get(k)][f2.spken2.get(k)];*/
-						anzeige.add(new PNonBlock3(nb.tn, lw, f2.seite, null /*TODO PolyFarbe*/, f2.seed, eckenR, eckenK));
+						anzeige.add(new PNonBlock3(nb.tn, lw, f2.seite, f2.polyFarbe, f2.seed, eckenR, eckenK));
 					}
 				}
-				/*for(int i = 0; i < nb.externals.length; i++)
-					anzeige.addAll(nb.externals[i].gibFl(nb.punkteK, nb.lw, theOverlay.godMode,
-							nb == theOverlay.kamZurZeit()));*///TODO extra methode
+				for(int i = 0; i < nb.externals.length; i++)
+					nb.externals[i].gibPl(anzeige, nb.punkteK, nb.lw, theOverlay.godMode,
+							nb == theOverlay.kamZurZeit());
 			}
 		if(siehBlocks)
 			za.zuAnz(anzeige, kp, kd, new K4(Staticf.sicht, Staticf.sicht,

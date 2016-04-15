@@ -1,6 +1,7 @@
 package nonBlock.aussehen.ext;
 
 import ansicht.*;
+import ansicht.a3.*;
 import ansicht.n2.*;
 import nonBlock.aussehen.*;
 import wahr.zugriff.*;
@@ -84,6 +85,26 @@ public class Enhance extends External
 			NF2.atl(toR, new NF2(ecken, ecken1, spken, f2.farbe, f2.seite, lw, 0, f2.seed, main2.tn), gmVision);
 		}
 		return toR;
+	}
+
+	public void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into, LichtW lw,
+			boolean gmVision, boolean isMasterVision)
+	{
+		for(int j = 0; j < enh.f2.size(); j++)
+		{
+			LadeF2 f2 = enh.f2.get(j);
+			K4[] eckenK = new K4[f2.ecken1.size()];
+			for(int k = 0; k < f2.ecken1.size(); k++)
+				eckenK[k] = into[f2.ecken1.get(k) + (f2.ecken3.get(k) ? 0 : anfang)][f2.ecken2.get(k)];
+			K4[] eckenR = new K4[f2.ecken1.size()];
+			for(int k = 0; k < f2.ecken1.size(); k++)
+				eckenR[k] = into1[f2.ecken1.get(k) + (f2.ecken3.get(k) ? 0 : anfang)][f2.ecken2.get(k)];
+			/*K4[] spken = new K4[f2.spken1.size()];
+			for(int k = 0; k < f2.spken1.size(); k++)
+				spken[k] = into[f2.spken1.get(k) + (f2.ecken3.get(k) ? 0 : anfang)][f2.spken2.get(k)];*/
+			dieListe.add(new PNonBlock3(main2.tn, lw, f2.seite,
+					f2.polyFarbe, f2.seed, eckenR, eckenK));
+		}
 	}
 
 	public void tick(){}

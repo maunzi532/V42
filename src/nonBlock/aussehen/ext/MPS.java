@@ -1,6 +1,7 @@
 package nonBlock.aussehen.ext;
 
 import ansicht.*;
+import ansicht.a3.*;
 import ansicht.n2.*;
 import ansicht.n2.xF.*;
 import wahr.zugriff.*;
@@ -95,6 +96,18 @@ public class MPS extends External
 			NF2.atl(toR, new NF2(ecken, null, null, xf, null, lw, -1, seeds.get(i), main2.tn), gmVision);
 		}
 		return toR;
+	}
+
+	public void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision)
+	{
+		for(int i = 0; i < flaechen.size(); i++)
+		{
+			K4[] ecken = new K4[flaechen.get(i).length]; //TODO eckenR fehlt und PolyFarbe
+			for(int j = 0; j < flaechen.get(i).length; j++)
+				ecken[j] = into[anfang][flaechen.get(i)[j]];
+			//NF2.atl(toR, new NF2(ecken, null, null, xf, null, lw, -1, seeds.get(i), main2.tn), gmVision);
+			dieListe.add(new PNonBlock3(main2.tn, lw, null, null, seeds.get(i), null, ecken));
+		}
 	}
 
 	public void tick()

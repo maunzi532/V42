@@ -1,5 +1,6 @@
 package nonBlock.aussehen;
 
+import ansicht.a3.*;
 import ansicht.n2.xF.*;
 
 import java.util.*;
@@ -35,7 +36,8 @@ public class LadeTeil
 					else if(x2[0].equals("FV"))
 						seite = false;
 					farbe = XFarbe.t2xf(x2[1]);
-					LadeF2 f22 = new LadeF2(farbe, seite);
+					PolyFarbe polyFarbe = new PolyFarbe(x2[1]);
+					LadeF2 f22 = new LadeF2(farbe, polyFarbe, seite);
 					f2.add(f22);
 					for(int j = 0; j + 2 < x2.length; j++)
 					{
@@ -123,11 +125,12 @@ public class LadeTeil
 							}
 						}
 					XFarbe xfall = null;
+					PolyFarbe fall = null;
 					for(int j = 0; j < seitig; j++)
 					{
 						LadeF2 l;
-						if(xfall != null)
-							l = new LadeF2(xfall, seite);
+						if(xfall != null && fall != null)
+							l = new LadeF2(xfall, fall, seite);
 						else if(x2[sh].equals("NICHT"))
 						{
 							sh++;
@@ -136,10 +139,11 @@ public class LadeTeil
 						else if(x2[sh].endsWith("-ALL"))
 						{
 							xfall = XFarbe.t2xf(x2[sh].substring(0, x2[sh].length() - 4));
-							l = new LadeF2(xfall, seite);
+							fall = new PolyFarbe(x2[sh].substring(0, x2[sh].length() - 4));
+							l = new LadeF2(xfall, fall, seite);
 						}
 						else
-							l = new LadeF2(XFarbe.t2xf(x2[sh]), seite);
+							l = new LadeF2(XFarbe.t2xf(x2[sh]), new PolyFarbe(x2[sh]), seite);
 						for(int m = 0; m < 4; m++)
 						{
 							l.ecken1.add(daten[(j + (m == 1 || m == 2 ? 1 : 0)) % seitig][m > 1 ? 3 : 0]);
@@ -207,11 +211,12 @@ public class LadeTeil
 						}
 					}
 					XFarbe xfall = null;
+					PolyFarbe fall = null;
 					for(int j = 0; j < seitig; j++)
 					{
 						LadeF2 l;
-						if(xfall != null)
-							l = new LadeF2(xfall, seite);
+						if(xfall != null && fall != null)
+							l = new LadeF2(xfall, fall, seite);
 						else if(x2[sh].equals("NICHT"))
 						{
 							sh++;
@@ -220,10 +225,11 @@ public class LadeTeil
 						else if(x2[sh].endsWith("-ALL"))
 						{
 							xfall = XFarbe.t2xf(x2[sh].substring(0, x2[sh].length() - 4));
-							l = new LadeF2(xfall, seite);
+							fall = new PolyFarbe(x2[sh].substring(0, x2[sh].length() - 4));
+							l = new LadeF2(xfall, fall, seite);
 						}
 						else
-							l = new LadeF2(XFarbe.t2xf(x2[sh]), seite);
+							l = new LadeF2(XFarbe.t2xf(x2[sh]), new PolyFarbe(x2[sh]), seite);
 						for(int m = 0; m < 3; m++)
 						{
 							if(m != 2)

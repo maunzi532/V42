@@ -1,6 +1,7 @@
 package nonBlock.aussehen.ext;
 
 import ansicht.*;
+import ansicht.a3.*;
 import ansicht.n2.*;
 import ansicht.n2.xF.*;
 import nonBlock.aussehen.*;
@@ -93,6 +94,28 @@ public class MK extends External
 				cy++;
 			}
 		return al;
+	}
+
+	public void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision)
+	{
+		int cy = anfang;
+		for(int t = 0; t < nt - 1; t++)
+			for(int w = 0; w < nw; w++)
+			{
+				PolyFarbe polyFarbe = new PolyFarbe("255,N");
+				K4[] k0 = into[cy];
+				K4[] k01 = into1[cy];
+				int pm = w == nw - 1 ? 1 - nw : 1;
+				K4[] k1 = into[cy + pm];
+				K4[] k11 = into1[cy + pm];
+				/*NF2.atl(al, new NF2(new K4[]{k0[0], k1[0], into[cy + nw + pm][0], into[cy + nw][0]},
+						new K4[]{k01[0], k11[0], into1[cy + nw + pm][0], into1[cy + nw][0]},
+						fn, true, lw, seeds[t][w], 0, main2.tn), gmVision);*/
+				dieListe.add(new PNonBlock3(main2.tn, lw, true, polyFarbe, seeds[t][w],
+						new K4[]{k01[0], k11[0], into1[cy + nw + pm][0], into1[cy + nw][0]},
+						new K4[]{k0[0], k1[0], into[cy + nw + pm][0], into[cy + nw][0]}));
+				cy++;
+			}
 	}
 
 	public void tick(){}

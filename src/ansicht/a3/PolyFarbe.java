@@ -18,6 +18,19 @@ public class PolyFarbe
 	}
 
 	Color baseColor;
+	Material mat;
+
+	public PolyFarbe(String text)
+	{
+		String[] tex = text.split(",");
+		baseColor = farbCode(tex[0]);
+		if(tex.length > 1)
+			mat = Material.valueOf(tex[1]);
+		else
+			mat = Material.N;
+	}
+
+	protected PolyFarbe(){}
 
 	public boolean showFade(Polygon3 target)
 	{
@@ -119,5 +132,27 @@ public class PolyFarbe
 		if(b < 0)
 			b = 0;
 		return new Color(r, g, b, c.getAlpha());
+	}
+
+	static Color farbCode(String code)
+	{
+		String[] cx1 = code.split("-");
+		switch(cx1.length)
+		{
+			case 1:
+				int f0 = Integer.parseInt(cx1[0]);
+				return new Color(f0, f0, f0);
+			case 2:
+				int f1 = Integer.parseInt(cx1[0]);
+				return new Color(f1, f1, f1, Integer.parseInt(cx1[1]));
+			case 3:
+				return new Color(Integer.parseInt(cx1[0]), Integer.parseInt(cx1[1]),
+						Integer.parseInt(cx1[2]));
+			case 4:
+				return new Color(Integer.parseInt(cx1[0]), Integer.parseInt(cx1[1]),
+						Integer.parseInt(cx1[2]), Integer.parseInt(cx1[3]));
+			default:
+				return Color.WHITE;
+		}
 	}
 }

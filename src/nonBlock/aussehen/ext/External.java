@@ -1,6 +1,7 @@
 package nonBlock.aussehen.ext;
 
 import ansicht.*;
+import ansicht.a3.*;
 import ansicht.n2.*;
 import nonBlock.aussehen.*;
 import wahr.zugriff.*;
@@ -22,6 +23,9 @@ public abstract class External
 	public abstract void punkte(K4[][] into);
 
 	public abstract ArrayList<F2> gibFl(K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision);
+
+	public abstract void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into, LichtW lw,
+			boolean gmVision, boolean isMasterVision);
 
 	public abstract void tick();
 }

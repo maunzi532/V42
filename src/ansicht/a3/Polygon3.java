@@ -1,7 +1,6 @@
 package ansicht.a3;
 
 import ansicht.*;
-import ansicht.n2.xF.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
@@ -14,7 +13,6 @@ public abstract class Polygon3 extends Anzeige3
 	public K4[] eckenCut;
 	public Boolean seite;
 	public PolyFarbe farbe;
-	public Material mat;
 	public int rSeed; //ungenutzt in PBlock3
 	public int nachSplitID;
 
@@ -165,7 +163,7 @@ public abstract class Polygon3 extends Anzeige3
 					xrDraw = true;
 			}
 			if(farbe.showFade(this))
-				dFarb = farbe.errechneFarbe(this, tn, mat);
+				dFarb = farbe.errechneFarbe(this, tn, farbe.mat);
 			else
 				anzeigen = false;
 		}
