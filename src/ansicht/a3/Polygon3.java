@@ -158,6 +158,7 @@ public abstract class Polygon3 extends Anzeige3
 					yse[j] = ethaY(spken[j].b, ca, wI, hI);
 				}
 			}*/
+			checkForVanishing(farbe.baseColor);
 			if(xrZone > 0)
 			{
 				K4 lr = K4.diff(kam, rMid);
@@ -165,7 +166,7 @@ public abstract class Polygon3 extends Anzeige3
 					xrDraw = true;
 			}
 			if(farbe.showFade(this))
-				dFarb = farbe.errechneFarbe(this, tn, farbe.mat);
+				dFarb = farbe.gibFarbe(this, tnTarget);
 			else
 				anzeigen = false;
 		}

@@ -46,9 +46,13 @@ public class PolyFarbe
 						Staticf.seedifier)) / (double)Staticf.seedifier;
 	}
 
-	public Paint errechneFarbe(Polygon3 target, Long tn, Material mat)
+	public Paint gibFarbe(Polygon3 target, Long tn)
 	{
-		Color fc = baseColor;
+		return errechneFarbe(baseColor, target, tn);
+	}
+
+	public Paint errechneFarbe(Color fc, Polygon3 target, Long tn)
+	{
 		if(target.ddiff > 0) //Rot
 			fc = limit(fc, (int)(target.ddiff * 10), (int)(target.ddiff * -5), (int)(target.ddiff * -5));
 		if(target.ddiff < 0) //Gn
@@ -79,8 +83,8 @@ public class PolyFarbe
 		if(target.tn != -1 && tn != null && target.tn == tn)
 			fc = limit(fc, 60, 60, 60); //Sichthilfe bei getargeteten Polygonen
 		return new Color((int)(fc.getRed() * nah + 20 * (1 - nah)),
-				(int)(fc.getGreen() * nah + 0 * (1 - nah)),
-				(int)(fc.getBlue() * nah + 0 * (1 - nah)), fc.getAlpha()); //Fading nach Dunkelrot
+				(int)(fc.getGreen() * nah),
+				(int)(fc.getBlue() * nah), fc.getAlpha()); //Fading nach Dunkelrot
 	}
 
 	private double shadeWinkel(Polygon3 mirror, K4 lichtOrt)

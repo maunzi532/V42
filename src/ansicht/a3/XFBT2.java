@@ -28,12 +28,12 @@ public class XFBT2 extends PolyFarbe
 		mat = Material.B;
 	}
 
-	public Paint errechneFarbe(Polygon3 target, long tn)
+	public Paint gibFarbe(Polygon3 target, Long tn)
 	{
-		assert target instanceof PNonBlock3;
-		PNonBlock3 t1 = (PNonBlock3) target;
+		assert target instanceof PBlock3;
+		PBlock3 t1 = (PBlock3) target;
 		if(farben.containsKey(t1.splitDepth))
-			return farben.get(t1.splitDepth)[t1.nachSplitID];
-		return baseColor;
+			return errechneFarbe(farben.get(t1.splitDepth)[t1.nachSplitID], target, tn);
+		return errechneFarbe(baseColor, target, tn);
 	}
 }

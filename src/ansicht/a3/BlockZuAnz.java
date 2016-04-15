@@ -11,12 +11,13 @@ public class BlockZuAnz
 {
 	private static final int[][] seiten = new int[][]
 			{
-					{1, 3, 2, 0},
 					{5, 7, 3, 1},
 					{4, 6, 7, 5},
 					{0, 2, 6, 4},
-					{0, 4, 5, 1},
-					{7, 6, 2, 3}
+					{1, 3, 2, 0},
+					{7, 6, 2, 3},
+					{0, 4, 5, 1}
+
 			};
 
 	private static final int[][] punkte = new int[][]
@@ -63,17 +64,12 @@ public class BlockZuAnz
 		int theD = wb.intiize((kam.d - wb.startWelt.d) / wb.weltBlock.d);
 		double wbDShift = wbD - theD;
 		K4 relativ = TK4F.transformSet2(new K4(kam), kDreh, null);
-		/*for(int i1 = kaw0.k[0]; i1 <= kawEnd.k[0]; i1++)
-			for(int i2 = kaw0.k[1]; i2 <= kawEnd.k[1]; i2++)
-				for(int i3 = kaw0.k[2]; i3 <= kawEnd.k[2]; i3++)
-					for(int i4 = kaw0.k[3]; i4 < kawEnd.k[3]; i4++)
-						eckenK[i1][i2][i3][i4] = TK4F.transformSet2(ecken[i1][i2][i3][i4], kDreh, relativ);*/
 		for(int a = kaw0.k[0]; a < kawEnd.k[0]; a++)
 			for(int b = kaw0.k[1]; b < kawEnd.k[1]; b++)
 				for(int c = kaw0.k[2]; c < kawEnd.k[2]; c++)
 				{
 					for(int type = 0; type < 3; type++)
-						addA3(dieListe, visionRange4D, type, new int[]{a, b, c, theD}, wbD, relativ, kDreh);
+						addA3(dieListe, visionRange4D, type, new int[]{a, b, c, theD}, kam.d, relativ, kDreh);
 					addDInfo(dieListe, visionRange4D, new int[]{a, b, c, theD},
 							wbD, wbDShift, baumodus, relativ, kDreh);
 				}
@@ -85,7 +81,7 @@ public class BlockZuAnz
 	}
 
 	private void addA3(ArrayList<Anzeige3> dieListe, int visionRange4D, int type, int[] ort,
-			double wbD, K4 relativ, Drehung kDreh)
+			double kamD, K4 relativ, Drehung kDreh)
 	{
 		for(int d = ort[3] - visionRange4D; d <= ort[3] + visionRange4D; d++)
 		{
@@ -112,18 +108,11 @@ public class BlockZuAnz
 					WBP ortP = new WBP(ortA);
 					for(int j = 0; j < 3; j++)
 						ortP.k[j] = ortP.k[j] + plus[j];
-					/*if(wb.innen(ortP)) //TODO
-					{
-						eR[i] = ecken[ortP.k[0]][ortP.k[1]][ortP.k[2]][ortP.k[3]];
-						eK[i] = eckenK[ortP.k[0]][ortP.k[1]][ortP.k[2]][ortP.k[3]];
-					}
-					else*/
-					{
-						eR[i] = wb.wt2(ortP);
-						eK[i] = TK4F.transformSet2(eR[i], kDreh, relativ);
-					}
+					eR[i] = wb.wt(ortP);
+					eK[i] = TK4F.transformSet2(new K4(eR[i]), kDreh, relativ);
 				}
-				dieListe.add(new PBlock3(wb.tn(ortA), lw, null, wb.wt2(ortA).d - wbD - 0.5, wb.wt2(ortA).d - wbD + 0.5,
+				dieListe.add(new PBlock3(wb.tn(ortA), lw, true, (wb.wt2(ortA).d - kamD) / wb.weltBlock.d - 0.5,
+						(wb.wt2(ortA).d - kamD) / wb.weltBlock.d + 0.5,
 						Index.gibXFBT2(attach.name(), flaechenNummer, 10/*WTF*/), eR, eK));
 			}
 		}
@@ -167,8 +156,8 @@ public class BlockZuAnz
 				System.arraycopy(ort1, 0, ort7, 0, 4);
 				ort7[3] = ort7[3] - i;
 				K4 mid7 = wb.wt2(new WBP(ort7));
-				double ddiff1 = mid7.d - wbD - 0.5;
-				double ddiff2 = mid7.d - wbD + 0.5;
+				double ddiff1 = (mid7.d - wbD) / wb.weltBlock.d - 0.5;
+				double ddiff2 = (mid7.d - wbD) / wb.weltBlock.d + 0.5;
 				if(ddiff2 > 0)
 					ddiff2 = 0;
 				maybeAddDInfo(dieListe, new WBP(ort7), mid7, ddiff1, ddiff2, baumodus, relativ, kDreh);
@@ -180,8 +169,8 @@ public class BlockZuAnz
 				System.arraycopy(ort1, 0, ort7, 0, 4);
 				ort7[3] = ort7[3] + i;
 				K4 mid7 = wb.wt2(new WBP(ort7));
-				double ddiff1 = mid7.d - wbD - 0.5;
-				double ddiff2 = mid7.d - wbD + 0.5;
+				double ddiff1 = (mid7.d - wbD) / wb.weltBlock.d - 0.5;
+				double ddiff2 = (mid7.d - wbD) / wb.weltBlock.d + 0.5;
 				if(ddiff1 < 0)
 					ddiff1 = 0;
 				maybeAddDInfo(dieListe, new WBP(ort7), mid7, ddiff1, ddiff2, baumodus, relativ, kDreh);

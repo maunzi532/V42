@@ -339,6 +339,6 @@ public abstract class TSSA extends FWA implements Licht
 
 	public double lichtPowerDecay()
 	{
-		return 0.4;
+		return 0.8;
 	}
 }

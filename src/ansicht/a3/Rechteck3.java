@@ -29,13 +29,17 @@ public class Rechteck3 extends Anzeige3
 
 	public void farbeFlaeche(Long tnTarget, int wI, int hI, K4 kam, double xrZone)
 	{
-		double ca = kamMid.c;
-		if(ca < Staticf.nnull)
-			ca = Staticf.nnull;
-		xe = ethaX(kamMid.a, ca, wI);
-		ye = ethaY(kamMid.b, ca, wI, hI);
+		if(!anzeigen)
+			return;
+		if(kamMid.c < Staticf.nnull)
+		{
+			anzeigen = false;
+			return;
+		}
+		xe = ethaX(kamMid.a, kamMid.c, wI);
+		ye = ethaY(kamMid.b, kamMid.c, wI, hI);
 		ddiff = kamMid.d;
-		scale = (int)(1000 / ca) + 1;
+		scale = (int)(1000 / kamMid.c) + 1;
 		checkForVanishing(background);
 		if(!anzeigen)
 			return;

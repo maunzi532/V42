@@ -34,7 +34,7 @@ public abstract class Anzeige3
 		if(lw == null)
 			return;
 		double vanishResist = fc.getRed() + fc.getGreen() + fc.getBlue() + fc.getAlpha();
-		double vanishCheck = 0;
+		double vanishCheck = -255;
 		for(int i = 0; i < lw.licht.size(); i++)
 		{
 			K4 lr = K4.diff(lw.licht.get(i).lichtPosition(), rMid);
@@ -51,7 +51,7 @@ public abstract class Anzeige3
 		double nah = (Staticf.sicht - weg) / Staticf.sicht; //Wenn nah 1, am Rand 0
 		if(nah < 0)
 			nah = 0;
-		if(vanishCheck * 4 < vanishResist * nah)
+		if(vanishResist / 4 + vanishCheck * 2 + nah * 63 < 0)
 			anzeigen = false; //Unsichtbar
 	}
 

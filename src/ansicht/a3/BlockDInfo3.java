@@ -41,6 +41,8 @@ public class BlockDInfo3 extends Rechteck3
 			yp[1] = (int) (ye + ddiff1 * scale * 3);
 			yp[2] = (int) (ye + ddiff2 * scale * 3);
 		}
+		if(scale > 100)
+			System.out.println(scale);
 		gd.setPaint(backgroundNew);
 		gd.fillPolygon(xp, yp, 3);
 		//gd.setFont(new Font("Consolas", Font.PLAIN, (int)(scale > 20 ? 20 : scale / 2 + 10)));

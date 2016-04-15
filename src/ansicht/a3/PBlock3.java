@@ -9,6 +9,7 @@ public class PBlock3 extends Polygon3
 {
 	public K4[] unSpldEckenK;
 	public K4[] unSpldEckenR;
+	public int splitDepth;
 	private double rEnd;
 	private double gEnd;
 
@@ -33,6 +34,7 @@ public class PBlock3 extends Polygon3
 		farbe = main.farbe;
 		nachSplitID = xs * max + ys;
 		ecken(xs, ys, max);
+		splitDepth = max;
 		berechneMids();
 	}
 
