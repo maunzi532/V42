@@ -29,7 +29,7 @@ public class PolyFarbe
 			mat = Material.N;
 	}
 
-	protected PolyFarbe(){}
+	PolyFarbe(){}
 
 	public boolean showFade(Polygon3 target)
 	{
@@ -50,7 +50,7 @@ public class PolyFarbe
 		return errechneFarbe(baseColor, target, tn);
 	}
 
-	public Paint errechneFarbe(Color fc, Polygon3 target, Long tn)
+	Paint errechneFarbe(Color fc, Polygon3 target, Long tn)
 	{
 		if(target.ddiff > 0) //Rot
 			fc = limit(fc, (int)(target.ddiff * 10), (int)(target.ddiff * -5), (int)(target.ddiff * -5));
@@ -117,7 +117,7 @@ public class PolyFarbe
 		return d1 < d2 ? d1 : d2;
 	}
 
-	public Color limit(Color c, int r, int g, int b)
+	private Color limit(Color c, int r, int g, int b)
 	{
 		r += c.getRed();
 		if(r > 255)
@@ -137,7 +137,7 @@ public class PolyFarbe
 		return new Color(r, g, b, c.getAlpha());
 	}
 
-	static Color farbCode(String code)
+	private static Color farbCode(String code)
 	{
 		String[] cx1 = code.split("-");
 		switch(cx1.length)

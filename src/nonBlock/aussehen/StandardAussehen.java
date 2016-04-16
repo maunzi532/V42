@@ -13,7 +13,7 @@ public class StandardAussehen extends AlternateStandard
 	private final ArrayList<Integer> enhStart;
 	private final ArrayList<Integer> enhLink;
 
-	public StandardAussehen(String code)
+	private StandardAussehen(String code)
 	{
 		super();
 		String[] zeilen = code.split("\n");
@@ -156,5 +156,14 @@ public class StandardAussehen extends AlternateStandard
 						blockbox.get(i)[6], blockbox.get(i)[7]), blockbox.get(i)[8]));
 		}
 		n.standard = this;
+	}
+
+	public static StandardAussehen gibVonIndex2(String name)
+	{
+		if(Index.geladen.containsKey(name))
+			return (StandardAussehen) Index.geladen.get(name);
+		StandardAussehen s = new StandardAussehen(Index.bauName("Ladeteile", name));
+		Index.geladen.put(name, s);
+		return s;
 	}
 }

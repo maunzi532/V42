@@ -5,7 +5,6 @@ import ansicht.a3.*;
 import nonBlock.aussehen.*;
 import wahr.zugriff.*;
 
-import java.awt.*;
 import java.util.*;
 
 public class H extends External
@@ -166,7 +165,7 @@ public class H extends External
 	}
 
 	public void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into,
-			LichtW lw, boolean gmVision, boolean isMasterVision)
+			LichtW lw, boolean isMasterVision)
 	{
 		if(!calculateH || isMasterVision)
 			return;

@@ -5,9 +5,11 @@ import wahr.physisch.*;
 
 public class TastenDrehInput implements DrehInput
 {
-	Overlay master;
-	public double movementX, movementY;
-	public int positionX, positionY;
+	private Overlay master;
+	private double movementX;
+	private double movementY;
+	private int positionX;
+	private int positionY;
 
 	public TastenDrehInput(Overlay master)
 	{

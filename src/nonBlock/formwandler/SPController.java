@@ -13,10 +13,10 @@ public class SPController extends Controller
 					2, 1, 5, 6, 3, 4, 7, 8
 			};
 
-	boolean lockL;
-	boolean lockR;
-	int k = -1;
-	Overlay master;
+	private boolean lockL;
+	private boolean lockR;
+	private int k = -1;
+	private Overlay master;
 
 	public SPController(Overlay master)
 	{

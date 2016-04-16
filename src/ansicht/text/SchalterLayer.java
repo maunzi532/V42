@@ -1,7 +1,5 @@
 package ansicht.text;
 
-import ansicht.*;
-
 import java.awt.*;
 import java.util.*;
 
@@ -28,11 +26,11 @@ public class SchalterLayer
 	public final int fadePerTick = 10;
 	public final double movePerTick = 0.01;
 
-	public Overlay master;
+	private int wI;
+	private int hI;
 
-	public SchalterLayer(Overlay master)
+	public SchalterLayer()
 	{
-		this.master = master;
 		tex = new ArrayList[orte.length];
 		for(int i = 0; i < orte.length; i++)
 			tex[i] = new ArrayList<>();
@@ -42,24 +40,30 @@ public class SchalterLayer
 		texters = new T2Box[orte.length];
 	}
 
+	public void resize(int wI, int hI)
+	{
+		this.wI = wI;
+		this.hI = hI;
+	}
+
 	public int mw(double multiplikator)
 	{
-		return (int)(master.wI * multiplikator);
+		return (int)(wI * multiplikator);
 	}
 
 	public int mh(double multiplikator)
 	{
-		return (int)(master.hI * multiplikator);
+		return (int)(hI * multiplikator);
 	}
 
 	private double nmw(double multiplikator)
 	{
-		return multiplikator / master.wI;
+		return multiplikator / wI;
 	}
 
 	private double nmh(double multiplikator)
 	{
-		return multiplikator / master.hI;
+		return multiplikator / hI;
 	}
 
 	public boolean click(int x, int y, boolean r)

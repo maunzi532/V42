@@ -7,13 +7,13 @@ import java.awt.*;
 
 public class MausDrehInput implements DrehInput
 {
-	Overlay master;
+	private Overlay master;
 	//Maus Robot
-	public Robot ro;
+	private Robot ro;
 	//Mausverschiebung
-	public Point mausv;
+	private Point mausv;
 	//Maus Letzter Fokus
-	public Point mausLast;
+	private Point mausLast;
 
 	public MausDrehInput(Overlay master)
 	{

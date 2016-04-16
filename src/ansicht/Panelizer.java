@@ -52,7 +52,7 @@ public class Panelizer
 		}
 	}
 
-	public void DPA3(int cl)
+	private void DPA3(int cl)
 	{
 		if(taType > 1 && tnTarget != -1)
 		{

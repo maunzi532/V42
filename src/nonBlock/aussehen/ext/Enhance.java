@@ -67,7 +67,7 @@ public class Enhance extends External
 	}
 
 	public void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into, LichtW lw,
-			boolean gmVision, boolean isMasterVision)
+			boolean isMasterVision)
 	{
 		for(int j = 0; j < enh.f2.size(); j++)
 		{

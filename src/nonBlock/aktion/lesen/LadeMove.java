@@ -1,5 +1,7 @@
 package nonBlock.aktion.lesen;
 
+import wahr.zugriff.*;
+
 import java.util.*;
 
 public class LadeMove
@@ -9,7 +11,7 @@ public class LadeMove
 	final ArrayList<Integer> zeitE;
 	final String name;
 
-	public LadeMove(String name, String code)
+	private LadeMove(String name, String code)
 	{
 		this.name = name;
 		zeitE = new ArrayList<>();
@@ -32,5 +34,14 @@ public class LadeMove
 				}
 			}
 		}
+	}
+
+	public static LadeMove gibVonIndex(boolean seq, String name)
+	{
+		if(Index.geladen.containsKey(name))
+			return (LadeMove) Index.geladen.get(name);
+		LadeMove s = new LadeMove(name, Index.bauName(seq ? "Sequenzen" : "Moves", name));
+		Index.geladen.put(name, s);
+		return s;
 	}
 }

@@ -2,10 +2,10 @@ package nonBlock.aktion.lesen;
 
 import nonBlock.aktion.*;
 
-public class RWert
+class RWert
 {
-	String name;
-	double zahl;
+	private String name;
+	private double zahl;
 
 	public RWert(String text)
 	{

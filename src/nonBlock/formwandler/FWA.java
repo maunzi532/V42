@@ -13,14 +13,14 @@ import java.util.*;
 public abstract class FWA extends NBB implements Controllable
 {
 	protected final Controller control;
-	public String currentZ;
-	public String lastZ;
+	protected String currentZ;
+	protected String lastZ;
 	int transformTime;
-	ArrayList<FWVerwendet> verwendbar;
-	int[] verwendet;
-	double[] cooldowns;
-	Move chain;
-	LadeFWA abilities;
+	private ArrayList<FWVerwendet> verwendbar;
+	private int[] verwendet;
+	private double[] cooldowns;
+	private Move chain;
+	private LadeFWA abilities;
 
 	protected FWA(Controller control, LadeFWA abilities, String currentZ, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
@@ -72,7 +72,7 @@ public abstract class FWA extends NBB implements Controllable
 			doFall(td.theFall, td.isChainOnly);
 		if(td.theMove != null)
 		{
-			Move m = new Move(Index.gibLadeMove(false, td.theMove), this);
+			Move m = new Move(LadeMove.gibVonIndex(false, td.theMove), this);
 			if(td.isChainOnly)
 				chain = m;
 			moves.add(m);
@@ -81,7 +81,7 @@ public abstract class FWA extends NBB implements Controllable
 			cooldowns[td.sharedcooldown] = td.cooldown;
 	}
 
-	public void inflChecks(boolean[] infl)
+	protected void inflChecks(boolean[] infl)
 	{
 		for(int i = 0; i < 8; i++)
 			if(infl[i])

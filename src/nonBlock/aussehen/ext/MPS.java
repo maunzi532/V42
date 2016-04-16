@@ -4,13 +4,12 @@ import ansicht.*;
 import ansicht.a3.*;
 import wahr.zugriff.*;
 
-import java.awt.*;
 import java.util.*;
 
 public class MPS extends External
 {
-	ArrayList<MPSF> teile;
-	ArrayList<int[]> flaechen;
+	private ArrayList<MPSF> teile;
+	private ArrayList<int[]> flaechen;
 	private ArrayList<Integer> seeds;
 	//XFarbe xf;
 
@@ -83,7 +82,7 @@ public class MPS extends External
 			into[anfang][i] = new K4(teile.get(i).ort);
 	}
 
-	public void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision)
+	public void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into, LichtW lw, boolean isMasterVision)
 	{
 		for(int i = 0; i < flaechen.size(); i++)
 		{

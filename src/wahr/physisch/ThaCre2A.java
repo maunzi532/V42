@@ -3,7 +3,7 @@ package wahr.physisch;
 import wahr.mage.*;
 import wahr.zugriff.*;
 
-public class ThaCre2A
+class ThaCre2A
 {
 	public static void main(String[] args)
 	{

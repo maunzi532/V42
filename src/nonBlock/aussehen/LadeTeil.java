@@ -1,6 +1,7 @@
 package nonBlock.aussehen;
 
 import ansicht.a3.*;
+import wahr.zugriff.*;
 
 import java.util.*;
 
@@ -10,7 +11,7 @@ public class LadeTeil
 	final ArrayList<LadeF2> f2;
 	final int end;
 
-	public LadeTeil(String code)
+	private LadeTeil(String code)
 	{
 		String[] zeilen = code.split("\n");
 		int achseAktuell = -1;
@@ -251,5 +252,14 @@ public class LadeTeil
 			}
 		}
 		end = Collections.max(punkte.keySet());
+	}
+
+	public static LadeTeil gibVonIndex(String name)
+	{
+		if(Index.geladen.containsKey(name))
+			return (LadeTeil) Index.geladen.get(name);
+		LadeTeil s = new LadeTeil(Index.bauName("Ladeteile", name));
+		Index.geladen.put(name, s);
+		return s;
 	}
 }

@@ -3,6 +3,7 @@ package nonBlock.aktion.lesen;
 import ansicht.*;
 import ansicht.text.*;
 import nonBlock.aktion.*;
+import nonBlock.aussehen.*;
 import nonBlock.collide.*;
 import nonBlock.controllable.*;
 import wahr.zugriff.*;
@@ -184,7 +185,7 @@ class LadeAktion
 					overlay.kamN = (Controllable)dislocated;
 				break;
 			case 6:
-				Index.gibAlternateStandard(text).changeToThis(dislocated, dauer, power);
+				AlternateStandard.gibVonIndex1(text).changeToThis(dislocated, dauer, power);
 				break;
 			case 7:
 				tp(dislocated, mvd, mvd2);

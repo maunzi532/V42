@@ -2,7 +2,7 @@ package ansicht.text;
 
 import java.awt.*;
 
-public abstract class SLF
+abstract class SLF
 {
 	final SchalterLayer main;
 	final boolean tangible;
@@ -10,7 +10,7 @@ public abstract class SLF
 	double y;
 	final double w;
 	final double h;
-	protected String text;
+	String text;
 
 	public SLF(SchalterLayer main, boolean tangible, double x, double y, double w, double h)
 	{

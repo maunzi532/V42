@@ -18,7 +18,7 @@ public class AlternateStandard
 
 	AlternateStandard(){}
 
-	public AlternateStandard(String code)
+	private AlternateStandard(String code)
 	{
 		AlternateStandard main = null;
 		String[] zeilen = code.split("\n");
@@ -35,7 +35,7 @@ public class AlternateStandard
 			{
 				if(zeilen[i].startsWith("Main="))
 				{
-					main = Index.gibStandardAussehen(zeilen[i].substring(5));
+					main = StandardAussehen.gibVonIndex2(zeilen[i].substring(5));
 				}
 				else if(zeilen[i].startsWith("B"))
 				{
@@ -117,5 +117,14 @@ public class AlternateStandard
 				ATR.summonATRandCheck(n, i, command);
 			}
 		n.aktionen.add(command);
+	}
+
+	public static AlternateStandard gibVonIndex1(String name)
+	{
+		if(Index.geladen.containsKey(name))
+			return (AlternateStandard) Index.geladen.get(name);
+		AlternateStandard s = new AlternateStandard(Index.bauName("Ladeteile", name));
+		Index.geladen.put(name, s);
+		return s;
 	}
 }

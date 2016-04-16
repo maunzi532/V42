@@ -4,9 +4,9 @@ import block.*;
 
 import java.util.*;
 
-public class TestGenerator extends Generator
+class TestGenerator extends Generator
 {
-	Random r;
+	private Random r;
 
 	DerBlock[][][][] generiere()
 	{
@@ -33,7 +33,7 @@ public class TestGenerator extends Generator
 		return blocks;
 	}
 
-	public DerBlock rDreh(int typ)
+	private DerBlock rDreh(int typ)
 	{
 		return new DerBlock(typ, r.nextInt(4));
 	}

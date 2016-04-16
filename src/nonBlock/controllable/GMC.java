@@ -7,7 +7,7 @@ import java.util.*;
 
 public class GMC extends Controller
 {
-	Overlay master;
+	private Overlay master;
 
 	public GMC(Overlay master)
 	{

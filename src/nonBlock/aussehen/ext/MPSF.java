@@ -6,7 +6,7 @@ import java.util.*;
 
 class MPSF
 {
-	MPS sup;
+	private MPS sup;
 	K4 ort;
 	K4 ortNeu;
 	MPSF[] verb;

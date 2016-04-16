@@ -7,8 +7,8 @@ import java.util.*;
 
 public class PBlock3 extends Polygon3
 {
-	public K4[] unSpldEckenK;
-	public K4[] unSpldEckenR;
+	private K4[] unSpldEckenK;
+	private K4[] unSpldEckenR;
 	public int splitDepth;
 	private double rEnd;
 	private double gEnd;
@@ -24,7 +24,7 @@ public class PBlock3 extends Polygon3
 		this.farbe = farbe;
 	}
 
-	public PBlock3(PBlock3 main, int xs, int ys, int max)
+	private PBlock3(PBlock3 main, int xs, int ys, int max)
 	{
 		super(main.tn, main.lw, main.seite);
 		unSpldEckenR = main.unSpldEckenR;
@@ -38,7 +38,7 @@ public class PBlock3 extends Polygon3
 		berechneMids();
 	}
 
-	private int sqToSplit(double sq, Vor daten)
+	private int sqToSplit(double sq, VorDaten daten)
 	{
 		for(int i = 0; i < daten.abstands.size(); i++)
 			if(sq < daten.abstands.get(i) * daten.abstands.get(i))
@@ -46,7 +46,7 @@ public class PBlock3 extends Polygon3
 		return 1;
 	}
 
-	public void splittern(ArrayList<Anzeige3> dieListe, boolean gmVision, Vor daten)
+	public void splittern(ArrayList<Anzeige3> dieListe, VorDaten daten)
 	{
 		if(!anzeigen || eckenR != null)
 			return;
@@ -69,7 +69,7 @@ public class PBlock3 extends Polygon3
 				dieListe.add(new PBlock3(this, j, k, spl));
 	}
 
-	public K4 splInn(K4[] ecken, int ax, int ay, int size)
+	private K4 splInn(K4[] ecken, int ax, int ay, int size)
 	{
 		return new K4((ecken[0].a * ax * ay + ecken[1].a * (size - ax) * ay +
 				ecken[2].a * (size - ax) * (size - ay) + ecken[3].a * ax * (size - ay)) / size / size,
@@ -81,7 +81,7 @@ public class PBlock3 extends Polygon3
 						ecken[2].d * (size - ax) * (size - ay) + ecken[3].d * ax * (size - ay)) / size / size);
 	}
 
-	public void ecken(int xs, int ys, int max)
+	private void ecken(int xs, int ys, int max)
 	{
 		eckenR = new K4[4];
 		eckenR[0] = splInn(unSpldEckenR, xs, ys, max);

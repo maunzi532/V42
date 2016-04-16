@@ -7,7 +7,7 @@ import java.util.*;
 
 public class PNonBlock3 extends Polygon3
 {
-	boolean canSplit;
+	private boolean canSplit;
 
 	public PNonBlock3(long tn, LichtW lw, Boolean seite, PolyFarbe farbe, int rSeed, K4[] eckenR, K4[] eckenK)
 	{
@@ -26,7 +26,7 @@ public class PNonBlock3 extends Polygon3
 		nachSplitID = splSeed;
 	}
 
-	public PNonBlock3(PNonBlock3 main, int splitID, K4[] eckenR, K4[] eckenK)
+	private PNonBlock3(PNonBlock3 main, int splitID, K4[] eckenR, K4[] eckenK)
 	{
 		super(main.tn, main.lw, main.seite);
 		farbe = main.farbe;
@@ -37,7 +37,7 @@ public class PNonBlock3 extends Polygon3
 		berechneMids();
 	}
 
-	public double sizeForKam()
+	private double sizeForKam()
 	{
 		double k = 0;
 		for(int i = 0; i < eckenK.length; i++)
@@ -51,8 +51,9 @@ public class PNonBlock3 extends Polygon3
 		return k;
 	}
 
-	public void splittern(ArrayList<Anzeige3> dieListe, boolean gmVision, Vor daten)
+	public void splittern(ArrayList<Anzeige3> dieListe, VorDaten daten)
 	{
+		//noinspection PointlessBooleanExpression,ConstantConditions
 		if(anzeigen && Staticf.splThr > 0 && canSplit && sizeForKam() > Staticf.splThr)
 		{
 			anzeigen = false;

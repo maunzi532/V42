@@ -10,7 +10,7 @@ public class LadeFWATeil
 	ArrayList<ArrayList<String>> usedInputs;
 	ArrayList<ArrayList<LadeControlledMove>> availMoves;
 
-	public LadeFWATeil(String code)
+	private LadeFWATeil(String code)
 	{
 		zustands = new ArrayList<>();
 		usedInputs = new ArrayList<>();
@@ -33,9 +33,18 @@ public class LadeFWATeil
 				{
 					String[] cde2 = cde[i].split(" ");
 					usedInputs.get(n).add(cde2[0]);
-					availMoves.get(n).add(Index.gibLadeControlledMove(cde2[1]));
+					availMoves.get(n).add(LadeControlledMove.gibVonIndex(cde2[1]));
 				}
 			}
 		}
+	}
+
+	public static LadeFWATeil gibVonIndex(String name)
+	{
+		if(Index.geladen.containsKey(name))
+			return (LadeFWATeil) Index.geladen.get(name);
+		LadeFWATeil s = new LadeFWATeil(Index.bauName("FWA", name));
+		Index.geladen.put(name, s);
+		return s;
 	}
 }

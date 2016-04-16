@@ -7,11 +7,11 @@ public class WeltLeser extends Generator
 {
 	private String ort;
 	private int[] size;
-	int c0 = 0;
-	int c1 = 0;
-	int c2 = 0;
-	int c3 = 0;
-	DerBlock[][][][] blocks = null;
+	private int c0 = 0;
+	private int c1 = 0;
+	private int c2 = 0;
+	private int c3 = 0;
+	private DerBlock[][][][] blocks = null;
 
 	public void gibInWelt(WeltB welt, Object... z)
 	{

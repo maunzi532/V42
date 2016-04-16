@@ -9,25 +9,25 @@ import java.util.*;
 public abstract class Polygon3 extends Anzeige3
 {
 	public K4[] eckenR;
-	public K4[] eckenK;
-	public K4[] eckenCut;
+	K4[] eckenK;
+	private K4[] eckenCut;
 	public Boolean seite;
-	public PolyFarbe farbe;
+	PolyFarbe farbe;
 	public int rSeed; //ungenutzt in PBlock3
 	public int nachSplitID;
 
-	protected Paint dFarb;
+	private Paint dFarb;
 	private int[] eckenPanelX;
 	private int[] eckenPanelY;
 	private boolean xrDraw;
 
-	public Polygon3(long tn, LichtW lw, Boolean seite)
+	Polygon3(long tn, LichtW lw, Boolean seite)
 	{
 		super(tn, lw);
 		this.seite =  seite;
 	}
 
-	public void berechneMids()
+	void berechneMids()
 	{
 		if(!anzeigen)
 			return;
@@ -41,7 +41,7 @@ public abstract class Polygon3 extends Anzeige3
 				(eckenR[0].d + eckenR[2].d) / 2);
 	}
 
-	public abstract void splittern(ArrayList<Anzeige3> dieListe, boolean gmVision, Vor daten);
+	public abstract void splittern(ArrayList<Anzeige3> dieListe, VorDaten daten);
 
 	public void eckenEntf(int wI, int hI, int cI)
 	{

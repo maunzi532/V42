@@ -7,18 +7,18 @@ import java.awt.*;
 
 public class Rechteck3 extends Anzeige3
 {
-	protected String text;
-	protected boolean targetable;
-	protected Color background;
-	protected Color foreground;
+	String text;
+	boolean targetable;
+	Color background;
+	Color foreground;
 
-	protected int xe;
-	protected int ye;
-	protected double scale;
-	protected Paint backgroundNew;
-	protected Paint foregroundNew;
+	int xe;
+	int ye;
+	double scale;
+	Paint backgroundNew;
+	private Paint foregroundNew;
 
-	public Rechteck3(long tn, LichtW lw, K4 mid, K4 kMid, boolean targetable, String text)
+	Rechteck3(long tn, LichtW lw, K4 mid, K4 kMid, boolean targetable, String text)
 	{
 		super(tn, lw);
 		rMid = mid;
@@ -47,7 +47,7 @@ public class Rechteck3 extends Anzeige3
 		foregroundNew = errechneFarbe(foreground, tnTarget);
 	}
 
-	public Paint errechneFarbe(Color fc, Long tnC)
+	private Paint errechneFarbe(Color fc, Long tnC)
 	{
 		double weg = Math.sqrt(kamMid.a * kamMid.a + kamMid.b * kamMid.b +
 				kamMid.c * kamMid.c + kamMid.d * kamMid.d);
@@ -77,7 +77,7 @@ public class Rechteck3 extends Anzeige3
 
 	public void panelDark(Graphics2D gd){}
 
-	public Color limit(Color c, int r, int g, int b)
+	private Color limit(Color c, int r, int g, int b)
 	{
 		r += c.getRed();
 		if(r > 255)

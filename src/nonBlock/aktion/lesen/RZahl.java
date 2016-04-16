@@ -6,10 +6,10 @@ import java.util.*;
 
 public class RZahl
 {
-	static List<Character> rechen = Arrays.asList('+', '-', '*', '/', '%');
+	private static List<Character> rechen = Arrays.asList('+', '-', '*', '/', '%');
 
-	public ArrayList<RWert> zahlies = new ArrayList<>();
-	public ArrayList<Integer> zeichens = new ArrayList<>();
+	private ArrayList<RWert> zahlies = new ArrayList<>();
+	private ArrayList<Integer> zeichens = new ArrayList<>();
 	public boolean deg2rad;
 	public NBD v1;
 

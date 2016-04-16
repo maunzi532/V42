@@ -19,7 +19,7 @@ public class Hauptschleife
 {
 	static AllWelt aw;
 	public static Overlay[] theOverlays;
-	public static LPaneel theLPaneel;
+	private static LPaneel theLPaneel;
 
 	public static void init0()
 	{
@@ -68,7 +68,7 @@ public class Hauptschleife
 					cmd.add("hinten");*/
 				return new ArrayList<>();
 			}
-		}, null, "Luft", null, aw)
+		}, null, "Luft", aw)
 		{
 			public void collide(Attk attk)
 			{
@@ -80,7 +80,7 @@ public class Hauptschleife
 
 			public void decollide(Attk attk)
 			{
-				Index.gibAlternateStandard("TSSA2R").changeToThis(this, 40, 5);
+				AlternateStandard.gibVonIndex1("TSSA2R").changeToThis(this, 40, 5);
 			}
 
 			public void wand(int welche){}
@@ -99,11 +99,11 @@ public class Hauptschleife
 			{
 				if(command.equals("B"))
 				{
-					dw.seq = new Move(Index.gibLadeMove(true, "TPSQ"), theOverlays[0], this, n1);
+					dw.seq = new Move(LadeMove.gibVonIndex(true, "TPSQ"), theOverlays[0], this, n1);
 				}
 				if(command.equals("C"))
 				{
-					dw.seq = new Move(Index.gibLadeMove(true, "TSQ"), theOverlays[0], this, n1);
+					dw.seq = new Move(LadeMove.gibVonIndex(true, "TSQ"), theOverlays[0], this, n1);
 				}
 			}
 
@@ -111,15 +111,15 @@ public class Hauptschleife
 		};
 		//MPS mp2 = new MPS();
 		n2.aussehen = new LadeModell().reload(
-				Index.gibLadeTeil("Hauptteil"),
-				Index.gibLadeTeil("Beine"),
-				Index.gibLadeTeil("Arme"),
-				Index.gibLadeTeil("Schuhe"),
-				Index.gibLadeTeil("Kopf"),
-				Index.gibLadeTeil("Sicht"));
-		Index.gibStandardAussehen("TSSA").assignStandard(n2,
-				new Enhance(new LadeModell().reload(Index.gibLadeTeil("Hand L2"))),
-				new Enhance(new LadeModell().reload(Index.gibLadeTeil("Hand R2"))),
+				LadeTeil.gibVonIndex("Hauptteil"),
+				LadeTeil.gibVonIndex("Beine"),
+				LadeTeil.gibVonIndex("Arme"),
+				LadeTeil.gibVonIndex("Schuhe"),
+				LadeTeil.gibVonIndex("Kopf"),
+				LadeTeil.gibVonIndex("Sicht"));
+		StandardAussehen.gibVonIndex2("TSSA").assignStandard(n2,
+				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand L2"))),
+				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand R2"))),
 				new H2(n2, 0.5, 0.5, 10, 10, 4, 1, 0, 0.6),
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
@@ -144,19 +144,19 @@ public class Hauptschleife
 	private static Tha giveNToOverlay(Overlay reciever)
 	{
 		LadeFWA lfwa = new LadeFWA(20);
-		lfwa.charge(Index.gibLadeFWATeil("SetN"));
-		lfwa.charge(Index.gibLadeFWATeil("Set1"));
-		Tha n = new Tha(new SPController(reciever), lfwa, reciever, aw);
+		lfwa.charge(LadeFWATeil.gibVonIndex("SetN"));
+		lfwa.charge(LadeFWATeil.gibVonIndex("Set1"));
+		Tha n = new Tha(new SPController(reciever), lfwa, aw);
 		n.aussehen = new LadeModell().reload(
-				Index.gibLadeTeil("Hauptteil"),
-				Index.gibLadeTeil("Beine"),
-				Index.gibLadeTeil("Arme"),
-				Index.gibLadeTeil("Schuhe"),
-				Index.gibLadeTeil("Kopf"),
-				Index.gibLadeTeil("Sicht"));
-		Index.gibStandardAussehen("TSSA").assignStandard(n,
-				new Enhance(new LadeModell().reload(Index.gibLadeTeil("Hand L2"))),
-				new Enhance(new LadeModell().reload(Index.gibLadeTeil("Hand R2"))),
+				LadeTeil.gibVonIndex("Hauptteil"),
+				LadeTeil.gibVonIndex("Beine"),
+				LadeTeil.gibVonIndex("Arme"),
+				LadeTeil.gibVonIndex("Schuhe"),
+				LadeTeil.gibVonIndex("Kopf"),
+				LadeTeil.gibVonIndex("Sicht"));
+		StandardAussehen.gibVonIndex2("TSSA").assignStandard(n,
+				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand L2"))),
+				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand R2"))),
 				new H(0.5, 0.5, 10, 10, 4, 1, 0, 0.9),
 				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9),
 				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9),

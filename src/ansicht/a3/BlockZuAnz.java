@@ -6,7 +6,7 @@ import wahr.zugriff.*;
 
 import java.util.*;
 
-public class BlockZuAnz
+class BlockZuAnz
 {
 	private static final int[][] seiten = new int[][]
 			{
@@ -112,7 +112,7 @@ public class BlockZuAnz
 				}
 				dieListe.add(new PBlock3(wb.tn(ortA), lw, true, (wb.wt2(ortA).d - kamD) / wb.weltBlock.d - 0.5,
 						(wb.wt2(ortA).d - kamD) / wb.weltBlock.d + 0.5,
-						Index.gibXFBT2(attach.name(), flaechenNummer, 10/*WTF*/), eR, eK));
+						XFBT2.gibVonIndex(attach.name(), flaechenNummer, 10/*WTF*/), eR, eK));
 			}
 		}
 	}

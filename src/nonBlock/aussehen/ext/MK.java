@@ -72,7 +72,7 @@ public class MK extends External
 		into1 = into;
 	}
 
-	public void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision)
+	public void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into, LichtW lw, boolean isMasterVision)
 	{
 		int cy = anfang;
 		for(int t = 0; t < nt - 1; t++)

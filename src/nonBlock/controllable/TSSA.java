@@ -13,24 +13,22 @@ import java.util.*;
 
 public abstract class TSSA extends FWA implements Licht
 {
-	protected static List<String> zustands = Arrays.asList("Normal", "Kante", "Luft", "Ducken");
-	protected static double[][] zinfl = new double[][]{{0.2, 0, 0, 0.2}, null,
+	private static List<String> zustands = Arrays.asList("Normal", "Kante", "Luft", "Ducken");
+	private static double[][] zinfl = new double[][]{{0.2, 0, 0, 0.2}, null,
 			{0.1, 0, 0.2, 0.1}, {0.05, 0, 0, 0.05}};
-	protected static Boolean[] zboden = new Boolean[]{true, null, false, true};
-	protected static boolean[] canDreh = new boolean[]{true, false, true, false};
+	private static Boolean[] zboden = new Boolean[]{true, null, false, true};
+	private static boolean[] canDreh = new boolean[]{true, false, true, false};
 
-	final Overlay overlay;
-	int grabRichtung = -1;
+	private int grabRichtung = -1;
 
-	TSSA(Controller control, LadeFWA abilities, String currentZ, Overlay overlay, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
+	TSSA(Controller control, LadeFWA abilities, String currentZ, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
 		super(control, abilities, currentZ, welt, lw, dw, bw);
-		this.overlay = overlay;
 	}
 
-	protected TSSA(Controller control, LadeFWA abilities, String currentZ, Overlay overlay, AllWelt aw)
+	protected TSSA(Controller control, LadeFWA abilities, String currentZ, AllWelt aw)
 	{
-		this(control, abilities, currentZ, overlay, aw.wbl, aw.lw, aw.dw, aw.bw);
+		this(control, abilities, currentZ, aw.wbl, aw.lw, aw.dw, aw.bw);
 	}
 
 	public void kontrolle()
@@ -49,7 +47,7 @@ public abstract class TSSA extends FWA implements Licht
 					currentZ = "Normal";
 				else
 					currentZ = "Luft";
-				Index.gibAlternateStandard("TSSA").changeToThis(this, 20, 3);
+				AlternateStandard.gibVonIndex1("TSSA").changeToThis(this, 20, 3);
 			}
 		}
 		canInfl = zinfl[zIndex];
@@ -156,7 +154,7 @@ public abstract class TSSA extends FWA implements Licht
 					if(approxRichtung() == 7)
 						richtung = 4;
 					focus = new Focus(this, 20, fp, Drehung.nDrehung((4 - richtung) * Math.PI / 2, 0));
-					Index.gibAlternateStandard("TSSA3LR").changeToThis(this, 20, 8);
+					AlternateStandard.gibVonIndex1("TSSA3LR").changeToThis(this, 20, 8);
 					lastZ = currentZ;
 					currentZ = "Kante";
 					return false;
@@ -242,15 +240,15 @@ public abstract class TSSA extends FWA implements Licht
 				Boolean ck = canKlettern(grabRichtung, dif, p);
 				if(ck != null)
 				{
-					Index.gibAlternateStandard("TSSA").changeToThis(this, 30, 10);
+					AlternateStandard.gibVonIndex1("TSSA").changeToThis(this, 30, 10);
 					lastZ = currentZ;
 					currentZ = "Luft";
 					focus = null;
 					grabRichtung = -1;
 					if(ck)
-						moves.add(new Move(Index.gibLadeMove(false, "WK"), this));
+						moves.add(new Move(LadeMove.gibVonIndex(false, "WK"), this));
 					else
-						moves.add(new Move(Index.gibLadeMove(false, "WK2"), this));
+						moves.add(new Move(LadeMove.gibVonIndex(false, "WK2"), this));
 					return false;
 				}
 			}
@@ -262,7 +260,7 @@ public abstract class TSSA extends FWA implements Licht
 	{
 		if(grabRichtung >= 0)
 		{
-			Index.gibAlternateStandard("TSSA").changeToThis(this, 20, 10);
+			AlternateStandard.gibVonIndex1("TSSA").changeToThis(this, 20, 10);
 			lastZ = currentZ;
 			currentZ = "Luft";
 			focus = null;
@@ -300,7 +298,7 @@ public abstract class TSSA extends FWA implements Licht
 			return welt.tk2(p, richtung);
 	}
 
-	boolean kletterSeitlich(boolean richtung)
+	void kletterSeitlich(boolean richtung)
 	{
 		if(grabRichtung >= 0)
 		{
@@ -319,7 +317,6 @@ public abstract class TSSA extends FWA implements Licht
 					focus.targetPosition.a += 0.2 * (2 - kR);
 			}
 		}
-		return false;
 	}
 
 	public K4 lichtPosition()

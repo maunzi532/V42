@@ -11,8 +11,6 @@ import java.util.*;
 public class Vor
 {
 	public ArrayList<Anzeige3> anzeige;
-	ArrayList<Double> abstands;
-	ArrayList<Integer> splits;
 	private WeltND dw;
 	private LichtW lw;
 	private BlockZuAnz za;
@@ -20,27 +18,18 @@ public class Vor
 	public int baumodus;
 	public boolean siehBlocks = true;
 	public boolean siehNonBlocks = true;
+	private VorDaten vorDaten;
 
 	public Vor(String abstandSplitInput, AllWelt aw)
 	{
-		abstands = new ArrayList<>();
-		splits = new ArrayList<>();
-		String[] zeilen = abstandSplitInput.split("\n");
-		for(int i = 0; i < zeilen.length; i++)
-			if(!zeilen[i].isEmpty() && !zeilen[i].startsWith("/"))
-			{
-				String[] z1 = zeilen[i].split(" ");
-				abstands.add(Double.parseDouble(z1[0]));
-				splits.add(Integer.parseInt(z1[1]));
-			}
+		vorDaten = new VorDaten(abstandSplitInput);
 		za = new BlockZuAnz(aw.wbl, aw.lw);
 		dw = aw.dw;
 		lw = aw.lw;
 	}
 
-	public void vorbereiten(Overlay theOverlay)
+	public void vorbereiten(Controllable kam, boolean godMode, int wI, int hI, int cI, Long tnTarget)
 	{
-		Controllable kam = theOverlay.kamZurZeit();
 		K4 kp = kam.kamP();
 		Drehung kd = kam.kamD();
 		anzeige = new ArrayList<>();
@@ -77,14 +66,13 @@ public class Vor
 					}
 				}
 				for(int i = 0; i < nb.externals.length; i++)
-					nb.externals[i].gibPl(anzeige, nb.punkteK, nb.lw, theOverlay.godMode,
-							nb == theOverlay.kamZurZeit());
+					nb.externals[i].gibPl(anzeige, nb.punkteK, nb.lw, nb == kam);
 			}
 		if(siehBlocks)
 			za.zuAnz(anzeige, kp, kd, new K4(Staticf.sicht, Staticf.sicht,
 					Staticf.sicht, 0), visionRange4D, baumodus);
 		for(int i = 0; i < anzeige.size(); i++)
-			anzeige.get(i).splittern(anzeige, theOverlay.godMode, this);
+			anzeige.get(i).splittern(anzeige, vorDaten);
 		Collections.sort(anzeige, (t1, t2) ->
 		{
 			if(!t1.anzeigen && !t2.anzeigen)
@@ -96,18 +84,8 @@ public class Vor
 			return -Double.compare(t1.kamMid.c, t2.kamMid.c);
 		});
 		for(int i = 0; i < anzeige.size(); i++)
-			anzeige.get(i).eckenEntf(theOverlay.wI, theOverlay.hI, theOverlay.auf.scF.width);
+			anzeige.get(i).eckenEntf(wI, hI, cI);
 		for(int i = 0; i < anzeige.size(); i++)
-			anzeige.get(i).farbeFlaeche(theOverlay.pa.tnTarget, theOverlay.wI, theOverlay.hI,
-					theOverlay.kamZurZeit().kamP(), /*Staticf.xraywidth*/ 0);
-	}
-
-	private void soutA()
-	{
-		int z = 0;
-		for(int i = 0; i < anzeige.size(); i++)
-			if(anzeige.get(i).anzeigen)
-				z++;
-		System.out.println(z);
+			anzeige.get(i).farbeFlaeche(tnTarget, wI, hI, kam.kamP(), /*Staticf.xraywidth*/ 0);
 	}
 }

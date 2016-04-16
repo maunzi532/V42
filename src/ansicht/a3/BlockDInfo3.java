@@ -41,8 +41,6 @@ public class BlockDInfo3 extends Rechteck3
 			yp[1] = (int) (ye + ddiff1 * scale * 3);
 			yp[2] = (int) (ye + ddiff2 * scale * 3);
 		}
-		if(scale > 100)
-			System.out.println(scale);
 		gd.setPaint(backgroundNew);
 		gd.fillPolygon(xp, yp, 3);
 		//gd.setFont(new Font("Consolas", Font.PLAIN, (int)(scale > 20 ? 20 : scale / 2 + 10)));
@@ -64,23 +62,26 @@ public class BlockDInfo3 extends Rechteck3
 
 	public void panelDark(Graphics2D gd)
 	{
-		int[] xp = new int[3];
-		int[] yp = new int[3];
-		xp[0] = xe;
-		yp[0] = ye;
-		xp[2] = xe;
-		if(ddiff1 < 0)
+		if(targetable)
 		{
-			xp[1] = (int) (xe - scale * 3);
-			yp[1] = (int) (ye + ddiff2 * scale * 3);
-			yp[2] = (int) (ye + ddiff1 * scale * 3);
+			int[] xp = new int[3];
+			int[] yp = new int[3];
+			xp[0] = xe;
+			yp[0] = ye;
+			xp[2] = xe;
+			if(ddiff1 < 0)
+			{
+				xp[1] = (int)(xe - scale * 3);
+				yp[1] = (int)(ye + ddiff2 * scale * 3);
+				yp[2] = (int)(ye + ddiff1 * scale * 3);
+			}
+			else if(ddiff2 > 0)
+			{
+				xp[1] = (int)(xe + scale * 3);
+				yp[1] = (int)(ye + ddiff1 * scale * 3);
+				yp[2] = (int)(ye + ddiff2 * scale * 3);
+			}
+			gd.fillPolygon(xp, yp, 3);
 		}
-		else if(ddiff2 > 0)
-		{
-			xp[1] = (int) (xe + scale * 3);
-			yp[1] = (int) (ye + ddiff1 * scale * 3);
-			yp[2] = (int) (ye + ddiff2 * scale * 3);
-		}
-		gd.fillPolygon(xp, yp, 3);
 	}
 }

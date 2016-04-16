@@ -15,10 +15,10 @@ import java.util.*;
 public class Overlay
 {
 	public LPaneel auf;
-	public double[] ort;
+	private double[] ort;
 	public int xI, yI, wI, hI;
 	public SchalterLayer sl;
-	public InitSL isl;
+	private InitSL isl;
 	public boolean sichtAn = true;
 	public Panelizer pa;
 	public AllWelt aw;
@@ -27,12 +27,12 @@ public class Overlay
 	//Spectator Modus
 	public boolean godMode = false;
 	//Spectator-Modus-Kamera
-	public GMKamera godModeKam;
+	private GMKamera godModeKam;
 	//Zurzeit benutzte Kamera, falls nicht im godMode
 	public Controllable kamN;
 	//Index in TA2
 	public int taIndex;
-	public boolean schalterSichtbar;
+	private boolean schalterSichtbar;
 	public DrehInput drehInput;
 
 	public void initOverlay(int taIndex, AllWelt awA, String zDatLad, LPaneel auf, double[] ort)
@@ -42,19 +42,20 @@ public class Overlay
 		this.ort = ort;
 		aw = awA;
 		vor = new Vor(Index.gibText("Einstellungen", zDatLad), aw);
-		sl = new SchalterLayer(this);
+		sl = new SchalterLayer();
 		pa = new Panelizer();
 		resize();
 		isl = new InitSL(sl, this);
 	}
 
-	public void resize()
+	private void resize()
 	{
 		xI = (int) (ort[0] * auf.scF.width);
 		yI = (int) (ort[1] * auf.scF.height);
 		wI = (int) (ort[2] * auf.scF.width);
 		hI = (int) (ort[3] * auf.scF.height);
 		pa.resize(wI, hI);
+		sl.resize(wI, hI);
 	}
 
 	public void vorbereiten()
@@ -74,7 +75,7 @@ public class Overlay
 			n2s3[i] = z.n2s.get(i);
 		n2s2 = n2s3;*/
 
-		vor.vorbereiten(this);
+		vor.vorbereiten(kamZurZeit(), godMode, wI, hI, auf.scF.width, pa.tnTarget);
 		ArrayList<Anzeige3> a3s3 = new ArrayList<>();
 		for(int i = 0; i < vor.anzeige.size(); i++)
 			if(vor.anzeige.get(i).anzeigen)
@@ -108,13 +109,13 @@ public class Overlay
 		godModeKam.dreh = new Drehung();
 		godModeKam.canInfl = new double[]{1, 1, 1, 1};
 		godModeKam.aussehen = new LadeModell();
-		Index.gibStandardAussehen("Kam").assignStandard(godModeKam);
+		StandardAussehen.gibVonIndex2("Kam").assignStandard(godModeKam);
 		godModeKam.aussehen.reload();
 		godModeKam.init();
 		godModeKam.aktionen.add(new Sicht(godModeKam, 10, 0, 0, true, this));
 	}
 
-	public Controllable kamZurZeit()
+	private Controllable kamZurZeit()
 	{
 		if(godMode)
 			return godModeKam;

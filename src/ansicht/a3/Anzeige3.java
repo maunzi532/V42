@@ -16,20 +16,20 @@ public abstract class Anzeige3
 
 	public double ddiff;
 
-	protected Anzeige3(long tn, LichtW lw)
+	Anzeige3(long tn, LichtW lw)
 	{
 		anzeigen = true;
 		this.tn = tn;
 		this.lw = lw;
 	}
 
-	public void splittern(ArrayList<Anzeige3> dieListe, boolean gmVision, Vor daten){}
+	public void splittern(ArrayList<Anzeige3> dieListe, VorDaten daten){}
 
 	public void eckenEntf(int wI, int hI, int cI){}
 
 	public abstract void farbeFlaeche(Long tnTarget, int wI, int hI, K4 kam, double xrZone);
 
-	protected void checkForVanishing(Color fc)
+	void checkForVanishing(Color fc)
 	{
 		if(lw == null)
 			return;
@@ -55,12 +55,12 @@ public abstract class Anzeige3
 			anzeigen = false; //Unsichtbar
 	}
 
-	protected int ethaX(double a1, double c1, int wI)
+	int ethaX(double a1, double c1, int wI)
 	{
 		return (int)(wI / 2d * (1 + Staticf.scaleX * a1 / c1));
 	}
 
-	protected int ethaY(double b1, double c1, int wI, int hI)
+	int ethaY(double b1, double c1, int wI, int hI)
 	{
 		return (int)(hI / 2d - wI / 2d * Staticf.scaleX * b1 / c1);
 	}

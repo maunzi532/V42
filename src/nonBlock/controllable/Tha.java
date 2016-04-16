@@ -14,14 +14,14 @@ public class Tha extends TSSA
 	private NBB fL;
 	private NBB fR;
 
-	private Tha(SPController control, LadeFWA abilities, Overlay overlay, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
+	private Tha(SPController control, LadeFWA abilities, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
 	{
-		super(control, abilities, "Luft", overlay, welt, lw, dw, bw);
+		super(control, abilities, "Luft", welt, lw, dw, bw);
 	}
 
-	public Tha(SPController control, LadeFWA abilities, Overlay overlay, AllWelt aw)
+	public Tha(SPController control, LadeFWA abilities, AllWelt aw)
 	{
-		this(control, abilities, overlay, aw.wbl, aw.lw, aw.dw, aw.bw);
+		this(control, abilities, aw.wbl, aw.lw, aw.dw, aw.bw);
 	}
 
 	public void init()
@@ -35,8 +35,8 @@ public class Tha extends TSSA
 			public void wand(int welche){}
 			protected void kontrolle(){}
 		};
-		Index.gibStandardAussehen("H4/Sta").assignStandard(fL);
-		fL.aussehen = new LadeModell().reload(Index.gibLadeTeil("H4/Achsen"));
+		StandardAussehen.gibVonIndex2("H4/Sta").assignStandard(fL);
+		fL.aussehen = new LadeModell().reload(LadeTeil.gibVonIndex("H4/Achsen"));
 		fL.focus = new Mount(fL, this, 15, 0, new Drehung(0, Math.PI * 3 / 2), 0);
 		fL.init();
 		fR = new NBB(welt, lw, dw, bw)
@@ -47,8 +47,8 @@ public class Tha extends TSSA
 			public void wand(int welche){}
 			protected void kontrolle(){}
 		};
-		Index.gibStandardAussehen("H4/Sta").assignStandard(fR);
-		fR.aussehen = new LadeModell().reload(Index.gibLadeTeil("H4/Achsen"));
+		StandardAussehen.gibVonIndex2("H4/Sta").assignStandard(fR);
+		fR.aussehen = new LadeModell().reload(LadeTeil.gibVonIndex("H4/Achsen"));
 		fR.focus = new Mount(fR, this, 16, 0, new Drehung(0, Math.PI * 3 / 2), 0);
 		fR.init();
 	}
@@ -186,14 +186,14 @@ public class Tha extends TSSA
 				break;
 			case "Ducken":
 				if(approxRichtung() % 2 == 0)
-					Index.gibAlternateStandard("TSSA2L").changeToThis(this, 30, 3);
+					AlternateStandard.gibVonIndex1("TSSA2L").changeToThis(this, 30, 3);
 				else
-					Index.gibAlternateStandard("TSSA2R").changeToThis(this, 30, 3);
+					AlternateStandard.gibVonIndex1("TSSA2R").changeToThis(this, 30, 3);
 				lastZ = currentZ;
 				currentZ = "Ducken";
 				break;
 			case "Aufstehen":
-				Index.gibAlternateStandard("TSSA").changeToThis(this, 40, 3);
+				AlternateStandard.gibVonIndex1("TSSA").changeToThis(this, 40, 3);
 				lastZ = currentZ;
 				currentZ = "Normal";
 				break;
