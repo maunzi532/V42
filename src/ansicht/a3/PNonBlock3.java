@@ -8,7 +8,6 @@ import java.util.*;
 public class PNonBlock3 extends Polygon3
 {
 	boolean canSplit;
-	int splitDepth;
 
 	public PNonBlock3(long tn, LichtW lw, Boolean seite, PolyFarbe farbe, int rSeed, K4[] eckenR, K4[] eckenK)
 	{
@@ -18,6 +17,13 @@ public class PNonBlock3 extends Polygon3
 		this.eckenK = eckenK;
 		this.rSeed = rSeed;
 		berechneMids();
+	}
+
+	public PNonBlock3(long tn, LichtW lw, Boolean seite, PolyFarbe farbe,
+			int rSeed, K4[] eckenR, K4[] eckenK, int splSeed)
+	{
+		this(tn, lw, seite, farbe, rSeed, eckenR, eckenK);
+		nachSplitID = splSeed;
 	}
 
 	public PNonBlock3(PNonBlock3 main, int splitID, K4[] eckenR, K4[] eckenK)

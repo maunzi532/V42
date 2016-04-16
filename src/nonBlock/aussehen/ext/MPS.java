@@ -2,8 +2,6 @@ package nonBlock.aussehen.ext;
 
 import ansicht.*;
 import ansicht.a3.*;
-import ansicht.n2.*;
-import ansicht.n2.xF.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
@@ -14,7 +12,7 @@ public class MPS extends External
 	ArrayList<MPSF> teile;
 	ArrayList<int[]> flaechen;
 	private ArrayList<Integer> seeds;
-	XFarbe xf;
+	//XFarbe xf;
 
 	public MPS()
 	{
@@ -70,7 +68,7 @@ public class MPS extends External
 		seeds = new ArrayList<>();
 		for(int i = 0; i < flaechen.size(); i++)
 			seeds.add(r.nextInt());
-		xf = new XFN(new Color(150, 150, 150), Material.STOFF);
+		//xf = new XFN(new Color(150, 150, 150), Material.STOFF);
 	}
 
 	public void entLink(Drehung mDreh, K4 mPos)
@@ -83,19 +81,6 @@ public class MPS extends External
 		into[anfang] = new K4[teile.size()];
 		for(int i = 0; i < teile.size(); i++)
 			into[anfang][i] = new K4(teile.get(i).ort);
-	}
-
-	public ArrayList<F2> gibFl(K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision)
-	{
-		ArrayList<F2> toR = new ArrayList<>();
-		for(int i = 0; i < flaechen.size(); i++)
-		{
-			K4[] ecken = new K4[flaechen.get(i).length];
-			for(int j = 0; j < flaechen.get(i).length; j++)
-				ecken[j] = into[anfang][flaechen.get(i)[j]];
-			NF2.atl(toR, new NF2(ecken, null, null, xf, null, lw, -1, seeds.get(i), main2.tn), gmVision);
-		}
-		return toR;
 	}
 
 	public void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision)

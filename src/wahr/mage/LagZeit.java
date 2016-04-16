@@ -6,7 +6,7 @@ public class LagZeit
 {
 	public static void start()
 	{
-		Hauptschleife.theOverlays[0].z.siehNonBlocks = false;
+		Hauptschleife.theOverlays[0].vor.siehNonBlocks = false;
 		for(int i = 0; i < 10; i++)
 		{
 			Staticf.last = System.currentTimeMillis();
@@ -17,6 +17,6 @@ public class LagZeit
 			Staticf.last2 = System.currentTimeMillis();
 			Hauptschleife.theOverlays[0].panelize();
 		}
-		Hauptschleife.theOverlays[0].z.siehNonBlocks = true;
+		Hauptschleife.theOverlays[0].vor.siehNonBlocks = true;
 	}
 }

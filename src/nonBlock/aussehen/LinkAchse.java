@@ -1,6 +1,6 @@
 package nonBlock.aussehen;
 
-import ansicht.n2.*;
+import ansicht.a3.*;
 import wahr.zugriff.*;
 
 public class LinkAchse

@@ -2,12 +2,9 @@ package nonBlock.aussehen.ext;
 
 import ansicht.*;
 import ansicht.a3.*;
-import ansicht.n2.*;
-import ansicht.n2.xF.*;
 import nonBlock.aussehen.*;
 import wahr.zugriff.*;
 
-import java.awt.*;
 import java.util.*;
 
 public class MK extends External
@@ -73,27 +70,6 @@ public class MK extends External
 				cy++;
 			}
 		into1 = into;
-	}
-
-	public ArrayList<F2> gibFl(K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision)
-	{
-		ArrayList<F2> al = new ArrayList<>();
-		int cy = anfang;
-		for(int t = 0; t < nt - 1; t++)
-			for(int w = 0; w < nw; w++)
-			{
-				XFarbe fn = new XFN(Color.WHITE, Material.N);
-				K4[] k0 = into[cy];
-				K4[] k01 = into1[cy];
-				int pm = w == nw - 1 ? 1 - nw : 1;
-				K4[] k1 = into[cy + pm];
-				K4[] k11 = into1[cy + pm];
-					NF2.atl(al, new NF2(new K4[]{k0[0], k1[0], into[cy + nw + pm][0], into[cy + nw][0]},
-							new K4[]{k01[0], k11[0], into1[cy + nw + pm][0], into1[cy + nw][0]},
-							fn, true, lw, seeds[t][w], 0, main2.tn), gmVision);
-				cy++;
-			}
-		return al;
 	}
 
 	public void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision)

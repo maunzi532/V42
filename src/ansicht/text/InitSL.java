@@ -45,15 +45,15 @@ public class InitSL
 			public void onClick(boolean r, double cx, double cy)
 			{
 				if(r)
-					ov.z.x4dization = ov.z.x4dization > 0 ? 0 : 1;
+					ov.vor.visionRange4D = ov.vor.visionRange4D > 0 ? 0 : 1;
 				else
-					ov.z.x4dization = ov.z.x4dization > 1 ? 0 : 2;
+					ov.vor.visionRange4D = ov.vor.visionRange4D > 1 ? 0 : 2;
 				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
 			{
-				switch(ov.z.x4dization)
+				switch(ov.vor.visionRange4D)
 				{
 					case 0:
 						text = "4D aus";
@@ -72,15 +72,15 @@ public class InitSL
 			public void onClick(boolean r, double cx, double cy)
 			{
 				if(r)
-					ov.z.d2tangibility = 0;
+					ov.vor.baumodus = 0;
 				else
-					ov.z.d2tangibility = (ov.z.d2tangibility + 1) % 3;
+					ov.vor.baumodus = (ov.vor.baumodus + 1) % 3;
 				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
 			{
-				switch(ov.z.d2tangibility)
+				switch(ov.vor.baumodus)
 				{
 					case 0:
 						text = "Baumodus aus";
@@ -100,24 +100,24 @@ public class InitSL
 			public void onClick(boolean r, double cx, double cy)
 			{
 				if(r)
-					ov.z.siehNonBlocks = !ov.z.siehNonBlocks;
+					ov.vor.siehNonBlocks = !ov.vor.siehNonBlocks;
 				else
-					ov.z.siehBlocks = !ov.z.siehBlocks;
+					ov.vor.siehBlocks = !ov.vor.siehBlocks;
 				super.onClick(r, cx, cy);
 			}
 
 			public void tick()
 			{
-				if(ov.z.siehBlocks)
+				if(ov.vor.siehBlocks)
 				{
-					if(ov.z.siehNonBlocks)
+					if(ov.vor.siehNonBlocks)
 						text = "Alles";
 					else
 						text = "Blocks";
 				}
 				else
 				{
-					if(ov.z.siehNonBlocks)
+					if(ov.vor.siehNonBlocks)
 						text = "NonBlocks";
 					else
 						text = "Nichts";

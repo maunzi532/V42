@@ -1,7 +1,6 @@
 package ansicht;
 
 import ansicht.a3.*;
-import ansicht.n2.*;
 import ansicht.text.*;
 import nonBlock.aktion.*;
 import nonBlock.aussehen.*;
@@ -23,8 +22,6 @@ public class Overlay
 	public boolean sichtAn = true;
 	public Panelizer pa;
 	public AllWelt aw;
-	public Zeichner z;
-	private N2[] n2s2;
 	public Vor vor;
 	private ArrayList<Anzeige3> a3s2;
 	//Spectator Modus
@@ -44,7 +41,6 @@ public class Overlay
 		this.auf = auf;
 		this.ort = ort;
 		aw = awA;
-		z = new Zeichner(Index.gibText("Einstellungen", zDatLad), aw);
 		vor = new Vor(Index.gibText("Einstellungen", zDatLad), aw);
 		sl = new SchalterLayer(this);
 		pa = new Panelizer();
@@ -173,8 +169,8 @@ public class Overlay
 				isl.normalSchalter.removeAll(isl.godModeSchalter);
 				godModeKam.lw.licht.remove(godModeKam);
 				pa.xrmode = false;
-				z.siehBlocks = true;
-				z.siehNonBlocks = true;
+				vor.siehBlocks = true;
+				vor.siehNonBlocks = true;
 			}
 		}
 		sl.actTex();

@@ -1,7 +1,7 @@
 package nonBlock.aussehen;
 
 import ansicht.*;
-import ansicht.n2.*;
+import ansicht.a3.*;
 import nonBlock.aussehen.ext.*;
 import nonBlock.aktion.*;
 import wahr.zugriff.*;

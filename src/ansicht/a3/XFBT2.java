@@ -1,7 +1,5 @@
 package ansicht.a3;
 
-import ansicht.n2.xF.*;
-
 import java.awt.*;
 import java.awt.image.*;
 import java.util.*;

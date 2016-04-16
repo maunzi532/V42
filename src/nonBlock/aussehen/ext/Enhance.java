@@ -2,7 +2,6 @@ package nonBlock.aussehen.ext;
 
 import ansicht.*;
 import ansicht.a3.*;
-import ansicht.n2.*;
 import nonBlock.aussehen.*;
 import wahr.zugriff.*;
 
@@ -65,26 +64,6 @@ public class Enhance extends External
 			}
 		}
 		into1 = into;
-	}
-
-	public ArrayList<F2> gibFl(K4[][] into, LichtW lw, boolean gmVision, boolean isMasterVision)
-	{
-		ArrayList<F2> toR = new ArrayList<>();
-		for(int j = 0; j < enh.f2.size(); j++)
-		{
-			LadeF2 f2 = enh.f2.get(j);
-			K4[] ecken = new K4[f2.ecken1.size()];
-			for(int k = 0; k < f2.ecken1.size(); k++)
-				ecken[k] = into[f2.ecken1.get(k) + (f2.ecken3.get(k) ? 0 : anfang)][f2.ecken2.get(k)];
-			K4[] ecken1 = new K4[f2.ecken1.size()];
-			for(int k = 0; k < f2.ecken1.size(); k++)
-				ecken1[k] = into1[f2.ecken1.get(k) + (f2.ecken3.get(k) ? 0 : anfang)][f2.ecken2.get(k)];
-			K4[] spken = new K4[f2.spken1.size()];
-			for(int k = 0; k < f2.spken1.size(); k++)
-				spken[k] = into[f2.spken1.get(k) + (f2.ecken3.get(k) ? 0 : anfang)][f2.spken2.get(k)];
-			NF2.atl(toR, new NF2(ecken, ecken1, spken, f2.farbe, f2.seite, lw, 0, f2.seed, main2.tn), gmVision);
-		}
-		return toR;
 	}
 
 	public void gibPl(ArrayList<Anzeige3> dieListe, K4[][] into, LichtW lw,

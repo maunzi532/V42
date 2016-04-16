@@ -1,7 +1,6 @@
 package ansicht;
 
 import ansicht.a3.*;
-import ansicht.n2.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
@@ -29,45 +28,6 @@ public class Panelizer
 		gd = light.createGraphics();
 		dark = new BufferedImage(w, h, BufferedImage.TYPE_INT_BGR);
 		darkCopy = dark.createGraphics();
-	}
-
-	public void panelize(N2[] n2s, int mx, int my)
-	{
-		gd.setColor(new Color(20, 0, 0));
-		gd.fillRect(0, 0, light.getWidth(), light.getHeight());
-		if(taType > 0)
-		{
-			darkCopy.setColor(Color.BLACK);
-			darkCopy.fillRect(0, 0, dark.getWidth(), dark.getHeight());
-			darkC = new HashMap<>();
-			darkC2 = new HashMap<>();
-			darkUsed = 0;
-		}
-		Staticf.sca("PL1 ");
-		for(int i = 0; i < n2s.length; i++)
-			if(n2s[i].draw())
-			{
-				if(taType > 0)
-				{
-					Long ta = n2s[i].tn;
-					if(darkC != null && !darkC.containsKey(ta))
-					{
-						darkUsed++;
-						darkC.put(ta, darkUsed);
-						darkC2.put(darkUsed, ta);
-					}
-					if(darkC != null && darkC.containsKey(ta) && darkC.get(ta) != null)
-					{
-						darkCopy.setColor(new Color(darkC.get(ta)));
-						n2s[i].panelDark(darkCopy);
-					}
-				}
-				n2s[i].panel(this);
-			}
-		Staticf.sca("PL2 ");
-		DPA2(gd, mx, my);
-		Staticf.sca("PL3 ");
-		//gd.drawImage(dark, 700, 0, 300, 200, null);
 	}
 
 	private void DPA2(Graphics2D gd, int mx, int my)

@@ -1,7 +1,6 @@
 package ansicht.a3;
 
 import ansicht.*;
-import ansicht.n2.*;
 import block.*;
 import wahr.zugriff.*;
 

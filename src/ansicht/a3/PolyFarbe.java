@@ -1,6 +1,5 @@
 package ansicht.a3;
 
-import ansicht.n2.xF.*;
 import wahr.zugriff.*;
 
 import java.awt.*;

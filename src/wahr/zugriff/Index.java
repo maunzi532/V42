@@ -1,7 +1,6 @@
 package wahr.zugriff;
 
 import ansicht.a3.*;
-import ansicht.n2.xF.*;
 import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
 import nonBlock.formwandler.*;
@@ -80,32 +79,6 @@ public class Index
 			return (LadeMove) geladen.get(name);
 		LadeMove s = new LadeMove(name, bauName(seq ? "Sequenzen" : "Moves", name));
 		geladen.put(name, s);
-		return s;
-	}
-
-	public static XFBT gibXFBT(String name)
-	{
-		if(geladen.containsKey(name))
-			return (XFBT) geladen.get(name);
-		XFBT s = new XFBT(bauName("Blocks", name));
-		geladen.put(name, s);
-		return s;
-	}
-
-	public static XFBT gibXFBT(String name, int seite, int max)
-	{
-		if(geladen.containsKey(name + seite))
-			return (XFBT) geladen.get(name + seite);
-		ArrayList<BufferedImage> imgs = new ArrayList<>();
-		for(int i = 1; i <= max; i++)
-		{
-			String text = teilNamen.get("Blocks") + File.separator +
-					name.replace("/", File.separator) + " " + i + ".png";
-			if(new File(text).exists())
-				imgs.add((BufferedImage)Lader.gibBild(text));
-		}
-		XFBT s = new XFBT(imgs, seite);
-		geladen.put(name + seite, s);
 		return s;
 	}
 
