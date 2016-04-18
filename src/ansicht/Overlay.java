@@ -41,6 +41,7 @@ public class Overlay
 		this.auf = auf;
 		this.ort = ort;
 		aw = awA;
+		aw.tw.texters.add(this);
 		vor = new Vor(Index.gibText("Einstellungen", zDatLad), aw);
 		sl = new SchalterLayer();
 		pa = new Panelizer();

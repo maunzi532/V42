@@ -43,6 +43,7 @@ class LadeAktion
 	private int delay;
 
 	private String text;
+	private boolean toAll;
 	private String dispName;
 	private String codebez;
 	private String emotion;
@@ -100,6 +101,10 @@ class LadeAktion
 					break;
 				case "T":
 					text = cd3[1];
+					break;
+				case "TAll":
+					text = cd3[1];
+					toAll = true;
 					break;
 				case "dispName":
 					dispName = cd3[1];
@@ -163,11 +168,16 @@ class LadeAktion
 				Freeze.checkLinA(dislocated, fm);
 				break;
 			case 2:
+				if(toAll)
+					overlay.aw.tw.sendThemAll(text, dispName, codebez, emotion);
 			case 3:
-				TBox st2 = new TBox(overlay.sl, typ == 3, 0.1, 0.1, text);
-				overlay.sl.placeTBox(st2, dispName, codebez, emotion);
-				if(typ == 3)
-					return st2;
+				if(!toAll)
+				{
+					TBox st2 = new TBox(overlay.sl, typ == 3, text);
+					overlay.sl.placeTBox(st2, dispName, codebez, emotion);
+					if(typ == 3)
+						return st2;
+				}
 				break;
 			case 4:
 				double[] mvdR = new double[mvd.length];

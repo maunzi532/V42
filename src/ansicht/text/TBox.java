@@ -11,9 +11,9 @@ public class TBox extends SLF implements ZDelay
 	public int fade;
 	private int timer;
 
-	public TBox(SchalterLayer main, boolean tangible, double w, double h, String text)
+	public TBox(SchalterLayer main, boolean tangible, String text)
 	{
-		super(main, tangible, 0, 0, w, h, text);
+		super(main, tangible, 0, 0, 0.1, 0.1, text);
 		fade = 255;
 		timer = tangible ? -1 : 100;
 	}

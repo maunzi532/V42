@@ -1,6 +1,7 @@
 package wahr.zugriff;
 
 import ansicht.*;
+import ansicht.text.*;
 import block.*;
 import nonBlock.aktion.*;
 import nonBlock.collide.*;
@@ -11,6 +12,7 @@ public class AllWelt
 	public WeltND dw;
 	public LichtW lw;
 	public WeltNB bw;
+	public TextWelt tw;
 
 	public AllWelt()
 	{
@@ -18,6 +20,7 @@ public class AllWelt
 		dw = new WeltND();
 		lw = new LichtW();
 		bw = new WeltNB(this);
+		tw = new TextWelt();
 	}
 
 	public void logik()
