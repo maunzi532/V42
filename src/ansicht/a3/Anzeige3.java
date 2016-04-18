@@ -27,7 +27,7 @@ public abstract class Anzeige3
 
 	public void eckenEntf(int wI, int hI, int cI){}
 
-	public abstract void farbeFlaeche(Long tnTarget, int wI, int hI, K4 kam, double xrZone);
+	public abstract void farbeFlaeche(long tnTarget, int wI, int hI, K4 kam, double xrZone);
 
 	void checkForVanishing(Color fc)
 	{

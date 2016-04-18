@@ -2,25 +2,21 @@ F Lx
 move KL2
 cld 500
 shcld 0
-power 2
 ChainOnly
 
 F Rx
 move KR2
 cld 500
 shcld 1
-power 2
 ChainOnly
 
 F N_Oben
 move MV1
 shcld -1
-power 3
 
 F N_Unten
 fall Ducken
 shcld -1
-
 
 F K_Links
 fall WandL

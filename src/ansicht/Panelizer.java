@@ -16,7 +16,7 @@ public class Panelizer
 	private HashMap<Long, Integer> darkC;
 	private HashMap<Integer, Long> darkC2;
 	private BufferedImage dark;
-	public Long tnTarget;
+	public long tnTarget;
 	public int taType = 0;
 	public boolean taGet;
 	//X_Ray-Modus an/aus
@@ -41,14 +41,13 @@ public class Panelizer
 				DPA3(cl);
 			}
 			else
-				tnTarget = null;
+				tnTarget = -1;
 		}
 		if(taType > 0)
 		{
 			gd.setColor(new Color(0, 180, 0));
 			gd.setFont(new Font(null, Font.PLAIN, 20));
-			if(tnTarget != null)
-				gd.drawString(tnTarget.toString(), 50, 150);
+			gd.drawString(String.valueOf(tnTarget), 50, 150);
 		}
 	}
 

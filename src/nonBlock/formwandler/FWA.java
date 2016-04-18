@@ -68,6 +68,10 @@ public abstract class FWA extends NBB implements Controllable
 			return;
 		if(td.isChainOnly && moves.contains(chain))
 			return;
+		if(td.power > 0)
+			for(int k = 0; k < moves.size(); k++)
+				if(moves.get(k).lad.resist < td.power)
+					moves.get(k).kill = true;
 		if(td.theFall != null)
 			doFall(td.theFall, td.isChainOnly);
 		if(td.theMove != null)

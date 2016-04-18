@@ -128,7 +128,7 @@ public abstract class Polygon3 extends Anzeige3
 		return (k0 * kc1 - k1 * kc0) / (kc1 - kc0);
 	}
 
-	public void farbeFlaeche(Long tnTarget, int wI, int hI, K4 kam, double xrZone)
+	public void farbeFlaeche(long tnTarget, int wI, int hI, K4 kam, double xrZone)
 	{
 		if(anzeigen)
 		{

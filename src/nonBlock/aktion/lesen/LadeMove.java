@@ -10,6 +10,7 @@ public class LadeMove
 	int teilE;
 	final ArrayList<Integer> zeitE;
 	final String name;
+	public int resist = 0;
 
 	private LadeMove(String name, String code)
 	{
@@ -27,6 +28,8 @@ public class LadeMove
 					zeitE.add(Integer.parseInt(cde[i].substring(2)));
 					teilE++;
 				}
+				else if(cde[i].startsWith("R "))
+					resist = Integer.parseInt(cde[i].substring(2));
 				else
 				{
 					String[] cd2 = cde[i].split(" ");

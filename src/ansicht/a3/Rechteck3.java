@@ -27,7 +27,7 @@ public class Rechteck3 extends Anzeige3
 		this.text = text;
 	}
 
-	public void farbeFlaeche(Long tnTarget, int wI, int hI, K4 kam, double xrZone)
+	public void farbeFlaeche(long tnTarget, int wI, int hI, K4 kam, double xrZone)
 	{
 		if(!anzeigen)
 			return;

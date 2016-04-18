@@ -5,7 +5,7 @@ import nonBlock.aktion.*;
 
 public class Move
 {
-	private final LadeMove lad;
+	public final LadeMove lad;
 	private int teilA;
 	private int zeitA;
 	private final NBD akteur;
@@ -14,6 +14,7 @@ public class Move
 	public final String name;
 	private final boolean seq;
 	private Overlay overlay;
+	public boolean kill;
 
 	public Move(LadeMove lad, NBD akteur)
 	{
@@ -41,6 +42,8 @@ public class Move
 
 	public boolean tick()
 	{
+		if(kill)
+			return true;
 		for(int i = 0; i < lad.aktionen.size(); i++)
 		{
 			LadeAktion lad1 = lad.aktionen.get(i);

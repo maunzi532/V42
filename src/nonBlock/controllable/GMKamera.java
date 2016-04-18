@@ -82,7 +82,7 @@ public class GMKamera extends NBD implements Controllable, Licht
 		switch(command)
 		{
 			case "Hoch":
-				if(overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
+				if(overlay.pa.tnTarget >= 0)
 				{
 					WBP p = welt.decodeTn(overlay.pa.tnTarget);
 					DerBlock block = welt.gib(p);
@@ -90,14 +90,14 @@ public class GMKamera extends NBD implements Controllable, Licht
 				}
 				break;
 			case "Weg":
-				if(overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
+				if(overlay.pa.tnTarget >= 0)
 				{
 					WBP p = welt.decodeTn(overlay.pa.tnTarget);
 					welt.set(p, new DerBlock(0, welt.gib(p).dreh4));
 				}
 				break;
 			case "Dreh":
-				if(overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
+				if(overlay.pa.tnTarget >= 0)
 				{
 					WBP p = welt.decodeTn(overlay.pa.tnTarget);
 					DerBlock block = welt.gib(p);
@@ -115,7 +115,7 @@ public class GMKamera extends NBD implements Controllable, Licht
 			case "R1":
 			case "R2":
 			case "R3":
-				if(overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
+				if(overlay.pa.tnTarget >= 0)
 				{
 					WBP p = welt.decodeTn(overlay.pa.tnTarget);
 					if(p != null)
@@ -130,7 +130,7 @@ public class GMKamera extends NBD implements Controllable, Licht
 				break;
 			case "H0":
 			case "H1":
-				if(overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
+				if(overlay.pa.tnTarget >= 0)
 				{
 					WBP p = welt.decodeTn(overlay.pa.tnTarget);
 					if(p != null)
@@ -144,7 +144,7 @@ public class GMKamera extends NBD implements Controllable, Licht
 				break;
 			case "D0":
 			case "D1":
-				if(overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
+				if(overlay.pa.tnTarget >= 0)
 				{
 					WBP p = welt.decodeTn(overlay.pa.tnTarget);
 					if(p != null)

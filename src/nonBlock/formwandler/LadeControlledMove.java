@@ -13,7 +13,7 @@ public class LadeControlledMove
 	String theFall;
 	int sharedcooldown;
 	double cooldown;
-	private int power;
+	protected int power;
 
 	private LadeControlledMove(String code, String find)
 	{
