@@ -27,18 +27,18 @@ public class BlockDInfo3 extends Rechteck3
 		int[] xp = new int[3];
 		int[] yp = new int[3];
 		xp[0] = xe;
-		yp[0] = ye;
+		yp[1] = ye;
 		xp[2] = xe;
 		if(ddiff1 < 0)
 		{
 			xp[1] = (int) (xe - scale * 3);
-			yp[1] = (int) (ye + ddiff2 * scale * 3);
+			yp[0] = (int) (ye + ddiff2 * scale * 3);
 			yp[2] = (int) (ye + ddiff1 * scale * 3);
 		}
 		else if(ddiff2 > 0)
 		{
 			xp[1] = (int) (xe + scale * 3);
-			yp[1] = (int) (ye + ddiff1 * scale * 3);
+			yp[0] = (int) (ye + ddiff1 * scale * 3);
 			yp[2] = (int) (ye + ddiff2 * scale * 3);
 		}
 		gd.setPaint(backgroundNew);

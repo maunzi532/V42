@@ -1,5 +1,7 @@
 LadeTeil
 
+Indexort: Ladeteile
+
 Leere und mit / beginnende Zeilen werden ignoriert
 
 Trennzeichen ist Leerzeichen
@@ -25,7 +27,17 @@ Flächenzeilen beginnen mit "F"
 		FA = Sichtbar nur von der einen Seite
 		FV = Sichtbar nur von der anderen Seite
 	Farbe:
-		Besteht aus 1 bis 4 Teilen
+		Aufbau: Farbwert,Material
+		Material ist immer in Capslock
+		Mögliche Materialien:
+			N
+			B
+			H
+			STOFF
+			PLASTIK
+			METALL
+			NOSHADE
+		Farbwert besteht aus 1 bis 4 Teilen
 		Trennzeichen ist Minus
 		Bei 1- oder 2-teiligen ist es ein Grauton
 		Die erste Nummer ist der Grauwert
@@ -38,3 +50,37 @@ Flächenzeilen beginnen mit "F"
 		Der letzte wird mit dem ersten verbunden
 		Trennzeichen ist Minus
 		Aufbau: Achse-Interne_Nummer_vom_Punkt
+		Falls ein Punkt die gleiche Achse wie der
+		letzte hat, geht auch nur Num_vom_Punkt
+
+Formzeilen beginnen mit einem Wort in Capslock
+	Aufbau: WORT(evtl. mit + oder - am Ende)
+	Kantenzahl Punkte Farben
+	WORT bestimmt die Sichtbarkeit
+		WORT = Sichtbarkeit von beiden Seiten
+		WORT+ = Sichtbar nur von der einen Seite
+		WORT- = Sichtbar nur von der anderen Seite
+	Farben:
+		Werden im Kreis wie bei einzelnen Flächen
+		definiert, es kann aber -ALL angehängt werden
+		um die Farbe aller Flächen auf einmal zu setzen
+	Kantenzahl und Punkte sind je nach WORT definiert
+	WORT-Typen
+	PRISMA:
+		Erstellt ein hohles Prisma
+		Kantenzahl bestimmt, wie viele Mantelflächen
+		das Prisma hat
+		Punkte werden in der Reihenfolge definiert,
+		dass die Enden immer wechseln, sie werden
+		pro Ende jeweils im Kreis definiert, das
+		gleiche Achse funktioniert jedoch nur
+		zwischen Punkten am gleichen Ende
+		Wenn an den ersten Punkt eines Endes -ALL
+		angehängt wird, werden die anderen Ecken
+		dieses Endes nicht definiert, für jeden
+		fehlenden Punkt dieses Endes wird je 1
+		zum Num_von_Punkt hinzugezählt
+	PYRAMIDE:
+		Erstellt eine Pyramide ohne Grundfläche
+		Wie Prisma, jedoch gibt es statt dem
+		ersten Ende nur einen Punkt

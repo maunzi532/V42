@@ -202,8 +202,8 @@ public class H extends External
 					{
 						if(k + 2 >= nlen)
 						{
-							K4[] p7 = punkteK[cy + 1];
-							K4[] p71 = punkte[cy + 1];
+							K4[] p7 = punkte[cy + 1];
+							K4[] p71 = punkteK[cy + 1];
 							dieListe.add(new PNonBlock3(main2.tn, lw, true, polyFarbe, seeds[i][j],
 									new K4[]{p6[0], p6[1], p7[0]},
 									new K4[]{p61[0], p61[1], p71[0]}, splSeed));
@@ -219,8 +219,8 @@ public class H extends External
 						}
 						else
 						{
-							K4[] p7 = punkteK[cy + 1];
-							K4[] p71 = punkte[cy + 1];
+							K4[] p7 = punkte[cy + 1];
+							K4[] p71 = punkteK[cy + 1];
 							dieListe.add(new PNonBlock3(main2.tn, lw, true, polyFarbe, seeds[i][j],
 									new K4[]{p6[0], p6[1], p7[1], p7[0]},
 									new K4[]{p61[0], p61[1], p71[1], p71[0]}, splSeed));

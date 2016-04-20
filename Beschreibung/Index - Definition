@@ -2,9 +2,10 @@ Index
 
 Leere und mit / beginnende Zeilen werden ignoriert
 
-Trennzeichen ist Leerzeichen
-
 Alle Zeilen sind Dateiplatzierungsdefinitionen
 	Aufbau: Name_im_Code "=" Ort
 	Ort ist im Verhältnis zum Ausführungsort
-	"/" ist immer unabhängig vom Betriebssystem ein Ordner
+	"/" ist immer unabhängig vom Betriebssystem
+	ein Ordner
+	Die Orte sind Ordner, in denen sich die
+	entsprechenden Dateien befinden

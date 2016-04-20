@@ -44,10 +44,28 @@ public class Rechteck3 extends Anzeige3
 		if(!anzeigen)
 			return;
 		backgroundNew = errechneFarbe(background, tnTarget);
-		foregroundNew = errechneFarbe(foreground, tnTarget);
+		foregroundNew = errechneFarbeND(foreground, tnTarget);
 	}
 
 	private Paint errechneFarbe(Color fc, Long tnC)
+	{
+		if(ddiff > 0) //Rot
+			fc = limit(fc, (int)(ddiff * 10), (int)(ddiff * -5), (int)(ddiff * -5));
+		if(ddiff < 0) //Gn
+			fc = limit(fc, (int)(ddiff * 5), (int)(ddiff * -10), (int)(ddiff * 5));
+		double weg = Math.sqrt(kamMid.a * kamMid.a + kamMid.b * kamMid.b +
+				kamMid.c * kamMid.c + kamMid.d * kamMid.d);
+		double nah = (Staticf.sicht - weg) / Staticf.sicht; //Wenn nah 1, am Rand 0
+		if(nah < 0)
+			nah = 0;
+		if(tn != -1 && tnC != null && tn == tnC)
+			fc = limit(fc, 60, 60, 60); //Sichthilfe wenn getargetet
+		return new Color((int)(fc.getRed() * nah + 20 * (1 - nah)),
+				(int)(fc.getGreen() * nah + 0 * (1 - nah)),
+				(int)(fc.getBlue() * nah + 0 * (1 - nah)), fc.getAlpha()); //Fading nach Dunkelrot
+	}
+
+	private Paint errechneFarbeND(Color fc, Long tnC)
 	{
 		double weg = Math.sqrt(kamMid.a * kamMid.a + kamMid.b * kamMid.b +
 				kamMid.c * kamMid.c + kamMid.d * kamMid.d);

@@ -70,7 +70,7 @@ class BlockZuAnz
 					for(int type = 0; type < 3; type++)
 						addA3(dieListe, visionRange4D, type, new int[]{a, b, c, theD}, kam.d, relativ, kDreh);
 					addDInfo(dieListe, visionRange4D, new int[]{a, b, c, theD},
-							wbD, wbDShift, baumodus, relativ, kDreh);
+							kam.d, wbDShift, baumodus, relativ, kDreh);
 				}
 	}
 
@@ -118,7 +118,7 @@ class BlockZuAnz
 	}
 
 	private void addDInfo(ArrayList<Anzeige3> dieListe, int visionRange4D, int[] ort1,
-			double wbD, double wbDShift, int baumodus, K4 relativ, Drehung kDreh)
+			double kamD, double wbDShift, int baumodus, K4 relativ, Drehung kDreh)
 	{
 		boolean showRot = true;
 		boolean showGn = true;
@@ -155,8 +155,8 @@ class BlockZuAnz
 				System.arraycopy(ort1, 0, ort7, 0, 4);
 				ort7[3] = ort7[3] - i;
 				K4 mid7 = wb.wt2(new WBP(ort7));
-				double ddiff1 = (mid7.d - wbD) / wb.weltBlock.d - 0.5;
-				double ddiff2 = (mid7.d - wbD) / wb.weltBlock.d + 0.5;
+				double ddiff1 = (mid7.d - kamD) / wb.weltBlock.d - 0.5;
+				double ddiff2 = (mid7.d - kamD) / wb.weltBlock.d + 0.5;
 				if(ddiff2 > 0)
 					ddiff2 = 0;
 				maybeAddDInfo(dieListe, new WBP(ort7), mid7, ddiff1, ddiff2, baumodus, relativ, kDreh);
@@ -168,8 +168,8 @@ class BlockZuAnz
 				System.arraycopy(ort1, 0, ort7, 0, 4);
 				ort7[3] = ort7[3] + i;
 				K4 mid7 = wb.wt2(new WBP(ort7));
-				double ddiff1 = (mid7.d - wbD) / wb.weltBlock.d - 0.5;
-				double ddiff2 = (mid7.d - wbD) / wb.weltBlock.d + 0.5;
+				double ddiff1 = (mid7.d - kamD) / wb.weltBlock.d - 0.5;
+				double ddiff2 = (mid7.d - kamD) / wb.weltBlock.d + 0.5;
 				if(ddiff1 < 0)
 					ddiff1 = 0;
 				maybeAddDInfo(dieListe, new WBP(ort7), mid7, ddiff1, ddiff2, baumodus, relativ, kDreh);
