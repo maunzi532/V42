@@ -1,7 +1,6 @@
 package wahr.spieler;
 
 import ansicht.*;
-import wahr.physisch.*;
 
 public class TastenDrehInput implements DrehInput
 {
@@ -24,24 +23,24 @@ public class TastenDrehInput implements DrehInput
 		movementY = 0;
 		if(mode)
 		{
-			if(TA2.keyStat[master.taIndex][21] > 0)
+			if(master.ta.keyStat[master.taIndex][21] > 0)
 				positionX -= 20;
-			if(TA2.keyStat[master.taIndex][22] > 0)
+			if(master.ta.keyStat[master.taIndex][22] > 0)
 				positionX += 20;
-			if(TA2.keyStat[master.taIndex][23] > 0)
+			if(master.ta.keyStat[master.taIndex][23] > 0)
 				positionY -= 20;
-			if(TA2.keyStat[master.taIndex][24] > 0)
+			if(master.ta.keyStat[master.taIndex][24] > 0)
 				positionY += 20;
 		}
 		else
 		{
-			if(TA2.keyStat[master.taIndex][21] > 0)
+			if(master.ta.keyStat[master.taIndex][21] > 0)
 				movementX -= 20;
-			if(TA2.keyStat[master.taIndex][22] > 0)
+			if(master.ta.keyStat[master.taIndex][22] > 0)
 				movementX += 20;
-			if(TA2.keyStat[master.taIndex][23] > 0)
+			if(master.ta.keyStat[master.taIndex][23] > 0)
 				movementY -= 20;
-			if(TA2.keyStat[master.taIndex][24] > 0)
+			if(master.ta.keyStat[master.taIndex][24] > 0)
 				movementY += 20;
 		}
 	}

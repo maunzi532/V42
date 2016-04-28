@@ -63,12 +63,15 @@ public class Vor
 				for(int i = 0; i < nb.externals.length; i++)
 					nb.externals[i].gibPl(anzeigeZ, nb.punkteK, nb.lw, nb == kam);
 			}
+		Staticf.sca("NonBlocks (2) ");
 		if(siehBlocks)
 			za.zuAnz(anzeigeZ, kp, kd, new K4(Staticf.sicht, Staticf.sicht,
 					Staticf.sicht, 0), visionRange4D, baumodus);
+		Staticf.sca("Blocks (3) ");
 		anzeige = new ArrayList<>();
 		for(int i = 0; i < anzeigeZ.size(); i++)
 			anzeigeZ.get(i).splittern(anzeige, vorDaten);
+		Staticf.sca("Splittern (4) ");
 		Collections.sort(anzeige, (t1, t2) ->
 		{
 			if(!t1.anzeigen && !t2.anzeigen)
@@ -79,9 +82,12 @@ public class Vor
 				return 1;
 			return -Double.compare(t1.kamMid.c, t2.kamMid.c);
 		});
+		Staticf.sca("Sortieren (2) ");
 		for(int i = 0; i < anzeige.size(); i++)
 			anzeige.get(i).eckenEntf(wI, hI, cI);
+		Staticf.sca("EckenEntf (2) ");
 		for(int i = 0; i < anzeige.size(); i++)
 			anzeige.get(i).farbeFlaeche(tnTarget, wI, hI, kam.kamP(),  xr ? Staticf.xraywidth : 0);
+		Staticf.sca("FarbeFlaeche (2) ");
 	}
 }

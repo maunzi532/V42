@@ -71,5 +71,5 @@ public abstract class Anzeige3
 
 	public abstract void panel(Graphics2D gd);
 
-	public abstract void panelDark(Graphics2D gd);
+	public abstract void panelDark(Graphics2D gd, TnZuordnung tnz);
 }

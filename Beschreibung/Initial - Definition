@@ -1,0 +1,32 @@
+Initial
+
+Kein Indexort
+
+Leere und mit / beginnende Zeilen werden ignoriert
+
+Alle Zeilen setzen Werte
+	Booleanzeilen enthalten kein =
+		Wertname -> Wert an
+		Wertname! -> Wert aus
+	Andere Zeilen enthalten ein =
+		Wertname=Wert
+		Doublewerte verwenden . als Komma
+
+Verfügbare Werte
+b = Boolean
+i = Int
+d = Double
+	b	undecoratedFrame	Frame hat keinen Rahmen
+	i	frameXW				Breite des Frame
+	i	frameYH				Höhe des Frame
+	b	automaximize		Maximiertes Frame
+							(ignoriert XW und YH)
+	d	scaleX				Blick-Zoom
+	b	sca					Schreibe Zeit in Thread 1
+	b	sca2				Schreibe Zeit in Thread 2
+	b	writeKeyIndex		Schreibe Tastennummern
+	b	writeFrameskips		Schreibe nicht angezeigte
+							Frames
+	b	writeFrameTime		
+	b	writeVisibleTime	
+	b	writeThreadTime		

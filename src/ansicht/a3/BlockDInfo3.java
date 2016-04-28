@@ -60,7 +60,7 @@ public class BlockDInfo3 extends Rechteck3
 		}*/
 	}
 
-	public void panelDark(Graphics2D gd)
+	public void panelDark(Graphics2D gd, TnZuordnung tnz)
 	{
 		if(targetable)
 		{
@@ -80,6 +80,11 @@ public class BlockDInfo3 extends Rechteck3
 				xp[1] = (int)(xe + scale * 3);
 				yp[1] = (int)(ye + ddiff1 * scale * 3);
 				yp[2] = (int)(ye + ddiff2 * scale * 3);
+			}
+			if(tnz != null)
+			{
+				tnz.actBounds(xp[1], yp[1]);
+				tnz.actBounds(xp[2], yp[2]);
 			}
 			gd.fillPolygon(xp, yp, 3);
 		}

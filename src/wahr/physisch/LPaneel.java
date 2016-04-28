@@ -5,35 +5,30 @@ import wahr.zugriff.*;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.*;
-import java.util.*;
 
 public class LPaneel
 {
-	public static ArrayList<LPaneel> paneele = new ArrayList<>();
-
 	public JFrame fr;
 	public Dimension scF;
 
-	public void init1()
+	public LPaneel(TA2 theTA, int xw, int yh, boolean max, boolean undecorated, int xp, int yp)
 	{
 		fr = new JFrame();
 		fr.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-		if(Staticf.undecoratedFrame)
+		if(undecorated)
 			fr.setUndecorated(true);
 		fr.setLayout(null);
-		if(Staticf.automaximize)
+		if(max)
 			fr.setExtendedState(Frame.MAXIMIZED_BOTH);
-		fr.setSize(Staticf.frameXW, Staticf.frameYH);
-		TA2.setzeAnz(2);
-		TA2.feedMoves(Index.gibText("Einstellungen", "TA_LT1"), 0);
-		TA2.feedMoves(Index.gibText("Einstellungen", "TA_RM2"), 1);
-		TA2.addToFrame(fr, Staticf.writeKeyIndex);
-	}
-
-	public void init2()
-	{
+		fr.setSize(xw, yh);
+		fr.setLocation(xp, yp);
 		fr.setCursor(Toolkit.getDefaultToolkit().createCustomCursor(
 				new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE), new Point(), null));
+		theTA.addToFrame(fr, Staticf.writeKeyIndex);
+	}
+
+	public void showFrames()
+	{
 		fr.setVisible(true);
 		while(true)
 			if(fr.isActive())

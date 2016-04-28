@@ -1,6 +1,5 @@
 package nonBlock.aktion.lesen;
 
-import ansicht.*;
 import nonBlock.aktion.*;
 
 public class Move
@@ -13,7 +12,7 @@ public class Move
 	private ZDelay ender;
 	public final String name;
 	private final boolean seq;
-	private Overlay overlay;
+	private Tverlay tverlay;
 	public boolean kill;
 
 	public Move(LadeMove lad, NBD akteur)
@@ -34,10 +33,10 @@ public class Move
 		seq = true;
 	}
 
-	public Move(LadeMove lad, Overlay overlay, NBD... akteure)
+	public Move(LadeMove lad, Tverlay tverlay, NBD... akteure)
 	{
 		this(lad, akteure);
-		this.overlay = overlay;
+		this.tverlay = tverlay;
 	}
 
 	public boolean tick()
@@ -51,9 +50,9 @@ public class Move
 			{
 				ZDelay a;
 				if(seq)
-					a = lad1.erzeugeAktion(lad1.akteur >= 0 ? akteure[lad1.akteur] : null, overlay);
+					a = lad1.erzeugeAktion(lad1.akteur >= 0 ? akteure[lad1.akteur] : null, tverlay);
 				else
-					a = lad1.erzeugeAktion(akteur, overlay);
+					a = lad1.erzeugeAktion(akteur, tverlay);
 				if(a != null)
 					ender = a;
 			}

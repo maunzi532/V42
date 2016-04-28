@@ -168,8 +168,11 @@ public abstract class Polygon3 extends Anzeige3
 			gd.fill(new Polygon(eckenPanelX, eckenPanelY, eckenPanelX.length));
 	}
 
-	public void panelDark(Graphics2D gd)
+	public void panelDark(Graphics2D gd, TnZuordnung tnz)
 	{
+		if(tnz != null)
+			for(int i = 0; i < eckenPanelX.length; i++)
+				tnz.actBounds(eckenPanelX[i], eckenPanelY[i]);
 		gd.fill(new Polygon(eckenPanelX, eckenPanelY, eckenPanelX.length));
 	}
 }

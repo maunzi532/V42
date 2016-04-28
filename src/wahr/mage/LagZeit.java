@@ -1,22 +1,23 @@
 package wahr.mage;
 
+import wahr.physisch.*;
 import wahr.zugriff.*;
 
 public class LagZeit
 {
 	public static void start()
 	{
-		Hauptschleife.theOverlays[0].vor.siehNonBlocks = false;
+		ThaCre2A.theOverlays[0].vor.siehNonBlocks = false;
 		for(int i = 0; i < 10; i++)
 		{
 			Staticf.last = System.currentTimeMillis();
-			if(Hauptschleife.theOverlays[0].eingabe(false))
+			if(ThaCre2A.theOverlays[0].eingabe())
 				System.exit(0);
 			Hauptschleife.aw.logik();
-			Hauptschleife.theOverlays[0].vorbereiten();
+			ThaCre2A.theOverlays[0].vorbereiten();
 			Staticf.last2 = System.currentTimeMillis();
-			Hauptschleife.theOverlays[0].panelize();
+			ThaCre2A.theOverlays[0].panelize();
 		}
-		Hauptschleife.theOverlays[0].vor.siehNonBlocks = true;
+		ThaCre2A.theOverlays[0].vor.siehNonBlocks = true;
 	}
 }

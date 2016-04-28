@@ -9,12 +9,13 @@ import java.util.*;
 
 public class Panelizer
 {
+	private static final int bgr = 16777216;
+
 	public BufferedImage light;
 	public Graphics2D gd;
 	private Graphics2D darkCopy;
-	private int darkUsed;
-	private HashMap<Long, Integer> darkC;
-	private HashMap<Integer, Long> darkC2;
+	private int darkUsed = 0;
+	private TnZuordnung[] darkZ = new TnZuordnung[10000];
 	private BufferedImage dark;
 	public long tnTarget;
 	public int taType = 0;
@@ -30,24 +31,72 @@ public class Panelizer
 		darkCopy = dark.createGraphics();
 	}
 
-	private void DPA2(Graphics2D gd, int mx, int my)
+	public void panelize(ArrayList<Anzeige3> anzeige, int mx, int my)
 	{
-		if(!taGet && taType > 0 && mx >= 0 && my >= 0 && mx < dark.getWidth() && my < dark.getHeight())
+		gd.setColor(new Color(20, 0, 0));
+		gd.fillRect(0, 0, light.getWidth(), light.getHeight());
+		Staticf.sca2("ResetLight (1) ");
+		if(taType > 0)
 		{
-			int cl = dark.getRGB(mx, my);
-			if(cl + 16777216 > 0)
-			{
-				tnTarget = darkC2.get(cl + 16777216);
-				DPA3(cl);
-			}
-			else
-				tnTarget = -1;
+			darkCopy.setColor(Color.BLACK);
+			darkCopy.fillRect(0, 0, dark.getWidth(), dark.getHeight());
+			darkUsed = 0;
 		}
 		if(taType > 0)
+		{
+			for(int i = 0; i < anzeige.size(); i++)
+				if(anzeige.get(i).anzeigen)
+				{
+					long tn = anzeige.get(i).tn;
+					boolean neu = true;
+					int farbe = 0;
+					for(int j = 1; j <= darkUsed; j++)
+						if(darkZ[j].tn == tn)
+						{
+							neu = false;
+							farbe = j;
+							break;
+						}
+					if(neu)
+					{
+						darkUsed++;
+						farbe = darkUsed;
+						if(taType > 1)
+							darkZ[darkUsed] = new TnZuordnung(tn, dark.getWidth(), dark.getHeight());
+						else
+							darkZ[darkUsed] = new TnZuordnung(tn);
+					}
+					darkCopy.setColor(new Color(farbe));
+					anzeige.get(i).panelDark(darkCopy, taType > 1 ? darkZ[farbe] : null);
+				}
+			Staticf.sca2("PanelDark (8) ");
+		}
+		for(int i = 0; i < anzeige.size(); i++)
+			if(anzeige.get(i).anzeigen)
+				anzeige.get(i).panel(gd);
+		Staticf.sca2("Panelize (7) ");
+		DPA2(mx, my);
+		/*if(taType > 0)
 		{
 			gd.setColor(new Color(0, 180, 0));
 			gd.setFont(new Font(null, Font.PLAIN, 20));
 			gd.drawString(String.valueOf(tnTarget), 50, 150);
+		}*/
+		//gd.drawImage(dark, 700, 0, 300, 200, null);
+	}
+
+	private void DPA2(int mx, int my)
+	{
+		if(!taGet && taType > 0 && mx >= 0 && my >= 0 && mx < dark.getWidth() && my < dark.getHeight())
+		{
+			int cl = dark.getRGB(mx, my);
+			if(cl + bgr > 0)
+			{
+				tnTarget = darkZ[cl + bgr].tn;
+				DPA3(cl);
+			}
+			else
+				tnTarget = -1;
 		}
 	}
 
@@ -55,68 +104,40 @@ public class Panelizer
 	{
 		if(taType > 1 && tnTarget != -1)
 		{
-			int[][] cls = new int[dark.getWidth()][dark.getHeight()];
-			for(int ix = 0; ix < cls.length; ix++)
-				for(int iy = 0; iy < cls[ix].length; iy++)
-					if(dark.getRGB(ix, iy) == cl)
-						cls[ix][iy] = Staticf.targetW + 1;
+			int dw = dark.getWidth();
+			int dh = dark.getHeight();
+			int[][] cls = new int[dw + 2][dh + 2];
+			TnZuordnung tnz = darkZ[cl + bgr];
+			for(int imx = tnz.minX; imx <= tnz.maxX; imx++)
+				for(int imy = tnz.minY; imy <= tnz.maxY; imy++)
+					if(dark.getRGB(imx, imy) == cl)
+						cls[imx + 1][imy + 1] = Staticf.targetW + 1;
+			Staticf.sca2("TN Erhalten (4) ");
 			for(int i = Staticf.targetW; i > 0; i--)
-				for(int ix = 0; ix < cls.length; ix++)
-					for(int iy = 0; iy < cls[ix].length; iy++)
-						if(cls[ix][iy] < i && ((ix > 0 && cls[ix - 1][iy] > i) ||
-								(iy > 0 && cls[ix][iy - 1] > i) ||
-								(ix < cls.length - 1 && cls[ix + 1][iy] > i) ||
-								(iy < cls[ix].length - 1 && cls[ix][iy + 1] > i)))
-							cls[ix][iy] = i;
-
+				for(int imx = tnz.minX > Staticf.targetW ? tnz.minX - Staticf.targetW : 0;
+					imx <= tnz.maxX + Staticf.targetW && imx < dw; imx++)
+					for(int imy = tnz.minY > Staticf.targetW ? tnz.minY - Staticf.targetW : 0;
+						imy < tnz.maxY + Staticf.targetW && imy < dh; imy++)
+					{
+						if(cls[imx + 1][imy + 1] < i &&
+								(cls[imx][imy + 1] > i ||
+										cls[imx + 1][imy] > i ||
+										cls[imx + 2][imy + 1] > i ||
+										cls[imx + 1][imy + 2] > i))
+							cls[imx + 1][imy + 1] = i;
+					}
+			Staticf.sca2("TN Rand (4) ");
 			if(taType == 2)
 			{
-				//A
-				for(int ix = 0; ix < cls.length; ix++)
-					for(int iy = 0; iy < cls[ix].length; iy++)
-						if(cls[ix][iy] > 0 && cls[ix][iy] <= Staticf.targetW)
+				for(int imx = 0; imx < dw; imx++)
+					for(int imy = 0; imy < dh; imy++)
+						if(cls[imx + 1][imy + 1] > 0 && cls[imx + 1][imy + 1] <= Staticf.targetW)
 						{
-							gd.setColor(new Color(0, 0, 127 - 255 * cls[ix][iy] / Staticf.targetW / 2));
-							gd.fillRect(ix, iy, 1, 1);
+							gd.setColor(new Color(0, 0, 127 - 255 * cls[imx + 1][imy + 1] / Staticf.targetW / 2));
+							gd.fillRect(imx, imy, 1, 1);
 						}
+				Staticf.sca2("TN Linie (6) ");
 			}
-			Staticf.sca("TN Linie (45) ");
 		}
-	}
-
-	public void panelize(ArrayList<Anzeige3> anzeige, int mx, int my)
-	{
-		gd.setColor(new Color(20, 0, 0));
-		gd.fillRect(0, 0, light.getWidth(), light.getHeight());
-		if(taType > 0)
-		{
-			darkCopy.setColor(Color.BLACK);
-			darkCopy.fillRect(0, 0, dark.getWidth(), dark.getHeight());
-			darkC = new HashMap<>();
-			darkC2 = new HashMap<>();
-			darkUsed = 0;
-		}
-		for(int i = 0; i < anzeige.size(); i++)
-			if(anzeige.get(i).anzeigen)
-			{
-				if(taType > 0)
-				{
-					Long ta = anzeige.get(i).tn;
-					if(darkC != null && !darkC.containsKey(ta))
-					{
-						darkUsed++;
-						darkC.put(ta, darkUsed);
-						darkC2.put(darkUsed, ta);
-					}
-					if(darkC != null && darkC.containsKey(ta) && darkC.get(ta) != null)
-					{
-						darkCopy.setColor(new Color(darkC.get(ta)));
-						anzeige.get(i).panelDark(darkCopy);
-					}
-				}
-				anzeige.get(i).panel(gd);
-			}
-		DPA2(gd, mx, my);
-		//gd.drawImage(dark, 700, 0, 300, 200, null);
 	}
 }

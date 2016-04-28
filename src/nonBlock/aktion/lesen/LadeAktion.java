@@ -145,17 +145,17 @@ class LadeAktion
 		}
 	}
 
-	public ZDelay erzeugeAktion(NBD besitzer, Overlay overlay)
+	public ZDelay erzeugeAktion(NBD besitzer, Tverlay tverlay)
 	{
 		NBD b2;
 		if(dislocate != null)
 			b2 = besitzer.plzDislocate(dislocate);
 		else
 			b2 = besitzer;
-		return erzeugeAktion(b2, besitzer, overlay);
+		return erzeugeAktion(b2, besitzer, tverlay);
 	}
 
-	private ZDelay erzeugeAktion(NBD dislocated, NBD besitzer2, Overlay overlay)
+	private ZDelay erzeugeAktion(NBD dislocated, NBD besitzer2, Tverlay tverlay)
 	{
 		switch(typ)
 		{
@@ -169,12 +169,12 @@ class LadeAktion
 				break;
 			case 2:
 				if(toAll)
-					overlay.aw.tw.sendThemAll(text, dispName, codebez, emotion);
+					tverlay.tw.sendThemAll(text, dispName, codebez, emotion);
 			case 3:
 				if(!toAll)
 				{
-					TBox st2 = new TBox(overlay.sl, typ == 3, text);
-					overlay.sl.placeTBox(st2, dispName, codebez, emotion);
+					TBox st2 = new TBox(tverlay.sl, typ == 3, text);
+					tverlay.sl.placeTBox(st2, dispName, codebez, emotion);
 					if(typ == 3)
 						return st2;
 				}
@@ -192,7 +192,7 @@ class LadeAktion
 				break;
 			case 5:
 				if(dislocated instanceof Controllable)
-					overlay.kamN = (Controllable)dislocated;
+					((Overlay)tverlay).kamN = (Controllable)dislocated;
 				break;
 			case 6:
 				AlternateStandard.gibVonIndex1(text).changeToThis(dislocated, dauer, power);

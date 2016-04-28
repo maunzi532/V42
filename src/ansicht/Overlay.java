@@ -3,6 +3,7 @@ package ansicht;
 import ansicht.a3.*;
 import ansicht.text.*;
 import nonBlock.aktion.*;
+import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
 import nonBlock.controllable.*;
 import wahr.physisch.*;
@@ -12,35 +13,33 @@ import wahr.zugriff.*;
 import java.io.*;
 import java.util.*;
 
-public class Overlay
+public class Overlay extends Tverlay
 {
+	public TA2 ta;
 	public LPaneel auf;
 	private double[] ort;
 	public int xI, yI, wI, hI;
-	public SchalterLayer sl;
 	private InitSL isl;
 	public boolean sichtAn = true;
 	public Panelizer pa;
 	public AllWelt aw;
 	public Vor vor;
 	private ArrayList<Anzeige3> a3s2;
-	//Spectator Modus
 	public boolean godMode = false;
-	//Spectator-Modus-Kamera
 	private GMKamera godModeKam;
-	//Zurzeit benutzte Kamera, falls nicht im godMode
 	public Controllable kamN;
-	//Index in TA2
 	public int taIndex;
 	private boolean schalterSichtbar;
 	public DrehInput drehInput;
 
-	public void initOverlay(int taIndex, AllWelt awA, String zDatLad, LPaneel auf, double[] ort)
+	public void initOverlay(TA2 ta, int taIndex, AllWelt awA, String zDatLad, LPaneel auf, double[] ort)
 	{
+		this.ta = ta;
 		this.taIndex = taIndex;
 		this.auf = auf;
 		this.ort = ort;
 		aw = awA;
+		tw = aw.tw;
 		aw.tw.texters.add(this);
 		vor = new Vor(Index.gibText("Einstellungen", zDatLad), aw);
 		sl = new SchalterLayer();
@@ -49,7 +48,7 @@ public class Overlay
 		isl = new InitSL(sl, this);
 	}
 
-	private void resize()
+	public void resize()
 	{
 		xI = (int) (ort[0] * auf.scF.width);
 		yI = (int) (ort[1] * auf.scF.height);
@@ -62,28 +61,26 @@ public class Overlay
 	public void vorbereiten()
 	{
 		vor.vorbereiten(kamZurZeit(), wI, hI, auf.scF.width, pa.tnTarget, pa.xrmode);
-		System.out.println(vor.anzeige.size());
 		ArrayList<Anzeige3> a3s3 = new ArrayList<>();
 		for(int i = 0; i < vor.anzeige.size(); i++)
 			if(vor.anzeige.get(i).anzeigen)
 				a3s3.add(vor.anzeige.get(i));
-		System.out.println(a3s3.size());
 		a3s2 = a3s3;
 	}
 
 	public void panelize()
 	{
+		Staticf.sca2("Start2 (0) ");
 		if(schalterSichtbar)
 			pa.panelize(a3s2, drehInput.xP(), drehInput.yP());
 		else
 			pa.panelize(a3s2, xI + wI / 2, yI + hI / 2);
-		Staticf.sca2("Panelize (14) ");
 		sl.draw(pa.gd);
 		pa.gd.drawImage(Lader.gibBild(Index.gibPfad("Einstellungen") + File.separator + "ThaCursor.png"),
 				drehInput.xP() - 16, drehInput.yP() - 16, 32, 32, null);
 		Staticf.sca2("Overlay (0) ");
 		auf.rePanel(pa.light, xI, yI);
-		Staticf.sca2("RePanel (7) ");
+		Staticf.sca2("RePanel (8) ");
 	}
 
 	public void erzeugeGMK(AllWelt aw, K4 gmkpos)
@@ -106,42 +103,37 @@ public class Overlay
 		return kamN;
 	}
 
-	public boolean eingabe(boolean resize)
+	public boolean eingabe()
 	{
-		TA2.move(taIndex);
-		if(TA2.keyStat[taIndex][0] > 0)
+		ta.move(taIndex);
+		if(ta.keyStat[taIndex][0] > 0)
 			return true;
-		if(resize)
-			resize();
-		Staticf.sca("TA2 ");
-		schalterSichtbar = TA2.keyStat[taIndex][13] > 0;
+		schalterSichtbar = ta.keyStat[taIndex][13] > 0;
 		drehInput.ablesen(schalterSichtbar);
-		Staticf.sca("DL ");
 		if(schalterSichtbar)
 		{
-			if(TA2.keyStat[taIndex][15] == 2)
+			if(ta.keyStat[taIndex][15] == 2)
 			{
 				if(sl.click(drehInput.xP(), drehInput.yP(), false))
-					TA2.keyStat[taIndex][15] = 1;
+					ta.keyStat[taIndex][15] = 1;
 			}
-			else if(TA2.keyStat[taIndex][16] == 2)
+			else if(ta.keyStat[taIndex][16] == 2)
 			{
 				if(sl.click(drehInput.xP(), drehInput.yP(), true))
-					TA2.keyStat[taIndex][16] = 1;
+					ta.keyStat[taIndex][16] = 1;
 			}
 		}
-		Staticf.sca("SL ");
-		if(TA2.keyStat[taIndex][13] == 2 && sichtAn)
+		if(ta.keyStat[taIndex][13] == 2 && sichtAn)
 		{
 			sichtAn = false;
 			sl.layer.addAll(isl.normalSchalter);
 		}
-		if(TA2.keyStat[taIndex][13] == -1 && !sichtAn)
+		if(ta.keyStat[taIndex][13] == -1 && !sichtAn)
 		{
 			sichtAn = true;
 			sl.layer.clear();
 		}
-		if(TA2.keyStat[taIndex][17] == 2 && godModeKam != null)
+		if(ta.keyStat[taIndex][17] == 2 && godModeKam != null)
 		{
 			godMode = !godMode;
 			if(godMode)
@@ -159,7 +151,7 @@ public class Overlay
 			}
 		}
 		sl.actTex();
-		Staticf.sca("M und T (0) ");
+		Staticf.sca("M / T (1) ");
 		return false;
 	}
 }

@@ -93,7 +93,7 @@ public class Rechteck3 extends Anzeige3
 		}
 	}
 
-	public void panelDark(Graphics2D gd){}
+	public void panelDark(Graphics2D gd, TnZuordnung tnz){}
 
 	private Color limit(Color c, int r, int g, int b)
 	{

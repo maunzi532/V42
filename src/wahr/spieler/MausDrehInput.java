@@ -1,7 +1,6 @@
 package wahr.spieler;
 
 import ansicht.*;
-import wahr.physisch.*;
 
 import java.awt.*;
 
@@ -37,7 +36,7 @@ public class MausDrehInput implements DrehInput
 		Point mm = master.auf.fr.getLocationOnScreen();
 		mausNeu.translate(-mm.x - master.xI, -mm.y - master.yI);
 		//mausNeu ist jetzt location in Frame
-		if(TA2.keyStat[master.taIndex][13] <= 0)
+		if(master.ta.keyStat[master.taIndex][13] <= 0)
 			ro.mouseMove(mausLast.x + mm.x + master.xI, mausLast.y + mm.y + master.yI); //zurueck wo du warst
 		else
 			mausLast = new Point(mausNeu); //wo du warst wird gesetzt

@@ -26,10 +26,10 @@ public class AllWelt
 	public void logik()
 	{
 		dw.timetickN();
-		Staticf.sca("WeltND tN (7) ");
+		Staticf.sca("WeltND tN (4) ");
 		bw.timetick();
 		Staticf.sca("WeltNB t (0) ");
 		dw.timetickD();
-		Staticf.sca("WeltND tD (0) ");
+		Staticf.sca("WeltND tD (1) ");
 	}
 }

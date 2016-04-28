@@ -5,15 +5,24 @@ import wahr.physisch.*;
 
 public class Staticf
 {
-
-	//Debug-Zeiten ausgeben an/aus
-	private static boolean sca = false;
-	//Debug-Zeiten in Threads ausgeben an/aus
-	private static boolean sca2 = false;
 	//Zeit an der sca gemessen werden soll
 	public static long last;
 	public static long last2;
 	public static long last3;
+	//Debug-Zeiten ausgeben an/aus
+	private static boolean sca = false;
+	//Debug-Zeiten in Threads ausgeben an/aus
+	private static boolean sca2 = false;
+	//Tasten-Indexes ausgeben
+	public static boolean writeKeyIndex = false;
+	//Frameskips ausgeben
+	public static boolean writeFrameskips = false;
+	//Frameskip Daten ausgeben
+	public static boolean writeFrameTime = false;
+	//Zeit zwischen sichtbaren Frames ausgeben
+	public static boolean writeVisibleTime = false;
+	//Zeit die der Thread braucht ausgeben
+	public static boolean writeThreadTime = false;
 
 	//Debug-Textausgabe
 	public static void sca(Object w)
@@ -28,29 +37,9 @@ public class Staticf
 			System.out.println("		" + w.toString() + (System.currentTimeMillis() - last2));
 	}
 
-	//Fenster ohne Rahmen
-	public static boolean undecoratedFrame = false;
-	//Fenster unmaximiert w/h
-	public static int frameXW = 500;
-	public static int frameYH = 500;
-	//Fenster am Anfang maximiert
-	public static boolean automaximize = true;
-	//Scaling am Bildschirm
-	public static double scaleX = 0.8;
-	//Tasten-Indexes ausgeben
-	public static boolean writeKeyIndex = false;
-	//Frameskips ausgeben
-	public static boolean writeFrameskips = false;
-	//Frameskips ausgeben
-	public static boolean writeFrameTime = false;
-	//Zeit zwischen sichtbaren Frames ausgeben
-	public static boolean writeVisibleTime = false;
-	//Zeit die der Thread braucht ausgeben
-	public static boolean writeThreadTime = false;
-
-	public static void initialCharge()
+	public static void scaCharge()
 	{
-		String t = Lader.gibText("Initial");
+		String t = Lader.gibText("Sca");
 		String[] t1 = t.split("\n");
 		for(int i = 0; i < t1.length; i++)
 			if(!t1[i].isEmpty() && !t1[i].startsWith("/"))
@@ -67,26 +56,10 @@ public class Staticf
 						z = true;
 				switch(t2[0])
 				{
-					case "undecoratedFrame":
-						if(z != null)
-							undecoratedFrame = z;
-						break;
-					case "frameXW":
-						if(t2.length > 1)
-							frameXW = Integer.parseInt(t2[1]);
-						break;
-					case "frameYH":
-						if(t2.length > 1)
-							frameYH = Integer.parseInt(t2[1]);
-						break;
-					case "automaximize":
-						if(z != null)
-							automaximize = z;
-						break;
-					case "scaleX":
+					/*case "scaleX":
 						if(t2.length > 1)
 							scaleX = Double.parseDouble(t2[1]);
-						break;
+						break;*/
 					case "sca":
 						if(z != null)
 							sca = z;
@@ -119,6 +92,8 @@ public class Staticf
 			}
 	}
 
+	//Blickbreite
+	public static double scaleX = 0.8;
 	//Sichtweite NonBlocks
 	public static final double sicht = 150;
 	//Eigene H ausblenden

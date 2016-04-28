@@ -17,6 +17,7 @@ public abstract class NBD extends NonBlock
 	public AlternateStandard standard = null;
 	public Aktion currentTrans = null;
 	protected final ArrayList<Move> moves;
+	public Tverlay tverlay;
 
 	protected NBD(LichtW lw, WeltND dw)
 	{
@@ -26,6 +27,12 @@ public abstract class NBD extends NonBlock
 		forced = new ArrayList<>();
 		aktionen = new ArrayList<>();
 		moves = new ArrayList<>();
+	}
+
+	protected NBD(LichtW lw, WeltND dw, Tverlay tverlay)
+	{
+		this(lw, dw);
+		this.tverlay = tverlay;
 	}
 
 	protected NBD(AllWelt aw)

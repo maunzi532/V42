@@ -1,0 +1,7 @@
+sca
+sca2
+writeKeyIndex!
+writeFrameskips
+writeFrameTime
+writeVisibleTime
+writeThreadTime

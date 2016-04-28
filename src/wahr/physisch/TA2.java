@@ -5,14 +5,24 @@ import java.awt.event.*;
 
 public class TA2
 {
-	private static boolean[] keys;
-	private static boolean[] k2;
-	private static int[][][] moves;
-	public static int[][] keyStat;
 	private static final int magicNumber = 700;
 
-	public static void addToFrame(JFrame frame, boolean ermittlung)
+	private boolean[] keys;
+	private boolean[] k2;
+
+	private int[][][] moves;
+	public int[][] keyStat;
+
+	public void setzeAnz(int spielerAnz)
 	{
+		moves = new int[spielerAnz][][];
+		keyStat = new int[spielerAnz][];
+	}
+
+	public void addToFrame(JFrame frame, boolean ermittlung)
+	{
+		keys = new boolean[1024];
+		k2 = new boolean[1024];
 		if(ermittlung)
 		{
 			frame.addKeyListener(new KeyListener()
@@ -93,7 +103,7 @@ public class TA2
 		}
 	}
 
-	public static void move(int spieler)
+	public void move(int spieler)
 	{
 		boolean n;
 		for(int i = 0; i < moves[spieler].length; i++)
@@ -120,16 +130,8 @@ public class TA2
 		k2 = new boolean[1024];
 	}
 
-	public static void setzeAnz(int spielerAnz)
+	public void feedMoves(String feed, int spieler)
 	{
-		moves = new int[spielerAnz][][];
-		keyStat = new int[spielerAnz][];
-	}
-
-	public static void feedMoves(String feed, int spieler)
-	{
-		keys = new boolean[1024];
-		k2 = new boolean[1024];
 		String[] na = feed.split("\n");
 		moves[spieler] = new int[Integer.parseInt(na[0])][];
 		for(int i = 1; i < na.length; i++)

@@ -48,10 +48,11 @@ public class Lader
 			frr.read(c);
 			frr.close();
 			int c1 = c.length;
-			do
-			{
-				c1--;
-			} while(c[c1] == 0);//length ist falsch
+			if(c1 > 0)
+				do
+				{
+					c1--;
+				} while(c[c1] == 0); //length ist falsch
 			char[] c2 = new char[c1];
 			System.arraycopy(c, 0, c2, 0, c1);
 			return new String(c2);
@@ -67,12 +68,6 @@ public class Lader
 		try
 		{
 			return ImageIO.read(file);
-			/*FileImageInputStream fl = new FileImageInputStream(file);
-			byte[] by = new byte[(int) file.length()];
-			fl.read(by);
-			ImageIcon ico = new ImageIcon(by);
-			fl.close();
-			return ico.getImage();*/
 		}
 		catch(Exception e)
 		{

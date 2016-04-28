@@ -24,7 +24,7 @@ public class WeltNB
 					vta.get(i).cTime.set(j, vta.get(i).cTime.get(j));
 			for(int i = 0; i < attks.size(); i++)
 				attks.get(i).reset();
-			Staticf.sca("TR ");
+			Staticf.sca("WeltNB Reset (0) ");
 			for(int i = 0; i < attks.size(); i++)
 				for(int j = 0; j < attks.get(i).h.size(); j++)
 					if(attks.get(i).h.get(j).dauerNoch > 0)
@@ -41,10 +41,10 @@ public class WeltNB
 									if(!attks.get(i).h.get(k).connected.contains(vta.get(j).collidable.get(l)))
 										if(attks.get(i).h.get(k).collide(vta.get(j).collidable.get(l)))
 											attks.get(i).h.get(k).connected.add(vta.get(j).collidable.get(l));
-			Staticf.sca("TC ");
+			Staticf.sca("WeltNB Collide (0) ");
 			for(int i = 0; i < attks.size(); i++)
 				attks.get(i).resolve();
-			Staticf.sca("TR1 ");
+			Staticf.sca("WeltNB Resolve (0) ");
 		}
 		for(int i = 0; i < vta.size(); i++)
 			for(int j = 0; j < vta.get(i).physik.size(); j++)
