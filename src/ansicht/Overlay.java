@@ -26,7 +26,7 @@ public class Overlay extends Tverlay
 	public Vor vor;
 	private ArrayList<Anzeige3> a3s2;
 	public boolean godMode = false;
-	private GMKamera godModeKam;
+	public GMKamera godModeKam;
 	public Controllable kamN;
 	public int taIndex;
 	private boolean schalterSichtbar;

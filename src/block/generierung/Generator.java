@@ -5,7 +5,7 @@ import wahr.zugriff.*;
 
 public abstract class Generator
 {
-	private WeltB welt;
+	protected WeltB welt;
 	int[][] starts;
 	DerBlock[] enden;
 	int[] endOrder;

@@ -1,6 +1,10 @@
 package ansicht.text;
 
 import ansicht.*;
+import nonBlock.aktion.*;
+import nonBlock.aussehen.*;
+import nonBlock.collide.*;
+import nonBlock.controllable.*;
 import wahr.zugriff.*;
 
 import java.util.*;
@@ -94,7 +98,44 @@ public class InitSL
 				}
 			}
 		});
+		normalSchalter.add(new SLF(sl, true, 0.1, 0.4, 0.1, 0.05, "Flagge")
+		{
+			public void onClick(boolean r, double cx, double cy)
+			{
+				if(r)
+					while(ov.aw.wbl.flags.size() > 0)
+						ov.aw.wbl.flags.get(0).ende();
+				else if(ov.kamN instanceof NBB)
+				{
+					NBB th = (NBB) ov.kamN;
+					Flag f = new Flag(th.welt, th.lw, th.dw, th.bw);
+					f.aussehen = new LadeModell();
+					StandardAussehen.gibVonIndex2("Flagge/Sta").assignStandard(f);
+					f.aussehen.reload(LadeTeil.gibVonIndex("Flagge/Achsen"));
+					f.position = new K4(th.position);
+					f.position.b -= th.block.get(0).airshift;
+					f.dreh = new Drehung(th.dreh.wl, 0);
+					f.collidable.add(new ColBox(f, 1, new EndScheibe(0.3), new EndScheibe(0.3), 1, 1));
+					f.init();
+				}
+				super.onClick(r, cx, cy);
+			}
+		});
 		godModeSchalter = new ArrayList<>();
+		godModeSchalter.add(new SLF(sl, true, 0.25, 0.1, 0.1, 0.05, "Teleport")
+		{
+			public void onClick(boolean r, double cx, double cy)
+			{
+				if(ov.kamN instanceof NBD)
+				{
+					if(r)
+						ov.godModeKam.position = ((NBD)ov.kamN).position;
+					else
+						((NBD)ov.kamN).position = ov.godModeKam.position;
+				}
+				super.onClick(r, cx, cy);
+			}
+		});
 		godModeSchalter.add(new SLF(sl, true, 0.25, 0.2, 0.1, 0.05)
 		{
 			public void onClick(boolean r, double cx, double cy)

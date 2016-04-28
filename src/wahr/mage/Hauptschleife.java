@@ -19,12 +19,23 @@ public class Hauptschleife
 	{
 		aw = new AllWelt();
 		Generator g = new WeltLeser();
-		g.gibInWelt(aw.wbl, "Levels/Test1");
+		g.gibInWelt(aw.wbl, "Levels/Test2");
 		//g.gibInWelt("Levels/Generiert1");
 		//g.gibInWelt();
 		//g.gibInWelt(4, 4);
 		aw.wbl.setzeSE(new K4(0, 0, 0, 0), new K4(20, 20, 20, 20));
 		g.ermittleStart();
+		for(int i = 0; i < aw.wbl.starts.length; i++)
+		{
+			Flag f = new Flag(aw.wbl, aw.lw, aw.dw, aw.bw);
+			f.aussehen = new LadeModell();
+			StandardAussehen.gibVonIndex2("Flagge/Sta").assignStandard(f);
+			f.aussehen.reload(LadeTeil.gibVonIndex("Flagge/Achsen"));
+			f.position = new K4(aw.wbl.starts[i]);
+			f.dreh = new Drehung(aw.wbl.startdrehs[i]);
+			f.collidable.add(new ColBox(f, 1, new EndScheibe(0.3), new EndScheibe(0.3), 1, 1));
+			f.init();
+		}
 		createTheN2();
 	}
 
@@ -57,7 +68,7 @@ public class Hauptschleife
 		);
 		n.position = aw.wbl.starts[0];
 		n.position.b += n.block.get(0).airshift;
-		n.dreh = new Drehung(1, 0);
+		n.dreh = aw.wbl.startdrehs[0];
 		n.physik.add(new ColBox(n, 69, new EndScheibe(1.5), new EndScheibe(1.0), 1.1));
 		n.physik.add(new ColBox(n, 78, new EndScheibe(1.0), new EndScheibe(0.7), 0.7));
 		n.physik.add(new ColBox(n, 11, new EndScheibe(0.7), new EndScheibe(0.7), 1));
@@ -137,7 +148,7 @@ public class Hauptschleife
 		n2.position = aw.wbl.starts[1];
 		n2.position.b += n2.block.get(0).airshift;
 		//mp2.init();
-		n2.dreh = new Drehung(Math.PI, 0);
+		n2.dreh = aw.wbl.startdrehs[1];
 		n2.tverlay = new Tverlay(aw.tw);
 		n2.init();
 		n2.collidable.add(new ColBox(n2, 0, new EndScheibe(4), new EndScheibe(4), 1, 1));

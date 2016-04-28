@@ -13,8 +13,8 @@ public class ThaCre2A
 
 	public static void main(String[] args)
 	{
-		Staticf.scaCharge();
 		Index.laden();
+		Staticf.scaCharge(Index.gibText("Einstellungen", "Sca"));
 		theTA = new TA2();
 		initPaneele();
 		Hauptschleife.initWelt();

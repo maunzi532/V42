@@ -2,6 +2,7 @@ package block.generierung;
 
 import block.*;
 import wahr.physisch.*;
+import wahr.zugriff.*;
 
 public class WeltLeser extends Generator
 {
@@ -46,6 +47,20 @@ public class WeltLeser extends Generator
 					for(int i = 0; i < w43.length; i++)
 						endOrder[i] = Integer.parseInt(w43[i]);
 					break;
+				case "F":
+					String[] w45 = w3[1].split(",");
+					welt.starts = new K4[w45.length / 6];
+					welt.startdrehs = new Drehung[w45.length / 6];
+					for(int i = 0; i < w45.length / 6; i++)
+					{
+						welt.starts[i] = new K4(Double.parseDouble(w45[i * 6]),
+								Double.parseDouble(w45[i * 6 + 1]),
+								Double.parseDouble(w45[i * 6 + 2]),
+								Double.parseDouble(w45[i * 6 + 3]));
+						welt.startdrehs[i] = new Drehung(Double.parseDouble(w45[i * 6 + 4]),
+								Double.parseDouble(w45[i * 6 + 5]));
+					}
+					break;
 				case "B":
 					assert blocks != null;
 					String[] w44 = w3[1].split(",");
@@ -64,8 +79,6 @@ public class WeltLeser extends Generator
 					break;
 			}
 		}
-		starts = new int[][]{{size[0] / 2 - 1, size[1] / 2 + 1, size[2] / 2, size[3] / 2},
-				{size[0] / 2 - 1, size[1] / 2 + 1, size[2] / 2 + 1, size[3] / 2}};
 		return blocks;
 	}
 
@@ -94,4 +107,6 @@ public class WeltLeser extends Generator
 	{
 		return new DerBlock(s);
 	}
+
+	public void ermittleStart(){}
 }

@@ -1,21 +1,13 @@
 package block;
 
+import nonBlock.controllable.*;
 import wahr.zugriff.*;
 
 import java.io.*;
+import java.util.*;
 
 public class WeltB
 {
-	public static final int[][] seiten = new int[][]
-			{
-					{-1, 0, 0},
-					{1, 0, 0},
-					{0, -1, 0},
-					{0, 1, 0},
-					{0, 0, -1},
-					{0, 0, 1},
-			};
-
 	public K4 weltBlock;
 	public K4 startWelt;
 	public int[] end;
@@ -23,6 +15,8 @@ public class WeltB
 	public DerBlock[] enden;
 	public int[] endOrder;
 	public K4[] starts;
+	public Drehung[] startdrehs;
+	public ArrayList<Flag> flags = new ArrayList<>();
 
 	public void setzeSE(K4 midShift, K4 setWeltBlock)
 	{
@@ -195,6 +189,16 @@ public class WeltB
 				.append(endOrder[1]).append(",")
 				.append(endOrder[2]).append(",")
 				.append(endOrder[3]).append(",").append("\n");
+		sb.append("F = ");
+		for(int i = 0; i < flags.size(); i++)
+		{
+			K4 position = flags.get(i).position;
+			Drehung dreh = flags.get(i).dreh;
+			sb.append(position.a).append(",").append(position.b).append(",").append("\n	")
+					.append(position.c).append(",").append(position.d).append(",").append("\n	")
+					.append(dreh.wl).append(",").append(dreh.wb).append(",").append("\n	");
+		}
+		sb.append("\n");
 		sb.append("B = ");
 		int cta = 0;
 		String last = "";

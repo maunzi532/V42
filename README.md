@@ -9,14 +9,15 @@ Rules for using:
 7. If uncompilable or crashing, use an older version  
 8. Try keeping the size of the compiled version rather small  
 9. (evtl.) All take smite and go botlane  
-A. Read the __Controls__ before using  
-B. The contents of "Beschreibung" are outdated, do not use  
+A. Read the __Controls__ before using (May be outdated though)  
+B. The contents of "Beschreibung" are probably useful  
 C. Small changes in the text files can (and will) produce a crash  
 D. When something is needed public, __make public!__  
 E. Try __avoiding__ getters and setters  
-F. The copy of the player character is for testing visual things
+F. The other character is for testing bugged hair which heavily bugs on the player character
 
 # Controls (May be outdated)
+The Controls depend on your Overlay Settings)
 I,W - forward, grab edge, climb up  
 J,A - left  
 L,D - right  

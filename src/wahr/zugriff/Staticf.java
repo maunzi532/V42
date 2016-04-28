@@ -1,7 +1,6 @@
 package wahr.zugriff;
 
 import block.*;
-import wahr.physisch.*;
 
 public class Staticf
 {
@@ -37,9 +36,8 @@ public class Staticf
 			System.out.println("		" + w.toString() + (System.currentTimeMillis() - last2));
 	}
 
-	public static void scaCharge()
+	public static void scaCharge(String t)
 	{
-		String t = Lader.gibText("Sca");
 		String[] t1 = t.split("\n");
 		for(int i = 0; i < t1.length; i++)
 			if(!t1[i].isEmpty() && !t1[i].startsWith("/"))
