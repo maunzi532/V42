@@ -78,9 +78,6 @@ public class Enhance extends External
 			K4[] eckenR = new K4[f2.ecken1.size()];
 			for(int k = 0; k < f2.ecken1.size(); k++)
 				eckenR[k] = into1[f2.ecken1.get(k) + (f2.ecken3.get(k) ? 0 : anfang)][f2.ecken2.get(k)];
-			/*K4[] spken = new K4[f2.spken1.size()];
-			for(int k = 0; k < f2.spken1.size(); k++)
-				spken[k] = into[f2.spken1.get(k) + (f2.ecken3.get(k) ? 0 : anfang)][f2.spken2.get(k)];*/
 			dieListe.add(new PNonBlock3(main2.tn, lw, f2.seite,
 					f2.polyFarbe, f2.seed, eckenR, eckenK));
 		}

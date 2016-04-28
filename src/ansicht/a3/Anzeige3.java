@@ -8,6 +8,10 @@ import java.util.*;
 
 public abstract class Anzeige3
 {
+	//Fast Null
+	public static double nnull = 0.0001;
+
+
 	public K4 kamMid;
 	public long tn;
 	public boolean anzeigen;

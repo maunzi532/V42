@@ -50,7 +50,6 @@ public class PBlock3 extends Polygon3
 	{
 		if(!anzeigen || eckenR != null)
 			return;
-		anzeigen = false;
 		K4 midsp = new K4((unSpldEckenK[0].a + unSpldEckenK[2].a) / 2,
 				(unSpldEckenK[0].b + unSpldEckenK[2].b) / 2,
 				(unSpldEckenK[0].c + unSpldEckenK[2].c) / 2,

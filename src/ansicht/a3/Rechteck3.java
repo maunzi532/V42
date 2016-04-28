@@ -31,7 +31,7 @@ public class Rechteck3 extends Anzeige3
 	{
 		if(!anzeigen)
 			return;
-		if(kamMid.c < Staticf.nnull)
+		if(kamMid.c < Anzeige3.nnull)
 		{
 			anzeigen = false;
 			return;

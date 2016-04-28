@@ -119,46 +119,51 @@ public class Staticf
 			}
 	}
 
-	//Panelizer fast Null
-	public static double nnull = 0.0001;
 	//Sichtweite NonBlocks
 	public static final double sicht = 150;
 	//Eigene H ausblenden
 	public static final double sichtMin = 2;
-	//Sichtweite d NonBlocks
-	public static final double sichtd = 100;
+
 	//Target-Markierungsbreite
 	public static final int targetW = 5;
-	//NonBlock F2 Teilung bis kleiner als das
+
+	//NonBlock Polygon Teilung bis kleiner als das
 	public static final double splThr = 1.2;
+
 	//Maximale Anzahl Frameskips
 	public static final int maxfskp = 5;
 	//Anzahl Millisekunden pro Frame
 	public static final long stdfms = 20;
 	//Anzahl Millisekunden zwischen Checks ob wieder im Fokus
 	public static final long blcfms = 200;
+
 	//Weite in Blocks wo NonBlocks in d nicht diffundieren
 	public static final double safezone = 1;
 	//Weite danach wo NonBlocks in d diffundieren
 	public static final double diffusewidth = 40;
 	//Anzahl unterschiedlicher Diffundierungs-Seeds
 	public static final int seedifier = 100;
+
 	//BlockBox-Genauigkeit in Dezimeter
 	public static final double step = 0.01;
 	//Ungenauigkeit bei Hitboxes oben und unten
 	public static final double ebhc = 0.1;
 	//Schrittweite bei Hitboxes
 	public static final double abhc = 1;
+
 	//D2 Mindestabstand um gesehen zu werden
-	public static final double d2min = 1;
+	public static final double d2min = 1; //TODO
+
 	//Weite des X-Ray-Modus
 	public static double xraywidth = 50;
+
 	//Speichergroesse
 	public static final WBP wspg = new WBP(1, 1, 1, 1);
-	//ZP4C Relokalisierungsgeschwindigkeit
+	//Umbruch beim WeltB speichern
+	public static final int maxCta = 60;
+
+	//D Relokalisierungsgeschwindigkeit
 	public static final double zpSpeed = 1;
 	//Drehgeschwindigkeit
 	public static final double nachDreh = 0.1;
-	//Umbruch beim WeltB speichern
-	public static final int maxCta = 60;
 }

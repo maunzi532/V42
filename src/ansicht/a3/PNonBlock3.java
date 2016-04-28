@@ -7,8 +7,6 @@ import java.util.*;
 
 public class PNonBlock3 extends Polygon3
 {
-	private boolean canSplit;
-
 	public PNonBlock3(long tn, LichtW lw, Boolean seite, PolyFarbe farbe, int rSeed, K4[] eckenR, K4[] eckenK)
 	{
 		super(tn, lw, seite);
@@ -53,10 +51,11 @@ public class PNonBlock3 extends Polygon3
 
 	public void splittern(ArrayList<Anzeige3> dieListe, VorDaten daten)
 	{
+		if(!anzeigen)
+			return;
 		//noinspection PointlessBooleanExpression,ConstantConditions
-		if(anzeigen && Staticf.splThr > 0 && canSplit && sizeForKam() > Staticf.splThr)
+		if(Staticf.splThr > 0 && sizeForKam() > Staticf.splThr)
 		{
-			anzeigen = false;
 			K4[] neueEckenK = new K4[eckenK.length];
 			for(int j = 0; j < neueEckenK.length; j++)
 			{
@@ -85,8 +84,10 @@ public class PNonBlock3 extends Polygon3
 								kamMid,
 								neueEckenK[j > 0 ? j - 1 : neueEckenK.length - 1]
 						};
-				dieListe.add(new PNonBlock3(this, j, eR, eK));
+				new PNonBlock3(this, j, eR, eK).splittern(dieListe, daten);
 			}
 		}
+		else
+			dieListe.add(this);
 	}
 }

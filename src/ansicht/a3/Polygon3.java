@@ -138,26 +138,13 @@ public abstract class Polygon3 extends Anzeige3
 			for(int j = 0; j < eckenCut.length; j++)
 			{
 				double ca = eckenCut[j].c;
-				if(ca < Staticf.nnull)
-					ca = Staticf.nnull;
+				if(ca < Anzeige3.nnull)
+					ca = Anzeige3.nnull;
 				eckenPanelX[j] = ethaX(eckenCut[j].a, ca, wI);
 				eckenPanelY[j] = ethaY(eckenCut[j].b, ca, wI, hI);
 				ddiff += eckenCut[j].d;
 			}
 			ddiff /= eckenCut.length;
-			/*if(spken != null)
-			{
-				xse = new int[spken.length];
-				yse = new int[spken.length];
-				for(int j = 0; j < spken.length; j++)
-				{
-					double ca = spken[j].c;
-					if(ca < Staticf.nnull)
-						ca = Staticf.nnull;
-					xse[j] = ethaX(spken[j].a, ca, wI);
-					yse[j] = ethaY(spken[j].b, ca, wI, hI);
-				}
-			}*/
 			checkForVanishing(farbe.baseColor);
 			if(xrZone > 0)
 			{

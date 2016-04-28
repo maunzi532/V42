@@ -59,10 +59,10 @@ public class InitSL
 						text = "4D aus";
 						break;
 					case 1:
-						text = "4D an";
+						text = "4D an Lv 1";
 						break;
 					case 2:
-						text = "4D an + Hinweise";
+						text = "4D an Lv 2";
 						break;
 				}
 			}

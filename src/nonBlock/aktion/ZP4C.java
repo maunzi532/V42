@@ -1,16 +1,9 @@
 package nonBlock.aktion;
 
-import block.*;
-import nonBlock.collide.*;
-import wahr.physisch.*;
-import wahr.zugriff.*;
-
-import java.util.*;
-
 //Deprecated
-public class ZP4C extends Aktion
+public class ZP4C// extends Aktion
 {
-	private double zd;
+	/*private double zd;
 	private boolean activated;
 	private Forced forced;
 
@@ -101,5 +94,5 @@ public class ZP4C extends Aktion
 					(m - Math.abs(bb.get(i).ee[3] - bb.get(i).se[3])) * (min ? -1 : 1)}, ((NBB)besitzer).welt))
 				return false;
 		return true;
-	}
+	}*/
 }

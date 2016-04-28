@@ -10,6 +10,7 @@ import java.util.*;
 
 public class Vor
 {
+	public ArrayList<Anzeige3> anzeigeZ;
 	public ArrayList<Anzeige3> anzeige;
 	private WeltND dw;
 	private LichtW lw;
@@ -28,11 +29,11 @@ public class Vor
 		lw = aw.lw;
 	}
 
-	public void vorbereiten(Controllable kam, boolean godMode, int wI, int hI, int cI, Long tnTarget)
+	public void vorbereiten(Controllable kam, int wI, int hI, int cI, Long tnTarget, boolean xr)
 	{
 		K4 kp = kam.kamP();
 		Drehung kd = kam.kamD();
-		anzeige = new ArrayList<>();
+		anzeigeZ = new ArrayList<>();
 		if(siehNonBlocks)
 			for(NonBlock nb : dw.nonBlocks)
 			{
@@ -49,7 +50,6 @@ public class Vor
 					for(int k = 0; k < f2.ecken1.size(); k++)
 					{
 						eckenK[k] = nb.punkteK[f2.ecken1.get(k)][f2.ecken2.get(k)];
-						//TODO Nicht sicher, checken
 						if(kam == nb && eckenK[k].a * eckenK[k].a + eckenK[k].b * eckenK[k].b +
 								eckenK[k].c * eckenK[k].c < Staticf.sichtMin * Staticf.sichtMin)
 						{
@@ -58,21 +58,17 @@ public class Vor
 						}
 					}
 					if(eckenK != null)
-					{
-						/*K4[] spken = new K4[f2.spken1.size()];
-						for(int k = 0; k < f2.spken1.size(); k++)
-							spken[k] = nb.punkteK[f2.spken1.get(k)][f2.spken2.get(k)];*/
-						anzeige.add(new PNonBlock3(nb.tn, lw, f2.seite, f2.polyFarbe, f2.seed, eckenR, eckenK));
-					}
+						anzeigeZ.add(new PNonBlock3(nb.tn, lw, f2.seite, f2.polyFarbe, f2.seed, eckenR, eckenK));
 				}
 				for(int i = 0; i < nb.externals.length; i++)
-					nb.externals[i].gibPl(anzeige, nb.punkteK, nb.lw, nb == kam);
+					nb.externals[i].gibPl(anzeigeZ, nb.punkteK, nb.lw, nb == kam);
 			}
 		if(siehBlocks)
-			za.zuAnz(anzeige, kp, kd, new K4(Staticf.sicht, Staticf.sicht,
+			za.zuAnz(anzeigeZ, kp, kd, new K4(Staticf.sicht, Staticf.sicht,
 					Staticf.sicht, 0), visionRange4D, baumodus);
-		for(int i = 0; i < anzeige.size(); i++)
-			anzeige.get(i).splittern(anzeige, vorDaten);
+		anzeige = new ArrayList<>();
+		for(int i = 0; i < anzeigeZ.size(); i++)
+			anzeigeZ.get(i).splittern(anzeige, vorDaten);
 		Collections.sort(anzeige, (t1, t2) ->
 		{
 			if(!t1.anzeigen && !t2.anzeigen)
@@ -86,6 +82,6 @@ public class Vor
 		for(int i = 0; i < anzeige.size(); i++)
 			anzeige.get(i).eckenEntf(wI, hI, cI);
 		for(int i = 0; i < anzeige.size(); i++)
-			anzeige.get(i).farbeFlaeche(tnTarget, wI, hI, kam.kamP(), /*Staticf.xraywidth*/ 0);
+			anzeige.get(i).farbeFlaeche(tnTarget, wI, hI, kam.kamP(),  xr ? Staticf.xraywidth : 0);
 	}
 }
