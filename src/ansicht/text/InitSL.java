@@ -209,7 +209,7 @@ public class InitSL
 		{
 			public void onClick(boolean r, double cx, double cy)
 			{
-				ov.aw.wbl.speichern("Levels/Test2", Staticf.wspg.k);
+				ov.aw.wbl.speichern("Levels/Test1", Staticf.wspg.k);
 				super.onClick(r, cx, cy);
 			}
 		});

@@ -15,7 +15,7 @@ public abstract class TSSA extends FWA implements Licht
 {
 	private static List<String> zustands = Arrays.asList("Normal", "Kante", "Luft", "Ducken");
 	private static double[][] zinfl = new double[][]{{0.2, 0, 0, 0.2}, null,
-			{0.1, 0, 0.2, 0.1}, {0.05, 0, 0, 0.05}};
+			{0.1, 0, 0.2, 0.1}, null};
 	private static Boolean[] zboden = new Boolean[]{true, null, false, true};
 	private static boolean[] canDreh = new boolean[]{true, false, true, false};
 
@@ -312,9 +312,9 @@ public abstract class TSSA extends FWA implements Licht
 			if(welt.tk1(welt.tw(p2), grabRichtung))
 			{
 				if(kR % 2 == 0)
-					focus.targetPosition.c += 0.2 * (1 - kR);
+					focus.targetPosition.c += 0.4 * (1 - kR);
 				else
-					focus.targetPosition.a += 0.2 * (2 - kR);
+					focus.targetPosition.a += 0.4 * (2 - kR);
 			}
 		}
 	}

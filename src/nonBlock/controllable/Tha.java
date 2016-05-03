@@ -152,7 +152,7 @@ public class Tha extends TSSA
 			case "Luftvor":
 				boolean can = true;
 				for(Move a : moves)
-					if(a.name.equals("WK"))
+					if(a.name.equals("WK") || a.name.equals("WK2"))
 					{
 						can = false;
 						break;

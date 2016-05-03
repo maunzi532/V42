@@ -19,7 +19,7 @@ public class Hauptschleife
 	{
 		aw = new AllWelt();
 		Generator g = new WeltLeser();
-		g.gibInWelt(aw.wbl, "Levels/Test2");
+		g.gibInWelt(aw.wbl, "Levels/Test1");
 		//g.gibInWelt("Levels/Generiert1");
 		//g.gibInWelt();
 		//g.gibInWelt(4, 4);

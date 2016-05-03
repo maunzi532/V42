@@ -77,7 +77,10 @@ public class Overlay extends Tverlay
 			pa.panelize(a3s2, xI + wI / 2, yI + hI / 2);
 		sl.draw(pa.gd);
 		pa.gd.drawImage(Lader.gibBild(Index.gibPfad("Einstellungen") + File.separator + "ThaCursor.png"),
-				drehInput.xP() - 16, drehInput.yP() - 16, 32, 32, null);
+				wI / 2 - 16, hI / 2 - 16, 32, 32, null);
+		if(schalterSichtbar)
+			pa.gd.drawImage(Lader.gibBild(Index.gibPfad("Einstellungen") + File.separator + "ThaCursor.png"),
+					drehInput.xP() - 16, drehInput.yP() - 16, 32, 32, null);
 		Staticf.sca2("Overlay (0) ");
 		auf.rePanel(pa.light, xI, yI);
 		Staticf.sca2("RePanel (8) ");
