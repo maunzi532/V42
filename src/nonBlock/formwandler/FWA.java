@@ -72,11 +72,14 @@ public abstract class FWA extends NBB implements Controllable
 			for(int k = 0; k < moves.size(); k++)
 				if(moves.get(k).lad.resist < td.power)
 					moves.get(k).kill = true;
-		if(td.theFall != null)
-			doFall(td.theFall, td.isChainOnly);
-		if(td.theMove != null)
+		boolean zx = td.theMoveTargeted != null || td.theFallTargeted != null;
+		String fall1 = zx && targetFall() ? td.theFallTargeted : td.theFall;
+		String move1 = zx && targetFall() ? td.theMoveTargeted : td.theMove;
+		if(fall1 != null)
+			doFall(fall1, td.isChainOnly);
+		if(move1 != null)
 		{
-			Move m = new Move(LadeMove.gibVonIndex(false, td.theMove), this);
+			Move m = new Move(LadeMove.gibVonIndex(false, move1), this);
 			if(td.isChainOnly)
 				chain = m;
 			moves.add(m);
@@ -90,6 +93,11 @@ public abstract class FWA extends NBB implements Controllable
 		for(int i = 0; i < 8; i++)
 			if(infl[i])
 			doCommand("I" + i);
+	}
+
+	protected boolean targetFall()
+	{
+		return false;
 	}
 
 	protected abstract void doFall(String fall, boolean attachChainOnly);

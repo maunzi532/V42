@@ -1,6 +1,7 @@
 package nonBlock.aktion.lesen;
 
 import nonBlock.aktion.*;
+import wahr.zugriff.*;
 
 import java.util.*;
 
@@ -12,6 +13,7 @@ public class RZahl
 	private ArrayList<Integer> zeichens = new ArrayList<>();
 	public boolean deg2rad;
 	public NBD v1;
+	public K4 target;
 
 	public RZahl(String text, boolean deg2rad)
 	{
@@ -37,25 +39,25 @@ public class RZahl
 
 	public double rechne()
 	{
-		double wert = zahlies.get(0).gib(v1);
+		double wert = zahlies.get(0).gib(v1, target);
 		for(int i = 0; i < zeichens.size(); i++)
 		{
 			switch(zeichens.get(i))
 			{
 				case 0:
-					wert = wert + zahlies.get(i + 1).gib(v1);
+					wert = wert + zahlies.get(i + 1).gib(v1, target);
 					break;
 				case 1:
-					wert = wert - zahlies.get(i + 1).gib(v1);
+					wert = wert - zahlies.get(i + 1).gib(v1, target);
 					break;
 				case 2:
-					wert = wert * zahlies.get(i + 1).gib(v1);
+					wert = wert * zahlies.get(i + 1).gib(v1, target);
 					break;
 				case 3:
-					wert = wert / zahlies.get(i + 1).gib(v1);
+					wert = wert / zahlies.get(i + 1).gib(v1, target);
 					break;
 				case 4:
-					wert = wert % zahlies.get(i + 1).gib(v1);
+					wert = wert % zahlies.get(i + 1).gib(v1, target);
 					break;
 			}
 		}

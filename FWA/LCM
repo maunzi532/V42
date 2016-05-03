@@ -1,12 +1,14 @@
 F Lx
 move KL2
-cld 500
+fallT KL
+cld 300
 shcld 0
 ChainOnly
 
 F Rx
 move KR2
-cld 500
+fallT KR
+cld 300
 shcld 1
 ChainOnly
 

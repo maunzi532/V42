@@ -95,55 +95,10 @@ public class Tha extends TSSA
 		return Drehung.plus(dreh, achsen[73].dreh);
 	}
 
-	/*public void doCommand(String command)
+	protected boolean targetFall()
 	{
-		if(command.equals("A"))
-		{
-			Flag f = new Flag(welt, lw, dw, bw);
-			f.aussehen = new LadeModell();
-			Index.gibStandardAussehen("Flagge/Sta").assignStandard(f);
-			f.aussehen.reload(Index.gibLadeTeil("Flagge/Achsen"));
-			f.position = new K4(this.position);
-			f.position.b -= this.block.get(0).airshift;
-			f.dreh = new Drehung(this.dreh.wl, 0);
-			f.collidable.add(new ColBox(f, 1, new EndScheibe(0.3), new EndScheibe(0.3), 1, 1));
-			f.init();
-			return;
-		}
-		if(command.equals("KL"))
-		{
-			if(overlay.pa.taType > 0 && overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
-			{
-				moves.add(new Move(Index.gibLadeMove(false, "KBL",
-						String.valueOf(-70 - UIVerbunden.maus.x / 10),
-						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
-				fL.aktionen.add(new Abbau(fL, 60, 5, overlay.pa.tnTarget, 20, this, 15,
-						new Drehung(0, Math.PI * 3 / 2), 40));
-			}
-			else
-				moves.add(new Move(Index.gibLadeMove(false, "KL",
-						String.valueOf(-70 - UIVerbunden.maus.x / 10),
-						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
-			return;
-		}
-		if(command.equals("KR"))
-		{
-			if(overlay.pa.taType > 0 && overlay.pa.tnTarget != null && overlay.pa.tnTarget >= 0)
-			{
-				moves.add(new Move(Index.gibLadeMove(false, "KBR",
-						String.valueOf(70 - UIVerbunden.maus.x / 10),
-						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
-				fR.aktionen.add(new Abbau(fR, 60, 5, overlay.pa.tnTarget, 20, this, 16,
-						new Drehung(0, Math.PI * 3 / 2), 40));
-			}
-			else
-				moves.add(new Move(Index.gibLadeMove(false, "KR",
-						String.valueOf(70 - UIVerbunden.maus.x / 10),
-						String.valueOf(60 - UIVerbunden.maus.y / 10)), this));
-			return;
-		}
-		super.doCommand(command);
-	}*/
+		return ((Overlay)tverlay).pa.taType > 0 && ((Overlay)tverlay).pa.tnTarget >= 0;
+	}
 
 	protected void doFall(String fall, boolean attachChainOnly)
 	{
@@ -197,6 +152,27 @@ public class Tha extends TSSA
 				lastZ = currentZ;
 				currentZ = "Normal";
 				break;
+			case "KL":
+			{
+				Panelizer pa = ((Overlay) tverlay).pa;
+				moves.add(new Move(LadeMove.gibVonIndex(false, "KL2"), this));
+				fL.aktionen.add(new Abbau(fL, 60, 5, pa.tnTarget, 20, this, 15,
+						new Drehung(0, Math.PI * 3 / 2), 40));
+				break;
+			}
+			case "KR":
+			{
+				Panelizer pa = ((Overlay) tverlay).pa;
+				moves.add(new Move(LadeMove.gibVonIndex(false, "KR2"), this));
+				fR.aktionen.add(new Abbau(fR, 60, 5, pa.tnTarget, 20, this, 16,
+						new Drehung(0, Math.PI * 3 / 2), 40));
+				break;
+			}
 		}
 	}
+
+	/*public double lichtRange()
+	{
+		return 0;
+	}*/
 }

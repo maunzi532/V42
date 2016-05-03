@@ -45,6 +45,7 @@ public class Hauptschleife
 		lfwa.charge(LadeFWATeil.gibVonIndex("SetN"));
 		lfwa.charge(LadeFWATeil.gibVonIndex("Set1"));
 		Tha n = new Tha(new SPController(reciever), lfwa, aw);
+		n.tverlay = reciever;
 		n.aussehen = new LadeModell().reload(
 				LadeTeil.gibVonIndex("Hauptteil"),
 				LadeTeil.gibVonIndex("Beine"),

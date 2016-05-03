@@ -10,7 +10,9 @@ public class LadeControlledMove
 	ArrayList<Integer> brauchtLevel;
 	boolean isChainOnly;
 	String theMove;
+	String theMoveTargeted;
 	String theFall;
+	String theFallTargeted;
 	int sharedcooldown;
 	double cooldown;
 	protected int power;
@@ -43,8 +45,12 @@ public class LadeControlledMove
 					power = Integer.parseInt(cde[i].substring(6));
 				else if(cde[i].startsWith("move "))
 					theMove = cde[i].substring(5);
+				else if(cde[i].startsWith("moveT "))
+					theMoveTargeted = cde[i].substring(6);
 				else if(cde[i].startsWith("fall "))
 					theFall = cde[i].substring(5);
+				else if(cde[i].startsWith("fallT "))
+					theFallTargeted = cde[i].substring(6);
 			}
 		}
 	}
