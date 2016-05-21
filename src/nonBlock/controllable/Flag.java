@@ -22,13 +22,13 @@ public class Flag extends NBB implements Licht
 		super.ende();
 	}
 
-	public void collide(Attk attk)
+	public void collide(Collider collider)
 	{
 		ende();
 	}
 
-	public void actCollide(Attk attk){}
-	public void decollide(Attk attk){}
+	public void actCollide(Collider collider){}
+	public void decollide(Collider collider){}
 	public void wand(int welche){}
 	protected void kontrolle(){}
 

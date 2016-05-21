@@ -11,8 +11,8 @@ public abstract class NBB extends NBD
 {
 	public final ArrayList<BlockBox> block;
 	public final ArrayList<ColBox> collidable;
-	public final ArrayList<Attk> attks;
-	final ArrayList<Attk> connected;
+	public final ArrayList<Collider> colliders;
+	final ArrayList<Collider> connected;
 	public final ArrayList<Integer> cTime;
 	public final NBB nht;
 	public final ArrayList<ColBox> physik;
@@ -29,7 +29,7 @@ public abstract class NBB extends NBD
 		connected = new ArrayList<>();
 		cTime = new ArrayList<>();
 		nht = null;
-		attks = new ArrayList<>();
+		colliders = new ArrayList<>();
 		physik = new ArrayList<>();
 		bw.vta.add(this);
 	}
@@ -97,11 +97,11 @@ public abstract class NBB extends NBD
 		bewegung = eb;
 	}
 
-	public abstract void collide(Attk attk);
+	public abstract void collide(Collider collider);
 
-	public abstract void actCollide(Attk attk);
+	public abstract void actCollide(Collider collider);
 
-	public abstract void decollide(Attk attk);
+	public abstract void decollide(Collider collider);
 
 	public abstract void wand(int welche);
 

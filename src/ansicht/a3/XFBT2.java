@@ -49,7 +49,7 @@ public class XFBT2 extends PolyFarbe
 			String text = Index.teilNamen.get("Blocks") + File.separator +
 					name.replace("/", File.separator) + " " + i + ".png";
 			if(new File(text).exists())
-				imgs.add((BufferedImage)Lader.gibBild(text));
+				imgs.add((BufferedImage) Lader.gibBild(text));
 		}
 		XFBT2 s = new XFBT2(imgs, seite);
 		Index.geladen.put(name + seite, s);

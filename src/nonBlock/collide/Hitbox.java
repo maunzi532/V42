@@ -10,7 +10,7 @@ public class Hitbox extends ColBox
 	public int dauerNoch;
 	final int dauer;
 
-	public Hitbox(Attk von, int linkN, End3 rad1, End3 rad2, double lnm, int time, double connectibility)
+	public Hitbox(Collider von, int linkN, End3 rad1, End3 rad2, double lnm, int time, double connectibility)
 	{
 		super(von.besitzer, linkN, rad1, rad2, lnm, connectibility);
 		connected = new ArrayList<>();

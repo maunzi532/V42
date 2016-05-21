@@ -29,9 +29,9 @@ public class Tha extends TSSA
 		super.init();
 		fL = new NBB(welt, lw, dw, bw)
 		{
-			public void collide(Attk attk){}
-			public void actCollide(Attk attk){}
-			public void decollide(Attk attk){}
+			public void collide(Collider collider){}
+			public void actCollide(Collider collider){}
+			public void decollide(Collider collider){}
 			public void wand(int welche){}
 			protected void kontrolle(){}
 		};
@@ -41,9 +41,9 @@ public class Tha extends TSSA
 		fL.init();
 		fR = new NBB(welt, lw, dw, bw)
 		{
-			public void collide(Attk attk){}
-			public void actCollide(Attk attk){}
-			public void decollide(Attk attk){}
+			public void collide(Collider collider){}
+			public void actCollide(Collider collider){}
+			public void decollide(Collider collider){}
 			public void wand(int welche){}
 			protected void kontrolle(){}
 		};
@@ -77,11 +77,11 @@ public class Tha extends TSSA
 		}
 	}
 
-	public void collide(Attk attk){}
+	public void collide(Collider collider){}
 
-	public void actCollide(Attk attk){}
+	public void actCollide(Collider collider){}
 
-	public void decollide(Attk attk){}
+	public void decollide(Collider collider){}
 
 	public void wand(int welche){}
 

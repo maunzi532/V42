@@ -3,10 +3,6 @@ Nicht sicher
 	NBD - Idle Bewegung
 	Metall-Reflexion
 
-Stufe Moves
-	LadeCM anderes wenn targeted
-	Zustand ändern in LadeAktion
-
 Stufe Mine
 	Initialisierung von WeltNB verbessern
 	ZP4C neu machen und umwandeln in LadeCM
@@ -23,6 +19,14 @@ Stufe Stoff
 	Haare Mehrfach-Physik einfacher machen
 
 Stufe Leiste
+	FWA-Zustand ändern in LadeAktion
+	Einige Fixes
+	Aufbaubarkeit (besser in FWA)
+	Leiste
+	Berechnung
+	Rückstoß
+	Cooldown-Anzeige (mit FWA)
+	Kollisionsaktualisierung beachten
 
 Stufe Eingabe
 

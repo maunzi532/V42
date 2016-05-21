@@ -39,7 +39,7 @@ class LadeAktion
 	private final ArrayList<Integer> linA = new ArrayList<>();
 	private final ArrayList<ADI> adiA = new ArrayList<>();
 
-	private Attk thatAttk;
+	private Collider thatCollider;
 	private int delay;
 
 	private String text;
@@ -88,13 +88,13 @@ class LadeAktion
 					dislocate = cd3[1];
 					break;
 				case "Attk":
-					thatAttk = new Attk(Integer.parseInt(cd3[1]));
+					thatCollider = new Collider(Integer.parseInt(cd3[1]));
 					break;
 				case "nht":
 					nhtDislocate = cd3[1];
 					break;
 				case "hbox":
-					thatAttk.h.add(new Hitbox(cd3[1]));
+					thatCollider.h.add(new Hitbox(cd3[1]));
 					break;
 				case "delay":
 					delay = Integer.parseInt(cd3[1]);
@@ -201,7 +201,7 @@ class LadeAktion
 				tp(dislocated, mvd, mvd2);
 				break;
 			case 8:
-				AttkAktion ak = new AttkAktion((NBB) dislocated, dauer, power, thatAttk,
+				ColliderAktion ak = new ColliderAktion((NBB) dislocated, dauer, power, thatCollider,
 						(NBB)besitzer2.plzDislocate(nhtDislocate));
 				dislocated.aktionen.add(ak);
 				if(delay > 0)

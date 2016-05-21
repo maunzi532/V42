@@ -89,15 +89,15 @@ public class Hauptschleife
 	{
 		TSSA n2 = new TSSA(new Controller(), null, "Luft", aw)
 		{
-			public void collide(Attk attk)
+			public void collide(Collider attk)
 			{
 				AktionM.checkLinA(this, new AktionM(this, 20, 1, ADI.deg(16, 2, 14, new RZahl(3), new RZahl(45),
 						new RZahl(0), new RZahl(0), new RZahl(0), false)));
 			}
 
-			public void actCollide(Attk attk){}
+			public void actCollide(Collider attk){}
 
-			public void decollide(Attk attk)
+			public void decollide(Collider attk)
 			{
 				AlternateStandard.gibVonIndex1("TSSA2R").changeToThis(this, 40, 5);
 			}

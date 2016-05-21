@@ -2,7 +2,7 @@ package nonBlock.collide;
 
 import java.util.*;
 
-public class Attk
+public class Collider
 {
 	NBB besitzer;
 	public final ArrayList<Hitbox> h;
@@ -14,7 +14,7 @@ public class Attk
 	private ArrayList<Hitbox> col1;
 	private ArrayList<ColBox> col2;
 
-	public Attk(int cll)
+	public Collider(int cll)
 	{
 		this.cll = cll;
 		h = new ArrayList<>();
@@ -34,8 +34,8 @@ public class Attk
 			h.get(i).connected = new ArrayList<>();
 			h.get(i).dauerNoch = h.get(i).dauer;
 		}
-		besitzer.attks.add(this);
-		besitzer.bw.attks.add(this);
+		besitzer.colliders.add(this);
+		besitzer.bw.colliders.add(this);
 	}
 
 	public void reset()
@@ -48,8 +48,8 @@ public class Attk
 
 	public void ende()
 	{
-		besitzer.attks.remove(this);
-		besitzer.bw.attks.remove(this);
+		besitzer.colliders.remove(this);
+		besitzer.bw.colliders.remove(this);
 	}
 
 	public void resolve()
