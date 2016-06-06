@@ -13,8 +13,8 @@ A. The contents of "Beschreibung" are probably useless
 B. Small changes in the text files can (and will) produce a crash  
 C. When something is needed public, __make public!__  
 D. __Avoid__ getters and setters  
-E. The other character is for testing bugged hair which heavily bugs on the player character
-F. V42 has a very problematic dependancy matrix, fix pls
+E. The other character is for testing bugged hair which heavily bugs on the player character  
+F. V42 has a very problematic dependancy matrix, fix pls  
 
 # Controls (May be outdated)
 The Controls depend on your Overlay Settings)
