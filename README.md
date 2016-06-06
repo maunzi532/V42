@@ -2,19 +2,19 @@
 Rules for using:  
 1. Only M5s may push to __master__  
 2. Other branches can be used by admins  
-3. Admins only, no access restrictions (currently)  
-4. master is sometimes uncompilable  
-5. Has to be compiled, __no compiled version here__  
-6. Some commits will crash, this is sometimes intended  
-7. If uncompilable or crashing, use an older version  
-8. Try keeping the size of the compiled version rather small  
-9. (evtl.) All take smite and go botlane  
-A. Read the __Controls__ before using (May be outdated though)  
-B. The contents of "Beschreibung" are probably useful  
-C. Small changes in the text files can (and will) produce a crash  
-D. When something is needed public, __make public!__  
-E. Try __avoiding__ getters and setters  
-F. The other character is for testing bugged hair which heavily bugs on the player character
+3. master is sometimes uncompilable  
+4. Has to be compiled, __no compiled version here__  
+5. Some commits will crash, this is sometimes intended  
+6. If uncompilable or crashing, use an older version  
+7. Try keeping the size of the compiled version rather small  
+8. (evtl.) All take smite and go to __botlane__  
+9. Read the __Controls__ before using (May be outdated though)  
+A. The contents of "Beschreibung" are probably useless  
+B. Small changes in the text files can (and will) produce a crash  
+C. When something is needed public, __make public!__  
+D. __Avoid__ getters and setters  
+E. The other character is for testing bugged hair which heavily bugs on the player character
+F. V42 has a very problematic dependancy matrix, fix pls
 
 # Controls (May be outdated)
 The Controls depend on your Overlay Settings)
