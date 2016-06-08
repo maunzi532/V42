@@ -1,6 +1,7 @@
 package ansicht.text;
 
 import ansicht.*;
+import ansicht.a3.*;
 import nonBlock.aktion.*;
 import nonBlock.aussehen.*;
 import nonBlock.collide.*;
@@ -108,10 +109,10 @@ public class InitSL
 				else if(ov.kamN instanceof NBB)
 				{
 					NBB th = (NBB) ov.kamN;
-					Flag f = new Flag(th.welt, th.lw, th.dw, th.bw);
+					Flag f = new Flag(th.welt, th.dw, th.bw);
 					f.aussehen = new LadeModell();
-					StandardAussehen.gibVonIndex2("Flagge/Sta").assignStandard(f);
-					f.aussehen.reload(LadeTeil.gibVonIndex("Flagge/Achsen"));
+					StandardAussehen.gibVonIndexS("Flagge/Sta").assignStandard(f);
+					f.aussehen.reload(LadeTeil.gibVonIndex("Flagge/Achsen", new PolyFarbe()));
 					f.position = new K4(th.position);
 					f.position.b -= th.block.get(0).airshift;
 					f.dreh = new Drehung(th.dreh.wl, 0);

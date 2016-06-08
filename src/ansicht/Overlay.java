@@ -93,7 +93,7 @@ public class Overlay extends Tverlay
 		godModeKam.dreh = new Drehung();
 		godModeKam.canInfl = new double[]{1, 1, 1, 1};
 		godModeKam.aussehen = new LadeModell();
-		StandardAussehen.gibVonIndex2("Kam").assignStandard(godModeKam);
+		StandardAussehen.gibVonIndexS("Kam").assignStandard(godModeKam);
 		godModeKam.aussehen.reload();
 		godModeKam.init();
 		godModeKam.aktionen.add(new Sicht(godModeKam, 10, 0, 0, true, this));
@@ -142,12 +142,12 @@ public class Overlay extends Tverlay
 			if(godMode)
 			{
 				isl.normalSchalter.addAll(isl.godModeSchalter);
-				godModeKam.lw.licht.add(godModeKam);
+				//TODO godModeKam.lw.licht.add(godModeKam);
 			}
 			else
 			{
 				isl.normalSchalter.removeAll(isl.godModeSchalter);
-				godModeKam.lw.licht.remove(godModeKam);
+				//TODO godModeKam.lw.licht.remove(godModeKam);
 				pa.xrmode = false;
 				vor.siehBlocks = true;
 				vor.siehNonBlocks = true;

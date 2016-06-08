@@ -1,12 +1,13 @@
 package ansicht.a3;
 
 import ansicht.*;
+import nonBlock.aussehen.*;
 import wahr.zugriff.*;
 
 import java.awt.*;
 import java.util.*;
 
-public abstract class Polygon3 extends Anzeige3
+public abstract class Polygon3 extends Anzeige3 implements Ifff2Target
 {
 	public K4[] eckenR;
 	K4[] eckenK;

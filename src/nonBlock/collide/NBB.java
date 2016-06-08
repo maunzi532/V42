@@ -19,9 +19,9 @@ public abstract class NBB extends NBD
 	public WeltB welt;
 	public WeltNB bw;
 
-	protected NBB(WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
+	protected NBB(WeltB welt, WeltND dw, WeltNB bw)
 	{
-		super(lw, dw);
+		super(dw);
 		this.welt = welt;
 		this.bw = bw;
 		block = new ArrayList<>();
@@ -36,7 +36,7 @@ public abstract class NBB extends NBD
 
 	protected NBB(AllWelt aw)
 	{
-		this(aw.wbl, aw.lw, aw.dw, aw.bw);
+		this(aw.wbl, aw.dw, aw.bw);
 	}
 
 	public void ende()

@@ -2,6 +2,7 @@ package ansicht.a3;
 
 import ansicht.*;
 import block.*;
+import nonBlock.aussehen.*;
 import wahr.zugriff.*;
 
 import java.util.*;
@@ -62,7 +63,7 @@ class BlockZuAnz
 		double wbD = (kam.d - wb.startWelt.d) / wb.weltBlock.d;
 		int theD = wb.intiize((kam.d - wb.startWelt.d) / wb.weltBlock.d);
 		double wbDShift = wbD - theD;
-		K4 relativ = TK4F.transformSet2(new K4(kam), kDreh, null);
+		K4 relativ = NonBlock.transformSet2(new K4(kam), kDreh, null);
 		for(int a = kaw0.k[0]; a < kawEnd.k[0]; a++)
 			for(int b = kaw0.k[1]; b < kawEnd.k[1]; b++)
 				for(int c = kaw0.k[2]; c < kawEnd.k[2]; c++)
@@ -108,7 +109,7 @@ class BlockZuAnz
 					for(int j = 0; j < 3; j++)
 						ortP.k[j] = ortP.k[j] + plus[j];
 					eR[i] = wb.wt(ortP);
-					eK[i] = TK4F.transformSet2(new K4(eR[i]), kDreh, relativ);
+					eK[i] = NonBlock.transformSet2(new K4(eR[i]), kDreh, relativ);
 				}
 				dieListe.add(new PBlock3(wb.tn(ortA), lw, true, (wb.wt2(ortA).d - kamD) / wb.weltBlock.d - 0.5,
 						(wb.wt2(ortA).d - kamD) / wb.weltBlock.d + 0.5,
@@ -200,7 +201,7 @@ class BlockZuAnz
 		}
 		if(ok)
 		{
-			K4 kMid = TK4F.transformSet2(mid7, kDreh, relativ);
+			K4 kMid = NonBlock.transformSet2(mid7, kDreh, relativ);
 			dieListe.add(new BlockDInfo3(wb.tn(w7), lw, mid7, kMid, true,
 					wb.gib(w7), ddiff1, ddiff2));
 		}

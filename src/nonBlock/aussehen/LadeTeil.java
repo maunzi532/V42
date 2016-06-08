@@ -11,7 +11,7 @@ public class LadeTeil
 	final ArrayList<LadeF2> f2;
 	final int end;
 
-	private LadeTeil(String code)
+	private LadeTeil(String code, IFarbeff2 factory)
 	{
 		String[] zeilen = code.split("\n");
 		int achseAktuell = -1;
@@ -27,7 +27,7 @@ public class LadeTeil
 					punkte.put(achseAktuell, new ArrayList<>());
 				}
 				else if(zeilen[i].startsWith("F") && zeilen[i].charAt(2) == ' ')
-					fx(zeilen[i]);
+					fx(zeilen[i], factory);
 				else if(zeilen[i].startsWith("PRISMA"))
 					prisma(zeilen[i]);
 				else if(zeilen[i].startsWith("PYRAMIDE"))
@@ -43,7 +43,7 @@ public class LadeTeil
 		end = Collections.max(punkte.keySet());
 	}
 
-	private void fx(String zeile)
+	private void fx(String zeile, IFarbeff2 factory)
 	{
 		Boolean seite = null;
 		String[] x2 = zeile.split(" ");
@@ -51,8 +51,8 @@ public class LadeTeil
 			seite = true;
 		else if(x2[0].equals("FV"))
 			seite = false;
-		PolyFarbe polyFarbe = new PolyFarbe(x2[1]);
-		LadeF2 f22 = new LadeF2(polyFarbe, seite);
+		IFarbeff2 fff2 = factory.gibNeu(x2[1]);
+		LadeF2 f22 = new LadeF2(fff2, seite);
 		f2.add(f22);
 		for(int j = 0; j + 2 < x2.length; j++)
 		{
@@ -263,11 +263,11 @@ public class LadeTeil
 		}
 	}
 
-	public static LadeTeil gibVonIndex(String name)
+	public static LadeTeil gibVonIndex(String name, IFarbeff2 factory)
 	{
 		if(Index.geladen.containsKey(name))
 			return (LadeTeil) Index.geladen.get(name);
-		LadeTeil s = new LadeTeil(Index.bauName("Ladeteile", name));
+		LadeTeil s = new LadeTeil(Index.bauName("Ladeteile", name), factory);
 		Index.geladen.put(name, s);
 		return s;
 	}

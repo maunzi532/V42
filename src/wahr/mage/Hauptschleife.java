@@ -1,6 +1,7 @@
 package wahr.mage;
 
 import ansicht.*;
+import ansicht.a3.*;
 import block.generierung.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
@@ -14,6 +15,7 @@ import wahr.zugriff.*;
 public class Hauptschleife
 {
 	public static AllWelt aw;
+	private static PolyFarbe fa1 = new PolyFarbe();
 
 	public static void initWelt()
 	{
@@ -27,10 +29,10 @@ public class Hauptschleife
 		g.ermittleStart();
 		for(int i = 0; i < aw.wbl.starts.length; i++)
 		{
-			Flag f = new Flag(aw.wbl, aw.lw, aw.dw, aw.bw);
+			Flag f = new Flag(aw.wbl, aw.dw, aw.bw);
 			f.aussehen = new LadeModell();
-			StandardAussehen.gibVonIndex2("Flagge/Sta").assignStandard(f);
-			f.aussehen.reload(LadeTeil.gibVonIndex("Flagge/Achsen"));
+			StandardAussehen.gibVonIndexS("Flagge/Sta").assignStandard(f);
+			f.aussehen.reload(LadeTeil.gibVonIndex("Flagge/Achsen", fa1));
 			f.position = new K4(aw.wbl.starts[i]);
 			f.dreh = new Drehung(aw.wbl.startdrehs[i]);
 			f.collidable.add(new ColBox(f, 1, new EndScheibe(0.3), new EndScheibe(0.3), 1, 1));
@@ -47,15 +49,15 @@ public class Hauptschleife
 		Tha n = new Tha(new SPController(reciever), lfwa, aw);
 		n.tverlay = reciever;
 		n.aussehen = new LadeModell().reload(
-				LadeTeil.gibVonIndex("Hauptteil"),
-				LadeTeil.gibVonIndex("Beine"),
-				LadeTeil.gibVonIndex("Arme"),
-				LadeTeil.gibVonIndex("Schuhe"),
-				LadeTeil.gibVonIndex("Kopf"),
-				LadeTeil.gibVonIndex("Sicht"));
-		StandardAussehen.gibVonIndex2("TSSA").assignStandard(n,
-				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand L2"))),
-				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand R2"))),
+				LadeTeil.gibVonIndex("Hauptteil", fa1),
+				LadeTeil.gibVonIndex("Beine", fa1),
+				LadeTeil.gibVonIndex("Arme", fa1),
+				LadeTeil.gibVonIndex("Schuhe", fa1),
+				LadeTeil.gibVonIndex("Kopf", fa1),
+				LadeTeil.gibVonIndex("Sicht", fa1));
+		StandardAussehen.gibVonIndexS("TSSA").assignStandard(n,
+				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand L2", fa1))),
+				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand R2", fa1))),
 				new H(0.5, 0.5, 10, 10, 4, 1, 0, 0.9),
 				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9),
 				new H(0.2, 0.5, 4, 10, 7, 0.7, 0, 0.9),
@@ -99,7 +101,7 @@ public class Hauptschleife
 
 			public void decollide(Collider attk)
 			{
-				AlternateStandard.gibVonIndex1("TSSA2R").changeToThis(this, 40, 5);
+				changeToThis(AlternateStandard.gibVonIndex("TSSA2R"), this, 40, 5);
 			}
 
 			public void wand(int welche){}
@@ -130,15 +132,15 @@ public class Hauptschleife
 		};
 		//MPS mp2 = new MPS();
 		n2.aussehen = new LadeModell().reload(
-				LadeTeil.gibVonIndex("Hauptteil"),
-				LadeTeil.gibVonIndex("Beine"),
-				LadeTeil.gibVonIndex("Arme"),
-				LadeTeil.gibVonIndex("Schuhe"),
-				LadeTeil.gibVonIndex("Kopf"),
-				LadeTeil.gibVonIndex("Sicht"));
-		StandardAussehen.gibVonIndex2("TSSA").assignStandard(n2,
-				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand L2"))),
-				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand R2"))),
+				LadeTeil.gibVonIndex("Hauptteil", fa1),
+				LadeTeil.gibVonIndex("Beine", fa1),
+				LadeTeil.gibVonIndex("Arme", fa1),
+				LadeTeil.gibVonIndex("Schuhe", fa1),
+				LadeTeil.gibVonIndex("Kopf", fa1),
+				LadeTeil.gibVonIndex("Sicht", fa1));
+		StandardAussehen.gibVonIndexS("TSSA").assignStandard(n2,
+				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand L2", fa1))),
+				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand R2", fa1))),
 				new H2(n2, 0.5, 0.5, 10, 10, 4, 1, 0, 0.6),
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55),

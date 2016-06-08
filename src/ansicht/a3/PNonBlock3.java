@@ -1,16 +1,17 @@
 package ansicht.a3;
 
 import ansicht.*;
+import nonBlock.aussehen.*;
 import wahr.zugriff.*;
 
 import java.util.*;
 
 public class PNonBlock3 extends Polygon3
 {
-	public PNonBlock3(long tn, LichtW lw, Boolean seite, PolyFarbe farbe, int rSeed, K4[] eckenR, K4[] eckenK)
+	public PNonBlock3(long tn, LichtW lw, Boolean seite, IFarbeff2 farbe, int rSeed, K4[] eckenR, K4[] eckenK)
 	{
 		super(tn, lw, seite);
-		this.farbe = farbe;
+		this.farbe = (PolyFarbe)farbe;
 		this.eckenR = eckenR;
 		this.eckenK = eckenK;
 		this.rSeed = rSeed;

@@ -1,23 +1,36 @@
 package ansicht.a3;
 
-import wahr.zugriff.*;
-
 import java.awt.*;
 import java.util.*;
+import nonBlock.aussehen.*;
+import wahr.zugriff.*;
 
-public class PolyFarbe
+public class PolyFarbe implements IFarbeff2
 {
+	//Anzahl unterschiedlicher Diffundierungs-Seeds
+	public static final int seedifier = 100;
+	//Weite in Blocks wo NonBlocks in d nicht diffundieren
+	public static final double safezone = 1;
+	//Weite danach wo NonBlocks in d diffundieren
+	public static final double diffusewidth = 40;
 	private static final int[] splN;
 	static
 	{
 		Random r = new Random();
-		splN = new int[Staticf.seedifier];
-		for(int i = 0; i < Staticf.seedifier; i++)
-			splN[i] = r.nextInt(Staticf.seedifier);
+		splN = new int[seedifier];
+		for(int i = 0; i < seedifier; i++)
+			splN[i] = r.nextInt(seedifier);
 	}
 
-	Color baseColor;
-	Material mat;
+	public Color baseColor;
+	public Material mat;
+
+	public IFarbeff2 gibNeu(String s)
+	{
+		return new PolyFarbe(s);
+	}
+
+	public PolyFarbe(){}
 
 	public PolyFarbe(String text)
 	{
@@ -29,28 +42,26 @@ public class PolyFarbe
 			mat = Material.N;
 	}
 
-	PolyFarbe(){}
-
 	public boolean showFade(Polygon3 target)
 	{
 		if(target.rSeed <= 0)
 			return true;
 		if(target.ddiff >= 0)
-			return target.ddiff / Staticf.diffusewidth - Staticf.safezone <=
-					((Math.abs(target.rSeed) + splN[(target.nachSplitID % Staticf.seedifier)]) %
-							Staticf.seedifier) / (double)Staticf.seedifier;
-		return -target.ddiff / Staticf.diffusewidth - Staticf.safezone <=
-				(Staticf.seedifier - 1 - ((Math.abs(target.rSeed) +
-						splN[(target.nachSplitID % Staticf.seedifier)]) %
-						Staticf.seedifier)) / (double)Staticf.seedifier;
+			return target.ddiff / diffusewidth - safezone <=
+					((Math.abs(target.rSeed) + splN[(target.nachSplitID % seedifier)]) %
+							seedifier) / (double) seedifier;
+		return -target.ddiff / diffusewidth - safezone <=
+				(seedifier - 1 - ((Math.abs(target.rSeed) +
+						splN[(target.nachSplitID % seedifier)]) %
+						seedifier)) / (double) seedifier;
 	}
 
-	public Paint gibFarbe(Polygon3 target, Long tn)
+	public Paint gibFarbe(Ifff2Target target, Long tn)
 	{
-		return errechneFarbe(baseColor, target, tn);
+		return errechneFarbe(baseColor, (Polygon3)target, tn);
 	}
 
-	Paint errechneFarbe(Color fc, Polygon3 target, Long tn)
+	public Paint errechneFarbe(Color fc, Polygon3 target, Long tn)
 	{
 		if(target.ddiff > 0) //Rot
 			fc = limit(fc, (int)(target.ddiff * 10), (int)(target.ddiff * -5), (int)(target.ddiff * -5));

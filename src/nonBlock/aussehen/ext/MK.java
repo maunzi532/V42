@@ -45,19 +45,19 @@ public class MK extends External
 		for(int w = 0; w < nw; w++)
 		{
 			LadePunkt la = main2.aussehen.punkte[axn].get(linkedP[w]);
-			main2.achsen[anfang + w] = h2[0][w].entlinken(TK4F.zuPunkt(main2.achsen[axn],
+			main2.achsen[anfang + w] = h2[0][w].entlinken(NonBlock.zuPunkt(main2.achsen[axn],
 					la.abstand, 0, la.vor,
 					la.spin, mDreh, mPos), main2.achsen[axn]);
 		}
 		for(int t = 1; t < nt; t++)
 			for(int w = 0; w < nw; w++)
 				main2.achsen[anfang + t * nw + w] =
-						h2[t][w].entlinken(TK4F.achseEnde(main2.achsen[anfang + (t - 1) * nw + w],
-						TK4F.mkT1(new K4(Math.sin(h2[t][w].dreh.wl) * t / nt *
-								(fwm * (nt - t) + fwx * t) / nt, 0,
-								Math.cos(h2[t][w].dreh.wl) * t / nt *
-								(fwm * (nt - t) + fwx * t) / nt, 0),
-								mDreh, new K4())), main2.achsen[anfang + (t - 1) * nw + w]);
+						h2[t][w].entlinken(LinkAchse.achseEnde(main2.achsen[anfang + (t - 1) * nw + w],
+								TK4F.mkT1(new K4(Math.sin(h2[t][w].dreh.wl) * t / nt *
+												(fwm * (nt - t) + fwx * t) / nt, 0,
+												Math.cos(h2[t][w].dreh.wl) * t / nt *
+														(fwm * (nt - t) + fwx * t) / nt, 0),
+										mDreh, new K4())), main2.achsen[anfang + (t - 1) * nw + w]);
 	}
 
 	public void punkte(K4[][] into)

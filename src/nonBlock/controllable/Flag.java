@@ -8,16 +8,16 @@ import wahr.zugriff.*;
 
 public class Flag extends NBB implements Licht
 {
-	public Flag(WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
+	public Flag(WeltB welt, WeltND dw, WeltNB bw)
 	{
-		super(welt, lw, dw, bw);
-		lw.licht.add(this);
+		super(welt, dw, bw);
+		//lw.licht.add(this);
 		welt.flags.add(this);
 	}
 
 	public void ende()
 	{
-		lw.licht.remove(this);
+		//lw.licht.remove(this);
 		welt.flags.remove(this);
 		super.ende();
 	}

@@ -85,15 +85,15 @@ public class H extends External
 
 	public void entLink(Drehung mDreh, K4 mPos)
 	{
-		inmid = TK4F.zuPunkt(main2.achsen[axn], 0, 0, 1, 0, mDreh, mPos);
+		inmid = NonBlock.zuPunkt(main2.achsen[axn], 0, 0, 1, 0, mDreh, mPos);
 		for(int i = 0; i < ht; i++)
 			for(int j = 0; j < wt; j++)
 				for(int k = 0; k < h2[i][j].length; k++)
 				{
 					if(k == 0)
 						h2a[i][j][k] = h2[i][j][k].entlinken(
-								TK4F.zuPunkt(main2.achsen[axn], j * w * 2 / wt - w + w / wt,
-								i * h * 2 / ht - h + h / ht, 1, 0, mDreh, mPos),
+								NonBlock.zuPunkt(main2.achsen[axn], j * w * 2 / wt - w + w / wt,
+										i * h * 2 / ht - h + h / ht, 1, 0, mDreh, mPos),
 								main2.achsen[axn], mDreh);
 					else
 						h2a[i][j][k] = h2[i][j][k].entlinken(h2a[i][j][k - 1]);
@@ -116,7 +116,7 @@ public class H extends External
 
 	public void transformK(K4 kam, Drehung kDreh)
 	{
-		K4 relativ = TK4F.transformSet2(new K4(kam), kDreh, null);
+		K4 relativ = NonBlock.transformSet2(new K4(kam), kDreh, null);
 		for(int i = 0; i < punkteK.length; i++)
 			if(punkte[i] != null)
 			{
@@ -125,7 +125,7 @@ public class H extends External
 					punkteK[i][j] = new K4(punkte[i][j]);
 				for(int j = 0; j < punkteK[i].length; j++)
 					if(punkteK[i][j] != null)
-						punkteK[i][j] = TK4F.transformSet2(punkteK[i][j], kDreh, relativ);
+						punkteK[i][j] = NonBlock.transformSet2(punkteK[i][j], kDreh, relativ);
 			}
 	}
 

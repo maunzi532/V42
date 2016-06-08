@@ -110,13 +110,6 @@ public class Staticf
 	//Anzahl Millisekunden zwischen Checks ob wieder im Fokus
 	public static final long blcfms = 200;
 
-	//Weite in Blocks wo NonBlocks in d nicht diffundieren
-	public static final double safezone = 1;
-	//Weite danach wo NonBlocks in d diffundieren
-	public static final double diffusewidth = 40;
-	//Anzahl unterschiedlicher Diffundierungs-Seeds
-	public static final int seedifier = 100;
-
 	//BlockBox-Genauigkeit in Dezimeter
 	public static final double step = 0.01;
 	//Ungenauigkeit bei Hitboxes oben und unten

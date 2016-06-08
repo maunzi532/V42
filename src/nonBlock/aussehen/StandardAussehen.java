@@ -1,11 +1,9 @@
 package nonBlock.aussehen;
 
+import java.util.*;
 import nonBlock.aussehen.ext.*;
-import nonBlock.aktion.*;
 import nonBlock.collide.*;
 import wahr.zugriff.*;
-
-import java.util.*;
 
 public class StandardAussehen extends AlternateStandard
 {
@@ -79,7 +77,6 @@ public class StandardAussehen extends AlternateStandard
 				}
 			}
 		}
-		//la = Collections.max(numm) + 1;
 		la = enhStart.get(enhStart.size() - 1);
 		linkeds = new Integer[la];
 		drehs = new Drehung[la];
@@ -99,7 +96,7 @@ public class StandardAussehen extends AlternateStandard
 		}
 	}
 
-	public void assignStandard(NBD n)
+	public void assignStandard(NonBlock n)
 	{
 		n.linkAchsen = new LinkAchse[enhStart.get(0)];
 		n.elimit = enhStart.get(0);
@@ -113,7 +110,7 @@ public class StandardAussehen extends AlternateStandard
 					n.linkAchsen[i] = new LinkAchse(n.linkAchsen[linkeds[i]],
 							new Drehung(drehs[i]), lens[i], spins[i], dShifts[i], teles[i]);
 			}
-		if(n instanceof NBB)
+		if(n instanceof NBB) //TODO
 		{
 			for(int i = 0; i < blockbox.size(); i++)
 				((NBB)n).block.add(new BlockBox((NBB)n, new K4(blockbox.get(i)[0],
@@ -124,7 +121,7 @@ public class StandardAussehen extends AlternateStandard
 		n.standard = this;
 	}
 
-	public void assignStandard(NBD n, External... ext)
+	public void assignStandard(NonBlock n, External... ext)
 	{
 		n.elimit = enhStart.get(0);
 		n.externals = new External[ext.length];
@@ -158,7 +155,7 @@ public class StandardAussehen extends AlternateStandard
 		n.standard = this;
 	}
 
-	public static StandardAussehen gibVonIndex2(String name)
+	public static StandardAussehen gibVonIndexS(String name)
 	{
 		if(Index.geladen.containsKey(name))
 			return (StandardAussehen) Index.geladen.get(name);

@@ -58,10 +58,10 @@ public class Vor
 						}
 					}
 					if(eckenK != null)
-						anzeigeZ.add(new PNonBlock3(nb.tn, lw, f2.seite, f2.polyFarbe, f2.seed, eckenR, eckenK));
+						anzeigeZ.add(new PNonBlock3(nb.tn, lw, f2.seite, f2.fff2, f2.seed, eckenR, eckenK));
 				}
 				for(int i = 0; i < nb.externals.length; i++)
-					nb.externals[i].gibPl(anzeigeZ, nb.punkteK, nb.lw, nb == kam);
+					nb.externals[i].gibPl(anzeigeZ, nb.punkteK, lw, nb == kam);
 			}
 		Staticf.sca("NonBlocks (2) ");
 		if(siehBlocks)
@@ -90,4 +90,5 @@ public class Vor
 			anzeige.get(i).farbeFlaeche(tnTarget, wI, hI, kam.kamP(),  xr ? Staticf.xraywidth : 0);
 		Staticf.sca("FarbeFlaeche (2) ");
 	}
+
 }

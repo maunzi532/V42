@@ -1,11 +1,9 @@
 package nonBlock.aktion;
 
-import ansicht.*;
+import java.util.*;
 import nonBlock.aktion.lesen.*;
 import nonBlock.aussehen.*;
 import wahr.zugriff.*;
-
-import java.util.*;
 
 public abstract class NBD extends NonBlock
 {
@@ -14,14 +12,17 @@ public abstract class NBD extends NonBlock
 	protected K4 bewegung;
 	protected ArrayList<K4> beweg;
 	public ArrayList<Forced> forced;
-	public AlternateStandard standard = null;
 	public Aktion currentTrans = null;
 	protected final ArrayList<Move> moves;
 	public Tverlay tverlay;
 
-	protected NBD(LichtW lw, WeltND dw)
+	public WeltND dw;
+
+	protected NBD(WeltND dw)
 	{
-		super(lw, dw);
+		super();
+		this.dw = dw;
+		dw.nonBlocks.add(this);
 		bewegung = new K4();
 		beweg = new ArrayList<>();
 		forced = new ArrayList<>();
@@ -29,15 +30,15 @@ public abstract class NBD extends NonBlock
 		moves = new ArrayList<>();
 	}
 
-	protected NBD(LichtW lw, WeltND dw, Tverlay tverlay)
+	protected NBD(WeltND dw, Tverlay tverlay)
 	{
-		this(lw, dw);
+		this(dw);
 		this.tverlay = tverlay;
 	}
 
 	protected NBD(AllWelt aw)
 	{
-		this(aw.lw, aw.dw);
+		this(aw.dw);
 	}
 
 	public void init()

@@ -10,7 +10,7 @@ import wahr.zugriff.*;
 
 import java.util.*;
 
-class LadeAktion
+public class LadeAktion
 {
 	private static String[] typen = new String[]
 			{
@@ -195,7 +195,7 @@ class LadeAktion
 					((Overlay)tverlay).kamN = (Controllable)dislocated;
 				break;
 			case 6:
-				AlternateStandard.gibVonIndex1(text).changeToThis(dislocated, dauer, power);
+				TSSA.changeToThis(AlternateStandard.gibVonIndex(text), dislocated, dauer, power);
 				break;
 			case 7:
 				tp(dislocated, mvd, mvd2);
@@ -243,4 +243,5 @@ class LadeAktion
 			target.dreh.wb = mvdT[5];
 		target.forced.add(new Forced(new K4(), 20));
 	}
+
 }

@@ -1,10 +1,7 @@
 package nonBlock.aussehen;
 
-import nonBlock.aktion.*;
-import nonBlock.collide.*;
-import wahr.zugriff.*;
-
 import java.util.*;
+import wahr.zugriff.*;
 
 public class AlternateStandard
 {
@@ -14,7 +11,7 @@ public class AlternateStandard
 	public Double[] spins;
 	public Double[] dShifts;
 	K4[] teles;
-	ArrayList<double[]> blockbox;
+	public ArrayList<double[]> blockbox;
 
 	AlternateStandard(){}
 
@@ -35,7 +32,7 @@ public class AlternateStandard
 			{
 				if(zeilen[i].startsWith("Main="))
 				{
-					main = StandardAussehen.gibVonIndex2(zeilen[i].substring(5));
+					main = StandardAussehen.gibVonIndexS(zeilen[i].substring(5));
 				}
 				else if(zeilen[i].startsWith("B"))
 				{
@@ -97,29 +94,7 @@ public class AlternateStandard
 		}
 	}
 
-	public void changeToThis(NBD n, int dauer, int power)
-	{
-		n.standard = this;
-		AltTrans command;
-		if(n instanceof NBB)
-			command = new AltTrans((NBB)n, dauer, power, blockbox);
-		else
-			command = new AltTrans(n, dauer, power);
-		for(int i = 0; i < n.resLink.length; i++)
-			if(n.resLink[i] == null)
-			{
-				if(n.linkAchsen[i] != null)
-					ATR.summonATRandCheck(n, i, command);
-			}
-			else if(n.resLink[i].power < 0)
-			{
-				n.resLink[i].needCancel = true;
-				ATR.summonATRandCheck(n, i, command);
-			}
-		n.aktionen.add(command);
-	}
-
-	public static AlternateStandard gibVonIndex1(String name)
+	public static AlternateStandard gibVonIndex(String name)
 	{
 		if(Index.geladen.containsKey(name))
 			return (AlternateStandard) Index.geladen.get(name);

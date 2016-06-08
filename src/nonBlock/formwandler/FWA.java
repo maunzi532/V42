@@ -1,14 +1,12 @@
 package nonBlock.formwandler;
 
-import ansicht.*;
 import block.*;
+import java.util.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
 import nonBlock.collide.*;
 import nonBlock.controllable.*;
 import wahr.zugriff.*;
-
-import java.util.*;
 
 public abstract class FWA extends NBB implements Controllable
 {
@@ -22,9 +20,9 @@ public abstract class FWA extends NBB implements Controllable
 	private Move chain;
 	private LadeFWA abilities;
 
-	protected FWA(Controller control, LadeFWA abilities, String currentZ, WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
+	protected FWA(Controller control, LadeFWA abilities, String currentZ, WeltB welt, WeltND dw, WeltNB bw)
 	{
-		super(welt, lw, dw, bw);
+		super(welt, dw, bw);
 		this.control = control;
 		this.abilities = abilities;
 		if(abilities != null)

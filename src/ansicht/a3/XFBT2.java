@@ -1,5 +1,6 @@
 package ansicht.a3;
 
+import nonBlock.aussehen.*;
 import wahr.physisch.*;
 import wahr.zugriff.*;
 
@@ -30,13 +31,13 @@ public class XFBT2 extends PolyFarbe
 		mat = Material.B;
 	}
 
-	public Paint gibFarbe(Polygon3 target, Long tn)
+	public Paint gibFarbe(Ifff2Target target, Long tn)
 	{
 		assert target instanceof PBlock3;
 		PBlock3 t1 = (PBlock3) target;
 		if(farben.containsKey(t1.splitDepth))
-			return errechneFarbe(farben.get(t1.splitDepth)[t1.nachSplitID], target, tn);
-		return errechneFarbe(baseColor, target, tn);
+			return errechneFarbe(farben.get(t1.splitDepth)[t1.nachSplitID], (Polygon3)target, tn);
+		return errechneFarbe(baseColor, (Polygon3)target, tn);
 	}
 
 	public static XFBT2 gibVonIndex(String name, int seite, int max)

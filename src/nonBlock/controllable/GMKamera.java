@@ -15,9 +15,9 @@ public class GMKamera extends NBD implements Controllable, Licht
 	private WeltB welt;
 	private int lockedDreh;
 
-	private GMKamera(Controller control, Overlay overlay, WeltB welt, WeltND dw, LichtW lw)
+	private GMKamera(Controller control, Overlay overlay, WeltB welt, WeltND dw)
 	{
-		super(lw, dw);
+		super(dw);
 		this.welt = welt;
 		this.control = control;
 		this.overlay = overlay;
@@ -25,7 +25,7 @@ public class GMKamera extends NBD implements Controllable, Licht
 
 	public GMKamera(Controller control, Overlay overlay, AllWelt aw)
 	{
-		this(control, overlay, aw.wbl, aw.dw, aw.lw);
+		this(control, overlay, aw.wbl, aw.dw);
 	}
 
 	public K4 kamP()

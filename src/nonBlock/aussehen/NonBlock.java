@@ -1,9 +1,6 @@
 package nonBlock.aussehen;
 
-import ansicht.*;
-import ansicht.a3.*;
 import nonBlock.aussehen.ext.*;
-import nonBlock.aktion.*;
 import wahr.zugriff.*;
 
 public abstract class NonBlock
@@ -14,8 +11,6 @@ public abstract class NonBlock
 	public Drehung dreh;
 	public final long tn;
 	public Focus focus;
-	public LichtW lw;
-	public WeltND dw;
 
 	public LadeModell aussehen;
 	public int elimit;
@@ -25,23 +20,12 @@ public abstract class NonBlock
 	public K4[][] punkte;
 	public K4[][] punkteK;
 
-	protected NonBlock(LichtW lw, WeltND dw)
+	public AlternateStandard standard = null;
+
+	protected NonBlock()
 	{
-		this.lw = lw;
-		this.dw = dw;
 		tnm--;
 		tn = tnm;
-		dw.nonBlocks.add(this);
-	}
-
-	protected NonBlock(AllWelt aw)
-	{
-		this(aw.lw, aw.dw);
-	}
-
-	public void ende()
-	{
-		dw.nonBlocks.remove(this);
 	}
 
 	public void tick()
@@ -96,7 +80,7 @@ public abstract class NonBlock
 				LadePunkt la = aussehen.punkte[i].get(j);
 				Achse a = achsen[la.achse];
 				if(a != null)
-					punkte[i][j] = TK4F.zuPunkt(a, la.abstand, 0, la.vor, la.spin, dreh, position);
+					punkte[i][j] = zuPunkt(a, la.abstand, 0, la.vor, la.spin, dreh, position);
 			}
 		}
 		for(int i = 0; i < externals.length; i++)
@@ -104,14 +88,14 @@ public abstract class NonBlock
 		for(int i = 0; i < achsen.length; i++)
 			if(achsen[i] != null)
 			{
-				achsen[i].tStart = TK4F.transformSet1(new K4(achsen[i].start), dreh, position);
-				achsen[i].tEnd = TK4F.transformSet1(new K4(TK4F.achseEnde(achsen[i], null)), dreh, position);
+				achsen[i].tStart = transformSet1(new K4(achsen[i].start), dreh, position);
+				achsen[i].tEnd = transformSet1(new K4(LinkAchse.achseEnde(achsen[i], null)), dreh, position);
 			}
 	}
 
 	public void punkteTransformKam(K4 kam, Drehung kDreh)
 	{
-		K4 relativ = TK4F.transformSet2(new K4(kam), kDreh, null);
+		K4 relativ = transformSet2(new K4(kam), kDreh, null);
 		punkteK = new K4[punkte.length][];
 		for(int i = 0; i < punkteK.length; i++)
 			if(punkte[i] != null)
@@ -121,10 +105,35 @@ public abstract class NonBlock
 					punkteK[i][j] = new K4(punkte[i][j]);
 				for(int j = 0; j < punkteK[i].length; j++)
 					if(punkteK[i][j] != null)
-						punkteK[i][j] = TK4F.transformSet2(punkteK[i][j], kDreh, relativ);
+						punkteK[i][j] = transformSet2(punkteK[i][j], kDreh, relativ);
 			}
 		for(int i = 0; i < externals.length; i++)
 			if(externals[i] instanceof H)
 				((H)externals[i]).transformK(kam, kDreh);
+	}
+
+	public static K4 transformSet1(K4 thi, Drehung d, K4 add)
+	{
+		thi.transformWBL(d);
+		return K4.plus(thi, add);
+	}
+
+	public static K4 zuPunkt(Achse achse, double abstand, double side, double vor, double spin,
+			Drehung mDreh, K4 mPos)
+	{
+		K4 tLen = new K4(side, abstand, vor * achse.len, achse.dShift);
+		tLen.transformWS(Drehung.plus(spin, achse.spin));
+		tLen.transformWBL(achse.dreh);
+		tLen = K4.plus(tLen, achse.start);
+		tLen.transformWBL(mDreh);
+		return K4.plus(tLen, mPos);
+	}
+
+	public static K4 transformSet2(K4 thi, Drehung d, K4 diff)
+	{
+		thi.transformKLB(d);
+		if(diff == null)
+			return thi;
+		return K4.diff(diff, thi);
 	}
 }

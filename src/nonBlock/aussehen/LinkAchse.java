@@ -1,6 +1,5 @@
 package nonBlock.aussehen;
 
-import ansicht.a3.*;
 import wahr.zugriff.*;
 
 public class LinkAchse
@@ -35,7 +34,7 @@ public class LinkAchse
 
 	public Achse entlinken(Achse gelinkt)
 	{
-		gelinktA = new Achse(TK4F.achseEnde(gelinkt, tele),
+		gelinktA = new Achse(achseEnde(gelinkt, tele),
 					Drehung.nplus(dreh, gelinkt.dreh), len, spin, dShift);
 		return gelinktA;
 	}
@@ -59,5 +58,23 @@ public class LinkAchse
 	{
 		gelinktA = new Achse(ende, Drehung.nplus(dreh, inlinkt.dreh), len, spin, dShift);
 		return gelinktA;
+	}
+
+	public static K4 achseEnde(Achse a, K4 tele)
+	{
+		if(a.len == 0)
+		{
+			if(tele != null)
+				return new K4(a.start.a + tele.a, a.start.b + tele.b,
+						a.start.c + tele.c, a.start.d + tele.d + a.dShift);
+			else
+				return new K4(a.start.a, a.start.b,
+						a.start.c, a.start.d + a.dShift);
+		}
+		K4 tLen = new K4(0, 0, a.len, a.dShift);
+		tLen.transformWBL(a.dreh);
+		if(tele != null)
+			tLen = K4.plus(tLen, tele);
+		return K4.plus(a.start, tLen);
 	}
 }
