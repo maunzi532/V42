@@ -3,6 +3,7 @@ package nonBlock.controllable;
 import a3.*;
 import k4.*;
 import nonBlock.aktion.*;
+import nonBlock.aktion.lesen.*;
 import nonBlock.collide.*;
 import welt.*;
 
@@ -24,7 +25,8 @@ public class Flag extends NBB implements Licht, IFlag
 
 	public void collide(Collider collider)
 	{
-		ende();
+		aktionen.add(new AktionM(this, 10000, 11, ADI.deg(0, 0, 1, new RZahl(0), new RZahl(180),
+				new RZahl(0), new RZahl(0), new RZahl(0), true)));
 	}
 
 	public void actCollide(Collider collider){}

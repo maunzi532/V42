@@ -28,7 +28,7 @@ public abstract class NBB extends NBD
 		collidable = new ArrayList<>();
 		connected = new ArrayList<>();
 		cTime = new ArrayList<>();
-		nht = null;
+		nht = this;
 		colliders = new ArrayList<>();
 		physik = new ArrayList<>();
 		bw.vta.add(this);
