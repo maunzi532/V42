@@ -5,32 +5,21 @@ import nonBlock.aktion.lesen.*;
 
 public class ATR extends R
 {
-	public static void summonATRandCheck(NBD target, int linA, AltTrans command)
+	public static void summonATRandCheck(NBD target, int linA, int dauer)
 	{
 		if(linA >= target.elimit)
 			return;
 		if(target.resLink[linA] != null && target.resLink[linA].power > -1)
 			return;
-		ATR r = new ATR(target, command);
+		ATR r = new ATR(target, dauer);
 		AlternateStandard std = target.standard;
-		r.a = ADI.rad(linA, 1, command.dauer - 1, new RZahl(std.lens[linA]), new RZahl(std.drehs[linA].wb),
+		r.a = ADI.rad(linA, 1, dauer - 1, new RZahl(std.lens[linA]), new RZahl(std.drehs[linA].wb),
 				new RZahl(std.drehs[linA].wl), new RZahl(std.spins[linA]), new RZahl(std.dShifts[linA]), false);
 		target.aktionen.add(r);
 	}
 
-	private final AltTrans command;
-
-	private ATR(NBD besitzer, AltTrans command)
+	private ATR(NBD besitzer, int dauer)
 	{
-		super(besitzer, command.dauer);
-		this.command = command;
-	}
-
-	public void tick()
-	{
-		if(needCancel)
-			return;
-		aktuell = command.aktuell;
-		super.tick();
+		super(besitzer, dauer);
 	}
 }

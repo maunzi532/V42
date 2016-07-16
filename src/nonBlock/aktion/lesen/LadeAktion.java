@@ -194,7 +194,7 @@ public class LadeAktion
 					((Overlay)tverlay).kamN = (Controllable)dislocated;
 				break;
 			case 6:
-				TSSA.changeToThis(AlternateStandard.gibVonIndex(text), dislocated, dauer, power);
+				TSSA.changeToThis(AlternateStandard.gibVonIndex(text), dislocated, dauer);
 				break;
 			case 7:
 				tp(dislocated, mvd, mvd2);

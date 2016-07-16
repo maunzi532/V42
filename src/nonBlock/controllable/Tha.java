@@ -143,14 +143,14 @@ public class Tha extends TSSA
 				break;
 			case "Ducken":
 				if(approxRichtung() % 2 == 0)
-					changeToThis(AlternateStandard.gibVonIndex("TSSA2L"), this, 30, 3);
+					changeToThis(AlternateStandard.gibVonIndex("TSSA2L"), this, 30);
 				else
-					changeToThis(AlternateStandard.gibVonIndex("TSSA2R"), this, 30, 3);
+					changeToThis(AlternateStandard.gibVonIndex("TSSA2R"), this, 30);
 				lastZ = currentZ;
 				currentZ = "Ducken";
 				break;
 			case "Aufstehen":
-				changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 40, 3);
+				changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 40);
 				lastZ = currentZ;
 				currentZ = "Normal";
 				break;

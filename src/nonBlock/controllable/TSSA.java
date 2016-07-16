@@ -47,7 +47,7 @@ public abstract class TSSA extends FWA implements Licht
 					currentZ = "Normal";
 				else
 					currentZ = "Luft";
-				changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 20, 3);
+				changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 20);
 			}
 		}
 		canInfl = zinfl[zIndex];
@@ -154,7 +154,7 @@ public abstract class TSSA extends FWA implements Licht
 					if(approxRichtung() == 7)
 						richtung = 4;
 					focus = new Focus(this, 20, fp, Drehung.nDrehung((4 - richtung) * Math.PI / 2, 0));
-					changeToThis(AlternateStandard.gibVonIndex("TSSA3LR"), this, 20, 8);
+					changeToThis(AlternateStandard.gibVonIndex("TSSA3LR"), this, 20);
 					lastZ = currentZ;
 					currentZ = "Kante";
 					return false;
@@ -240,7 +240,7 @@ public abstract class TSSA extends FWA implements Licht
 				Boolean ck = canKlettern(grabRichtung, dif, p);
 				if(ck != null)
 				{
-					changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 30, 10);
+					changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 30);
 					lastZ = currentZ;
 					currentZ = "Luft";
 					focus = null;
@@ -260,7 +260,7 @@ public abstract class TSSA extends FWA implements Licht
 	{
 		if(grabRichtung >= 0)
 		{
-			changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 20, 10);
+			changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 20);
 			lastZ = currentZ;
 			currentZ = "Luft";
 			focus = null;
@@ -339,25 +339,19 @@ public abstract class TSSA extends FWA implements Licht
 		return 0.8;
 	}
 
-	public static void changeToThis(AlternateStandard alt, NBD n, int dauer, int power)
+	public static void changeToThis(AlternateStandard alt, NBD n, int dauer)
 	{
 		n.standard = alt;
-		AltTrans command;
-		if(n instanceof NBB)
-			command = new AltTrans((NBB)n, dauer, power, ((NBB) n).bl);
-		else
-			command = new AltTrans(n, dauer, power);
 		for(int i = 0; i < n.resLink.length; i++)
 			if(n.resLink[i] == null)
 			{
 				if(n.linkAchsen[i] != null)
-					ATR.summonATRandCheck(n, i, command);
+					ATR.summonATRandCheck(n, i, dauer);
 			}
 			else if(n.resLink[i].power < 0)
 			{
 				n.resLink[i].needCancel = true;
-				ATR.summonATRandCheck(n, i, command);
+				ATR.summonATRandCheck(n, i, dauer);
 			}
-		n.aktionen.add(command);
 	}
 }

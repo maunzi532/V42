@@ -104,7 +104,7 @@ public class Hauptschleife
 
 			public void decollide(Collider attk)
 			{
-				changeToThis(AlternateStandard.gibVonIndex("TSSA2R"), this, 40, 5);
+				changeToThis(AlternateStandard.gibVonIndex("TSSA2R"), this, 40);
 			}
 
 			public void wand(int welche){}
