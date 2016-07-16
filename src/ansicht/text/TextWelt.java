@@ -12,7 +12,7 @@ public class TextWelt
 	{
 		for(int i = 0; i < texters.size(); i++)
 		{
-			texters.get(i).sl.placeTBox(new TBox(texters.get(i).sl, false, text),
+			texters.get(i).sl.placeTBox(new TBox(false, text),
 					dispName, codebez, emotion);
 		}
 	}

@@ -172,7 +172,7 @@ public class LadeAktion
 			case 3:
 				if(!toAll)
 				{
-					TBox st2 = new TBox(tverlay.sl, typ == 3, text);
+					TBox st2 = new TBox(typ == 3, text);
 					tverlay.sl.placeTBox(st2, dispName, codebez, emotion);
 					if(typ == 3)
 						return st2;

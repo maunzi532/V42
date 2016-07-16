@@ -11,14 +11,14 @@ public class TBox extends SLF implements ZDelay
 	public int fade;
 	private int timer;
 
-	public TBox(SchalterLayer main, boolean tangible, String text)
+	public TBox(boolean tangible, String text)
 	{
-		super(main, tangible, 0, 0, 0.1, 0.1, text);
+		super(tangible, 0, 0, 0.1, 0.1, text);
 		fade = 255;
 		timer = tangible ? -1 : 100;
 	}
 
-	public void draw(Graphics2D gd)
+	public void draw(SchalterLayer main, Graphics2D gd)
 	{
 		if(fade > 0)
 		{
@@ -40,13 +40,13 @@ public class TBox extends SLF implements ZDelay
 		return true;
 	}
 
-	public void onClick(boolean r, double cx, double cy)
+	public void onClick(SchalterLayer main, boolean r, double cx, double cy)
 	{
 		clicked = true;
 		main.removeText();
 	}
 
-	public void tick()
+	public void tick(SchalterLayer main)
 	{
 		double ny = main.giveNewH(this);
 		if(ny < y - main.movePerTick)

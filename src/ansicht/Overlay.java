@@ -20,7 +20,7 @@ public class Overlay extends Tverlay
 	public LPaneel auf;
 	private double[] ort;
 	public int xI, yI, wI, hI;
-	private InitSL isl;
+	public SchalterInit sci;
 	public boolean sichtAn = true;
 	public Panelizer pa;
 	public AllWelt aw;
@@ -47,7 +47,6 @@ public class Overlay extends Tverlay
 		sl = new SchalterLayer();
 		pa = new Panelizer();
 		resize();
-		isl = new InitSL(sl, this);
 	}
 
 	public void resize()
@@ -131,24 +130,24 @@ public class Overlay extends Tverlay
 		if(ta.keyStat[taIndex][13] == 2 && sichtAn)
 		{
 			sichtAn = false;
-			sl.layer.addAll(isl.normalSchalter);
+			sl.layer = sci.gibSchalter(false, godMode);
 		}
 		if(ta.keyStat[taIndex][13] == -1 && !sichtAn)
 		{
 			sichtAn = true;
-			sl.layer.clear();
+			sl.layer = sci.gibSchalter(true);
 		}
 		if(ta.keyStat[taIndex][17] == 2 && godModeKam != null)
 		{
 			godMode = !godMode;
 			if(godMode)
 			{
-				isl.normalSchalter.addAll(isl.godModeSchalter);
+				sl.layer = sci.gibSchalter(sichtAn, true);
 				//godModeKam.lw.licht.add(godModeKam);
 			}
 			else
 			{
-				isl.normalSchalter.removeAll(isl.godModeSchalter);
+				sl.layer = sci.gibSchalter(sichtAn, false);
 				//godModeKam.lw.licht.remove(godModeKam);
 				pa.xrmode = false;
 				vor.siehBlocks = true;

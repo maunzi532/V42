@@ -10,7 +10,7 @@ public class SchalterLayer
 	final Color schieber = new Color(46, 46, 46);
 	final Color schieberKante = Color.GRAY;
 
-	public final ArrayList<SLF> layer = new ArrayList<>();
+	public ArrayList<SLF> layer = new ArrayList<>();
 
 	private final ArrayList[] tex;
 	private final ArrayList<Integer> lastTex;
@@ -73,7 +73,7 @@ public class SchalterLayer
 		for(SLF slf : layer)
 			if(slf.tangible && slf.click(nmw(x), nmh(y)))
 			{
-				slf.onClick(r, (nmw(x) - slf.x) / slf.w, (nmh(y) - slf.y) / slf.h);
+				slf.onClick(this, r, (nmw(x) - slf.x) / slf.w, (nmh(y) - slf.y) / slf.h);
 				return true;
 			}
 		return false;
@@ -82,7 +82,7 @@ public class SchalterLayer
 	public void draw(Graphics2D gd)
 	{
 		for(int i = 0; i < layer.size(); i++)
-			layer.get(i).draw(gd);
+			layer.get(i).draw(gd, this);
 	}
 
 	public void actTex()
@@ -90,9 +90,9 @@ public class SchalterLayer
 		for(int i = 0; i < orte.length; i++)
 		{
 			for(int j = 0; j < tex[i].size(); j++)
-				((TBox)tex[i].get(j)).tick();
+				((TBox)tex[i].get(j)).tick(this);
 			if(texters[i] != null)
-				texters[i].tick();
+				texters[i].tick(this);
 		}
 	}
 
@@ -126,7 +126,7 @@ public class SchalterLayer
 		for(int i = 0; i < texters.length; i++)
 			if(texters[i] == null)
 			{
-				texters[i] = new T2Box(this, true, 0.1, 0.3, orte[i], dispName, codebez, emotion);
+				texters[i] = new T2Box(abstand, true, 0.1, 0.3, orte[i], dispName, codebez, emotion);
 				layer.add(texters[i]);
 				placeTBox(t, i);
 				return;
@@ -135,7 +135,7 @@ public class SchalterLayer
 		ArrayList<TBox> tb = tex[i];
 		for(int j = 0; j < tb.size(); j++)
 			removeTBox(tb.get(j));
-		texters[i] = new T2Box(this, true, 0.1, 0.3, orte[i], dispName, codebez, emotion);
+		texters[i] = new T2Box(abstand, true, 0.1, 0.3, orte[i], dispName, codebez, emotion);
 		layer.add(texters[i]);
 		placeTBox(t, i);
 	}

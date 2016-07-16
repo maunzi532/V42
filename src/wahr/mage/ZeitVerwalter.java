@@ -1,5 +1,6 @@
 package wahr.mage;
 
+import ansicht.*;
 import ext.*;
 import java.awt.*;
 import wahr.physisch.*;
@@ -12,13 +13,13 @@ public class ZeitVerwalter
 	private static long over;
 	private static boolean thd;
 
-	public static void start()
+	public static void start(LPaneel[] paneele, Overlay[] theOverlays)
 	{
 		while(true)
 		{
 			boolean okay = false;
-			for(int i = 0; i < ThaCre2A.paneele.length; i++)
-				if(ThaCre2A.paneele[i].fr.hasFocus())
+			for(int i = 0; i < paneele.length; i++)
+				if(paneele[i].fr.hasFocus())
 					okay = true;
 			boolean skpf;
 			if(last > 0)
@@ -80,20 +81,20 @@ public class ZeitVerwalter
 				//Hat Fokus
 				Staticf.last = System.currentTimeMillis();
 				Staticf.last2 = System.currentTimeMillis();
-				for(int i = 0; i < ThaCre2A.paneele.length; i++)
+				for(int i = 0; i < paneele.length; i++)
 				{
-					Dimension sc1 = ThaCre2A.paneele[i].fr.getSize();
-					if(ThaCre2A.paneele[i].scF.width != sc1.width ||
-							ThaCre2A.paneele[i].scF.height != sc1.height)
+					Dimension sc1 = paneele[i].fr.getSize();
+					if(paneele[i].scF.width != sc1.width ||
+							paneele[i].scF.height != sc1.height)
 					{
-						ThaCre2A.paneele[i].scF = sc1;
-						for(int j = 0; j < ThaCre2A.theOverlays.length; j++)
-							if(ThaCre2A.theOverlays[j].auf == ThaCre2A.paneele[i])
-								ThaCre2A.theOverlays[j].resize();
+						paneele[i].scF = sc1;
+						for(int j = 0; j < theOverlays.length; j++)
+							if(theOverlays[j].auf == paneele[i])
+								theOverlays[j].resize();
 					}
 				}
-				for(int i = 0; i < ThaCre2A.theOverlays.length; i++)
-					if(ThaCre2A.theOverlays[i].eingabe())
+				for(int i = 0; i < theOverlays.length; i++)
+					if(theOverlays[i].eingabe())
 						return;
 				//Haare laggen furchtbar
 				H.calculateH = !skpf;
@@ -101,8 +102,8 @@ public class ZeitVerwalter
 				if(!skpf)
 				{
 					//Noch nicht aufmalen
-					for(int i = 0; i < ThaCre2A.theOverlays.length; i++)
-						ThaCre2A.theOverlays[i].vorbereiten();
+					for(int i = 0; i < theOverlays.length; i++)
+						theOverlays[i].vorbereiten();
 					new Thread()
 					{
 						//Hier wird aufgemalt
@@ -112,8 +113,8 @@ public class ZeitVerwalter
 							{
 								thd = true;
 								long last4 = System.currentTimeMillis();
-								for(int i = 0; i < ThaCre2A.theOverlays.length; i++)
-									ThaCre2A.theOverlays[i].panelize();
+								for(int i = 0; i < theOverlays.length; i++)
+									theOverlays[i].panelize();
 								if(Staticf.writeVisibleTime)
 									System.out.println("VIS: " + (System.currentTimeMillis() - Staticf.last3));
 								Staticf.last3 = System.currentTimeMillis();

@@ -3,7 +3,11 @@ Nicht sicher
 	NBD - Idle Bewegung
 	Metall-Reflexion
 
+Stufe Matrix
+	Dependency Matrix
+
 Stufe Mine
+	4D deaktivierbar machen
 	Initialisierung von WeltNB verbessern
 	ZP4C neu machen und umwandeln in LadeCM
 	System F - GMKamera mitbewegen
@@ -43,7 +47,5 @@ Stufe 2
 
 Stufe 3
 	Gameplay 3
-		Item-System
 		Essenz-System
-		Level-Depower-System
 		Level-Auswahl

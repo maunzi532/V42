@@ -1,8 +1,9 @@
-package wahr.physisch;
+package wahr.mage;
 
 import ansicht.*;
+import ansicht.text.*;
 import indexLader.*;
-import wahr.mage.*;
+import wahr.physisch.*;
 import wahr.spieler.*;
 import wahr.zugriff.*;
 
@@ -22,8 +23,8 @@ public class ThaCre2A
 		for(int i = 0; i < paneele.length; i++)
 			paneele[i].showFrames();
 		createOverlays();
-		LagZeit.start();
-		ZeitVerwalter.start();
+		LagZeit.start(theOverlays);
+		ZeitVerwalter.start(paneele, theOverlays);
 		System.exit(0);
 	}
 
@@ -82,6 +83,7 @@ public class ThaCre2A
 			theTA.feedMoves(Index.gibText("Einstellungen", teile[3]), i);
 			LPaneel auf = paneele[Integer.parseInt(teile[1])];
 			theOverlays[i].initOverlay(theTA, i, Hauptschleife.aw, teile[0], auf, ort);
+			theOverlays[i].sci = new InitSL(theOverlays[i]);
 			switch(teile[2])
 			{
 				case "Maus":
