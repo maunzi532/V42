@@ -1,10 +1,9 @@
 package wahr.mage;
 
-import nonBlock.aussehen.ext.*;
+import ext.*;
+import java.awt.*;
 import wahr.physisch.*;
 import wahr.zugriff.*;
-
-import java.awt.*;
 
 public class ZeitVerwalter
 {

@@ -1,9 +1,9 @@
 package nonBlock.aktion;
 
-import block.*;
-import nonBlock.aussehen.*;
+import achsen.*;
+import k4.*;
 import nonBlock.collide.*;
-import wahr.zugriff.*;
+import welt.*;
 
 public class Abbau extends Aktion
 {

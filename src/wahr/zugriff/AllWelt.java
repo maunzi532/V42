@@ -1,10 +1,10 @@
 package wahr.zugriff;
 
-import ansicht.*;
+import a3.*;
 import ansicht.text.*;
-import block.*;
 import nonBlock.aktion.*;
 import nonBlock.collide.*;
+import welt.*;
 
 public class AllWelt
 {

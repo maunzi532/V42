@@ -1,15 +1,15 @@
 package nonBlock.collide;
 
-import ansicht.*;
-import block.*;
+import java.util.*;
+import k4.*;
 import nonBlock.aktion.*;
 import wahr.zugriff.*;
-
-import java.util.*;
+import welt.*;
 
 public abstract class NBB extends NBD
 {
 	public final ArrayList<BlockBox> block;
+	public ArrayList<double[]> bl;
 	public final ArrayList<ColBox> collidable;
 	public final ArrayList<Collider> colliders;
 	final ArrayList<Collider> connected;
@@ -37,6 +37,35 @@ public abstract class NBB extends NBD
 	protected NBB(AllWelt aw)
 	{
 		this(aw.wbl, aw.dw, aw.bw);
+	}
+
+	public void chargeBlockBox(String input)
+	{
+		ArrayList<double[]> blockbox = gibBlockBox(input);
+		bl = blockbox;
+		for(int i = 0; i < blockbox.size(); i++)
+			block.add(new BlockBox(this, new K4(blockbox.get(i)[0],
+					blockbox.get(i)[1], blockbox.get(i)[2], blockbox.get(i)[3]),
+					new K4(blockbox.get(i)[4], blockbox.get(i)[5],
+							blockbox.get(i)[6], blockbox.get(i)[7]), blockbox.get(i)[8]));
+	}
+
+	public static ArrayList gibBlockBox(String input)
+	{
+		String[] zeilen = input.split("\n");
+		ArrayList<double[]> blockbox = new ArrayList<>();
+		for(int i = 0; i < zeilen.length; i++)
+		{
+			if(!zeilen[i].isEmpty() && !zeilen[i].startsWith("/"))
+			{
+				String[] y1 = zeilen[i].split(" ");
+				double[] da = new double[9];
+				for(int j = 0; j < 9; j++)
+					da[j] = Double.parseDouble(y1[j]);
+				blockbox.add(da);
+			}
+		}
+		return blockbox;
 	}
 
 	public void ende()

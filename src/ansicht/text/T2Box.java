@@ -1,8 +1,6 @@
 package ansicht.text;
 
-import wahr.physisch.*;
-import wahr.zugriff.*;
-
+import indexLader.*;
 import java.awt.*;
 import java.io.*;
 

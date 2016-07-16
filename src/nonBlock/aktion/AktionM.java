@@ -1,7 +1,7 @@
 package nonBlock.aktion;
 
+import achsen.*;
 import nonBlock.aktion.lesen.*;
-import nonBlock.aussehen.*;
 
 public class AktionM extends Freeze
 {

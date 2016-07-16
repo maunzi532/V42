@@ -1,9 +1,8 @@
 package nonBlock.aktion;
 
-import nonBlock.collide.*;
-import wahr.zugriff.*;
-
 import java.util.*;
+import k4.*;
+import nonBlock.collide.*;
 
 public class AltTrans extends Aktion
 {

@@ -1,14 +1,15 @@
 package nonBlock.controllable;
 
+import a3.*;
+import achsen.*;
 import ansicht.*;
-import ansicht.a3.*;
-import block.*;
+import k4.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
-import nonBlock.aussehen.*;
 import nonBlock.collide.*;
 import nonBlock.formwandler.*;
 import wahr.zugriff.*;
+import welt.*;
 
 public class Tha extends TSSA
 {

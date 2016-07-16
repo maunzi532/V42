@@ -1,12 +1,12 @@
 package nonBlock.controllable;
 
-import ansicht.*;
-import block.*;
+import a3.*;
+import k4.*;
 import nonBlock.aktion.*;
 import nonBlock.collide.*;
-import wahr.zugriff.*;
+import welt.*;
 
-public class Flag extends NBB implements Licht
+public class Flag extends NBB implements Licht, IFlag
 {
 	public Flag(WeltB welt, WeltND dw, WeltNB bw)
 	{
@@ -47,5 +47,15 @@ public class Flag extends NBB implements Licht
 	public double lichtPowerDecay()
 	{
 		return 2.8;
+	}
+
+	public K4 position()
+	{
+		return position;
+	}
+
+	public Drehung dreh()
+	{
+		return dreh;
 	}
 }

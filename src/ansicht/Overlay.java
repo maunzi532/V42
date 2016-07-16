@@ -1,17 +1,18 @@
 package ansicht;
 
-import ansicht.a3.*;
+import a3.*;
+import achsen.*;
 import ansicht.text.*;
+import indexLader.*;
+import java.io.*;
+import java.util.*;
+import k4.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
-import nonBlock.aussehen.*;
 import nonBlock.controllable.*;
 import wahr.physisch.*;
 import wahr.spieler.*;
 import wahr.zugriff.*;
-
-import java.io.*;
-import java.util.*;
 
 public class Overlay extends Tverlay
 {
@@ -41,7 +42,8 @@ public class Overlay extends Tverlay
 		aw = awA;
 		tw = aw.tw;
 		aw.tw.texters.add(this);
-		vor = new Vor(Index.gibText("Einstellungen", zDatLad), aw);
+		vor = new Vor(Index.gibText("Einstellungen", zDatLad),
+				aw.dw.nonBlocks, aw.lw, new BlockZuAnz(aw.wbl, aw.lw));
 		sl = new SchalterLayer();
 		pa = new Panelizer();
 		resize();
@@ -142,12 +144,12 @@ public class Overlay extends Tverlay
 			if(godMode)
 			{
 				isl.normalSchalter.addAll(isl.godModeSchalter);
-				//TODO godModeKam.lw.licht.add(godModeKam);
+				//godModeKam.lw.licht.add(godModeKam);
 			}
 			else
 			{
 				isl.normalSchalter.removeAll(isl.godModeSchalter);
-				//TODO godModeKam.lw.licht.remove(godModeKam);
+				//godModeKam.lw.licht.remove(godModeKam);
 				pa.xrmode = false;
 				vor.siehBlocks = true;
 				vor.siehNonBlocks = true;

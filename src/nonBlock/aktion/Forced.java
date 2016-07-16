@@ -1,6 +1,6 @@
 package nonBlock.aktion;
 
-import wahr.zugriff.*;
+import k4.*;
 
 public class Forced
 {

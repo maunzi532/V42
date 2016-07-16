@@ -1,14 +1,14 @@
 package ansicht.text;
 
+import a3.*;
+import achsen.*;
 import ansicht.*;
-import ansicht.a3.*;
+import java.util.*;
+import k4.*;
 import nonBlock.aktion.*;
-import nonBlock.aussehen.*;
 import nonBlock.collide.*;
 import nonBlock.controllable.*;
 import wahr.zugriff.*;
-
-import java.util.*;
 
 public class InitSL
 {
@@ -186,8 +186,8 @@ public class InitSL
 		{
 			public void tick()
 			{
-				Staticf.xraywidth = shift * shiftm + startw;
-				text = String.valueOf(Staticf.xraywidth);
+				Vor.xraywidth = shift * shiftm + startw;
+				text = String.valueOf(Vor.xraywidth);
 			}
 		});
 		godModeSchalter.add(new SLF(sl, true, 0.25, 0.5, 0.1, 0.05)

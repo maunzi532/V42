@@ -1,16 +1,18 @@
 package wahr.mage;
 
+import a3.*;
+import achsen.*;
 import ansicht.*;
-import ansicht.a3.*;
-import block.generierung.*;
+import ext.*;
+import indexLader.*;
+import k4.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
-import nonBlock.aussehen.*;
-import nonBlock.aussehen.ext.*;
 import nonBlock.collide.*;
 import nonBlock.controllable.*;
 import nonBlock.formwandler.*;
 import wahr.zugriff.*;
+import welt.*;
 
 public class Hauptschleife
 {
@@ -55,7 +57,7 @@ public class Hauptschleife
 				LadeTeil.gibVonIndex("Schuhe", fa1),
 				LadeTeil.gibVonIndex("Kopf", fa1),
 				LadeTeil.gibVonIndex("Sicht", fa1));
-		StandardAussehen.gibVonIndexS("TSSA").assignStandard(n,
+		XSta.gibVonIndexS2("TSSA").assignStandard(n,
 				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand L2", fa1))),
 				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand R2", fa1))),
 				new H(0.5, 0.5, 10, 10, 4, 1, 0, 0.9),
@@ -69,6 +71,7 @@ public class Hauptschleife
 				new H2(n, 0.2, 0.5, 4, 10, 3, 0.7, 0, 0.55),
 				new H2(n, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55)*/
 		);
+		n.chargeBlockBox(Index.gibText("Blockcd", "TSSA"));
 		n.position = aw.wbl.starts[0];
 		n.position.b += n.block.get(0).airshift;
 		n.dreh = aw.wbl.startdrehs[0];
@@ -138,7 +141,7 @@ public class Hauptschleife
 				LadeTeil.gibVonIndex("Schuhe", fa1),
 				LadeTeil.gibVonIndex("Kopf", fa1),
 				LadeTeil.gibVonIndex("Sicht", fa1));
-		StandardAussehen.gibVonIndexS("TSSA").assignStandard(n2,
+		XSta.gibVonIndexS2("TSSA").assignStandard(n2,
 				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand L2", fa1))),
 				new Enhance(new LadeModell().reload(LadeTeil.gibVonIndex("Hand R2", fa1))),
 				new H2(n2, 0.5, 0.5, 10, 10, 4, 1, 0, 0.6),
@@ -148,6 +151,7 @@ public class Hauptschleife
 				new H2(n2, 0.2, 0.5, 4, 10, 7, 0.7, 0, 0.55)/*,
 				mp2*/
 		);
+		n2.chargeBlockBox(Index.gibText("Blockcd", "TSSA"));
 		n2.position = aw.wbl.starts[1];
 		n2.position.b += n2.block.get(0).airshift;
 		//mp2.init();

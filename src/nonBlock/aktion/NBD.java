@@ -1,11 +1,12 @@
 package nonBlock.aktion;
 
+import ext.*;
 import java.util.*;
+import k4.*;
 import nonBlock.aktion.lesen.*;
-import nonBlock.aussehen.*;
 import wahr.zugriff.*;
 
-public abstract class NBD extends NonBlock
+public abstract class NBD extends ENB
 {
 	public LinAAktion[] resLink;
 	public final ArrayList<Aktion> aktionen;

@@ -1,15 +1,15 @@
 package nonBlock.controllable;
 
-import ansicht.*;
-import block.*;
+import a3.*;
+import achsen.*;
+import java.util.*;
+import k4.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
-import nonBlock.aussehen.*;
 import nonBlock.collide.*;
 import nonBlock.formwandler.*;
 import wahr.zugriff.*;
-
-import java.util.*;
+import welt.*;
 
 public abstract class TSSA extends FWA implements Licht
 {
@@ -344,7 +344,7 @@ public abstract class TSSA extends FWA implements Licht
 		n.standard = alt;
 		AltTrans command;
 		if(n instanceof NBB)
-			command = new AltTrans((NBB)n, dauer, power, alt.blockbox);
+			command = new AltTrans((NBB)n, dauer, power, ((NBB) n).bl);
 		else
 			command = new AltTrans(n, dauer, power);
 		for(int i = 0; i < n.resLink.length; i++)

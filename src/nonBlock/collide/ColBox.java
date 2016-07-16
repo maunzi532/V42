@@ -1,6 +1,6 @@
 package nonBlock.collide;
 
-import wahr.zugriff.*;
+import k4.*;
 
 public class ColBox
 {

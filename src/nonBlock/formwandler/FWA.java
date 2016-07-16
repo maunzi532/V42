@@ -1,12 +1,12 @@
 package nonBlock.formwandler;
 
-import block.*;
 import java.util.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
 import nonBlock.collide.*;
 import nonBlock.controllable.*;
 import wahr.zugriff.*;
+import welt.*;
 
 public abstract class FWA extends NBB implements Controllable
 {

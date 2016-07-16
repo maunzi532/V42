@@ -1,7 +1,7 @@
 package nonBlock.aktion.lesen;
 
+import k4.*;
 import nonBlock.aktion.*;
-import wahr.zugriff.*;
 
 class RWert
 {

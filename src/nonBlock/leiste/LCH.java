@@ -1,11 +1,11 @@
 package nonBlock.leiste;
 
-import block.*;
 import nonBlock.aktion.*;
 import nonBlock.collide.*;
 import nonBlock.controllable.*;
 import nonBlock.formwandler.*;
 import wahr.zugriff.*;
+import welt.*;
 
 public abstract class LCH extends FWA
 {

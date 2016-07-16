@@ -1,11 +1,12 @@
 package nonBlock.controllable;
 
+import a3.*;
 import ansicht.*;
-import block.*;
+import java.util.*;
+import k4.*;
 import nonBlock.aktion.*;
 import wahr.zugriff.*;
-
-import java.util.*;
+import welt.*;
 
 public class GMKamera extends NBD implements Controllable, Licht
 {

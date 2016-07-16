@@ -1,6 +1,7 @@
 package wahr.physisch;
 
 import ansicht.*;
+import indexLader.*;
 import wahr.mage.*;
 import wahr.spieler.*;
 import wahr.zugriff.*;
@@ -13,7 +14,7 @@ public class ThaCre2A
 
 	public static void main(String[] args)
 	{
-		Index.laden();
+		Index.laden("T ");
 		Staticf.scaCharge(Index.gibText("Einstellungen", "Sca"));
 		theTA = new TA2();
 		initPaneele();
