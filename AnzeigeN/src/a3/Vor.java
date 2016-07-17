@@ -6,8 +6,6 @@ import k4.*;
 
 public class Vor
 {
-	//Sichtweite NonBlocks
-	public static final double sicht = 150;
 	//NonBlock Polygon Teilung bis kleiner als das
 	public static final double splThr = 1.2;
 	//Blickbreite
@@ -15,14 +13,22 @@ public class Vor
 	//Weite des X-Ray-Modus
 	public static double xraywidth = 50;
 	//Eigene H ausblenden
-	public static final double sichtMin = 2;
+	public static final double ausblendRange = 2;
 
+	public static final double minSicht = 50;
+	public static final double maxSicht = PolyFarbe.redEnd;
+
+
+
+	public double sicht = minSicht;
+	private int rchecks;
+	private int rfail;
 	public ArrayList<Anzeige3> anzeigeZ;
 	public ArrayList<Anzeige3> anzeige;
 	private ArrayList<NonBlock> nonBlocks;
 	private LichtW lw;
 	private IVUpgrade za;
-	public int visionRange4D = 1;
+	public int visionRange4D = 0;
 	public int baumodus;
 	public boolean siehBlocks = true;
 	public boolean siehNonBlocks = true;
@@ -58,7 +64,7 @@ public class Vor
 					{
 						eckenK[k] = nb.punkteK[f2.ecken1.get(k)][f2.ecken2.get(k)];
 						if(kam == nb && eckenK[k].a * eckenK[k].a + eckenK[k].b * eckenK[k].b +
-								eckenK[k].c * eckenK[k].c < sichtMin * sichtMin)
+								eckenK[k].c * eckenK[k].c < ausblendRange * ausblendRange)
 						{
 							eckenK = null;
 							break;
@@ -88,5 +94,35 @@ public class Vor
 			anzeige.get(i).eckenEntf(wI, hI, cI);
 		for(int i = 0; i < anzeige.size(); i++)
 			anzeige.get(i).farbeFlaeche(tnTarget, wI, hI, kam.kamP(),  xr ? xraywidth : 0);
+	}
+
+	public void changeRange(boolean lower)
+	{
+		rchecks++;
+		if(lower)
+			rfail++;
+		if(rchecks >= 20)
+		{
+			switch(rfail * 5 / rchecks)
+			{
+				case 0:
+					sicht += 30;
+					if(sicht > maxSicht)
+						sicht = maxSicht;
+					break;
+				case 4:
+					sicht -= 20;
+				case 3:
+					sicht -= 10;
+					if(sicht < minSicht)
+						sicht = minSicht;
+					break;
+				case 5:
+					sicht = minSicht;
+					break;
+			}
+			rchecks = 0;
+			rfail = 0;
+		}
 	}
 }

@@ -53,7 +53,7 @@ public class Rechteck3 extends Anzeige3
 			fc = limit(fc, (int)(ddiff * 5), (int)(ddiff * -10), (int)(ddiff * 5));
 		double weg = Math.sqrt(kamMid.a * kamMid.a + kamMid.b * kamMid.b +
 				kamMid.c * kamMid.c + kamMid.d * kamMid.d);
-		double nah = (Vor.sicht - weg) / Vor.sicht; //Wenn nah 1, am Rand 0
+		double nah = (PolyFarbe.redEnd - weg) / PolyFarbe.redEnd; //Wenn nah 1, am Rand 0
 		if(nah < 0)
 			nah = 0;
 		if(tn != -1 && tnC != null && tn == tnC)
@@ -67,7 +67,7 @@ public class Rechteck3 extends Anzeige3
 	{
 		double weg = Math.sqrt(kamMid.a * kamMid.a + kamMid.b * kamMid.b +
 				kamMid.c * kamMid.c + kamMid.d * kamMid.d);
-		double nah = (Vor.sicht - weg) / Vor.sicht; //Wenn nah 1, am Rand 0
+		double nah = (PolyFarbe.redEnd - weg) / PolyFarbe.redEnd; //Wenn nah 1, am Rand 0
 		if(nah < 0)
 			nah = 0;
 		if(tn != -1 && tnC != null && tn == tnC)

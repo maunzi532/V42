@@ -66,6 +66,14 @@ public class WeltB
 				p.k[3] * weltBlock.d + weltBlock.d / 2 + startWelt.d);
 	}
 
+	public K4 wt3(WBP p)
+	{
+		return new K4(p.k[0] * weltBlock.a + weltBlock.a / 2 + startWelt.a,
+				p.k[1] * weltBlock.b + startWelt.b,
+				p.k[2] * weltBlock.c + weltBlock.c / 2 + startWelt.c,
+				p.k[3] * weltBlock.d + weltBlock.d / 2 + startWelt.d);
+	}
+
 	public WBP decodeTn(long tn)
 	{
 		if(tn < 0)
@@ -77,14 +85,6 @@ public class WeltB
 		int c = (int)(tn / end[3]);
 		int d = (int)(tn - c * end[3]);
 		return new WBP(a, b, c, d);
-	}
-
-	public K4 N2Start(int[] ort)
-	{
-		return new K4(startWelt.a + weltBlock.a / 2 + weltBlock.a * ort[0],
-				startWelt.b + weltBlock.b * ort[1],
-				startWelt.c + weltBlock.c / 2 + weltBlock.c * ort[2],
-				startWelt.d + weltBlock.d / 2 + weltBlock.d * ort[3]);
 	}
 
 	public DerBlock gib(WBP p)

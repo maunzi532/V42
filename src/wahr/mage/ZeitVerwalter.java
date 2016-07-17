@@ -94,8 +94,11 @@ public class ZeitVerwalter
 					}
 				}
 				for(int i = 0; i < theOverlays.length; i++)
+				{
 					if(theOverlays[i].eingabe())
 						return;
+					theOverlays[i].vor.changeRange(skpf);
+				}
 				//Haare laggen furchtbar
 				H.calculateH = !skpf;
 				Hauptschleife.aw.logik();

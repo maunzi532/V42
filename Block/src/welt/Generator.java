@@ -5,7 +5,7 @@ import k4.*;
 public abstract class Generator
 {
 	protected WeltB welt;
-	int[][] starts;
+	WBP[] starts;
 	DerBlock[] enden;
 	int[] endOrder;
 
@@ -23,6 +23,6 @@ public abstract class Generator
 	{
 		welt.starts = new K4[starts.length];
 		for(int i = 0; i < starts.length; i++)
-			welt.starts[i] = welt.N2Start(starts[i]);
+			welt.starts[i] = welt.wt3(starts[i]);
 	}
 }

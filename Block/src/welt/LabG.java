@@ -32,10 +32,10 @@ public class LabG extends Generator
 	{
 		Random r = new Random();
 		b1 = new int[size[0]][size[1]][size[2]][size[3]];
-		starts = new int[2][4];
+		/*starts = new int[2][4];
 		for(int i = 0; i < 4; i++)
 			starts[0][i] = r.nextInt(size[i]);
-		position = starts[0].clone();
+		position = starts[0].clone();*/
 		ArrayList<int[]> alt = new ArrayList<>();
 		boolean[] paths = new boolean[8];
 		ArrayList<Integer> pathr = new ArrayList<>();
@@ -64,7 +64,7 @@ public class LabG extends Generator
 				if(pathc == 0)
 				{
 					//if(ab == 0)
-						starts[1] = position;
+						//starts[1] = position;
 					break;
 				}
 				int ra = pathr.get(r.nextInt(pathr.size()));

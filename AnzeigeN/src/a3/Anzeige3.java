@@ -50,7 +50,7 @@ public abstract class Anzeige3
 		}
 		double weg = Math.sqrt(kamMid.a * kamMid.a + kamMid.b * kamMid.b +
 				kamMid.c * kamMid.c + kamMid.d * kamMid.d);
-		double nah = (Vor.sicht - weg) / Vor.sicht; //Wenn nah 1, am Rand 0
+		double nah = (PolyFarbe.redEnd - weg) / PolyFarbe.redEnd; //Wenn nah 1, am Rand 0
 		if(nah < 0)
 			nah = 0;
 		if(vanishResist / 4 + vanishCheck * 2 + nah * 63 < 0)

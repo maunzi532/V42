@@ -13,6 +13,7 @@ public class PolyFarbe implements IFarbeff2
 	public static final double safezone = 1;
 	//Weite danach wo NonBlocks in d diffundieren
 	public static final double diffusewidth = 40;
+	public static final double redEnd = 150;
 	private static final int[] splN;
 	static
 	{
@@ -87,7 +88,7 @@ public class PolyFarbe implements IFarbeff2
 		fc = limit(fc, (int)power, (int)power, (int)power); //Beleuchten und shaden
 		double weg = Math.sqrt(target.kamMid.a * target.kamMid.a + target.kamMid.b * target.kamMid.b +
 				target.kamMid.c * target.kamMid.c + target.kamMid.d * target.kamMid.d);
-		double nah = (Vor.sicht - weg) / Vor.sicht; //Wenn nah 1, am Rand 0
+		double nah = (redEnd - weg) / redEnd; //Wenn nah 1, am Rand 0
 		if(nah < 0)
 			nah = 0;
 		if(target.tn != -1 && tn != null && target.tn == tn)

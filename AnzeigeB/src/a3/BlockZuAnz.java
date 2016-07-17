@@ -67,8 +67,9 @@ public class BlockZuAnz implements IVUpgrade
 				{
 					for(int type = 0; type < 3; type++)
 						addA3(dieListe, visionRange4D, type, new int[]{a, b, c, theD}, kam.d, relativ, kDreh);
-					addDInfo(dieListe, visionRange4D, new int[]{a, b, c, theD},
-							kam.d, wbDShift, baumodus, relativ, kDreh);
+					if(visionRange4D > 0)
+						addDInfo(dieListe, visionRange4D, new int[]{a, b, c, theD},
+								kam.d, wbDShift, baumodus, relativ, kDreh);
 				}
 	}
 
@@ -108,9 +109,13 @@ public class BlockZuAnz implements IVUpgrade
 					eR[i] = wb.wt(ortP);
 					eK[i] = transformSet2(new K4(eR[i]), kDreh, relativ);
 				}
-				dieListe.add(new PBlock3(wb.tn(ortA), lw, true, (wb.wt2(ortA).d - kamD) / wb.weltBlock.d - 0.5,
-						(wb.wt2(ortA).d - kamD) / wb.weltBlock.d + 0.5,
-						XFBT2.gibVonIndex(attach.name(), flaechenNummer, 10/*WTF*/), eR, eK));
+				if(visionRange4D == 0)
+					dieListe.add(new PBlock3(wb.tn(ortA), lw, true, -1, 1,
+							XFBT2.gibVonIndex(attach.name(), flaechenNummer, 10/*WTF*/), eR, eK));
+				else
+					dieListe.add(new PBlock3(wb.tn(ortA), lw, true, (wb.wt2(ortA).d - kamD) / wb.weltBlock.d - 0.5,
+							(wb.wt2(ortA).d - kamD) / wb.weltBlock.d + 0.5,
+							XFBT2.gibVonIndex(attach.name(), flaechenNummer, 10/*WTF*/), eR, eK));
 			}
 		}
 	}

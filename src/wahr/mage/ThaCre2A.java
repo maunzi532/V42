@@ -19,7 +19,7 @@ public class ThaCre2A
 		Staticf.scaCharge(Index.gibText("Einstellungen", "Sca"));
 		theTA = new TA2();
 		initPaneele();
-		Hauptschleife.initWelt();
+		Hauptschleife.initWelt(args.length > 0 ? args[0] : null);
 		for(int i = 0; i < paneele.length; i++)
 			paneele[i].showFrames();
 		createOverlays();

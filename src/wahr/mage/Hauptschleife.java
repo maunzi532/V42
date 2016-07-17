@@ -19,14 +19,20 @@ public class Hauptschleife
 	public static AllWelt aw;
 	private static PolyFarbe fa1 = new PolyFarbe();
 
-	public static void initWelt()
+	public static void initWelt(String lvlname)
 	{
 		aw = new AllWelt();
-		Generator g = new WeltLeser();
-		g.gibInWelt(aw.wbl, "Levels/Test1");
-		//g.gibInWelt("Levels/Generiert1");
-		//g.gibInWelt();
-		//g.gibInWelt(4, 4);
+		Generator g;
+		if(lvlname == null)
+		{
+			g = new TestGenerator();
+			g.gibInWelt(aw.wbl);
+		}
+		else
+		{
+			g = new WeltLeser();
+			g.gibInWelt(aw.wbl, "Levels/" + lvlname);
+		}
 		aw.wbl.setzeSE(new K4(0, 0, 0, 0), new K4(20, 20, 20, 20));
 		g.ermittleStart();
 		for(int i = 0; i < aw.wbl.starts.length; i++)
