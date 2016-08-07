@@ -30,7 +30,7 @@ public class Vor
 	private IVUpgrade za;
 	public int visionRange4D = 0;
 	public int baumodus;
-	public boolean siehBlocks = true;
+	public boolean upgradeActive;
 	public boolean siehNonBlocks = true;
 	private VorDaten vorDaten;
 
@@ -38,6 +38,8 @@ public class Vor
 	{
 		vorDaten = new VorDaten(abstandSplitInput);
 		za = upgrade;
+		if(za != null)
+			upgradeActive = true;
 		this.nonBlocks = nonBlocks;
 		this.lw = lw;
 	}
@@ -75,7 +77,7 @@ public class Vor
 				}
 				nb.additional(anzeigeZ, lw, nb == kam);
 			}
-		if(siehBlocks)
+		if(upgradeActive)
 			za.zuAnz(anzeigeZ, kp, kd, new K4(sicht, sicht, sicht, 0), visionRange4D, baumodus);
 		anzeige = new ArrayList<>();
 		for(int i = 0; i < anzeigeZ.size(); i++)

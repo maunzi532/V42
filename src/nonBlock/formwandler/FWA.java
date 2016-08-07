@@ -35,7 +35,7 @@ public abstract class FWA extends NBB implements Controllable
 
 	protected FWA(Controller control, LadeFWA abilities, String currentZ, AllWelt aw)
 	{
-		super(aw);
+		super(aw.wbl, aw.dw, aw.bw);
 		this.control = control;
 		this.abilities = abilities;
 		cooldowns = new double[abilities.cldSize];

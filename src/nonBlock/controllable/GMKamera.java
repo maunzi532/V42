@@ -8,7 +8,7 @@ import nonBlock.aktion.*;
 import wahr.zugriff.*;
 import welt.*;
 
-public class GMKamera extends NBD implements Controllable, Licht
+public class GMKamera extends NBD implements Controllable, Licht, GMMover
 {
 	private final Controller control;
 	private final Overlay overlay;

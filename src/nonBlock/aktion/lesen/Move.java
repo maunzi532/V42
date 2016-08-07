@@ -50,9 +50,9 @@ public class Move
 			{
 				ZDelay a;
 				if(seq)
-					a = lad1.erzeugeAktion(lad1.akteur >= 0 ? akteure[lad1.akteur] : null, tverlay);
+					a = lad1.erzeugeAktion2(lad1.akteur >= 0 ? akteure[lad1.akteur] : null, tverlay);
 				else
-					a = lad1.erzeugeAktion(akteur, tverlay);
+					a = lad1.erzeugeAktion2(akteur, tverlay);
 				if(a != null)
 					ender = a;
 			}

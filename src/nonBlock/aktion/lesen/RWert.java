@@ -1,7 +1,7 @@
 package nonBlock.aktion.lesen;
 
+import achsen.*;
 import k4.*;
-import nonBlock.aktion.*;
 
 class RWert
 {
@@ -21,7 +21,7 @@ class RWert
 		this.zahl = zahl;
 	}
 
-	public double gib(NBD v1, K4 target)
+	public double gib(NonBlock v1, K4 target)
 	{
 		if(name != null)
 			switch(name)

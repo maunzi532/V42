@@ -3,7 +3,7 @@ package achsen;
 import java.util.*;
 import k4.*;
 
-public abstract class NonBlock
+public class NonBlock implements IKamera
 {
 	private static int tnm = -1;
 
@@ -21,7 +21,7 @@ public abstract class NonBlock
 
 	public AlternateStandard standard = null;
 
-	protected NonBlock()
+	public NonBlock()
 	{
 		tnm--;
 		tn = tnm;
@@ -110,6 +110,18 @@ public abstract class NonBlock
 					if(punkteK[i][j] != null)
 						punkteK[i][j] = transformSet2(punkteK[i][j], kDreh, relativ);
 			}
+	}
+
+	@Override
+	public Drehung kamD()
+	{
+		return dreh;
+	}
+
+	@Override
+	public K4 kamP()
+	{
+		return position;
 	}
 
 	public static K4 transformSet1(K4 thi, Drehung d, K4 add)

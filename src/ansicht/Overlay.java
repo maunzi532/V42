@@ -33,6 +33,8 @@ public class Overlay extends Tverlay
 	private boolean schalterSichtbar;
 	public DrehInput drehInput;
 
+	public Overlay(){}
+
 	public void initOverlay(TA2 ta, int taIndex, AllWelt awA, String zDatLad, LPaneel auf, double[] ort)
 	{
 		this.ta = ta;
@@ -150,12 +152,20 @@ public class Overlay extends Tverlay
 				sl.layer = sci.gibSchalter(sichtAn, false);
 				//godModeKam.lw.licht.remove(godModeKam);
 				pa.xrmode = false;
-				vor.siehBlocks = true;
+				vor.upgradeActive = true;
 				vor.siehNonBlocks = true;
 			}
 		}
 		sl.actTex();
 		Staticf.sca("M / T (1) ");
 		return false;
+	}
+
+	@Override
+	public ZDelay erzeuge(String whtd, NBD dislocated, NBD besitzer2, Tverlay tverlay,
+			HashMap<String, String> parameters, ArrayList<String> list)
+	{
+		((Overlay) tverlay).kamN = (Controllable) dislocated;
+		return null;
 	}
 }

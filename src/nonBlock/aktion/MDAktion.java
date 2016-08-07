@@ -1,13 +1,97 @@
 package nonBlock.aktion;
 
+import java.util.*;
 import k4.*;
+import nonBlock.aktion.lesen.*;
 
-public class MDAktion extends Aktion
+public class MDAktion extends Aktion implements LadAktion
 {
-	private final Boolean[] mvdA;
-	private final double[] mvd0;
-	private final double[] mvdT;
+	private Boolean[] mvdA;
+	private double[] mvd0;
+	private double[] mvdT;
 	private Forced forced;
+
+	public MDAktion(){}
+
+	@Override
+	public ZDelay erzeuge(String whtd, NBD dislocated, NBD besitzer2, Tverlay tverlay,
+			HashMap<String, String> parameters, ArrayList<String> list)
+	{
+		RZahl[] mvd = new RZahl[6];
+		Boolean[] mvd2 = new Boolean[6];
+		for(String cd0 : parameters.keySet())
+		{
+			if(cd0.endsWith("m") || cd0.endsWith("t"))
+			{
+				if(cd0.length() == 2)
+				{
+					int nd = cd0.charAt(0) - 97;
+					if(nd >= 0 && nd < 4)
+					{
+						mvd2[nd] = cd0.endsWith("t");
+						mvd[nd] = new RZahl(parameters.get(cd0), false);
+					}
+				}
+				else if(cd0.length() == 3 && cd0.charAt(0) == 'w')
+				{
+					int nd = 0;
+					if(cd0.charAt(1) == 'l')
+						nd = 4;
+					else if(cd0.charAt(1) == 'b')
+						nd = 5;
+					if(nd > 0)
+					{
+						mvd2[nd] = cd0.endsWith("t");
+						mvd[nd] = new RZahl(parameters.get(cd0), true);
+					}
+				}
+			}
+		}
+		if(whtd.charAt(0) == 'B')
+		{
+			double[] mvdR = new double[mvd.length];
+			for(int i1 = 0; i1 < mvd.length; i1++)
+				if(mvd[i1] != null)
+				{
+					mvd[i1].v1 = dislocated;
+					mvdR[i1] = mvd[i1].rechne();
+				}
+			MDAktion md = new MDAktion(dislocated,
+					Integer.parseInt(parameters.get("dauer")),
+					Integer.parseInt(parameters.get("power")), mvdR, mvd2);
+			dislocated.aktionen.add(md);
+		}
+		else
+		{
+			double[] mvd0 = new double[]{dislocated.position.a, dislocated.position.b,
+					dislocated.position.c, dislocated.position.d, dislocated.dreh.wl, dislocated.dreh.wb};
+			double[] mvdT = new double[6];
+			for(int i = 0; i < 6; i++)
+				if(mvdA[i] != null)
+				{
+					if(mvdA[i])
+						mvdT[i] = mvd[i].rechne();
+					else
+						mvdT[i] = mvd0[i] + mvd[i].rechne();
+				}
+			mvdT[4] = Drehung.sichern(mvdT[4]);
+			mvdT[5] = Drehung.sichern(mvdT[5]);
+			if(mvdA[0] != null)
+				dislocated.position.a = mvdT[0];
+			if(mvdA[1] != null)
+				dislocated.position.b = mvdT[1];
+			if(mvdA[2] != null)
+				dislocated.position.c = mvdT[2];
+			if(mvdA[3] != null)
+				dislocated.position.d = mvdT[3];
+			if(mvdA[4] != null)
+				dislocated.dreh.wl = mvdT[4];
+			if(mvdA[5] != null)
+				dislocated.dreh.wb = mvdT[5];
+			dislocated.forced.add(new Forced(new K4(), 20));
+		}
+		return null;
+	}
 
 	public MDAktion(NBD besitzer, int dauer, int power, double[] mvd, Boolean[] mvdA)
 	{

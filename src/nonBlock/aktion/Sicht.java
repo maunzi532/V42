@@ -30,9 +30,9 @@ public class Sicht extends LinAAktion
 	{
 		if(master.sichtAn && (gm ? master.godMode : (besitzer.dw.nofreeze() && !master.godMode)))
 		{
-			besitzer.linkAchsen[linAl].dreh.wl -= master.drehInput.wlmove() * 1.1d / master.auf.scF.width;
+			besitzer.linkAchsen[linAl].dreh.wl -= master.drehInput.wlmove() * 2.2d / master.auf.scF.width;
 			besitzer.linkAchsen[linAl].dreh.sichern();
-			besitzer.linkAchsen[linAb].dreh.wb -= master.drehInput.wbmove() * 1.1d / master.auf.scF.height;
+			besitzer.linkAchsen[linAb].dreh.wb -= master.drehInput.wbmove() * 2.2d / master.auf.scF.height;
 			if(!gm)
 			{
 				if(besitzer.linkAchsen[linAb].dreh.wb < 0.2)

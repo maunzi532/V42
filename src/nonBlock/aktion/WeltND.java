@@ -3,7 +3,6 @@ package nonBlock.aktion;
 import achsen.*;
 import java.util.*;
 import nonBlock.aktion.lesen.*;
-import nonBlock.controllable.*;
 
 public class WeltND
 {
@@ -43,7 +42,7 @@ public class WeltND
 			if(seq.tick())
 				seq = null;
 		for(int i = 0; i < nonBlocks.size(); i++)
-			if(!gmFreeze || nonBlocks.get(i) instanceof GMKamera)
+			if(!gmFreeze || nonBlocks.get(i) instanceof GMMover)
 				nonBlocks.get(i).tick();
 	}
 }

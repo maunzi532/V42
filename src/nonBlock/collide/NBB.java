@@ -3,7 +3,6 @@ package nonBlock.collide;
 import java.util.*;
 import k4.*;
 import nonBlock.aktion.*;
-import wahr.zugriff.*;
 import welt.*;
 
 public abstract class NBB extends NBD
@@ -32,11 +31,6 @@ public abstract class NBB extends NBD
 		colliders = new ArrayList<>();
 		physik = new ArrayList<>();
 		bw.vta.add(this);
-	}
-
-	protected NBB(AllWelt aw)
-	{
-		this(aw.wbl, aw.dw, aw.bw);
 	}
 
 	public void chargeBlockBox(String input)

@@ -22,4 +22,20 @@ public class ATR extends R
 	{
 		super(besitzer, dauer);
 	}
+
+	public static void changeToThis(AlternateStandard alt, NBD n, int dauer)
+	{
+		n.standard = alt;
+		for(int i = 0; i < n.resLink.length; i++)
+			if(n.resLink[i] == null)
+			{
+				if(n.linkAchsen[i] != null)
+					summonATRandCheck(n, i, dauer);
+			}
+			else if(n.resLink[i].power < 0)
+			{
+				n.resLink[i].needCancel = true;
+				summonATRandCheck(n, i, dauer);
+			}
+	}
 }

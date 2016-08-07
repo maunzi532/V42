@@ -19,7 +19,7 @@ public class AllWelt
 		wbl = new WeltB();
 		dw = new WeltND();
 		lw = new LichtW();
-		bw = new WeltNB(this);
+		bw = new WeltNB(dw);
 		tw = new TextWelt();
 	}
 

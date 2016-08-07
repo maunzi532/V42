@@ -4,17 +4,15 @@ import ext.*;
 import java.util.*;
 import k4.*;
 import nonBlock.aktion.lesen.*;
-import wahr.zugriff.*;
 
 public abstract class NBD extends ENB
 {
 	public LinAAktion[] resLink;
-	public final ArrayList<Aktion> aktionen;
+	public ArrayList<Aktion> aktionen;
 	protected K4 bewegung;
 	protected ArrayList<K4> beweg;
 	public ArrayList<Forced> forced;
-	public Aktion currentTrans = null;
-	protected final ArrayList<Move> moves;
+	protected ArrayList<Move> moves;
 	public Tverlay tverlay;
 
 	public WeltND dw;
@@ -35,11 +33,6 @@ public abstract class NBD extends ENB
 	{
 		this(dw);
 		this.tverlay = tverlay;
-	}
-
-	protected NBD(AllWelt aw)
-	{
-		this(aw.dw);
 	}
 
 	public void init()

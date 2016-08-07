@@ -1,12 +1,16 @@
 package nonBlock.collide;
 
+import java.util.*;
+import java.util.stream.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
 
-public class ColliderAktion extends Aktion implements ZDelay
+public class ColliderAktion extends Aktion implements ZDelay, LadAktion
 {
-	private final Collider collider;
+	private Collider collider;
 	public int delay;
+
+	public ColliderAktion(){}
 
 	public ColliderAktion(NBB besitzer, int dauer, int power, Collider collider, NBB nht)
 	{
@@ -28,5 +32,24 @@ public class ColliderAktion extends Aktion implements ZDelay
 			return timeLeft >= 0;
 		else
 			return timeLeft >= delay;
+	}
+
+	@Override
+	public ZDelay erzeuge(String whtd, NBD dislocated, NBD besitzer2, Tverlay tverlay,
+			HashMap<String, String> parameters, ArrayList<String> list)
+	{
+		Collider newc = new Collider(Integer.parseInt(parameters.get("collider")));
+		newc.h.addAll(list.stream().map(Hitbox::new).collect(Collectors.toList()));
+		ColliderAktion ak = new ColliderAktion((NBB) dislocated,
+				Integer.parseInt(parameters.get("dauer")),
+				Integer.parseInt(parameters.get("power")),
+				newc, (NBB) besitzer2.plzDislocate(parameters.get("nht")));
+		dislocated.aktionen.add(ak);
+		if(parameters.containsKey("delay"))
+		{
+			ak.delay = Integer.parseInt(parameters.get("delay"));
+			return ak;
+		}
+		return null;
 	}
 }

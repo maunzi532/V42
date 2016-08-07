@@ -155,13 +155,13 @@ public class InitSL implements SchalterInit
 				if(r)
 					ov.vor.siehNonBlocks = !ov.vor.siehNonBlocks;
 				else
-					ov.vor.siehBlocks = !ov.vor.siehBlocks;
+					ov.vor.upgradeActive = !ov.vor.upgradeActive;
 				super.onClick(main, r, cx, cy);
 			}
 
 			public void tick(SchalterLayer main)
 			{
-				if(ov.vor.siehBlocks)
+				if(ov.vor.upgradeActive)
 				{
 					if(ov.vor.siehNonBlocks)
 						text = "Alles";

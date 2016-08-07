@@ -1,16 +1,40 @@
 package nonBlock.aktion;
 
 import achsen.*;
+import java.util.*;
 import nonBlock.aktion.lesen.*;
 
 public class AktionM extends Freeze
 {
-	private final ADI[] a;
-	private final double[] lenY;
-	private final double[] dwbY;
-	private final double[] dwlY;
-	private final double[] spnY;
-	private final double[] dd4Y;
+	private ADI[] a;
+	private double[] lenY;
+	private double[] dwbY;
+	private double[] dwlY;
+	private double[] spnY;
+	private double[] dd4Y;
+
+	public AktionM(){}
+
+	@Override
+	public ZDelay erzeuge(String whtd, NBD dislocated, NBD besitzer2, Tverlay tverlay,
+			HashMap<String, String> parameters, ArrayList<String> list)
+	{
+		if(whtd.charAt(0) == 'M')
+		{
+			ADI[] adi2 = new ADI[list.size()];
+			for(int i = 0; i < list.size(); i++)
+				adi2[i] = new ADI(list.get(i));
+			AktionM am = new AktionM(dislocated,
+					Integer.parseInt(parameters.get("dauer")),
+					Integer.parseInt(parameters.get("power")), adi2);
+			checkLinA(dislocated, am);
+		}
+		else
+			ATR.changeToThis(AlternateStandard.gibVonIndex(parameters.get("sta")),
+					dislocated, parameters.containsKey("dauer") ?
+							Integer.parseInt(parameters.get("dauer")) : 0);
+		return null;
+	}
 
 	public AktionM(NBD besitzer, int dauer, int power, ADI... a)
 	{

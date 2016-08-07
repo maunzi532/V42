@@ -46,6 +46,7 @@ public class Hauptschleife
 			f.collidable.add(new ColBox(f, 1, new EndScheibe(0.3), new EndScheibe(0.3), 1, 1));
 			f.init();
 		}
+		ZLad.rage();
 		createTheN2();
 	}
 
@@ -111,7 +112,7 @@ public class Hauptschleife
 
 			public void decollide(Collider attk)
 			{
-				changeToThis(AlternateStandard.gibVonIndex("TSSA2R"), this, 40);
+				ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA2R"), this, 40);
 			}
 
 			public void wand(int welche){}
