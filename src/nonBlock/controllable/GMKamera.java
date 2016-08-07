@@ -73,11 +73,6 @@ public class GMKamera extends NBD implements Controllable, Licht, GMMover
 		}
 	}
 
-	public NBD plzDislocate(String info)
-	{
-		return this;
-	}
-
 	public void doCommand(String command)
 	{
 		switch(command)

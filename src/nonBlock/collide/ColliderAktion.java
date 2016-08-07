@@ -35,7 +35,7 @@ public class ColliderAktion extends Aktion implements ZDelay, LadAktion
 	}
 
 	@Override
-	public ZDelay erzeuge(String whtd, NBD dislocated, NBD besitzer2, Tverlay tverlay,
+	public ZDelay erzeuge(String whtd, AkA dislocated, AkA besitzer2, Tverlay tverlay,
 			HashMap<String, String> parameters, ArrayList<String> list)
 	{
 		Collider newc = new Collider(Integer.parseInt(parameters.get("collider")));
@@ -44,7 +44,7 @@ public class ColliderAktion extends Aktion implements ZDelay, LadAktion
 				Integer.parseInt(parameters.get("dauer")),
 				Integer.parseInt(parameters.get("power")),
 				newc, (NBB) besitzer2.plzDislocate(parameters.get("nht")));
-		dislocated.aktionen.add(ak);
+		dislocated.addAktion(ak);
 		if(parameters.containsKey("delay"))
 		{
 			ak.delay = Integer.parseInt(parameters.get("delay"));

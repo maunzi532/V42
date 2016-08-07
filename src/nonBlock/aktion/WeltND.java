@@ -15,7 +15,7 @@ public class WeltND
 		return seq == null && !gmFreeze;
 	}
 
-	public void timetickN()
+	public void entlinke()
 	{
 		ArrayList<NonBlock> noch = nonBlocks;
 		while(noch.size() > 0)
@@ -36,7 +36,7 @@ public class WeltND
 		}
 	}
 
-	public void timetickD()
+	public void alleTick()
 	{
 		if(!nofreeze() && seq != null)
 			if(seq.tick())

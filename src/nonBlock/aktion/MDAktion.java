@@ -14,7 +14,7 @@ public class MDAktion extends Aktion implements LadAktion
 	public MDAktion(){}
 
 	@Override
-	public ZDelay erzeuge(String whtd, NBD dislocated, NBD besitzer2, Tverlay tverlay,
+	public ZDelay erzeuge(String whtd, AkA dislocated, AkA besitzer2, Tverlay tverlay,
 			HashMap<String, String> parameters, ArrayList<String> list)
 	{
 		RZahl[] mvd = new RZahl[6];
@@ -59,12 +59,12 @@ public class MDAktion extends Aktion implements LadAktion
 			MDAktion md = new MDAktion(dislocated,
 					Integer.parseInt(parameters.get("dauer")),
 					Integer.parseInt(parameters.get("power")), mvdR, mvd2);
-			dislocated.aktionen.add(md);
+			dislocated.addAktion(md);
 		}
 		else
 		{
-			double[] mvd0 = new double[]{dislocated.position.a, dislocated.position.b,
-					dislocated.position.c, dislocated.position.d, dislocated.dreh.wl, dislocated.dreh.wb};
+			double[] mvd0 = new double[]{dislocated.position().a, dislocated.position().b,
+					dislocated.position().c, dislocated.position().d, dislocated.dreh().wl, dislocated.dreh().wb};
 			double[] mvdT = new double[6];
 			for(int i = 0; i < 6; i++)
 				if(mvdA[i] != null)
@@ -77,28 +77,28 @@ public class MDAktion extends Aktion implements LadAktion
 			mvdT[4] = Drehung.sichern(mvdT[4]);
 			mvdT[5] = Drehung.sichern(mvdT[5]);
 			if(mvdA[0] != null)
-				dislocated.position.a = mvdT[0];
+				dislocated.position().a = mvdT[0];
 			if(mvdA[1] != null)
-				dislocated.position.b = mvdT[1];
+				dislocated.position().b = mvdT[1];
 			if(mvdA[2] != null)
-				dislocated.position.c = mvdT[2];
+				dislocated.position().c = mvdT[2];
 			if(mvdA[3] != null)
-				dislocated.position.d = mvdT[3];
+				dislocated.position().d = mvdT[3];
 			if(mvdA[4] != null)
-				dislocated.dreh.wl = mvdT[4];
+				dislocated.dreh().wl = mvdT[4];
 			if(mvdA[5] != null)
-				dislocated.dreh.wb = mvdT[5];
-			dislocated.forced.add(new Forced(new K4(), 20));
+				dislocated.dreh().wb = mvdT[5];
+			dislocated.addForced(new Forced(new K4(), 20));
 		}
 		return null;
 	}
 
-	public MDAktion(NBD besitzer, int dauer, int power, double[] mvd, Boolean[] mvdA)
+	public MDAktion(AkA besitzer, int dauer, int power, double[] mvd, Boolean[] mvdA)
 	{
 		super(besitzer, dauer, power);
 		this.mvdA = mvdA;
-		mvd0 = new double[]{besitzer.position.a, besitzer.position.b,
-				besitzer.position.c, besitzer.position.d, besitzer.dreh.wl, besitzer.dreh.wb};
+		mvd0 = new double[]{besitzer.position().a, besitzer.position().b,
+				besitzer.position().c, besitzer.position().d, besitzer.dreh().wl, besitzer.dreh().wb};
 		mvdT = new double[6];
 		for(int i = 0; i < 6; i++)
 			if(mvdA[i] != null)
@@ -121,18 +121,18 @@ public class MDAktion extends Aktion implements LadAktion
 	{
 		int m1 = dauer - aktuell;
 		if(mvdA[0] != null)
-			forced.movement.a = (mvd0[0] * m1 + mvdT[0] * aktuell) / dauer - besitzer.position.a;
+			forced.movement.a = (mvd0[0] * m1 + mvdT[0] * aktuell) / dauer - besitzer.position().a;
 		if(mvdA[1] != null)
-			forced.movement.b = (mvd0[1] * m1 + mvdT[1] * aktuell) / dauer - besitzer.position.b;
+			forced.movement.b = (mvd0[1] * m1 + mvdT[1] * aktuell) / dauer - besitzer.position().b;
 		if(mvdA[2] != null)
-			forced.movement.c = (mvd0[2] * m1 + mvdT[2] * aktuell) / dauer - besitzer.position.c;
+			forced.movement.c = (mvd0[2] * m1 + mvdT[2] * aktuell) / dauer - besitzer.position().c;
 		if(mvdA[3] != null)
-			forced.movement.d = (mvd0[3] * m1 + mvdT[3] * aktuell) / dauer - besitzer.position.d;
-		besitzer.forced.add(forced);
+			forced.movement.d = (mvd0[3] * m1 + mvdT[3] * aktuell) / dauer - besitzer.position().d;
+		besitzer.addForced(forced);
 		if(mvdA[4] != null)
-			besitzer.dreh.wl = mvd0[4] + (mvdT[4] - mvd0[4]) * aktuell / dauer;
+			besitzer.dreh().wl = mvd0[4] + (mvdT[4] - mvd0[4]) * aktuell / dauer;
 		if(mvdA[5] != null)
-			besitzer.dreh.wb = mvd0[5] + (mvdT[5] - mvd0[5]) * aktuell / dauer;
-		besitzer.dreh.sichern();
+			besitzer.dreh().wb = mvd0[5] + (mvdT[5] - mvd0[5]) * aktuell / dauer;
+		besitzer.dreh().sichern();
 	}
 }

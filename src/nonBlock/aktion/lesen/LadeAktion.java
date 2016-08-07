@@ -53,9 +53,9 @@ public class LadeAktion
 		}
 	}
 
-	public ZDelay erzeugeAktion2(NBD besitzer, Tverlay tverlay)
+	public ZDelay erzeugeAktion(AkA besitzer, Tverlay tverlay)
 	{
-		NBD b2;
+		AkA b2;
 		if(dislocate != null)
 			b2 = besitzer.plzDislocate(dislocate);
 		else

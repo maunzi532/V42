@@ -18,7 +18,7 @@ public class Tverlay implements LadAktion
 	}
 
 	@Override
-	public ZDelay erzeuge(String whtd, NBD dislocated, NBD besitzer2, Tverlay tverlay,
+	public ZDelay erzeuge(String whtd, AkA dislocated, AkA besitzer2, Tverlay tverlay,
 			HashMap<String, String> parameters, ArrayList<String> list)
 	{
 		if(parameters.containsKey("toAll"))

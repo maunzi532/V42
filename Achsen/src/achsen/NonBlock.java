@@ -21,10 +21,17 @@ public class NonBlock implements IKamera
 
 	public AlternateStandard standard = null;
 
+	public LinkBlocker[] resLink;
+
 	public NonBlock()
 	{
 		tnm--;
 		tn = tnm;
+	}
+
+	public void init()
+	{
+		resLink = new LinkBlocker[linkAchsen.length];
 	}
 
 	public void tick()

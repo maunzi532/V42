@@ -5,7 +5,6 @@ import achsen.*;
 import ansicht.*;
 import java.util.*;
 import k4.*;
-import nonBlock.aktion.*;
 import nonBlock.collide.*;
 import nonBlock.controllable.*;
 import wahr.zugriff.*;
@@ -138,12 +137,12 @@ public class InitSL implements SchalterInit
 		{
 			public void onClick(SchalterLayer main, boolean r, double cx, double cy)
 			{
-				if(ov.kamN instanceof NBD)
+				if(ov.kamN instanceof NonBlock)
 				{
 					if(r)
-						ov.godModeKam.position = ((NBD)ov.kamN).position;
+						ov.godModeKam.position = ((NonBlock)ov.kamN).position;
 					else
-						((NBD)ov.kamN).position = ov.godModeKam.position;
+						((NonBlock)ov.kamN).position = ov.godModeKam.position;
 				}
 				super.onClick(main, r, cx, cy);
 			}

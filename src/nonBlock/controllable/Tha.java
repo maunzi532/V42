@@ -35,7 +35,6 @@ public class Tha extends TSSA
 			public void actCollide(Collider collider){}
 			public void decollide(Collider collider){}
 			public void wand(int welche){}
-			protected void kontrolle(){}
 		};
 		StandardAussehen.gibVonIndexS("H4/Sta").assignStandard(fL);
 		fL.aussehen = new LadeModell().reload(LadeTeil.gibVonIndex("H4/Achsen", new PolyFarbe()));
@@ -47,7 +46,6 @@ public class Tha extends TSSA
 			public void actCollide(Collider collider){}
 			public void decollide(Collider collider){}
 			public void wand(int welche){}
-			protected void kontrolle(){}
 		};
 		StandardAussehen.gibVonIndexS("H4/Sta").assignStandard(fR);
 		fR.aussehen = new LadeModell().reload(LadeTeil.gibVonIndex("H4/Achsen", new PolyFarbe()));
@@ -66,7 +64,7 @@ public class Tha extends TSSA
 		fR.linkAchsen[0].dreh.sichern();
 	}
 
-	public NBD plzDislocate(String info)
+	public AkA plzDislocate(String info)
 	{
 		switch(info)
 		{

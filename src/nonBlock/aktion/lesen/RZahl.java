@@ -1,8 +1,8 @@
 package nonBlock.aktion.lesen;
 
-import achsen.*;
 import java.util.*;
 import k4.*;
+import nonBlock.aktion.*;
 
 public class RZahl
 {
@@ -11,7 +11,7 @@ public class RZahl
 	private ArrayList<RWert> zahlies = new ArrayList<>();
 	private ArrayList<Integer> zeichens = new ArrayList<>();
 	public boolean deg2rad;
-	public NonBlock v1;
+	public AkA v1;
 	public K4 target;
 
 	public RZahl(String text, boolean deg2rad)

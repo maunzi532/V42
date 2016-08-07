@@ -1,12 +1,14 @@
 package nonBlock.aktion;
 
-public class LinAAktion extends Aktion
+import achsen.*;
+
+public class LinAAktion extends Aktion implements LinkBlocker
 {
 	boolean[] needCancelAt;
 
-	LinAAktion(NBD besitzer, int dauer, int power)
+	LinAAktion(NonBlock besitzer, int dauer, int power)
 	{
-		super(besitzer, dauer, power);
+		super((AkA) besitzer, dauer, power);
 		needCancelAt = new boolean[besitzer.resLink.length];
 	}
 

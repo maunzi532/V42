@@ -93,7 +93,7 @@ public abstract class NBB extends NBD
 		super.tick();
 	}
 
-	protected void mTick()
+	public void mTick()
 	{
 		super.mTick();
 		K4 eb = new K4(bewegung); //Bewegunsfreiheit testen

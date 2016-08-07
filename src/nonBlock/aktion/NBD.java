@@ -5,9 +5,8 @@ import java.util.*;
 import k4.*;
 import nonBlock.aktion.lesen.*;
 
-public abstract class NBD extends ENB
+public abstract class NBD extends ENB implements AkA
 {
-	public LinAAktion[] resLink;
 	public ArrayList<Aktion> aktionen;
 	protected K4 bewegung;
 	protected ArrayList<K4> beweg;
@@ -35,11 +34,7 @@ public abstract class NBD extends ENB
 		this.tverlay = tverlay;
 	}
 
-	public void init()
-	{
-		resLink = new LinAAktion[linkAchsen.length];
-	}
-
+	@Override
 	public void tick()
 	{
 		super.tick();
@@ -68,7 +63,8 @@ public abstract class NBD extends ENB
 		position = K4.plus(position, bewegung);
 	}
 
-	protected void mTick()
+	@Override
+	public void mTick()
 	{
 		bewegung = new K4();
 		int[] powers = new int[4];
@@ -80,10 +76,39 @@ public abstract class NBD extends ENB
 		forced.clear();
 	}
 
-	protected abstract void kontrolle();
+	@Override
+	public K4 position()
+	{
+		return position;
+	}
 
-	public NBD plzDislocate(String info)
+	@Override
+	public Drehung dreh()
+	{
+		return dreh;
+	}
+
+	@Override
+	public AkA plzDislocate(String info)
 	{
 		return this;
+	}
+
+	@Override
+	public void addForced(Forced f)
+	{
+		forced.add(f);
+	}
+
+	@Override
+	public void addAktion(Aktion a)
+	{
+		aktionen.add(a);
+	}
+
+	@Override
+	public boolean nofreeze()
+	{
+		return dw.nofreeze();
 	}
 }

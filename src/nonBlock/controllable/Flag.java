@@ -32,7 +32,6 @@ public class Flag extends NBB implements Licht, IFlag
 	public void actCollide(Collider collider){}
 	public void decollide(Collider collider){}
 	public void wand(int welche){}
-	protected void kontrolle(){}
 
 	public K4 lichtPosition()
 	{
