@@ -17,7 +17,7 @@ E. The other character is for testing bugged hair which heavily bugs on the play
 F. V42 has a very problematic dependancy matrix, fix pls  
 
 # Controls (May be outdated)
-The Controls depend on your Overlay Settings)
+(The Controls depend on your Overlay Settings)  
 I,W - forward, grab edge, climb up  
 J,A - left  
 L,D - right  
