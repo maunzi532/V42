@@ -1,9 +1,9 @@
 package nonBlock.collide;
 
-import block.*;
-import wahr.zugriff.*;
-
 import java.util.*;
+import k4.*;
+import wahr.zugriff.*;
+import welt.*;
 
 public class BlockBox
 {

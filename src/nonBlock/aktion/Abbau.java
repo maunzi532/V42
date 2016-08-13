@@ -1,9 +1,9 @@
 package nonBlock.aktion;
 
-import block.*;
-import nonBlock.aussehen.*;
+import achsen.*;
+import k4.*;
 import nonBlock.collide.*;
-import wahr.zugriff.*;
+import welt.*;
 
 public class Abbau extends Aktion
 {
@@ -28,12 +28,12 @@ public class Abbau extends Aktion
 
 	public void tick()
 	{
-		WeltB welt = ((NBB)besitzer).welt;
+		WeltB welt = ((NBB) besitzer).welt;
 		if(aktuell == start)
-			besitzer.focus = new Focus(besitzer, dauer - start, welt.wt2(welt.decodeTn(tn)));
+			((NonBlock) besitzer).focus = new Focus((NonBlock) besitzer, dauer - start, welt.wt2(welt.decodeTn(tn)));
 		if(aktuell == dauer - 1)
 		{
-			besitzer.focus = new Mount(besitzer, reMount, linA, 0, reD, reT);
+			((NonBlock) besitzer).focus = new Mount((NonBlock) besitzer, reMount, linA, 0, reD, reT);
 			WBP p = welt.decodeTn(tn);
 			welt.set(p, new DerBlock(0, welt.gib(p).dreh4));
 		}

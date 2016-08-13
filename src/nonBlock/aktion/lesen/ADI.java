@@ -49,7 +49,7 @@ public class ADI
 		return a;
 	}
 
-	public ADI(String code, boolean zv)
+	public ADI(String code)
 	{
 		String[] cde1 = code.split(",");
 		linA = Integer.parseInt(cde1[0]);
@@ -60,6 +60,6 @@ public class ADI
 		dwlZ = new RZahl(cde1[5], true);
 		spnZ = new RZahl(cde1[6], true);
 		dd4Z = new RZahl(cde1[7], false);
-		this.zv = zv;
+		zv = cde1.length > 8;
 	}
 }

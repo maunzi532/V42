@@ -1,11 +1,8 @@
 package nonBlock.controllable;
 
-import wahr.zugriff.*;
+import achsen.*;
 
-public interface Controllable
+public interface Controllable extends IKamera
 {
-	void kontrolle();
-	K4 kamP();
-	Drehung kamD();
 	void doCommand(String command);
 }

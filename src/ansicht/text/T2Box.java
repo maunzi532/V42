@@ -1,8 +1,6 @@
 package ansicht.text;
 
-import wahr.physisch.*;
-import wahr.zugriff.*;
-
+import indexLader.*;
 import java.awt.*;
 import java.io.*;
 
@@ -14,11 +12,12 @@ public class T2Box extends SLF
 	private int fade;
 	private double h2;
 
-	public T2Box(SchalterLayer main, boolean tangible, double w, double h, TBoxOrt connect,
+	public T2Box(double abstand, boolean tangible, double w, double h, TBoxOrt connect,
 			String dispName, String codebez, String emotion)
 	{
-		super(main, tangible, connect.x - (connect.links ? -main.abstand : w + main.abstand),
+		super(tangible, connect.x - (connect.links ? -abstand : w + abstand),
 				connect.y - (connect.oben ? h : 0), w, h, dispName);
+		schalter = false;
 		this.connect = connect;
 		this.codebez = codebez;
 		this.emotion = emotion;
@@ -31,7 +30,7 @@ public class T2Box extends SLF
 		this.emotion = emotion;
 	}
 
-	public void draw(Graphics2D gd)
+	public void draw(Graphics2D gd, SchalterLayer main)
 	{
 		if(fade > 0)
 		{
@@ -52,12 +51,12 @@ public class T2Box extends SLF
 		}
 	}
 
-	public void onClick(boolean r, double cx, double cy)
+	public void onClick(SchalterLayer main, boolean r, double cx, double cy)
 	{
 		main.removeText(connect);
 	}
 
-	public void tick()
+	public void tick(SchalterLayer main)
 	{
 		fade = main.giveMaxFade(connect);
 	}

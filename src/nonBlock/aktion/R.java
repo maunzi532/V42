@@ -1,11 +1,11 @@
 package nonBlock.aktion;
 
+import achsen.*;
 import nonBlock.aktion.lesen.*;
-import nonBlock.aussehen.*;
 
 public class R extends LinAAktion
 {
-	public static void summonR(NBD besitzer, int linA)
+	public static void summonR(NonBlock besitzer, int linA)
 	{
 		if(linA >= besitzer.linkAchsen.length)
 			return;
@@ -17,7 +17,7 @@ public class R extends LinAAktion
 				new RZahl(std.drehs[linA].wl), new RZahl(std.spins[linA]), new RZahl(std.dShifts[linA]), false);
 		if(!r.needCancel)
 			besitzer.resLink[r.a.linA] = r;
-		besitzer.aktionen.add(r);
+		((AkA) besitzer).addAktion(r);
 	}
 
 	ADI a;
@@ -27,12 +27,12 @@ public class R extends LinAAktion
 	private double spnY;
 	private double dd4Y;
 
-	private R(NBD besitzer)
+	private R(NonBlock besitzer)
 	{
 		super(besitzer, 10, -1);
 	}
 
-	R(NBD besitzer, int dauer)
+	R(NonBlock besitzer, int dauer)
 	{
 		super(besitzer, dauer, -1);
 	}
@@ -40,7 +40,7 @@ public class R extends LinAAktion
 	public void delink()
 	{
 		if(!needCancel)
-			besitzer.resLink[a.linA] = null;
+			((NonBlock) besitzer).resLink[a.linA] = null;
 	}
 
 	public void tick()
@@ -49,7 +49,7 @@ public class R extends LinAAktion
 			return;
 		if(aktuell >= a.anfD && aktuell <= a.anfD + a.lenD)
 		{
-			LinkAchse li = besitzer.linkAchsen[a.linA];
+			LinkAchse li = ((NonBlock) besitzer).linkAchsen[a.linA];
 			if(aktuell == a.anfD)
 			{
 				lenY = li.len;

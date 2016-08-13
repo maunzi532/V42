@@ -1,27 +1,25 @@
 package nonBlock.aktion;
 
-import ansicht.*;
-import nonBlock.aktion.lesen.*;
-import nonBlock.aussehen.*;
-import wahr.zugriff.*;
-
+import ext.*;
 import java.util.*;
+import k4.*;
+import nonBlock.aktion.lesen.*;
 
-public abstract class NBD extends NonBlock
+public abstract class NBD extends ENB implements AkA
 {
-	public LinAAktion[] resLink;
-	public final ArrayList<Aktion> aktionen;
+	public ArrayList<Aktion> aktionen;
 	protected K4 bewegung;
 	protected ArrayList<K4> beweg;
 	public ArrayList<Forced> forced;
-	public AlternateStandard standard = null;
-	public Aktion currentTrans = null;
-	protected final ArrayList<Move> moves;
-	public Tverlay tverlay;
+	protected ArrayList<Move> moves;
 
-	protected NBD(LichtW lw, WeltND dw)
+	public WeltND dw;
+
+	protected NBD(WeltND dw)
 	{
-		super(lw, dw);
+		super();
+		this.dw = dw;
+		dw.nonBlocks.add(this);
 		bewegung = new K4();
 		beweg = new ArrayList<>();
 		forced = new ArrayList<>();
@@ -29,22 +27,7 @@ public abstract class NBD extends NonBlock
 		moves = new ArrayList<>();
 	}
 
-	protected NBD(LichtW lw, WeltND dw, Tverlay tverlay)
-	{
-		this(lw, dw);
-		this.tverlay = tverlay;
-	}
-
-	protected NBD(AllWelt aw)
-	{
-		this(aw.lw, aw.dw);
-	}
-
-	public void init()
-	{
-		resLink = new LinAAktion[linkAchsen.length];
-	}
-
+	@Override
 	public void tick()
 	{
 		super.tick();
@@ -73,7 +56,8 @@ public abstract class NBD extends NonBlock
 		position = K4.plus(position, bewegung);
 	}
 
-	protected void mTick()
+	@Override
+	public void mTick()
 	{
 		bewegung = new K4();
 		int[] powers = new int[4];
@@ -85,10 +69,39 @@ public abstract class NBD extends NonBlock
 		forced.clear();
 	}
 
-	protected abstract void kontrolle();
+	@Override
+	public K4 position()
+	{
+		return position;
+	}
 
-	public NBD plzDislocate(String info)
+	@Override
+	public Drehung dreh()
+	{
+		return dreh;
+	}
+
+	@Override
+	public AkA plzDislocate(String info)
 	{
 		return this;
+	}
+
+	@Override
+	public void addForced(Forced f)
+	{
+		forced.add(f);
+	}
+
+	@Override
+	public void addAktion(Aktion a)
+	{
+		aktionen.add(a);
+	}
+
+	@Override
+	public boolean nofreeze()
+	{
+		return dw.nofreeze();
 	}
 }

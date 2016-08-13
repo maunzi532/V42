@@ -7,15 +7,14 @@ public class Move
 	public final LadeMove lad;
 	private int teilA;
 	private int zeitA;
-	private final NBD akteur;
-	private final NBD[] akteure;
+	private final AkA akteur;
+	private final AkA[] akteure;
 	private ZDelay ender;
 	public final String name;
 	private final boolean seq;
-	private Tverlay tverlay;
 	public boolean kill;
 
-	public Move(LadeMove lad, NBD akteur)
+	public Move(LadeMove lad, AkA akteur)
 	{
 		this.akteur = akteur;
 		akteure = null;
@@ -24,19 +23,13 @@ public class Move
 		seq = false;
 	}
 
-	private Move(LadeMove lad, NBD... akteure)
+	public Move(LadeMove lad, AkA... akteure)
 	{
 		this.akteure = akteure;
 		akteur = null;
 		this.lad = lad;
 		name = lad.name;
 		seq = true;
-	}
-
-	public Move(LadeMove lad, Tverlay tverlay, NBD... akteure)
-	{
-		this(lad, akteure);
-		this.tverlay = tverlay;
 	}
 
 	public boolean tick()
@@ -50,9 +43,9 @@ public class Move
 			{
 				ZDelay a;
 				if(seq)
-					a = lad1.erzeugeAktion(lad1.akteur >= 0 ? akteure[lad1.akteur] : null, tverlay);
+					a = lad1.erzeugeAktion(lad1.akteur >= 0 ? akteure[lad1.akteur] : null, akteure);
 				else
-					a = lad1.erzeugeAktion(akteur, tverlay);
+					a = lad1.erzeugeAktion(akteur);
 				if(a != null)
 					ender = a;
 			}

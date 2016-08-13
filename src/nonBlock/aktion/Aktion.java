@@ -2,18 +2,20 @@ package nonBlock.aktion;
 
 public class Aktion
 {
-	final NBD besitzer;
-	public final int dauer;
+	public AkA besitzer;
+	public int dauer;
 	public int aktuell;
 	public boolean needCancel;
-	public final int power;
+	public int power;
 
-	protected Aktion(NBD besitzer, int dauer, int power)
+	protected Aktion(AkA besitzer, int dauer, int power)
 	{
 		this.besitzer = besitzer;
 		this.dauer = dauer;
 		this.power = power;
 	}
+
+	protected Aktion(){}
 
 	public void delink(){}
 

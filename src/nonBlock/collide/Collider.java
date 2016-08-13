@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Collider
 {
-	NBB besitzer;
+	public NBB besitzer;
 	public final ArrayList<Hitbox> h;
 	public NBB nht;
 	public ArrayList<NBB> con;

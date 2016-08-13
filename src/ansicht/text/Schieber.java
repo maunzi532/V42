@@ -8,17 +8,17 @@ public class Schieber extends SLF
 	public final double shiftm;
 	public final double startw;
 
-	public Schieber(SchalterLayer main, double x, double y, double w, double h,
+	public Schieber(double x, double y, double w, double h,
 			double startw, double endw, double init)
 	{
-		super(main, true, x, y, w, h);
+		super(true, x, y, w, h);
 		this.startw = startw;
 		shiftm = endw - startw;
 		shift = (init - startw) / shiftm;
-		tick();
+		tick(null);
 	}
 
-	public void draw(Graphics2D gd)
+	public void draw(Graphics2D gd, SchalterLayer main)
 	{
 		gd.setColor(main.back);
 		gd.fillRect(main.mw(x), main.mh(y), main.mw(w), main.mh(h));
@@ -37,9 +37,9 @@ public class Schieber extends SLF
 		}
 	}
 
-	public void onClick(boolean r, double cx, double cy)
+	public void onClick(SchalterLayer main, boolean r, double cx, double cy)
 	{
 		shift = cx;
-		super.onClick(r, cx, cy);
+		super.onClick(main, r, cx, cy);
 	}
 }

@@ -1,6 +1,6 @@
 package wahr.zugriff;
 
-import block.*;
+import welt.*;
 
 public class Staticf
 {
@@ -90,32 +90,12 @@ public class Staticf
 			}
 	}
 
-	//Blickbreite
-	public static double scaleX = 0.8;
-	//Sichtweite NonBlocks
-	public static final double sicht = 150;
-	//Eigene H ausblenden
-	public static final double sichtMin = 2;
-
-	//Target-Markierungsbreite
-	public static final int targetW = 5;
-
-	//NonBlock Polygon Teilung bis kleiner als das
-	public static final double splThr = 1.2;
-
 	//Maximale Anzahl Frameskips
 	public static final int maxfskp = 5;
 	//Anzahl Millisekunden pro Frame
 	public static final long stdfms = 20;
 	//Anzahl Millisekunden zwischen Checks ob wieder im Fokus
 	public static final long blcfms = 200;
-
-	//Weite in Blocks wo NonBlocks in d nicht diffundieren
-	public static final double safezone = 1;
-	//Weite danach wo NonBlocks in d diffundieren
-	public static final double diffusewidth = 40;
-	//Anzahl unterschiedlicher Diffundierungs-Seeds
-	public static final int seedifier = 100;
 
 	//BlockBox-Genauigkeit in Dezimeter
 	public static final double step = 0.01;
@@ -127,13 +107,8 @@ public class Staticf
 	//D2 Mindestabstand um gesehen zu werden
 	public static final double d2min = 1; //TODO
 
-	//Weite des X-Ray-Modus
-	public static double xraywidth = 50;
-
 	//Speichergroesse
 	public static final WBP wspg = new WBP(1, 1, 1, 1);
-	//Umbruch beim WeltB speichern
-	public static final int maxCta = 60;
 
 	//D Relokalisierungsgeschwindigkeit
 	public static final double zpSpeed = 1;

@@ -1,10 +1,10 @@
 package wahr.zugriff;
 
-import ansicht.*;
+import a3.*;
 import ansicht.text.*;
-import block.*;
 import nonBlock.aktion.*;
 import nonBlock.collide.*;
+import welt.*;
 
 public class AllWelt
 {
@@ -19,17 +19,17 @@ public class AllWelt
 		wbl = new WeltB();
 		dw = new WeltND();
 		lw = new LichtW();
-		bw = new WeltNB(this);
+		bw = new WeltNB(dw);
 		tw = new TextWelt();
 	}
 
 	public void logik()
 	{
-		dw.timetickN();
+		dw.entlinke();
 		Staticf.sca("WeltND tN (4) ");
 		bw.timetick();
 		Staticf.sca("WeltNB t (0) ");
-		dw.timetickD();
+		dw.alleTick();
 		Staticf.sca("WeltND tD (1) ");
 	}
 }

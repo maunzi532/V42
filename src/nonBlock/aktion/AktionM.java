@@ -1,18 +1,42 @@
 package nonBlock.aktion;
 
+import achsen.*;
+import java.util.*;
 import nonBlock.aktion.lesen.*;
-import nonBlock.aussehen.*;
 
 public class AktionM extends Freeze
 {
-	private final ADI[] a;
-	private final double[] lenY;
-	private final double[] dwbY;
-	private final double[] dwlY;
-	private final double[] spnY;
-	private final double[] dd4Y;
+	private ADI[] a;
+	private double[] lenY;
+	private double[] dwbY;
+	private double[] dwlY;
+	private double[] spnY;
+	private double[] dd4Y;
 
-	public AktionM(NBD besitzer, int dauer, int power, ADI... a)
+	public AktionM(){}
+
+	@Override
+	public ZDelay erzeuge(String whtd, AkA dislocated, AkA besitzer2,
+			HashMap<String, String> parameters, ArrayList<String> list, AkA[] akteure2)
+	{
+		if(whtd.charAt(0) == 'M')
+		{
+			ADI[] adi2 = new ADI[list.size()];
+			for(int i = 0; i < list.size(); i++)
+				adi2[i] = new ADI(list.get(i));
+			AktionM am = new AktionM((NonBlock) dislocated,
+					Integer.parseInt(parameters.get("dauer")),
+					Integer.parseInt(parameters.get("power")), adi2);
+			checkLinA((NonBlock) dislocated, am);
+		}
+		else
+			ATR.changeToThis(AlternateStandard.gibVonIndex(parameters.get("sta")),
+					(NonBlock) dislocated, parameters.containsKey("dauer") ?
+							Integer.parseInt(parameters.get("dauer")) : 0);
+		return null;
+	}
+
+	public AktionM(NonBlock besitzer, int dauer, int power, ADI... a)
 	{
 		super(besitzer, dauer, power);
 		this.a = a;
@@ -32,7 +56,7 @@ public class AktionM extends Freeze
 			if(!needCancelAt[linA[i]])
 				if(aktuell >= a[i].anfD && aktuell <= a[i].anfD + a[i].lenD)
 				{
-					LinkAchse li = besitzer.linkAchsen[linA[i]];
+					LinkAchse li = ((NonBlock) besitzer).linkAchsen[linA[i]];
 					if(a[i].zv)
 					{
 						if(aktuell == a[i].anfD)

@@ -1,17 +1,19 @@
 package ansicht;
 
-import ansicht.a3.*;
+import a3.*;
+import achsen.*;
 import ansicht.text.*;
+import indexLader.*;
+import java.io.*;
+import java.util.*;
+import k4.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
-import nonBlock.aussehen.*;
 import nonBlock.controllable.*;
+import nonBlock.formwandler.*;
 import wahr.physisch.*;
 import wahr.spieler.*;
 import wahr.zugriff.*;
-
-import java.io.*;
-import java.util.*;
 
 public class Overlay extends Tverlay
 {
@@ -19,7 +21,7 @@ public class Overlay extends Tverlay
 	public LPaneel auf;
 	private double[] ort;
 	public int xI, yI, wI, hI;
-	private InitSL isl;
+	public SchalterInit sci;
 	public boolean sichtAn = true;
 	public Panelizer pa;
 	public AllWelt aw;
@@ -32,6 +34,8 @@ public class Overlay extends Tverlay
 	private boolean schalterSichtbar;
 	public DrehInput drehInput;
 
+	public Overlay(){}
+
 	public void initOverlay(TA2 ta, int taIndex, AllWelt awA, String zDatLad, LPaneel auf, double[] ort)
 	{
 		this.ta = ta;
@@ -41,11 +45,11 @@ public class Overlay extends Tverlay
 		aw = awA;
 		tw = aw.tw;
 		aw.tw.texters.add(this);
-		vor = new Vor(Index.gibText("Einstellungen", zDatLad), aw);
+		vor = new Vor(Index.gibText("Einstellungen", zDatLad),
+				aw.dw.nonBlocks, aw.lw, new BlockZuAnz(aw.wbl, aw.lw));
 		sl = new SchalterLayer();
 		pa = new Panelizer();
 		resize();
-		isl = new InitSL(sl, this);
 	}
 
 	public void resize()
@@ -93,7 +97,7 @@ public class Overlay extends Tverlay
 		godModeKam.dreh = new Drehung();
 		godModeKam.canInfl = new double[]{1, 1, 1, 1};
 		godModeKam.aussehen = new LadeModell();
-		StandardAussehen.gibVonIndex2("Kam").assignStandard(godModeKam);
+		StandardAussehen.gibVonIndexS("Kam").assignStandard(godModeKam);
 		godModeKam.aussehen.reload();
 		godModeKam.init();
 		godModeKam.aktionen.add(new Sicht(godModeKam, 10, 0, 0, true, this));
@@ -129,32 +133,41 @@ public class Overlay extends Tverlay
 		if(ta.keyStat[taIndex][13] == 2 && sichtAn)
 		{
 			sichtAn = false;
-			sl.layer.addAll(isl.normalSchalter);
+			sl.replaceSchalter(sci.gibSchalter(false, godMode));
 		}
 		if(ta.keyStat[taIndex][13] == -1 && !sichtAn)
 		{
 			sichtAn = true;
-			sl.layer.clear();
+			sl.replaceSchalter(sci.gibSchalter(true));
 		}
 		if(ta.keyStat[taIndex][17] == 2 && godModeKam != null)
 		{
 			godMode = !godMode;
 			if(godMode)
 			{
-				isl.normalSchalter.addAll(isl.godModeSchalter);
-				godModeKam.lw.licht.add(godModeKam);
+				sl.replaceSchalter(sci.gibSchalter(sichtAn, true));
+				//godModeKam.lw.licht.add(godModeKam);
 			}
 			else
 			{
-				isl.normalSchalter.removeAll(isl.godModeSchalter);
-				godModeKam.lw.licht.remove(godModeKam);
+				sl.replaceSchalter(sci.gibSchalter(sichtAn, false));
+				//godModeKam.lw.licht.remove(godModeKam);
 				pa.xrmode = false;
-				vor.siehBlocks = true;
+				vor.upgradeActive = true;
 				vor.siehNonBlocks = true;
 			}
 		}
 		sl.actTex();
 		Staticf.sca("M / T (1) ");
 		return false;
+	}
+
+	@Override
+	public ZDelay erzeuge(String whtd, AkA dislocated, AkA besitzer2,
+			HashMap<String, String> parameters, ArrayList<String> list, AkA[] akteure2)
+	{
+		int hv = Integer.parseInt(parameters.get("hatoverlay"));
+		((Overlay) ((FWA) akteure2[hv]).tverlay).kamN = (Controllable) dislocated;
+		return null;
 	}
 }

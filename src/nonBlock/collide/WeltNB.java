@@ -1,5 +1,6 @@
 package nonBlock.collide;
 
+import nonBlock.aktion.*;
 import wahr.zugriff.*;
 
 import java.util.*;
@@ -8,16 +9,16 @@ public class WeltNB
 {
 	public final ArrayList<NBB> vta = new ArrayList<>();
 	public final ArrayList<Collider> colliders = new ArrayList<>();
-	private final AllWelt aw;
+	private final WeltND dw;
 
-	public WeltNB(AllWelt aw)
+	public WeltNB(WeltND dw)
 	{
-		this.aw = aw;
+		this.dw = dw;
 	}
 
 	public void timetick()
 	{
-		if(aw.dw.nofreeze())
+		if(dw.nofreeze())
 		{
 			for(int i = 0; i < vta.size(); i++)
 				for(int j = 0; j < vta.get(i).cTime.size(); j++)

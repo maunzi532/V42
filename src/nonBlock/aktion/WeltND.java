@@ -1,10 +1,8 @@
 package nonBlock.aktion;
 
-import nonBlock.aktion.lesen.*;
-import nonBlock.aussehen.*;
-import nonBlock.controllable.*;
-
+import achsen.*;
 import java.util.*;
+import nonBlock.aktion.lesen.*;
 
 public class WeltND
 {
@@ -17,7 +15,7 @@ public class WeltND
 		return seq == null && !gmFreeze;
 	}
 
-	public void timetickN()
+	public void entlinke()
 	{
 		ArrayList<NonBlock> noch = nonBlocks;
 		while(noch.size() > 0)
@@ -38,13 +36,13 @@ public class WeltND
 		}
 	}
 
-	public void timetickD()
+	public void alleTick()
 	{
 		if(!nofreeze() && seq != null)
 			if(seq.tick())
 				seq = null;
 		for(int i = 0; i < nonBlocks.size(); i++)
-			if(!gmFreeze || nonBlocks.get(i) instanceof GMKamera)
+			if(!gmFreeze || nonBlocks.get(i) instanceof GMMover)
 				nonBlocks.get(i).tick();
 	}
 }

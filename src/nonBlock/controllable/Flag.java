@@ -1,36 +1,37 @@
 package nonBlock.controllable;
 
-import ansicht.*;
-import block.*;
+import a3.*;
+import k4.*;
 import nonBlock.aktion.*;
+import nonBlock.aktion.lesen.*;
 import nonBlock.collide.*;
-import wahr.zugriff.*;
+import welt.*;
 
-public class Flag extends NBB implements Licht
+public class Flag extends NBB implements Licht, IFlag
 {
-	public Flag(WeltB welt, LichtW lw, WeltND dw, WeltNB bw)
+	public Flag(WeltB welt, WeltND dw, WeltNB bw)
 	{
-		super(welt, lw, dw, bw);
-		lw.licht.add(this);
+		super(welt, dw, bw);
+		//lw.licht.add(this);
 		welt.flags.add(this);
 	}
 
 	public void ende()
 	{
-		lw.licht.remove(this);
+		//lw.licht.remove(this);
 		welt.flags.remove(this);
 		super.ende();
 	}
 
 	public void collide(Collider collider)
 	{
-		ende();
+		aktionen.add(new AktionM(this, 10000, 11, ADI.deg(0, 0, 1, new RZahl(0), new RZahl(180),
+				new RZahl(0), new RZahl(0), new RZahl(0), true)));
 	}
 
 	public void actCollide(Collider collider){}
 	public void decollide(Collider collider){}
 	public void wand(int welche){}
-	protected void kontrolle(){}
 
 	public K4 lichtPosition()
 	{
@@ -47,5 +48,15 @@ public class Flag extends NBB implements Licht
 	public double lichtPowerDecay()
 	{
 		return 2.8;
+	}
+
+	public K4 position()
+	{
+		return position;
+	}
+
+	public Drehung dreh()
+	{
+		return dreh;
 	}
 }
