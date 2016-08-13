@@ -19,6 +19,7 @@ public abstract class FWA extends NBB implements Controllable
 	private double[] cooldowns;
 	private Move chain;
 	private LadeFWA abilities;
+	public Tverlay tverlay;
 
 	protected FWA(Controller control, LadeFWA abilities, String currentZ, WeltB welt, WeltND dw, WeltNB bw)
 	{

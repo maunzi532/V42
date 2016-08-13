@@ -14,11 +14,12 @@ public class TBox extends SLF implements ZDelay
 	public TBox(boolean tangible, String text)
 	{
 		super(tangible, 0, 0, 0.1, 0.1, text);
+		schalter = false;
 		fade = 255;
 		timer = tangible ? -1 : 100;
 	}
 
-	public void draw(SchalterLayer main, Graphics2D gd)
+	public void draw(Graphics2D gd, SchalterLayer main)
 	{
 		if(fade > 0)
 		{

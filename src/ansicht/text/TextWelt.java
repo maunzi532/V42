@@ -5,7 +5,6 @@ import nonBlock.aktion.lesen.*;
 
 public class TextWelt
 {
-
 	public ArrayList<Tverlay> texters = new ArrayList<>();
 
 	public void sendThemAll(String text, String dispName, String codebez, String emotion)

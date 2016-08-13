@@ -10,7 +10,7 @@ public class SchalterLayer
 	final Color schieber = new Color(46, 46, 46);
 	final Color schieberKante = Color.GRAY;
 
-	public ArrayList<SLF> layer = new ArrayList<>();
+	private ArrayList<SLF> layer = new ArrayList<>();
 
 	private final ArrayList[] tex;
 	private final ArrayList<Integer> lastTex;
@@ -83,6 +83,12 @@ public class SchalterLayer
 	{
 		for(int i = 0; i < layer.size(); i++)
 			layer.get(i).draw(gd, this);
+	}
+
+	public void replaceSchalter(ArrayList<SLF> schalter)
+	{
+		layer.removeIf(slf -> slf.schalter);
+		layer.addAll(schalter);
 	}
 
 	public void actTex()

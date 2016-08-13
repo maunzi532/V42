@@ -53,7 +53,7 @@ public class LadeAktion
 		}
 	}
 
-	public ZDelay erzeugeAktion(AkA besitzer, Tverlay tverlay)
+	public ZDelay erzeugeAktion(AkA besitzer, AkA... akteure2)
 	{
 		AkA b2;
 		if(dislocate != null)
@@ -62,11 +62,10 @@ public class LadeAktion
 			b2 = besitzer;
 		try
 		{
-			return LadAktion.ak.get(typ).newInstance().erzeuge(typ, b2, besitzer, tverlay, para2, theList);
+			return LadAktion.ak.get(typ).newInstance().erzeuge(typ, b2, besitzer, para2, theList, akteure2);
 		}catch(InstantiationException | IllegalAccessException e)
 		{
 			throw new RuntimeException(e);
 		}
 	}
-
 }

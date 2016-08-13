@@ -106,6 +106,7 @@ public class Hauptschleife
 			{
 				AktionM.checkLinA(this, new AktionM(this, 20, 1, ADI.deg(16, 2, 14, new RZahl(3), new RZahl(45),
 						new RZahl(0), new RZahl(0), new RZahl(0), false)));
+				dw.seq = new Move(LadeMove.gibVonIndex(true, "TSQ"), this, attk.besitzer);
 			}
 
 			public void actCollide(Collider attk){}
@@ -131,11 +132,11 @@ public class Hauptschleife
 			{
 				if(command.equals("B"))
 				{
-					dw.seq = new Move(LadeMove.gibVonIndex(true, "TPSQ"), tverlay, this);
+					dw.seq = new Move(LadeMove.gibVonIndex(true, "TPSQ"), this);
 				}
 				if(command.equals("C"))
 				{
-					dw.seq = new Move(LadeMove.gibVonIndex(true, "TSQ"), tverlay, this); //da fehlt ein Ziel
+					dw.seq = new Move(LadeMove.gibVonIndex(true, "TSQ"), this); //da fehlt ein Ziel
 				}
 			}
 

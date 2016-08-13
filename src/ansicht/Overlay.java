@@ -10,6 +10,7 @@ import k4.*;
 import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
 import nonBlock.controllable.*;
+import nonBlock.formwandler.*;
 import wahr.physisch.*;
 import wahr.spieler.*;
 import wahr.zugriff.*;
@@ -132,24 +133,24 @@ public class Overlay extends Tverlay
 		if(ta.keyStat[taIndex][13] == 2 && sichtAn)
 		{
 			sichtAn = false;
-			sl.layer = sci.gibSchalter(false, godMode);
+			sl.replaceSchalter(sci.gibSchalter(false, godMode));
 		}
 		if(ta.keyStat[taIndex][13] == -1 && !sichtAn)
 		{
 			sichtAn = true;
-			sl.layer = sci.gibSchalter(true);
+			sl.replaceSchalter(sci.gibSchalter(true));
 		}
 		if(ta.keyStat[taIndex][17] == 2 && godModeKam != null)
 		{
 			godMode = !godMode;
 			if(godMode)
 			{
-				sl.layer = sci.gibSchalter(sichtAn, true);
+				sl.replaceSchalter(sci.gibSchalter(sichtAn, true));
 				//godModeKam.lw.licht.add(godModeKam);
 			}
 			else
 			{
-				sl.layer = sci.gibSchalter(sichtAn, false);
+				sl.replaceSchalter(sci.gibSchalter(sichtAn, false));
 				//godModeKam.lw.licht.remove(godModeKam);
 				pa.xrmode = false;
 				vor.upgradeActive = true;
@@ -162,10 +163,11 @@ public class Overlay extends Tverlay
 	}
 
 	@Override
-	public ZDelay erzeuge(String whtd, AkA dislocated, AkA besitzer2, Tverlay tverlay,
-			HashMap<String, String> parameters, ArrayList<String> list)
+	public ZDelay erzeuge(String whtd, AkA dislocated, AkA besitzer2,
+			HashMap<String, String> parameters, ArrayList<String> list, AkA[] akteure2)
 	{
-		((Overlay) tverlay).kamN = (Controllable) dislocated;
+		int hv = Integer.parseInt(parameters.get("hatoverlay"));
+		((Overlay) ((FWA) akteure2[hv]).tverlay).kamN = (Controllable) dislocated;
 		return null;
 	}
 }

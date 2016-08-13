@@ -17,6 +17,7 @@ public class T2Box extends SLF
 	{
 		super(tangible, connect.x - (connect.links ? -abstand : w + abstand),
 				connect.y - (connect.oben ? h : 0), w, h, dispName);
+		schalter = false;
 		this.connect = connect;
 		this.codebez = codebez;
 		this.emotion = emotion;

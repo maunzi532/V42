@@ -12,7 +12,6 @@ public abstract class NBD extends ENB implements AkA
 	protected ArrayList<K4> beweg;
 	public ArrayList<Forced> forced;
 	protected ArrayList<Move> moves;
-	public Tverlay tverlay;
 
 	public WeltND dw;
 
@@ -26,12 +25,6 @@ public abstract class NBD extends ENB implements AkA
 		forced = new ArrayList<>();
 		aktionen = new ArrayList<>();
 		moves = new ArrayList<>();
-	}
-
-	protected NBD(WeltND dw, Tverlay tverlay)
-	{
-		this(dw);
-		this.tverlay = tverlay;
 	}
 
 	@Override

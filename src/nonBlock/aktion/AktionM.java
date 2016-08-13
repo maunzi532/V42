@@ -16,8 +16,8 @@ public class AktionM extends Freeze
 	public AktionM(){}
 
 	@Override
-	public ZDelay erzeuge(String whtd, AkA dislocated, AkA besitzer2, Tverlay tverlay,
-			HashMap<String, String> parameters, ArrayList<String> list)
+	public ZDelay erzeuge(String whtd, AkA dislocated, AkA besitzer2,
+			HashMap<String, String> parameters, ArrayList<String> list, AkA[] akteure2)
 	{
 		if(whtd.charAt(0) == 'M')
 		{

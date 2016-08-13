@@ -11,8 +11,8 @@ public class Freeze extends LinAAktion implements LadAktion
 	public Freeze(){}
 
 	@Override
-	public ZDelay erzeuge(String whtd, AkA dislocated, AkA besitzer2, Tverlay tverlay,
-			HashMap<String, String> parameters, ArrayList<String> list)
+	public ZDelay erzeuge(String whtd, AkA dislocated, AkA besitzer2,
+			HashMap<String, String> parameters, ArrayList<String> list, AkA[] akteure2)
 	{
 		Integer[] linA2 = new Integer[list.size()];
 		for(int i = 0; i < list.size(); i++)

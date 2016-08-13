@@ -1,7 +1,7 @@
 2 Freeze Akt=0 Power=12 Dauer=10 LinA=15 LinA=16
-6 KText Dauer=20 T=hesou_du_wa_finden_ji codebez=Die_Kopie dispName=Kopie
+6 KText Akt=0 ToAll=1 Dauer=20 Text=hesou_du_wa_finden_ji codebez=Die_Kopie dispName=Kopie
 7 Bewegung Akt=0 Dauer=30 Power=10 bM=5 wlM=20
-13 K Dauer=20 T=Waah codebez=Tha dispName=Tha
+13 K Akt=0 ToAll=1 Dauer=20 Text=Waah codebez=Tha dispName=Tha
 16 Multi Akt=0 Dauer=15 Power=4 
 	ADI=16,2,14,3,120,0,0,0 
 	ADI=15,2,14,3,120,0,0,0 
@@ -10,9 +10,9 @@
 	ADI=62,2,14,2,90,360,0,0 
 	ADI=64,2,14,2,90,0,0,0
 32 Freeze Akt=0 Power=12 Dauer=40 LinA=23 LinA=24 LinA=15 LinA=16
-36 Fokus Akt=0
-40 End T=Internal_Error_4 codebez=Die_Kopie dispName=KopieX
+36 Fokus Akt=0 HatOverlay=1
+40 End Akt=1 Text=Internal_Error_4 codebez=Die_Kopie dispName=KopieX
 /36 Transform Akt=1 T=TSSA2L
 Z 50
-1 Fokus Akt=1
+1 Fokus Akt=1 HatOverlay=1
 Z 2

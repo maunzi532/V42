@@ -5,6 +5,7 @@ import java.awt.*;
 abstract class SLF
 {
 	final boolean tangible;
+	boolean schalter = true;
 	double x;
 	double y;
 	final double w;
