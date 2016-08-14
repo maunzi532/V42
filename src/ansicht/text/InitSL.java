@@ -24,7 +24,7 @@ public class InitSL implements SchalterInit
 		return normalSchalter;
 	}
 
-	public InitSL(Overlay ov)
+	public InitSL(Overlay ov, String lvName)
 	{
 		normalSchalter = new ArrayList<>();
 		normalSchalter.add(new SLF(true, 0.1, 0.1, 0.1, 0.05)
@@ -220,7 +220,7 @@ public class InitSL implements SchalterInit
 		{
 			public void onClick(SchalterLayer main, boolean r, double cx, double cy)
 			{
-				ov.aw.wbl.speichern("Levels/Test1", Staticf.wspg.k);
+				ov.aw.wbl.speichern("Levels/" + lvName, Staticf.wspg.k);
 				super.onClick(main, r, cx, cy);
 			}
 		});

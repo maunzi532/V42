@@ -12,6 +12,7 @@ public class ThaCre2A
 	public static LPaneel[] paneele = new LPaneel[1];
 	public static Overlay[] theOverlays;
 	public static TA2 theTA;
+	public static String lvName;
 
 	public static void main(String[] args)
 	{
@@ -19,7 +20,8 @@ public class ThaCre2A
 		Staticf.scaCharge(Index.gibText("Einstellungen", "Sca"));
 		theTA = new TA2();
 		initPaneele();
-		Hauptschleife.initWelt(args.length > 0 ? args[0] : null);
+		lvName = args.length > 0 ? args[0] : null;
+		Hauptschleife.initWelt(lvName);
 		for(int i = 0; i < paneele.length; i++)
 			paneele[i].showFrames();
 		createOverlays();
@@ -83,7 +85,7 @@ public class ThaCre2A
 			theTA.feedMoves(Index.gibText("Einstellungen", teile[3]), i);
 			LPaneel auf = paneele[Integer.parseInt(teile[1])];
 			theOverlays[i].initOverlay(theTA, i, Hauptschleife.aw, teile[0], auf, ort);
-			theOverlays[i].sci = new InitSL(theOverlays[i]);
+			theOverlays[i].sci = new InitSL(theOverlays[i], lvName);
 			switch(teile[2])
 			{
 				case "Maus":
