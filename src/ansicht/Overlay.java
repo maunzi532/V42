@@ -146,12 +146,12 @@ public class Overlay extends Tverlay
 			if(godMode)
 			{
 				sl.replaceSchalter(sci.gibSchalter(sichtAn, true));
-				//godModeKam.lw.licht.add(godModeKam);
+				aw.lw.licht.add(godModeKam);
 			}
 			else
 			{
 				sl.replaceSchalter(sci.gibSchalter(sichtAn, false));
-				//godModeKam.lw.licht.remove(godModeKam);
+				aw.lw.licht.remove(godModeKam);
 				pa.xrmode = false;
 				vor.upgradeActive = true;
 				vor.siehNonBlocks = true;

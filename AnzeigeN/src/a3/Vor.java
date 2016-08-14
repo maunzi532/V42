@@ -44,7 +44,7 @@ public class Vor
 		this.lw = lw;
 	}
 
-	public void vorbereiten(IKamera kam, int wI, int hI, int cI, Long tnTarget, boolean xr)
+	public void vorbereiten(IKamera kam, int wI, int hI, int cI, TnTarget tnTarget, boolean xr)
 	{
 		K4 kp = kam.kamP();
 		Drehung kd = kam.kamD();

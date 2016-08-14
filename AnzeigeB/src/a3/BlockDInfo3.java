@@ -9,7 +9,7 @@ public class BlockDInfo3 extends Rechteck3
 	private double ddiff1;
 	private double ddiff2;
 
-	public BlockDInfo3(long tn, LichtW lw, K4 mid, K4 rMid, boolean targetable,
+	public BlockDInfo3(TnTarget tn, LichtW lw, K4 mid, K4 rMid, boolean targetable,
 			DerBlock block, double ddiff1, double ddiff2)
 	{
 		super(tn, lw, mid, rMid, targetable, null);

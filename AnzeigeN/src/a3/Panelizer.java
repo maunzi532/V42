@@ -3,6 +3,7 @@ package a3;
 import java.awt.*;
 import java.awt.image.*;
 import java.util.*;
+import k4.*;
 
 public class Panelizer
 {
@@ -16,7 +17,7 @@ public class Panelizer
 	private int darkUsed = 0;
 	private TnZuordnung[] darkZ = new TnZuordnung[10000];
 	private BufferedImage dark;
-	public long tnTarget;
+	public TnTarget tnTarget;
 	public int taType = 0;
 	public boolean taGet;
 	//X_Ray-Modus an/aus
@@ -28,6 +29,11 @@ public class Panelizer
 		gd = light.createGraphics();
 		dark = new BufferedImage(w, h, BufferedImage.TYPE_INT_BGR);
 		darkCopy = dark.createGraphics();
+	}
+
+	public boolean isTnBlock()
+	{
+		return tnTarget != null && tnTarget.target >= 0;
 	}
 
 	public void panelize(ArrayList<Anzeige3> anzeige, int mx, int my)
@@ -45,11 +51,11 @@ public class Panelizer
 			for(int i = 0; i < anzeige.size(); i++)
 				if(anzeige.get(i).anzeigen)
 				{
-					long tn = anzeige.get(i).tn;
+					TnTarget tn = anzeige.get(i).tn;
 					boolean neu = true;
 					int farbe = 0;
 					for(int j = 1; j <= darkUsed; j++)
-						if(darkZ[j].tn == tn)
+						if(darkZ[j].tn.equals(tn))
 						{
 							neu = false;
 							farbe = j;
@@ -85,13 +91,13 @@ public class Panelizer
 				DPA3(cl);
 			}
 			else
-				tnTarget = -1;
+				tnTarget = null;
 		}
 	}
 
 	private void DPA3(int cl)
 	{
-		if(taType > 1 && tnTarget != -1)
+		if(taType > 1 && tnTarget != null)
 		{
 			int dw = dark.getWidth();
 			int dh = dark.getHeight();

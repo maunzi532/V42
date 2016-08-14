@@ -19,7 +19,7 @@ public abstract class Polygon3 extends Anzeige3
 	private int[] eckenPanelY;
 	private boolean xrDraw;
 
-	public Polygon3(long tn, LichtW lw, Boolean seite)
+	public Polygon3(TnTarget tn, LichtW lw, Boolean seite)
 	{
 		super(tn, lw);
 		this.seite =  seite;
@@ -126,7 +126,7 @@ public abstract class Polygon3 extends Anzeige3
 		return (k0 * kc1 - k1 * kc0) / (kc1 - kc0);
 	}
 
-	public void farbeFlaeche(Long tnTarget, int wI, int hI, K4 kam, double xrZone)
+	public void farbeFlaeche(TnTarget tnTarget, int wI, int hI, K4 kam, double xrZone)
 	{
 		if(anzeigen)
 		{

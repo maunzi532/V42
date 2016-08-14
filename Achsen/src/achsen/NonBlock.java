@@ -5,11 +5,11 @@ import k4.*;
 
 public class NonBlock implements IKamera
 {
-	private static int tnm = -1;
+	private static int tnm;
 
 	public K4 position;
 	public Drehung dreh;
-	public final long tn;
+	public final TnTarget tn;
 	public Focus focus;
 
 	public LadeModell aussehen;
@@ -26,7 +26,7 @@ public class NonBlock implements IKamera
 	public NonBlock()
 	{
 		tnm--;
-		tn = tnm;
+		tn = new TnTarget(tnm, 0);
 	}
 
 	public void init()

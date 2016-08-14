@@ -11,7 +11,7 @@ public class PBlock3 extends Polygon3
 	private double rEnd;
 	private double gEnd;
 
-	public PBlock3(long tn, LichtW lw, Boolean seite,
+	public PBlock3(TnTarget tn, LichtW lw, Boolean seite,
 			double rEnd, double gEnd, PolyFarbe farbe, K4[] unSpldEckenR, K4[] unSpldEckenK)
 	{
 		super(tn, lw, seite);

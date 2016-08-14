@@ -19,11 +19,13 @@ public class GMC extends Controller
 		if(master.godMode)
 		{
 			if(master.ta.keyStat[master.taIndex][15] == 2)
-				cmd.add("Hoch");
-			if(master.ta.keyStat[master.taIndex][16] == 2)
 				cmd.add("Weg");
+			if(master.ta.keyStat[master.taIndex][16] == 2)
+				cmd.add("Neu");
 			if(master.ta.keyStat[master.taIndex][14] == 2)
 				cmd.add("Dreh");
+			if(master.ta.keyStat[master.taIndex][10] == 2)
+				cmd.add("ScrollB");
 			if(master.ta.keyStat[master.taIndex][9] == 2)
 				cmd.add("taGet");
 			if(master.ta.keyStat[master.taIndex][2] == 2)

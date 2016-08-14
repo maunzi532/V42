@@ -16,7 +16,7 @@ public class Rechteck3 extends Anzeige3
 	Paint backgroundNew;
 	private Paint foregroundNew;
 
-	Rechteck3(long tn, LichtW lw, K4 mid, K4 kMid, boolean targetable, String text)
+	Rechteck3(TnTarget tn, LichtW lw, K4 mid, K4 kMid, boolean targetable, String text)
 	{
 		super(tn, lw);
 		rMid = mid;
@@ -25,7 +25,7 @@ public class Rechteck3 extends Anzeige3
 		this.text = text;
 	}
 
-	public void farbeFlaeche(Long tnTarget, int wI, int hI, K4 kam, double xrZone)
+	public void farbeFlaeche(TnTarget tnTarget, int wI, int hI, K4 kam, double xrZone)
 	{
 		if(!anzeigen)
 			return;
@@ -45,7 +45,7 @@ public class Rechteck3 extends Anzeige3
 		foregroundNew = errechneFarbeND(foreground, tnTarget);
 	}
 
-	private Paint errechneFarbe(Color fc, Long tnC)
+	private Paint errechneFarbe(Color fc, TnTarget tnC)
 	{
 		if(ddiff > 0) //Rot
 			fc = limit(fc, (int)(ddiff * 10), (int)(ddiff * -5), (int)(ddiff * -5));
@@ -56,22 +56,30 @@ public class Rechteck3 extends Anzeige3
 		double nah = (PolyFarbe.redEnd - weg) / PolyFarbe.redEnd; //Wenn nah 1, am Rand 0
 		if(nah < 0)
 			nah = 0;
-		if(tn != -1 && tnC != null && tn == tnC)
-			fc = limit(fc, 60, 60, 60); //Sichthilfe wenn getargetet
+		if(tn != null && tnC != null && tn.target == tnC.target)
+		{
+			fc = limit(fc, 30, 30, 30); //Sichthilfe wenn getargetet
+			if(tn.inner == tnC.inner)
+				fc = limit(fc, 30, 30, 30);
+		}
 		return new Color((int)(fc.getRed() * nah + 20 * (1 - nah)),
 				(int)(fc.getGreen() * nah + 0 * (1 - nah)),
 				(int)(fc.getBlue() * nah + 0 * (1 - nah)), fc.getAlpha()); //Fading nach Dunkelrot
 	}
 
-	private Paint errechneFarbeND(Color fc, Long tnC)
+	private Paint errechneFarbeND(Color fc, TnTarget tnC)
 	{
 		double weg = Math.sqrt(kamMid.a * kamMid.a + kamMid.b * kamMid.b +
 				kamMid.c * kamMid.c + kamMid.d * kamMid.d);
 		double nah = (PolyFarbe.redEnd - weg) / PolyFarbe.redEnd; //Wenn nah 1, am Rand 0
 		if(nah < 0)
 			nah = 0;
-		if(tn != -1 && tnC != null && tn == tnC)
-			fc = limit(fc, 60, 60, 60); //Sichthilfe wenn getargetet
+		if(tn != null && tnC != null && tn.target == tnC.target)
+		{
+			fc = limit(fc, 30, 30, 30); //Sichthilfe wenn getargetet
+			if(tn.inner == tnC.inner)
+				fc = limit(fc, 30, 30, 30);
+		}
 		return new Color((int)(fc.getRed() * nah + 20 * (1 - nah)),
 				(int)(fc.getGreen() * nah + 0 * (1 - nah)),
 				(int)(fc.getBlue() * nah + 0 * (1 - nah)), fc.getAlpha()); //Fading nach Dunkelrot

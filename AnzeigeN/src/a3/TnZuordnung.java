@@ -1,8 +1,10 @@
 package a3;
 
+import k4.*;
+
 public class TnZuordnung
 {
-	long tn;
+	TnTarget tn;
 	int wI;
 	int hI;
 	boolean set;
@@ -11,12 +13,12 @@ public class TnZuordnung
 	int minY;
 	int maxY;
 
-	public TnZuordnung(long tn)
+	public TnZuordnung(TnTarget tn)
 	{
 		this.tn = tn;
 	}
 
-	public TnZuordnung(long tn, int wI, int hI)
+	public TnZuordnung(TnTarget tn, int wI, int hI)
 	{
 		this.tn = tn;
 		this.wI = wI;

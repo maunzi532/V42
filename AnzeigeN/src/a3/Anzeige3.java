@@ -11,14 +11,14 @@ public abstract class Anzeige3
 
 
 	public K4 kamMid;
-	public long tn;
+	public TnTarget tn;
 	public boolean anzeigen;
 	public LichtW lw;
 	public K4 rMid;
 
 	public double ddiff;
 
-	public Anzeige3(long tn, LichtW lw)
+	public Anzeige3(TnTarget tn, LichtW lw)
 	{
 		anzeigen = true;
 		this.tn = tn;
@@ -29,7 +29,7 @@ public abstract class Anzeige3
 
 	public void eckenEntf(int wI, int hI, int cI){}
 
-	public abstract void farbeFlaeche(Long tnTarget, int wI, int hI, K4 kam, double xrZone);
+	public abstract void farbeFlaeche(TnTarget tnTarget, int wI, int hI, K4 kam, double xrZone);
 
 	public void checkForVanishing(Color fc)
 	{

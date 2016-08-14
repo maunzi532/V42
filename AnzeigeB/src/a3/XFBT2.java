@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.image.*;
 import java.io.*;
 import java.util.*;
+import k4.*;
 
 public class XFBT2 extends PolyFarbe
 {
@@ -28,7 +29,7 @@ public class XFBT2 extends PolyFarbe
 		mat = Material.B;
 	}
 
-	public Paint gibFarbe(Polygon3 target, Long tn)
+	public Paint gibFarbe(Polygon3 target, TnTarget tn)
 	{
 		assert target instanceof PBlock3;
 		PBlock3 t1 = (PBlock3) target;

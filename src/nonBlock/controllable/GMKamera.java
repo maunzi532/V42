@@ -77,25 +77,38 @@ public class GMKamera extends NBD implements Controllable, Licht, GMMover
 	{
 		switch(command)
 		{
-			case "Hoch":
-				if(overlay.pa.tnTarget >= 0)
+			case "Neu":
+				if(overlay.pa.isTnBlock())
 				{
-					WBP p = welt.decodeTn(overlay.pa.tnTarget);
-					DerBlock block = welt.gib(p);
-					welt.set(p, new DerBlock(block.typ + 1, block.dreh4));
+					WBP p = welt.decodeTn(overlay.pa.tnTarget.target);
+					if(overlay.pa.taGet)
+					{
+						DerBlock block = welt.gib(p);
+						welt.set(p, new DerBlock(block.typ + 1, block.dreh4));
+					}
+					else
+					{
+						int drehA = welt.gib(p).dreh4;
+						long inner = overlay.pa.tnTarget.inner;
+						if(inner >= 4)
+							p.k[1] += inner == 5 ? -1 : 1;
+						else
+							p.k[inner % 2 == 0 ? 0 : 2] += inner / 2 == 1 ? -1 : 1;
+						welt.set(p, new DerBlock(1, drehA));
+					}
+					break;
 				}
-				break;
 			case "Weg":
-				if(overlay.pa.tnTarget >= 0)
+				if(overlay.pa.isTnBlock())
 				{
-					WBP p = welt.decodeTn(overlay.pa.tnTarget);
+					WBP p = welt.decodeTn(overlay.pa.tnTarget.target);
 					welt.set(p, new DerBlock(0, welt.gib(p).dreh4));
 				}
 				break;
 			case "Dreh":
-				if(overlay.pa.tnTarget >= 0)
+				if(overlay.pa.isTnBlock())
 				{
-					WBP p = welt.decodeTn(overlay.pa.tnTarget);
+					WBP p = welt.decodeTn(overlay.pa.tnTarget.target);
 					DerBlock block = welt.gib(p);
 					block.dreh4 = (block.dreh4 + 1) % 4;
 				}
@@ -103,52 +116,50 @@ public class GMKamera extends NBD implements Controllable, Licht, GMMover
 			case "taGet":
 				overlay.pa.taGet = !overlay.pa.taGet;
 				if(overlay.pa.taGet)
-				{
 					lockedDreh = ((int)(dreh.wl / Math.PI * 4) + 1) % 8 / 2;
-				}
 				break;
 			case "R0":
 			case "R1":
 			case "R2":
 			case "R3":
-				if(overlay.pa.tnTarget >= 0)
+				if(overlay.pa.isTnBlock())
 				{
-					WBP p = welt.decodeTn(overlay.pa.tnTarget);
+					WBP p = welt.decodeTn(overlay.pa.tnTarget.target);
 					if(p != null)
 					{
 						int d = (lockedDreh + command.charAt(1)) % 4;
 						p.k[d % 2 == 0 ? 0 : 2] += d > 1 ? 1 : -1;
 						long tn = welt.tn(p);
 						if(tn >= 0)
-							overlay.pa.tnTarget = tn;
+							overlay.pa.tnTarget = new TnTarget(tn, lockedDreh);
 					}
 				}
 				break;
 			case "H0":
 			case "H1":
-				if(overlay.pa.tnTarget >= 0)
+				if(overlay.pa.isTnBlock())
 				{
-					WBP p = welt.decodeTn(overlay.pa.tnTarget);
+					WBP p = welt.decodeTn(overlay.pa.tnTarget.target);
 					if(p != null)
 					{
 						p.k[1] -= (command.charAt(1) - 48) * 2 - 1;
 						long tn = welt.tn(p);
 						if(tn >= 0)
-							overlay.pa.tnTarget = tn;
+							overlay.pa.tnTarget = new TnTarget(tn, lockedDreh);
 					}
 				}
 				break;
 			case "D0":
 			case "D1":
-				if(overlay.pa.tnTarget >= 0)
+				if(overlay.pa.isTnBlock())
 				{
-					WBP p = welt.decodeTn(overlay.pa.tnTarget);
+					WBP p = welt.decodeTn(overlay.pa.tnTarget.target);
 					if(p != null)
 					{
 						p.k[3] -= (command.charAt(1) - 48) * 2 - 1;
 						long tn = welt.tn(p);
 						if(tn >= 0)
-							overlay.pa.tnTarget = tn;
+							overlay.pa.tnTarget = new TnTarget(tn, lockedDreh);
 					}
 				}
 				break;

@@ -13,7 +13,7 @@ public class PolyFarbe implements IFarbeff2
 	public static final double safezone = 1;
 	//Weite danach wo NonBlocks in d diffundieren
 	public static final double diffusewidth = 40;
-	public static final double redEnd = 150;
+	public static final double redEnd = 300;
 	private static final int[] splN;
 	static
 	{
@@ -57,12 +57,12 @@ public class PolyFarbe implements IFarbeff2
 						seedifier)) / (double) seedifier;
 	}
 
-	public Paint gibFarbe(Polygon3 target, Long tn)
+	public Paint gibFarbe(Polygon3 target, TnTarget tn)
 	{
 		return errechneFarbe(baseColor, target, tn);
 	}
 
-	public Paint errechneFarbe(Color fc, Polygon3 target, Long tn)
+	public Paint errechneFarbe(Color fc, Polygon3 target, TnTarget tn)
 	{
 		if(target.ddiff > 0) //Rot
 			fc = limit(fc, (int)(target.ddiff * 10), (int)(target.ddiff * -5), (int)(target.ddiff * -5));
@@ -91,8 +91,12 @@ public class PolyFarbe implements IFarbeff2
 		double nah = (redEnd - weg) / redEnd; //Wenn nah 1, am Rand 0
 		if(nah < 0)
 			nah = 0;
-		if(target.tn != -1 && tn != null && target.tn == tn)
-			fc = limit(fc, 60, 60, 60); //Sichthilfe bei getargeteten Polygonen
+		if(tn != null && target.tn != null && tn.target == target.tn.target)
+		{
+			fc = limit(fc, 30, 30, 30); //Sichthilfe wenn getargetet
+			if(tn.inner == target.tn.inner)
+				fc = limit(fc, 30, 30, 30);
+		}
 		return new Color((int)(fc.getRed() * nah + 20 * (1 - nah)),
 				(int)(fc.getGreen() * nah),
 				(int)(fc.getBlue() * nah), fc.getAlpha()); //Fading nach Dunkelrot

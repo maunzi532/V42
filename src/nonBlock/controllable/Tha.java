@@ -97,7 +97,7 @@ public class Tha extends TSSA
 
 	protected boolean targetFall()
 	{
-		return ((Overlay)tverlay).pa.taType > 0 && ((Overlay)tverlay).pa.tnTarget >= 0;
+		return ((Overlay)tverlay).pa.taType > 0 && ((Overlay)tverlay).pa.tnTarget.target >= 0;
 	}
 
 	protected void doFall(String fall, boolean attachChainOnly)
