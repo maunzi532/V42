@@ -3,28 +3,30 @@ Nicht sicher
 	NBD - Idle Bewegung
 	Metall-Reflexion
 
-Stufe Matrix
-	Dependency Matrix
-
 Stufe Mine
-	4D deaktivierbar machen
-	Initialisierung von WeltNB verbessern
 	ZP4C neu machen und umwandeln in LadeCM
 	System F - GMKamera mitbewegen
-	Beim aktivieren von System F Targeting kurz aktivieren
+	Automatische Targeting Aktivierung
 	Block Platzier Auswahl
+	Blöcke drehen
 	Welt generieren
+
+Stufe Achsen1
+	Neue Achsendateien
+	Neue Flächendateien
+	Neue Alternate-Dateien
+	Initialisierung von NonBlock verbessern
+	Modelleditor
+	Tha Modell neu erstellen
 
 Stufe Stoff
 	Haare richtig anmontieren
 	ColBox Position Vergleich
 	Einfalten verhindern
-	Modell ändern und besser anmontieren
 	Haare Mehrfach-Physik einfacher machen
 
 Stufe Leiste
 	FWA-Zustand ändern in LadeAktion
-	Einige Fixes
 	Aufbaubarkeit (besser in FWA)
 	Leiste
 	Berechnung
@@ -35,17 +37,10 @@ Stufe Leiste
 Stufe Eingabe
 
 Stufe 2
-	Overlay 2
-		Schrift Aussehen
-		Hauptmenü einbauen
-	Gameplay 2
-		Sinnvolles Attk
-		Fallende Blöcke
-	Speicher 2
-		Mehrsprachig Text lagern
-		Einstellungs-Editor
-
-Stufe 3
-	Gameplay 3
-		Essenz-System
-		Level-Auswahl
+	Schrift Aussehen
+	Hauptmenü einbauen
+	Sinnvolles Attk
+	Fallende Blöcke
+	Mehrsprachig Text lagern
+	Einstellungs-Editor
+	Welten wechseln
