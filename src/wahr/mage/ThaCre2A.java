@@ -84,7 +84,7 @@ public class ThaCre2A
 				ort[j] = Double.parseDouble(teile[j + 4]);
 			theTA.feedMoves(Index.gibText("Einstellungen", teile[3]), i);
 			LPaneel auf = paneele[Integer.parseInt(teile[1])];
-			theOverlays[i].initOverlay(theTA, i, Hauptschleife.aw, teile[0], auf, ort);
+			theOverlays[i].initOverlay(theTA, i, Hauptschleife.aw, auf, ort);
 			theOverlays[i].sci = new InitSL(theOverlays[i], lvName);
 			switch(teile[2])
 			{

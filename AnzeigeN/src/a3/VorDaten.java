@@ -1,5 +1,6 @@
 package a3;
 
+import indexLader.*;
 import java.util.*;
 
 public class VorDaten
@@ -19,5 +20,14 @@ public class VorDaten
 				abstands.add(Double.parseDouble(z1[0]));
 				splits.add(Integer.parseInt(z1[1]));
 			}
+	}
+
+	public static VorDaten gibVonIndex(String name)
+	{
+		if(Index.geladen.containsKey("VD" + name))
+			return (VorDaten) Index.geladen.get("VD" + name);
+		VorDaten s = new VorDaten(Index.bauName("Blocks", name));
+		Index.geladen.put("VD" + name, s);
+		return s;
 	}
 }

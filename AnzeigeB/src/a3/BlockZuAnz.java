@@ -109,14 +109,15 @@ public class BlockZuAnz implements IVUpgrade
 					eR[i] = wb.wt(ortP);
 					eK[i] = transformSet2(new K4(eR[i]), kDreh, relativ);
 				}
+				VorDaten vd = VorDaten.gibVonIndex(wb.gib(ortA).typ + " SPL");
 				if(visionRange4D == 0)
 					dieListe.add(new PBlock3(new TnTarget(wb.tn(ortA), flaechenNummer), lw, true, -1, 1,
-							XFBT2.gibVonIndex(attach.name(), flaechenNummer, 10/*WTF*/), eR, eK));
+							XFBT2.gibVonIndex(attach.name(), flaechenNummer, vd), vd, eR, eK));
 				else
 					dieListe.add(new PBlock3(new TnTarget(wb.tn(ortA), flaechenNummer), lw, true,
 							(wb.wt2(ortA).d - kamD) / wb.weltBlock.d - 0.5,
 							(wb.wt2(ortA).d - kamD) / wb.weltBlock.d + 0.5,
-							XFBT2.gibVonIndex(attach.name(), flaechenNummer, 10/*WTF*/), eR, eK));
+							XFBT2.gibVonIndex(attach.name(), flaechenNummer, vd), vd, eR, eK));
 			}
 		}
 	}

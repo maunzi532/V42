@@ -25,7 +25,7 @@ public abstract class Anzeige3
 		this.lw = lw;
 	}
 
-	public void splittern(ArrayList<Anzeige3> dieListe, VorDaten daten){}
+	public void splittern(ArrayList<Anzeige3> dieListe){}
 
 	public void eckenEntf(int wI, int hI, int cI){}
 

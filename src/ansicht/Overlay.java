@@ -36,7 +36,7 @@ public class Overlay extends Tverlay
 
 	public Overlay(){}
 
-	public void initOverlay(TA2 ta, int taIndex, AllWelt awA, String zDatLad, LPaneel auf, double[] ort)
+	public void initOverlay(TA2 ta, int taIndex, AllWelt awA, LPaneel auf, double[] ort)
 	{
 		this.ta = ta;
 		this.taIndex = taIndex;
@@ -45,8 +45,7 @@ public class Overlay extends Tverlay
 		aw = awA;
 		tw = aw.tw;
 		aw.tw.texters.add(this);
-		vor = new Vor(Index.gibText("Einstellungen", zDatLad),
-				aw.dw.nonBlocks, aw.lw, new BlockZuAnz(aw.wbl, aw.lw));
+		vor = new Vor(aw.dw.nonBlocks, aw.lw, new BlockZuAnz(aw.wbl, aw.lw));
 		sl = new SchalterLayer();
 		pa = new Panelizer();
 		resize();

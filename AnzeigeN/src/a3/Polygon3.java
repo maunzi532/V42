@@ -39,7 +39,7 @@ public abstract class Polygon3 extends Anzeige3
 				(eckenR[0].d + eckenR[2].d) / 2);
 	}
 
-	public abstract void splittern(ArrayList<Anzeige3> dieListe, VorDaten daten);
+	public abstract void splittern(ArrayList<Anzeige3> dieListe);
 
 	public void eckenEntf(int wI, int hI, int cI)
 	{

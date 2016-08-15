@@ -10,9 +10,11 @@ public class PBlock3 extends Polygon3
 	public int splitDepth;
 	private double rEnd;
 	private double gEnd;
+	VorDaten vd;
 
 	public PBlock3(TnTarget tn, LichtW lw, Boolean seite,
-			double rEnd, double gEnd, PolyFarbe farbe, K4[] unSpldEckenR, K4[] unSpldEckenK)
+			double rEnd, double gEnd, PolyFarbe farbe, VorDaten vd,
+			K4[] unSpldEckenR, K4[] unSpldEckenK)
 	{
 		super(tn, lw, seite);
 		this.unSpldEckenR = unSpldEckenR;
@@ -20,6 +22,7 @@ public class PBlock3 extends Polygon3
 		this.rEnd = rEnd;
 		this.gEnd = gEnd;
 		this.farbe = farbe;
+		this.vd = vd;
 	}
 
 	private PBlock3(PBlock3 main, int xs, int ys, int max)
@@ -30,21 +33,22 @@ public class PBlock3 extends Polygon3
 		rEnd = main.rEnd;
 		gEnd = main.gEnd;
 		farbe = main.farbe;
+		vd = main.vd;
 		nachSplitID = xs * max + ys;
 		ecken(xs, ys, max);
 		splitDepth = max;
 		berechneMids();
 	}
 
-	private int sqToSplit(double sq, VorDaten daten)
+	private int sqToSplit(double sq)
 	{
-		for(int i = 0; i < daten.abstands.size(); i++)
-			if(sq < daten.abstands.get(i) * daten.abstands.get(i))
-				return daten.splits.get(i);
+		for(int i = 0; i < vd.abstands.size(); i++)
+			if(sq < vd.abstands.get(i) * vd.abstands.get(i))
+				return vd.splits.get(i);
 		return 1;
 	}
 
-	public void splittern(ArrayList<Anzeige3> dieListe, VorDaten daten)
+	public void splittern(ArrayList<Anzeige3> dieListe)
 	{
 		if(!anzeigen || eckenR != null)
 			return;
@@ -52,7 +56,7 @@ public class PBlock3 extends Polygon3
 				(unSpldEckenK[0].b + unSpldEckenK[2].b) / 2,
 				(unSpldEckenK[0].c + unSpldEckenK[2].c) / 2,
 				(unSpldEckenK[0].d + unSpldEckenK[2].d) / 2);
-		int spl = sqToSplit(midsp.a * midsp.a + midsp.b * midsp.b + midsp.c * midsp.c, daten);
+		int spl = sqToSplit(midsp.a * midsp.a + midsp.b * midsp.b + midsp.c * midsp.c);
 		K4[][] neueEckenK = new K4[spl + 1][spl + 1];
 		for(int j = 0; j <= spl; j++)
 			for(int k = 0; k <= spl; k++)

@@ -32,11 +32,9 @@ public class Vor
 	public int baumodus;
 	public boolean upgradeActive;
 	public boolean siehNonBlocks = true;
-	private VorDaten vorDaten;
 
-	public Vor(String abstandSplitInput, ArrayList<NonBlock> nonBlocks, LichtW lw, IVUpgrade upgrade)
+	public Vor(ArrayList<NonBlock> nonBlocks, LichtW lw, IVUpgrade upgrade)
 	{
-		vorDaten = new VorDaten(abstandSplitInput);
 		za = upgrade;
 		if(za != null)
 			upgradeActive = true;
@@ -81,7 +79,7 @@ public class Vor
 			za.zuAnz(anzeigeZ, kp, kd, new K4(sicht, sicht, sicht, 0), visionRange4D, baumodus);
 		anzeige = new ArrayList<>();
 		for(int i = 0; i < anzeigeZ.size(); i++)
-			anzeigeZ.get(i).splittern(anzeige, vorDaten);
+			anzeigeZ.get(i).splittern(anzeige);
 		Collections.sort(anzeige, (t1, t2) ->
 		{
 			if(!t1.anzeigen && !t2.anzeigen)

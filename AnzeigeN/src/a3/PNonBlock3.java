@@ -48,7 +48,7 @@ public class PNonBlock3 extends Polygon3
 		return k;
 	}
 
-	public void splittern(ArrayList<Anzeige3> dieListe, VorDaten daten)
+	public void splittern(ArrayList<Anzeige3> dieListe)
 	{
 		if(!anzeigen)
 			return;
@@ -83,7 +83,7 @@ public class PNonBlock3 extends Polygon3
 								kamMid,
 								neueEckenK[j > 0 ? j - 1 : neueEckenK.length - 1]
 						};
-				new PNonBlock3(this, j, eR, eK).splittern(dieListe, daten);
+				new PNonBlock3(this, j, eR, eK).splittern(dieListe);
 			}
 		}
 		else
