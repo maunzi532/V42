@@ -9,9 +9,6 @@ public class Achse1
 	int linkedPunkt;
 	boolean neueDrehung;
 
-	/*
-	{2:2.3,4.5,6.7;...;l:10,1}
-	 */
 	public Achse1(String build)
 	{
 		ArrayList<Punkt1> punkte1 = new ArrayList<>();
@@ -20,6 +17,8 @@ public class Achse1
 		punkte1.add(new Punkt1(1, 0, 0));
 		for(String line : b2)
 		{
+			if(line.length() == 0)
+				continue;
 			String[] lr = line.split("=");
 			if(lr[0].equals("l"))
 			{
@@ -59,6 +58,15 @@ public class Achse1
 				double baseSpin = Double.parseDouble(r[4]);
 				for(int i = 0; i < ecken; i++)
 					p1.add(new Punkt1(vor, abstand, (baseSpin + 360d / ecken * i) % 360));
+				break;
+			}
+			case "q":
+			{
+				double vor = Double.parseDouble(r[1]);
+				double abstand = Double.parseDouble(r[2]);
+				double baseSpin = Double.parseDouble(r[3]);
+				for(int i = 0; i < 4; i++)
+					p1.add(new Punkt1(vor, abstand, ((i + 1) / 2) * 180d + (i % 2 == 0 ? baseSpin : - baseSpin)));
 				break;
 			}
 			default:

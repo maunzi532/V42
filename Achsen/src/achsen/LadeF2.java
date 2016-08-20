@@ -10,13 +10,13 @@ public class LadeF2
 	public final ArrayList<Integer> spken1;
 	public final ArrayList<Integer> spken2;
 	public final ArrayList<Boolean> spken3;
-	public final IFarbeff2 fff2;
+	public final IFarbe fff2;
 	public final Boolean seite;
 	public final int seed;
 
 	private static final Random seedgeber = new Random();
 
-	public LadeF2(IFarbeff2 fff2, Boolean seite)
+	public LadeF2(IFarbe fff2, Boolean seite)
 	{
 		ecken1 = new ArrayList<>();
 		ecken2 = new ArrayList<>();

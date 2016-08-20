@@ -5,7 +5,7 @@ import java.awt.*;
 import java.util.*;
 import k4.*;
 
-public class PolyFarbe implements IFarbeff2
+public class PolyFarbe implements IFarbe
 {
 	//Anzahl unterschiedlicher Diffundierungs-Seeds
 	public static final int seedifier = 100;
@@ -26,7 +26,14 @@ public class PolyFarbe implements IFarbeff2
 	public Color baseColor;
 	public Material mat;
 
-	public IFarbeff2 gibNeu(String s)
+	@Override
+	public IFarbe gibNeu(String s)
+	{
+		return new PolyFarbe(s);
+	}
+
+	@Override
+	public IFarbe gibNeu(ArrayList<String> s)
 	{
 		return new PolyFarbe(s);
 	}
@@ -39,6 +46,15 @@ public class PolyFarbe implements IFarbeff2
 		baseColor = farbCode(tex[0]);
 		if(tex.length > 1)
 			mat = Material.valueOf(tex[1]);
+		else
+			mat = Material.N;
+	}
+
+	public PolyFarbe(ArrayList<String> text)
+	{
+		baseColor = farbCode(text.get(0));
+		if(text.size() > 1)
+			mat = Material.valueOf(text.get(1));
 		else
 			mat = Material.N;
 	}

@@ -6,7 +6,7 @@ import k4.*;
 
 public class PNonBlock3 extends Polygon3
 {
-	public PNonBlock3(TnTarget tn, LichtW lw, Boolean seite, IFarbeff2 farbe, int rSeed, K4[] eckenR, K4[] eckenK)
+	public PNonBlock3(TnTarget tn, LichtW lw, Boolean seite, IFarbe farbe, int rSeed, K4[] eckenR, K4[] eckenK)
 	{
 		super(tn, lw, seite);
 		this.farbe = (PolyFarbe)farbe;
@@ -16,7 +16,7 @@ public class PNonBlock3 extends Polygon3
 		berechneMids();
 	}
 
-	public PNonBlock3(TnTarget tn, LichtW lw, Boolean seite, IFarbeff2 farbe,
+	public PNonBlock3(TnTarget tn, LichtW lw, Boolean seite, IFarbe farbe,
 			int rSeed, K4[] eckenR, K4[] eckenK, int splSeed)
 	{
 		this(tn, lw, seite, farbe, rSeed, eckenR, eckenK);

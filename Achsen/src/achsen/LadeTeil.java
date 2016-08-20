@@ -9,7 +9,7 @@ public class LadeTeil
 	final ArrayList<LadeF2> f2;
 	final int end;
 
-	private LadeTeil(String code, IFarbeff2 factory)
+	private LadeTeil(String code, IFarbe factory)
 	{
 		String[] zeilen = code.split("\n");
 		int achseAktuell = -1;
@@ -41,7 +41,7 @@ public class LadeTeil
 		end = Collections.max(punkte.keySet());
 	}
 
-	private void fx(String zeile, IFarbeff2 factory)
+	private void fx(String zeile, IFarbe factory)
 	{
 		Boolean seite = null;
 		String[] x2 = zeile.split(" ");
@@ -49,7 +49,7 @@ public class LadeTeil
 			seite = true;
 		else if(x2[0].equals("FV"))
 			seite = false;
-		IFarbeff2 fff2 = factory.gibNeu(x2[1]);
+		IFarbe fff2 = factory.gibNeu(x2[1]);
 		LadeF2 f22 = new LadeF2(fff2, seite);
 		f2.add(f22);
 		for(int j = 0; j + 2 < x2.length; j++)
@@ -92,7 +92,7 @@ public class LadeTeil
 		}
 	}
 
-	private void prisma(String zeile, IFarbeff2 factory)
+	private void prisma(String zeile, IFarbe factory)
 	{
 		String[] x2 = zeile.split(" ");
 		Boolean seite = null;
@@ -138,7 +138,7 @@ public class LadeTeil
 					daten[j][k * 3 + 2] = daten[all[k]][k * 3 + 2];
 				}
 			}
-		IFarbeff2 fall = null;
+		IFarbe fall = null;
 		for(int j = 0; j < seitig; j++)
 		{
 			LadeF2 l;
@@ -167,7 +167,7 @@ public class LadeTeil
 		}
 	}
 
-	private void pyramide(String zeile, IFarbeff2 factory)
+	private void pyramide(String zeile, IFarbe factory)
 	{
 		String[] x2 = zeile.split(" ");
 		Boolean seite = null;
@@ -223,7 +223,7 @@ public class LadeTeil
 				daten[j][2] = daten[all][2];
 			}
 		}
-		IFarbeff2 fall = null;
+		IFarbe fall = null;
 		for(int j = 0; j < seitig; j++)
 		{
 			LadeF2 l;
@@ -261,7 +261,7 @@ public class LadeTeil
 		}
 	}
 
-	public static LadeTeil gibVonIndex(String name, IFarbeff2 factory)
+	public static LadeTeil gibVonIndex(String name, IFarbe factory)
 	{
 		if(Index.geladen.containsKey(name))
 			return (LadeTeil) Index.geladen.get(name);
