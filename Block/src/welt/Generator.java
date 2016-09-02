@@ -5,11 +5,11 @@ import k4.*;
 public abstract class Generator
 {
 	protected WeltB welt;
-	WBP[] starts;
-	DerBlock[] enden;
-	int[] endOrder;
+	protected WBP[] starts;
+	protected DerBlock[] enden;
+	protected int[] endOrder;
 
-	abstract DerBlock[][][][] generiere();
+	protected abstract DerBlock[][][][] generiere();
 
 	public void gibInWelt(WeltB welt, Object... z)
 	{

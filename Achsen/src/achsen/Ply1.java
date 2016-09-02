@@ -4,9 +4,9 @@ import java.util.*;
 
 public class Ply1 implements LC1
 {
-	ArrayList<AP1> punkte;
-	IFarbe farbe;
-	Boolean seite;
+	public ArrayList<AP1> punkte;
+	public IFarbe farbe;
+	public Boolean seite;
 
 	public Ply1(ArrayList<AP1> punkte, IFarbe farbe, Boolean seite)
 	{

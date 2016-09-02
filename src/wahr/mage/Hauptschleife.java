@@ -25,7 +25,8 @@ public class Hauptschleife
 		Generator g;
 		if(lvlname == null)
 		{
-			g = new TestGenerator();
+			g = new PfadG1(4, 10, 4, 1);
+			//g = new TestGenerator();
 			g.gibInWelt(aw.wbl);
 		}
 		else

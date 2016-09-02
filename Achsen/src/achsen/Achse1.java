@@ -7,7 +7,6 @@ public class Achse1
 	Punkt1[] punkte;
 	int linkedAchse = -1;
 	int linkedPunkt;
-	boolean neueDrehung;
 
 	public Achse1(String build)
 	{
@@ -25,8 +24,6 @@ public class Achse1
 				String[] r = lr[1].split(",");
 				linkedAchse = Integer.parseInt(r[0]);
 				linkedPunkt = Integer.parseInt(r[1]);
-				if(r.length > 2 && r[2].charAt(0) == 'n')
-					neueDrehung = true;
 			}
 			else
 			{
@@ -36,10 +33,10 @@ public class Achse1
 					int ort = Integer.parseInt(lr[0]);
 					while(punkte1.size() < ort)
 						punkte1.add(null);
-					r = lr[0].split(",");
+					r = lr[1].split(",");
 				}
 				else
-					r = lr[1].split(",");
+					r = lr[0].split(",");
 				punkte(r, punkte1);
 			}
 		}
@@ -55,23 +52,28 @@ public class Achse1
 				int ecken = Integer.parseInt(r[1]);
 				double vor = Double.parseDouble(r[2]);
 				double abstand = Double.parseDouble(r[3]);
-				double baseSpin = Double.parseDouble(r[4]);
+				double baseSpin = d2r(r[4]);
 				for(int i = 0; i < ecken; i++)
-					p1.add(new Punkt1(vor, abstand, (baseSpin + 360d / ecken * i) % 360));
+					p1.add(new Punkt1(vor, abstand, (baseSpin + Math.PI * 2 / ecken * i) % (Math.PI * 2)));
 				break;
 			}
 			case "q":
 			{
 				double vor = Double.parseDouble(r[1]);
 				double abstand = Double.parseDouble(r[2]);
-				double baseSpin = Double.parseDouble(r[3]);
+				double baseSpin = d2r(r[3]);
 				for(int i = 0; i < 4; i++)
-					p1.add(new Punkt1(vor, abstand, ((i + 1) / 2) * 180d + (i % 2 == 0 ? baseSpin : - baseSpin)));
+					p1.add(new Punkt1(vor, abstand, ((i + 1) / 2) * Math.PI + (i % 2 == 0 ? baseSpin : -baseSpin)));
 				break;
 			}
 			default:
 				p1.add(new Punkt1(Double.parseDouble(r[0]),
-						Double.parseDouble(r[1]), Double.parseDouble(r[2])));
+						Double.parseDouble(r[1]), d2r(r[2])));
 		}
+	}
+
+	static double d2r(String tr)
+	{
+		return Double.parseDouble(tr) / 180d * Math.PI;
 	}
 }

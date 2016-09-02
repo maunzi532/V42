@@ -22,11 +22,25 @@ public class VorDaten
 			}
 	}
 
+	public VorDaten()
+	{
+		abstands = new ArrayList<>();
+		splits = new ArrayList<>();
+	}
+
 	public static VorDaten gibVonIndex(String name)
 	{
 		if(Index.geladen.containsKey("VD" + name))
 			return (VorDaten) Index.geladen.get("VD" + name);
-		VorDaten s = new VorDaten(Index.bauName("Blocks", name));
+		VorDaten s;
+		try
+		{
+			s = new VorDaten(Index.bauName("Blocks", name));
+		}
+		catch(Exception e)
+		{
+			s = new VorDaten();
+		}
 		Index.geladen.put("VD" + name, s);
 		return s;
 	}

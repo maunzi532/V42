@@ -1,12 +1,16 @@
 package achsen;
 
+import indexLader.*;
+import java.io.*;
 import java.util.*;
 
 public class LadeTeil1 implements LC1
 {
-	ArrayList<Ply1> plys;
+	public static IFarbe factory;
 
-	public LadeTeil1(String build, IFarbe factory)
+	public ArrayList<Ply1> plys;
+
+	public LadeTeil1(String build)
 	{
 		plys = new ArrayList<>();
 		for(String decl : klaSplit(build))
@@ -103,5 +107,15 @@ public class LadeTeil1 implements LC1
 				}
 			}
 		}
+	}
+
+	public static LadeTeil1 gibVonIndex(String name1, String teilName)
+	{
+		String name = name1 + File.separator + teilName;
+		if(Index.geladen.containsKey(name))
+			return (LadeTeil1) Index.geladen.get(name);
+		LadeTeil1 s = new LadeTeil1(Index.bauName("Ladeteile1", name));
+		Index.geladen.put(name, s);
+		return s;
 	}
 }

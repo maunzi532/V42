@@ -2,8 +2,8 @@ package achsen;
 
 public class AP1
 {
-	int achse;
-	int punkt;
+	public int achse;
+	public int punkt;
 
 	public AP1(int achse, int punkt)
 	{
