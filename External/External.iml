@@ -8,8 +8,9 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="Achsen" />
-    <orderEntry type="module" module-name="AnzeigeN" />
     <orderEntry type="module" module-name="IndexLader" />
+    <orderEntry type="module" module-name="AnzeigeB" />
+    <orderEntry type="module" module-name="AnzeigeN" />
     <orderEntry type="module" module-name="K4" />
   </component>
 </module>

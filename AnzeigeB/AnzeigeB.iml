@@ -7,10 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="AnzeigeN" />
-    <orderEntry type="module" module-name="K4" />
     <orderEntry type="module" module-name="Block" />
     <orderEntry type="module" module-name="IndexLader" />
+    <orderEntry type="module" module-name="K4" />
+    <orderEntry type="module" module-name="AnzeigeN" />
     <orderEntry type="module" module-name="Achsen" />
   </component>
 </module>
