@@ -7,33 +7,59 @@ public class AchsenK1 implements IKamera
 {
 	private static int tnm;
 
+	public String nameLook;
 	Standard1 achsen;
 	Alternate1 alternate;
 	public List<LadeTeil1> plys;
 	public TnTarget tNum;
-	ADreh1[] drehs;
+	public ADreh1[] drehs;
 	ArrayList<K4>[] entlinkt;
 	Drehung[] drehA;
 	ArrayList<K4>[] punkteK;
-	K4 position;
-	Drehung dreh;
+	public K4 position;
+	public Drehung dreh;
 	LinkBlocker[] resLink;
 
-	public AchsenK1(K4 position, Drehung dreh, String name, String... teilNamen)
+	public AchsenK1(K4 position, Drehung dreh, boolean save, String name, String altName, String... teilNamen)
 	{
 		tnm--;
 		tNum = new TnTarget(tnm, 0);
 		this.position = position;
 		this.dreh = dreh;
-		achsen = Standard1.gibVonIndex(name);
-		alternate = Alternate1.gibVonIndex(name, achsen.achsen.size());
+		resLink = new LinkBlocker[0];
+		nameLook = name;
+		reload(save, name, altName, teilNamen);
+	}
+
+	public AchsenK1(K4 position, Drehung dreh, String name)
+	{
+		tnm--;
+		tNum = new TnTarget(tnm, 0);
+		this.position = position;
+		this.dreh = dreh;
+		resLink = new LinkBlocker[0];
+		nameLook = name;
+		reload();
+	}
+
+	public void reload(boolean save, String name, String altName, String... teilNamen)
+	{
+		achsen = Standard1.gibVonL4(name, save);
+		alternate = Alternate1.gibVonL4(name, altName, achsen.achsen.size(), save);
 		drehs = new ADreh1[alternate.drehungen.length];
 		for(int i = 0; i < alternate.drehungen.length; i++)
 			drehs[i] = new ADreh1(alternate.drehungen[i]);
 		plys = new ArrayList<>();
 		for(String teilName : teilNamen)
-			plys.add(LadeTeil1.gibVonIndex(name, teilName));
-		resLink = new LinkBlocker[0];
+			plys.add(LadeTeil1.gibVonL4(name, teilName, save));
+	}
+
+	public void reload()
+	{
+		achsen = new Standard1("");
+		alternate = new Alternate1("", 0);
+		drehs = new ADreh1[0];
+		plys = new ArrayList<>();
 	}
 
 	@SuppressWarnings("unchecked")

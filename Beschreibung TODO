@@ -1,7 +1,6 @@
 Nicht sicher
 	4D-Daten des aktuellen Felds anzeigen
 	NBD - Idle Bewegung
-	Metall-Reflexion
 
 Stufe Mine
 	ZP4C neu machen und umwandeln in LadeCM
@@ -11,19 +10,25 @@ Stufe Mine
 	Blöcke drehen
 	Welt generieren
 
+Stufe Editor
+	Plane
+	List
+	Type
+	AView
+	AEKam
+	EditerTab
+	Positionierer
+
 Stufe Achsen1
-	Neue Achsendateien
-	Neue Flächendateien
-	Neue Alternate-Dateien
-	Initialisierung von NonBlock verbessern
-	Modelleditor
+	Index entfernen
 	Tha Modell neu erstellen
+	Mit "1-Versionen" ersetzen
 
 Stufe Stoff
+	Haare neu machen
 	Haare richtig anmontieren
 	ColBox Position Vergleich
-	Einfalten verhindern
-	Haare Mehrfach-Physik einfacher machen
+	Haare Mehrfach-Physik verbessern
 
 Stufe Leiste
 	FWA-Zustand ändern in LadeAktion

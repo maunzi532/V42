@@ -1,7 +1,6 @@
 package achsen;
 
 import indexLader.*;
-import java.io.*;
 import java.util.*;
 
 public class LadeTeil1 implements LC1
@@ -13,6 +12,8 @@ public class LadeTeil1 implements LC1
 	public LadeTeil1(String build)
 	{
 		plys = new ArrayList<>();
+		if(build.length() == 0)
+			return;
 		for(String decl : klaSplit(build))
 		{
 			String[] b2 = decl.substring(1, decl.length() - 1).split(";");
@@ -109,13 +110,23 @@ public class LadeTeil1 implements LC1
 		}
 	}
 
-	public static LadeTeil1 gibVonIndex(String name1, String teilName)
+	public static LadeTeil1 gibVonL4(String name1, String name2, boolean save)
 	{
-		String name = name1 + File.separator + teilName;
-		if(Index.geladen.containsKey(name))
-			return (LadeTeil1) Index.geladen.get(name);
-		LadeTeil1 s = new LadeTeil1(Index.bauName("Ladeteile1", name));
-		Index.geladen.put(name, s);
-		return s;
+		String s = Lader4.bauName("Ladeteile1", name1, name2);
+		LadeTeil1 toR;
+		if(save)
+		{
+			String s2 = "LadeTeil1 " + s;
+			if(Lader4.map.containsKey(s2))
+				toR = (LadeTeil1) Lader4.map.get(s2);
+			else
+			{
+				toR = new LadeTeil1(Lader4.readR(s));
+				Lader4.map.put(s2, toR);
+			}
+		}
+		else
+			toR = new LadeTeil1(Lader4.readR(s));
+		return toR;
 	}
 }

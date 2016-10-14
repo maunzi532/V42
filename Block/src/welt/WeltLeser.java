@@ -19,7 +19,7 @@ public class WeltLeser extends Generator
 		super.gibInWelt(welt);
 	}
 
-	DerBlock[][][][] generiere()
+	protected DerBlock[][][][] generiere()
 	{
 		String[] w1 = Lader.gibText(ort).replace("\n	", "").split("\n");
 		for(String w2 : w1)

@@ -73,6 +73,45 @@ public class PolyFarbe implements IFarbe
 						seedifier)) / (double) seedifier;
 	}
 
+	public Paint gibFarbe(Linie3 target, TnTarget tn)
+	{
+		Color fc = baseColor;
+		if(target.ddiff > 0) //Rot
+			fc = limit(fc, (int)(target.ddiff * 10), (int)(target.ddiff * -5), (int)(target.ddiff * -5));
+		if(target.ddiff < 0) //Gn
+			fc = limit(fc, (int)(target.ddiff * 5), (int)(target.ddiff * -10), (int)(target.ddiff * 5));
+		if(target.lw == null)
+			return fc; //Kein Licht, keine andere Farbe
+		double power = -255;
+		for(int i = 0; i < target.lw.licht.size(); i++)
+		{
+			K4 lr = K4.diff(target.lw.licht.get(i).lichtPosition(), target.rMid);
+			double ld = Math.sqrt(lr.a * lr.a + lr.b * lr.b + lr.c * lr.c);
+			if(ld > target.lw.licht.get(i).lichtRange())
+				continue;
+			double pow = target.lw.licht.get(i).lichtPower();
+			pow -= ld * target.lw.licht.get(i).lichtPowerDecay();
+			pow *= mat.lichtAffection;
+			if(pow > power)
+				power = pow;
+		}
+		fc = limit(fc, (int)power, (int)power, (int)power); //Beleuchten
+		double weg = Math.sqrt(target.kamMid.a * target.kamMid.a + target.kamMid.b * target.kamMid.b +
+				target.kamMid.c * target.kamMid.c + target.kamMid.d * target.kamMid.d);
+		double nah = (redEnd - weg) / redEnd; //Wenn nah 1, am Rand 0
+		if(nah < 0)
+			nah = 0;
+		if(tn != null && target.tn != null && tn.target == target.tn.target)
+		{
+			fc = limit(fc, 30, 30, 30); //Sichthilfe wenn getargetet
+			if(tn.inner == target.tn.inner)
+				fc = limit(fc, 30, 30, 30);
+		}
+		return new Color((int)(fc.getRed() * nah + 20 * (1 - nah)),
+				(int)(fc.getGreen() * nah),
+				(int)(fc.getBlue() * nah), fc.getAlpha()); //Fading nach Dunkelrot
+	}
+
 	public Paint gibFarbe(Polygon3 target, TnTarget tn)
 	{
 		return errechneFarbe(baseColor, target, tn);

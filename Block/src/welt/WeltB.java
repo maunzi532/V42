@@ -108,16 +108,6 @@ public class WeltB
 		return true;
 	}
 
-	public boolean opaque(DerBlock block)
-	{
-		return block.typ > 0;
-	}
-
-	private boolean vKanten(DerBlock block)
-	{
-		return block.typ == 2;
-	}
-
 	public boolean innen(WBP p)
 	{
 		for(int i = 0; i < 4; i++)
@@ -139,17 +129,17 @@ public class WeltB
 
 	public boolean tk1(WBP p, int richtung)
 	{
-		if(opaque(gib(p)))
+		if(gib(p).opaque())
 			return false;
 		p.k[richtung % 2 == 0 ? 2 : 0] += richtung < 2 ? 1 : -1;
-		if(!opaque(gib(p)))
+		if(!gib(p).opaque())
 			return false;
-		boolean v = vKanten(gib(p));
+		boolean v = gib(p).vKanten();
 			p.k[1]++;
-		if(!v && opaque(gib(p)))
+		if(!v && gib(p).opaque())
 			return false;
 		p.k[richtung % 2 == 0 ? 2 : 0] -= richtung < 2 ? 1 : -1;
-		if(opaque(gib(p)))
+		if(gib(p).opaque())
 			return false;
 		p.k[1]--;
 		return true;
@@ -157,15 +147,15 @@ public class WeltB
 
 	public Boolean tk2(WBP p, int richtung)
 	{
-		if(opaque(gib(p)))
+		if(gib(p).opaque())
 			return null;
 		p.k[richtung % 2 == 0 ? 2 : 0] += richtung < 2 ? 1 : -1;
-		if(!opaque(gib(p)))
+		if(!gib(p).opaque())
 			return null;
 		p.k[1]++;
-		boolean rf = !opaque(gib(p));
+		boolean rf = !gib(p).opaque();
 		p.k[richtung % 2 == 0 ? 2 : 0] -= richtung < 2 ? 1 : -1;
-		if(opaque(gib(p)))
+		if(gib(p).opaque())
 			return null;
 		p.k[1]--;
 		return rf;

@@ -74,9 +74,7 @@ public class Panelizer
 					anzeige.get(i).panelDark(darkCopy, taType > 1 ? darkZ[farbe] : null);
 				}
 		}
-		for(int i = 0; i < anzeige.size(); i++)
-			if(anzeige.get(i).anzeigen)
-				anzeige.get(i).panel(gd);
+		anzeige.stream().filter(a -> a != null && a.anzeigen).forEach(a -> a.panel(gd));
 		DPA2(mx, my);
 	}
 

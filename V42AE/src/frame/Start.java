@@ -1,0 +1,100 @@
+package frame;
+
+import a3.*;
+import achsen.*;
+import edit.*;
+import indexLader.*;
+import java.io.*;
+import java.util.*;
+import k4.*;
+
+public class Start
+{
+	public static TA2 ta;
+	static LPaneel pl;
+	static LRPL lr;
+	static Vor1 vor1;
+	static LichtW lw;
+	public static Map<String, AchsenK1> ak1s;
+	public static AEKam kam;
+	static Panelizer panelizer;
+	static IFarbe ff2;
+	static PolyFarbe achsenFarbe = new PolyFarbe("0-0-255");
+
+	public static void main(String[] args)
+	{
+		ta = new TA2();
+		ta.feedMoves(Lader4.readText(Lader4.bauName("E", "TA2"), true));
+		pl = new LPaneel(800, 600, true, 0, 0);
+		lr = new LRPL(pl.fr, ta);
+		pl.showFrame();
+		ak1s = new HashMap<>();
+		lw = new LichtW();
+		lw.licht.add(new Licht()
+		{
+			@Override
+			public K4 lichtPosition()
+			{
+				return new K4(10, 10, 5, 0);
+			}
+
+			@Override
+			public double lichtRange()
+			{
+				return 100;
+			}
+
+			@Override
+			public double lichtPower()
+			{
+				return 100;
+			}
+
+			@Override
+			public double lichtPowerDecay()
+			{
+				return 0;
+			}
+		});
+		vor1 = new Vor1(ak1s.values(), lw, null);
+		kam = new AEKam(new K4(), 20, new Drehung(), 0.05);
+		panelizer = new Panelizer();
+		panelizer.resize(lr.right.getWidth(), lr.right.getHeight());
+		ArrayList<Anzeige3> a3s2;
+		ff2 = new PolyFarbe();
+		LadeTeil1.factory = new PolyFarbe();
+		while(true)
+		{
+			ta.move();
+			if(ta.keyStat[0] > 0)
+				break;
+			kam.tick(ta.keyStat[1] > 0, ta.keyStat[2] > 0, ta.keyStat[3] > 0, ta.keyStat[4] > 0);
+			try
+			{
+				lr.flt();
+			}catch(IOException e)
+			{
+				break;
+			}
+			ak1s.forEach((s, ak1) -> ak1.reset());
+			vor1.vorbereiten(kam, lr.right.getWidth(), lr.right.getHeight(), lr.right.getWidth(),
+					null, lr.xr3v, lr.ac1v ? achsenFarbe : null, lr.fl2v);
+			ArrayList<Anzeige3> a3s3 = new ArrayList<>();
+			vor1.anzeige.stream().filter(e -> e.anzeigen).forEach(a3s3::add);
+			a3s2 = a3s3;
+			panelizer.panelize(a3s2, lr.right.getWidth() / 4, lr.right.getHeight() / 2);
+			lr.right.getGraphics().drawImage(panelizer.light, 0, 0, null);
+			sleep(10);
+		}
+		System.exit(0);
+	}
+
+	public static void sleep(long millis)
+	{
+		try
+		{
+			Thread.sleep(millis);
+		}
+		catch(InterruptedException ignored){}
+	}
+}

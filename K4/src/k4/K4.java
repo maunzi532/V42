@@ -35,6 +35,27 @@ public class K4
 		return new K4(end.a - start.a, end.b - start.b, end.c - start.c, end.d - start.d);
 	}
 
+	public static K4 mult(K4 start, double mul)
+	{
+		return new K4(start.a * mul, start.b * mul, start.c * mul, start.d * mul);
+	}
+
+	public static K4 div(K4 start, double div)
+	{
+		return new K4(start.a / div, start.b / div, start.c / div, start.d / div);
+	}
+
+	public static K4 part(K4 start, K4 end, double l)
+	{
+		return new K4(start.a * l + end.a * (1 - l), start.b * l + end.b * (1 - l),
+				start.c * l + end.c * (1 - l), start.d * l + end.d * (1 - l));
+	}
+
+	public static double len(K4 l)
+	{
+		return Math.sqrt(l.a * l.a + l.b * l.b + l.c * l.c + l.d * l.d);
+	}
+
 	/*void transformWL(double wl)
 	{
 		if(wl == 0)

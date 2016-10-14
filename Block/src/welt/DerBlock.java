@@ -23,6 +23,17 @@ public class DerBlock
 		return String.valueOf(typ);
 	}
 
+	public boolean opaque()
+	{
+		return typ > 0;
+	}
+
+	boolean vKanten()
+	{
+		return typ == 2;
+	}
+
+
 	public String toString()
 	{
 		return typ + "-" + dreh4;

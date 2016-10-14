@@ -4,6 +4,31 @@ import java.util.*;
 
 public interface LC1
 {
+	default String decommentandcut(String build)
+	{
+		String[] lines = build.split("\n");
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < lines.length; i++)
+		{
+			if(lines[i].contains("/"))
+			{
+				boolean write = true;
+				StringBuilder sb1 = new StringBuilder();
+				for(int j = 0; j < lines[i].length(); j++)
+				{
+					if(lines[i].charAt(j) == '/')
+						write = !write;
+					else if(write)
+						sb1.append(lines[i].charAt(j));
+				}
+				sb.append(sb1);
+			}
+			else
+				sb.append(lines[i]);
+		}
+		return sb.toString().replace("\t", "").replace(" ", "");
+	}
+
 	default ArrayList<String> klaSplit(String build)
 	{
 		build = build.replace("\t", "").replace("\n", "").replace(" ", "");

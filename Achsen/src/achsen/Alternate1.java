@@ -1,7 +1,6 @@
 package achsen;
 
 import indexLader.*;
-import java.io.*;
 
 public class Alternate1
 {
@@ -9,8 +8,10 @@ public class Alternate1
 
 	public Alternate1(String build, int len)
 	{
-		build = build.replace("\t", "").replace("\n", "").replace(" ", "");
 		drehungen = new ADreh1[len];
+		if(build.length() == 0)
+			return;
+		build = build.replace("\t", "").replace("\n", "").replace(" ", "");
 		int next = 0;
 		for(String line : build.split(";"))
 		{
@@ -27,13 +28,23 @@ public class Alternate1
 		}
 	}
 
-	public static Alternate1 gibVonIndex(String name, int len)
+	public static Alternate1 gibVonL4(String name1, String name2, int len, boolean save)
 	{
-		name = name + File.separator + "Drehs";
-		if(Index.geladen.containsKey(name))
-			return (Alternate1) Index.geladen.get(name);
-		Alternate1 s = new Alternate1(Index.bauName("Ladeteile1", name), len);
-		Index.geladen.put(name, s);
-		return s;
+		String s = Lader4.bauName("Ladeteile1", name1, name2);
+		Alternate1 toR;
+		if(save)
+		{
+			String s2 = "Alternate1 " + s;
+			if(Lader4.map.containsKey(s2))
+				toR = (Alternate1) Lader4.map.get(s2);
+			else
+			{
+				toR = new Alternate1(Lader4.readR(s), len);
+				Lader4.map.put(s2, toR);
+			}
+		}
+		else
+			toR = new Alternate1(Lader4.readR(s), len);
+		return toR;
 	}
 }

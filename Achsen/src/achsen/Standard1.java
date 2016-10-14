@@ -1,7 +1,6 @@
 package achsen;
 
 import indexLader.*;
-import java.io.*;
 import java.util.*;
 
 public class Standard1 implements LC1
@@ -11,6 +10,8 @@ public class Standard1 implements LC1
 	public Standard1(String build)
 	{
 		achsen = new ArrayList<>();
+		if(build.length() == 0)
+			return;
 		for(String line : klaSplit(build))
 		{
 			int div = line.indexOf("=");
@@ -27,13 +28,23 @@ public class Standard1 implements LC1
 		}
 	}
 
-	public static Standard1 gibVonIndex(String name)
+	public static Standard1 gibVonL4(String name, boolean save)
 	{
-		name = name + File.separator + "Achsen";
-		if(Index.geladen.containsKey(name))
-			return (Standard1) Index.geladen.get(name);
-		Standard1 s = new Standard1(Index.bauName("Ladeteile1", name));
-		Index.geladen.put(name, s);
-		return s;
+		String s = Lader4.bauName("Ladeteile1", name, "Standard.v42s");
+		Standard1 toR;
+		if(save)
+		{
+			String s2 = "Standard1 " + s;
+			if(Lader4.map.containsKey(s2))
+				toR = (Standard1) Lader4.map.get(s2);
+			else
+			{
+				toR = new Standard1(Lader4.readR(s));
+				Lader4.map.put(s2, toR);
+			}
+		}
+		else
+			toR = new Standard1(Lader4.readR(s));
+		return toR;
 	}
 }

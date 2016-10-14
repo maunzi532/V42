@@ -7,7 +7,7 @@ public class TestGenerator extends Generator
 {
 	private Random r;
 
-	DerBlock[][][][] generiere()
+	protected DerBlock[][][][] generiere()
 	{
 		r = new Random();
 		DerBlock[][][][] blocks = new DerBlock[40][40][40][3];
