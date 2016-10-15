@@ -2,9 +2,10 @@ package edit;
 
 import achsen.*;
 import java.util.*;
+import javax.swing.*;
 import k4.*;
 
-public class AView
+public class AView extends JButton
 {
 	AchsenK1 ak1;
 	String name;
@@ -15,7 +16,7 @@ public class AView
 	K4 kamMoved;
 	double kamDistance;
 
-	public AView(String name, String build)
+	public AView(String name, String build, List<AchsenK1> liste) throws NumberFormatException
 	{
 		this.name = name;
 		String[] werte = build.split(",");
@@ -27,12 +28,33 @@ public class AView
 			drehfile = werte[7];
 		sichtbar = new ArrayList<>();
 		sichtbar.addAll(Arrays.asList(werte).subList(8, werte.length));
-		createak1();
+		setText(drehfile != null ? drehfile : "Sehe nichts");
+		createAk1(liste);
 	}
 
-	public void createak1()
+	public AView(String name, List<AchsenK1> liste)
+	{
+		this.name = name;
+		kamDistance = 10;
+		kamDreh = new Drehung();
+		kamMoved = new K4();
+		sichtbar = new ArrayList<>();
+		setText("Sehe nichts");
+		createAk1(liste);
+	}
+
+	public void createAk1(List<AchsenK1> liste)
 	{
 		ak1 = new AchsenK1(new K4(), new Drehung(), name);
+		//Positionen.forderePositionAn(ak1);
+		liste.add(ak1);
+		actualize();
+	}
+
+	//TODO Funktion einbauen
+
+	public void actualize()
+	{
 		if(drehfile != null)
 		{
 			try
@@ -43,5 +65,7 @@ public class AView
 				//Fehler
 			}
 		}
+		else
+			ak1.reload();
 	}
 }

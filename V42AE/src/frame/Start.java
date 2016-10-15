@@ -4,7 +4,6 @@ import a3.*;
 import achsen.*;
 import edit.*;
 import indexLader.*;
-import java.io.*;
 import java.util.*;
 import k4.*;
 
@@ -12,10 +11,11 @@ public class Start
 {
 	public static TA2 ta;
 	static LPaneel pl;
-	static LRPL lr;
+	//static LRPL lr;
+	static UI ui;
 	static Vor1 vor1;
 	static LichtW lw;
-	public static Map<String, AchsenK1> ak1s;
+	public static List<AchsenK1> ak1s;
 	public static AEKam kam;
 	static Panelizer panelizer;
 	static IFarbe ff2;
@@ -26,9 +26,10 @@ public class Start
 		ta = new TA2();
 		ta.feedMoves(Lader4.readText(Lader4.bauName("E", "TA2"), true));
 		pl = new LPaneel(800, 600, true, 0, 0);
-		lr = new LRPL(pl.fr, ta);
+		//lr = new LRPL(pl.fr, ta);
+		ui = new UI(pl.fr, ta);
 		pl.showFrame();
-		ak1s = new HashMap<>();
+		ak1s = new ArrayList<>();
 		lw = new LichtW();
 		lw.licht.add(new Licht()
 		{
@@ -56,10 +57,11 @@ public class Start
 				return 0;
 			}
 		});
-		vor1 = new Vor1(ak1s.values(), lw, null);
+		vor1 = new Vor1(ak1s, lw, null);
 		kam = new AEKam(new K4(), 20, new Drehung(), 0.05);
 		panelizer = new Panelizer();
-		panelizer.resize(lr.right.getWidth(), lr.right.getHeight());
+		//panelizer.resize(lr.right.getWidth(), lr.right.getHeight());
+		panelizer.resize(ui.right.getWidth(), ui.right.getHeight());
 		ArrayList<Anzeige3> a3s2;
 		ff2 = new PolyFarbe();
 		LadeTeil1.factory = new PolyFarbe();
@@ -69,21 +71,26 @@ public class Start
 			if(ta.keyStat[0] > 0)
 				break;
 			kam.tick(ta.keyStat[1] > 0, ta.keyStat[2] > 0, ta.keyStat[3] > 0, ta.keyStat[4] > 0);
-			try
+			/*try
 			{
 				lr.flt();
 			}catch(IOException e)
 			{
 				break;
-			}
-			ak1s.forEach((s, ak1) -> ak1.reset());
-			vor1.vorbereiten(kam, lr.right.getWidth(), lr.right.getHeight(), lr.right.getWidth(),
-					null, lr.xr3v, lr.ac1v ? achsenFarbe : null, lr.fl2v);
+			}*/
+			ui.flt();
+			ak1s.forEach(AchsenK1::reset);
+			/*vor1.vorbereiten(kam, lr.right.getWidth(), lr.right.getHeight(), lr.right.getWidth(),
+					null, lr.xr3v, lr.ac1v ? achsenFarbe : null, lr.fl2v);*/
+			vor1.vorbereiten(kam, ui.rWidth, ui.rHeight, ui.rWidth,
+					null, ui.xr3v, ui.ac1v ? achsenFarbe : null, ui.fl2v);
 			ArrayList<Anzeige3> a3s3 = new ArrayList<>();
 			vor1.anzeige.stream().filter(e -> e.anzeigen).forEach(a3s3::add);
 			a3s2 = a3s3;
-			panelizer.panelize(a3s2, lr.right.getWidth() / 4, lr.right.getHeight() / 2);
-			lr.right.getGraphics().drawImage(panelizer.light, 0, 0, null);
+			//panelizer.panelize(a3s2, lr.right.getWidth() / 4, lr.right.getHeight() / 2);
+			panelizer.panelize(a3s2, ui.rWidth / 4, ui.rHeight / 2);
+			//lr.right.getGraphics().drawImage(panelizer.light, 0, 0, null);
+			ui.right.getGraphics().drawImage(panelizer.light, 0, 0, null);
 			sleep(10);
 		}
 		System.exit(0);

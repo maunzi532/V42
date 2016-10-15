@@ -150,7 +150,7 @@ public class LRPL
 				editingChooser.setListData(edit.stream().map(e -> e.nameLook).toArray(String[]::new));
 				editingChooser.setSelectedValue(createNew, true);
 				newEChosen = createNew;
-				Start.ak1s.put(createNew, ak1);
+				//Start.ak1s.put(createNew, ak1);
 			}
 			createNew = null;
 		}
@@ -163,7 +163,7 @@ public class LRPL
 				editingChooser.setListData(edit.stream().map(e -> e.nameLook).toArray(String[]::new));
 				editingChooser.setSelectedValue(chargeInNew, true);
 				newEChosen = chargeInNew;
-				Start.ak1s.put(chargeInNew, ak1);
+				//Start.ak1s.put(chargeInNew, ak1);
 			}
 			chargeInNew = null;
 		}
@@ -317,18 +317,18 @@ public class LRPL
 		{
 			if(theD == null)
 			{
-				Start.ak1s.get(currentEChosen).reload();
+				//Start.ak1s.get(currentEChosen).reload();
 				actualize.setBackground(Color.WHITE);
 			}
 			else try
 			{
-				Start.ak1s.get(currentEChosen).reload(false, currentEChosen,
-						theD, fs.toArray(new String[fs.size()]));
+				//Start.ak1s.get(currentEChosen).reload(false, currentEChosen,
+						//theD, fs.toArray(new String[fs.size()]));
 				actualize.setBackground(Color.WHITE);
 			}catch(Exception e)
 			{
 				actualize.setBackground(Color.RED);
-				Start.ak1s.get(currentEChosen).reload();
+				//Start.ak1s.get(currentEChosen).reload();
 			}
 		}
 	}

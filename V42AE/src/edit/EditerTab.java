@@ -11,6 +11,7 @@ public class EditerTab extends JScrollPane
 	File file;
 	String name;
 	public JTextArea plane;
+	public JPanel over;
 	public JCheckBox checkBox;
 	public JRadioButton radioButton;
 
@@ -24,6 +25,45 @@ public class EditerTab extends JScrollPane
 		plane.setTabSize(4);
 		setViewportView(plane);
 		plane.setText(new String(Files.readAllBytes(Paths.get(file.getPath())), Charset.forName("UTF-8")));
+
+	}
+
+	public JPanel getOverS()
+	{
+		if(over != null)
+			return over;
+		over = new JPanel();
+		over.add(new JLabel(name));
+		JButton plusD = new JButton("+D");
+		//plusD.addActionListener();
+		over.add(plusD);
+		JButton plusF = new JButton("+F");
+		//plusF.addActionListener();
+		over.add(plusF);
+		return over;
+	}
+
+	public JPanel getOverD(ButtonGroup group)
+	{
+		if(over != null)
+			return over;
+		over = new JPanel();
+		over.add(new JLabel(name));
+		radioButton = new JRadioButton();
+		group.add(radioButton);
+		over.add(radioButton);
+		return over;
+	}
+
+	public JPanel getOverF()
+	{
+		if(over != null)
+			return over;
+		over = new JPanel();
+		over.add(new JLabel(name));
+		checkBox = new JCheckBox();
+		over.add(checkBox);
+		return over;
 	}
 
 	public void save() throws IOException
