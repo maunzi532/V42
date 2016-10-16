@@ -16,7 +16,6 @@ public class Type extends JPanel implements LC1
 	File location;
 
 	JTabbedPane tabPanel;
-	//List<EditerTab> editerTabs;
 	EditerTab sTab;
 	List<EditerTab> dTabs;
 	List<EditerTab> fTabs;
@@ -25,11 +24,14 @@ public class Type extends JPanel implements LC1
 	AView currentView;
 	JPanel viewsPanel;
 	JPanel innerViewsPanel;
+	List<EditerTab> editerTabs;
 
 	AView switchToView;
 	boolean reloadVSet;
+	public boolean saveAndActualize;
+	public boolean reload;
 
-	public Type(File location, List<AchsenK1> liste) throws IOException
+	public Type(File location, List<AchsenK1> liste, AEKam aeKam) throws IOException
 	{
 		this.location = location;
 		name = location.getName();
@@ -80,8 +82,10 @@ public class Type extends JPanel implements LC1
 			v42s.createNewFile();
 		}
 
+		editerTabs = new ArrayList<>();
 		int lastTab = 0;
 		sTab = new EditerTab(v42s, this);
+		editerTabs.add(sTab);
 		tabPanel.add(sTab);
 		tabPanel.setTabComponentAt(lastTab, sTab.getOverS());
 		dTabs = new ArrayList<>();
@@ -90,6 +94,7 @@ public class Type extends JPanel implements LC1
 		{
 			EditerTab tab = new EditerTab(file, this);
 			dTabs.add(tab);
+			editerTabs.add(tab);
 			tabPanel.add(tab);
 			lastTab++;
 			tabPanel.setTabComponentAt(lastTab, tab.getOverD(drehfilesGroup));
@@ -99,6 +104,7 @@ public class Type extends JPanel implements LC1
 		{
 			EditerTab tab = new EditerTab(file, this);
 			fTabs.add(tab);
+			editerTabs.add(tab);
 			tabPanel.add(tab);
 			lastTab++;
 			tabPanel.setTabComponentAt(lastTab, tab.getOverF());
@@ -120,7 +126,7 @@ public class Type extends JPanel implements LC1
 		{
 			try
 			{
-				AView av = new AView(name, lines[i], liste);
+				AView av = new AView(name, lines[i], liste, aeKam);
 				views.add(av);
 				if(dch == i)
 					currentView = av;
@@ -128,7 +134,7 @@ public class Type extends JPanel implements LC1
 			catch(NumberFormatException ignored){}
 		}
 		if(views.size() == 0)
-			views.add(new AView(name, liste));
+			views.add(new AView(name, liste, aeKam));
 		if(currentView == null)
 			currentView = views.get(0);
 
@@ -140,7 +146,7 @@ public class Type extends JPanel implements LC1
 		JButton plusView = new JButton("+");
 		plusView.addActionListener(e ->
 		{
-			AView av = new AView(name, liste);
+			AView av = new AView(name, liste, aeKam);
 			av.addActionListener(e1 -> switchToView = av);
 			views.add(av);
 			innerViewsPanel.add(av);
@@ -151,19 +157,21 @@ public class Type extends JPanel implements LC1
 			v.addActionListener(e -> switchToView = v);
 		views.forEach(innerViewsPanel::add);
 		switchToView = currentView;
+		reload();
 	}
 
 	public void reload()
 	{
-		//TODO sonst sieht man nix
+		views.forEach(edit.AView::actualize);
 	}
 
-	public void flt()
+	public void flt(AEKam aeKam)
 	{
 		if(switchToView != null)
 		{
 			currentView = switchToView;
 			currentView.aktivieren(dTabs, fTabs);
+			aeKam.beweg(currentView.ak1.position, currentView.kamDistance);
 			switchToView = null;
 			reloadVSet = false;
 		}
@@ -176,6 +184,26 @@ public class Type extends JPanel implements LC1
 			currentView.sichtbar.addAll(fTabs.stream().filter(fTab -> fTab.checkBox.isSelected())
 					.map(fTab -> fTab.name).collect(Collectors.toList()));
 			reloadVSet = false;
+			reload = true;
+		}
+		if(saveAndActualize)
+		{
+			saveAndActualize = false;
+			reload = false;
+			for(EditerTab ed : editerTabs)
+				try
+				{
+					ed.save();
+				}catch(IOException e)
+				{
+					JOptionPane.showMessageDialog(this, "Behinderter Fehler: " + e.getMessage());
+				}
+			reload();
+		}
+		if(reload)
+		{
+			reload = false;
+			reload();
 		}
 	}
 

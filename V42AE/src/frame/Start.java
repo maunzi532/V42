@@ -27,7 +27,8 @@ public class Start
 		ta.feedMoves(Lader4.readText(Lader4.bauName("E", "TA2"), true));
 		pl = new LPaneel(800, 600, true, 0, 0);
 		//lr = new LRPL(pl.fr, ta);
-		ui = new UI(pl.fr, ta);
+		kam = new AEKam2(new K4(), 20, new Drehung(), 0.05);
+		ui = new UI(pl.fr, ta, kam);
 		pl.showFrame();
 		ak1s = new ArrayList<>();
 		lw = new LichtW();
@@ -58,7 +59,6 @@ public class Start
 			}
 		});
 		vor1 = new Vor1(ak1s, lw, null);
-		kam = new AEKam(new K4(), 20, new Drehung(), 0.05);
 		panelizer = new Panelizer();
 		//panelizer.resize(lr.right.getWidth(), lr.right.getHeight());
 		panelizer.resize(ui.right.getWidth(), ui.right.getHeight());

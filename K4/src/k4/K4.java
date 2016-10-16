@@ -47,8 +47,8 @@ public class K4
 
 	public static K4 part(K4 start, K4 end, double l)
 	{
-		return new K4(start.a * l + end.a * (1 - l), start.b * l + end.b * (1 - l),
-				start.c * l + end.c * (1 - l), start.d * l + end.d * (1 - l));
+		return new K4(end.a * l + start.a * (1 - l), end.b * l + start.b * (1 - l),
+				end.c * l + start.c * (1 - l), end.d * l + start.d * (1 - l));
 	}
 
 	public static double len(K4 l)

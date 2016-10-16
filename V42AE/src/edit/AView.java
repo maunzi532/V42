@@ -16,7 +16,7 @@ public class AView extends JButton
 	K4 kamMoved;
 	double kamDistance;
 
-	public AView(String name, String build, List<AchsenK1> liste) throws NumberFormatException
+	public AView(String name, String build, List<AchsenK1> liste, AEKam aeKam) throws NumberFormatException
 	{
 		this.name = name;
 		String[] werte = build.split(",");
@@ -29,10 +29,10 @@ public class AView extends JButton
 		sichtbar = new ArrayList<>();
 		sichtbar.addAll(Arrays.asList(werte).subList(8, werte.length));
 		text();
-		createAk1(liste);
+		createAk1(liste, aeKam);
 	}
 
-	public AView(String name, List<AchsenK1> liste)
+	public AView(String name, List<AchsenK1> liste, AEKam aeKam)
 	{
 		this.name = name;
 		kamDistance = 10;
@@ -40,7 +40,7 @@ public class AView extends JButton
 		kamMoved = new K4();
 		sichtbar = new ArrayList<>();
 		text();
-		createAk1(liste);
+		createAk1(liste, aeKam);
 	}
 
 	public void text()
@@ -48,10 +48,10 @@ public class AView extends JButton
 		setText(drehfile != null ? drehfile : "Sehe nichts");
 	}
 
-	public void createAk1(List<AchsenK1> liste)
+	public void createAk1(List<AchsenK1> liste, AEKam aeKam)
 	{
 		ak1 = new AchsenK1(new K4(), new Drehung(), name);
-		//Positionen.forderePositionAn(ak1);
+		aeKam.forderePositionAn(ak1);
 		liste.add(ak1);
 		actualize();
 	}

@@ -37,10 +37,10 @@ public class EditerTab extends JScrollPane
 		over = new JPanel();
 		over.add(new JLabel(name));
 		JButton plusD = new JButton("+D");
-		//plusD.addActionListener();
+
 		over.add(plusD);
 		JButton plusF = new JButton("+F");
-		//plusF.addActionListener();
+
 		over.add(plusF);
 		return over;
 	}

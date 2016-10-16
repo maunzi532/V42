@@ -72,7 +72,7 @@ public class AEKam implements IKamera
 		zielP = ziel;
 		zielA = abstand;
 		tick = 0;
-		maxTicks = (int) Math.sqrt(K4.len(K4.diff(startP, zielP)));
+		maxTicks = (int) Math.sqrt(K4.len(K4.diff(startP, zielP)) * 40);
 	}
 
 	void errechnePosition()
@@ -92,5 +92,10 @@ public class AEKam implements IKamera
 	public K4 kamP()
 	{
 		return position;
+	}
+
+	public void forderePositionAn(AchsenK1 ak1)
+	{
+
 	}
 }

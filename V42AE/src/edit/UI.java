@@ -24,33 +24,30 @@ public class UI
 	public JCheckBox fl2;
 	public JCheckBox xr3;
 
+	public AEKam aeKam;
+
 	public File directoryForNew;
 	public File chargeInNew;
 	public boolean switchType;
 	public Type currentType;
-	public boolean saveAndActualize;
 	public boolean changeSettings;
 	public boolean ac1v;
 	public boolean fl2v;
 	public boolean xr3v;
 	public boolean focus;
 	public int scroll;
-	public boolean reload;
 	public int rWidth;
 	public int rHeight;
 
-	public AView currentAView()
-	{
-		return null;
-	}
-
 	public EditerTab currentEditerTab()
 	{
-		return null;
+		return (EditerTab) currentType.tabPanel.getSelectedComponent();
 	}
 
-	public UI(JFrame frame, TA2 ta)
+	public UI(JFrame frame, TA2 ta, AEKam aeKam)
 	{
+		this.aeKam = aeKam;
+
 		JPanel pl = new JPanel(new GridLayout(1, 2));
 		frame.setContentPane(pl);
 		left = new JPanel();
@@ -124,7 +121,7 @@ public class UI
 		upperPanel.add(ruPanel);
 
 		actualize = new JButton("Aktualisieren");
-		actualize.addActionListener(e -> saveAndActualize = true);
+		actualize.addActionListener(e -> currentType.saveAndActualize = true);
 		ruPanel.add(actualize);
 
 		//add view settings
@@ -162,7 +159,7 @@ public class UI
 			{
 				if(!chargeInNew.exists())
 					chargeInNew.mkdir();
-				Type new1 = new Type(chargeInNew, Start.ak1s);
+				Type new1 = new Type(chargeInNew, Start.ak1s, aeKam);
 				boolean ok = true;
 				for(Type type1 : types)
 					if(type1.location.equals(chargeInNew))
@@ -191,26 +188,13 @@ public class UI
 			left.updateUI();
 			switchType = false;
 		}
-		types.forEach(edit.Type::flt);
+		types.forEach(type -> type.flt(aeKam));
 		if(changeSettings)
 		{
 			changeSettings = false;
 			ac1v = ac1.isSelected();
 			fl2v = fl2.isSelected();
 			xr3v = xr3.isSelected();
-		}
-		if(saveAndActualize)
-		{
-			saveAndActualize = false;
-			reload = false;
-			//for(EditerTab ed : editerTabs.get(currentE))
-				//ed.save();
-			currentType.reload();
-		}
-		if(reload)
-		{
-			reload = false;
-			currentType.reload();
 		}
 	}
 }
