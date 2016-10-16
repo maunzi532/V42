@@ -7,6 +7,7 @@ import java.nio.charset.*;
 import java.nio.file.*;
 import java.util.*;
 import java.util.List;
+import java.util.stream.*;
 import javax.swing.*;
 
 public class Type extends JPanel implements LC1
@@ -26,6 +27,7 @@ public class Type extends JPanel implements LC1
 	JPanel innerViewsPanel;
 
 	AView switchToView;
+	boolean reloadVSet;
 
 	public Type(File location, List<AchsenK1> liste) throws IOException
 	{
@@ -79,14 +81,14 @@ public class Type extends JPanel implements LC1
 		}
 
 		int lastTab = 0;
-		sTab = new EditerTab(v42s);
+		sTab = new EditerTab(v42s, this);
 		tabPanel.add(sTab);
 		tabPanel.setTabComponentAt(lastTab, sTab.getOverS());
 		dTabs = new ArrayList<>();
 		drehfilesGroup = new ButtonGroup();
 		for(File file : v42d)
 		{
-			EditerTab tab = new EditerTab(file);
+			EditerTab tab = new EditerTab(file, this);
 			dTabs.add(tab);
 			tabPanel.add(tab);
 			lastTab++;
@@ -95,7 +97,7 @@ public class Type extends JPanel implements LC1
 		fTabs = new ArrayList<>();
 		for(File file : v42f)
 		{
-			EditerTab tab = new EditerTab(file);
+			EditerTab tab = new EditerTab(file, this);
 			fTabs.add(tab);
 			tabPanel.add(tab);
 			lastTab++;
@@ -139,17 +141,42 @@ public class Type extends JPanel implements LC1
 		plusView.addActionListener(e ->
 		{
 			AView av = new AView(name, liste);
+			av.addActionListener(e1 -> switchToView = av);
 			views.add(av);
 			innerViewsPanel.add(av);
 			innerViewsPanel.updateUI();
 		});
 		viewsPanel.add(plusView, BorderLayout.LINE_END);
+		for(AView v : views)
+			v.addActionListener(e -> switchToView = v);
 		views.forEach(innerViewsPanel::add);
+		switchToView = currentView;
 	}
 
 	public void reload()
 	{
 		//TODO sonst sieht man nix
+	}
+
+	public void flt()
+	{
+		if(switchToView != null)
+		{
+			currentView = switchToView;
+			currentView.aktivieren(dTabs, fTabs);
+			switchToView = null;
+			reloadVSet = false;
+		}
+		if(reloadVSet)
+		{
+			currentView.sichtbar = new ArrayList<>();
+			dTabs.stream().filter(dTab -> dTab.radioButton.isSelected())
+					.forEach(dTab -> currentView.drehfile = dTab.name);
+			currentView.text();
+			currentView.sichtbar.addAll(fTabs.stream().filter(fTab -> fTab.checkBox.isSelected())
+					.map(fTab -> fTab.name).collect(Collectors.toList()));
+			reloadVSet = false;
+		}
 	}
 
 	@Override

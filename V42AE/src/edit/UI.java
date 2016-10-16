@@ -191,6 +191,7 @@ public class UI
 			left.updateUI();
 			switchType = false;
 		}
+		types.forEach(edit.Type::flt);
 		if(changeSettings)
 		{
 			changeSettings = false;

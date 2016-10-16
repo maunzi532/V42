@@ -9,15 +9,17 @@ import javax.swing.*;
 public class EditerTab extends JScrollPane
 {
 	File file;
-	String name;
+	public String name;
 	public JTextArea plane;
 	public JPanel over;
 	public JCheckBox checkBox;
 	public JRadioButton radioButton;
+	public Type von;
 
-	public EditerTab(File file) throws IOException
+	public EditerTab(File file, Type von) throws IOException
 	{
 		this.file = file;
+		this.von = von;
 		name = file.getName();
 		plane = new JTextArea();
 		plane.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -50,6 +52,7 @@ public class EditerTab extends JScrollPane
 		over = new JPanel();
 		over.add(new JLabel(name));
 		radioButton = new JRadioButton();
+		radioButton.addActionListener(e -> von.reloadVSet = true);
 		group.add(radioButton);
 		over.add(radioButton);
 		return over;
@@ -62,6 +65,7 @@ public class EditerTab extends JScrollPane
 		over = new JPanel();
 		over.add(new JLabel(name));
 		checkBox = new JCheckBox();
+		checkBox.addActionListener(e -> von.reloadVSet = true);
 		over.add(checkBox);
 		return over;
 	}

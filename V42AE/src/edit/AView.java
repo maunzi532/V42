@@ -28,7 +28,7 @@ public class AView extends JButton
 			drehfile = werte[7];
 		sichtbar = new ArrayList<>();
 		sichtbar.addAll(Arrays.asList(werte).subList(8, werte.length));
-		setText(drehfile != null ? drehfile : "Sehe nichts");
+		text();
 		createAk1(liste);
 	}
 
@@ -39,8 +39,13 @@ public class AView extends JButton
 		kamDreh = new Drehung();
 		kamMoved = new K4();
 		sichtbar = new ArrayList<>();
-		setText("Sehe nichts");
+		text();
 		createAk1(liste);
+	}
+
+	public void text()
+	{
+		setText(drehfile != null ? drehfile : "Sehe nichts");
 	}
 
 	public void createAk1(List<AchsenK1> liste)
@@ -52,6 +57,13 @@ public class AView extends JButton
 	}
 
 	//TODO Funktion einbauen
+
+	public void aktivieren(List<EditerTab> dTabs, List<EditerTab> fTabs)
+	{
+		dTabs.stream().filter(dTab -> dTab.name.equals(drehfile))
+				.forEach(dTab -> dTab.radioButton.setSelected(true));
+		fTabs.stream().forEach(fTab -> fTab.checkBox.setSelected(sichtbar.contains(fTab.name)));
+	}
 
 	public void actualize()
 	{

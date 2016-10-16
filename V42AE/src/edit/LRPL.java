@@ -263,7 +263,7 @@ public class LRPL
 
 	private boolean addTab(File f, int num, boolean dToSet) throws IOException
 	{
-		EditerTab ed = new EditerTab(f);
+		EditerTab ed = new EditerTab(f, null);
 		editerTabs.get(currentE).add(ed);
 		JPanel pl = new JPanel();
 		pl.setLayout(new BoxLayout(pl, BoxLayout.LINE_AXIS));
