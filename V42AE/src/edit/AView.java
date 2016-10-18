@@ -56,8 +56,6 @@ public class AView extends JButton
 		actualize();
 	}
 
-	//TODO Funktion einbauen
-
 	public void aktivieren(List<EditerTab> dTabs, List<EditerTab> fTabs)
 	{
 		dTabs.stream().filter(dTab -> dTab.name.equals(drehfile))

@@ -1,10 +1,12 @@
 package edit;
 
+import achsen.*;
 import frame.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
 import java.util.*;
+import java.util.List;
 import javax.swing.*;
 
 public class UI
@@ -137,7 +139,7 @@ public class UI
 		changeSettings = true;
 	}
 
-	public void flt()
+	public void flt(List<AchsenK1> liste)
 	{
 		rWidth = right.getWidth();
 		rHeight =  right.getHeight();
@@ -158,6 +160,7 @@ public class UI
 			try
 			{
 				if(!chargeInNew.exists())
+					//noinspection ResultOfMethodCallIgnored
 					chargeInNew.mkdir();
 				Type new1 = new Type(chargeInNew, Start.ak1s, aeKam);
 				boolean ok = true;
@@ -188,7 +191,7 @@ public class UI
 			left.updateUI();
 			switchType = false;
 		}
-		types.forEach(type -> type.flt(aeKam));
+		types.forEach(type -> type.flt(aeKam, liste));
 		if(changeSettings)
 		{
 			changeSettings = false;

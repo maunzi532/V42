@@ -30,6 +30,7 @@ public class Type extends JPanel implements LC1
 	boolean reloadVSet;
 	public boolean saveAndActualize;
 	public boolean reload;
+	public boolean plusView;
 
 	public Type(File location, List<AchsenK1> liste, AEKam aeKam) throws IOException
 	{
@@ -79,6 +80,7 @@ public class Type extends JPanel implements LC1
 		if(v42s == null)
 		{
 			v42s = new File(location.getPath() + File.separator + "Standard.v42s");
+			//noinspection ResultOfMethodCallIgnored
 			v42s.createNewFile();
 		}
 
@@ -143,16 +145,9 @@ public class Type extends JPanel implements LC1
 		viewsPanel.add(minusView, BorderLayout.LINE_START);
 		innerViewsPanel = new JPanel(new GridLayout(1, 0));
 		viewsPanel.add(innerViewsPanel, BorderLayout.CENTER);
-		JButton plusView = new JButton("+");
-		plusView.addActionListener(e ->
-		{
-			AView av = new AView(name, liste, aeKam);
-			av.addActionListener(e1 -> switchToView = av);
-			views.add(av);
-			innerViewsPanel.add(av);
-			innerViewsPanel.updateUI();
-		});
-		viewsPanel.add(plusView, BorderLayout.LINE_END);
+		JButton plusView1 = new JButton("+");
+		plusView1.addActionListener(e -> plusView = true);
+		viewsPanel.add(plusView1, BorderLayout.LINE_END);
 		for(AView v : views)
 			v.addActionListener(e -> switchToView = v);
 		views.forEach(innerViewsPanel::add);
@@ -165,8 +160,17 @@ public class Type extends JPanel implements LC1
 		views.forEach(edit.AView::actualize);
 	}
 
-	public void flt(AEKam aeKam)
+	public void flt(AEKam aeKam, List<AchsenK1> liste)
 	{
+		if(plusView)
+		{
+			AView av = new AView(name, liste, aeKam);
+			av.addActionListener(e1 -> switchToView = av);
+			views.add(av);
+			innerViewsPanel.add(av);
+			innerViewsPanel.updateUI();
+			plusView = false;
+		}
 		if(switchToView != null)
 		{
 			currentView = switchToView;

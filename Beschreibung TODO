@@ -11,17 +11,10 @@ Stufe Mine
 	Welt generieren
 
 Stufe Editor
-	Plane
-	List
-	Type
-	AView
-	AEKam
-	EditerTab
-	Positionierer
+	---
 
 Stufe Achsen1
 	Index entfernen
-	Tha Modell neu erstellen
 	Mit "1-Versionen" ersetzen
 
 Stufe Stoff
