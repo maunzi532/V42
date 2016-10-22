@@ -31,7 +31,7 @@ public class Start
 		fr = new JFrame();
 		fr.setExtendedState(Frame.MAXIMIZED_BOTH);
 		fr.setSize(800, 600);
-		kam = new AEKam2(new K4(), 20, new Drehung(), 0.05);
+		kam = new AEKam2(20, 0.05, 0.05);
 		ui = new UI(fr, ta, kam);
 		fr.addWindowListener(new WindowAdapter()
 		{
@@ -85,7 +85,7 @@ public class Start
 			ta.move();
 			if(ta.keyStat[0] > 0)
 				break;
-			kam.tick(ta.keyStat[1] > 0, ta.keyStat[2] > 0, ta.keyStat[3] > 0, ta.keyStat[4] > 0);
+			kam.tick(ta.keyStat2);
 			ui.flt(ak1s);
 			ak1s.forEach(AchsenK1::reset);
 			vor1.vorbereiten(kam, ui.rWidth, ui.rHeight, ui.rWidth,

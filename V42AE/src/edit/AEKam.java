@@ -20,32 +20,34 @@ public class AEKam implements IKamera
 	int tick;
 	int maxTicks;
 	double turnSpeed;
+	double mvSpeed;
 
-	public AEKam(K4 ziel, double abstand, Drehung winkel, double turnSpeed)
+	public AEKam(double abstand, double turnSpeed, double mvSpeed)
 	{
-		sichtP = new K4(ziel);
-		sichtD = new Drehung(winkel);
+		sichtP = new K4();
+		sichtD = new Drehung();
 		sichtA = abstand;
 		zP = new K4();
 		this.turnSpeed = turnSpeed;
+		this.mvSpeed = mvSpeed;
 		errechnePosition();
 	}
 
-	public void tick(boolean l, boolean r, boolean o, boolean u)
+	public void tick(boolean[] keyStat)
 	{
 		boolean ePosition = false;
 		if(tick >= maxTicks)
 		{
 			int lr = 0;
 			int ou = 0;
-			if(l != r)
+			if(keyStat[1] != keyStat[2])
 			{
-				lr = r ? 1 : -1;
+				lr = keyStat[2] ? 1 : -1;
 				ePosition = true;
 			}
-			if(o != u)
+			if(keyStat[3] != keyStat[4])
 			{
-				ou = u ? 1 : -1;
+				ou = keyStat[4] ? 1 : -1;
 				ePosition = true;
 			}
 			sichtD.wl += lr * (ou != 0 ? 0.7 : 1d) * turnSpeed;
@@ -56,8 +58,16 @@ public class AEKam implements IKamera
 				sichtD.wb = Math.PI * 3 / 2;
 			if(ePosition)
 				sichtD.sichern();
+			int mou = 0;
+			if(keyStat[5] != keyStat[6])
+			{
+				mou = keyStat[5] ? 1 : -1;
+				ePosition = true;
+			}
+			zP.b += mou * mvSpeed;
+			sichtP.b += mou * mvSpeed;
 		}
-		if(tick < maxTicks)
+		else
 		{
 			tick++;
 			sichtA = startA * (1 - tick / (double) maxTicks) + zielA * (tick / (double) maxTicks);

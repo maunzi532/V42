@@ -13,6 +13,7 @@ public class TA2
 
 	private int[][] moves;
 	public int[] keyStat;
+	public boolean[] keyStat2;
 
 	public void away()
 	{
@@ -111,6 +112,7 @@ public class TA2
 					keyStat[i] = 1;
 				else
 					keyStat[i] = 2;
+				keyStat2[i] = true;
 			}
 			else
 			{
@@ -118,6 +120,7 @@ public class TA2
 					keyStat[i] = 0;
 				else
 					keyStat[i] = -1;
+				keyStat2[i] = false;
 			}
 		}
 		k2 = new boolean[1024];
@@ -151,5 +154,6 @@ public class TA2
 			if(moves[i] == null)
 				moves[i] = new int[0];
 		keyStat = new int[moves.length];
+		keyStat2 = new boolean[moves.length];
 	}
 }

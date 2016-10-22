@@ -155,7 +155,8 @@ public class Type extends JPanel implements LC1
 		for(AView v : views)
 			v.addActionListener(e -> switchToView = v);
 		views.forEach(innerViewsPanel::add);
-		switchToView = currentView;
+		currentView.aktivieren(dTabs, fTabs);
+		toView = true;
 		reload();
 	}
 

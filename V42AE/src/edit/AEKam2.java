@@ -7,9 +7,9 @@ public class AEKam2 extends AEKam
 {
 	int w = 0;
 
-	public AEKam2(K4 ziel, double abstand, Drehung winkel, double turnSpeed)
+	public AEKam2(double abstand, double turnSpeed, double mvSpeed)
 	{
-		super(ziel, abstand, winkel, turnSpeed);
+		super(abstand, turnSpeed, mvSpeed);
 	}
 
 	public void forderePositionAn(AchsenK1 ak1)
