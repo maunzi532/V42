@@ -12,9 +12,9 @@ public class AView extends JButton
 	String drehfile;
 	List<String> sichtbar;
 
+	double kamDistance;
 	Drehung kamDreh;
 	K4 kamMoved;
-	double kamDistance;
 
 	public AView(String name, String build, List<AchsenK1> liste, AEKam aeKam) throws NumberFormatException
 	{
@@ -77,5 +77,23 @@ public class AView extends JButton
 		}
 		else
 			ak1.reload();
+	}
+
+	public void avac(AEKam kam)
+	{
+		kamDistance = kam.avAbstand();
+		kamDreh = kam.avDreh();
+		kamMoved = kam.zP;
+	}
+
+	public StringBuilder saveText()
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append('\n').append(kamDistance).append(", ").append(kamDreh.wl).append(", ").append(kamDreh.wb)
+				.append(", ").append(kamMoved.a).append(", ").append(kamMoved.b).append(", ")
+				.append(kamMoved.c).append(", ").append(kamMoved.d).append(", ").append(drehfile);
+		for(int i = 0; i < sichtbar.size(); i++)
+			sb.append(", ").append(sichtbar.get(i));
+		return sb.append(';');
 	}
 }

@@ -41,11 +41,6 @@ public class UI
 	public int rWidth;
 	public int rHeight;
 
-	public EditerTab currentEditerTab()
-	{
-		return (EditerTab) currentType.tabPanel.getSelectedComponent();
-	}
-
 	public UI(JFrame frame, TA2 ta, AEKam aeKam)
 	{
 		this.aeKam = aeKam;
@@ -150,9 +145,9 @@ public class UI
 		}
 		if(focus)
 			right.requestFocusInWindow();
-		else if(right.hasFocus()/* && editerTabs.size() > 0*/)
+		else if(right.hasFocus() && currentType != null && currentType.currentTab != null)
 		{
-			//editerTabs.get(currentE).get(tabPanel.getSelectedIndex()).plane.requestFocusInWindow();
+			currentType.currentTab.plane.requestFocusInWindow();
 			Start.ta.away();
 		}
 		if(chargeInNew != null)
@@ -185,10 +180,14 @@ public class UI
 		if(switchType)
 		{
 			if(currentType != null)
+			{
+				currentType.currentView.avac(aeKam);
 				left.remove(currentType);
+			}
 			currentType = typesL.getSelectedValue();
 			left.add(currentType, BorderLayout.CENTER);
 			left.updateUI();
+			currentType.toView = true;
 			switchType = false;
 		}
 		types.forEach(type -> type.flt(aeKam, liste));
@@ -199,5 +198,11 @@ public class UI
 			fl2v = fl2.isSelected();
 			xr3v = xr3.isSelected();
 		}
+	}
+
+	public void saveConfigs(AEKam aeKam)
+	{
+		for(Type t : types)
+			t.saveConfig(aeKam, t == currentType);
 	}
 }

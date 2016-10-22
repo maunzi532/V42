@@ -4,13 +4,17 @@ import a3.*;
 import achsen.*;
 import edit.*;
 import indexLader.*;
+import java.awt.*;
+import java.awt.event.*;
 import java.util.*;
+import java.util.List;
+import javax.swing.*;
 import k4.*;
 
 public class Start
 {
 	public static TA2 ta;
-	static LPaneel pl;
+	static JFrame fr;
 	static UI ui;
 	static Vor1 vor1;
 	static LichtW lw;
@@ -24,10 +28,24 @@ public class Start
 	{
 		ta = new TA2();
 		ta.feedMoves(Lader4.readText(Lader4.bauName("E", "TA2"), true));
-		pl = new LPaneel(800, 600, true, 0, 0);
+		fr = new JFrame();
+		fr.setExtendedState(Frame.MAXIMIZED_BOTH);
+		fr.setSize(800, 600);
 		kam = new AEKam2(new K4(), 20, new Drehung(), 0.05);
-		ui = new UI(pl.fr, ta, kam);
-		pl.showFrame();
+		ui = new UI(fr, ta, kam);
+		fr.addWindowListener(new WindowAdapter()
+		{
+			@Override
+			public void windowClosing(WindowEvent e)
+			{
+				ui.saveConfigs(kam);
+				System.exit(0);
+			}
+		});
+		fr.setVisible(true);
+		while(true)
+			if(fr.isActive())
+				break;
 		ak1s = new ArrayList<>();
 		lw = new LichtW();
 		lw.licht.add(new Licht()
@@ -79,6 +97,7 @@ public class Start
 			ui.right.getGraphics().drawImage(panelizer.light, 0, 0, null);
 			sleep(10);
 		}
+		ui.saveConfigs(kam);
 		System.exit(0);
 	}
 

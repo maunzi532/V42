@@ -21,16 +21,19 @@ public class Type extends JPanel implements LC1
 	List<EditerTab> fTabs;
 	ButtonGroup drehfilesGroup;
 	List<AView> views;
-	AView currentView;
 	JPanel viewsPanel;
 	JPanel innerViewsPanel;
 	List<EditerTab> editerTabs;
 
+	File v42c;
+	AView currentView;
 	AView switchToView;
+	boolean toView;
 	boolean reloadVSet;
 	public boolean saveAndActualize;
 	public boolean reload;
 	public boolean plusView;
+	public EditerTab currentTab;
 
 	public Type(File location, List<AchsenK1> liste, AEKam aeKam) throws IOException
 	{
@@ -44,7 +47,6 @@ public class Type extends JPanel implements LC1
 
 		File[] files = location.listFiles();
 		assert files != null;
-		File v42c = null;
 		File v42s = null;
 		List<File> v42d = new ArrayList<>();
 		List<File> v42f = new ArrayList<>();
@@ -90,6 +92,7 @@ public class Type extends JPanel implements LC1
 		editerTabs.add(sTab);
 		tabPanel.add(sTab);
 		tabPanel.setTabComponentAt(lastTab, sTab.getOverS());
+		currentTab = sTab;
 		dTabs = new ArrayList<>();
 		drehfilesGroup = new ButtonGroup();
 		for(File file : v42d)
@@ -111,6 +114,7 @@ public class Type extends JPanel implements LC1
 			lastTab++;
 			tabPanel.setTabComponentAt(lastTab, tab.getOverF());
 		}
+		tabPanel.addChangeListener(e -> currentTab = (EditerTab) tabPanel.getSelectedComponent());
 		add(tabPanel);
 
 		views = new ArrayList<>();
@@ -130,7 +134,7 @@ public class Type extends JPanel implements LC1
 			{
 				AView av = new AView(name, lines[i], liste, aeKam);
 				views.add(av);
-				if(dch == i)
+				if(dch == i - 1)
 					currentView = av;
 			}
 			catch(NumberFormatException ignored){}
@@ -141,7 +145,7 @@ public class Type extends JPanel implements LC1
 			currentView = views.get(0);
 
 		JButton minusView = new JButton("-");
-		//minusView.addActionListener();
+		minusView.setBackground(Color.BLACK);
 		viewsPanel.add(minusView, BorderLayout.LINE_START);
 		innerViewsPanel = new JPanel(new GridLayout(1, 0));
 		viewsPanel.add(innerViewsPanel, BorderLayout.CENTER);
@@ -160,6 +164,29 @@ public class Type extends JPanel implements LC1
 		views.forEach(edit.AView::actualize);
 	}
 
+	public void saveConfig(AEKam aeKam, boolean x)
+	{
+		if(currentView != null)
+		{
+			if(x)
+				currentView.avac(aeKam);
+			StringBuilder sb = new StringBuilder();
+			int index = views.indexOf(currentView);
+			if(index < 0)
+				return;
+			sb.append(index).append(';');
+			for(int i = 0; i < views.size(); i++)
+				sb.append(views.get(i).saveText());
+			try
+			{
+				Files.write(v42c.toPath(), sb.toString().getBytes("UTF-8"));
+			}catch(IOException e)
+			{
+				JOptionPane.showMessageDialog(this, "Behinderter Fehler: " + e.getMessage());
+			}
+		}
+	}
+
 	public void flt(AEKam aeKam, List<AchsenK1> liste)
 	{
 		if(plusView)
@@ -173,11 +200,17 @@ public class Type extends JPanel implements LC1
 		}
 		if(switchToView != null)
 		{
+			currentView.avac(aeKam);
 			currentView = switchToView;
 			currentView.aktivieren(dTabs, fTabs);
-			aeKam.beweg(currentView.ak1.position, currentView.kamDistance);
 			switchToView = null;
+			toView = true;
 			reloadVSet = false;
+		}
+		if(toView)
+		{
+			aeKam.beweg(currentView.kamDistance, currentView.kamDreh, currentView.kamMoved, currentView.ak1.position);
+			toView = false;
 		}
 		if(reloadVSet)
 		{
@@ -215,23 +248,5 @@ public class Type extends JPanel implements LC1
 	public String toString()
 	{
 		return name;
-	}
-
-	@Override
-	public boolean equals(Object o)
-	{
-		if(this == o) return true;
-		if(o == null || getClass() != o.getClass()) return false;
-
-		Type type = (Type) o;
-
-		return !(location != null ? !location.equals(type.location) : type.location != null);
-
-	}
-
-	@Override
-	public int hashCode()
-	{
-		return location != null ? location.hashCode() : 0;
 	}
 }

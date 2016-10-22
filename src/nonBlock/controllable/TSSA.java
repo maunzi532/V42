@@ -18,7 +18,9 @@ public abstract class TSSA extends FWA implements Licht
 			{0.1, 0, 0.2, 0.1}, null};
 	private static Boolean[] zboden = new Boolean[]{true, null, false, true};
 	private static boolean[] canDreh = new boolean[]{true, false, true, false};
-
+	//Zustand in FWA einbauen
+	//Zustand als Objekt
+	//mit zusatz werten
 	private int grabRichtung = -1;
 
 	TSSA(Controller control, LadeFWA abilities, String currentZ, WeltB welt, WeltND dw, WeltNB bw)
@@ -39,7 +41,7 @@ public abstract class TSSA extends FWA implements Licht
 		double[] canInfl;
 		if(zboden[zIndex] != null)
 		{
-			boolean boden = naheWand(2, 0.1);
+			boolean boden = naheWand(2, 0.1); //und b-speed
 			if(zboden[zIndex] != boden)
 			{
 				lastZ = currentZ;

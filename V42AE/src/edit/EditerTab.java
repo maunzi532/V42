@@ -27,7 +27,6 @@ public class EditerTab extends JScrollPane
 		plane.setTabSize(4);
 		setViewportView(plane);
 		plane.setText(new String(Files.readAllBytes(Paths.get(file.getPath())), Charset.forName("UTF-8")));
-
 	}
 
 	public JPanel getOverS()
@@ -37,10 +36,10 @@ public class EditerTab extends JScrollPane
 		over = new JPanel();
 		over.add(new JLabel(name));
 		JButton plusD = new JButton("+D");
-
+		plusD.setBackground(Color.BLACK);
 		over.add(plusD);
 		JButton plusF = new JButton("+F");
-
+		plusF.setBackground(Color.BLACK);
 		over.add(plusF);
 		return over;
 	}
