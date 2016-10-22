@@ -1,15 +1,9 @@
-Nicht sicher
-	4D-Daten des aktuellen Felds anzeigen
-	NBD - Idle Bewegung
+Controls fixen
+Index entfernen
 
-Stufe Mine
-	ZP4C neu machen und umwandeln in LadeCM
-	System F - GMKamera mitbewegen
-	Automatische Targeting Aktivierung
-	Block Platzier Auswahl
-	Blöcke drehen
-	Welt generieren
+Stufe Blöcke
 	Blöcke nachsplitten
+	ZP4C neu machen und umwandeln in LadeCM
 
 Stufe Editor
 	Fehlende Funktionen einbauen
@@ -18,8 +12,8 @@ Stufe Editor
 Stufe Achsen1
 	Punkte
 	Flächen auf anderen Flächen
-	Index entfernen
 	Mit "1-Versionen" ersetzen
+
 
 Stufe Stoff
 	Haare neu machen
@@ -36,9 +30,17 @@ Stufe Leiste
 	Cooldown-Anzeige (mit FWA)
 	Kollisionsaktualisierung beachten
 
-Stufe Eingabe
+Stufe SystemF
+	System F - GMKamera mitbewegen
+	Automatische Targeting Aktivierung
+	Block Platzier Auswahl
+	Blöcke drehen
+	Welt generieren
 
 Stufe 2
+	4D-Daten des aktuellen Felds anzeigen
+	NBD - Idle Bewegung
+	Eingabefelder
 	Schrift Aussehen
 	Hauptmenü einbauen
 	Sinnvolles Attk

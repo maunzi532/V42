@@ -7,16 +7,17 @@ Rules for using:
 7. Try keeping the size of the compiled version rather small  
 8. (evtl.) All take smite and go to __botlane__  
 9. Read the __Controls__ before using (May be outdated though)  
-A. The contents of "Beschreibung" are __probably useless__  
-B. Any changes in the text files can (and will) produce a crash  
+A. Any changes in the text files can (and will) produce a crash  
+B. Not in the Editor  
 C. When something is needed public, __make public!__  
-D. __Avoid__ getters and setters  
+D. __Avoid__ getters and setters (especially setters)  
 E. The other character is for testing bugged hair which heavily bugs on the player character  
+F. The Editor has no manual
 
-# Controls (May be outdated)
+# Controls (Probably will not work)
 The Controls depend on your Overlay Settings  
 Go to Einstellungen/Overlay1 and replace TA1  
-with TA2 if you want the second control scheme  
+with TA2 if you want the second control scheme (This is because of weird programming and should get fixed)  
 I,W - forward, grab edge, climb up  
 J,A - left  
 L,D - right  
