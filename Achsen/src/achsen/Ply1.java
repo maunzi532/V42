@@ -26,7 +26,7 @@ public class Ply1 implements LC1
 	{
 		punkte = new ArrayList<>();
 		int achse = -1;
-		ArrayList<String> teils = klaSplit(build);
+		ArrayList<String> teils = LC1.klaSplit(build);
 		for(int i = 0; i < teils.size(); i++)
 			if(i % 2 == 0)
 				achse = Integer.parseInt(teils.get(i));

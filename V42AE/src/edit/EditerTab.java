@@ -1,5 +1,6 @@
 package edit;
 
+import achsen.*;
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.*;
@@ -36,10 +37,10 @@ public class EditerTab extends JScrollPane
 		over = new JPanel();
 		over.add(new JLabel(name));
 		JButton plusD = new JButton("+D");
-		plusD.setBackground(Color.BLACK);
+		plusD.addActionListener(e -> von.newD = JOptionPane.showInputDialog(this, "Name der .v42d Datei") + ".v42d");
 		over.add(plusD);
 		JButton plusF = new JButton("+F");
-		plusF.setBackground(Color.BLACK);
+		plusF.addActionListener(e -> von.newF = JOptionPane.showInputDialog(this, "Name der .v42f Datei") + ".v42f");
 		over.add(plusF);
 		return over;
 	}
@@ -71,6 +72,12 @@ public class EditerTab extends JScrollPane
 
 	public void save() throws IOException
 	{
-		Files.write(Paths.get(file.getPath()), plane.getText().getBytes(Charset.forName("UTF-8")));
+		String text = plane.getText();
+		if(radioButton != null)
+		{
+			text = Alternate1.auto(text, Standard1.achsennummern(von.sTab.plane.getText()));
+			plane.setText(text);
+		}
+		Files.write(Paths.get(file.getPath()), text.getBytes(Charset.forName("UTF-8")));
 	}
 }

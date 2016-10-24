@@ -3,7 +3,7 @@ package achsen;
 import indexLader.*;
 import java.util.*;
 
-public class Standard1 implements LC1
+public class Standard1
 {
 	ArrayList<Achse1> achsen;
 
@@ -12,7 +12,7 @@ public class Standard1 implements LC1
 		achsen = new ArrayList<>();
 		if(build.length() == 0)
 			return;
-		for(String line : klaSplit(build))
+		for(String line : LC1.klaSplit(build))
 		{
 			int div = line.indexOf("=");
 			int klae = line.indexOf("{");
@@ -26,6 +26,23 @@ public class Standard1 implements LC1
 			}
 			achsen.add(new Achse1(line.substring(div == 0 ? 0 : div + 1)));
 		}
+	}
+
+	public static ArrayList<Integer> achsennummern(String build)
+	{
+		if(build.length() == 0)
+			return new ArrayList<>();
+		ArrayList<Integer> toR = new ArrayList<>();
+		for(String line : LC1.klaSplit(build))
+		{
+			int div = line.indexOf("=");
+			int klae = line.indexOf("{");
+			if(klae < div)
+				div = 0;
+			else
+				toR.add(Integer.parseInt(line.substring(0, div)));
+		}
+		return toR;
 	}
 
 	public static Standard1 gibVonL4(String name, boolean save)

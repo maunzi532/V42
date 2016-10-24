@@ -34,6 +34,9 @@ public class Type extends JPanel implements LC1
 	public boolean reload;
 	public boolean plusView;
 	public EditerTab currentTab;
+	public String newD;
+	public String newF;
+	int lastTab;
 
 	public Type(File location, List<AchsenK1> liste, AEKam aeKam) throws IOException
 	{
@@ -87,7 +90,6 @@ public class Type extends JPanel implements LC1
 		}
 
 		editerTabs = new ArrayList<>();
-		int lastTab = 0;
 		sTab = new EditerTab(v42s, this);
 		editerTabs.add(sTab);
 		tabPanel.add(sTab);
@@ -118,7 +120,7 @@ public class Type extends JPanel implements LC1
 		add(tabPanel);
 
 		views = new ArrayList<>();
-		String[] lines = decommentandcut(config).split(";");
+		String[] lines = LC1.decommentandcut(config).split(";");
 		int dch;
 		try
 		{
@@ -223,6 +225,58 @@ public class Type extends JPanel implements LC1
 					.map(fTab -> fTab.name).collect(Collectors.toList()));
 			reloadVSet = false;
 			reload = true;
+		}
+		if(newD != null)
+		{
+			if(!newD.isEmpty())
+			{
+				try
+				{
+					File f = new File(location.getPath() + File.separator + newD);
+					if(!f.exists())
+					{
+						//noinspection ResultOfMethodCallIgnored
+						f.createNewFile();
+						EditerTab tab = new EditerTab(f, this);
+						editerTabs.add(tab);
+						dTabs.add(tab);
+						tabPanel.add(tab);
+						lastTab++;
+						tabPanel.setTabComponentAt(lastTab, tab.getOverD(drehfilesGroup));
+					}
+				}
+				catch(IOException e)
+				{
+					JOptionPane.showMessageDialog(this, "Behinderter Fehler: " + e.toString());
+				}
+			}
+			newD = null;
+		}
+		if(newF != null)
+		{
+			if(!newF.isEmpty())
+			{
+				try
+				{
+					File f = new File(location.getPath() + File.separator + newF);
+					if(!f.exists())
+					{
+						//noinspection ResultOfMethodCallIgnored
+						f.createNewFile();
+						EditerTab tab = new EditerTab(f, this);
+						editerTabs.add(tab);
+						fTabs.add(tab);
+						tabPanel.add(tab);
+						lastTab++;
+						tabPanel.setTabComponentAt(lastTab, tab.getOverF());
+					}
+				}
+				catch(IOException e)
+				{
+					JOptionPane.showMessageDialog(this, "Behinderter Fehler: " + e.toString());
+				}
+			}
+			newF = null;
 		}
 		if(saveAndActualize)
 		{

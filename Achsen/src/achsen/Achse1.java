@@ -19,7 +19,7 @@ public class Achse1
 			if(line.length() == 0)
 				continue;
 			String[] lr = line.split("=");
-			if(lr[0].equals("l"))
+			if(lr[0].equals("a"))
 			{
 				String[] r = lr[1].split(",");
 				linkedAchse = Integer.parseInt(r[0]);

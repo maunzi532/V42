@@ -12,7 +12,7 @@ public class ADreh1 implements LC1
 
 	ADreh1(String build)
 	{
-		ArrayList<String> list = klaSplit(build);
+		ArrayList<String> list = LC1.klaSplit(build);
 		dreh = new Drehung(d2r(list.get(0)), d2r(list.get(1)));
 		len = Double.parseDouble(list.get(2));
 		if(list.size() > 3)

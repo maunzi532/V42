@@ -1,6 +1,7 @@
 package achsen;
 
 import indexLader.*;
+import java.util.*;
 
 public class Alternate1
 {
@@ -26,6 +27,26 @@ public class Alternate1
 			drehungen[next] = new ADreh1(line);
 			next++;
 		}
+	}
+
+	public static String auto(String build, ArrayList<Integer> achsen)
+	{
+		StringBuilder sb = new StringBuilder();
+		sb.append(build);
+		build = build.replace("\t", "").replace("\n", "").replace(" ", "");
+		int next = 0;
+		for(String line : build.split(";"))
+		{
+			if(line.length() == 0)
+				continue;
+			if(line.contains("="))
+				next = Integer.parseInt(line.split("=")[0]);
+			achsen.remove((Integer) next);
+			next++;
+		}
+		for(Integer fehlt : achsen)
+			sb.append(fehlt).append(" = 0, 0, 1;\n");
+		return sb.toString();
 	}
 
 	public static Alternate1 gibVonL4(String name1, String name2, int len, boolean save)

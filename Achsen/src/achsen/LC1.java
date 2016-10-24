@@ -4,7 +4,7 @@ import java.util.*;
 
 public interface LC1
 {
-	default String decommentandcut(String build)
+	public static String decommentandcut(String build)
 	{
 		String[] lines = build.split("\n");
 		StringBuilder sb = new StringBuilder();
@@ -29,7 +29,7 @@ public interface LC1
 		return sb.toString().replace("\t", "").replace(" ", "");
 	}
 
-	default ArrayList<String> klaSplit(String build)
+	public static ArrayList<String> klaSplit(String build)
 	{
 		build = build.replace("\t", "").replace("\n", "").replace(" ", "");
 		ArrayList<String> lines = new ArrayList<>();
