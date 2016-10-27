@@ -8,6 +8,8 @@ public class Achse1
 	int linkedAchse = -1;
 	int linkedPunkt;
 
+	public Achse1(){}
+
 	public Achse1(String build)
 	{
 		ArrayList<Punkt1> punkte1 = new ArrayList<>();

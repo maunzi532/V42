@@ -1,8 +1,9 @@
 package achsen;
 
+import indexLader.*;
 import java.util.*;
 
-public class Ply1 implements LC1
+public class Ply1 implements LC2
 {
 	public ArrayList<AP1> punkte;
 	public IFarbe farbe;
@@ -26,7 +27,7 @@ public class Ply1 implements LC1
 	{
 		punkte = new ArrayList<>();
 		int achse = -1;
-		ArrayList<String> teils = LC1.klaSplit(build);
+		ArrayList<String> teils = LC2.klaSplit(build);
 		for(int i = 0; i < teils.size(); i++)
 			if(i % 2 == 0)
 				achse = Integer.parseInt(teils.get(i));

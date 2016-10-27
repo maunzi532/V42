@@ -3,7 +3,7 @@ package achsen;
 import indexLader.*;
 import java.util.*;
 
-public class LadeTeil1 implements LC1
+public class LadeTeil1 implements LC2
 {
 	public static IFarbe factory;
 
@@ -14,7 +14,7 @@ public class LadeTeil1 implements LC1
 		plys = new ArrayList<>();
 		if(build.length() == 0)
 			return;
-		for(String decl : LC1.klaSplit(build))
+		for(String decl : LC2.klaSplit(build))
 		{
 			String[] b2 = decl.substring(1, decl.length() - 1).split(";");
 			IFarbe farbe = null;
@@ -39,7 +39,7 @@ public class LadeTeil1 implements LC1
 						seite = false;
 						break;
 					case "f":
-						farbe = factory.gibNeu(LC1.klaSplit(lr[1]));
+						farbe = factory.gibNeu(LC2.klaSplit(lr[1]));
 						break;
 					case "o":
 						oben = new Ply1(lr[1]);

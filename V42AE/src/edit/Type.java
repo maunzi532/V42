@@ -1,6 +1,7 @@
 package edit;
 
 import achsen.*;
+import indexLader.*;
 import java.awt.*;
 import java.io.*;
 import java.nio.charset.*;
@@ -10,7 +11,7 @@ import java.util.List;
 import java.util.stream.*;
 import javax.swing.*;
 
-public class Type extends JPanel implements LC1
+public class Type extends JPanel
 {
 	String name;
 	File location;
@@ -120,7 +121,7 @@ public class Type extends JPanel implements LC1
 		add(tabPanel);
 
 		views = new ArrayList<>();
-		String[] lines = LC1.decommentandcut(config).split(";");
+		String[] lines = LC2.decommentandcut(config).split(";");
 		int dch;
 		try
 		{

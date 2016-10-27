@@ -1,9 +1,10 @@
 package achsen;
 
+import indexLader.*;
 import java.util.*;
 import k4.*;
 
-public class ADreh1 implements LC1
+public class ADreh1 implements LC2
 {
 	Drehung dreh;
 	double len;
@@ -12,7 +13,7 @@ public class ADreh1 implements LC1
 
 	ADreh1(String build)
 	{
-		ArrayList<String> list = LC1.klaSplit(build);
+		ArrayList<String> list = LC2.klaSplit(build);
 		dreh = new Drehung(d2r(list.get(0)), d2r(list.get(1)));
 		len = Double.parseDouble(list.get(2));
 		if(list.size() > 3)
