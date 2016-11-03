@@ -1,7 +1,9 @@
 package edit;
 
 import achsen.*;
+import indexLader.*;
 import java.awt.*;
+import java.awt.event.*;
 import java.io.*;
 import java.nio.charset.*;
 import java.nio.file.*;
@@ -16,6 +18,7 @@ public class EditerTab extends JScrollPane
 	public JCheckBox checkBox;
 	public JRadioButton radioButton;
 	public Type von;
+	public JEditorPane errView;
 
 	public EditerTab(File file, Type von) throws IOException
 	{
@@ -28,6 +31,15 @@ public class EditerTab extends JScrollPane
 		plane.setTabSize(4);
 		setViewportView(plane);
 		plane.setText(new String(Files.readAllBytes(Paths.get(file.getPath())), Charset.forName("UTF-8")));
+		errView = new JEditorPane("text/html", "");
+		errView.addMouseListener(new MouseAdapter()
+		{
+			@Override
+			public void mouseClicked(MouseEvent e)
+			{
+				setViewportView(plane);
+			}
+		});
 	}
 
 	public JPanel getOverS()
@@ -93,5 +105,11 @@ public class EditerTab extends JScrollPane
 			return "";
 		}
 		return plane.getText();
+	}
+
+	public void applyVial(ErrorVial vial)
+	{
+		errView.setText(vial.markText());
+		setViewportView(errView);
 	}
 }

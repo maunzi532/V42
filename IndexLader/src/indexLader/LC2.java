@@ -110,9 +110,11 @@ public interface LC2
 	static ArrayList<Integer> areaEnds(String build)
 	{
 		ArrayList<Integer> ends = new ArrayList<>();
+		//ends.add(0);
 		for(int i = 0; i < build.length(); i++)
 			if(build.charAt(i) == ',' || build.charAt(i) == ';' || build.charAt(i) == '=')
 				ends.add(i);
+		ends.add(build.length());
 		return ends;
 	}
 

@@ -188,6 +188,7 @@ public class Type extends JPanel
 		}
 		else
 		{
+			sTab.applyVial(standardErrors);
 			System.out.println(standardErrors);
 		}
 	}
