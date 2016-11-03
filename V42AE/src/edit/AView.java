@@ -7,7 +7,7 @@ import k4.*;
 
 public class AView extends JButton
 {
-	AchsenK1 ak1;
+	public AchsenK1 ak1;
 	String name;
 	String drehfile;
 	List<String> sichtbar;
@@ -77,6 +77,11 @@ public class AView extends JButton
 		}
 		else
 			ak1.reload();
+	}
+
+	public void actualize(Standard1 sta, HashMap<String, Alternate1> alts, HashMap<String, LadeTeil1> teils)
+	{
+		ak1.reload(sta, alts.get(drehfile), sichtbar.stream().map(teils::get).toArray(LadeTeil1[]::new));
 	}
 
 	public void avac(AEKam kam)

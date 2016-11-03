@@ -160,12 +160,36 @@ public class Type extends JPanel
 		views.forEach(innerViewsPanel::add);
 		currentView.aktivieren(dTabs, fTabs);
 		toView = true;
-		reload();
+		reload(null);
 	}
 
-	public void reload()
+	public void reload(AView view)
 	{
-		views.forEach(edit.AView::actualize);
+		Standard1 lsta = new Standard1();
+		ErrorVial standardErrors = lsta.argh(sTab.gSave());
+		if(standardErrors.worked())
+		{
+			HashMap<String, LadeTeil1> lteils = new HashMap<>();
+			if(view != null)
+			{
+				//Alternate1 lalt = new Alternate1()
+			}
+			else
+			{
+				HashMap<String, Alternate1> lalts = new HashMap<>();
+				for(EditerTab dt : dTabs)
+					lalts.put(dt.name, new Alternate1(dt.gSave(), lsta.achsenAnz()));
+				for(EditerTab ft : fTabs)
+					lteils.put(ft.name, new LadeTeil1(ft.gSave()));
+				for(AView av : views)
+					av.actualize(lsta, lalts, lteils);
+			}
+			//views.forEach(edit.AView::actualize);
+		}
+		else
+		{
+			System.out.println(standardErrors);
+		}
 	}
 
 	public void saveConfig(AEKam aeKam, boolean x)
@@ -291,12 +315,12 @@ public class Type extends JPanel
 				{
 					JOptionPane.showMessageDialog(this, "Behinderter Fehler: " + e.getMessage());
 				}
-			reload();
+			reload(null);
 		}
 		if(reload)
 		{
 			reload = false;
-			reload();
+			reload(null);
 		}
 	}
 

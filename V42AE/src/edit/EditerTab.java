@@ -80,4 +80,18 @@ public class EditerTab extends JScrollPane
 		}
 		Files.write(Paths.get(file.getPath()), text.getBytes(Charset.forName("UTF-8")));
 	}
+
+	public String gSave()
+	{
+		try
+		{
+			save();
+		}
+		catch(IOException e)
+		{
+			JOptionPane.showMessageDialog(this, "Behinderter Fehler: " + e.toString());
+			return "";
+		}
+		return plane.getText();
+	}
 }

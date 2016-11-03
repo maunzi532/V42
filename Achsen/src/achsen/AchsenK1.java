@@ -62,6 +62,17 @@ public class AchsenK1 implements IKamera
 		plys = new ArrayList<>();
 	}
 
+	public void reload(Standard1 sta1, Alternate1 alt1, LadeTeil1... lad1)
+	{
+		achsen = sta1;
+		alternate = alt1;
+		drehs = new ADreh1[alternate.drehungen.length];
+		for(int i = 0; i < alternate.drehungen.length; i++)
+			drehs[i] = new ADreh1(alternate.drehungen[i]);
+		plys = new ArrayList<>();
+		Collections.addAll(plys, lad1);
+	}
+
 	@SuppressWarnings("unchecked")
 	public void reset()
 	{

@@ -3,7 +3,7 @@ package achsen;
 import indexLader.*;
 import java.util.*;
 
-public class Standard1
+public class Standard1 implements Decodable
 {
 	ArrayList<Achse1> achsen;
 
@@ -30,6 +30,11 @@ public class Standard1
 		}
 	}
 
+	public int achsenAnz()
+	{
+		return achsen.size();
+	}
+
 	public static ArrayList<Integer> achsennummern(String build)
 	{
 		if(build.length() == 0)
@@ -47,41 +52,24 @@ public class Standard1
 		return toR;
 	}
 
-	public void argh(String build)
+	public ErrorVial argh(String build)
 	{
-		ErrorVial errors = new ErrorVial();
-		build = errors.prep(build);
+		ErrorVial vial = new ErrorVial();
+		build = vial.prep(build);
 		achsen = new ArrayList<>();
-		ArrayList<Integer> ends2_1 = new ArrayList<>();
-		ArrayList<String> buildSpl_1 = LC2.klaSplit2(build, false, 0, ends2_1);
-		int lnum_1 = -1;
-		for(int i_1 = 0; i_1 < buildSpl_1.size(); i_1++)
+		ArrayList<Integer> ends = new ArrayList<>();
+		ArrayList<String> buildSpl = LC2.klaSplit2(build, false, 0, ends);
+		int lnum = -1;
+		for(int i = 0; i < buildSpl.size(); i++)
 		{
-			Object[] returned_1 = LC2.extractKey(buildSpl_1.get(i_1), ends2_1.get(i_1), ends2_1.get(i_1 + 1),
-					true, true, false, lnum_1, errors);
-			lnum_1 = LC2.fillthis(returned_1, achsen, ends2_1, i_1, errors);
-			Achse1 ac_2 = new Achse1();
-			achsen.add(ac_2);
-			ArrayList<Punkt1> punkte_2 = new ArrayList<>();
-			ArrayList<Integer> ends2_2 = new ArrayList<>();
-			ArrayList<String> buildSpl_2 = LC2.klaSplit2((String) returned_1[2], true, ends2_1.get(i_1), ends2_2);
-			int lnum_2 = -1;
-			for(int i_2 = 0; i_2 < buildSpl_2.size(); i_2++)
-			{
-				Object[] returned_2 = LC2.extractKey(buildSpl_2.get(i_2), ends2_2.get(i_2), ends2_2.get(i_2 + 1),
-						false, true, true, lnum_2, errors);
-				if(returned_2[0] != null)
-				{
-					lnum_2 = LC2.fillthis(returned_2, punkte_2, ends2_2, i_2, errors);
-					//punkte_2.add(new Punkt1());
-					//argh
-				}
-				else
-				{
-					//argh
-				}
-			}
+			Object[] returned = LC2.extractKey(buildSpl.get(i), ends.get(i), ends.get(i + 1),
+					true, true, false, lnum, vial);
+			lnum = LC2.fillthis(returned, achsen, ends, i, vial);
+			Achse1 ac = new Achse1();
+			achsen.add(ac);
+			ac.argh((String) returned[2], ends.get(i), vial);
 		}
+		return vial;
 	}
 
 	public static Standard1 gibVonL4(String name, boolean save)

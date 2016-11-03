@@ -179,13 +179,17 @@ public interface LC2
 			}
 		}
 		if(!v2)
+		{
+			end2++;
+			ends2.add(end2);
 			lines.add(sb.toString());
+		}
 		return lines;
 	}
 
 	//Argh
 	static Object[] extractKey(String build, int startN, int nachEndN,
-			boolean removeK, boolean expectN, boolean expectT, int lastN, ErrorVial errors)
+			boolean removeK, boolean expectN, boolean expectT, int lastN, ErrorVial vial)
 	{
 		Object[] toR = new Object[3];
 		if(expectN || expectT)
@@ -205,7 +209,7 @@ public interface LC2
 						else
 						{
 							toR[0] = 0;
-							errors.add(new CError("Nur positive Zahlen im Key", startN, startN + 1));
+							vial.add(new CError("Nur positive Zahlen im Key", startN, startN + 1));
 						}
 					}
 				else
@@ -217,14 +221,14 @@ public interface LC2
 				if(!expectN)
 				{
 					toR[1] = "";
-					errors.add(new CError("Key zuweisen bitte", startN, startN + 1));
+					vial.add(new CError("Key zuweisen bitte", startN, startN + 1));
 				}
 				else if(lastN >= 0)
 					toR[0] = lastN + 1;
 				else
 				{
 					toR[0] = 0;
-					errors.add(new CError("Erster Zahlenkey muss existieren", startN, startN + 1));
+					vial.add(new CError("Erster Zahlenkey muss existieren", startN, startN + 1));
 				}
 			}
 		}
@@ -233,26 +237,89 @@ public interface LC2
 			if(build.charAt(0) == '{' && build.charAt(build.length() - 1) == '}')
 				build = build.substring(1, build.length() - 1);
 			else
-				errors.add(new CError("Nicht alle Klammern vorhanden", startN + 1, nachEndN - 1));
+				vial.add(new CError("Nicht alle Klammern vorhanden", startN + 1, nachEndN - 1));
 		}
 		toR[2] = build;
 		return toR;
 	}
 
 	static int fillthis(Object[] ret, ArrayList fillthis,
-			ArrayList<Integer> ends2, int inends, ErrorVial errors)
+			ArrayList<Integer> ends, int inends, ErrorVial vial)
 	{
 		int lnum = (Integer) ret[0];
 		if(lnum < fillthis.size())
 		{
-			errors.add(new CError("Key " + lnum + " zu klein, muss mindestens " + fillthis.size() + " sein",
-
-					ends2.get(inends), ends2.get(inends) + 1));
+			vial.add(new CError("Key " + lnum + " zu klein, muss mindestens " + fillthis.size() + " sein",
+					ends.get(inends), ends.get(inends) + 1));
 			lnum = fillthis.size();
 		}
 		while(lnum > fillthis.size())
 			//noinspection unchecked
 			fillthis.add(null);
 		return lnum;
+	}
+
+	static Object[] verifyTypes(ArrayList<String> checkThis,
+			int errStart, int errEnd, ErrorVial vial, TFV... types)
+	{
+		Object[] results = new Object[types.length];
+		if(checkThis.size() != types.length)
+			vial.add(new CError("Parameter anzahl: " + checkThis.size() + ", muss " + types.length + " sein",
+					errStart, errEnd));
+		for(int i = 0; i < types.length; i++)
+		{
+			if(i < checkThis.size())
+				switch(types[i])
+				{
+					case INT:
+						try
+						{
+							results[i] = Integer.parseInt(checkThis.get(i));
+						}
+						catch(NumberFormatException e)
+						{
+							vial.add(new CError("Parameter Nummer " + i + " muss int sein",
+									errStart + i, errStart + i + 1));
+							results[i] = 0;
+						}
+						break;
+					case DOUBLE:
+						try
+						{
+							results[i] = Double.parseDouble(checkThis.get(i));
+						}
+						catch(NumberFormatException e)
+						{
+							vial.add(new CError("Parameter Nummer " + i + " muss double sein",
+									errStart + i, errStart + i + 1));
+							results[i] = 0d;
+						}
+						break;
+					case STRING:
+						results[i] = checkThis.get(i);
+						break;
+				}
+			else
+				switch(types[i])
+				{
+					case INT:
+						results[i] = 0;
+						break;
+					case DOUBLE:
+						results[i] = 0d;
+						break;
+					case STRING:
+						results[i] = "";
+						break;
+				}
+		}
+		return results;
+	}
+
+	enum TFV
+	{
+		INT,
+		DOUBLE,
+		STRING
 	}
 }

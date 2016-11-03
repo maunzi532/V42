@@ -4,7 +4,7 @@ import java.util.*;
 
 public interface Decodable
 {
-	ArrayList<CError> argh(String build);
+	ErrorVial argh(String build);
 
 	static ArrayList<CError> combine(ArrayList... errors)
 	{

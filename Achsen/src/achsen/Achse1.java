@@ -1,5 +1,6 @@
 package achsen;
 
+import indexLader.*;
 import java.util.*;
 
 public class Achse1
@@ -71,6 +72,61 @@ public class Achse1
 			default:
 				p1.add(new Punkt1(Double.parseDouble(r[0]),
 						Double.parseDouble(r[1]), d2r(r[2])));
+		}
+	}
+
+	public void argh(String build, int errStart, ErrorVial vial)
+	{
+		ArrayList<Punkt1> punkteL = new ArrayList<>();
+		punkteL.add(new Punkt1(0, 0, 0));
+		punkteL.add(new Punkt1(1, 0, 0));
+		ArrayList<Integer> ends = new ArrayList<>();
+		ArrayList<String> buildSpl = LC2.klaSplit2(build, true, errStart, ends);
+		int lnum = -1;
+		for(int i = 0; i < buildSpl.size(); i++)
+		{
+			Object[] returned = LC2.extractKey(buildSpl.get(i), ends.get(i), ends.get(i + 1),
+					false, true, true, lnum, vial);
+			if(returned[0] != null)
+			{
+				lnum = LC2.fillthis(returned, punkteL, ends, i, vial);
+				Punkt1.argh((String) returned[2], punkteL, ends.get(i), ends.get(i + 1), vial);
+			}
+			else if("a".equalsIgnoreCase((String) returned[1]))
+				arghA((String) returned[2], ends.get(i), ends.get(i + 1), vial);
+			else
+				vial.add(new CError("Wos is des?", ends.get(i), ends.get(i + 1)));
+		}
+		punkte = punkteL.toArray(new Punkt1[punkteL.size()]);
+	}
+
+	private void arghA(String build, int errStart, int errEnd, ErrorVial vial)
+	{
+		ArrayList<Integer> ends = new ArrayList<>();
+		ArrayList<String> buildSpl = LC2.klaSplit2(build, false, errStart, ends);
+		if(buildSpl.size() == 2)
+		{
+			try
+			{
+				linkedAchse = Integer.parseInt(buildSpl.get(0));
+			}catch(NumberFormatException e)
+			{
+				vial.add(new CError("Anschluss Achse ist kein int",
+						ends.get(0), ends.get(1)));
+			}
+			try
+			{
+				linkedPunkt = Integer.parseInt(buildSpl.get(1));
+			}catch(NumberFormatException e)
+			{
+				vial.add(new CError("Anschluss Punkt ist kein int",
+						ends.get(1), ends.get(2)));
+			}
+		}
+		else
+		{
+			vial.add(new CError("Anschluss Parameter anzahl: " + buildSpl.size() + ", muss 2 sein",
+					errStart, errEnd));
 		}
 	}
 
