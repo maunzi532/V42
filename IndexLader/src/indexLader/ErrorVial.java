@@ -4,7 +4,7 @@ import java.util.*;
 
 public class ErrorVial
 {
-	ArrayList<CError> errors;
+	public ArrayList<CError> errors;
 	ArrayList<Integer> areaEnds;
 	String buildX;
 
@@ -31,32 +31,16 @@ public class ErrorVial
 		return errors.isEmpty();
 	}
 
-	//WAGUUUH
-	public String markText()
+	public int[] mark(CError e, int xm)
 	{
-		StringBuilder sb = new StringBuilder();
-		int ed = 0;
-		sb.append(buildX.substring(0, areaEnds.get(0)).replace("\n", "<br>"));
-		for(int i = 0; i < areaEnds.size(); i++)
-		{
-			if(i + 1 < areaEnds.size())
-				sb.append(buildX.substring(areaEnds.get(i), areaEnds.get(i + 1)).replace("\n", "<br>"));
-			int edA = ed;
-			for(CError err : errors)
-			{
-				if(err.areaStart == i)
-					ed++;
-				if(err.areaEnd == i)
-					ed--;
-			}
-			if(ed < 0)
-				ed = 0;
-			if(ed > 0 && edA == 0)
-				sb.append("<b>");
-			if(ed == 0 && edA > 0)
-				sb.append("</b>");
-		}
-		return sb.toString();
+		int[] toR = new int[2];
+		toR[0] = areaEnds.get(e.areaStart + 1) + 1;
+		toR[1] = areaEnds.get(e.areaEnd + 1);
+		if(toR[0] < 0)
+			toR[0] = 0;
+		if(toR[1] > xm)
+			toR[1] = xm;
+		return toR;
 	}
 
 	public String toString()

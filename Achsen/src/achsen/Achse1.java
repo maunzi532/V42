@@ -90,7 +90,8 @@ public class Achse1
 			if(returned[0] != null)
 			{
 				lnum = LC2.fillthis(returned, punkteL, ends, i, vial);
-				Punkt1.argh((String) returned[2], punkteL, ends.get(i), ends.get(i + 1), vial);
+				Punkt1.argh((String) returned[2], punkteL,
+						ends.get(i) + (((Boolean) returned[3]) ? 1 : 0), ends.get(i + 1), vial);
 			}
 			else if("a".equalsIgnoreCase((String) returned[1]))
 				arghA((String) returned[2], ends.get(i), ends.get(i + 1), vial);

@@ -118,7 +118,11 @@ public class UI
 		upperPanel.add(ruPanel);
 
 		actualize = new JButton("Aktualisieren");
-		actualize.addActionListener(e -> currentType.saveAndActualize = true);
+		actualize.addActionListener(e ->
+		{
+			if(currentType != null)
+				currentType.saveAndActualize = true;
+		});
 		ruPanel.add(actualize);
 
 		//add view settings

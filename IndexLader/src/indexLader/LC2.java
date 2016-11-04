@@ -110,7 +110,7 @@ public interface LC2
 	static ArrayList<Integer> areaEnds(String build)
 	{
 		ArrayList<Integer> ends = new ArrayList<>();
-		//ends.add(0);
+		ends.add(0);
 		for(int i = 0; i < build.length(); i++)
 			if(build.charAt(i) == ',' || build.charAt(i) == ';' || build.charAt(i) == '=')
 				ends.add(i);
@@ -193,13 +193,15 @@ public interface LC2
 	static Object[] extractKey(String build, int startN, int nachEndN,
 			boolean removeK, boolean expectN, boolean expectT, int lastN, ErrorVial vial)
 	{
-		Object[] toR = new Object[3];
+		Object[] toR = new Object[4];
+		toR[3] = false;
 		if(expectN || expectT)
 		{
 			int idx = build.indexOf('=');
 			if(idx >= 0)
 			{
 				String left = build.substring(0, idx);
+				toR[3] = true;
 				if(expectN)
 					try
 					{
@@ -223,6 +225,7 @@ public interface LC2
 				if(!expectN)
 				{
 					toR[1] = "";
+					toR[3] = true;
 					vial.add(new CError("Key zuweisen bitte", startN, startN + 1));
 				}
 				else if(lastN >= 0)
