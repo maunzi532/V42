@@ -3,7 +3,7 @@ package achsen;
 import indexLader.*;
 import java.util.*;
 
-public class Standard1 implements Decodable
+public class Standard1 extends LC2
 {
 	ArrayList<Achse1> achsen;
 
@@ -52,24 +52,22 @@ public class Standard1 implements Decodable
 		return toR;
 	}
 
+	private static final KXS forArgh = new KXS(false, true, true, false, false, true);
+
 	public ErrorVial argh(String build)
 	{
 		ErrorVial vial = new ErrorVial();
-		build = vial.prep(build);
 		achsen = new ArrayList<>();
-		ArrayList<Integer> ends = new ArrayList<>();
-		ArrayList<String> buildSpl = LC2.klaSplit2(build, false, 0, ends);
-		int lnum = -1;
-		for(int i = 0; i < buildSpl.size(); i++)
-		{
-			Object[] returned = LC2.extractKey(buildSpl.get(i), ends.get(i), ends.get(i + 1),
-					true, true, false, lnum, vial);
-			lnum = LC2.fillthis(returned, achsen, ends, i, vial);
-			Achse1 ac = new Achse1();
-			achsen.add(ac);
-			ac.argh((String) returned[2], ends.get(i), vial);
-		}
+		superwaguh(vial.prep(build), 0, vial, forArgh, achsen, this, "arghS");
 		return vial;
+	}
+
+	public void arghS(Integer numKey, String textKey, String value,
+			Integer errStart, Integer errEnd, ErrorVial vial)
+	{
+		Achse1 ac = new Achse1();
+		achsen.add(ac);
+		ac.argh(value, errStart, vial);
 	}
 
 	public static Standard1 gibVonL4(String name, boolean save)

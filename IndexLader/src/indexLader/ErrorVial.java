@@ -34,8 +34,11 @@ public class ErrorVial
 	public int[] mark(CError e, int xm)
 	{
 		int[] toR = new int[2];
-		toR[0] = areaEnds.get(e.areaStart + 1) + 1;
-		toR[1] = areaEnds.get(e.areaEnd + 1);
+		toR[0] = areaEnds.get(e.areaStart) + 1;
+		if(e.areaEnd >= areaEnds.size())
+			toR[1] = areaEnds.get(areaEnds.size() - 1);
+		else
+			toR[1] = areaEnds.get(e.areaEnd);
 		if(toR[0] < 0)
 			toR[0] = 0;
 		if(toR[1] > xm)

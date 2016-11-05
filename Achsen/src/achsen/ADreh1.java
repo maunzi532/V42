@@ -4,7 +4,7 @@ import indexLader.*;
 import java.util.*;
 import k4.*;
 
-public class ADreh1 implements LC2
+public class ADreh1
 {
 	Drehung dreh;
 	double len;

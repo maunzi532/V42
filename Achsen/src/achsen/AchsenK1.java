@@ -10,7 +10,7 @@ public class AchsenK1 implements IKamera
 	public String nameLook;
 	Standard1 achsen;
 	Alternate1 alternate;
-	public List<LadeTeil1> plys;
+	public List<AnzTeil1> plys;
 	public TnTarget tNum;
 	public ADreh1[] drehs;
 	ArrayList<K4>[] entlinkt;
@@ -51,7 +51,7 @@ public class AchsenK1 implements IKamera
 			drehs[i] = new ADreh1(alternate.drehungen[i]);
 		plys = new ArrayList<>();
 		for(String teilName : teilNamen)
-			plys.add(LadeTeil1.gibVonL4(name, teilName, save));
+			plys.add(AnzTeil1.gibVonL4(name, teilName, save));
 	}
 
 	public void reload()
@@ -62,7 +62,7 @@ public class AchsenK1 implements IKamera
 		plys = new ArrayList<>();
 	}
 
-	public void reload(Standard1 sta1, Alternate1 alt1, LadeTeil1... lad1)
+	public void reload(Standard1 sta1, Alternate1 alt1, AnzTeil1... lad1)
 	{
 		achsen = sta1;
 		alternate = alt1;
@@ -111,7 +111,7 @@ public class AchsenK1 implements IKamera
 		ADreh1 a1 = achse(anum);
 		if(punkt == 0)
 			return entlinkt[anum].get(0);
-		K4 tp = zuPunkt(new K4(), a1, achsen.achsen.get(anum).punkte[punkt],
+		K4 tp = zuPunkt(new K4(), a1, achsen.achsen.get(anum).punkte.get(punkt),
 				entlinkt[anum].get(0), drehA[anum]);
 		if(entlinkt[anum].size() > punkt)
 			entlinkt[anum].set(punkt, tp);

@@ -79,9 +79,9 @@ public class AView extends JButton
 			ak1.reload();
 	}
 
-	public void actualize(Standard1 sta, HashMap<String, Alternate1> alts, HashMap<String, LadeTeil1> teils)
+	public void actualize(Standard1 sta, HashMap<String, Alternate1> alts, HashMap<String, AnzTeil1> teils)
 	{
-		ak1.reload(sta, alts.get(drehfile), sichtbar.stream().map(teils::get).toArray(LadeTeil1[]::new));
+		ak1.reload(sta, alts.get(drehfile), sichtbar.stream().map(teils::get).toArray(AnzTeil1[]::new));
 	}
 
 	public void avac(AEKam kam)

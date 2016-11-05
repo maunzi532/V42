@@ -12,4 +12,12 @@ public class CError
 		this.areaStart = areaStart;
 		this.areaEnd = areaEnd;
 	}
+
+	@Override
+	public String toString()
+	{
+		return '\'' + message + '\'' +
+				", zwischen " + areaStart +
+				" und " + areaEnd;
+	}
 }

@@ -169,7 +169,7 @@ public class Type extends JPanel
 		ErrorVial standardErrors = lsta.argh(sTab.gSave());
 		if(standardErrors.worked())
 		{
-			HashMap<String, LadeTeil1> lteils = new HashMap<>();
+			HashMap<String, AnzTeil1> lteils = new HashMap<>();
 			if(view != null)
 			{
 				//Alternate1 lalt = new Alternate1()
@@ -180,17 +180,13 @@ public class Type extends JPanel
 				for(EditerTab dt : dTabs)
 					lalts.put(dt.name, new Alternate1(dt.gSave(), lsta.achsenAnz()));
 				for(EditerTab ft : fTabs)
-					lteils.put(ft.name, new LadeTeil1(ft.gSave()));
+					lteils.put(ft.name, new AnzTeil1(ft.gSave()));
 				for(AView av : views)
 					av.actualize(lsta, lalts, lteils);
 			}
-			//views.forEach(edit.AView::actualize);
 		}
 		else
-		{
 			sTab.applyVial(standardErrors);
-			//System.out.println(standardErrors);
-		}
 	}
 
 	public void saveConfig(AEKam aeKam, boolean x)

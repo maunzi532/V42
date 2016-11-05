@@ -3,13 +3,13 @@ package achsen;
 import indexLader.*;
 import java.util.*;
 
-public class LadeTeil1 implements LC2
+public class AnzTeil1
 {
 	public static IFarbe factory;
 
 	public ArrayList<Ply1> plys;
 
-	public LadeTeil1(String build)
+	public AnzTeil1(String build)
 	{
 		plys = new ArrayList<>();
 		if(build.length() == 0)
@@ -110,23 +110,66 @@ public class LadeTeil1 implements LC2
 		}
 	}
 
-	public static LadeTeil1 gibVonL4(String name1, String name2, boolean save)
+	public ErrorVial argh(String build, Standard1 standard1)
+	{
+		ErrorVial vial = new ErrorVial();
+		build = vial.prep(build);
+		plys = new ArrayList<>();
+		/*ArrayList<Integer> ends = new ArrayList<>();
+		ArrayList<String> buildSpl = LC2.klaSplit2(build, false, 0, ends);
+		for(int i = 0; i < buildSpl.size(); i++)
+			argh2(LC2.removeKlammern(buildSpl.get(i), ends.get(i), ends.get(i + 1), vial),
+					standard1, ends.get(i), ends.get(i + 1), vial);*/
+		return vial;
+	}
+
+	public void argh2(String build, Standard1 standard1, int errStart, int errEnd, ErrorVial vial)
+	{
+		IFarbe farbe = null;
+		Boolean seite = null;
+		Ply1 unten = null;
+		Ply1 oben = null;
+		ArrayList<Integer> ends = new ArrayList<>();
+		ArrayList<String> buildSpl = LC2.klaSplit2(build, true, errStart, ends);
+		for(int i = 0; i < buildSpl.size(); i++)
+		{
+			/*Object[] returned = LC2.extractKey(buildSpl.get(i),
+					ends.get(i), ends.get(i + 1), false, false, true, 0, vial);
+			switch((String) returned[2])
+			{
+				case "f":
+					break;
+				case "s":
+					break;
+				case "u":
+					break;
+				case "o":
+					break;
+				case "p":
+					break;
+				default:
+
+			}*/
+		}
+	}
+
+	public static AnzTeil1 gibVonL4(String name1, String name2, boolean save)
 	{
 		String s = Lader4.bauName("Ladeteile1", name1, name2);
-		LadeTeil1 toR;
+		AnzTeil1 toR;
 		if(save)
 		{
 			String s2 = "LadeTeil1 " + s;
 			if(Lader4.map.containsKey(s2))
-				toR = (LadeTeil1) Lader4.map.get(s2);
+				toR = (AnzTeil1) Lader4.map.get(s2);
 			else
 			{
-				toR = new LadeTeil1(Lader4.readR(s));
+				toR = new AnzTeil1(Lader4.readR(s));
 				Lader4.map.put(s2, toR);
 			}
 		}
 		else
-			toR = new LadeTeil1(Lader4.readR(s));
+			toR = new AnzTeil1(Lader4.readR(s));
 		return toR;
 	}
 }

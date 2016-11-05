@@ -3,7 +3,7 @@ package achsen;
 import indexLader.*;
 import java.util.*;
 
-public class Ply1 implements LC2
+public class Ply1
 {
 	public ArrayList<AP1> punkte;
 	public IFarbe farbe;
@@ -51,5 +51,10 @@ public class Ply1 implements LC2
 				else
 					punkte.add(new AP1(achse, Integer.parseInt(ti)));
 			}
+	}
+
+	public void argh(String build, Standard1 standard1, int errStart, int errEnd, ErrorVial vial)
+	{
+
 	}
 }

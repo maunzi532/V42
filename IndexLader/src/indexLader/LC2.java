@@ -1,10 +1,11 @@
 package indexLader;
 
+import java.lang.reflect.*;
 import java.util.*;
 
-public interface LC2
+public abstract class LC2
 {
-	static String decommentandcut(String build)
+	public static String decommentandcut(String build)
 	{
 		String[] lines = build.split("\n");
 		StringBuilder sb = new StringBuilder();
@@ -29,7 +30,7 @@ public interface LC2
 		return sb.toString().replace("\t", "").replace(" ", "");
 	}
 
-	static ArrayList<String> klaSplit(String build)
+	public static ArrayList<String> klaSplit(String build)
 	{
 		build = build.replace("\t", "").replace("\n", "").replace(" ", "");
 		ArrayList<String> lines = new ArrayList<>();
@@ -81,7 +82,7 @@ public interface LC2
 		return lines;
 	}
 
-	static String decomment(String build)
+	public static String decomment(String build)
 	{
 		StringBuilder sb = new StringBuilder();
 		boolean comment = false;
@@ -107,7 +108,7 @@ public interface LC2
 		return sb.toString();
 	}
 
-	static ArrayList<Integer> areaEnds(String build)
+	public static ArrayList<Integer> areaEnds(String build)
 	{
 		ArrayList<Integer> ends = new ArrayList<>();
 		ends.add(0);
@@ -118,8 +119,7 @@ public interface LC2
 		return ends;
 	}
 
-	//Evil C++ Techs here
-	static ArrayList<String> klaSplit2(String build, boolean v2, int startN, ArrayList<Integer> ends2)
+	public static ArrayList<String> klaSplit2(String build, boolean v2, int startN, ArrayList<Integer> ends2)
 	{
 		ArrayList<String> lines = new ArrayList<>();
 		StringBuilder sb = new StringBuilder();
@@ -189,73 +189,91 @@ public interface LC2
 		return lines;
 	}
 
-	//Argh
-	static Object[] extractKey(String build, int startN, int nachEndN,
-			boolean removeK, boolean expectN, boolean expectT, int lastN, ErrorVial vial)
+	public static void removeKlammern(Object[] wugu, ErrorVial vial)
 	{
-		Object[] toR = new Object[4];
-		toR[3] = false;
-		if(expectN || expectT)
+		String build = (String) wugu[2];
+		if(build == null)
+			return;
+		if(build.charAt(0) == '{' && build.charAt(build.length() - 1) == '}')
+			wugu[2] = build.substring(1, build.length() - 1);
+		else
+			vial.add(new CError("Nicht alle Klammern vorhanden", (Integer) wugu[3], (Integer) wugu[4]));
+	}
+
+	public static Object[] extractKey(String build, int errStart, int errEnd, boolean really,
+			boolean expectN, int lastN, boolean expectT, boolean keyOk, ErrorVial vial)
+	{
+		Object[] toR = new Object[6];
+		boolean moveStart = false;
+		boolean zwei = true;
+		if(really)
 		{
-			int idx = build.indexOf('=');
-			if(idx >= 0)
+			if(expectN || expectT)
 			{
-				String left = build.substring(0, idx);
-				toR[3] = true;
-				if(expectN)
-					try
+				int idx = build.indexOf('=');
+				if(idx >= 0)
+				{
+					String left = build.substring(0, idx);
+					moveStart = true;
+					if(expectN)
+						try
+						{
+							toR[0] = Integer.parseUnsignedInt(left);
+						}
+						catch(NumberFormatException e)
+						{
+							if(expectT)
+								toR[1] = left;
+							else
+							{
+								toR[0] = 0;
+								vial.add(new CError("Nur positive ints im Key", errStart, errStart + 1));
+							}
+						}
+					else
+						toR[1] = left;
+					build = build.substring(idx + 1);
+				}
+				else
+				{
+					if(!expectN)
 					{
-						toR[0] = Integer.parseUnsignedInt(left);
-					}catch(NumberFormatException e)
-					{
-						if(expectT)
-							toR[1] = left;
+						if(keyOk)
+						{
+							zwei = false;
+							moveStart = true;
+							toR[1] = build;
+						}
 						else
 						{
-							toR[0] = 0;
-							vial.add(new CError("Nur positive Zahlen im Key", startN, startN + 1));
+							toR[1] = "";
+							vial.add(new CError("Key zuweisen bitte", errStart, errEnd));
 						}
 					}
-				else
-					toR[1] = left;
-				build = build.substring(idx + 1);
-			}
-			else
-			{
-				if(!expectN)
-				{
-					toR[1] = "";
-					toR[3] = true;
-					vial.add(new CError("Key zuweisen bitte", startN, startN + 1));
-				}
-				else if(lastN >= 0)
-					toR[0] = lastN + 1;
-				else
-				{
-					toR[0] = 0;
-					vial.add(new CError("Erster Zahlenkey muss existieren", startN, startN + 1));
+					else if(lastN >= 0)
+						toR[0] = lastN + 1;
+					else
+					{
+						toR[0] = 0;
+						vial.add(new CError("Erster Zahlenkey muss existieren", errStart, errEnd));
+					}
 				}
 			}
 		}
-		if(removeK)
-		{
-			if(build.charAt(0) == '{' && build.charAt(build.length() - 1) == '}')
-				build = build.substring(1, build.length() - 1);
-			else
-				vial.add(new CError("Nicht alle Klammern vorhanden", startN + 1, nachEndN - 1));
-		}
-		toR[2] = build;
+		if(zwei)
+			toR[2] = build;
+		toR[3] = errStart + (moveStart ? 1 : 0);
+		toR[4] = errEnd;
+		toR[5] = vial;
 		return toR;
 	}
 
-	static int fillthis(Object[] ret, ArrayList fillthis,
-			ArrayList<Integer> ends, int inends, ErrorVial vial)
+	public static int fillthis(int lnum, ArrayList fillthis, int errStart, int errEnd, ErrorVial vial)
 	{
-		int lnum = (Integer) ret[0];
 		if(lnum < fillthis.size())
 		{
 			vial.add(new CError("Key " + lnum + " zu klein, muss mindestens " + fillthis.size() + " sein",
-					ends.get(inends), ends.get(inends) + 1));
+					errStart, errEnd));
 			lnum = fillthis.size();
 		}
 		while(lnum > fillthis.size())
@@ -264,7 +282,7 @@ public interface LC2
 		return lnum;
 	}
 
-	static Object[] verifyTypes(ArrayList<String> checkThis,
+	public static Object[] verifyTypes(ArrayList<String> checkThis,
 			int errStart, int errEnd, ErrorVial vial, TFV... types)
 	{
 		Object[] results = new Object[types.length];
@@ -321,10 +339,35 @@ public interface LC2
 		return results;
 	}
 
-	enum TFV
+	public enum TFV
 	{
 		INT,
 		DOUBLE,
 		STRING
+	}
+
+	public static void superwaguh(String build, int errStart, ErrorVial vial,
+			KXS kxs, ArrayList fillthis, LC2 invoker, String superwaguhcall)
+	{
+		ArrayList<Integer> ends = new ArrayList<>();
+		ArrayList<String> buildSpl = klaSplit2(build, kxs.splitv2, errStart, ends);
+		int lnum = -1;
+		for(int i = 0; i < buildSpl.size(); i++)
+		{
+			Object[] toInsert = extractKey(buildSpl.get(i), ends.get(i), ends.get(i + 1),
+					kxs.extractKey, kxs.expectNumbers, lnum, kxs.expectText, kxs.keyOnlyOk, vial);
+			if(kxs.removeKlammern)
+				removeKlammern(toInsert, vial);
+			if(kxs.expectNumbers && toInsert[0] != null)
+				lnum = fillthis((Integer) toInsert[0], fillthis, ends.get(i), ends.get(i) + 1, vial);
+			try
+			{
+				invoker.getClass().getMethod(superwaguhcall, Integer.class, String.class, String.class,
+						Integer.class, Integer.class, ErrorVial.class).invoke(invoker, toInsert);
+			}catch(IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
+			{
+				throw new RuntimeException(e);
+			}
+		}
 	}
 }

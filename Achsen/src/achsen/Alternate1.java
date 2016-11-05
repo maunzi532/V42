@@ -49,6 +49,11 @@ public class Alternate1
 		return sb.toString();
 	}
 
+	public ErrorVial argh(String build)
+	{
+		return null;
+	}
+
 	public static Alternate1 gibVonL4(String name1, String name2, int len, boolean save)
 	{
 		String s = Lader4.bauName("Ladeteile1", name1, name2);

@@ -79,7 +79,7 @@ public class Start
 		panelizer.resize(ui.right.getWidth(), ui.right.getHeight());
 		ArrayList<Anzeige3> a3s2;
 		ff2 = new PolyFarbe();
-		LadeTeil1.factory = new PolyFarbe();
+		AnzTeil1.factory = new PolyFarbe();
 		while(true)
 		{
 			ta.move();

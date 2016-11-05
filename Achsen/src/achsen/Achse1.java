@@ -3,9 +3,9 @@ package achsen;
 import indexLader.*;
 import java.util.*;
 
-public class Achse1
+public class Achse1 extends LC2
 {
-	Punkt1[] punkte;
+	ArrayList<Punkt1> punkte;
 	int linkedAchse = -1;
 	int linkedPunkt;
 
@@ -43,7 +43,7 @@ public class Achse1
 				punkte(r, punkte1);
 			}
 		}
-		punkte = punkte1.toArray(new Punkt1[punkte1.size()]);
+		punkte = punkte1;
 	}
 
 	private void punkte(String[] r, ArrayList<Punkt1> p1)
@@ -75,30 +75,25 @@ public class Achse1
 		}
 	}
 
+	private static final KXS forArgh = new KXS(true, true, true, true, false, false);
+
 	public void argh(String build, int errStart, ErrorVial vial)
 	{
-		ArrayList<Punkt1> punkteL = new ArrayList<>();
-		punkteL.add(new Punkt1(0, 0, 0));
-		punkteL.add(new Punkt1(1, 0, 0));
-		ArrayList<Integer> ends = new ArrayList<>();
-		ArrayList<String> buildSpl = LC2.klaSplit2(build, true, errStart, ends);
-		int lnum = -1;
-		for(int i = 0; i < buildSpl.size(); i++)
-		{
-			Object[] returned = LC2.extractKey(buildSpl.get(i), ends.get(i), ends.get(i + 1),
-					false, true, true, lnum, vial);
-			if(returned[0] != null)
-			{
-				lnum = LC2.fillthis(returned, punkteL, ends, i, vial);
-				Punkt1.argh((String) returned[2], punkteL,
-						ends.get(i) + (((Boolean) returned[3]) ? 1 : 0), ends.get(i + 1), vial);
-			}
-			else if("a".equalsIgnoreCase((String) returned[1]))
-				arghA((String) returned[2], ends.get(i), ends.get(i + 1), vial);
-			else
-				vial.add(new CError("Wos is des?", ends.get(i), ends.get(i + 1)));
-		}
-		punkte = punkteL.toArray(new Punkt1[punkteL.size()]);
+		punkte = new ArrayList<>();
+		punkte.add(new Punkt1(0, 0, 0));
+		punkte.add(new Punkt1(1, 0, 0));
+		superwaguh(build, errStart, vial, forArgh, punkte, this, "arghS");
+	}
+
+	public void arghS(Integer numKey, String textKey, String value,
+			Integer errStart, Integer errEnd, ErrorVial vial)
+	{
+		if(numKey != null)
+			Punkt1.argh(value, punkte, errStart, errEnd, vial);
+		else if("a".equalsIgnoreCase(textKey))
+			arghA(value, errStart - 1, errEnd, vial);
+		else
+			vial.add(new CError("Wos is des?", errStart - 1, errStart));
 	}
 
 	private void arghA(String build, int errStart, int errEnd, ErrorVial vial)
