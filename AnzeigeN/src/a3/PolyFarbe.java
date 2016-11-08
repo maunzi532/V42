@@ -1,6 +1,7 @@
 package a3;
 
 import achsen.*;
+import indexLader.*;
 import java.awt.*;
 import java.util.*;
 import k4.*;
@@ -36,6 +37,22 @@ public class PolyFarbe implements IFarbe
 	public IFarbe gibNeu(ArrayList<String> s)
 	{
 		return new PolyFarbe(s);
+	}
+
+	@Override
+	public IFarbe gibNeu(String build, int errStart, int errEnd, ErrorVial vial)
+	{
+		PolyFarbe create;
+		//TODO
+		try
+		{
+			create = new PolyFarbe(build);
+		}
+		catch(Exception e)
+		{
+			create = new PolyFarbe("255-255-255,N");
+		}
+		return create;
 	}
 
 	public PolyFarbe(){}

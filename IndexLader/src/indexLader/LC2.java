@@ -125,7 +125,8 @@ public abstract class LC2
 		StringBuilder sb = new StringBuilder();
 		int kla = 0;
 		int end2 = startN;
-		ends2.add(end2);
+		if(ends2 != null)
+			ends2.add(end2);
 		for(int i = 0; i < build.length(); i++)
 		{
 			char i1 = build.charAt(i);
@@ -162,7 +163,8 @@ public abstract class LC2
 						end2++;
 						if((i1 == ';') == v2)
 						{
-							ends2.add(end2);
+							if(ends2 != null)
+								ends2.add(end2);
 							lines.add(sb.toString());
 							sb = new StringBuilder();
 						}
@@ -183,7 +185,8 @@ public abstract class LC2
 		if(!v2)
 		{
 			end2++;
-			ends2.add(end2);
+			if(ends2 != null)
+				ends2.add(end2);
 			lines.add(sb.toString());
 		}
 		return lines;
@@ -201,9 +204,10 @@ public abstract class LC2
 	}
 
 	public static Object[] extractKey(String build, int errStart, int errEnd, boolean really,
-			boolean expectN, int lastN, boolean expectT, boolean keyOk, ErrorVial vial)
+			boolean expectN, int lastN, boolean expectT, boolean keyOk, ErrorVial vial, Object... extra)
 	{
-		Object[] toR = new Object[6];
+		Object[] toR = new Object[6 + extra.length];
+		System.arraycopy(extra, 0, toR, 6, extra.length);
 		boolean moveStart = false;
 		boolean zwei = true;
 		if(really)
@@ -282,6 +286,13 @@ public abstract class LC2
 		return lnum;
 	}
 
+	public enum TFV
+	{
+		UINT,
+		DOUBLE,
+		STRING
+	}
+
 	public static Object[] verifyTypes(ArrayList<String> checkThis,
 			int errStart, int errEnd, ErrorVial vial, TFV... types)
 	{
@@ -294,14 +305,14 @@ public abstract class LC2
 			if(i < checkThis.size())
 				switch(types[i])
 				{
-					case INT:
+					case UINT:
 						try
 						{
-							results[i] = Integer.parseInt(checkThis.get(i));
+							results[i] = Integer.parseUnsignedInt(checkThis.get(i));
 						}
 						catch(NumberFormatException e)
 						{
-							vial.add(new CError("Parameter Nummer " + i + " muss int sein",
+							vial.add(new CError("Parameter Nummer " + i + " muss positiver int sein",
 									errStart + i, errStart + i + 1));
 							results[i] = 0;
 						}
@@ -325,7 +336,7 @@ public abstract class LC2
 			else
 				switch(types[i])
 				{
-					case INT:
+					case UINT:
 						results[i] = 0;
 						break;
 					case DOUBLE:
@@ -339,15 +350,19 @@ public abstract class LC2
 		return results;
 	}
 
-	public enum TFV
+	public static boolean requireValue(String value, int errStart, ErrorVial vial)
 	{
-		INT,
-		DOUBLE,
-		STRING
+		if(value != null)
+			return true;
+		vial.add(new CError("Value fehlt", errStart - 1, errStart));
+		return false;
 	}
 
+	private static Class[] baseC = new Class[]{Integer.class, String.class,
+			String.class, Integer.class, Integer.class, ErrorVial.class};
+
 	public static void superwaguh(String build, int errStart, ErrorVial vial,
-			KXS kxs, ArrayList fillthis, LC2 invoker, String superwaguhcall)
+			KXS kxs, ArrayList fillthis, LC2 invoker, String superwaguhcall, Object... extra)
 	{
 		ArrayList<Integer> ends = new ArrayList<>();
 		ArrayList<String> buildSpl = klaSplit2(build, kxs.splitv2, errStart, ends);
@@ -355,15 +370,18 @@ public abstract class LC2
 		for(int i = 0; i < buildSpl.size(); i++)
 		{
 			Object[] toInsert = extractKey(buildSpl.get(i), ends.get(i), ends.get(i + 1),
-					kxs.extractKey, kxs.expectNumbers, lnum, kxs.expectText, kxs.keyOnlyOk, vial);
+					kxs.extractKey, kxs.expectNumbers, lnum, kxs.expectText, kxs.keyOnlyOk, vial, extra);
 			if(kxs.removeKlammern)
 				removeKlammern(toInsert, vial);
 			if(kxs.expectNumbers && toInsert[0] != null)
 				lnum = fillthis((Integer) toInsert[0], fillthis, ends.get(i), ends.get(i) + 1, vial);
 			try
 			{
-				invoker.getClass().getMethod(superwaguhcall, Integer.class, String.class, String.class,
-						Integer.class, Integer.class, ErrorVial.class).invoke(invoker, toInsert);
+				Class[] params = new Class[baseC.length + extra.length];
+				System.arraycopy(baseC, 0, params, 0, baseC.length);
+				for(int j = 0; j < extra.length; j++)
+					params[baseC.length + j] = extra[j].getClass();
+				invoker.getClass().getMethod(superwaguhcall, params).invoke(invoker, toInsert);
 			}catch(IllegalAccessException | InvocationTargetException | NoSuchMethodException e)
 			{
 				throw new RuntimeException(e);

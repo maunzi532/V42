@@ -5,13 +5,13 @@ import java.util.*;
 
 public class Standard1 extends LC2
 {
-	ArrayList<Achse1> achsen;
+	Achse1[] achsen;
 
 	public Standard1(){}
 
 	public Standard1(String build)
 	{
-		achsen = new ArrayList<>();
+		ArrayList<Achse1> achsen1 = new ArrayList<>();
 		if(build.length() == 0)
 			return;
 		for(String line : LC2.klaSplit(build))
@@ -23,16 +23,17 @@ public class Standard1 extends LC2
 			else
 			{
 				int ort = Integer.parseInt(line.substring(0, div));
-				while(ort > achsen.size())
-					achsen.add(null);
+				while(ort > achsen1.size())
+					achsen1.add(null);
 			}
-			achsen.add(new Achse1(line.substring(div == 0 ? 0 : div + 1)));
+			achsen1.add(new Achse1(line.substring(div == 0 ? 0 : div + 1)));
 		}
+		achsen = achsen1.toArray(new Achse1[achsen1.size()]);
 	}
 
 	public int achsenAnz()
 	{
-		return achsen.size();
+		return achsen.length;
 	}
 
 	public static ArrayList<Integer> achsennummern(String build)
@@ -57,16 +58,17 @@ public class Standard1 extends LC2
 	public ErrorVial argh(String build)
 	{
 		ErrorVial vial = new ErrorVial();
-		achsen = new ArrayList<>();
-		superwaguh(vial.prep(build), 0, vial, forArgh, achsen, this, "arghS");
+		ArrayList<Achse1> achsen1 = new ArrayList<>();
+		superwaguh(vial.prep(build), 0, vial, forArgh, achsen1, this, "arghS", achsen1);
+		achsen = achsen1.toArray(new Achse1[achsen1.size()]);
 		return vial;
 	}
 
 	public void arghS(Integer numKey, String textKey, String value,
-			Integer errStart, Integer errEnd, ErrorVial vial)
+			Integer errStart, Integer errEnd, ErrorVial vial, ArrayList<Achse1> achsen1)
 	{
 		Achse1 ac = new Achse1();
-		achsen.add(ac);
+		achsen1.add(ac);
 		ac.argh(value, errStart, vial);
 	}
 

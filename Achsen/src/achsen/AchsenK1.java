@@ -45,7 +45,7 @@ public class AchsenK1 implements IKamera
 	public void reload(boolean save, String name, String altName, String... teilNamen)
 	{
 		achsen = Standard1.gibVonL4(name, save);
-		alternate = Alternate1.gibVonL4(name, altName, achsen.achsen.size(), save);
+		alternate = Alternate1.gibVonL4(name, altName, achsen.achsen.length, save);
 		drehs = new ADreh1[alternate.drehungen.length];
 		for(int i = 0; i < alternate.drehungen.length; i++)
 			drehs[i] = new ADreh1(alternate.drehungen[i]);
@@ -76,7 +76,7 @@ public class AchsenK1 implements IKamera
 	@SuppressWarnings("unchecked")
 	public void reset()
 	{
-		int anz = achsen.achsen.size();
+		int anz = achsen.achsen.length;
 		entlinkt = new ArrayList[anz];
 		drehA = new Drehung[anz];
 		punkteK = new ArrayList[anz];
@@ -89,14 +89,14 @@ public class AchsenK1 implements IKamera
 		if(drehA[nummer] != null)
 			return drehs[nummer];
 		entlinkt[nummer] = new ArrayList<>();
-		if(achsen.achsen.get(nummer).linkedAchse < 0)
+		if(achsen.achsen[nummer].linkedAchse < 0)
 		{
 			entlinkt[nummer].add(new K4(position));
 			drehA[nummer] = new Drehung(dreh);
 		}
 		else
 		{
-			int nummerZ = achsen.achsen.get(nummer).linkedAchse;
+			int nummerZ = achsen.achsen[nummer].linkedAchse;
 			achse(nummerZ);
 			entlinkt[nummer].add(punkt(nummerZ, 1));
 			drehA[nummer] = Drehung.plus(drehA[nummerZ], drehs[nummerZ].dreh);
@@ -111,7 +111,7 @@ public class AchsenK1 implements IKamera
 		ADreh1 a1 = achse(anum);
 		if(punkt == 0)
 			return entlinkt[anum].get(0);
-		K4 tp = zuPunkt(new K4(), a1, achsen.achsen.get(anum).punkte.get(punkt),
+		K4 tp = zuPunkt(new K4(), a1, achsen.achsen[anum].punkte.get(punkt),
 				entlinkt[anum].get(0), drehA[anum]);
 		if(entlinkt[anum].size() > punkt)
 			entlinkt[anum].set(punkt, tp);

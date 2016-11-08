@@ -3,7 +3,7 @@ package achsen;
 import indexLader.*;
 import java.util.*;
 
-public class Alternate1
+public class Alternate1 extends LC2
 {
 	ADreh1[] drehungen;
 
@@ -49,9 +49,21 @@ public class Alternate1
 		return sb.toString();
 	}
 
+	private static final KXS forArgh = new KXS(true, true, true, false, false, false);
+
 	public ErrorVial argh(String build)
 	{
-		return null;
+		ErrorVial vial = new ErrorVial();
+		ArrayList<ADreh1> dreh1 = new ArrayList<>();
+		superwaguh(vial.prep(build), 0, vial, forArgh, dreh1, this, "arghS", dreh1);
+		drehungen = dreh1.toArray(new ADreh1[dreh1.size()]);
+		return vial;
+	}
+
+	public void arghS(Integer numKey, String textKey, String value,
+			Integer errStart, Integer errEnd, ErrorVial vial, ArrayList<ADreh1> dreh1)
+	{
+		dreh1.add(new ADreh1(value, errStart, errEnd, vial));
 	}
 
 	public static Alternate1 gibVonL4(String name1, String name2, int len, boolean save)

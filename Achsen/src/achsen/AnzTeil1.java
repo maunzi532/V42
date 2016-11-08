@@ -3,11 +3,11 @@ package achsen;
 import indexLader.*;
 import java.util.*;
 
-public class AnzTeil1
+public class AnzTeil1 extends LC2
 {
-	public static IFarbe factory;
-
 	public ArrayList<Ply1> plys;
+
+	public AnzTeil1(){}
 
 	public AnzTeil1(String build)
 	{
@@ -39,7 +39,7 @@ public class AnzTeil1
 						seite = false;
 						break;
 					case "f":
-						farbe = factory.gibNeu(LC2.klaSplit(lr[1]));
+						farbe = Ply1.factory.gibNeu(LC2.klaSplit(lr[1]));
 						break;
 					case "o":
 						oben = new Ply1(lr[1]);
@@ -110,46 +110,73 @@ public class AnzTeil1
 		}
 	}
 
+	private static final KXS forArgh = new KXS(false, false, false, false, false, true);
+
 	public ErrorVial argh(String build, Standard1 standard1)
 	{
 		ErrorVial vial = new ErrorVial();
-		build = vial.prep(build);
 		plys = new ArrayList<>();
-		/*ArrayList<Integer> ends = new ArrayList<>();
-		ArrayList<String> buildSpl = LC2.klaSplit2(build, false, 0, ends);
-		for(int i = 0; i < buildSpl.size(); i++)
-			argh2(LC2.removeKlammern(buildSpl.get(i), ends.get(i), ends.get(i + 1), vial),
-					standard1, ends.get(i), ends.get(i + 1), vial);*/
+		superwaguh(vial.prep(build), 0, vial, forArgh, null, this, "arghS", standard1);
 		return vial;
 	}
 
-	public void argh2(String build, Standard1 standard1, int errStart, int errEnd, ErrorVial vial)
-	{
-		IFarbe farbe = null;
-		Boolean seite = null;
-		Ply1 unten = null;
-		Ply1 oben = null;
-		ArrayList<Integer> ends = new ArrayList<>();
-		ArrayList<String> buildSpl = LC2.klaSplit2(build, true, errStart, ends);
-		for(int i = 0; i < buildSpl.size(); i++)
-		{
-			/*Object[] returned = LC2.extractKey(buildSpl.get(i),
-					ends.get(i), ends.get(i + 1), false, false, true, 0, vial);
-			switch((String) returned[2])
-			{
-				case "f":
-					break;
-				case "s":
-					break;
-				case "u":
-					break;
-				case "o":
-					break;
-				case "p":
-					break;
-				default:
+	private static final KXS forArghS = new KXS(true, true, false, true, true, false);
 
-			}*/
+	public void arghS(Integer numKey, String textKey, String value,
+			Integer errStart, Integer errEnd, ErrorVial vial, Standard1 standard1)
+	{
+		Object[] keeper = new Object[4]; //Farbe, Seite, Unten, Oben
+		superwaguh(value, errStart, vial, forArghS, null, this, "arghS2", standard1, keeper);
+	}
+
+	public void arghS2(Integer numKey, String textKey, String value,
+			Integer errStart, Integer errEnd, ErrorVial vial, Standard1 standard1, Object[] keeper)
+	{
+		switch(textKey)
+		{
+			case "m":
+				keeper[1] = null;
+				break;
+			case "a":
+				keeper[1] = true;
+				break;
+			case "v":
+				keeper[1] = false;
+				break;
+			case "f":
+				if(requireValue(value, errStart, vial))
+				{
+					keeper[0] = Ply1.factory.gibNeu(value, errStart, errEnd, vial);
+				}
+				break;
+			case "u":
+				if(requireValue(value, errStart, vial))
+					keeper[2] = new Ply1(value, standard1, false, null, null, errStart, errEnd, vial);
+				break;
+			case "o":
+				if(requireValue(value, errStart, vial))
+					keeper[3] = new Ply1(value, standard1, false, null, null, errStart, errEnd, vial);
+				break;
+			case "p":
+				if(requireValue(value, errStart, vial))
+				{
+					Ply1 ply = new Ply1(value, standard1, true, (IFarbe) keeper[0],
+							(Boolean) keeper[1], errStart, errEnd, vial);
+					if(ply.punkte.size() >= 3)
+						plys.add(ply);
+					else
+						vial.add(new CError("Mindestens 3 Punkte", errStart, errEnd));
+				}
+				break;
+			case "PRISMA":
+				//TODO
+				break;
+			case "PYRA":
+				break;
+			case "ZPRISMA":
+				break;
+			default:
+				vial.add(new CError("Wos is des?", errStart - 1, errStart));
 		}
 	}
 

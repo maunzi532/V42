@@ -4,7 +4,7 @@ import indexLader.*;
 import java.util.*;
 import k4.*;
 
-public class ADreh1
+public class ADreh1 extends LC2
 {
 	Drehung dreh;
 	double len;
@@ -41,5 +41,25 @@ public class ADreh1
 		this.len = len;
 		this.spin = spin;
 		this.dShift = dShift;
+	}
+
+	public ADreh1(String build, int errStart, int errEnd, ErrorVial vial)
+	{
+		ArrayList<String> buildSpl = klaSplit2(build, false, errStart, null);
+		int paramLen = buildSpl.size();
+		if(paramLen < 3)
+			paramLen = 3;
+		if(paramLen > 5)
+			paramLen = 5;
+		LC2.TFV[] paramTypes = new LC2.TFV[paramLen];
+		for(int i = 0; i < paramTypes.length; i++)
+			paramTypes[i] = TFV.DOUBLE;
+		Object[] werte = LC2.verifyTypes(buildSpl, errStart, errEnd, vial, paramTypes);
+		dreh = new Drehung(((Double) werte[0]) / 180d * Math.PI, ((Double) werte[1]) / 180d * Math.PI);
+		len = (Double) werte[2];
+		if(paramLen > 3)
+			spin = ((Double) werte[3]) / 180d * Math.PI;
+		if(paramLen > 4)
+			dShift = (Double) werte[4];
 	}
 }

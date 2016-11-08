@@ -180,7 +180,13 @@ public class Type extends JPanel
 				for(EditerTab dt : dTabs)
 					lalts.put(dt.name, new Alternate1(dt.gSave(), lsta.achsenAnz()));
 				for(EditerTab ft : fTabs)
-					lteils.put(ft.name, new AnzTeil1(ft.gSave()));
+				{
+					//lteils.put(ft.name, new AnzTeil1(ft.gSave()));
+					AnzTeil1 lanz = new AnzTeil1();
+					ErrorVial fErrors = lanz.argh(ft.gSave(), lsta);
+					ft.applyVial(fErrors);
+					lteils.put(ft.name, lanz);
+				}
 				for(AView av : views)
 					av.actualize(lsta, lalts, lteils);
 			}
