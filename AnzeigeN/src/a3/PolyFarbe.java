@@ -6,7 +6,7 @@ import java.awt.*;
 import java.util.*;
 import k4.*;
 
-public class PolyFarbe implements IFarbe
+public class PolyFarbe extends LC2 implements IFarbe
 {
 	//Anzahl unterschiedlicher Diffundierungs-Seeds
 	public static final int seedifier = 100;
@@ -42,20 +42,73 @@ public class PolyFarbe implements IFarbe
 	@Override
 	public IFarbe gibNeu(String build, int errStart, int errEnd, ErrorVial vial)
 	{
-		PolyFarbe create;
-		//TODO
+		ArrayList<Integer> ends = new ArrayList<>();
+		ArrayList<String> buildSpl = klaSplit2(build, false, errStart, ends);
+		Object[] vt = verifyTypes(buildSpl, errStart, errEnd, vial, TFV.STRING, TFV.STRING);
+		String[] clar = ((String) vt[0]).split("-");
+		int clare = clar.length;
+		if(clare > 4)
+		{
+			vial.add(new CError("Max. 4 Farbnummern", errStart, errStart + 1));
+			clare = 4;
+		}
+		int[] nums = new int[clare];
+		for(int i = 0; i < clare; i++)
+		{
+			try
+			{
+				int num = Integer.parseUnsignedInt(clar[i]);
+				if(num > 255)
+				{
+					vial.add(new CError("Farbnummer " + clar[i] + " sollte 255 oder weniger sein", errStart, errStart + 1));
+					num = 255;
+				}
+				nums[i] = num;
+			}
+			catch(NumberFormatException e)
+			{
+				vial.add(new CError("Farbnummer " + clar[i] + " kein positiver int", errStart, errStart + 1));
+				nums[i] = 255;
+			}
+		}
+		Color fa;
+		switch(clare)
+		{
+			case 1:
+				fa = new Color(nums[0], nums[0], nums[0]);
+				break;
+			case 2:
+				fa = new Color(nums[0], nums[0], nums[0], nums[1]);
+				break;
+			case 3:
+				fa = new Color(nums[0], nums[1], nums[2]);
+				break;
+			case 4:
+				fa = new Color(nums[0], nums[1], nums[2], nums[3]);
+				break;
+			default:
+				throw new RuntimeException();
+		}
+		Material mat1;
 		try
 		{
-			create = new PolyFarbe(build);
+			mat1 = Material.valueOf(((String) vt[1]).toUpperCase());
 		}
-		catch(Exception e)
+		catch(IllegalArgumentException e)
 		{
-			create = new PolyFarbe("255-255-255,N");
+			vial.add(new CError("Material " + vt[1] + " existiert nicht", errStart + 1, errStart + 2));
+			mat1 = Material.N;
 		}
-		return create;
+		return new PolyFarbe(fa, mat1);
 	}
 
 	public PolyFarbe(){}
+
+	public PolyFarbe(Color fa, Material mat1)
+	{
+		baseColor = fa;
+		mat = mat1;
+	}
 
 	public PolyFarbe(String text)
 	{

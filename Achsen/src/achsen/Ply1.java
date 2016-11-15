@@ -57,7 +57,7 @@ public class Ply1 extends LC2
 			}
 	}
 
-	public Ply1(String build, Standard1 standard1, boolean mitF, IFarbe farbe1, Boolean seite1,
+	public boolean argh(String build, Standard1 standard1, boolean mitF, IFarbe farbe1, Boolean seite1,
 			int errStart, int errEnd, ErrorVial vial)
 	{
 		if(mitF)
@@ -66,8 +66,8 @@ public class Ply1 extends LC2
 				farbe = farbe1;
 			else
 			{
-				farbe = factory;
 				vial.add(new CError("Farbe noch nicht definiert", errStart, errEnd));
+				return false;
 			}
 			seite = seite1;
 		}
@@ -108,6 +108,13 @@ public class Ply1 extends LC2
 					vial.add(new CError("Achsennummer " + achse + " nicht im .v42s enthalten",
 							ends.get(i), ends.get(i + 1)));
 			}
+		}
+		if(punkte.size() >= 3)
+			return true;
+		else
+		{
+			vial.add(new CError("Mindestens 3 Punkte", errStart, errEnd));
+			return false;
 		}
 	}
 
@@ -159,5 +166,43 @@ public class Ply1 extends LC2
 						errStart, errEnd));
 			}
 		return toR;
+	}
+
+	public static ArrayList<Ply1> prisma(IFarbe farbe1, Boolean seite1,
+			Ply1 unten, Ply1 oben, int errStart, int errEnd, ErrorVial vial)
+	{
+		if(farbe1 == null)
+		{
+			vial.add(new CError("Farbe noch nicht definiert", errStart, errEnd));
+			return new ArrayList<>();
+		}
+		if(unten == null)
+		{
+			vial.add(new CError("U noch nicht definiert", errStart, errEnd));
+			return new ArrayList<>();
+		}
+		if(oben == null)
+		{
+			vial.add(new CError("O noch nicht definiert", errStart, errEnd));
+			return new ArrayList<>();
+		}
+		int len = unten.punkte.size();
+		if(len != oben.punkte.size())
+		{
+			vial.add(new CError("Anzahl Punkte unterschiedlich, U = " + len +
+					", O = " + oben.punkte.size(), errStart, errEnd));
+			return new ArrayList<>();
+		}
+		ArrayList<Ply1> plys = new ArrayList<>();
+		for(int j = 0; j < len; j++)
+		{
+			ArrayList<AP1> punkte = new ArrayList<>();
+			punkte.add(unten.punkte.get(j));
+			punkte.add(unten.punkte.get((j + 1) % len));
+			punkte.add(oben.punkte.get((j + 1) % len));
+			punkte.add(oben.punkte.get(j));
+			plys.add(new Ply1(punkte, farbe1, seite1));
+		}
+		return plys;
 	}
 }

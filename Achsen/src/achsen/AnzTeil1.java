@@ -132,44 +132,51 @@ public class AnzTeil1 extends LC2
 	public void arghS2(Integer numKey, String textKey, String value,
 			Integer errStart, Integer errEnd, ErrorVial vial, Standard1 standard1, Object[] keeper)
 	{
-		switch(textKey)
+		switch(textKey.toUpperCase())
 		{
-			case "m":
+			case "M":
 				keeper[1] = null;
 				break;
-			case "a":
+			case "A":
 				keeper[1] = true;
 				break;
-			case "v":
+			case "V":
 				keeper[1] = false;
 				break;
-			case "f":
+			case "F":
 				if(requireValue(value, errStart, vial))
 				{
 					keeper[0] = Ply1.factory.gibNeu(value, errStart, errEnd, vial);
 				}
 				break;
-			case "u":
-				if(requireValue(value, errStart, vial))
-					keeper[2] = new Ply1(value, standard1, false, null, null, errStart, errEnd, vial);
-				break;
-			case "o":
-				if(requireValue(value, errStart, vial))
-					keeper[3] = new Ply1(value, standard1, false, null, null, errStart, errEnd, vial);
-				break;
-			case "p":
+			case "U":
 				if(requireValue(value, errStart, vial))
 				{
-					Ply1 ply = new Ply1(value, standard1, true, (IFarbe) keeper[0],
-							(Boolean) keeper[1], errStart, errEnd, vial);
-					if(ply.punkte.size() >= 3)
+					Ply1 ply = new Ply1();
+					if(ply.argh(value, standard1, false, null, null, errStart, errEnd, vial))
+						keeper[2] = ply;
+				}
+				break;
+			case "O":
+				if(requireValue(value, errStart, vial))
+				{
+					Ply1 ply = new Ply1();
+					if(ply.argh(value, standard1, false, null, null, errStart, errEnd, vial))
+						keeper[3] = ply;
+				}
+				break;
+			case "P":
+				if(requireValue(value, errStart, vial))
+				{
+					Ply1 ply = new Ply1();
+					if(ply.argh(value, standard1, true, (IFarbe) keeper[0],
+						(Boolean) keeper[1], errStart, errEnd, vial))
 						plys.add(ply);
-					else
-						vial.add(new CError("Mindestens 3 Punkte", errStart, errEnd));
 				}
 				break;
 			case "PRISMA":
-				//TODO
+				plys.addAll(Ply1.prisma((IFarbe) keeper[0], (Boolean) keeper[1],
+						(Ply1) keeper[2], (Ply1) keeper[3], errStart, errEnd, vial));
 				break;
 			case "PYRA":
 				break;

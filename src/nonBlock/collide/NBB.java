@@ -44,7 +44,7 @@ public abstract class NBB extends NBD
 							blockbox.get(i)[6], blockbox.get(i)[7]), blockbox.get(i)[8]));
 	}
 
-	public static ArrayList gibBlockBox(String input)
+	public static ArrayList<double[]> gibBlockBox(String input)
 	{
 		String[] zeilen = input.split("\n");
 		ArrayList<double[]> blockbox = new ArrayList<>();

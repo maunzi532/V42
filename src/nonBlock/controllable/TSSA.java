@@ -175,13 +175,13 @@ public abstract class TSSA extends FWA implements Licht
 				{
 					if(dif.a < 3 || dif.a > welt.weltBlock.a - 3)
 					{
-						if(!welt.tk1(p, richtung))
+						if(!WeltB.tk1(welt, p, richtung))
 							return false;
 						p.k[0] += dif.a > welt.weltBlock.a / 2 ? 1 : -1;
-						return welt.tk1(p, richtung);
+						return WeltB.tk1(welt, p, richtung);
 					}
 					else
-						return welt.tk1(p, richtung);
+						return WeltB.tk1(welt, p, richtung);
 				}
 				break;
 			case 1:
@@ -189,13 +189,13 @@ public abstract class TSSA extends FWA implements Licht
 				{
 					if(dif.c < 3 || dif.c > welt.weltBlock.c - 3)
 					{
-						if(!welt.tk1(p, richtung))
+						if(!WeltB.tk1(welt, p, richtung))
 							return false;
 						p.k[2] += dif.c > welt.weltBlock.c / 2 ? 1 : -1;
-						return welt.tk1(p, richtung);
+						return WeltB.tk1(welt, p, richtung);
 					}
 					else
-						return welt.tk1(p, richtung);
+						return WeltB.tk1(welt, p, richtung);
 				}
 				break;
 			case 2:
@@ -203,13 +203,13 @@ public abstract class TSSA extends FWA implements Licht
 				{
 					if(dif.a < 3 || dif.a > welt.weltBlock.a - 3)
 					{
-						if(!welt.tk1(p, richtung))
+						if(!WeltB.tk1(welt, p, richtung))
 							return false;
 						p.k[0] += dif.a > welt.weltBlock.a / 2 ? 1 : -1;
-						return welt.tk1(p, richtung);
+						return WeltB.tk1(welt, p, richtung);
 					}
 					else
-						return welt.tk1(p, richtung);
+						return WeltB.tk1(welt, p, richtung);
 				}
 				break;
 			case 3:
@@ -217,13 +217,13 @@ public abstract class TSSA extends FWA implements Licht
 				{
 					if(dif.c < 3 || dif.c > welt.weltBlock.c - 3)
 					{
-						if(!welt.tk1(p, richtung))
+						if(!WeltB.tk1(welt, p, richtung))
 							return false;
 						p.k[2] += dif.c > welt.weltBlock.c / 2 ? 1 : -1;
-						return welt.tk1(p, richtung);
+						return WeltB.tk1(welt, p, richtung);
 					}
 					else
-						return welt.tk1(p, richtung);
+						return WeltB.tk1(welt, p, richtung);
 				}
 				break;
 		}
@@ -276,28 +276,28 @@ public abstract class TSSA extends FWA implements Licht
 	{
 		if(richtung % 2 == 0 && (dif.a < 3 || dif.a > welt.weltBlock.a - 3))
 		{
-			Boolean k1 = welt.tk2(p, richtung);
+			Boolean k1 = WeltB.tk2(welt, p, richtung);
 			if(k1 == null)
 				return null;
 			p.k[0] += dif.a > welt.weltBlock.a / 2 ? 1 : -1;
-			Boolean k2 = welt.tk2(p, richtung);
+			Boolean k2 = WeltB.tk2(welt, p, richtung);
 			if(k2 == null)
 				return null;
 			return k1 && k2;
 		}
 		else if(richtung % 2 != 0 && (dif.c < 3 || dif.c > welt.weltBlock.c - 3))
 		{
-			Boolean k1 = welt.tk2(p, richtung);
+			Boolean k1 = WeltB.tk2(welt, p, richtung);
 			if(k1 == null)
 				return null;
 			p.k[2] += dif.c > welt.weltBlock.c / 2 ? 1 : -1;
-			Boolean k2 = welt.tk2(p, richtung);
+			Boolean k2 = WeltB.tk2(welt, p, richtung);
 			if(k2 == null)
 				return null;
 			return k1 && k2;
 		}
 		else
-			return welt.tk2(p, richtung);
+			return WeltB.tk2(welt, p, richtung);
 	}
 
 	void kletterSeitlich(boolean richtung)
@@ -311,7 +311,7 @@ public abstract class TSSA extends FWA implements Licht
 			else
 				p2.a += 3.2 * (2 - kR);
 			p2.b -= 2;
-			if(welt.tk1(welt.tw(p2), grabRichtung))
+			if(WeltB.tk1(welt, welt.tw(p2), grabRichtung))
 			{
 				if(kR % 2 == 0)
 					focus.targetPosition.c += 0.4 * (1 - kR);

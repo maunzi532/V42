@@ -23,7 +23,12 @@ public class DerBlock
 		return String.valueOf(typ);
 	}
 
-	public boolean opaque()
+	public boolean collideOpaque()
+	{
+		return typ != 0;
+	}
+
+	public boolean sichtOpaque()
 	{
 		return typ > 0;
 	}
@@ -32,7 +37,6 @@ public class DerBlock
 	{
 		return typ == 2;
 	}
-
 
 	public String toString()
 	{

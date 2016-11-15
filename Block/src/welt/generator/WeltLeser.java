@@ -1,7 +1,8 @@
-package welt;
+package welt.generator;
 
 import indexLader.*;
 import k4.*;
+import welt.*;
 
 public class WeltLeser extends Generator
 {

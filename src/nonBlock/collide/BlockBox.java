@@ -88,7 +88,7 @@ public class BlockBox
 							for(int jb = p0.k[1]; jb <= p1.k[1]; jb++)
 								for(int jc = p0.k[2]; jc <= p1.k[2]; jc++)
 									for(int jd = p0.k[3]; jd <= p1.k[3]; jd++)
-										if(welt.gib(new WBP(ja, jb, jc, jd)).opaque())
+										if(welt.gib(new WBP(ja, jb, jc, jd)).collideOpaque())
 										{
 											end[k1] = i;
 											fin[k1] = movStep[k1] * i;
@@ -150,7 +150,7 @@ public class BlockBox
 							for(int jb = p0.k[1]; jb <= p1.k[1]; jb++)
 								for(int jc = p0.k[2]; jc <= p1.k[2]; jc++)
 									for(int jd = p0.k[3]; jd <= p1.k[3]; jd++)
-										if(welt.gib(new WBP(ja, jb, jc, jd)).opaque())
+										if(welt.gib(new WBP(ja, jb, jc, jd)).collideOpaque())
 											return false;
 					}
 					if(end[k1] == -1)

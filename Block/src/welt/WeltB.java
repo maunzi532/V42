@@ -127,35 +127,35 @@ public class WeltB
 		return -1;
 	}
 
-	public boolean tk1(WBP p, int richtung)
+	public static boolean tk1(WeltB w, WBP p, int richtung)
 	{
-		if(gib(p).opaque())
+		if(w.gib(p).collideOpaque())
 			return false;
 		p.k[richtung % 2 == 0 ? 2 : 0] += richtung < 2 ? 1 : -1;
-		if(!gib(p).opaque())
+		if(!w.gib(p).collideOpaque())
 			return false;
-		boolean v = gib(p).vKanten();
+		boolean v = w.gib(p).vKanten();
 			p.k[1]++;
-		if(!v && gib(p).opaque())
+		if(!v && w.gib(p).collideOpaque())
 			return false;
 		p.k[richtung % 2 == 0 ? 2 : 0] -= richtung < 2 ? 1 : -1;
-		if(gib(p).opaque())
+		if(w.gib(p).collideOpaque())
 			return false;
 		p.k[1]--;
 		return true;
 	}
 
-	public Boolean tk2(WBP p, int richtung)
+	public static Boolean tk2(WeltB w, WBP p, int richtung)
 	{
-		if(gib(p).opaque())
+		if(w.gib(p).collideOpaque())
 			return null;
 		p.k[richtung % 2 == 0 ? 2 : 0] += richtung < 2 ? 1 : -1;
-		if(!gib(p).opaque())
+		if(!w.gib(p).collideOpaque())
 			return null;
 		p.k[1]++;
-		boolean rf = !gib(p).opaque();
+		boolean rf = !w.gib(p).collideOpaque();
 		p.k[richtung % 2 == 0 ? 2 : 0] -= richtung < 2 ? 1 : -1;
-		if(gib(p).opaque())
+		if(w.gib(p).collideOpaque())
 			return null;
 		p.k[1]--;
 		return rf;

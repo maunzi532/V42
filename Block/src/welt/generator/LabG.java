@@ -1,6 +1,7 @@
-package welt;
+package welt.generator;
 
 import java.util.*;
+import welt.*;
 
 public class LabG extends Generator
 {

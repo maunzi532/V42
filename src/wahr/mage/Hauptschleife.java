@@ -12,7 +12,7 @@ import nonBlock.collide.*;
 import nonBlock.controllable.*;
 import nonBlock.formwandler.*;
 import wahr.zugriff.*;
-import welt.*;
+import welt.generator.*;
 
 public class Hauptschleife
 {

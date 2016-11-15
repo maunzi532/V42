@@ -1,6 +1,7 @@
-package welt;
+package welt.generator;
 
 import k4.*;
+import welt.*;
 
 public abstract class Generator
 {

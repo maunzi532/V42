@@ -38,7 +38,7 @@ public class Drehung
 
 	public static double plus(double d1, double d2)
 	{
-		double d3 = d1 + d2;
+		double d3 = d1 + d2; //plus irgendwas lel
 		if(d3 >= Math.PI * 2)
 			return d3 - Math.PI * 2;
 		return sichern(d3);
@@ -50,7 +50,7 @@ public class Drehung
 			winkel -= Math.PI * 2;
 		while(winkel < 0)
 			winkel += Math.PI * 2;
-		return winkel;
+		return winkel; //+0.01 = waguhtime
 	}
 
 	public static Drehung nDrehung(double wl, double wb)
@@ -59,5 +59,10 @@ public class Drehung
 		d.wl = wl;
 		d.wb = wb;
 		return d;
+	}
+
+	public String toString()
+	{
+		return "WL: " + (wl / Math.PI * 180) + " WB: " + (wb / Math.PI * 180);
 	}
 }

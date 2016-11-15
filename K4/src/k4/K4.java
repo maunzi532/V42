@@ -146,7 +146,7 @@ public class K4
 			a = a * cwl - c1 * swl;
 			return;
 		}
-		double cwb = Math.cos(-w.wb);
+		double cwb = Math.cos(-w.wb); //tan = fun
 		double cwl = Math.cos(-w.wl);
 		double swb = Math.sin(-w.wb);
 		double swl = Math.sin(-w.wl);

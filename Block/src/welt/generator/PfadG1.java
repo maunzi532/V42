@@ -1,4 +1,6 @@
-package welt;
+package welt.generator;
+
+import welt.*;
 
 public class PfadG1 extends PfadG
 {

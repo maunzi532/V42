@@ -167,6 +167,7 @@ public class Type extends JPanel
 	{
 		Standard1 lsta = new Standard1();
 		ErrorVial standardErrors = lsta.argh(sTab.gSave());
+		sTab.applyVial(standardErrors);
 		if(standardErrors.worked())
 		{
 			HashMap<String, AnzTeil1> lteils = new HashMap<>();
@@ -178,10 +179,15 @@ public class Type extends JPanel
 			{
 				HashMap<String, Alternate1> lalts = new HashMap<>();
 				for(EditerTab dt : dTabs)
-					lalts.put(dt.name, new Alternate1(dt.gSave(), lsta.achsenAnz()));
+				{
+					Alternate1 lalt = new Alternate1();
+					ErrorVial dErrors = lalt.argh(dt.gSave(), lsta);
+					dt.applyVial(dErrors);
+					//dt.plane.setText(dt.plane.getText() + dErrors.addedInfo);
+					lalts.put(dt.name, lalt);
+				}
 				for(EditerTab ft : fTabs)
 				{
-					//lteils.put(ft.name, new AnzTeil1(ft.gSave()));
 					AnzTeil1 lanz = new AnzTeil1();
 					ErrorVial fErrors = lanz.argh(ft.gSave(), lsta);
 					ft.applyVial(fErrors);
@@ -191,8 +197,6 @@ public class Type extends JPanel
 					av.actualize(lsta, lalts, lteils);
 			}
 		}
-		else
-			sTab.applyVial(standardErrors);
 	}
 
 	public void saveConfig(AEKam aeKam, boolean x)

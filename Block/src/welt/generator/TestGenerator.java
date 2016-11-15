@@ -1,7 +1,8 @@
-package welt;
+package welt.generator;
 
 import java.util.*;
 import k4.*;
+import welt.*;
 
 public class TestGenerator extends Generator
 {

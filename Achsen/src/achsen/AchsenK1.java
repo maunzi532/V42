@@ -46,8 +46,8 @@ public class AchsenK1 implements IKamera
 	{
 		achsen = Standard1.gibVonL4(name, save);
 		alternate = Alternate1.gibVonL4(name, altName, achsen.achsen.length, save);
-		drehs = new ADreh1[alternate.drehungen.length];
-		for(int i = 0; i < alternate.drehungen.length; i++)
+		drehs = new ADreh1[achsen.achsen.length];
+		for(int i = 0; i < achsen.achsen.length; i++)
 			drehs[i] = new ADreh1(alternate.drehungen[i]);
 		plys = new ArrayList<>();
 		for(String teilName : teilNamen)
@@ -66,8 +66,8 @@ public class AchsenK1 implements IKamera
 	{
 		achsen = sta1;
 		alternate = alt1;
-		drehs = new ADreh1[alternate.drehungen.length];
-		for(int i = 0; i < alternate.drehungen.length; i++)
+		drehs = new ADreh1[sta1.achsen.length];
+		for(int i = 0; i < sta1.achsen.length; i++)
 			drehs[i] = new ADreh1(alternate.drehungen[i]);
 		plys = new ArrayList<>();
 		Collections.addAll(plys, lad1);
