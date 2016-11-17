@@ -43,7 +43,7 @@ public class WeltB
 				intiize((k[2] - startWelt.c) / weltBlock.c), intiize((k[3] - startWelt.d) / weltBlock.d));
 	}
 
-	public int intiize(double d)
+	public static int intiize(double d)
 	{
 		if(d >= 0)
 			return (int) d;
