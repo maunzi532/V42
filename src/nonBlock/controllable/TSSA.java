@@ -230,6 +230,20 @@ public abstract class TSSA extends FWA implements Licht
 		return false;
 	}
 
+	//TODO
+	private boolean canAirgrab2()
+	{
+		if(InBlockRaster.drehArt(dreh.wl))
+		{
+			InBlockRaster ibr = new InBlockRaster(welt, position, dreh.wl, true, 0, 0, 0, 0, 0, 0, 0, 0);
+		}
+		else
+		{
+			InBlockRaster ibr = new InBlockRaster(welt, position, dreh.wl, false, 0, 0, 0, 0, 0, 0, 0, 0);
+		}
+		return false;
+	}
+
 	boolean kletterHoch()
 	{
 		if(grabRichtung >= 0)

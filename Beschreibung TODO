@@ -4,15 +4,27 @@ Index entfernen
 Stufe Blöcke
 	Blöcke nachsplitten
 	ZP4C neu machen und umwandeln in LadeCM
+	Weltübergänge
 
 Stufe Editor
 	THA bauen
 
 Stufe Achsen1
-	Punkte
+	Neudrehung
+	Punkte anzeigen
 	Achsen und Punkte vorne
 	Subflächen
 	Mit "1-Versionen" ersetzen
+	Änderungsparameter
+
+Stufe Moves
+	Neues Zustand-System
+	InBlockRaster verwendbar machen
+	Verwenden in Kanten klettern
+
+Stufe Steuerung
+	Overlay- und TA2-Dateien fixen
+	Targeting Bugs fixen
 
 
 Stufe Stoff
@@ -35,16 +47,17 @@ Stufe SystemF
 	Automatische Targeting Aktivierung
 	Block Platzier Auswahl
 	Blöcke drehen
-	Welt generieren
+
 
 Stufe 2
 	4D-Daten des aktuellen Felds anzeigen
 	NBD - Idle Bewegung
 	Eingabefelder
+	GMKonsole
 	Schrift Aussehen
 	Hauptmenü einbauen
 	Sinnvolles Attk
 	Fallende Blöcke
 	Mehrsprachig Text lagern
-	Einstellungs-Editor
 	Welten wechseln
+	Mehrspieler über LAN

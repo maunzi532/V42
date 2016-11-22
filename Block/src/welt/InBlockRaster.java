@@ -10,28 +10,31 @@ public class InBlockRaster
 	//180  |    0
 	//  270|a
 
+	//0123
 	public static int drehIntD(double drehung)
 	{
 		drehung = Drehung.sichern(drehung);
 		return (int)(drehung / Math.PI * 2);
 	}
 
+	//01230
 	public static int drehIntH(double drehung)
 	{
 		drehung = Drehung.sichern(drehung);
-		return ((int)(drehung / Math.PI * 4) / 2) % 4;
+		return (((int)(drehung / Math.PI * 4) + 1) / 2) % 4;
 	}
 
+	//01234567
 	public static int drehIntH2(double drehung)
 	{
 		drehung = Drehung.sichern(drehung);
-		return (int)(drehung / Math.PI * 4) % 8;
+		return (int)(drehung / Math.PI * 4);
 	}
 
-	public static int drehInt8(double drehung)
+	public static boolean drehArt(double drehung)
 	{
 		drehung = Drehung.sichern(drehung);
-		return ((int)(drehung / Math.PI * 8) / 2) % 8;
+		return (((int)(drehung / Math.PI * 4) + 1) / 2) % 2 == 0;
 	}
 
 	public int[][][][] raster;
@@ -120,85 +123,72 @@ public class InBlockRaster
 
 	public void zusammenfassen(int richtung, int startA, int endA)
 	{
+		if(rlens[richtung] > startA + endA)
+		{
+			nochOk = false;
+			return;
+		}
 		if(nochOk)
-			switch(richtung)
+		{
+			if(rlens[richtung] > startA + endA + 1)
 			{
-				case 0:
-					for(int id = 0; id < rlens[3]; id++)
-						for(int ic = 0; ic < rlens[2]; ic++)
-							for(int ib = 0; ib < rlens[1]; ib++)
-							{
-								if(rlens[0] > startA + endA)
+				switch(richtung)
+				{
+					case 0:
+						for(int id = 0; id < rlens[3]; id++)
+							for(int ic = 0; ic < rlens[2]; ic++)
+								for(int ib = 0; ib < rlens[1]; ib++)
 								{
-									nochOk = false;
-									return;
+									int z = 0;
+									for(int ia = startA; ia < rlens[0] - endA; ia++)
+										z = z | raster[id][ic][ib][ia];
+									raster[id][ic][ib][startA] = z;
+									for(int i2 = 0; i2 < endA; i2++)
+										raster[id][ic][ib][i2 + startA + 1] =
+												raster[id][ic][ib][rlens[0] - endA + i2];
 								}
-								int z = 0;
-								for(int ia = startA; ia < rlens[0] - endA; ia++)
-									z = z | raster[id][ic][ib][ia];
-								raster[id][ic][ib][startA] = z;
-								for(int i2 = 0; i2 < endA; i2++)
-									raster[id][ic][ib][i2 + startA + 1] =
-											raster[id][ic][ib][rlens[0] - endA + i2];
-								rlens[0] = startA + endA + 1;
-							}
-					break;
-				case 1:
-					for(int id = 0; id < rlens[3]; id++)
-						for(int ic = 0; ic < rlens[2]; ic++)
-						{
-							if(rlens[1] > startA + endA)
+						break;
+					case 1:
+						for(int id = 0; id < rlens[3]; id++)
+							for(int ic = 0; ic < rlens[2]; ic++)
 							{
-								nochOk = false;
-								return;
+								int[] z = new int[rlens[0]];
+								for(int ib = startA; ib < rlens[1] - endA; ib++)
+									for(int ia = 0; ia < rlens[0]; ia++)
+										z[ia] = z[ia] | raster[id][ic][ib][ia];
+								raster[id][ic][startA] = z;
+								for(int i2 = 0; i2 < endA; i2++)
+									raster[id][ic][i2 + startA + 1] = raster[id][ic][rlens[1] - endA + i2];
 							}
-							int[] z = new int[rlens[0]];
-							for(int ib = startA; ib < rlens[1] - endA; ib++)
-								for(int ia = 0; ia < rlens[0]; ia++)
-									z[ia] = z[ia] | raster[id][ic][ib][ia];
-							raster[id][ic][startA] = z;
-							for(int i2 = 0; i2 < endA; i2++)
-								raster[id][ic][i2 + startA + 1] = raster[id][ic][rlens[1] - endA + i2];
-							rlens[1] = startA + endA + 1;
-						}
-					break;
-				case 2:
-					for(int id = 0; id < rlens[3]; id++)
-					{
-						if(rlens[2] > startA + endA)
+						break;
+					case 2:
+						for(int id = 0; id < rlens[3]; id++)
 						{
-							nochOk = false;
-							return;
+							int[][] z = new int[rlens[1]][rlens[0]];
+							for(int ic = startA; ic < rlens[2] - endA; ic++)
+								for(int ib = 0; ib < rlens[1]; ib++)
+									for(int ia = 0; ia < rlens[0]; ia++)
+										z[ib][ia] = z[ib][ia] | raster[id][ic][ib][ia];
+							raster[id][startA] = z;
+							for(int i2 = 0; i2 < endA; i2++)
+								raster[id][i2 + startA + 1] = raster[id][rlens[2] - endA + i2];
 						}
-						int[][] z = new int[rlens[1]][rlens[0]];
-						for(int ic = startA; ic < rlens[2] - endA; ic++)
-							for(int ib = 0; ib < rlens[1]; ib++)
-								for(int ia = 0; ia < rlens[0]; ia++)
-									z[ib][ia] = z[ib][ia] | raster[id][ic][ib][ia];
-						raster[id][startA] = z;
+						break;
+					case 3:
+						int[][][] z = new int[rlens[2]][rlens[1]][rlens[0]];
+						for(int id = startA; id < rlens[3] - endA; id++)
+							for(int ic = 0; ic < rlens[2]; ic++)
+								for(int ib = 0; ib < rlens[1]; ib++)
+									for(int ia = 0; ia < rlens[0]; ia++)
+										z[ic][ib][ia] = z[ic][ib][ia] | raster[id][ic][ib][ia];
+						raster[startA] = z;
 						for(int i2 = 0; i2 < endA; i2++)
-							raster[id][i2 + startA + 1] = raster[id][rlens[2] - endA + i2];
-						rlens[2] = startA + endA + 1;
-					}
-					break;
-				case 3:
-					if(rlens[3] > startA + endA)
-					{
-						nochOk = false;
-						return;
-					}
-					int[][][] z = new int[rlens[2]][rlens[1]][rlens[0]];
-					for(int id = startA; id < rlens[3] - endA; id++)
-						for(int ic = 0; ic < rlens[2]; ic++)
-							for(int ib = 0; ib < rlens[1]; ib++)
-								for(int ia = 0; ia < rlens[0]; ia++)
-									z[ic][ib][ia] = z[ic][ib][ia] | raster[id][ic][ib][ia];
-					raster[startA] = z;
-					for(int i2 = 0; i2 < endA; i2++)
-						raster[i2 + startA + 1] = raster[rlens[2] - endA + i2];
-					rlens[3] = startA + endA + 1;
-					break;
+							raster[i2 + startA + 1] = raster[rlens[2] - endA + i2];
+						break;
+				}
+				rlens[richtung] = startA + endA + 1;
 			}
+		}
 	}
 
 	public void len(int richtung, int len)
