@@ -85,6 +85,7 @@ public class Vor1
 		for(int i = 0; i < anzeigeZ.size(); i++)
 			anzeigeZ.get(i).splittern(anzeige);
 		//System.out.println(anzeige.stream().filter(e -> e.anzeigen).count());
+		anzeige.forEach(Anzeige3::weg);
 		Collections.sort(anzeige, (t1, t2) ->
 		{
 			if(!t1.anzeigen && !t2.anzeigen)
@@ -93,7 +94,8 @@ public class Vor1
 				return -1;
 			if(!t2.anzeigen)
 				return 1;
-			return -Double.compare(t1.kamMid.c, t2.kamMid.c);
+			//return -Double.compare(t1.kamMid.c, t2.kamMid.c);
+			return -Double.compare(t1.weg, t2.weg);
 		});
 		for(int i = 0; i < anzeige.size(); i++)
 			anzeige.get(i).eckenEntf(wI, hI, cI);

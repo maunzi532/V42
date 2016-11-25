@@ -55,21 +55,21 @@ public abstract class TSSA extends FWA implements Licht
 		canInfl = zinfl[zIndex];
 		if(canDreh[zIndex])
 		{
-			if(achsen[67].dreh.wl < Staticf.nachDreh || achsen[67].dreh.wl > Math.PI * 2 - Staticf.nachDreh)
+			if(achsen[67].dreh.wl < ZRX.nachDreh || achsen[67].dreh.wl > Math.PI * 2 - ZRX.nachDreh)
 			{
 				dreh.wl += achsen[67].dreh.wl;
 				achsen[67].dreh.wl = 0;
 			}
 			else if(achsen[67].dreh.wl > Math.PI)
 			{
-				dreh.wl -= Staticf.nachDreh;
-				achsen[67].dreh.wl += Staticf.nachDreh;
+				dreh.wl -= ZRX.nachDreh;
+				achsen[67].dreh.wl += ZRX.nachDreh;
 				achsen[67].dreh.sichern();
 			}
 			else
 			{
-				dreh.wl += Staticf.nachDreh;
-				achsen[67].dreh.wl -= Staticf.nachDreh;
+				dreh.wl += ZRX.nachDreh;
+				achsen[67].dreh.wl -= ZRX.nachDreh;
 				achsen[67].dreh.sichern();
 			}
 			dreh.sichern();

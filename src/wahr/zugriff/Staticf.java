@@ -112,6 +112,4 @@ public class Staticf
 
 	//D Relokalisierungsgeschwindigkeit
 	public static final double zpSpeed = 1;
-	//Drehgeschwindigkeit
-	public static final double nachDreh = 0.1;
 }

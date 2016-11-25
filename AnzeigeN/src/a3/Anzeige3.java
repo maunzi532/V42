@@ -15,6 +15,7 @@ public abstract class Anzeige3
 	public boolean anzeigen;
 	public LichtW lw;
 	public K4 rMid;
+	public double weg;
 
 	public double ddiff;
 
@@ -26,6 +27,12 @@ public abstract class Anzeige3
 	}
 
 	public void splittern(ArrayList<Anzeige3> dieListe){}
+
+	public void weg()
+	{
+		weg = Math.sqrt(kamMid.a * kamMid.a + kamMid.b * kamMid.b +
+				kamMid.c * kamMid.c + kamMid.d * kamMid.d);
+	}
 
 	public void eckenEntf(int wI, int hI, int cI){}
 
@@ -48,8 +55,6 @@ public abstract class Anzeige3
 			if(vanishCheck < pow)
 				vanishCheck = pow;
 		}
-		double weg = Math.sqrt(kamMid.a * kamMid.a + kamMid.b * kamMid.b +
-				kamMid.c * kamMid.c + kamMid.d * kamMid.d);
 		double nah = (PolyFarbe.redEnd - weg) / PolyFarbe.redEnd; //Wenn nah 1, am Rand 0
 		if(nah < 0)
 			nah = 0;

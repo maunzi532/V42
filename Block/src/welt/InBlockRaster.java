@@ -196,4 +196,26 @@ public class InBlockRaster
 		if(rlens[richtung] != len)
 			nochOk = false;
 	}
+
+	public boolean entspricht(int[][][][] ent, boolean[][][][] genau)
+	{
+		if(!nochOk)
+			return false;
+		if(ent.length != rlens[3] || genau.length != rlens[3])
+			return false;
+		if(ent[0].length != rlens[2] || genau[0].length != rlens[2])
+			return false;
+		if(ent[0][0].length != rlens[1] || genau[0][0].length != rlens[1])
+			return false;
+		if(ent[0][0][0].length != rlens[0] || genau[0][0][0].length != rlens[0])
+			return false;
+		for(int id = 0; id < rlens[3]; id++)
+			for(int ic = 0; ic < rlens[2]; ic++)
+				for(int ib = 0; ib < rlens[1]; ib++)
+					for(int ia = 0; ia < rlens[0]; ia++)
+						if(genau[id][ic][ib][ia] ? raster[id][ic][ib][ia] != ent[id][ic][ib][ia] :
+								(raster[id][ic][ib][ia] | ent[id][ic][ib][ia]) != raster[id][ic][ib][ia])
+							return false;
+		return true;
+	}
 }

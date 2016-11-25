@@ -1,4 +1,3 @@
-Controls fixen
 Index entfernen
 
 Stufe Blöcke
@@ -23,8 +22,10 @@ Stufe Moves
 	Verwenden in Kanten klettern
 
 Stufe Steuerung
-	Overlay- und TA2-Dateien fixen
+	Overlay-Dateien fixen
 	Targeting Bugs fixen
+	Controls fixen
+	Steuerung verzögerbar machen
 
 
 Stufe Stoff
