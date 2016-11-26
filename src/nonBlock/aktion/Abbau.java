@@ -24,6 +24,8 @@ public class Abbau extends Aktion
 		this.linA = linA;
 		this.reD = reD;
 		this.reT = reT;
+		if(tn.target == -1)
+			needCancel = true;
 	}
 
 	public void tick()

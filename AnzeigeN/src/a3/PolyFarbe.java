@@ -171,7 +171,7 @@ public class PolyFarbe extends LC2 implements IFarbe
 		double nah = (redEnd - weg) / redEnd; //Wenn nah 1, am Rand 0
 		if(nah < 0)
 			nah = 0;
-		if(tn != null && target.tn != null && tn.target == target.tn.target)
+		if(tn.target != -1 && tn.target == target.tn.target)
 		{
 			fc = limit(fc, 30, 30, 30); //Sichthilfe wenn getargetet
 			if(tn.inner == target.tn.inner)
@@ -216,7 +216,7 @@ public class PolyFarbe extends LC2 implements IFarbe
 		double nah = (redEnd - weg) / redEnd; //Wenn nah 1, am Rand 0
 		if(nah < 0)
 			nah = 0;
-		if(tn != null && target.tn != null && tn.target == target.tn.target)
+		if(tn.target != -1 && tn.target == target.tn.target)
 		{
 			fc = limit(fc, 30, 30, 30); //Sichthilfe wenn getargetet
 			if(tn.inner == target.tn.inner)

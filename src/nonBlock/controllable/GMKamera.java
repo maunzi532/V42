@@ -178,11 +178,11 @@ public class GMKamera extends NBD implements Controllable, Licht, GMMover
 
 	public double lichtPower()
 	{
-		return -50;
+		return -20;
 	}
 
 	public double lichtPowerDecay()
 	{
-		return 0.001;
+		return 0;
 	}
 }

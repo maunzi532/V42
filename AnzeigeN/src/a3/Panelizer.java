@@ -17,7 +17,7 @@ public class Panelizer
 	private int darkUsed = 0;
 	private TnZuordnung[] darkZ = new TnZuordnung[10000];
 	private BufferedImage dark;
-	public TnTarget tnTarget;
+	public TnTarget tnTarget = new TnTarget(-1, 0);
 	public int taType = 0;
 	public boolean taGet;
 	//X_Ray-Modus an/aus
@@ -33,7 +33,7 @@ public class Panelizer
 
 	public boolean isTnBlock()
 	{
-		return tnTarget != null && tnTarget.target >= 0;
+		return tnTarget.target >= 0;
 	}
 
 	public void panelize(ArrayList<Anzeige3> anzeige, int mx, int my)
@@ -89,13 +89,13 @@ public class Panelizer
 				DPA3(cl);
 			}
 			else
-				tnTarget = null;
+				tnTarget = new TnTarget(-1, 0);
 		}
 	}
 
 	private void DPA3(int cl)
 	{
-		if(taType > 1 && tnTarget != null)
+		if(taType > 1 && tnTarget.target != -1)
 		{
 			int dw = dark.getWidth();
 			int dh = dark.getHeight();

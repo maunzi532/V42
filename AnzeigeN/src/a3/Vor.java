@@ -89,7 +89,6 @@ public class Vor
 				return -1;
 			if(!t2.anzeigen)
 				return 1;
-			//return -Double.compare(t1.kamMid.c, t2.kamMid.c);
 			return -Double.compare(t1.weg, t2.weg);
 		});
 		for(int i = 0; i < anzeige.size(); i++)

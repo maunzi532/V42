@@ -58,7 +58,7 @@ public class BlockZuAnz implements IVUpgrade
 		WBP kawEnd = new WBP(wb.tw(new K4(kam.a + radius.a + 1, kam.b + radius.b + 1,
 				kam.c + radius.c + 1, kam.d + radius.d + 1)));
 		double wbD = (kam.d - wb.startWelt.d) / wb.weltBlock.d;
-		int theD = wb.intiize((kam.d - wb.startWelt.d) / wb.weltBlock.d);
+		int theD = WeltB.intiize((kam.d - wb.startWelt.d) / wb.weltBlock.d);
 		double wbDShift = wbD - theD;
 		K4 relativ = transformSet2(new K4(kam), kDreh, null);
 		for(int a = kaw0.k[0]; a < kawEnd.k[0]; a++)
@@ -110,11 +110,12 @@ public class BlockZuAnz implements IVUpgrade
 					eK[i] = transformSet2(new K4(eR[i]), kDreh, relativ);
 				}
 				VorDaten vd = VorDaten.gibVonIndex(wb.gib(ortA).typ + " SPL");
+				TnTarget tn = wb.innen(ortA) ? new TnTarget(wb.tn(ortA), flaechenNummer) : new TnTarget(-1, 0);
 				if(visionRange4D == 0)
-					dieListe.add(new PBlock3(new TnTarget(wb.tn(ortA), flaechenNummer), lw, true, -1, 1,
+					dieListe.add(new PBlock3(tn, lw, true, -1, 1,
 							XFBT2.gibVonIndex(attach.name(), flaechenNummer, vd), vd, eR, eK));
 				else
-					dieListe.add(new PBlock3(new TnTarget(wb.tn(ortA), flaechenNummer), lw, true,
+					dieListe.add(new PBlock3(tn, lw, true,
 							(wb.wt2(ortA).d - kamD) / wb.weltBlock.d - 0.5,
 							(wb.wt2(ortA).d - kamD) / wb.weltBlock.d + 0.5,
 							XFBT2.gibVonIndex(attach.name(), flaechenNummer, vd), vd, eR, eK));

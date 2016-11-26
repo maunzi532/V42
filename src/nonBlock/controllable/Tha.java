@@ -116,11 +116,11 @@ public class Tha extends TSSA
 				{
 					if(attemptAirgrab(0, position, position.d))
 					{
-						if(position.d - welt.intiize(position.d / welt.weltBlock.d) *
+						if(position.d - WeltB.intiize(position.d / welt.weltBlock.d) *
 								welt.weltBlock.d < Staticf.zpSpeed)
 							attemptAirgrab(0, new K4(position.a, position.b, position.c,
 									position.d - Staticf.zpSpeed), position.d - Staticf.zpSpeed / 2);
-						if(position.d - welt.intiize(position.d / welt.weltBlock.d) *
+						if(position.d - WeltB.intiize(position.d / welt.weltBlock.d) *
 								welt.weltBlock.d > welt.weltBlock.d - Staticf.zpSpeed)
 							attemptAirgrab(0, new K4(position.a, position.b, position.c,
 									position.d + Staticf.zpSpeed), position.d + Staticf.zpSpeed / 2);
