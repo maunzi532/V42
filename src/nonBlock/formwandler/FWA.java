@@ -5,14 +5,15 @@ import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
 import nonBlock.collide.*;
 import nonBlock.controllable.*;
-import wahr.zugriff.*;
+import nonBlock.formwandler.zustand.*;
 import welt.*;
 
 public abstract class FWA extends NBB implements Controllable
 {
 	protected final Controller control;
-	protected String currentZ;
-	protected String lastZ;
+	public Zustand zustand;
+	//protected String currentZ;
+	//protected String lastZ;
 	int transformTime;
 	private ArrayList<FWVerwendet> verwendbar;
 	private int[] verwendet;
@@ -30,18 +31,9 @@ public abstract class FWA extends NBB implements Controllable
 			cooldowns = new double[abilities.cldSize];
 		else
 			cooldowns = new double[0];
-		this.currentZ = currentZ;
-		lastZ = currentZ;
-	}
-
-	protected FWA(Controller control, LadeFWA abilities, String currentZ, AllWelt aw)
-	{
-		super(aw.wbl, aw.dw, aw.bw);
-		this.control = control;
-		this.abilities = abilities;
-		cooldowns = new double[abilities.cldSize];
-		this.currentZ = currentZ;
-		lastZ = currentZ;
+		//this.currentZ = currentZ;
+		//lastZ = currentZ;
+		zustand = new AerialZ(this);
 	}
 
 	public void tick()
@@ -53,7 +45,7 @@ public abstract class FWA extends NBB implements Controllable
 
 	public void doCommand(String command)
 	{
-		int i = abilities.zustands.indexOf(currentZ);
+		int i = abilities.zustands.indexOf(zustand.getClass().getSimpleName());
 		if(i < 0)
 			return;
 		int j = abilities.usedInputs.get(i).indexOf(command);
@@ -87,11 +79,11 @@ public abstract class FWA extends NBB implements Controllable
 			cooldowns[td.sharedcooldown] = td.cooldown;
 	}
 
-	protected void inflChecks(boolean[] infl)
+	protected void inflChecks(int[] infl)
 	{
 		for(int i = 0; i < 8; i++)
-			if(infl[i])
-			doCommand("I" + i);
+			if(infl[i] > 0)
+				doCommand("I" + i);
 	}
 
 	protected boolean targetFall()

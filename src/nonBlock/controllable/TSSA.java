@@ -13,11 +13,13 @@ import welt.*;
 
 public abstract class TSSA extends FWA implements Licht
 {
-	private static List<String> zustands = Arrays.asList("Normal", "Kante", "Luft", "Ducken");
+	//private static final double nachDreh = 0.1;
+	//private int hda = 67;
+	/*private static List<String> zustands = Arrays.asList("Normal", "Kante", "Luft", "Ducken");
 	private static double[][] zinfl = new double[][]{{0.2, 0, 0, 0.2}, null,
 			{0.1, 0, 0.2, 0.1}, null};
 	private static Boolean[] zboden = new Boolean[]{true, null, false, true};
-	private static boolean[] canDreh = new boolean[]{true, false, true, false};
+	private static boolean[] canDreh = new boolean[]{true, false, true, false};*/
 	//Zustand in FWA einbauen
 	//Zustand als Objekt
 	//mit zusatz werten
@@ -37,80 +39,12 @@ public abstract class TSSA extends FWA implements Licht
 	{
 		if(!dw.nofreeze())
 			return;
-		int zIndex = zustands.indexOf(currentZ);
-		double[] canInfl;
-		if(zboden[zIndex] != null)
-		{
-			boolean boden = naheWand(2, 0.1); //und b-speed
-			if(zboden[zIndex] != boden)
-			{
-				lastZ = currentZ;
-				if(boden)
-					currentZ = "Normal";
-				else
-					currentZ = "Luft";
-				ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 20);
-			}
-		}
-		canInfl = zinfl[zIndex];
-		if(canDreh[zIndex])
-		{
-			if(achsen[67].dreh.wl < ZRX.nachDreh || achsen[67].dreh.wl > Math.PI * 2 - ZRX.nachDreh)
-			{
-				dreh.wl += achsen[67].dreh.wl;
-				achsen[67].dreh.wl = 0;
-			}
-			else if(achsen[67].dreh.wl > Math.PI)
-			{
-				dreh.wl -= ZRX.nachDreh;
-				achsen[67].dreh.wl += ZRX.nachDreh;
-				achsen[67].dreh.sichern();
-			}
-			else
-			{
-				dreh.wl += ZRX.nachDreh;
-				achsen[67].dreh.wl -= ZRX.nachDreh;
-				achsen[67].dreh.sichern();
-			}
-			dreh.sichern();
-		}
-		else
-		{
-			if(achsen[67].dreh.wl < Math.PI * 1.5 && achsen[67].dreh.wl > Math.PI * 0.5)
-			{
-				if(achsen[67].dreh.wl > Math.PI)
-					achsen[67].dreh.wl = Math.PI * 1.5;
-				else
-					achsen[67].dreh.wl = Math.PI * 0.5;
-			}
-		}
-		boolean[] infl = control.infl();
-		if(canInfl != null)
-		{
-			K4 cb = new K4();
-			if(infl[0] != infl[1])
-			{
-				cb.a += Math.cos(dreh.wl) * (infl[0] ? canInfl[0] : -canInfl[0]);
-				cb.c += Math.sin(dreh.wl) * (infl[0] ? canInfl[0] : -canInfl[0]);
-			}
-			if(infl[2] != infl[3])
-				cb.b += infl[2] ? canInfl[1] : -canInfl[2];
-			if(infl[4] != infl[5])
-			{
-				cb.a -= Math.sin(dreh.wl) * (infl[4] ? canInfl[0] : -canInfl[0]);
-				cb.c += Math.cos(dreh.wl) * (infl[4] ? canInfl[0] : -canInfl[0]);
-			}
-			if(infl[6] != infl[7])
-				cb.d += infl[6] ? canInfl[3] : -canInfl[3];
-			beweg.add(cb);
-		}
-
-		inflChecks(infl);
+		zustand.kontrolleDrehung();
+		zustand.kontrolle(control.infl());
+		//inflChecks(control.infl());
 		ArrayList<String> commands = control.giveCommands();
 		for(int i = 0; i < commands.size(); i++)
 			doCommand(commands.get(i));
-		beweg.add(new K4(bewegung.a * 0.85, bewegung.b * 0.85, bewegung.c * 0.85, bewegung.d * 0.85));
-		beweg.add(new K4(0, -0.05, 0, 0));
 	}
 
 	//Links 7 Rechts 0
@@ -119,139 +53,82 @@ public abstract class TSSA extends FWA implements Licht
 		return 7 - (int)(Drehung.sichern(dreh.wl) * 4 / Math.PI);
 	}
 
-	boolean attemptAirgrab(int type, K4 dlPosition, double dUnedited)
+	boolean attemptAirgrab(K4 dlPosition, double dUnedited)
 	{
 		WBP p = welt.tw(dlPosition);
-		K4 dif = K4.diff(welt.wt(p), dlPosition);
-		if(dif.b < welt.weltBlock.b - 4 || dif.b > welt.weltBlock.b)
-		{
-			if(dif.b < 4)
-			{
-				p.k[1]--;
-				dif.b += welt.weltBlock.b;
-			}
-			else
-				return true;
-		}
-		int richtung = (approxRichtung() + 1) % 8 / 2;
-		switch(type)
-		{
-			case 0:
-				if(/*canAirgrab(richtung, dif, new WBP(p))*/canAirgrab2())
-				{
-					K4 fp = welt.wt2(p);
-					fp.b += welt.weltBlock.b / 2 + 0.6;
-					if(richtung % 2 == 0)
-					{
-						fp.c += (welt.weltBlock.c / 2 - 3.6) * (1 - richtung);
-						fp.a = dlPosition.a;
-					}
-					else
-					{
-						fp.a += (welt.weltBlock.a / 2 - 3.6) * (2 - richtung);
-						fp.c = dlPosition.c;
-					}
-					fp.d = dUnedited;
-					grabRichtung = richtung;
-					if(approxRichtung() == 7)
-						richtung = 4;
-					focus = new Focus(this, 20, fp, Drehung.nDrehung((4 - richtung) * Math.PI / 2, 0));
-					ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA3LR"), this, 20);
-					lastZ = currentZ;
-					currentZ = "Kante";
-					return false;
-				}
-				break;
-		}
-		return true;
-	}
-
-	private boolean canAirgrab(int richtung, K4 dif, WBP p)
-	{
-		switch(richtung)
-		{
-			case 0:
-				if(dif.c > welt.weltBlock.c - 8 && dif.c < welt.weltBlock.c - 2)
-				{
-					if(dif.a < 3 || dif.a > welt.weltBlock.a - 3)
-					{
-						if(!WeltB.tk1(welt, p, richtung))
-							return false;
-						p.k[0] += dif.a > welt.weltBlock.a / 2 ? 1 : -1;
-						return WeltB.tk1(welt, p, richtung);
-					}
-					else
-						return WeltB.tk1(welt, p, richtung);
-				}
-				break;
-			case 1:
-				if(dif.a > welt.weltBlock.a - 8 && dif.a < welt.weltBlock.a - 2)
-				{
-					if(dif.c < 3 || dif.c > welt.weltBlock.c - 3)
-					{
-						if(!WeltB.tk1(welt, p, richtung))
-							return false;
-						p.k[2] += dif.c > welt.weltBlock.c / 2 ? 1 : -1;
-						return WeltB.tk1(welt, p, richtung);
-					}
-					else
-						return WeltB.tk1(welt, p, richtung);
-				}
-				break;
-			case 2:
-				if(dif.c < 8 && dif.c > 2)
-				{
-					if(dif.a < 3 || dif.a > welt.weltBlock.a - 3)
-					{
-						if(!WeltB.tk1(welt, p, richtung))
-							return false;
-						p.k[0] += dif.a > welt.weltBlock.a / 2 ? 1 : -1;
-						return WeltB.tk1(welt, p, richtung);
-					}
-					else
-						return WeltB.tk1(welt, p, richtung);
-				}
-				break;
-			case 3:
-				if(dif.a < 8 && dif.a > 2)
-				{
-					if(dif.c < 3 || dif.c > welt.weltBlock.c - 3)
-					{
-						if(!WeltB.tk1(welt, p, richtung))
-							return false;
-						p.k[2] += dif.c > welt.weltBlock.c / 2 ? 1 : -1;
-						return WeltB.tk1(welt, p, richtung);
-					}
-					else
-						return WeltB.tk1(welt, p, richtung);
-				}
-				break;
-		}
-		return false;
-	}
-
-	private boolean canAirgrab2()
-	{
-		//InBlockRaster ibr = new InBlockRaster(welt, position, dreh.wl, true, 20, 20, 20, 20, 20, 20, 0, 0);
-		//System.out.println(ibr);
-		if(InBlockRaster.drehArt(dreh.wl))
+		boolean drehArt = InBlockRaster.drehArt(dreh.wl);
+		if(drehArt)
 		{
 			InBlockRaster ibr = new InBlockRaster(welt, position, dreh.wl, true, 4, 16, 4, 4, 0, 20, 0, 0);
-			System.out.println("1 " + ibr);
 			ibr.zusammenfassen(3);
 			ibr.len(2, 2);
 			ibr.zusammenfassen(1);
 			ibr.len(0, 2);
-			System.out.println("2 " + ibr);
-			return ibr.entspricht(new int[][][][]{{{{1, 2}}, {{1, 1}}}},
-					new boolean[][][][]{{{{true, true}}, {{true, true}}}});
+			if(ibr.entspricht(new int[][][][]{{{{1, 2}}, {{1, 1}}}},
+					new boolean[][][][]{{{{true, true}}, {{true, true}}}}))
+			{
+				int richtung = InBlockRaster.drehIntH(dreh.wl);
+				K4 fp = welt.wt(p);
+				fp.b += welt.weltBlock.b + 0.6;
+				if(richtung % 2 == 0)
+				{
+					if(richtung == 0)
+						fp.c += welt.weltBlock.c - 3.6;
+					else
+						fp.c += 3.6;
+					fp.a = dlPosition.a;
+				}
+				else
+				{
+					if(richtung == 3)
+						fp.a += welt.weltBlock.a - 3.6;
+					else
+						fp.a += 3.6;
+					fp.c = dlPosition.c;
+				}
+				fp.d = dUnedited;
+				grabRichtung = approxRichtung();
+				if(InBlockRaster.drehIntH2(dreh.wl) == 7)
+					richtung = 4;
+				focus = new Focus(this, 20, fp, Drehung.nDrehung(richtung * Math.PI / 2, 0));
+				ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA3LR"), this, 20);
+				//lastZ = currentZ;
+				//currentZ = "Kante";
+				return false;
+			}
 		}
 		else
 		{
-			System.out.println("W");
-			InBlockRaster ibr = new InBlockRaster(welt, position, dreh.wl, false, 0, 0, 0, 0, 0, 0, 0, 0);
+			InBlockRaster ibr = new InBlockRaster(welt, position, dreh.wl, false, 4, 16, 16, 4, 0, 20, 0, 0);
+			//System.out.println(ibr);
+			ibr.zusammenfassen(3);
+			ibr.len(2, 2);
+			ibr.len(1, 2);
+			ibr.len(0, 2);
+			if(ibr.entspricht(new int[][][][]{{{{1, 2}, {1, 1}}, {{1, 1}, {1, 1}}}},
+					new boolean[][][][]{{{{true, true}, {true, true}}, {{true, true}, {true, true}}}}))
+			{
+				int richtung = InBlockRaster.drehIntD(dreh.wl);
+				K4 fp = welt.wt(p);
+				fp.b += welt.weltBlock.b + 0.6;
+				if(richtung == 0 || richtung == 3)
+					fp.c += welt.weltBlock.c - 3.6;
+				else
+					fp.c += 3.6;
+				if(richtung >= 2)
+					fp.a += welt.weltBlock.a - 3.6;
+				else
+					fp.a += 3.6;
+				fp.d = dUnedited;
+				//grabRichtung = approxRichtung();
+				focus = new Focus(this, 20, fp, new Drehung(richtung * Math.PI / 2 + Math.PI / 4, 0));
+				ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA3LR"), this, 20);
+				//lastZ = currentZ;
+				//currentZ = "Ecke";
+				return false;
+			}
 		}
-		return false;
+		return true;
 	}
 
 	boolean kletterHoch()
@@ -267,8 +144,8 @@ public abstract class TSSA extends FWA implements Licht
 				if(ck != null)
 				{
 					ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 30);
-					lastZ = currentZ;
-					currentZ = "Luft";
+					//lastZ = currentZ;
+					//currentZ = "Luft";
 					focus = null;
 					grabRichtung = -1;
 					if(ck)
@@ -287,8 +164,8 @@ public abstract class TSSA extends FWA implements Licht
 		if(grabRichtung >= 0)
 		{
 			ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 20);
-			lastZ = currentZ;
-			currentZ = "Luft";
+			//lastZ = currentZ;
+			//currentZ = "Luft";
 			focus = null;
 			grabRichtung = -1;
 			return false;
@@ -364,5 +241,4 @@ public abstract class TSSA extends FWA implements Licht
 	{
 		return 0.8;
 	}
-
 }

@@ -50,7 +50,6 @@ public class InBlockRaster
 		K4 wb = w.weltBlock;
 		K4 sw = w.startWelt;
 		int dreh = typ ? drehIntH(drehung) : drehIntD(drehung);
-		System.out.println(dreh);
 		int hvmul = (dreh + 1) / 2 == 1 ? -1 : 1;
 		int lrmul = dreh / 2 == 1 ? -1 : 1;
 		double hvp = dreh % 2 == 0 ? position.c : position.a;

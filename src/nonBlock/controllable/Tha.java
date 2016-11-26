@@ -8,6 +8,7 @@ import nonBlock.aktion.*;
 import nonBlock.aktion.lesen.*;
 import nonBlock.collide.*;
 import nonBlock.formwandler.*;
+import nonBlock.formwandler.zustand.*;
 import wahr.zugriff.*;
 import welt.*;
 
@@ -26,6 +27,7 @@ public class Tha extends TSSA
 		this(control, abilities, aw.wbl, aw.dw, aw.bw);
 	}
 
+	@Override
 	public void init()
 	{
 		super.init();
@@ -53,17 +55,22 @@ public class Tha extends TSSA
 		fR.init();
 	}
 
+	@Override
 	public void kontrolle()
 	{
 		if(!dw.nofreeze())
 			return;
 		super.kontrolle();
-		fL.linkAchsen[0].dreh.wl += 0.03;
-		fL.linkAchsen[0].dreh.sichern();
-		fR.linkAchsen[0].dreh.wl -= 0.03;
-		fR.linkAchsen[0].dreh.sichern();
+		if(zustand instanceof BodenZ)
+		{
+			fL.linkAchsen[0].dreh.wl += 0.03;
+			fL.linkAchsen[0].dreh.sichern();
+			fR.linkAchsen[0].dreh.wl -= 0.03;
+			fR.linkAchsen[0].dreh.sichern();
+		}
 	}
 
+	@Override
 	public AkA plzDislocate(String info)
 	{
 		switch(info)
@@ -77,29 +84,37 @@ public class Tha extends TSSA
 		}
 	}
 
+	@Override
 	public void collide(Collider collider){}
 
+	@Override
 	public void actCollide(Collider collider){}
 
+	@Override
 	public void decollide(Collider collider){}
 
+	@Override
 	public void wand(int welche){}
 
+	@Override
 	public K4 kamP()
 	{
 		return new K4(punkte[73][14]);
 	}
 
+	@Override
 	public Drehung kamD()
 	{
 		return Drehung.plus(dreh, achsen[73].dreh);
 	}
 
+	@Override
 	protected boolean targetFall()
 	{
 		return ((Overlay)tverlay).pa.taType > 0 && ((Overlay)tverlay).pa.tnTarget.target >= 0;
 	}
 
+	@Override
 	protected void doFall(String fall, boolean attachChainOnly)
 	{
 		switch(fall)
@@ -114,15 +129,15 @@ public class Tha extends TSSA
 					}
 				if(can)
 				{
-					if(attemptAirgrab(0, position, position.d))
+					if(attemptAirgrab(position, position.d))
 					{
 						if(position.d - WeltB.intiize(position.d / welt.weltBlock.d) *
 								welt.weltBlock.d < Staticf.zpSpeed)
-							attemptAirgrab(0, new K4(position.a, position.b, position.c,
+							attemptAirgrab(new K4(position.a, position.b, position.c,
 									position.d - Staticf.zpSpeed), position.d - Staticf.zpSpeed / 2);
 						if(position.d - WeltB.intiize(position.d / welt.weltBlock.d) *
 								welt.weltBlock.d > welt.weltBlock.d - Staticf.zpSpeed)
-							attemptAirgrab(0, new K4(position.a, position.b, position.c,
+							attemptAirgrab(new K4(position.a, position.b, position.c,
 									position.d + Staticf.zpSpeed), position.d + Staticf.zpSpeed / 2);
 					}
 				}
@@ -144,13 +159,13 @@ public class Tha extends TSSA
 					ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA2L"), this, 30);
 				else
 					ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA2R"), this, 30);
-				lastZ = currentZ;
-				currentZ = "Ducken";
+				//lastZ = currentZ;
+				//currentZ = "Ducken";
 				break;
 			case "Aufstehen":
 				ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 40);
-				lastZ = currentZ;
-				currentZ = "Normal";
+				//lastZ = currentZ;
+				//currentZ = "Normal";
 				break;
 			case "KL":
 			{
@@ -171,8 +186,9 @@ public class Tha extends TSSA
 		}
 	}
 
-	/*public double lichtRange()
+	@Override
+	public double lichtRange()
 	{
-		return 0;
-	}*/
+		return super.lichtRange();
+	}
 }

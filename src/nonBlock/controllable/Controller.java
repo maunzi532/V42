@@ -9,8 +9,8 @@ public class Controller
 		return new ArrayList<>();
 	}
 
-	public boolean[] infl()
+	public int[] infl()
 	{
-		return new boolean[8];
+		return new int[8];
 	}
 }

@@ -8,8 +8,8 @@ import nonBlock.aktion.lesen.*;
 public abstract class NBD extends ENB implements AkA
 {
 	public ArrayList<Aktion> aktionen;
-	protected K4 bewegung;
-	protected ArrayList<K4> beweg;
+	public K4 bewegung;
+	public ArrayList<K4> beweg;
 	public ArrayList<Forced> forced;
 	protected ArrayList<Move> moves;
 

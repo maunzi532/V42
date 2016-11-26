@@ -48,21 +48,14 @@ public class GMC extends Controller
 		return cmd;
 	}
 
-	public boolean[] infl()
+	public int[] infl()
 	{
 		if(master.godMode)
-			return new boolean[]
-					{
-							master.ta.keyStat[master.taIndex][2] > 0,
-							master.ta.keyStat[master.taIndex][1] > 0,
-							master.ta.keyStat[master.taIndex][5] > 0,
-							master.ta.keyStat[master.taIndex][6] > 0,
-							master.ta.keyStat[master.taIndex][3] > 0,
-							master.ta.keyStat[master.taIndex][4] > 0,
-							master.ta.keyStat[master.taIndex][7] > 0,
-							master.ta.keyStat[master.taIndex][8] > 0,
-					};
+		{
+			int[] src = master.ta.keyStat[master.taIndex];
+			return new int[]{src[4], src[3], src[1], src[2], src[6], src[5], src[7], src[8]};
+		}
 		else
-			return new boolean[8];
+			return new int[8];
 	}
 }

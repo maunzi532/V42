@@ -52,22 +52,22 @@ public class GMKamera extends NBD implements Controllable, Licht, GMMover
 		if(canInfl != null)
 		{
 			K4 cb = new K4();
-			boolean[] infl = control.infl();
-			if(infl[0] != infl[1])
+			int[] infl = control.infl();
+			if(infl[2] > 0 != infl[3] > 0)
 			{
-				cb.a += Math.cos(dreh.wl) * (infl[0] ? canInfl[0] : -canInfl[0]);
-				cb.c += Math.sin(dreh.wl) * (infl[0] ? canInfl[0] : -canInfl[0]);
+				cb.a += Math.cos(dreh.wl) * (infl[3] > 0 ? canInfl[0] : -canInfl[0]);
+				cb.c += Math.sin(dreh.wl) * (infl[3] > 0 ? canInfl[0] : -canInfl[0]);
 			}
-			if(infl[2] != infl[3])
-				cb.b += infl[2] ? canInfl[1] : -canInfl[2];
-			if(infl[4] != infl[5])
+			if(infl[4] > 0 != infl[5] > 0)
+				cb.b += infl[5] > 0 ? canInfl[1] : -canInfl[2];
+			if(infl[0] > 0 != infl[1] > 0)
 			{
-				cb.a -= Math.sin(dreh.wl) * Math.cos(dreh.wb) * (infl[4] ? canInfl[0] : -canInfl[0]);
-				cb.c += Math.cos(dreh.wl) * Math.cos(dreh.wb) * (infl[4] ? canInfl[0] : -canInfl[0]);
-				cb.b += Math.sin(dreh.wb) * (infl[4] ? canInfl[1] : -canInfl[1]);
+				cb.a -= Math.sin(dreh.wl) * Math.cos(dreh.wb) * (infl[1] > 0 ? canInfl[0] : -canInfl[0]);
+				cb.c += Math.cos(dreh.wl) * Math.cos(dreh.wb) * (infl[1] > 0 ? canInfl[0] : -canInfl[0]);
+				cb.b += Math.sin(dreh.wb) * (infl[1] > 0 ? canInfl[1] : -canInfl[1]);
 			}
-			if(infl[6] != infl[7])
-				cb.d += infl[6] ? canInfl[3] : -canInfl[3];
+			if(infl[6] > 0 != infl[7] > 0)
+				cb.d += infl[6] > 0 ? canInfl[3] : -canInfl[3];
 			beweg.add(cb);
 			beweg.add(new K4(bewegung.a * 0.7, bewegung.b * 0.7, bewegung.c * 0.7, bewegung.d * 0.7));
 		}

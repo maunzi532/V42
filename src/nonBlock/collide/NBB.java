@@ -128,7 +128,7 @@ public abstract class NBB extends NBD
 
 	public abstract void wand(int welche);
 
-	protected boolean naheWand(int welche, double abstand)
+	public boolean naheWand(int welche, double abstand)
 	{
 		for(int i = 0; i < block.size(); i++)
 			if(block.get(i).checkWand(welche, abstand, welt))
