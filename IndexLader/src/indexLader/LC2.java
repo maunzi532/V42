@@ -197,7 +197,7 @@ public abstract class LC2
 		String build = (String) wugu[2];
 		if(build == null)
 			return;
-		if(build.charAt(0) == '{' && build.charAt(build.length() - 1) == '}')
+		if(build.length() > 0 && build.charAt(0) == '{' && build.charAt(build.length() - 1) == '}')
 			wugu[2] = build.substring(1, build.length() - 1);
 		else
 			vial.add(new CError("Nicht alle Klammern vorhanden", (Integer) wugu[3], (Integer) wugu[4]));

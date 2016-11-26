@@ -89,7 +89,7 @@ public class Start
 			ui.flt(ak1s);
 			ak1s.forEach(AchsenK1::reset);
 			vor1.vorbereiten(kam, ui.rWidth, ui.rHeight, ui.rWidth,
-					null, ui.xr3v, ui.ac1v ? achsenFarbe : null, ui.fl2v);
+					new TnTarget(-1, 0), ui.xr3v, ui.ac1v ? achsenFarbe : null, ui.fl2v);
 			ArrayList<Anzeige3> a3s3 = new ArrayList<>();
 			vor1.anzeige.stream().filter(e -> e.anzeigen).forEach(a3s3::add);
 			a3s2 = a3s3;

@@ -34,7 +34,8 @@ public class InBlockRaster
 	public static boolean drehArt(double drehung)
 	{
 		drehung = Drehung.sichern(drehung);
-		return (((int)(drehung / Math.PI * 4) + 1) / 2) % 2 == 0;
+		//System.out.println((int)(drehung / Math.PI * 8));
+		return (((int)(drehung / Math.PI * 8) + 1) / 2) % 2 == 0;
 	}
 
 	public int[][][][] raster;
@@ -45,23 +46,28 @@ public class InBlockRaster
 	//false = diagonal -> lhinten, rvorne, lvorne, rhinten, unten, oben, -4d, +4d
 	public InBlockRaster(WeltB w, K4 position, double drehung, boolean typ, double... area)
 	{
+
 		K4 wb = w.weltBlock;
+		K4 sw = w.startWelt;
 		int dreh = typ ? drehIntH(drehung) : drehIntD(drehung);
+		System.out.println(dreh);
 		int hvmul = (dreh + 1) / 2 == 1 ? -1 : 1;
-		int lrmul = dreh / 2 * 2 - 1;
+		int lrmul = dreh / 2 == 1 ? -1 : 1;
 		double hvp = dreh % 2 == 0 ? position.c : position.a;
 		double lrp = dreh % 2 == 0 ? position.a : position.c;
 		double wbhv = dreh % 2 == 0 ? wb.c : wb.a;
 		double wblr = dreh % 2 == 0 ? wb.a : wb.c;
-		rastern(w, dreh, takeZone(hvp, area[0] * -hvmul, wbhv), takeZone(hvp, area[1] * hvmul, wbhv),
-				takeZone(lrp, area[2] * -lrmul, wblr), takeZone(lrp, area[3] * lrmul, wblr),
-				takeZone(position.b, -area[4], wb.b), takeZone(position.b, area[5], wb.b),
-				takeZone(position.d, -area[6], wb.d), takeZone(position.d, area[7], wb.d));
+		double swhv = dreh % 2 == 0 ? sw.c : sw.a;
+		double swlr = dreh % 2 == 0 ? sw.a : sw.c;
+		rastern(w, dreh, takeZone(hvp, area[0] * -hvmul, wbhv, swhv), takeZone(hvp, area[1] * hvmul, wbhv, swhv),
+				takeZone(lrp, area[2] * -lrmul, wblr, swlr), takeZone(lrp, area[3] * lrmul, wblr, swlr),
+				takeZone(position.b, -area[4], wb.b, sw.b), takeZone(position.b, area[5], wb.b, sw.b),
+				takeZone(position.d, -area[6], wb.d, sw.d), takeZone(position.d, area[7], wb.d, sw.d));
 	}
 
-	private int takeZone(double n1, double n2, double wb)
+	private int takeZone(double n1, double n2, double wb, double sw)
 	{
-		return WeltB.intiize((n1 + n2) / wb);
+		return WeltB.intiize((n1 + n2 - sw) / wb);
 	}
 
 	private void rastern(WeltB w, int dreh, int hintenEnde, int vorneEnde,
@@ -75,10 +81,10 @@ public class InBlockRaster
 		rlens[2] = obenEnde + 1 - untenEnde;
 		rlens[3] = p4dEnde + 1 - m4dEnde;
 		raster = new int[rlens[3]][rlens[2]][rlens[1]][rlens[0]];
-		for(int id = 0; id <= p4dEnde - m4dEnde; id++)
-			for(int ic = 0; ic <= obenEnde - untenEnde; ic++)
-				for(int ib = 0; ib <= rechtsEnde - linksEnde; ib++)
-					for(int ia = 0; ia <= vorneEnde - hintenEnde; ia++)
+		for(int id = 0; id < rlens[3]; id++)
+			for(int ic = 0; ic < rlens[2]; ic++)
+				for(int ib = 0; ib < rlens[1]; ib++)
+					for(int ia = 0; ia < rlens[0]; ia++)
 					{
 						WBP wbp;/* = new WBP(0, untenEnde + ic, 0, m4dEnde + id);
 						if(dreh < 2)
@@ -89,7 +95,7 @@ public class InBlockRaster
 							wbp.k[dreh / 2 * 2] = vorneEnde - ia;
 						else
 							wbp.k[dreh / 2 * -2 + 2] = hintenEnde + ib;*///Geht nich
-						switch(dreh)
+						/*switch(dreh)
 						{
 							case 0:
 								wbp = new WBP(rechtsEnde - ib, untenEnde + ic,
@@ -109,7 +115,15 @@ public class InBlockRaster
 								break;
 							default:
 								throw new RuntimeException();
-						}
+						}*/
+						if(dreh % 2 == 0)
+							wbp = new WBP(lrVerk ? linksEnde - ib : linksEnde + ib, untenEnde + ic,
+									hvVerk ? hintenEnde - ia : hintenEnde + ia, m4dEnde + id);
+						else
+							wbp = new WBP(hvVerk ? hintenEnde - ia : hintenEnde + ia, untenEnde + ic,
+									lrVerk ? linksEnde - ib : linksEnde + ib, m4dEnde + id);
+						//System.out.println(Arrays.toString(wbp.k));
+						//System.out.println(w.gib(wbp));
 						raster[id][ic][ib][ia] = w.gib(wbp).collideOpaque() ? 2 : 1;
 					}
 	}
@@ -123,7 +137,7 @@ public class InBlockRaster
 
 	public void zusammenfassen(int richtung, int startA, int endA)
 	{
-		if(rlens[richtung] > startA + endA)
+		if(rlens[richtung] <= startA + endA)
 		{
 			nochOk = false;
 			return;
@@ -217,5 +231,42 @@ public class InBlockRaster
 								(raster[id][ic][ib][ia] | ent[id][ic][ib][ia]) != raster[id][ic][ib][ia])
 							return false;
 		return true;
+	}
+
+	public String toString()
+	{
+		if(!nochOk)
+			return "X";
+		StringBuilder sb = new StringBuilder();
+		sb.append('[');
+		for(int id = 0; id < rlens[3]; id++)
+		{
+			sb.append('[');
+			for(int ic = 0; ic < rlens[2]; ic++)
+			{
+				sb.append('[');
+				for(int ib = 0; ib < rlens[1]; ib++)
+				{
+					sb.append('[');
+					for(int ia = 0; ia < rlens[0]; ia++)
+					{
+						sb.append(raster[id][ic][ib][ia]);
+						if(ia < rlens[0] - 1)
+							sb.append(", ");
+					}
+					sb.append(']');
+					if(ib < rlens[1] - 1)
+						sb.append(", ");
+				}
+				sb.append(']');
+				if(ic < rlens[2] - 1)
+					sb.append(", ");
+			}
+			sb.append(']');
+			if(id < rlens[3] - 1)
+				sb.append(", ");
+		}
+		sb.append(']');
+		return sb.toString();
 	}
 }

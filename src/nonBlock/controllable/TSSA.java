@@ -137,7 +137,7 @@ public abstract class TSSA extends FWA implements Licht
 		switch(type)
 		{
 			case 0:
-				if(canAirgrab(richtung, dif, new WBP(p)))
+				if(/*canAirgrab(richtung, dif, new WBP(p))*/canAirgrab2())
 				{
 					K4 fp = welt.wt2(p);
 					fp.b += welt.weltBlock.b / 2 + 0.6;
@@ -230,15 +230,25 @@ public abstract class TSSA extends FWA implements Licht
 		return false;
 	}
 
-	//TODO
 	private boolean canAirgrab2()
 	{
+		//InBlockRaster ibr = new InBlockRaster(welt, position, dreh.wl, true, 20, 20, 20, 20, 20, 20, 0, 0);
+		//System.out.println(ibr);
 		if(InBlockRaster.drehArt(dreh.wl))
 		{
-			InBlockRaster ibr = new InBlockRaster(welt, position, dreh.wl, true, 0, 0, 0, 0, 0, 0, 0, 0);
+			InBlockRaster ibr = new InBlockRaster(welt, position, dreh.wl, true, 4, 16, 4, 4, 0, 20, 0, 0);
+			System.out.println("1 " + ibr);
+			ibr.zusammenfassen(3);
+			ibr.len(2, 2);
+			ibr.zusammenfassen(1);
+			ibr.len(0, 2);
+			System.out.println("2 " + ibr);
+			return ibr.entspricht(new int[][][][]{{{{1, 2}}, {{1, 1}}}},
+					new boolean[][][][]{{{{true, true}}, {{true, true}}}});
 		}
 		else
 		{
+			System.out.println("W");
 			InBlockRaster ibr = new InBlockRaster(welt, position, dreh.wl, false, 0, 0, 0, 0, 0, 0, 0, 0);
 		}
 		return false;
