@@ -38,6 +38,19 @@ public class InBlockRaster
 		return (((int)(drehung / Math.PI * 8) + 1) / 2) % 2 == 0;
 	}
 
+	public static DerBlock gib(WeltB w, K4 position, int dreh,
+			double mvv, double mvr, double mvo, double mvg)
+	{
+		K4 wb = w.weltBlock;
+		K4 sw = w.startWelt;
+		boolean dg = dreh % 2 == 0;
+		double[] mvac = new double[2];
+		mvac[dg ? 0 : 1] = mvr * (dreh >= 2 ? -1 : 1);
+		mvac[dg ? 1 : 0] = mvv * (dreh == 1 || dreh == 2 ? -1 : 1);
+		return w.gib(new WBP(takeZone(position.a, mvac[0], wb.a, sw.a), takeZone(position.c, mvac[1], wb.c, sw.c),
+				takeZone(position.b, mvo, wb.b, sw.b), takeZone(position.d, mvg, wb.d, sw.d)));
+	}
+
 	public int[][][][] raster;
 	public int[] rlens;
 	public boolean nochOk = true;
@@ -46,84 +59,46 @@ public class InBlockRaster
 	//false = diagonal -> lhinten, rvorne, lvorne, rhinten, unten, oben, -4d, +4d
 	public InBlockRaster(WeltB w, K4 position, double drehung, boolean typ, double... area)
 	{
-
 		K4 wb = w.weltBlock;
 		K4 sw = w.startWelt;
 		int dreh = typ ? drehIntH(drehung) : drehIntD(drehung);
-		int hvmul = (dreh + 1) / 2 == 1 ? -1 : 1;
-		int lrmul = dreh / 2 == 1 ? -1 : 1;
-		double hvp = dreh % 2 == 0 ? position.c : position.a;
-		double lrp = dreh % 2 == 0 ? position.a : position.c;
-		double wbhv = dreh % 2 == 0 ? wb.c : wb.a;
-		double wblr = dreh % 2 == 0 ? wb.a : wb.c;
-		double swhv = dreh % 2 == 0 ? sw.c : sw.a;
-		double swlr = dreh % 2 == 0 ? sw.a : sw.c;
-		rastern(w, dreh, takeZone(hvp, area[0] * -hvmul, wbhv, swhv), takeZone(hvp, area[1] * hvmul, wbhv, swhv),
-				takeZone(lrp, area[2] * -lrmul, wblr, swlr), takeZone(lrp, area[3] * lrmul, wblr, swlr),
+		boolean dg = dreh % 2 == 0;
+		double[] mvac = new double[4];
+		mvac[dg ? 0 : 1] = area[2] * (dreh >= 2 ? -1 : 1);
+		mvac[dg ? 1 : 0] = area[0] * (dreh == 1 || dreh == 2 ? -1 : 1);
+		mvac[dg ? 2 : 3] = area[3] * (dreh >= 2 ? -1 : 1);
+		mvac[dg ? 3 : 2] = area[1] * (dreh == 1 || dreh == 2 ? -1 : 1);
+		rastern(w, dreh, takeZone(position.c, -mvac[1], wb.c, sw.c), takeZone(position.c, mvac[3], wb.c, sw.c),
+				takeZone(position.a, -mvac[0], wb.a, sw.a), takeZone(position.a, mvac[2], wb.a, sw.a),
 				takeZone(position.b, -area[4], wb.b, sw.b), takeZone(position.b, area[5], wb.b, sw.b),
 				takeZone(position.d, -area[6], wb.d, sw.d), takeZone(position.d, area[7], wb.d, sw.d));
 	}
 
-	private int takeZone(double n1, double n2, double wb, double sw)
+	private static int takeZone(double n1, double n2, double wb, double sw)
 	{
 		return WeltB.intiize((n1 + n2 - sw) / wb);
 	}
 
-	private void rastern(WeltB w, int dreh, int hintenEnde, int vorneEnde,
-			int linksEnde, int rechtsEnde, int untenEnde, int obenEnde, int m4dEnde, int p4dEnde)
+	private void rastern(WeltB w, int dreh, int c1Ende, int c2Ende,
+			int a1Ende, int a2Ende, int untenEnde, int obenEnde, int m4dEnde, int p4dEnde)
 	{
-		boolean hvVerk = hintenEnde > vorneEnde;
-		boolean lrVerk = linksEnde > rechtsEnde;
+		boolean dg = dreh % 2 == 0;
+		boolean cVerk = c1Ende > c2Ende;
+		boolean aVerk = a1Ende > a2Ende;
 		rlens = new int[4];
-		rlens[0] = (vorneEnde - hintenEnde) * (hvVerk ? -1 : 1) + 1;
-		rlens[1] = (rechtsEnde - linksEnde) * (lrVerk ? -1 : 1) + 1;
+		rlens[dg ? 0 : 1] = (c2Ende - c1Ende) * (cVerk ? -1 : 1) + 1;
+		rlens[dg ? 1 : 0] = (a2Ende - a1Ende) * (aVerk ? -1 : 1) + 1;
 		rlens[2] = obenEnde + 1 - untenEnde;
 		rlens[3] = p4dEnde + 1 - m4dEnde;
 		raster = new int[rlens[3]][rlens[2]][rlens[1]][rlens[0]];
 		for(int id = 0; id < rlens[3]; id++)
 			for(int ic = 0; ic < rlens[2]; ic++)
-				for(int ib = 0; ib < rlens[1]; ib++)
-					for(int ia = 0; ia < rlens[0]; ia++)
+				for(int ib = 0; ib < rlens[dg ? 1 : 0]; ib++)
+					for(int ia = 0; ia < rlens[dg ? 0 : 1]; ia++)
 					{
-						WBP wbp;/* = new WBP(0, untenEnde + ic, 0, m4dEnde + id);
-						if(dreh < 2)
-							wbp.k[dreh * 2] = rechtsEnde - ib;
-						else
-							wbp.k[(dreh - 2) * 2] = linksEnde + ib;
-						if((dreh + 2) / 2 == 1)
-							wbp.k[dreh / 2 * 2] = vorneEnde - ia;
-						else
-							wbp.k[dreh / 2 * -2 + 2] = hintenEnde + ib;*///Geht nich
-						/*switch(dreh)
-						{
-							case 0:
-								wbp = new WBP(rechtsEnde - ib, untenEnde + ic,
-										hintenEnde + ia, m4dEnde + id);
-								break;
-							case 1:
-								wbp = new WBP(vorneEnde - ia, untenEnde + ic,
-										rechtsEnde - ib, m4dEnde + id);
-								break;
-							case 2:
-								wbp = new WBP(linksEnde + ib, untenEnde + ic,
-										vorneEnde - ia, m4dEnde + id);
-								break;
-							case 3:
-								wbp = new WBP(hintenEnde + ia, untenEnde + ic,
-										linksEnde + ib, m4dEnde + id);
-								break;
-							default:
-								throw new RuntimeException();
-						}*/
-						if(dreh % 2 == 0)
-							wbp = new WBP(lrVerk ? linksEnde - ib : linksEnde + ib, untenEnde + ic,
-									hvVerk ? hintenEnde - ia : hintenEnde + ia, m4dEnde + id);
-						else
-							wbp = new WBP(hvVerk ? hintenEnde - ia : hintenEnde + ia, untenEnde + ic,
-									lrVerk ? linksEnde - ib : linksEnde + ib, m4dEnde + id);
-						//System.out.println(Arrays.toString(wbp.k));
-						//System.out.println(w.gib(wbp));
-						raster[id][ic][ib][ia] = w.gib(wbp).collideOpaque() ? 2 : 1;
+						WBP wbp = new WBP(aVerk ? a1Ende - ib : a1Ende + ib, untenEnde + ic,
+									cVerk ? c1Ende - ia : c1Ende + ia, m4dEnde + id);
+						raster[id][ic][dg ? ib : ia][dg ? ia : ib] = w.gib(wbp).collideOpaque() ? 2 : 1;
 					}
 	}
 

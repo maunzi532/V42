@@ -22,8 +22,9 @@ public class AerialZ extends MovableZ
 		{
 			z.zustand = new BodenZ(z);
 			//ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA"), z, 20);
+			return;
 		}
-		else if(infl[1] > 0)
+		if(infl[1] > 0)
 			attemptAirgrab(z);
 	}
 
