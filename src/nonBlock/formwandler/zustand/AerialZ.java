@@ -36,7 +36,8 @@ public class AerialZ extends MovableZ
 		boolean drehArt = InBlockRaster.drehArt(z.dreh.wl);
 		if(drehArt)
 		{
-			InBlockRaster ibr = new InBlockRaster(z.welt, z.position, z.dreh.wl, true, 4, 16, 4, 4, 0, 20, 0, 0);
+			InBlockRaster ibr = new InBlockRaster(z.welt, z.position, z.dreh.wl, true,
+					4, 16, 4, 4, 0, 20, 0, 0);
 			ibr.zusammenfassen(3);
 			ibr.len(2, 2);
 			ibr.zusammenfassen(1);
@@ -45,25 +46,7 @@ public class AerialZ extends MovableZ
 					new boolean[][][][]{{{{true, true}}, {{true, true}}}}))
 			{
 				int richtung = InBlockRaster.drehIntH(z.dreh.wl);
-				K4 fp = z.welt.wt(p);
-				fp.b += z.welt.weltBlock.b + 0.6;
-				if(richtung % 2 == 0)
-				{
-					if(richtung == 0)
-						fp.c += z.welt.weltBlock.c - 3.6;
-					else
-						fp.c += 3.6;
-					fp.a = z.position.a;
-				}
-				else
-				{
-					if(richtung == 3)
-						fp.a += z.welt.weltBlock.a - 3.6;
-					else
-						fp.a += 3.6;
-					fp.c = z.position.c;
-				}
-				fp.d = z.position.d;
+				K4 fp = AllgKanteZ.ankanten(z.welt, z.position, richtung, -3.6, 0.6);
 				if(InBlockRaster.drehIntH2(z.dreh.wl) == 7)
 					richtung = 4;
 				focus(new Focus(z, 20, fp, Drehung.nDrehung(richtung * Math.PI / 2, 0)),
@@ -73,7 +56,8 @@ public class AerialZ extends MovableZ
 		}
 		else
 		{
-			InBlockRaster ibr = new InBlockRaster(z.welt, z.position, z.dreh.wl, false, 4, 16, 16, 4, 0, 20, 0, 0);
+			InBlockRaster ibr = new InBlockRaster(z.welt, z.position, z.dreh.wl, false,
+					4, 16, 16, 4, 0, 20, 0, 0);
 			ibr.zusammenfassen(3);
 			ibr.len(2, 2);
 			ibr.len(1, 2);
@@ -82,19 +66,9 @@ public class AerialZ extends MovableZ
 					new boolean[][][][]{{{{true, true}, {true, true}}, {{true, true}, {true, true}}}}))
 			{
 				int richtung = InBlockRaster.drehIntD(z.dreh.wl);
-				K4 fp = z.welt.wt(p);
-				fp.b += z.welt.weltBlock.b + 0.6;
-				if(richtung == 0 || richtung == 3)
-					fp.c += z.welt.weltBlock.c - 3.6;
-				else
-					fp.c += 3.6;
-				if(richtung >= 2)
-					fp.a += z.welt.weltBlock.a - 3.6;
-				else
-					fp.a += 3.6;
-				fp.d = z.position.d;
-				focus(new Focus(z, 20, fp, new Drehung(richtung * Math.PI / 2
-						+ Math.PI / 4, 0)), new EckeZ(z, richtung, fp));
+				K4 fp = AllgKanteZ.anecken(z.welt, z.position, richtung, -3.6, 0.6);
+				focus(new Focus(z, 20, fp, new Drehung(richtung * Math.PI / 2 + Math.PI / 4, 0)),
+						new EckeZ(z, richtung, fp));
 				ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA3LR"), z, 20);
 			}
 		}
