@@ -34,7 +34,6 @@ public class InBlockRaster
 	public static boolean drehArt(double drehung)
 	{
 		drehung = Drehung.sichern(drehung);
-		//System.out.println((int)(drehung / Math.PI * 8));
 		return (((int)(drehung / Math.PI * 8) + 1) / 2) % 2 == 0;
 	}
 

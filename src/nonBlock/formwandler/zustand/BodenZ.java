@@ -12,9 +12,9 @@ public class BodenZ extends MovableZ
 	}
 
 	@Override
-	public void kontrolle(int[] infl)
+	public void kontrolleX(int[] infl)
 	{
-		super.kontrolle(infl);
+		super.kontrolleX(infl);
 		z.beweg.add(K4.mult(z.bewegung, 0.85));
 		if(!z.naheWand(2, 0.1))
 		{

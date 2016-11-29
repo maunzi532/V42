@@ -5,7 +5,7 @@ import k4.*;
 public class Focus
 {
 	private final NonBlock the;
-	int focusTime;
+	public int focusTime;
 	public K4 targetPosition;
 	Drehung targetDreh;
 

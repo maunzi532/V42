@@ -15,6 +15,12 @@ public abstract class MovableZ extends Zustand
 	}
 
 	@Override
+	protected void next()
+	{
+		z.focus = null;
+	}
+
+	@Override
 	public void kontrolleDrehung()
 	{
 		if(z.achsen[hda].dreh.wl < nachDreh || z.achsen[hda].dreh.wl > Math.PI * 2 - nachDreh)
@@ -38,7 +44,7 @@ public abstract class MovableZ extends Zustand
 	}
 
 	@Override
-	public void kontrolle(int[] infl)
+	public void kontrolleX(int[] infl)
 	{
 		K4 cb = new K4();
 		if(infl[2] > 0 != infl[3] > 0)
