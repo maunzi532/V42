@@ -7,9 +7,12 @@ public class Alternate1 extends LC2
 {
 	ADreh1[] drehungen;
 
-	public Alternate1(){}
+	public Alternate1()
+	{
+		drehungen = new ADreh1[0];
+	}
 
-	public Alternate1(String build, int len)
+	/*public Alternate1(String build, int len)
 	{
 		drehungen = new ADreh1[len];
 		if(build.length() == 0)
@@ -29,7 +32,7 @@ public class Alternate1 extends LC2
 			drehungen[next] = new ADreh1(line);
 			next++;
 		}
-	}
+	}*/
 
 	public static String auto(String build, ArrayList<Integer> achsen)
 	{
@@ -63,7 +66,8 @@ public class Alternate1 extends LC2
 	}
 
 	public void arghS(Integer numKey, String textKey, String value,
-			Integer errStart, Integer errEnd, ErrorVial vial, ArrayList<ADreh1> dreh1, Standard1 standard1)
+			Integer errStart, Integer errEnd, ErrorVial vial,
+			ArrayList<ADreh1> dreh1, Standard1 standard1)
 	{
 		if(standard1.achsen.length > dreh1.size() && standard1.achsen[dreh1.size()] != null)
 			dreh1.add(new ADreh1(value, errStart, errEnd, vial));
@@ -84,7 +88,7 @@ public class Alternate1 extends LC2
 		return null;
 	}
 
-	public static Alternate1 gibVonL4(String name1, String name2, int len, boolean save)
+	/*public static Alternate1 gibVonL4(String name1, String name2, int len, boolean save)
 	{
 		String s = Lader4.bauName("Ladeteile1", name1, name2);
 		Alternate1 toR;
@@ -102,5 +106,5 @@ public class Alternate1 extends LC2
 		else
 			toR = new Alternate1(Lader4.readR(s), len);
 		return toR;
-	}
+	}*/
 }

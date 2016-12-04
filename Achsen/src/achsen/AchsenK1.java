@@ -19,6 +19,7 @@ public class AchsenK1 implements IKamera
 	public K4 position;
 	public Drehung dreh;
 	LinkBlocker[] resLink;
+	HashMap<String, Double> map;
 
 	public AchsenK1(K4 position, Drehung dreh, boolean save, String name, String altName, String... teilNamen)
 	{
@@ -45,7 +46,7 @@ public class AchsenK1 implements IKamera
 	public void reload(boolean save, String name, String altName, String... teilNamen)
 	{
 		achsen = Standard1.gibVonL4(name, save);
-		alternate = Alternate1.gibVonL4(name, altName, achsen.achsen.length, save);
+		//alternate = Alternate1.gibVonL4(name, altName, achsen.achsen.length, save);
 		drehs = new ADreh1[achsen.achsen.length];
 		for(int i = 0; i < achsen.achsen.length; i++)
 			drehs[i] = new ADreh1(alternate.drehungen[i]);
@@ -57,7 +58,7 @@ public class AchsenK1 implements IKamera
 	public void reload()
 	{
 		achsen = new Standard1("");
-		alternate = new Alternate1("", 0);
+		alternate = new Alternate1();
 		drehs = new ADreh1[0];
 		plys = new ArrayList<>();
 	}
@@ -99,7 +100,8 @@ public class AchsenK1 implements IKamera
 			int nummerZ = achsen.achsen[nummer].linkedAchse;
 			achse(nummerZ);
 			entlinkt[nummer].add(punkt(nummerZ, 1));
-			drehA[nummer] = Drehung.plus(drehA[nummerZ], drehs[nummerZ].dreh);
+			drehA[nummer] = Drehung.plus(drehA[nummerZ],
+					new Drehung(drehs[nummerZ].drehwl.wert(map), drehs[nummerZ].drehwb.wert(map)));
 		}
 		return drehs[nummer];
 	}
@@ -154,11 +156,12 @@ public class AchsenK1 implements IKamera
 		return position;
 	}
 
-	public static K4 zuPunkt(K4 start, ADreh1 aDreh, Punkt1 punkt, K4 mPos, Drehung mDreh)
+	public K4 zuPunkt(K4 start, ADreh1 aDreh, Punkt1 punkt, K4 mPos, Drehung mDreh)
 	{
-		K4 tLen = new K4(0, punkt.abstand, punkt.vor * aDreh.len, aDreh.dShift);
-		tLen.transformWS(Drehung.plus(punkt.spin, aDreh.spin));
-		tLen.transformWBL(aDreh.dreh);
+		K4 tLen = new K4(0, punkt.abstand.wert(map),
+				punkt.vor.wert(map) * aDreh.len.wert(map), aDreh.dShift.wert(map));
+		tLen.transformWS(Drehung.plus(punkt.spin.wert(map), aDreh.spin.wert(map)));
+		tLen.transformWBL(new Drehung(aDreh.drehwl.wert(map), aDreh.drehwb.wert(map)));
 		tLen = K4.plus(tLen, start);
 		tLen.transformWBL(mDreh);
 		return K4.plus(tLen, mPos);

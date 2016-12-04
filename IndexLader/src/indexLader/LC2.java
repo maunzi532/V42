@@ -289,6 +289,7 @@ public abstract class LC2
 	public enum TFV
 	{
 		UINT,
+		DEG,
 		DOUBLE,
 		STRING
 	}
@@ -303,44 +304,41 @@ public abstract class LC2
 		for(int i = 0; i < types.length; i++)
 		{
 			if(i < checkThis.size())
+			{
+				boolean deg2rad = false;
 				switch(types[i])
 				{
 					case UINT:
 						try
 						{
 							results[i] = Integer.parseUnsignedInt(checkThis.get(i));
-						}
-						catch(NumberFormatException e)
+						}catch(NumberFormatException e)
 						{
 							vial.add(new CError("Parameter Nummer " + i + " muss positiver int sein",
 									errStart + i, errStart + i + 1));
 							results[i] = 0;
 						}
 						break;
+					case DEG:
+						deg2rad = true;
 					case DOUBLE:
-						try
-						{
-							results[i] = Double.parseDouble(checkThis.get(i));
-						}
-						catch(NumberFormatException e)
-						{
-							vial.add(new CError("Parameter Nummer " + i + " muss double sein",
-									errStart + i, errStart + i + 1));
-							results[i] = 0d;
-						}
+						results[i] = new R2(checkThis.get(i), deg2rad,
+								errStart + i, errStart + i + 1, vial);
 						break;
 					case STRING:
 						results[i] = checkThis.get(i);
 						break;
 				}
+			}
 			else
 				switch(types[i])
 				{
 					case UINT:
 						results[i] = 0;
 						break;
+					case DEG:
 					case DOUBLE:
-						results[i] = 0d;
+						results[i] = new R2(0);
 						break;
 					case STRING:
 						results[i] = "";
