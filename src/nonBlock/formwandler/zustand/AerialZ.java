@@ -32,16 +32,15 @@ public class AerialZ extends MovableZ
 
 	public void attemptAirgrab()
 	{
-		WBP p = z.welt.tw(z.position);
 		boolean drehArt = InBlockRaster.drehArt(z.dreh.wl);
 		if(drehArt)
 		{
 			InBlockRaster ibr = new InBlockRaster(z.welt, z.position, z.dreh.wl, true,
-					4, 16, 4, 4, 0, 20, 0, 0);
+					0, 16, 4, 4, 0, 20, 0, 0);
 			ibr.zusammenfassen(3);
-			ibr.len(2, 2);
+			ibr.checkLen(2, 2);
 			ibr.zusammenfassen(1);
-			ibr.len(0, 2);
+			ibr.checkLen(0, 2);
 			if(ibr.entspricht(new int[][][][]{{{{1, 2}}, {{1, 1}}}},
 					new boolean[][][][]{{{{true, true}}, {{true, true}}}}))
 			{
@@ -57,11 +56,11 @@ public class AerialZ extends MovableZ
 		else
 		{
 			InBlockRaster ibr = new InBlockRaster(z.welt, z.position, z.dreh.wl, false,
-					4, 16, 16, 4, 0, 20, 0, 0);
+					0, 16, 16, 0, 0, 20, 0, 0);
 			ibr.zusammenfassen(3);
-			ibr.len(2, 2);
-			ibr.len(1, 2);
-			ibr.len(0, 2);
+			ibr.checkLen(2, 2);
+			ibr.checkLen(1, 2);
+			ibr.checkLen(0, 2);
 			if(ibr.entspricht(new int[][][][]{{{{1, 2}, {1, 1}}, {{1, 1}, {1, 1}}}},
 					new boolean[][][][]{{{{true, true}, {true, true}}, {{true, true}, {true, true}}}}))
 			{

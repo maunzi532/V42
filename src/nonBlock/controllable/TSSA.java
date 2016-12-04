@@ -61,9 +61,9 @@ public abstract class TSSA extends FWA implements Licht
 		{
 			InBlockRaster ibr = new InBlockRaster(welt, position, dreh.wl, true, 4, 16, 4, 4, 0, 20, 0, 0);
 			ibr.zusammenfassen(3);
-			ibr.len(2, 2);
+			ibr.checkLen(2, 2);
 			ibr.zusammenfassen(1);
-			ibr.len(0, 2);
+			ibr.checkLen(0, 2);
 			if(ibr.entspricht(new int[][][][]{{{{1, 2}}, {{1, 1}}}},
 					new boolean[][][][]{{{{true, true}}, {{true, true}}}}))
 			{
@@ -102,9 +102,9 @@ public abstract class TSSA extends FWA implements Licht
 			InBlockRaster ibr = new InBlockRaster(welt, position, dreh.wl, false, 4, 16, 16, 4, 0, 20, 0, 0);
 			//System.out.println(ibr);
 			ibr.zusammenfassen(3);
-			ibr.len(2, 2);
-			ibr.len(1, 2);
-			ibr.len(0, 2);
+			ibr.checkLen(2, 2);
+			ibr.checkLen(1, 2);
+			ibr.checkLen(0, 2);
 			if(ibr.entspricht(new int[][][][]{{{{1, 2}, {1, 1}}, {{1, 1}, {1, 1}}}},
 					new boolean[][][][]{{{{true, true}, {true, true}}, {{true, true}, {true, true}}}}))
 			{

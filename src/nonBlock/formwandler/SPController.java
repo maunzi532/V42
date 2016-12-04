@@ -59,7 +59,7 @@ public class SPController extends Controller
 				if(master.ta.keyStat[master.taIndex][kh[i]] == 2)
 					k = i;
 		}
-		if(!lockL && !lockR)
+		/*if(!lockL && !lockR)
 		{
 			if(master.ta.keyStat[master.taIndex][2] == 2)
 				cmd.add("Rechts");
@@ -77,7 +77,7 @@ public class SPController extends Controller
 				cmd.add("Rot");
 			if(master.ta.keyStat[master.taIndex][8] == 2)
 				cmd.add("Gn");
-		}
+		}*/
 		return cmd;
 	}
 

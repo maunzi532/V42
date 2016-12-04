@@ -178,10 +178,15 @@ public class InBlockRaster
 		}
 	}
 
-	public void len(int richtung, int len)
+	public void checkLen(int richtung, int len)
 	{
 		if(rlens[richtung] != len)
 			nochOk = false;
+	}
+
+	public int getLen(int richtung)
+	{
+		return rlens[richtung];
 	}
 
 	public boolean entspricht(int[][][][] ent, boolean[][][][] genau)

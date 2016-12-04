@@ -1,4 +1,5 @@
 Index entfernen
+Mit "1-Versionen" ersetzen
 
 Stufe Blöcke
 	Blöcke nachsplitten
@@ -6,15 +7,12 @@ Stufe Blöcke
 	Weltübergänge
 
 Stufe Editor
-	THA bauen
-
-Stufe Achsen1
-	Neudrehung
 	Punkte anzeigen
 	Achsen und Punkte vorne
+	Neudrehung
 	Subflächen
-	Mit "1-Versionen" ersetzen
 	Änderungsparameter
+	THA bauen
 
 Stufe Moves
 	Neues Zustand-System

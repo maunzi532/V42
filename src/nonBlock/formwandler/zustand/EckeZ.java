@@ -10,6 +10,12 @@ public class EckeZ extends AllgKanteZ
 		super(z, richtung);
 	}
 
+	/* Movements
+	 * Hochklettern (AerialZ)
+	 * Fallenlassen (AerialZ)
+	 * Seitlich klettern (KanteZ)
+	 */
+
 	@Override
 	public void kontrolleX(int[] infl)
 	{
