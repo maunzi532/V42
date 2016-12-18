@@ -27,6 +27,15 @@ public class ADreh1 extends LC2
 		return Double.parseDouble(tr) / 180d * Math.PI;
 	}*/
 
+	ADreh1()
+	{
+		drehwl = new R2(0);
+		drehwb = new R2(0);
+		len = new R2(0);
+		spin = new R2(0);
+		dShift = new R2(0);
+	}
+
 	ADreh1(ADreh1 copy)
 	{
 		//dreh = new Drehung(copy.dreh);
@@ -35,6 +44,13 @@ public class ADreh1 extends LC2
 		len = copy.len;
 		spin = copy.spin;
 		dShift = copy.dShift;
+	}
+
+	static ADreh1 copy(ADreh1 copy)
+	{
+		if(copy == null)
+			return new ADreh1();
+		return new ADreh1(copy);
 	}
 
 	/*public ADreh1(Drehung dreh, double len, double spin, double dShift)

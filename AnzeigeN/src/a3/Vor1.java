@@ -53,8 +53,9 @@ public class Vor1
 			{
 				if(achsenFarbe != null)
 					for(int j = 0; j < ak.drehs.length; j++)
-						anzeigeZ.add(new Linie3(ak.tNum, lw, achsenFarbe, ak.punkt(j, 0), ak.punkt(j, 1),
-								ak.punktK(j, 0, relativ, kd), ak.punktK(j, 1, relativ, kd)));
+						if(ak.achse(j) != null)
+							anzeigeZ.add(new Linie3(ak.tNum, lw, achsenFarbe, ak.punkt(j, 0), ak.punkt(j, 1),
+									ak.punktK(j, 0, relativ, kd), ak.punktK(j, 1, relativ, kd)));
 				if(siehPlys)
 					for(int j = 0; j < ak.plys.size(); j++)
 						for(int l = 0; l < ak.plys.get(j).plys.size(); l++)
@@ -84,7 +85,7 @@ public class Vor1
 		for(int i = 0; i < anzeigeZ.size(); i++)
 			anzeigeZ.get(i).splittern(anzeige);
 		anzeige.forEach(Anzeige3::weg);
-		Collections.sort(anzeige, (t1, t2) ->
+		anzeige.sort((t1, t2) ->
 		{
 			if(!t1.anzeigen && !t2.anzeigen)
 				return 0;

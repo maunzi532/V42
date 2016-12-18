@@ -49,7 +49,7 @@ public class AchsenK1 implements IKamera
 		//alternate = Alternate1.gibVonL4(name, altName, achsen.achsen.length, save);
 		drehs = new ADreh1[achsen.achsen.length];
 		for(int i = 0; i < achsen.achsen.length; i++)
-			drehs[i] = new ADreh1(alternate.drehungen[i]);
+			drehs[i] = ADreh1.copy(alternate.drehungen[i]);
 		plys = new ArrayList<>();
 		for(String teilName : teilNamen)
 			plys.add(AnzTeil1.gibVonL4(name, teilName, save));
@@ -69,7 +69,7 @@ public class AchsenK1 implements IKamera
 		alternate = alt1;
 		drehs = new ADreh1[sta1.achsen.length];
 		for(int i = 0; i < sta1.achsen.length; i++)
-			drehs[i] = new ADreh1(alternate.drehungen[i]);
+			drehs[i] = ADreh1.copy(alternate.drehungen[i]);
 		plys = new ArrayList<>();
 		Collections.addAll(plys, lad1);
 	}
@@ -90,6 +90,8 @@ public class AchsenK1 implements IKamera
 		if(drehA[nummer] != null)
 			return drehs[nummer];
 		entlinkt[nummer] = new ArrayList<>();
+		if(achsen.achsen[nummer] == null)
+			return null;
 		if(achsen.achsen[nummer].linkedAchse < 0)
 		{
 			entlinkt[nummer].add(new K4(position));
@@ -99,7 +101,7 @@ public class AchsenK1 implements IKamera
 		{
 			int nummerZ = achsen.achsen[nummer].linkedAchse;
 			achse(nummerZ);
-			entlinkt[nummer].add(punkt(nummerZ, 1));
+			entlinkt[nummer].add(punkt(nummerZ, achsen.achsen[nummer].linkedPunkt));
 			drehA[nummer] = Drehung.plus(drehA[nummerZ],
 					new Drehung(drehs[nummerZ].drehwl.wert(map), drehs[nummerZ].drehwb.wert(map)));
 		}
