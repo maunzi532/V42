@@ -100,7 +100,7 @@ public class Hauptschleife
 
 	private static void createTheN2()
 	{
-		TSSA n2 = new TSSA(new Controller(), null, "Luft", aw)
+		TSSA n2 = new TSSA(new Controller(), null, aw)
 		{
 			public void collide(Collider attk)
 			{

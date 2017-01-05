@@ -10,7 +10,7 @@ public abstract class Anzeige3
 	public static double nnull = 0.0001;
 
 
-	public K4 kamMid;
+	public K4 kamMid = new K4();
 	public TnTarget tn;
 	public boolean anzeigen;
 	public LichtW lw;

@@ -19,7 +19,7 @@ public class Tha extends TSSA
 
 	private Tha(SPController control, LadeFWA abilities, WeltB welt, WeltND dw, WeltNB bw)
 	{
-		super(control, abilities, "Luft", welt, dw, bw);
+		super(control, abilities, welt, dw, bw);
 	}
 
 	public Tha(SPController control, LadeFWA abilities, AllWelt aw)

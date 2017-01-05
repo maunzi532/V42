@@ -19,7 +19,7 @@ public abstract class FWA extends NBB implements Controllable
 	private LadeFWA abilities;
 	public Tverlay tverlay;
 
-	protected FWA(Controller control, LadeFWA abilities, String currentZ, WeltB welt, WeltND dw, WeltNB bw)
+	protected FWA(Controller control, LadeFWA abilities, WeltB welt, WeltND dw, WeltNB bw)
 	{
 		super(welt, dw, bw);
 		this.control = control;

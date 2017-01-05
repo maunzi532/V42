@@ -14,14 +14,14 @@ public abstract class TSSA extends FWA implements Licht
 	//private static final double nachDreh = 0.1;
 	//private int hda = 67;
 
-	TSSA(Controller control, LadeFWA abilities, String currentZ, WeltB welt, WeltND dw, WeltNB bw)
+	TSSA(Controller control, LadeFWA abilities, WeltB welt, WeltND dw, WeltNB bw)
 	{
-		super(control, abilities, currentZ, welt, dw, bw);
+		super(control, abilities, welt, dw, bw);
 	}
 
-	protected TSSA(Controller control, LadeFWA abilities, String currentZ, AllWelt aw)
+	protected TSSA(Controller control, LadeFWA abilities, AllWelt aw)
 	{
-		this(control, abilities, currentZ, aw.wbl, aw.dw, aw.bw);
+		this(control, abilities, aw.wbl, aw.dw, aw.bw);
 	}
 
 	public void kontrolle()
