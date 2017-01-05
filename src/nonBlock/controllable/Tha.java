@@ -119,54 +119,6 @@ public class Tha extends TSSA
 	{
 		switch(fall)
 		{
-			case "Luftvor":
-				boolean can = true;
-				for(Move a : moves)
-					if(a.name.equals("WK") || a.name.equals("WK2"))
-					{
-						can = false;
-						break;
-					}
-				if(can)
-				{
-					if(attemptAirgrab(position, position.d))
-					{
-						if(position.d - WeltB.intiize(position.d / welt.weltBlock.d) *
-								welt.weltBlock.d < Staticf.zpSpeed)
-							attemptAirgrab(new K4(position.a, position.b, position.c,
-									position.d - Staticf.zpSpeed), position.d - Staticf.zpSpeed / 2);
-						if(position.d - WeltB.intiize(position.d / welt.weltBlock.d) *
-								welt.weltBlock.d > welt.weltBlock.d - Staticf.zpSpeed)
-							attemptAirgrab(new K4(position.a, position.b, position.c,
-									position.d + Staticf.zpSpeed), position.d + Staticf.zpSpeed / 2);
-					}
-				}
-				break;
-			case "WandL":
-				kletterSeitlich(false);
-				break;
-			case "WandR":
-				kletterSeitlich(true);
-				break;
-			case "KletterHoch":
-				kletterHoch();
-				break;
-			case "LassLos":
-				lassLos();
-				break;
-			case "Ducken":
-				if(approxRichtung() % 2 == 0)
-					ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA2L"), this, 30);
-				else
-					ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA2R"), this, 30);
-				//lastZ = currentZ;
-				//currentZ = "Ducken";
-				break;
-			case "Aufstehen":
-				ATR.changeToThis(AlternateStandard.gibVonIndex("TSSA"), this, 40);
-				//lastZ = currentZ;
-				//currentZ = "Normal";
-				break;
 			case "KL":
 			{
 				Panelizer pa = ((Overlay) tverlay).pa;

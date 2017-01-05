@@ -12,9 +12,6 @@ public abstract class FWA extends NBB implements Controllable
 {
 	protected final Controller control;
 	public Zustand zustand;
-	//protected String currentZ;
-	//protected String lastZ;
-	int transformTime;
 	private ArrayList<FWVerwendet> verwendbar;
 	private int[] verwendet;
 	private double[] cooldowns;
@@ -31,8 +28,6 @@ public abstract class FWA extends NBB implements Controllable
 			cooldowns = new double[abilities.cldSize];
 		else
 			cooldowns = new double[0];
-		//this.currentZ = currentZ;
-		//lastZ = currentZ;
 		zustand = new AerialZ(this);
 	}
 
@@ -77,13 +72,6 @@ public abstract class FWA extends NBB implements Controllable
 		}
 		if(td.sharedcooldown >= 0)
 			cooldowns[td.sharedcooldown] = td.cooldown;
-	}
-
-	protected void inflChecks(int[] infl)
-	{
-		for(int i = 0; i < 8; i++)
-			if(infl[i] > 0)
-				doCommand("I" + i);
 	}
 
 	protected boolean targetFall()

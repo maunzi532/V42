@@ -54,7 +54,6 @@ public class Hauptschleife
 	public static Tha giveNToOverlay(Overlay reciever)
 	{
 		LadeFWA lfwa = new LadeFWA(20);
-		lfwa.charge(LadeFWATeil.gibVonIndex("SetN"));
 		lfwa.charge(LadeFWATeil.gibVonIndex("Set1"));
 		Tha n = new Tha(new SPController(reciever), lfwa, aw);
 		n.tverlay = reciever;

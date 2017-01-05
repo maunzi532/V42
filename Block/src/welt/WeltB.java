@@ -127,40 +127,6 @@ public class WeltB
 		return -1;
 	}
 
-	public static boolean tk1(WeltB w, WBP p, int richtung)
-	{
-		if(w.gib(p).collideOpaque())
-			return false;
-		p.k[richtung % 2 == 0 ? 2 : 0] += richtung < 2 ? 1 : -1;
-		if(!w.gib(p).collideOpaque())
-			return false;
-		boolean v = w.gib(p).vKanten();
-			p.k[1]++;
-		if(!v && w.gib(p).collideOpaque())
-			return false;
-		p.k[richtung % 2 == 0 ? 2 : 0] -= richtung < 2 ? 1 : -1;
-		if(w.gib(p).collideOpaque())
-			return false;
-		p.k[1]--;
-		return true;
-	}
-
-	public static Boolean tk2(WeltB w, WBP p, int richtung)
-	{
-		if(w.gib(p).collideOpaque())
-			return null;
-		p.k[richtung % 2 == 0 ? 2 : 0] += richtung < 2 ? 1 : -1;
-		if(!w.gib(p).collideOpaque())
-			return null;
-		p.k[1]++;
-		boolean rf = !w.gib(p).collideOpaque();
-		p.k[richtung % 2 == 0 ? 2 : 0] -= richtung < 2 ? 1 : -1;
-		if(w.gib(p).collideOpaque())
-			return null;
-		p.k[1]--;
-		return rf;
-	}
-
 	public void speichern(String name, int[] size)
 	{
 		StringBuilder sb = new StringBuilder();

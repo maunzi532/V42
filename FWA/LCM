@@ -11,35 +11,3 @@ fallT KR
 cld 300
 shcld 1
 ChainOnly
-
-F N_Oben
-move MV1
-shcld -1
-
-F N_Unten
-fall Ducken
-shcld -1
-
-F K_Links
-fall WandL
-shcld -1
-
-F K_Rechts
-fall WandR
-shcld -1
-
-F K_Vorne
-fall KletterHoch
-shcld -1
-
-F K_Hinten
-fall LassLos
-shcld -1
-
-F L_Vor
-fall Luftvor
-shcld -1
-
-F D_Oben
-fall Aufstehen
-shcld -1

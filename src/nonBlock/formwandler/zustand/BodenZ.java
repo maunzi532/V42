@@ -8,7 +8,7 @@ public class BodenZ extends MovableZ
 	public BodenZ(FWA z)
 	{
 		super(z);
-		canInfl = new double[]{0.2, 0, 0, 0.2};
+		canInfl = new double[]{0.2, 0.2, 0, 0.2};
 	}
 
 	@Override

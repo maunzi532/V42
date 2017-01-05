@@ -11,7 +11,7 @@ public class AerialZ extends MovableZ
 	public AerialZ(FWA z)
 	{
 		super(z);
-		canInfl = new double[]{0.1, 0.2, 0.2, 0.1};
+		canInfl = new double[]{0.1, 0, 0.2, 0.1};
 	}
 
 	@Override
