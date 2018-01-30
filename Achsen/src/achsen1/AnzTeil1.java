@@ -1,5 +1,6 @@
-package achsen;
+package achsen1;
 
+import achsen.*;
 import indexLader.*;
 import java.util.*;
 

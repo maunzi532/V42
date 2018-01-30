@@ -1,6 +1,6 @@
 package edit;
 
-import achsen.*;
+import achsen1.*;
 import java.util.*;
 import javax.swing.*;
 import k4.*;

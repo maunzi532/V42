@@ -97,7 +97,8 @@ public class InBlockRaster
 					{
 						WBP wbp = new WBP(aVerk ? a1Ende - ib : a1Ende + ib, untenEnde + ic,
 									cVerk ? c1Ende - ia : c1Ende + ia, m4dEnde + id);
-						raster[id][ic][dg ? ib : ia][dg ? ia : ib] = w.gib(wbp).collideOpaque() ? 2 : 1;
+						raster[id][ic][dg ? ib : ia][dg ? ia : ib] =
+								(w.gib(wbp).collideOpaque() ? 2 : 1) + (w.gib(wbp).vKanten() ? 4 : 0);
 					}
 	}
 

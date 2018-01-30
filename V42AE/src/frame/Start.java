@@ -2,6 +2,7 @@ package frame;
 
 import a3.*;
 import achsen.*;
+import achsen1.*;
 import edit.*;
 import indexLader.*;
 import java.awt.*;

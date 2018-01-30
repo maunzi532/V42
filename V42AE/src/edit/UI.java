@@ -1,6 +1,6 @@
 package edit;
 
-import achsen.*;
+import achsen1.*;
 import frame.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -141,7 +141,7 @@ public class UI
 	public void flt(List<AchsenK1> liste)
 	{
 		rWidth = right.getWidth();
-		rHeight =  right.getHeight();
+		rHeight = right.getHeight();
 		if(scroll != 0)
 		{
 			Start.kam.scroll(scroll / 60d);

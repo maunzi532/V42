@@ -16,6 +16,7 @@ public class ThaCre2A
 
 	public static void main(String[] args)
 	{
+		Lader.inJarCheck();
 		Index.laden("T ");
 		Staticf.scaCharge(Index.gibText("Einstellungen", "Sca"));
 		theTA = new TA2();
@@ -68,7 +69,7 @@ public class ThaCre2A
 
 	public static void createOverlays()
 	{
-		int spielerzahl = Integer.parseInt(Index.gibText("Einstellungen", "Spielerzahl"));
+		int spielerzahl = Integer.parseInt(Index.gibText("Einstellungen", "Spielerzahl").trim());
 		theTA.setzeAnz(spielerzahl);
 		theOverlays = new Overlay[spielerzahl];
 		for(int i = 0; i < spielerzahl; i++)

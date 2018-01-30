@@ -42,7 +42,9 @@ public class AerialZ extends MovableZ
 			ibr.zusammenfassen(1);
 			ibr.checkLen(0, 2);
 			if(ibr.entspricht(new int[][][][]{{{{1, 2}}, {{1, 1}}}},
-					new boolean[][][][]{{{{true, true}}, {{true, true}}}}))
+					new boolean[][][][]{{{{true, false}}, {{true, true}}}}) ||
+					ibr.entspricht(new int[][][][]{{{{1, 6}}, {{1, 0}}}},
+					new boolean[][][][]{{{{true, false}}, {{true, false}}}}))
 			{
 				int richtung = InBlockRaster.drehIntH(z.dreh.wl);
 				K4 fp = AllgKanteZ.ankanten(z.welt, z.position, richtung, -3.6, 0.6);
@@ -62,7 +64,9 @@ public class AerialZ extends MovableZ
 			ibr.checkLen(1, 2);
 			ibr.checkLen(0, 2);
 			if(ibr.entspricht(new int[][][][]{{{{1, 2}, {1, 1}}, {{1, 1}, {1, 1}}}},
-					new boolean[][][][]{{{{true, true}, {true, true}}, {{true, true}, {true, true}}}}))
+					new boolean[][][][]{{{{true, false}, {true, true}}, {{true, true}, {true, true}}}}) ||
+					ibr.entspricht(new int[][][][]{{{{1, 6}, {1, 1}}, {{1, 2}, {1, 1}}}},
+					new boolean[][][][]{{{{true, false}, {true, true}}, {{true, false}, {true, true}}}}))
 			{
 				int richtung = InBlockRaster.drehIntD(z.dreh.wl);
 				K4 fp = AllgKanteZ.anecken(z.welt, z.position, richtung, -3.6, 0.6);

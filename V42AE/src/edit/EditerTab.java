@@ -1,6 +1,6 @@
 package edit;
 
-import achsen.*;
+import achsen1.*;
 import indexLader.*;
 import java.awt.*;
 import java.io.*;

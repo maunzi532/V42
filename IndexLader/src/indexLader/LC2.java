@@ -27,12 +27,12 @@ public abstract class LC2
 			else
 				sb.append(lines[i]);
 		}
-		return sb.toString().replace("\t", "").replace(" ", "");
+		return sb.toString().replaceAll("\\s", "");
 	}
 
 	public static ArrayList<String> klaSplit(String build)
 	{
-		build = build.replace("\t", "").replace("\n", "").replace(" ", "");
+		build = build.replaceAll("\\s", "");
 		ArrayList<String> lines = new ArrayList<>();
 		StringBuilder sb = new StringBuilder();
 		int kla = 0;
@@ -43,10 +43,6 @@ public abstract class LC2
 			{
 				switch(i1)
 				{
-					case '\t':
-					case '\n':
-					case ' ':
-						break;
 					case '{':
 						kla++;
 						sb.append(i1);
@@ -63,10 +59,6 @@ public abstract class LC2
 			{
 				switch(i1)
 				{
-					case '\t':
-					case '\n':
-					case ' ':
-						break;
 					case ',':
 						lines.add(sb.toString());
 						sb = new StringBuilder();

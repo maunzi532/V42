@@ -1,4 +1,4 @@
-package achsen;
+package achsen1;
 
 import indexLader.*;
 import java.util.*;
@@ -38,7 +38,7 @@ public class Alternate1 extends LC2
 	{
 		StringBuilder sb = new StringBuilder();
 		sb.append(build);
-		build = build.replace("\t", "").replace("\n", "").replace(" ", "");
+		build = build.replaceAll("\\s", "");
 		int next = 0;
 		for(String line : build.split(";"))
 		{

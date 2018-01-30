@@ -1,6 +1,6 @@
 package edit;
 
-import achsen.*;
+import achsen1.*;
 import k4.*;
 
 public class AEKam2 extends AEKam
