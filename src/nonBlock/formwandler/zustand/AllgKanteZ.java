@@ -14,7 +14,7 @@ public abstract class AllgKanteZ extends SnappedZ
 		this.richtung = richtung;
 	}
 
-	public static K4 ankanten(WeltB w, K4 zp, int richtung, double outward, double upward)
+	public static K4 ankanten(WeltB w, K4 zp, int richtung, double outward, double upward, double sideward)
 	{
 		K4 fp = w.wt(w.tw(zp));
 		fp.b += w.weltBlock.b + upward;
@@ -24,7 +24,7 @@ public abstract class AllgKanteZ extends SnappedZ
 				fp.c += w.weltBlock.c + outward;
 			else
 				fp.c -= outward;
-			fp.a = zp.a;
+			fp.a = zp.a + sideward * (richtung == 0 ? 1 : -1);
 		}
 		else
 		{
@@ -32,7 +32,7 @@ public abstract class AllgKanteZ extends SnappedZ
 				fp.a += w.weltBlock.a + outward;
 			else
 				fp.a -= outward;
-			fp.c = zp.c;
+			fp.c = zp.c + sideward * (richtung == 1 ? 1 : -1);
 		}
 		fp.d = zp.d;
 		return fp;

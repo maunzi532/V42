@@ -20,6 +20,8 @@ public abstract class Zustand
 
 	protected abstract void next();
 
+	/*h, v, l, r, u, o, g, r*/
+
 	public void kontrolle(int[] infl)
 	{
 		//System.out.println(z.zustand.getClass());

@@ -1,5 +1,6 @@
 package welt;
 
+import java.util.*;
 import k4.*;
 
 public class InBlockRaster
@@ -53,6 +54,24 @@ public class InBlockRaster
 	public int[][][][] raster;
 	public int[] rlens;
 	public boolean nochOk = true;
+
+	public InBlockRaster(int[] rlens, int[][][][] raster)
+	{
+		this.rlens = rlens;
+		this.raster = raster;
+	}
+
+	public InBlockRaster(InBlockRaster von)
+	{
+		rlens = new int[4];
+		System.arraycopy(von.rlens, 0, rlens, 0, 4);
+		raster = new int[rlens[3]][rlens[2]][rlens[1]][rlens[0]];
+		for(int id = 0; id < rlens[3]; id++)
+			for(int ic = 0; ic < rlens[2]; ic++)
+				for(int ib = 0; ib < rlens[1]; ib++)
+					System.arraycopy(von.raster[id][ic][ib], 0, raster[id][ic][ib], 0, rlens[0]);
+		nochOk = von.nochOk;
+	}
 
 	//true = horizontal -> hinten, vorne, links, rechts, unten, oben, -4d, +4d
 	//false = diagonal -> lhinten, rvorne, lvorne, rhinten, unten, oben, -4d, +4d
@@ -210,6 +229,70 @@ public class InBlockRaster
 								(raster[id][ic][ib][ia] | ent[id][ic][ib][ia]) != raster[id][ic][ib][ia])
 							return false;
 		return true;
+	}
+
+	public ArrayList<InBlockRaster> zerteilen(int richtung)
+	{
+		ArrayList<InBlockRaster> teile = new ArrayList<>();
+		if(!nochOk)
+		{
+			teile.add(this);
+			return teile;
+		}
+		switch(richtung)
+		{
+			case 0:
+				for(int i = 0; i < rlens[0]; i++)
+				{
+					int[] rlens0 = new int[]{1, rlens[1], rlens[2], rlens[3]};
+					int[][][][] raster0 = new int[rlens0[3]][rlens0[2]][rlens0[1]][rlens0[0]];
+					for(int id = 0; id < rlens[3]; id++)
+						for(int ic = 0; ic < rlens[2]; ic++)
+							for(int ib = 0; ib < rlens[1]; ib++)
+								raster0[id][ic][ib][0] = raster[id][ic][ib][i];
+					teile.add(new InBlockRaster(rlens0, raster0));
+				}
+				break;
+			case 1:
+				for(int i = 0; i < rlens[1]; i++)
+				{
+					int[] rlens0 = new int[]{rlens[0], 1, rlens[2], rlens[3]};
+					int[][][][] raster0 = new int[rlens0[3]][rlens0[2]][rlens0[1]][rlens0[0]];
+					for(int id = 0; id < rlens[3]; id++)
+						for(int ic = 0; ic < rlens[2]; ic++)
+							for(int ia = 0; ia < rlens[0]; ia++)
+								raster0[id][ic][0][ia] = raster[id][ic][i][ia];
+					teile.add(new InBlockRaster(rlens0, raster0));
+				}
+				break;
+			case 2:
+				for(int i = 0; i < rlens[2]; i++)
+				{
+					int[] rlens0 = new int[]{rlens[0], rlens[1], 1, rlens[3]};
+					int[][][][] raster0 = new int[rlens0[3]][rlens0[2]][rlens0[1]][rlens0[0]];
+					for(int id = 0; id < rlens[3]; id++)
+						for(int ib = 0; ib < rlens[1]; ib++)
+							for(int ia = 0; ia < rlens[0]; ia++)
+								raster0[id][0][ib][ia] = raster[id][i][ib][ia];
+					teile.add(new InBlockRaster(rlens0, raster0));
+				}
+				break;
+			case 3:
+				for(int i = 0; i < rlens[3]; i++)
+				{
+					int[] rlens0 = new int[]{rlens[0], rlens[1], rlens[2], 1};
+					int[][][][] raster0 = new int[rlens0[3]][rlens0[2]][rlens0[1]][rlens0[0]];
+					for(int ic = 0; ic < rlens[2]; ic++)
+						for(int ib = 0; ib < rlens[1]; ib++)
+							for(int ia = 0; ia < rlens[0]; ia++)
+								raster0[0][ic][ib][ia] = raster[i][ic][ib][ia];
+					teile.add(new InBlockRaster(rlens0, raster0));
+				}
+				break;
+			default:
+				teile.add(this);
+		}
+		return teile;
 	}
 
 	public String toString()

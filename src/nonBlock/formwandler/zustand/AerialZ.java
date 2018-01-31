@@ -47,7 +47,7 @@ public class AerialZ extends MovableZ
 					new boolean[][][][]{{{{true, false}}, {{true, false}}}}))
 			{
 				int richtung = InBlockRaster.drehIntH(z.dreh.wl);
-				K4 fp = AllgKanteZ.ankanten(z.welt, z.position, richtung, -3.6, 0.6);
+				K4 fp = AllgKanteZ.ankanten(z.welt, z.position, richtung, -3.6, 0.6, 0);
 				if(InBlockRaster.drehIntH2(z.dreh.wl) == 7)
 					richtung = 4;
 				focus(new Focus(z, 20, fp, Drehung.nDrehung(richtung * Math.PI / 2, 0)),
