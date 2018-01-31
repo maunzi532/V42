@@ -20,7 +20,7 @@ public abstract class Zustand
 
 	protected abstract void next();
 
-	/*h, v, l, r, u, o, g, r*/
+	/*h, v, l, r, u, o, r, g*/
 
 	public void kontrolle(int[] infl)
 	{

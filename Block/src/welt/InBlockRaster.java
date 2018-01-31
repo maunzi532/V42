@@ -38,6 +38,16 @@ public class InBlockRaster
 		return (((int)(drehung / Math.PI * 8) + 1) / 2) % 2 == 0;
 	}
 
+	private static K4[] shift1d = new K4[]
+			{new K4(0, 0, 1, 0), new K4(-1, 0, 0, 0),
+					new K4(0, 0, -1, 0), new K4(1, 0, 0, 0)};
+
+	public static K4 shift1d(WeltB w, int richtung)
+	{
+		return new K4(shift1d[richtung].a * w.weltBlock.a, 0,
+				shift1d[richtung].c * w.weltBlock.c, 0);
+	}
+
 	public static DerBlock gib(WeltB w, K4 position, int dreh,
 			double mvv, double mvr, double mvo, double mvg)
 	{
@@ -116,8 +126,7 @@ public class InBlockRaster
 					{
 						WBP wbp = new WBP(aVerk ? a1Ende - ib : a1Ende + ib, untenEnde + ic,
 									cVerk ? c1Ende - ia : c1Ende + ia, m4dEnde + id);
-						raster[id][ic][dg ? ib : ia][dg ? ia : ib] =
-								(w.gib(wbp).collideOpaque() ? 2 : 1) + (w.gib(wbp).vKanten() ? 4 : 0);
+						raster[id][ic][dg ? ib : ia][dg ? ia : ib] = w.gib(wbp).toBitfield();
 					}
 	}
 
@@ -213,19 +222,19 @@ public class InBlockRaster
 	{
 		if(!nochOk)
 			return false;
-		if(ent.length != rlens[3] || genau.length != rlens[3])
+		if(ent.length != rlens[3] || (genau != null && genau.length != rlens[3]))
 			return false;
-		if(ent[0].length != rlens[2] || genau[0].length != rlens[2])
+		if(ent[0].length != rlens[2] || (genau != null && genau[0].length != rlens[2]))
 			return false;
-		if(ent[0][0].length != rlens[1] || genau[0][0].length != rlens[1])
+		if(ent[0][0].length != rlens[1] || (genau != null && genau[0][0].length != rlens[1]))
 			return false;
-		if(ent[0][0][0].length != rlens[0] || genau[0][0][0].length != rlens[0])
+		if(ent[0][0][0].length != rlens[0] || (genau != null && genau[0][0][0].length != rlens[0]))
 			return false;
 		for(int id = 0; id < rlens[3]; id++)
 			for(int ic = 0; ic < rlens[2]; ic++)
 				for(int ib = 0; ib < rlens[1]; ib++)
 					for(int ia = 0; ia < rlens[0]; ia++)
-						if(genau[id][ic][ib][ia] ? raster[id][ic][ib][ia] != ent[id][ic][ib][ia] :
+						if(genau != null && genau[id][ic][ib][ia] ? raster[id][ic][ib][ia] != ent[id][ic][ib][ia] :
 								(raster[id][ic][ib][ia] | ent[id][ic][ib][ia]) != raster[id][ic][ib][ia])
 							return false;
 		return true;

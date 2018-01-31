@@ -33,9 +33,17 @@ public class DerBlock
 		return typ > 0;
 	}
 
-	boolean vKanten()
+	public boolean vKanten()
 	{
 		return typ == 2;
+	}
+
+	public int toBitfield()
+	{
+		int bitfield = collideOpaque() ? 2 : 1;
+		if(vKanten())
+			bitfield += 4;
+		return bitfield;
 	}
 
 	public String toString()
